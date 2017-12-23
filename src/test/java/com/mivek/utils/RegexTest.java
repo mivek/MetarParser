@@ -18,7 +18,7 @@ public class RegexTest {
 		String regex = "(a((b)(c)))";
 		String input = "abc";
 		
-		String[] res = Regex.preg_match(regex, input);
+		String[] res = Regex.pregMatch(regex, input);
 		
 		assertThat(res, is(notNullValue()));
 		assertThat(res, arrayWithSize(5));
@@ -30,7 +30,7 @@ public class RegexTest {
 		String regex = "(a((b)(c)))";
 		String input = "";
 		
-		String[] res = Regex.preg_match(regex, input);
+		String[] res = Regex.pregMatch(regex, input);
 		
 		assertThat(res, is(nullValue()));
 	}
