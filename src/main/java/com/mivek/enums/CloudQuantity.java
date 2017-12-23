@@ -8,26 +8,59 @@ package com.mivek.enums;
  *
  */
 public enum CloudQuantity {
+	/**
+	 * Sky clear.
+	 */
 	SKC("SKC", Messages.CLOUD_QUANTITY_SKC), //$NON-NLS-1$
+	/**
+	 * Few clouds.
+	 */
 	FEW("FEW", Messages.CLOUD_QUANTITY_FEW), //$NON-NLS-1$
+	/**
+	 * Broken ceiling.
+	 */
 	BKN("BKN", Messages.CLOUD_QUANTITY_BKN), //$NON-NLS-1$
+	/**
+	 * Scattered.
+	 */
 	SCT("SCT", Messages.CLOUD_QUANTITY_SCT), //$NON-NLS-1$
-	OVC("OVC", Messages.CLOUD_QUANTITY_OVC) //$NON-NLS-1$
-	;
-	
-	private String shortcut=""; //$NON-NLS-1$
-	private String name=""; //$NON-NLS-1$
-	
-	CloudQuantity(String shortcut,String name){
-		this.shortcut=shortcut;
-		this.name =name;
+	/**
+	 * Overcast.
+	 */
+	OVC("OVC", Messages.CLOUD_QUANTITY_OVC); //$NON-NLS-1$
+
+	/**
+	 * Shortcut of the cloud quanity.
+	 */
+	private String shortcut = ""; //$NON-NLS-1$
+	/**
+	 * The name of the quantity.
+	 */
+	private String name = ""; //$NON-NLS-1$
+
+	/**
+	 * Constructor.
+	 *
+	 * @param pShortcut
+	 *            a string representing the shortcut.
+	 * @param pName
+	 *            The meaning of the shortcut.
+	 */
+	CloudQuantity(final String pShortcut, final String pName) {
+		this.shortcut = pShortcut;
+		this.name = pName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;
 	}
-	
+
+	/**
+	 * Returns the shortcut.
+	 *
+	 * @return a string.
+	 */
 	public String getShortcut() {
 		return this.shortcut;
 	}

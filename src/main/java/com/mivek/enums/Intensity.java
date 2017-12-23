@@ -8,32 +8,70 @@ package com.mivek.enums;
  *
  */
 public enum Intensity {
+	/**
+	 * Light intensity.
+	 */
 	LIGHT("-", Messages.INTENSITY_LIGHT), //$NON-NLS-1$
+	/**
+	 * Heavy intensity.
+	 */
 	HEAVY("+", Messages.INTENSITY_HEAVY), //$NON-NLS-1$
-	IN_VICINITY("VC", Messages.INTENSITY_VC) //$NON-NLS-1$
-	;
-	
-	private String shortcut=""; //$NON-NLS-1$
-	private String name=""; //$NON-NLS-1$
-	
-	Intensity(String shortcut,String name){
-		this.shortcut=shortcut;
-		this.name =name;
+	/**
+	 * In vicinity.
+	 */
+	IN_VICINITY("VC", Messages.INTENSITY_VC); //$NON-NLS-1$
+
+	/**
+	 * The shortcut of the intensity.
+	 */
+	private String shortcut = ""; //$NON-NLS-1$
+	/**
+	 * The meaning of the intensity.
+	 */
+	private String name = ""; //$NON-NLS-1$
+
+	/**
+	 * Constructor.
+	 *
+	 * @param pShortcut
+	 *            A String for the shortcut.
+	 * @param pName
+	 *            A string for the meaning.
+	 */
+	Intensity(final String pShortcut, final String pName) {
+		this.shortcut = pShortcut;
+		this.name = pName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;
 	}
-	
+
+	/**
+	 * Returns shortcut.
+	 *
+	 * @return string.
+	 */
 	public String getShortcut() {
 		return this.shortcut;
 	}
 
-	public static Intensity getEnum(String value) {
-		for (Intensity v : values())
-			if (v.getShortcut().equalsIgnoreCase(value))
+	/**
+	 * Returns the enum with the same shortcut than the value.
+	 *
+	 * @param value
+	 *            String of the intensity searched.
+	 * @return a intensity with the same shortcut.
+	 * @throws IllegalArgumentException
+	 *             error if not found.
+	 */
+	public static Intensity getEnum(final String value) throws IllegalArgumentException {
+		for (Intensity v : values()) {
+			if (v.getShortcut().equalsIgnoreCase(value)) {
 				return v;
+			}
+		}
 		throw new IllegalArgumentException();
 	}
 }
