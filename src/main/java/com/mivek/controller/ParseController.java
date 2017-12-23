@@ -1,13 +1,17 @@
 package com.mivek.controller;
 
+import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.mivek.enums.CloudQuantity;
 import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
-import com.mivek.main.Main;
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
+import com.mivek.model.Country;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
 import com.mivek.model.Time;
@@ -16,19 +20,94 @@ import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
+import com.opencsv.CSVReader;
 
 /**
- * This controller contains methods that parse the metar code
- * 
+ * This controller contains methods that parse the metar code. This class is a
+ * singleton.
+ *
  * @author mivek
  *
  */
-public class ParseController {
+public final class ParseController {
+	/**
+	 * Path of airport file
+	 */
+	private static final String AIRPORT_FILE = "data/airports.dat";
+	/**
+	 * Path of countries file.
+	 */
+	private static final String COUNTRIES_FILE = "data/countries.dat";
+	/**
+	 * Map of airports.
+	 */
+	private static Map<String, Airport> airports;
+	/**
+	 * Map of countries.
+	 */
+	private static Map<String, Country> countries;
+	/**
+	 * Instance of the class.
+	 */
 	private static ParseController INSTANCE = null;
+	/**
+	 * Pattern regex for runway with min and max range visibility.
+	 */
+	private static final String RUNWAY_MAX_RANGE_REGEX = "^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})";
+	/**
+	 * Pattern regex for runway visibility.
+	 */
+	private static final String RUNWAY_REGEX = "^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$";
+	/**
+	 * Pattern regex for wind.
+	 */
+	private final String WIND_REGEX = "(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+	/**
+	 * Pattern regex for extreme winds.
+	 */
+	private final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
+	/**
+	 * Pattern for the main visibility.
+	 */
+	private final String MAIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d)$";
+	/**
+	 * Pattern for the minimum visibility.
+	 */
+	private final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
+	/**
+	 * Pattern to recognize a runway.
+	 */
+	private final String GENERIC_RUNWAY_REGEX = "^(R\\d{2}\\w?\\/)";
+	/**
+	 * Pattern of the temperature block.
+	 */
+	private final String TEMPERATURE_REGEX = "^(M?\\d\\d)\\/(M?\\d\\d)$";
+	/**
+	 * Pattern of the altimeter (Pascals).
+	 */
+	private final String ALTIMETER_REGEX = "^Q(\\d{4})$";
+	/**
+	 * Pattern to recognize clouds.
+	 */
+	private final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?";
+	/**
+	 * Pattern for the vertical visibility.
+	 */
+	private final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
 
+	/**
+	 * Private constructor.
+	 */
 	private ParseController() {
+		initCountries();
+		initAirports();
 	}
 
+	/**
+	 * Get instance method.
+	 *
+	 * @return the instance of ParseController.
+	 */
 	public static ParseController getInstance() {
 		if (INSTANCE == null) {
 			INSTANCE = new ParseController();
@@ -39,15 +118,15 @@ public class ParseController {
 	/**
 	 * This is the main method of the parser. This method checks if the airport
 	 * exists. If it does then the metar code is decoded.
-	 * 
-	 * @param metarCode.
+	 *
+	 * @param metarCode
 	 *            String representing the metar.
 	 * @return a decoded metar object.
 	 */
 	public Metar parseMetarAction(final String metarCode) {
 		Metar m = new Metar();
 		String[] metarTab = metarCode.split(" ");
-		Airport airport = Main.getAirports().get(metarTab[0]);
+		Airport airport = airports.get(metarTab[0]);
 		if (airport != null) {
 			m.setAirport(airport);
 			m.setMessage(metarCode);
@@ -61,32 +140,32 @@ public class ParseController {
 			int metarTabLength = metarTab.length;
 			for (int i = 2; i < metarTabLength; i++) {
 				String[] matches;
-				if ((matches = Regex.preg_match("(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)", metarTab[i])) != null) {
+				if ((matches = Regex.pregMatch(WIND_REGEX, metarTab[i])) != null) {
 					Wind wind = parseWind(matches);
 					m.setWind(wind);
-				} else if ((matches = Regex.preg_match("^(\\d{3})V(\\d{3})", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i])) != null) {
 					m.getWind().setExtreme1(Integer.parseInt(matches[1]));
 					m.getWind().setExtreme2(Integer.parseInt(matches[2]));
-				} else if ((matches = Regex.preg_match("^(\\d\\d\\d\\d)$", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i])) != null) {
 					visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
-				} else if ((matches = Regex.preg_match("^(\\d\\d\\d\\d\\w)$", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i])) != null) {
 					visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
 					visibility.setMinDirection(matches[1].substring(4));
 				} else if ("NOSIG".equals(metarTab[i])) {
 					m.setNosig(true);
 				} else if ("AUTO".equals(metarTab[i])) {
 					m.setAuto(true);
-				} else if (Regex.find("^(R\\d{2}\\w?\\/)", metarTab[i])) {
+				} else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
 					RunwayInfo ri = parseRunWayAction(metarTab[i]);
 					m.addRunwayInfo(ri);
-				} else if ((matches = Regex.preg_match("^(M?\\d\\d)\\/(M?\\d\\d)$", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i])) != null) {
 					m.setTemperature(Converter.convertTemperature(matches[1]));
 					m.setDewPoint(Converter.convertTemperature(matches[2]));
-				} else if ((matches = Regex.preg_match("^Q(\\d{4})$", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i])) != null) {
 					m.setAltimeter(Integer.parseInt(matches[1]));
-				} else if ((matches = Regex.preg_match("^(\\w{3})(\\d{3})?(\\w{2,3})?", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(CLOUD_REGEX, metarTab[i])) != null) {
 					m.addCloud(parseCloud(matches));
-				} else if ((matches = Regex.preg_match("^VV(\\d{3})$", metarTab[i])) != null) {
+				} else if ((matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i])) != null) {
 					m.setVerticalVisibility(Integer.parseInt(matches[1]));
 				} else {
 					m.addWeatherCondition(parseWeatherCondition(metarTab[i]));
@@ -99,22 +178,22 @@ public class ParseController {
 
 	/**
 	 * This method parses the string and returns an object.
-	 * 
-	 * @param runWayPart.
+	 *
+	 * @param runWayPart
 	 *            String containing the runway info
 	 * @return a object with parsed informations.
 	 */
 	protected RunwayInfo parseRunWayAction(final String runWayPart) {
 		String[] matches;
 		RunwayInfo ri = new RunwayInfo();
-		if ((matches = Regex.preg_match("^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$", runWayPart)) != null) {
+		if ((matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart)) != null) {
 			ri.setName(matches[1]);
 			// ri.setIndicator(matches[2]);
 			ri.setMinRange(Integer.parseInt(matches[3]));
 			ri.setTrend(Converter.convertTrend(matches[4]));
 			return ri;
 		}
-		if ((matches = Regex.preg_match("^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})", runWayPart)) != null) {
+		if ((matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart)) != null) {
 			ri.setName(matches[1]);
 			ri.setMinRange(Integer.parseInt(matches[2]));
 			ri.setMaxRange(Integer.parseInt(matches[3]));
@@ -127,9 +206,10 @@ public class ParseController {
 	/**
 	 * This method parses the wind part of the metar code. It parses the generic
 	 * part. Variable winds are not parsed by this method.
-	 * 
+	 *
 	 * @param windPart
-	 * @return
+	 *            An array of strings with wind elements.
+	 * @return a Wind element with the informations.
 	 */
 	protected Wind parseWind(final String[] windPart) {
 		Wind wind = new Wind();
@@ -144,8 +224,9 @@ public class ParseController {
 
 	/**
 	 * This method parses the cloud part of the metar.
-	 * 
+	 *
 	 * @param cloudPart
+	 *            Table of strings with clouds elements.
 	 * @return a decoded cloud with its quantity, its altitude and its type.
 	 */
 	protected Cloud parseCloud(final String[] cloudPart) {
@@ -169,8 +250,9 @@ public class ParseController {
 
 	/**
 	 * This method parses the weather conditions of the metar.
-	 * 
+	 *
 	 * @param weatherPart
+	 *            String representing the weather.
 	 * @return a weather condition with its intensity, its descriptor and the
 	 *         phenomenon.
 	 */
@@ -197,4 +279,64 @@ public class ParseController {
 		return null;
 	}
 
+	/**
+	 * Initiate airports map.
+	 */
+	private static void initAirports() {
+		airports = new HashMap<>();
+		CSVReader reader;
+		try {
+			reader = new CSVReader(new FileReader(AIRPORT_FILE));
+			String[] line;
+			while ((line = reader.readNext()) != null) {
+				Airport airport = new Airport();
+				airport.setName(line[1]);
+				airport.setCity(line[2]);
+				airport.setCountry(countries.get(line[3]));
+				airport.setIata(line[4]);
+				airport.setIcao(line[5]);
+				airport.setLatitude(Double.parseDouble(line[6]));
+				airport.setLongitude(Double.parseDouble(line[7]));
+				airport.setAltitude(Integer.parseInt(line[8]));
+				airport.setTimezone(line[9]);
+				airport.setDst(line[10]);
+				airports.put(airport.getIcao(), airport);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Initiate countries map.
+	 */
+	private static void initCountries() {
+		countries = new HashMap<>();
+		CSVReader reader;
+		try {
+			reader = new CSVReader(new FileReader(COUNTRIES_FILE));
+			String[] line;
+			while ((line = reader.readNext()) != null) {
+				Country country = new Country();
+				country.setName(line[0]);
+				countries.put(country.getName(), country);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @return the airports
+	 */
+	public static Map<String, Airport> getAirports() {
+		return airports;
+	}
+
+	/**
+	 * @return the countries
+	 */
+	public static Map<String, Country> getCountries() {
+		return countries;
+	}
 }

@@ -14,7 +14,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.mivek.enums.CloudQuantity;
@@ -22,7 +21,6 @@ import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
-import com.mivek.main.Main;
 import com.mivek.model.Cloud;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
@@ -37,11 +35,6 @@ import com.mivek.utils.Messages;
 public class ParseControllerTest {
 
 
-	@Before
-	public void setUp() {
-		Main.initCountries();
-		Main.initAirports();
-	}
 	/*
 	 * ===========================
 	 * 
@@ -211,7 +204,7 @@ public class ParseControllerTest {
 
 		assertNotNull(m);
 
-		assertEquals(Main.getAirports().get("LFPG"), m.getAirport());
+		assertEquals(ParseController.getAirports().get("LFPG"), m.getAirport());
 		assertEquals(Integer.valueOf(17), m.getDay());
 		assertEquals(8, m.getTime().getHours());
 		assertEquals(30, m.getTime().getMinutes());
