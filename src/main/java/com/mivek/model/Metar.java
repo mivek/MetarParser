@@ -3,23 +3,77 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Metar class.
+ *
+ * @author mivek
+ *
+ */
 public class Metar {
+	/**
+	 * Integer for the day of the metar.
+	 */
 	private Integer day;
+	/**
+	 * Time of the metar.
+	 */
 	private Time time;
+	/**
+	 * Temperature.
+	 */
 	private Integer temperature;
+	/**
+	 * Dew point.
+	 */
 	private Integer dewPoint;
+	/**
+	 * Altimeter.
+	 */
 	private Integer altimeter;
+	/**
+	 * Vertical visibility.
+	 */
 	private Integer verticalVisibility;
+	/**
+	 * Original message of the metar.
+	 */
 	private String message;
+	/**
+	 * Airport of the metar.
+	 */
 	private Airport airport;
+	/**
+	 * Visibility.
+	 */
 	private Visibility visibility;
+	/**
+	 * Wind.
+	 */
 	private Wind wind;
+	/**
+	 * Nosig value.
+	 */
 	private boolean nosig;
+	/**
+	 * Auto Value.
+	 */
 	private boolean auto;
+	/**
+	 * List of runways information.
+	 */
 	private List<RunwayInfo> runways;
+	/**
+	 * List of weather conditions.
+	 */
 	private List<WeatherCondition> weatherConditions;
+	/**
+	 * List of clouds.
+	 */
 	private List<Cloud> clouds;
-	
+
+	/**
+	 * Constructor.
+	 */
 	public Metar() {
 		runways = new ArrayList<>();
 		weatherConditions = new ArrayList<>();
@@ -34,10 +88,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param day the day to set
+	 * @param pDay
+	 *            the day to set
 	 */
-	public void setDay(Integer day) {
-		this.day = day;
+	public void setDay(final Integer pDay) {
+		this.day = pDay;
 	}
 
 	/**
@@ -48,10 +103,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param time the time to set
+	 * @param pTime
+	 *            the time to set
 	 */
-	public void setTime(Time time) {
-		this.time = time;
+	public void setTime(final Time pTime) {
+		this.time = pTime;
 	}
 
 	/**
@@ -62,10 +118,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param temperature the temperature to set
+	 * @param pTemperature
+	 *            the temperature to set
 	 */
-	public void setTemperature(Integer temperature) {
-		this.temperature = temperature;
+	public void setTemperature(final Integer pTemperature) {
+		this.temperature = pTemperature;
 	}
 
 	/**
@@ -76,10 +133,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param dewPoint the dewPoint to set
+	 * @param pDewPoint
+	 *            the dewPoint to set
 	 */
-	public void setDewPoint(Integer dewPoint) {
-		this.dewPoint = dewPoint;
+	public void setDewPoint(final Integer pDewPoint) {
+		this.dewPoint = pDewPoint;
 	}
 
 	/**
@@ -90,10 +148,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param altimeter the altimeter to set
+	 * @param pAltimeter
+	 *            the altimeter to set
 	 */
-	public void setAltimeter(Integer altimeter) {
-		this.altimeter = altimeter;
+	public void setAltimeter(final Integer pAltimeter) {
+		this.altimeter = pAltimeter;
 	}
 
 	/**
@@ -104,10 +163,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param verticalVisibility the verticalVisibility to set
+	 * @param pVerticalVisibility
+	 *            the verticalVisibility to set
 	 */
-	public void setVerticalVisibility(Integer verticalVisibility) {
-		this.verticalVisibility = verticalVisibility;
+	public void setVerticalVisibility(final Integer pVerticalVisibility) {
+		this.verticalVisibility = pVerticalVisibility;
 	}
 
 	/**
@@ -118,10 +178,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param message the message to set
+	 * @param pMessage
+	 *            the message to set
 	 */
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessage(final String pMessage) {
+		this.message = pMessage;
 	}
 
 	/**
@@ -132,10 +193,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param airport the airport to set
+	 * @param pAirport
+	 *            the airport to set
 	 */
-	public void setAirport(Airport airport) {
-		this.airport = airport;
+	public void setAirport(final Airport pAirport) {
+		this.airport = pAirport;
 	}
 
 	/**
@@ -146,10 +208,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param visibility the visibility to set
+	 * @param pVisibility
+	 *            the visibility to set
 	 */
-	public void setVisibility(Visibility visibility) {
-		this.visibility = visibility;
+	public void setVisibility(final Visibility pVisibility) {
+		this.visibility = pVisibility;
 	}
 
 	/**
@@ -159,7 +222,13 @@ public class Metar {
 		return runways;
 	}
 
-	public void addRunwayInfo(RunwayInfo ri) {
+	/**
+	 * Adds a runway to the list.
+	 *
+	 * @param ri
+	 *            the runway to add.
+	 */
+	public void addRunwayInfo(final RunwayInfo ri) {
 		this.runways.add(ri);
 	}
 
@@ -170,7 +239,13 @@ public class Metar {
 		return weatherConditions;
 	}
 
-	public void addWeatherCondition(WeatherCondition wc) {
+	/**
+	 * Adds a weatherCondition to the list.
+	 *
+	 * @param wc
+	 *            the WeatherCondition to add.
+	 */
+	public void addWeatherCondition(final WeatherCondition wc) {
 		weatherConditions.add(wc);
 	}
 	/**
@@ -180,11 +255,16 @@ public class Metar {
 		return clouds;
 	}
 
-	
-	public void addCloud(Cloud cloud) {
+	/**
+	 * Adds a cloud to the list.
+	 *
+	 * @param cloud
+	 *            The cloud to add.
+	 */
+	public void addCloud(final Cloud cloud) {
 		this.clouds.add(cloud);
 	}
-	
+
 	/**
 	 * @return the wind
 	 */
@@ -193,10 +273,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param wind the wind to set
+	 * @param pWind
+	 *            the wind to set
 	 */
-	public void setWind(Wind wind) {
-		this.wind = wind;
+	public void setWind(final Wind pWind) {
+		this.wind = pWind;
 	}
 	/**
 	 * @return the nosig
@@ -206,10 +287,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param nosig the nosig to set
+	 * @param pNosig
+	 *            the nosig to set
 	 */
-	public void setNosig(boolean nosig) {
-		this.nosig = nosig;
+	public void setNosig(final boolean pNosig) {
+		this.nosig = pNosig;
 	}
 
 	/**
@@ -220,10 +302,11 @@ public class Metar {
 	}
 
 	/**
-	 * @param auto the auto to set
+	 * @param pAuto
+	 *            the auto to set
 	 */
-	public void setAuto(boolean auto) {
-		this.auto = auto;
+	public void setAuto(final boolean pAuto) {
+		this.auto = pAuto;
 	}
 
 }

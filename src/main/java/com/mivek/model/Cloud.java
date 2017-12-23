@@ -3,31 +3,86 @@ package com.mivek.model;
 import com.mivek.enums.CloudQuantity;
 import com.mivek.enums.CloudType;
 
+/**
+ * Class representing a cloud element.
+ * Clouds are composed of :
+ * 		a quantity
+ * 		a type (optional)
+ * 		an altitude (optional)
+ * @author mivek
+ *
+ */
 public class Cloud {
+	/**
+	 * The altitude of the cloud.
+	 */
 	private int altitude;
+	/**
+	 * The quantity of the cloud.
+	 */
 	private CloudQuantity quantity;
+	/**
+	 * The type of the cloud.
+	 */
 	private CloudType type;
+
+	/**
+	 * Getter of the altitude.
+	 *
+	 * @return int of altitude.
+	 */
 	public int getAltitude() {
 		return altitude;
 	}
-	public void setAltitude(int altitude) {
-		this.altitude = altitude;
+
+	/**
+	 * Setter of the altitude.
+	 *
+	 * @param pAltitude
+	 *            The altitude to set.
+	 */
+	public void setAltitude(final int pAltitude) {
+		this.altitude = pAltitude;
 	}
+	/**
+	 * Getter of the quantity.
+	 * @return a CloudQuantity.
+	 */
 	public CloudQuantity getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(CloudQuantity quantity) {
-		this.quantity = quantity;
+
+	/**
+	 * Setter of CloudQuantity.
+	 *
+	 * @param pQuantity
+	 *            The CloudQuantity to set.
+	 */
+	public void setQuantity(final CloudQuantity pQuantity) {
+		this.quantity = pQuantity;
 	}
+
+	/**
+	 * Getter of type.
+	 *
+	 * @return a CloudType.
+	 */
 	public CloudType getType() {
 		return type;
 	}
-	public void setType(CloudType type) {
-		this.type = type;
+
+	/**
+	 * Setter of cloud type.
+	 *
+	 * @param pType
+	 *            The CloudType to set.
+	 */
+	public void setType(final CloudType pType) {
+		this.type = pType;
 	}
-	
+
 	@Override
-	public String toString() {
+	public final String toString() {
 		String res = this.quantity.toString();
 		if (this.type != null) {
 			res += " " + this.type.toString();

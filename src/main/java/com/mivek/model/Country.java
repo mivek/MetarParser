@@ -1,18 +1,38 @@
 package com.mivek.model;
 
+/**
+ * Country class.
+ *
+ * @author mivek
+ *
+ */
 public class Country {
-	public String name;
-	
+	/**
+	 * Name of the country.
+	 */
+	private String name;
+
+	/**
+	 * Getter of name.
+	 *
+	 * @return the name.
+	 */
 	public String getName() {
 		return this.name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	/**
+	 * Setter of name.
+	 *
+	 * @param pName
+	 *            the name to set.
+	 */
+	public void setName(final String pName) {
+		this.name = pName;
 	}
-	
+
 	@Override
-	public String toString() {
+	public final String toString() {
 		return this.name;
 	}
 }
