@@ -1,5 +1,6 @@
 package com.mivek.enums;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 /**
  * Messages class for internationalization.
@@ -15,7 +16,7 @@ public final class Messages {
 	/**
 	 * Bundle variable.
 	 */
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault());
 	/**
 	 * Cloud quantity broken.
 	 */

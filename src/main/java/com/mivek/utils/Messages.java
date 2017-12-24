@@ -1,5 +1,6 @@
 package com.mivek.utils;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -17,7 +18,7 @@ public final class Messages {
 	/**
 	 * Bundle instance.
 	 */
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault());
 	/**
 	 * Decreasing.
 	 */
