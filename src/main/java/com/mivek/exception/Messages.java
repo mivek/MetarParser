@@ -9,10 +9,12 @@ public class Messages {
 
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME, Locale.getDefault());
 
+	public static final String INVALID_ICAO = RESOURCE_BUNDLE.getString("MetarFacade.InvalidIcao");
+
 	private Messages() {
 	}
 
-	public static String getString(String key) {
+	private static String getString(String key) {
 		try {
 			return RESOURCE_BUNDLE.getString(key);
 		} catch (MissingResourceException e) {

@@ -52,7 +52,7 @@ public class MetarFacade {
 			}
 			in.close();
 		}
-		throw new InvalidIcaoException(Messages.getString("MetarFacade.InvalidIcao")); //$NON-NLS-1$
+		throw new InvalidIcaoException(Messages.INVALID_ICAO); // $NON-NLS-1$
 	}
 	
 	/**
