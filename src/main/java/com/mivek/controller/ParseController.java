@@ -1,6 +1,7 @@
 package com.mivek.controller;
 
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,11 +34,11 @@ public final class ParseController {
 	/**
 	 * Path of airport file.
 	 */
-	private final String AIRPORT_FILE = "data/airports.dat";
+	private final InputStream AIRPORT_FILE = getClass().getClassLoader().getResourceAsStream("data/airports.dat");
 	/**
 	 * Path of countries file.
 	 */
-	private final String COUNTRIES_FILE = "data/countries.dat";
+	private final InputStream COUNTRIES_FILE = getClass().getClassLoader().getResourceAsStream("data/countries.dat");
 	/**
 	 * Map of airports.
 	 */
@@ -286,7 +287,7 @@ public final class ParseController {
 		airports = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new FileReader(AIRPORT_FILE));
+			reader = new CSVReader(new InputStreamReader(AIRPORT_FILE));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Airport airport = new Airport();
@@ -314,7 +315,7 @@ public final class ParseController {
 		countries = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new FileReader(COUNTRIES_FILE));
+			reader = new CSVReader(new InputStreamReader(COUNTRIES_FILE));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Country country = new Country();
