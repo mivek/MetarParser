@@ -31,21 +31,21 @@ import com.opencsv.CSVReader;
  */
 public final class ParseController {
 	/**
-	 * Path of airport file
+	 * Path of airport file.
 	 */
-	private static final String AIRPORT_FILE = "data/airports.dat";
+	private final String AIRPORT_FILE = "data/airports.dat";
 	/**
 	 * Path of countries file.
 	 */
-	private static final String COUNTRIES_FILE = "data/countries.dat";
+	private final String COUNTRIES_FILE = "data/countries.dat";
 	/**
 	 * Map of airports.
 	 */
-	private static Map<String, Airport> airports;
+	private Map<String, Airport> airports;
 	/**
 	 * Map of countries.
 	 */
-	private static Map<String, Country> countries;
+	private Map<String, Country> countries;
 	/**
 	 * Instance of the class.
 	 */
@@ -282,7 +282,7 @@ public final class ParseController {
 	/**
 	 * Initiate airports map.
 	 */
-	private static void initAirports() {
+	private void initAirports() {
 		airports = new HashMap<>();
 		CSVReader reader;
 		try {
@@ -310,7 +310,7 @@ public final class ParseController {
 	/**
 	 * Initiate countries map.
 	 */
-	private static void initCountries() {
+	private void initCountries() {
 		countries = new HashMap<>();
 		CSVReader reader;
 		try {
@@ -329,14 +329,14 @@ public final class ParseController {
 	/**
 	 * @return the airports
 	 */
-	public static Map<String, Airport> getAirports() {
+	public Map<String, Airport> getAirports() {
 		return airports;
 	}
 
 	/**
 	 * @return the countries
 	 */
-	public static Map<String, Country> getCountries() {
+	public Map<String, Country> getCountries() {
 		return countries;
 	}
 }

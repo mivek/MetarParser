@@ -204,7 +204,7 @@ public class ParseControllerTest {
 
 		assertNotNull(m);
 
-		assertEquals(ParseController.getAirports().get("LFPG"), m.getAirport());
+		assertEquals(ParseController.getInstance().getAirports().get("LFPG"), m.getAirport());
 		assertEquals(Integer.valueOf(17), m.getDay());
 		assertEquals(8, m.getTime().getHours());
 		assertEquals(30, m.getTime().getMinutes());
