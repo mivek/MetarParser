@@ -3,7 +3,8 @@
 
 This java lib provides a Metar decoder.
 
-Use the ParseController class and its method parseMetarAction to decode a metar.
+Use the MetarFacade class and its method decode to decode a metar.
+Use the MetarFacade class and its method retrieveFromAirport to get the metar of an airport. This metod take the icao code as parameter.
 
 ## Model
 
