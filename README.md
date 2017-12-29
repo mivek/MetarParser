@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
 # MetarParser
 
 
