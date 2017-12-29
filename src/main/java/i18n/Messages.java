@@ -1,4 +1,4 @@
-package com.mivek.enums;
+package i18n;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ public final class Messages {
 	/**
 	 * Name of the bundle.
 	 */
-	private static final String BUNDLE_NAME = "com.mivek.enums.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "i18n.messages"; //$NON-NLS-1$
 
 	/**
 	 * Bundle variable.
@@ -178,6 +178,57 @@ public final class Messages {
 	 * Phenomenon volcanic ashes.
 	 */
 	public static final String PHENOMENON_VA = RESOURCE_BUNDLE.getString("Phenomenon.VA");
+
+	public static final String INVALID_ICAO = RESOURCE_BUNDLE.getString("MetarFacade.InvalidIcao");
+
+	/**
+	 * Decreasing.
+	 */
+	public static final String CONVERTER_D = RESOURCE_BUNDLE.getString("Converter.D");
+	/**
+	 * East.
+	 */
+	public static final String CONVERTER_E = RESOURCE_BUNDLE.getString("Converter.E");
+	/**
+	 * North.
+	 */
+	public static final String CONVERTER_N = RESOURCE_BUNDLE.getString("Converter.N");
+	/**
+	 * North east.
+	 */
+	public static final String CONVERTER_NE = RESOURCE_BUNDLE.getString("Converter.NE");
+	/**
+	 * No significant change.
+	 */
+	public static final String CONVERTER_NSC = RESOURCE_BUNDLE.getString("Converter.NSC");
+	/**
+	 * North West.
+	 */
+	public static final String CONVERTER_NW = RESOURCE_BUNDLE.getString("Converter.NW");
+	/**
+	 * South.
+	 */
+	public static final String CONVERTER_S = RESOURCE_BUNDLE.getString("Converter.S");
+	/**
+	 * South East.
+	 */
+	public static final String CONVERTER_SE = RESOURCE_BUNDLE.getString("Converter.SE");
+	/**
+	 * South West.
+	 */
+	public static final String CONVERTER_SW = RESOURCE_BUNDLE.getString("Converter.SW");
+	/**
+	 * Uprising.
+	 */
+	public static final String CONVERTER_U = RESOURCE_BUNDLE.getString("Converter.U");
+	/**
+	 * Variable.
+	 */
+	public static final String CONVERTER_VRB = RESOURCE_BUNDLE.getString("Converter.VRB");
+	/**
+	 * West.
+	 */
+	public static final String CONVERTER_W = RESOURCE_BUNDLE.getString("Converter.W");
 
 	/**
 	 * Private constructor.

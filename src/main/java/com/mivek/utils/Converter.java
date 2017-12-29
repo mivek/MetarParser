@@ -1,5 +1,7 @@
 package com.mivek.utils;
 
+import i18n.Messages;
+
 /**
  * This class is used to convert data.
  * @author mivek

@@ -10,7 +10,6 @@ import java.net.URLConnection;
 
 import com.mivek.controller.ParseController;
 import com.mivek.exception.InvalidIcaoException;
-import com.mivek.exception.Messages;
 import com.mivek.model.Metar;
 
 /**
@@ -52,7 +51,7 @@ public class MetarFacade {
 			}
 			in.close();
 		}
-		throw new InvalidIcaoException(Messages.INVALID_ICAO); // $NON-NLS-1$
+		throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
 	}
 	
 	/**

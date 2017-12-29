@@ -15,7 +15,6 @@ import org.junit.rules.ExpectedException;
 import com.mivek.controller.ParseController;
 import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.Metar;
-import com.mivek.utils.Messages;
 
 public class MetarFacadeTest {
 	@Rule
@@ -41,7 +40,7 @@ public class MetarFacadeTest {
 		assertEquals(30, res.getTime().getMinutes());
 		// Wind
 		assertNotNull(res.getWind());
-		assertEquals(Messages.CONVERTER_S, res.getWind().getDirection());
+		assertEquals(i18n.Messages.CONVERTER_S, res.getWind().getDirection());
 		assertEquals(13, res.getWind().getSpeed());
 		assertEquals("KT", res.getWind().getUnit());
 		// Visibility

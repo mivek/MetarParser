@@ -26,7 +26,6 @@ import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
-import com.mivek.utils.Messages;
 
 /**
  * @author mivek
@@ -98,7 +97,7 @@ public class ParseControllerTest {
 		Wind res = ParseController.getInstance().parseWind(windPart);
 
 		assertNotNull(res);
-		assertThat(res.getDirection(), is(Messages.CONVERTER_N));
+		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_N));
 		assertEquals(8, res.getSpeed());
 		assertEquals(0, res.getGust());
 		assertEquals("KT", res.getUnit());
@@ -112,7 +111,7 @@ public class ParseControllerTest {
 		Wind res = ParseController.getInstance().parseWind(windPart);
 
 		assertNotNull(res);
-		assertThat(res.getDirection(), is(Messages.CONVERTER_SE));
+		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_SE));
 		assertEquals(17, res.getSpeed());
 		assertEquals(20, res.getGust());
 		assertEquals("KT", res.getUnit());
@@ -167,7 +166,7 @@ public class ParseControllerTest {
 		assertNotNull(ri);
 		assertEquals("26", ri.getName());
 		assertEquals(600, ri.getMinRange());
-		assertEquals(Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -179,7 +178,7 @@ public class ParseControllerTest {
 		assertEquals("26L", ri.getName());
 		assertEquals(550, ri.getMinRange());
 		assertEquals(700, ri.getMaxRange());
-		assertEquals(Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -210,7 +209,7 @@ public class ParseControllerTest {
 		assertEquals(30, m.getTime().getMinutes());
 		assertNotNull(m.getWind());
 		assertEquals(0, m.getWind().getSpeed());
-		assertEquals(Messages.CONVERTER_N, m.getWind().getDirection());
+		assertEquals(i18n.Messages.CONVERTER_N, m.getWind().getDirection());
 		assertEquals("KT", m.getWind().getUnit());
 		assertEquals("350m", m.getVisibility().getMainVisibility());
 		assertThat(m.getRunways(), is(not(empty())));
@@ -218,7 +217,7 @@ public class ParseControllerTest {
 		//Check if runways are correctly parsed
 		assertEquals("27L", m.getRunways().get(0).getName());
 		assertEquals(375, m.getRunways().get(0).getMinRange());
-		assertEquals(Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
+		assertEquals(i18n.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
 	}
 
 	@Test

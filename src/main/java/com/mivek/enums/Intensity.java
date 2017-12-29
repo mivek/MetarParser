@@ -1,5 +1,7 @@
 package com.mivek.enums;
 
+import i18n.Messages;
+
 /**
  * Enumeration for indicator.
  * The first attribute is the code used in the metar.
