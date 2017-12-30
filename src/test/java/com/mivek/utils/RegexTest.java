@@ -2,9 +2,9 @@ package com.mivek.utils;
 
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.hamcrest.Matchers.arrayWithSize;
+import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -20,7 +20,7 @@ public class RegexTest {
 		
 		String[] res = Regex.pregMatch(regex, input);
 		
-		assertThat(res, is(notNullValue()));
+		assertThat(res, is(not(emptyArray())));
 		assertThat(res, arrayWithSize(5));
 		assertThat(res, arrayContainingInAnyOrder("abc", "abc", "bc", "b", "c"));
 	}
@@ -32,7 +32,7 @@ public class RegexTest {
 		
 		String[] res = Regex.pregMatch(regex, input);
 		
-		assertThat(res, is(nullValue()));
+		assertThat(res, is(emptyArray()));
 	}
 	
 	@Test

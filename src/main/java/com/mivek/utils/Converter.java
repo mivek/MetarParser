@@ -54,6 +54,7 @@ public final class Converter {
 	 */
 	public static String degreesToDirection(final String degreesStr) {
 		double degrees = 0;
+		String res = "";
 		try {
 			degrees = Double.parseDouble(degreesStr);
 		} catch (NumberFormatException e) {
@@ -61,22 +62,23 @@ public final class Converter {
 		}
 
 		if (isBetween(degrees, NORTH_EAST_MIN, NORTH_EAST_MAX)) {
-			return Messages.CONVERTER_NE;
+			res = Messages.CONVERTER_NE;
 		} else if (isBetween(degrees, NORTH_EAST_MAX, EAST)) {
-			return Messages.CONVERTER_E;
+			res = Messages.CONVERTER_E;
 		} else if (isBetween(degrees, EAST, SOUTH_EAST)) {
-			return Messages.CONVERTER_SE;
+			res = Messages.CONVERTER_SE;
 		} else if (isBetween(degrees, SOUTH_EAST, SOUTH)) {
-			return Messages.CONVERTER_S;
+			res = Messages.CONVERTER_S;
 		} else if (isBetween(degrees, SOUTH, SOUTH_WEST)) {
-			return Messages.CONVERTER_SW;
+			res = Messages.CONVERTER_SW;
 		} else if (isBetween(degrees, SOUTH_WEST, WEST)) {
-			return Messages.CONVERTER_W;
+			res = Messages.CONVERTER_W;
 		} else if (isBetween(degrees, WEST, NORTH_WEST)) {
-			return Messages.CONVERTER_NW;
+			res = Messages.CONVERTER_NW;
 		} else {
-			return Messages.CONVERTER_N;
+			res = Messages.CONVERTER_N;
 		}
+		return res;
 	}
 
 	/**

@@ -11,10 +11,6 @@ import java.util.regex.Pattern;
  */
 public final class Regex {
 	/**
-	 * Pattern (regex).
-	 */
-	private static Pattern p;
-	/**
 	 * Matcher (input).
 	 */
 	private static Matcher m;
@@ -46,7 +42,7 @@ public final class Regex {
 			}
 			return matches;
 		}
-		return null;
+		return new String[0];
 	}
 
 	/**
@@ -88,7 +84,7 @@ public final class Regex {
 	 *            The input to test.
 	 */
 	private static void init(final String regex, final String input) {
-		p = Pattern.compile(regex);
+		Pattern p = Pattern.compile(regex);
 		m = p.matcher(input);
 	}
 }

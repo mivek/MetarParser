@@ -107,6 +107,6 @@ public class WeatherCondition {
 	 * @return true if there is at least phenomenon.
 	 */
 	public boolean isValid() {
-		return phenomenons.size() >= 1;
+		return !phenomenons.isEmpty();
 	}
 }
