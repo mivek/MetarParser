@@ -263,14 +263,8 @@ public class Airport {
 
 	@Override
 	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		} else if (obj instanceof Airport) {
-			Airport o = (Airport) obj;
-			if (this.icao.equals(o.getIcao())) {
-				return true;
-			}
-			return false;
+		if (obj instanceof Airport) {
+			return this.icao.equals(((Airport) obj).getIcao());
 		}
 		return false;
 	}

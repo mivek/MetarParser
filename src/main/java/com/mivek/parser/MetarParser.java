@@ -1,4 +1,4 @@
-package com.mivek.controller;
+package com.mivek.parser;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -18,11 +18,11 @@ import com.mivek.utils.Regex;
  * @author mivek
  *
  */
-public final class ParseController extends AbstractParser {
+public final class MetarParser extends AbstractParser<Metar> {
 	/**
 	 * Instance of the class.
 	 */
-	private static ParseController INSTANCE = null;
+	private static MetarParser INSTANCE = null;
 	/**
 	 * Pattern regex for runway with min and max range visibility.
 	 */
@@ -43,21 +43,22 @@ public final class ParseController extends AbstractParser {
 	 * Pattern of the altimeter (Pascals).
 	 */
 	private static final String ALTIMETER_REGEX = "^Q(\\d{4})$";
+
 	/**
 	 * Private constructor.
 	 */
-	private ParseController() {
+	private MetarParser() {
 		super();
 	}
 
 	/**
 	 * Get instance method.
 	 *
-	 * @return the instance of ParseController.
+	 * @return the instance of MetarParser.
 	 */
-	public static ParseController getInstance() {
+	public static MetarParser getInstance() {
 		if (INSTANCE == null) {
-			INSTANCE = new ParseController();
+			INSTANCE = new MetarParser();
 		}
 		return INSTANCE;
 	}
@@ -70,57 +71,59 @@ public final class ParseController extends AbstractParser {
 	 *            String representing the metar.
 	 * @return a decoded metar object.
 	 */
-	public Metar parseMetarAction(final String metarCode) {
+	@Override
+	public Metar parse(final String metarCode) {
 		Metar m = new Metar();
 		String[] metarTab = metarCode.split(" ");
 		Airport airport = getAirports().get(metarTab[0]);
-		if (airport != null) {
-			m.setAirport(airport);
-			m.setMessage(metarCode);
-			m.setDay(Integer.parseInt(metarTab[1].substring(0, 2)));
-			Time t = new Time();
-			t.setHours(Integer.parseInt(metarTab[1].substring(2, 4)));
-			t.setMinutes(Integer.parseInt(metarTab[1].substring(4, 6)));
-			m.setTime(t);
-			Visibility visibility = new Visibility();
-			m.setVisibility(visibility);
-			int metarTabLength = metarTab.length;
-			for (int i = 2; i < metarTabLength; i++) {
-				String[] matches;
-				if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_REGEX, metarTab[i])))) {
-					Wind wind = parseWind(matches);
-					m.setWind(wind);
-				} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i])))) {
-					m.getWind().setExtreme1(Integer.parseInt(matches[1]));
-					m.getWind().setExtreme2(Integer.parseInt(matches[2]));
-				} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i])))) {
-					visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
-				} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i]))) {
-					visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
-					visibility.setMinDirection(matches[1].substring(4));
-				} else if ("NOSIG".equals(metarTab[i])) {
-					m.setNosig(true);
-				} else if ("AUTO".equals(metarTab[i])) {
-					m.setAuto(true);
-				} else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
-					RunwayInfo ri = parseRunWayAction(metarTab[i]);
-					m.addRunwayInfo(ri);
-				} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]))) {
-					m.setTemperature(Converter.convertTemperature(matches[1]));
-					m.setDewPoint(Converter.convertTemperature(matches[2]));
-				} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]))) {
-					m.setAltimeter(Integer.parseInt(matches[1]));
-				} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(CLOUD_REGEX, metarTab[i])))) {
-					m.addCloud(parseCloud(matches));
-				} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]))) {
-					m.setVerticalVisibility(Integer.parseInt(matches[1]));
-				} else {
-					m.addWeatherCondition(parseWeatherCondition(metarTab[i]));
-				}
-			}
-			return m;
+		if (airport == null) {
+			return null;
 		}
-		return null;
+
+		m.setAirport(airport);
+		m.setMessage(metarCode);
+		m.setDay(Integer.parseInt(metarTab[1].substring(0, 2)));
+		Time t = new Time();
+		t.setHours(Integer.parseInt(metarTab[1].substring(2, 4)));
+		t.setMinutes(Integer.parseInt(metarTab[1].substring(4, 6)));
+		m.setTime(t);
+		Visibility visibility = new Visibility();
+		m.setVisibility(visibility);
+		int metarTabLength = metarTab.length;
+		for (int i = 2; i < metarTabLength; i++) {
+			String[] matches;
+			if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_REGEX, metarTab[i])))) {
+				Wind wind = parseWind(matches);
+				m.setWind(wind);
+			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i])))) {
+				m.getWind().setExtreme1(Integer.parseInt(matches[1]));
+				m.getWind().setExtreme2(Integer.parseInt(matches[2]));
+			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i])))) {
+				visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
+			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i]))) {
+				visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
+				visibility.setMinDirection(matches[1].substring(4));
+			} else if ("NOSIG".equals(metarTab[i])) {
+				m.setNosig(true);
+			} else if ("AUTO".equals(metarTab[i])) {
+				m.setAuto(true);
+			} else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
+				RunwayInfo ri = parseRunWayAction(metarTab[i]);
+				m.addRunwayInfo(ri);
+			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]))) {
+				m.setTemperature(Converter.convertTemperature(matches[1]));
+				m.setDewPoint(Converter.convertTemperature(matches[2]));
+			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]))) {
+				m.setAltimeter(Integer.parseInt(matches[1]));
+			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(CLOUD_REGEX, metarTab[i])))) {
+				m.addCloud(parseCloud(matches));
+			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]))) {
+				m.setVerticalVisibility(Integer.parseInt(matches[1]));
+			} else {
+				m.addWeatherCondition(parseWeatherCondition(metarTab[i]));
+			}
+		}
+		return m;
 	}
 
 	/**
@@ -135,12 +138,10 @@ public final class ParseController extends AbstractParser {
 		RunwayInfo ri = new RunwayInfo();
 		if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart)))) {
 			ri.setName(matches[1]);
-			// ri.setIndicator(matches[2]);
 			ri.setMinRange(Integer.parseInt(matches[3]));
 			ri.setTrend(Converter.convertTrend(matches[4]));
 			return ri;
-		}
-		if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart)))) {
+		} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart)))) {
 			ri.setName(matches[1]);
 			ri.setMinRange(Integer.parseInt(matches[2]));
 			ri.setMaxRange(Integer.parseInt(matches[3]));

@@ -3,14 +3,15 @@
  */
 package com.mivek.facade;
 
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.mivek.controller.ParseController;
 import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.Metar;
+import com.mivek.parser.MetarParser;
 
 /**
  * @author mivek
@@ -27,17 +28,18 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 * @return a metar object.
 	 */
 	public Metar decode(String pCode) {
-		return ParseController.getInstance().parseMetarAction(pCode);
+		return MetarParser.getInstance().parse(pCode);
 	}
 
 	/**
 	 * 
 	 * @param icao
 	 * @return
-	 * @throws Exception
+	 * @throws InvalidIcaoException
+	 * @throws IOException
 	 */
 	@Override
-	public Metar retrieveFromAirport(String icao) throws Exception {
+	public Metar retrieveFromAirport(String icao) throws InvalidIcaoException, IOException {
 		if (icao.length() == 4) {
 			String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
 					+ ".TXT"; //$NON-NLS-1$
@@ -47,7 +49,7 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
 				if (in.getLineNumber() == 2) {
-					return ParseController.getInstance().parseMetarAction(inputLine);
+					return MetarParser.getInstance().parse(inputLine);
 				}
 			}
 			in.close();

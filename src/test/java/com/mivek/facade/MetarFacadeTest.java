@@ -12,9 +12,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.mivek.controller.ParseController;
 import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.Metar;
+import com.mivek.parser.MetarParser;
 
 public class MetarFacadeTest {
 	@Rule
@@ -32,7 +32,7 @@ public class MetarFacadeTest {
 		Metar res = MetarFacade.getInstance().decode(code);
 
 		assertNotNull(res);
-		assertEquals(ParseController.getInstance().getAirports().get("LFPG"), res.getAirport());
+		assertEquals(MetarParser.getAirports().get("LFPG"), res.getAirport());
 		assertEquals(25, res.getDay().intValue());
 		// Time
 		assertNotNull(res.getTime());

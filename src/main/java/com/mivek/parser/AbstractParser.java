@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mivek.controller;
+package com.mivek.parser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,6 +16,7 @@ import com.mivek.enums.Phenomenon;
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
 import com.mivek.model.Country;
+import com.mivek.model.WeatherCode;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
@@ -26,16 +27,18 @@ import com.opencsv.CSVReader;
  * @author mivek
  *
  */
-public abstract class AbstractParser {
+public abstract class AbstractParser<T extends WeatherCode> {
 
 	/**
 	 * Path of airport file.
 	 */
-	private final InputStream AIRPORT_FILE = getClass().getClassLoader().getResourceAsStream("data/airports.dat");
+	private static final InputStream AIRPORT_FILE = AbstractParser.class.getClassLoader()
+			.getResourceAsStream("data/airports.dat");
 	/**
 	 * Path of countries file.
 	 */
-	private final InputStream COUNTRIES_FILE = getClass().getClassLoader().getResourceAsStream("data/countries.dat");
+	private static final InputStream COUNTRIES_FILE = AbstractParser.class.getClassLoader()
+			.getResourceAsStream("data/countries.dat");
 	/**
 	 * Pattern regex for wind.
 	 */
@@ -80,7 +83,7 @@ public abstract class AbstractParser {
 	/**
 	 * Initiate airports map.
 	 */
-	private void initAirports() {
+	private static void initAirports() {
 		airports = new HashMap<>();
 		CSVReader reader;
 		try {
@@ -108,7 +111,7 @@ public abstract class AbstractParser {
 	/**
 	 * Initiate countries map.
 	 */
-	private void initCountries() {
+	private static void initCountries() {
 		countries = new HashMap<>();
 		CSVReader reader;
 		try {
@@ -213,5 +216,7 @@ public abstract class AbstractParser {
 	public static Map<String, Country> getCountries() {
 		return countries;
 	}
+
+	public abstract T parse(String pCode);
 
 }

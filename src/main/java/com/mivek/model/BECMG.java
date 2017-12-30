@@ -16,8 +16,8 @@ public class BECMG {
 	private List<WeatherCondition> weatherConditions;
 
 	public BECMG() {
-		clouds = new ArrayList<Cloud>();
-		weatherConditions = new ArrayList<WeatherCondition>();
+		clouds = new ArrayList<>();
+		weatherConditions = new ArrayList<>();
 	}
 
 	/**

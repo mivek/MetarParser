@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mivek.controller;
+package com.mivek.parser;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasItem;
@@ -27,12 +27,13 @@ import com.mivek.model.RunwayInfo;
 import com.mivek.model.WeatherCode;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
+import com.mivek.parser.MetarParser;
 
 /**
  * @author mivek
  *
  */
-public class ParseControllerTest {
+public class MetarParserTest {
 
 
 	/*
@@ -47,7 +48,7 @@ public class ParseControllerTest {
 	public void testParseCloudNullCloudQuantity() {
 		String[] cloudTab = new String[] { "AZE", "015" };
 
-		Cloud res = ParseController.getInstance().parseCloud(cloudTab);
+		Cloud res = MetarParser.getInstance().parseCloud(cloudTab);
 
 		assertNull(res);
 	}
@@ -56,7 +57,7 @@ public class ParseControllerTest {
 	public void testParseCloudSkyClear() {
 		String[] cloudTab = new String[] { "SKC", "SKC", null, null };
 
-		Cloud res = ParseController.getInstance().parseCloud(cloudTab);
+		Cloud res = MetarParser.getInstance().parseCloud(cloudTab);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SKC, res.getQuantity());
@@ -67,7 +68,7 @@ public class ParseControllerTest {
 	@Test
 	public void testParseCloudWithAltitude() {
 		String[] cloudTab = new String[] { "SCT016", "SCT", "016", null };
-		Cloud res = ParseController.getInstance().parseCloud(cloudTab);
+		Cloud res = MetarParser.getInstance().parseCloud(cloudTab);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -79,7 +80,7 @@ public class ParseControllerTest {
 	public void testParseCloudWithType() {
 		String[] cloudTab = new String[] { "SCT026CB", "SCT", "026", "CB" };
 
-		Cloud res = ParseController.getInstance().parseCloud(cloudTab);
+		Cloud res = MetarParser.getInstance().parseCloud(cloudTab);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -95,7 +96,7 @@ public class ParseControllerTest {
 	public void testParseWindSimple() {
 		String[] windPart = new String[] { "34008KT", "340", "08", null, "KT" };
 
-		Wind res = ParseController.getInstance().parseWind(windPart);
+		Wind res = MetarParser.getInstance().parseWind(windPart);
 
 		assertNotNull(res);
 		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_N));
@@ -109,7 +110,7 @@ public class ParseControllerTest {
 	public void testParseWindWithGusts() {
 		String[] windPart = new String[] { "12017G20KT", "120", "17", "20", "KT" };
 
-		Wind res = ParseController.getInstance().parseWind(windPart);
+		Wind res = MetarParser.getInstance().parseWind(windPart);
 
 		assertNotNull(res);
 		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_SE));
@@ -125,7 +126,7 @@ public class ParseControllerTest {
 	public void testParseWCSimple() {
 		String wcPart = "-DZ";
 		
-		WeatherCondition wc = ParseController.getInstance().parseWeatherCondition(wcPart);
+		WeatherCondition wc = MetarParser.getInstance().parseWeatherCondition(wcPart);
 		
 		assertEquals(Intensity.LIGHT, wc.getIntensity());
 		assertNull(wc.getDescriptive());
@@ -137,7 +138,7 @@ public class ParseControllerTest {
 	public void testParseWCMultiplePHE() {
 		String wcPart = "SHRAGR";
 
-		WeatherCondition wc = ParseController.getInstance().parseWeatherCondition(wcPart);
+		WeatherCondition wc = MetarParser.getInstance().parseWeatherCondition(wcPart);
 
 		assertNull(wc.getIntensity());
 		assertNotNull(wc.getDescriptive());
@@ -150,7 +151,7 @@ public class ParseControllerTest {
 	public void testParseWCNull() {
 		String wcPart = "-SH";
 
-		WeatherCondition wc = ParseController.getInstance().parseWeatherCondition(wcPart);
+		WeatherCondition wc = MetarParser.getInstance().parseWeatherCondition(wcPart);
 
 		assertNull(wc);
 	}
@@ -162,7 +163,7 @@ public class ParseControllerTest {
 	public void testParseRunwayActionSimple() {
 		String riString = "R26/0600U";
 
-		RunwayInfo ri = ParseController.getInstance().parseRunWayAction(riString);
+		RunwayInfo ri = MetarParser.getInstance().parseRunWayAction(riString);
 
 		assertNotNull(ri);
 		assertEquals("26", ri.getName());
@@ -174,7 +175,7 @@ public class ParseControllerTest {
 	public void testParseRunWaysComplex() {
 		String riString = "R26L/0550V700U";
 
-		RunwayInfo ri = ParseController.getInstance().parseRunWayAction(riString);
+		RunwayInfo ri = MetarParser.getInstance().parseRunWayAction(riString);
 		assertNotNull(ri);
 		assertEquals("26L", ri.getName());
 		assertEquals(550, ri.getMinRange());
@@ -186,48 +187,48 @@ public class ParseControllerTest {
 	public void testParseRunWayNull() {
 		String riString = "R26R/AZEZFDFS";
 
-		RunwayInfo ri = ParseController.getInstance().parseRunWayAction(riString);
+		RunwayInfo ri = MetarParser.getInstance().parseRunWayAction(riString);
 
 		assertNull(ri);
 	}
 
 	/**
-	 * =========================== Test ParseMetarAction ===========================
-	 */
+		 * =========================== Test ParseMetarAction ===========================
+		 */
+	
+		@Test
+		public void testParse() {
+			String metarString = "LFPG 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
+	
+	
+			Metar m = MetarParser.getInstance().parse(metarString);
+	
+			assertNotNull(m);
+	
+			MetarParser.getInstance();
+			assertEquals(MetarParser.getAirports().get("LFPG"), m.getAirport());
+			assertEquals(Integer.valueOf(17), m.getDay());
+			assertEquals(8, m.getTime().getHours());
+			assertEquals(30, m.getTime().getMinutes());
+			assertNotNull(m.getWind());
+			assertEquals(0, m.getWind().getSpeed());
+			assertEquals(i18n.Messages.CONVERTER_N, m.getWind().getDirection());
+			assertEquals("KT", m.getWind().getUnit());
+			assertEquals("350m", m.getVisibility().getMainVisibility());
+			assertThat(m.getRunways(), is(not(empty())));
+			assertThat(m.getRunways(), hasSize(8));
+			//Check if runways are correctly parsed
+			assertEquals("27L", m.getRunways().get(0).getName());
+			assertEquals(375, m.getRunways().get(0).getMinRange());
+			assertEquals(i18n.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
+		}
 
 	@Test
-	public void testParseMetarAction() {
-		String metarString = "LFPG 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
-
-
-		Metar m = ParseController.getInstance().parseMetarAction(metarString);
-
-		assertNotNull(m);
-
-		ParseController.getInstance();
-		assertEquals(ParseController.getAirports().get("LFPG"), m.getAirport());
-		assertEquals(Integer.valueOf(17), m.getDay());
-		assertEquals(8, m.getTime().getHours());
-		assertEquals(30, m.getTime().getMinutes());
-		assertNotNull(m.getWind());
-		assertEquals(0, m.getWind().getSpeed());
-		assertEquals(i18n.Messages.CONVERTER_N, m.getWind().getDirection());
-		assertEquals("KT", m.getWind().getUnit());
-		assertEquals("350m", m.getVisibility().getMainVisibility());
-		assertThat(m.getRunways(), is(not(empty())));
-		assertThat(m.getRunways(), hasSize(8));
-		//Check if runways are correctly parsed
-		assertEquals("27L", m.getRunways().get(0).getName());
-		assertEquals(375, m.getRunways().get(0).getMinRange());
-		assertEquals(i18n.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
-	}
-
-	@Test
-	public void testParseMetarActionNullAirport() {
-		String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
-
-		WeatherCode m = ParseController.getInstance().parseMetarAction(metarString);
-
-		assertNull(m);
-	}
+		public void testParseNullAirport() {
+			String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
+	
+			WeatherCode m = MetarParser.getInstance().parse(metarString);
+	
+			assertNull(m);
+		}
 }
