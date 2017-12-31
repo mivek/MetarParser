@@ -270,6 +270,13 @@ public class Airport {
 	}
 
 	@Override
+	public int hashCode() {
+		int result;
+		result = 31 * icao.hashCode();
+		return result;
+	}
+
+	@Override
 	public final String toString() {
 		return this.name + " (" + this.icao + ")";
 	}

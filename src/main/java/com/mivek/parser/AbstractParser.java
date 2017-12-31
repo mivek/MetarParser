@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.mivek.enums.CloudQuantity;
 import com.mivek.enums.CloudType;
@@ -28,7 +30,7 @@ import com.opencsv.CSVReader;
  *
  */
 public abstract class AbstractParser<T extends WeatherCode> {
-
+	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
 	/**
 	 * Path of airport file.
 	 */
@@ -104,7 +106,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 				airports.put(airport.getIcao(), airport);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.toString(), e);
 		}
 	}
 
@@ -123,7 +125,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 				countries.put(country.getName(), country);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.toString(), e);
 		}
 	}
 

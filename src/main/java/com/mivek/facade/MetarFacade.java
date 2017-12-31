@@ -3,9 +3,9 @@
  */
 package com.mivek.facade;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -40,23 +40,19 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 */
 	@Override
 	public Metar retrieveFromAirport(String icao) throws InvalidIcaoException, IOException {
-		if (icao.length() == 4) {
-			String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
-					+ ".TXT"; //$NON-NLS-1$
-			URL url = new URL(website);
-			URLConnection urlCo = url.openConnection();
-			LineNumberReader in = new LineNumberReader(new InputStreamReader(urlCo.getInputStream()));
-			String inputLine;
-			while ((inputLine = in.readLine()) != null) {
-				if (in.getLineNumber() == 2) {
-					return MetarParser.getInstance().parse(inputLine);
-				}
-			}
-			in.close();
+		if (icao.length() != 4) {
+			throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
 		}
-		throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
+		String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
+				+ ".TXT"; //$NON-NLS-1$
+		URL url = new URL(website);
+		URLConnection urlCo = url.openConnection();
+		BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()));
+		String[] lines = (String[]) br.lines().toArray();
+		br.close();
+		return MetarParser.getInstance().parse(lines[1]);
 	}
-	
+
 	/**
 	 * Private constructor.
 	 */
