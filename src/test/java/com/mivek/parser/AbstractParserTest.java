@@ -39,18 +39,18 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 	@Test
 	public void testParseCloudNullCloudQuantity() {
-		String[] cloudTab = new String[] { "AZE", "015" };
+		String cloud = "AZE015";
 
-		Cloud res = getSut().parseCloud(cloudTab);
+		Cloud res = getSut().parseCloud(cloud);
 
 		assertNull(res);
 	}
 
 	@Test
 	public void testParseCloudSkyClear() {
-		String[] cloudTab = new String[] { "SKC", "SKC", null, null };
+		String cloud = "SKC";
 
-		Cloud res = getSut().parseCloud(cloudTab);
+		Cloud res = getSut().parseCloud(cloud);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SKC, res.getQuantity());
@@ -60,8 +60,8 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 	@Test
 	public void testParseCloudWithAltitude() {
-		String[] cloudTab = new String[] { "SCT016", "SCT", "016", null };
-		Cloud res = getSut().parseCloud(cloudTab);
+		String cloud = "SCT016";
+		Cloud res = getSut().parseCloud(cloud);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -71,9 +71,9 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 	@Test
 	public void testParseCloudWithType() {
-		String[] cloudTab = new String[] { "SCT026CB", "SCT", "026", "CB" };
+		String cloud = "SCT026CB";
 
-		Cloud res = getSut().parseCloud(cloudTab);
+		Cloud res = getSut().parseCloud(cloud);
 
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -87,7 +87,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 	 */
 	@Test
 	public void testParseWindSimple() {
-		String[] windPart = new String[] { "34008KT", "340", "08", null, "KT" };
+		String windPart = "34008KT";
 
 		Wind res = getSut().parseWind(windPart);
 
@@ -101,7 +101,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 	@Test
 	public void testParseWindWithGusts() {
-		String[] windPart = new String[] { "12017G20KT", "120", "17", "20", "KT" };
+		String windPart = "12017G20KT";
 
 		Wind res = getSut().parseWind(windPart);
 

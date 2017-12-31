@@ -27,7 +27,6 @@ import com.opencsv.CSVReader;
 
 /**
  * @author mivek
- *
  */
 public abstract class AbstractParser<T extends WeatherCode> {
 	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
@@ -132,13 +131,14 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * This method parses the wind part of the metar code. It parses the generic
 	 * part. Variable winds are not parsed by this method.
-	 *
+	 * 
 	 * @param windPart
 	 *            An array of strings with wind elements.
 	 * @return a Wind element with the informations.
 	 */
-	protected Wind parseWind(final String[] windPart) {
+	protected Wind parseWind(final String pStringWind) {
 		Wind wind = new Wind();
+		String[] windPart = Regex.pregMatch(WIND_REGEX, pStringWind);
 		wind.setDirection(Converter.degreesToDirection(windPart[1]));
 		wind.setSpeed(Integer.parseInt(windPart[2]));
 		if (windPart[3] != null) {
@@ -155,8 +155,9 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 *            Table of strings with clouds elements.
 	 * @return a decoded cloud with its quantity, its altitude and its type.
 	 */
-	protected Cloud parseCloud(final String[] cloudPart) {
+	protected Cloud parseCloud(final String pCloudString) {
 		Cloud cloud = new Cloud();
+		String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, pCloudString);
 		try {
 			CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
 	

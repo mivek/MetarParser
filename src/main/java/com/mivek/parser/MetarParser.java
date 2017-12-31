@@ -22,7 +22,7 @@ public final class MetarParser extends AbstractParser<Metar> {
 	/**
 	 * Instance of the class.
 	 */
-	private static MetarParser INSTANCE = null;
+	private static MetarParser instance = null;
 	/**
 	 * Pattern regex for runway with min and max range visibility.
 	 */
@@ -57,10 +57,10 @@ public final class MetarParser extends AbstractParser<Metar> {
 	 * @return the instance of MetarParser.
 	 */
 	public static MetarParser getInstance() {
-		if (INSTANCE == null) {
-			INSTANCE = new MetarParser();
+		if (instance == null) {
+			instance = new MetarParser();
 		}
-		return INSTANCE;
+		return instance;
 	}
 
 	/**
@@ -92,15 +92,18 @@ public final class MetarParser extends AbstractParser<Metar> {
 		int metarTabLength = metarTab.length;
 		for (int i = 2; i < metarTabLength; i++) {
 			String[] matches;
-			if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_REGEX, metarTab[i])))) {
-				Wind wind = parseWind(matches);
+			if (Regex.find(WIND_REGEX, metarTab[i])) {
+				Wind wind = parseWind(metarTab[i]);
 				m.setWind(wind);
-			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i])))) {
+			} else if (Regex.find(WIND_EXTREME_REGEX, metarTab[i])) {
+				matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i]);
 				m.getWind().setExtreme1(Integer.parseInt(matches[1]));
 				m.getWind().setExtreme2(Integer.parseInt(matches[2]));
-			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i])))) {
+			} else if (Regex.find(MAIN_VISIBILITY_REGEX, metarTab[i])) {
+				matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i]);
 				visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
-			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i]))) {
+			} else if (Regex.find(MIN_VISIBILITY_REGEX, metarTab[i])) {
+				matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i]);
 				visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
 				visibility.setMinDirection(matches[1].substring(4));
 			} else if ("NOSIG".equals(metarTab[i])) {
@@ -110,14 +113,17 @@ public final class MetarParser extends AbstractParser<Metar> {
 			} else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
 				RunwayInfo ri = parseRunWayAction(metarTab[i]);
 				m.addRunwayInfo(ri);
-			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]))) {
+			} else if (Regex.find(TEMPERATURE_REGEX, metarTab[i])) {
+				matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]);
 				m.setTemperature(Converter.convertTemperature(matches[1]));
 				m.setDewPoint(Converter.convertTemperature(matches[2]));
-			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]))) {
+			} else if (Regex.find(ALTIMETER_REGEX, metarTab[i])) {
+				matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
 				m.setAltimeter(Integer.parseInt(matches[1]));
-			} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(CLOUD_REGEX, metarTab[i])))) {
-				m.addCloud(parseCloud(matches));
-			} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]))) {
+			} else if (Regex.find(CLOUD_REGEX, metarTab[i])) {
+				m.addCloud(parseCloud(metarTab[i]));
+			} else if (Regex.find(VERTICAL_VISIBILITY, metarTab[i])) {
+				matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]);
 				m.setVerticalVisibility(Integer.parseInt(matches[1]));
 			} else {
 				m.addWeatherCondition(parseWeatherCondition(metarTab[i]));
