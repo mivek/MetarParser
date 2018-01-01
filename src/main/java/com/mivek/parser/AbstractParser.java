@@ -186,7 +186,8 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	protected WeatherCondition parseWeatherCondition(final String weatherPart) {
 		WeatherCondition wc = new WeatherCondition();
 		String match = null;
-		if ((match = Regex.findString("^(-|\\+|VC)", weatherPart)) != null) {
+		if (Regex.find("^(-|\\+|VC)", weatherPart)) {
+			match = Regex.findString("^(-|\\+|VC)", weatherPart);
 			Intensity i = Intensity.getEnum(match);
 			wc.setIntensity(i);
 		}
