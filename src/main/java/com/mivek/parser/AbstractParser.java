@@ -33,12 +33,12 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Path of airport file.
 	 */
-	private static final InputStream AIRPORT_FILE = AbstractParser.class.getClassLoader()
+	private final InputStream airportsFile = AbstractParser.class.getClassLoader()
 			.getResourceAsStream("data/airports.dat");
 	/**
 	 * Path of countries file.
 	 */
-	private static final InputStream COUNTRIES_FILE = AbstractParser.class.getClassLoader()
+	private final InputStream countriesFile = AbstractParser.class.getClassLoader()
 			.getResourceAsStream("data/countries.dat");
 	/**
 	 * Pattern regex for wind.
@@ -55,7 +55,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Pattern to recognize clouds.
 	 */
-	protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?";
+	protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
 	/**
 	 * Pattern for the vertical visibility.
 	 */
@@ -67,11 +67,11 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Map of airports.
 	 */
-	private static Map<String, Airport> airports;
+	private Map<String, Airport> airports;
 	/**
 	 * Map of countries.
 	 */
-	private static Map<String, Country> countries;
+	private Map<String, Country> countries;
 
 	/**
 	 * 
@@ -84,11 +84,11 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Initiate airports map.
 	 */
-	private static void initAirports() {
+	private void initAirports() {
 		airports = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new InputStreamReader(AIRPORT_FILE));
+			reader = new CSVReader(new InputStreamReader(airportsFile));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Airport airport = new Airport();
@@ -112,11 +112,11 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Initiate countries map.
 	 */
-	private static void initCountries() {
+	private void initCountries() {
 		countries = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new InputStreamReader(COUNTRIES_FILE));
+			reader = new CSVReader(new InputStreamReader(countriesFile));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Country country = new Country();
@@ -210,14 +210,14 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * @return the airports
 	 */
-	public static Map<String, Airport> getAirports() {
+	public Map<String, Airport> getAirports() {
 		return airports;
 	}
 
 	/**
 	 * @return the countries
 	 */
-	public static Map<String, Country> getCountries() {
+	public Map<String, Country> getCountries() {
 		return countries;
 	}
 

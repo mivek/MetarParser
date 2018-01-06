@@ -87,4 +87,9 @@ public final class Regex {
 		Pattern p = Pattern.compile(regex);
 		m = p.matcher(input);
 	}
+
+	public static boolean match(final String regex, final String input) {
+		init(regex, input);
+		return m.matches();
+	}
 }

@@ -32,7 +32,7 @@ public class MetarFacadeTest {
 		Metar res = MetarFacade.getInstance().decode(code);
 
 		assertNotNull(res);
-		assertEquals(MetarParser.getAirports().get("LFPG"), res.getAirport());
+		assertEquals(MetarParser.getInstance().getAirports().get("LFPG"), res.getAirport());
 		assertEquals(25, res.getDay().intValue());
 		// Time
 		assertNotNull(res.getTime());
