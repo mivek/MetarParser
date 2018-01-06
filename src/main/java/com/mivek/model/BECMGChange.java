@@ -7,7 +7,7 @@ import com.mivek.enums.WeatherChangeType;
  * @author mivek
  *
  */
-public class BECMGChange extends AbstractWeatherChange {
+public class BECMGChange extends AbstractWeatherChange<Validity> {
 
 	public BECMGChange() {
 		super();

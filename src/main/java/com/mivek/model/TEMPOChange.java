@@ -10,8 +10,7 @@ import com.mivek.enums.WeatherChangeType;
  * @param <E>
  *
  */
-public final class TEMPOChange extends AbstractWeatherChange {
-
+public final class TEMPOChange extends AbstractWeatherChange<Validity> {
 	/**
 	 * 
 	 */

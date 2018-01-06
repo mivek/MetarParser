@@ -2,7 +2,7 @@ package com.mivek.model;
 
 import com.mivek.enums.WeatherChangeType;
 
-public class FMChange extends AbstractWeatherChange {
+public class FMChange extends AbstractWeatherChange<BeginningValidity> {
 
 	public FMChange() {
 		super();
