@@ -34,7 +34,7 @@ Use the ParseController class to parse a metar and retrieve a metar object.</des
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>${artifactId}-${version}</finalName>
+		<finalName>${project.artifactId}-${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -47,6 +47,11 @@ Use the ParseController class to parse a metar and retrieve a metar object.</des
 					</formats>
 					<check />
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.8</version>
 			</plugin>
 		</plugins>
 	</build>
