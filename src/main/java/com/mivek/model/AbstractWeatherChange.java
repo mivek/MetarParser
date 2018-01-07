@@ -20,6 +20,8 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	private ArrayList<WeatherCondition> fWeatherConditions;
 	private T fValidity;
 	private Integer probability;
+	private TemperatureDated fMaxTemperature;
+	private TemperatureDated fMinTemperature;
 
 	public AbstractWeatherChange() {
 		fClouds = new ArrayList<>();
@@ -110,6 +112,36 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 */
 	public void setWind(Wind pWind) {
 		fWind = pWind;
+	}
+
+	/**
+	 * @return the maxTemperature
+	 */
+	public TemperatureDated getMaxTemperature() {
+		return fMaxTemperature;
+	}
+
+	/**
+	 * @param pMaxTemperature
+	 *            the maxTemperature to set
+	 */
+	public void setMaxTemperature(TemperatureDated pMaxTemperature) {
+		fMaxTemperature = pMaxTemperature;
+	}
+
+	/**
+	 * @return the minTemperature
+	 */
+	public TemperatureDated getMinTemperature() {
+		return fMinTemperature;
+	}
+
+	/**
+	 * @param pMinTemperature
+	 *            the minTemperature to set
+	 */
+	public void setMinTemperature(TemperatureDated pMinTemperature) {
+		fMinTemperature = pMinTemperature;
 	}
 
 }

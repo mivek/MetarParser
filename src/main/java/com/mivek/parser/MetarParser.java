@@ -3,10 +3,12 @@ package com.mivek.parser;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.mivek.model.Airport;
+import com.mivek.model.Cloud;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
 import com.mivek.model.Time;
 import com.mivek.model.Visibility;
+import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
@@ -121,12 +123,18 @@ public final class MetarParser extends AbstractParser<Metar> {
 				matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
 				m.setAltimeter(Integer.parseInt(matches[1]));
 			} else if (Regex.find(CLOUD_REGEX, metarTab[i])) {
-				m.addCloud(parseCloud(metarTab[i]));
+				Cloud c = parseCloud(metarTab[i]);
+				if (c != null) {
+					m.addCloud(c);
+				}
 			} else if (Regex.find(VERTICAL_VISIBILITY, metarTab[i])) {
 				matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]);
 				m.setVerticalVisibility(Integer.parseInt(matches[1]));
 			} else {
-				m.addWeatherCondition(parseWeatherCondition(metarTab[i]));
+				WeatherCondition wc = parseWeatherCondition(metarTab[i]);
+				if (wc != null) {
+					m.addWeatherCondition(wc);
+				}
 			}
 		}
 		return m;
