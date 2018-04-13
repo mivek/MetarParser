@@ -1,12 +1,13 @@
 package com.mivek.parser;
 
+import java.time.LocalTime;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
-import com.mivek.model.Time;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
@@ -24,7 +25,7 @@ public final class MetarParser extends AbstractParser<Metar> {
 	/**
 	 * Instance of the class.
 	 */
-	private static MetarParser instance = null;
+	private static MetarParser instance = new MetarParser();
 	/**
 	 * Pattern regex for runway with min and max range visibility.
 	 */
@@ -59,9 +60,6 @@ public final class MetarParser extends AbstractParser<Metar> {
 	 * @return the instance of MetarParser.
 	 */
 	public static MetarParser getInstance() {
-		if (instance == null) {
-			instance = new MetarParser();
-		}
 		return instance;
 	}
 
@@ -85,9 +83,9 @@ public final class MetarParser extends AbstractParser<Metar> {
 		m.setAirport(airport);
 		m.setMessage(metarCode);
 		m.setDay(Integer.parseInt(metarTab[1].substring(0, 2)));
-		Time t = new Time();
-		t.setHours(Integer.parseInt(metarTab[1].substring(2, 4)));
-		t.setMinutes(Integer.parseInt(metarTab[1].substring(4, 6)));
+		int hours = Integer.parseInt(metarTab[1].substring(2, 4));
+		int minutes = Integer.parseInt(metarTab[1].substring(4, 6));
+		LocalTime t = LocalTime.of(hours, minutes);
 		m.setTime(t);
 		Visibility visibility = new Visibility();
 		m.setVisibility(visibility);

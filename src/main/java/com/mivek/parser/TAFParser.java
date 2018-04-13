@@ -3,6 +3,8 @@
  */
 package com.mivek.parser;
 
+import java.time.LocalTime;
+
 import com.mivek.model.AbstractWeatherChange;
 import com.mivek.model.Airport;
 import com.mivek.model.BECMGChange;
@@ -12,7 +14,6 @@ import com.mivek.model.FMChange;
 import com.mivek.model.TAF;
 import com.mivek.model.TEMPOChange;
 import com.mivek.model.TemperatureDated;
-import com.mivek.model.Time;
 import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
 import com.mivek.utils.Converter;
@@ -34,7 +35,7 @@ public class TAFParser extends AbstractParser<TAF> {
 	/**
 	 * Instance of the TAFParser.
 	 */
-	private static TAFParser instance = null;
+	private static TAFParser instance = new TAFParser();
 
 	/**
 	 * 
@@ -48,9 +49,6 @@ public class TAFParser extends AbstractParser<TAF> {
 	 * @return
 	 */
 	public static TAFParser getInstance() {
-		if (instance == null) {
-			instance = new TAFParser();
-		}
 		return instance;
 	}
 
@@ -74,9 +72,9 @@ public class TAFParser extends AbstractParser<TAF> {
 		taf.setMessage(pTAFCode);
 		// Day and time
 		taf.setDay(Integer.parseInt(parts[2].substring(0, 2)));
-		Time t = new Time();
-		t.setHours(Integer.parseInt(parts[2].substring(2, 4)));
-		t.setMinutes(Integer.parseInt(parts[2].substring(4, 6)));
+		int hours = Integer.parseInt(parts[2].substring(2, 4));
+		int minutes = Integer.parseInt(parts[2].substring(4, 6));
+		LocalTime t = LocalTime.of(hours, minutes);
 		taf.setTime(t);
 		
 		// Validity Time

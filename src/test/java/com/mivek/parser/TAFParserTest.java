@@ -161,8 +161,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertEquals(fSut.getAirports().get("LFPB"), res.getAirport());
 		// Check on time delivery.
 		assertEquals(Integer.valueOf(1), res.getDay());
-		assertEquals(11, res.getTime().getHours());
-		assertEquals(0, res.getTime().getMinutes());
+		assertEquals(11, res.getTime().getHour());
+		assertEquals(0, res.getTime().getMinute());
 		// Checks on validity.
 		assertEquals(Integer.valueOf(1), res.getValidity().getStartDay());
 		assertEquals(Integer.valueOf(12), res.getValidity().getStartHour());
@@ -259,8 +259,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res, is(not(nullValue())));
 		assertThat(res.getAirport(), is(fSut.getAirports().get("LLIB")));
 		assertThat(res.getDay(), is(6));
-		assertThat(res.getTime().getHours(), is(11));
-		assertThat(res.getTime().getMinutes(), is(23));
+		assertThat(res.getTime().getHour(), is(11));
+		assertThat(res.getTime().getMinute(), is(23));
 		assertThat(res.getValidity().getStartDay(), is(6));
 		assertThat(res.getValidity().getStartHour(), is(12));
 		assertThat(res.getValidity().getEndDay(), is(7));

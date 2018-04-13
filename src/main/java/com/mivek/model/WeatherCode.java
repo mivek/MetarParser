@@ -3,6 +3,7 @@
  */
 package com.mivek.model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public abstract class WeatherCode {
 	/**
 	 * Time of the metar.
 	 */
-	protected Time time;
+	protected LocalTime time;
 	/**
 	 * Airport of the metar.
 	 */
@@ -72,7 +73,7 @@ public abstract class WeatherCode {
 	/**
 	 * @return the time
 	 */
-	public Time getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
@@ -80,7 +81,7 @@ public abstract class WeatherCode {
 	 * @param pTime
 	 *            the time to set
 	 */
-	public void setTime(final Time pTime) {
+	public void setTime(final LocalTime pTime) {
 		this.time = pTime;
 	}
 

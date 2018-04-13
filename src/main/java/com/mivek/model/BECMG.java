@@ -1,5 +1,6 @@
 package com.mivek.model;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,8 @@ import java.util.List;
  *
  */
 public class BECMG {
-	private Time start;
-	private Time end;
+	private LocalTime start;
+	private LocalTime end;
 	private List<Cloud> clouds;
 	private List<WeatherCondition> weatherConditions;
 
@@ -23,7 +24,7 @@ public class BECMG {
 	/**
 	 * @return the start. The start of the changement.
 	 */
-	public Time getStart() {
+	public LocalTime getStart() {
 		return start;
 	}
 
@@ -31,14 +32,14 @@ public class BECMG {
 	 * @param start
 	 *            the start to set
 	 */
-	public void setStart(Time start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 
 	/**
 	 * @return the end. The end of the changement.
 	 */
-	public Time getEnd() {
+	public LocalTime getEnd() {
 		return end;
 	}
 
@@ -46,7 +47,7 @@ public class BECMG {
 	 * @param end
 	 *            the end to set
 	 */
-	public void setEnd(Time end) {
+	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
 

@@ -18,7 +18,7 @@ import com.mivek.parser.MetarParser;
  *
  */
 public class MetarFacade implements IWeatherCodeFacade<Metar> {
-	private static MetarFacade instance = null;
+	private static MetarFacade instance = new MetarFacade();
 
 	/**
 	 * Method to parse a metar.
@@ -27,16 +27,17 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 *            the metar to decode.
 	 * @return a metar object.
 	 */
+	@Override
 	public Metar decode(String pCode) {
 		return MetarParser.getInstance().parse(pCode);
 	}
 
 	/**
-	 * 
-	 * @param icao
-	 * @return
-	 * @throws InvalidIcaoException
-	 * @throws IOException
+	 * Gets the metar of an airport.
+	 * @param icao String icao of the airport
+	 * @return the decoded metar.
+	 * @throws InvalidIcaoException When the icao is not valid.
+	 * @throws IOException When an error occurs.
 	 */
 	@Override
 	public Metar retrieveFromAirport(String icao) throws InvalidIcaoException, IOException {
@@ -65,9 +66,6 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 * @return the instance of the class.
 	 */
 	public static MetarFacade getInstance() {
-		if (instance == null) {
-			instance = new MetarFacade();
-		}
 		return instance;
 	}
 }

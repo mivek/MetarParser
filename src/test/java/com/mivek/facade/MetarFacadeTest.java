@@ -8,17 +8,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.Metar;
 import com.mivek.parser.MetarParser;
 
 public class MetarFacadeTest {
-	@Rule
-	public ExpectedException thrown;
+
 
 	@Test(expected = InvalidIcaoException.class)
 	public void testRetrieveFromAirportInvalid() throws Exception {
@@ -36,8 +33,8 @@ public class MetarFacadeTest {
 		assertEquals(25, res.getDay().intValue());
 		// Time
 		assertNotNull(res.getTime());
-		assertEquals(18, res.getTime().getHours());
-		assertEquals(30, res.getTime().getMinutes());
+		assertEquals(18, res.getTime().getHour());
+		assertEquals(30, res.getTime().getMinute());
 		// Wind
 		assertNotNull(res.getWind());
 		assertEquals(i18n.Messages.CONVERTER_S, res.getWind().getDirection());
