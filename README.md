@@ -73,6 +73,26 @@ The wind class is composed of
   - the lowest variable wind
   - the highest variable wind
   - the unit of the wind's speed
-  
-#### Time
-This class is composed of the hour and the minute.
+
+## Examples
+### Parse a metar
+Instantiate the metarFacade and use its method parse.
+
+```java
+String code = "LFPG 131830Z 19005KT 170V250 9999 -SHRA FEW040TCU SCT086 16/08 Q1011 TEMPO SCT030TCU";
+MetarFacade facade = MetarFacade.getInstance();
+Metar metar = facade.decode(code);
+```
+
+### Retrieve the metar of an airport
+Instantiate the metarFacade.
+Use the its method retrieveFromAirport with the ICAO code of the airport.
+
+```java
+String icao = "LFPG";
+MetarFacade facade = MetarFacade.getInstance();
+Metar metar = facade.retrieveFromAirport(icao);
+```
+
+
+
