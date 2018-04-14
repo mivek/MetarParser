@@ -1,13 +1,15 @@
-/**
- * 
- */
 package com.mivek.model;
 
 /**
+ * Class representing a validity with start day, start hour and start minutes.
+ *
  * @author mivek
  *
  */
 public class BeginningValidity extends AbstractValidity {
+	/**
+	 * the minutes.
+	 */
 	private Integer fStartMinutes;
 
 	/**

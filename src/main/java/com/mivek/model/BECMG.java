@@ -6,16 +6,31 @@ import java.util.List;
 
 /**
  * This class represents the BECMG part of a metar.
- * 
+ *
  * @author mivek
  *
  */
 public class BECMG {
+	/**
+	 * Start time.
+	 */
 	private LocalTime start;
+	/**
+	 * End time.
+	 */
 	private LocalTime end;
+	/**
+	 * List of clouds.
+	 */
 	private List<Cloud> clouds;
+	/**
+	 * List of weather conditions.
+	 */
 	private List<WeatherCondition> weatherConditions;
 
+	/**
+	 * Constructor.
+	 */
 	public BECMG() {
 		clouds = new ArrayList<>();
 		weatherConditions = new ArrayList<>();
@@ -29,11 +44,11 @@ public class BECMG {
 	}
 
 	/**
-	 * @param start
+	 * @param pStart
 	 *            the start to set
 	 */
-	public void setStart(LocalTime start) {
-		this.start = start;
+	public void setStart(final LocalTime pStart) {
+		this.start = pStart;
 	}
 
 	/**
@@ -44,11 +59,11 @@ public class BECMG {
 	}
 
 	/**
-	 * @param end
-	 *            the end to set
+	 * @param pEnd
+	 *            the end to set.
 	 */
-	public void setEnd(LocalTime end) {
-		this.end = end;
+	public void setEnd(final LocalTime pEnd) {
+		this.end = pEnd;
 	}
 
 	/**
@@ -66,18 +81,22 @@ public class BECMG {
 	}
 
 	/**
-	 * 
+	 * Adds a cloud to the list.
+	 *
 	 * @param c
+	 *            the cloud to add
 	 */
-	public void addCloud(Cloud c) {
+	public void addCloud(final Cloud c) {
 		clouds.add(c);
 	}
 
 	/**
-	 * 
+	 * Adds a weather condition to the list.
+	 *
 	 * @param wc
+	 *            the weathercondition to add.
 	 */
-	public void addWeatherCondition(WeatherCondition wc) {
+	public void addWeatherCondition(final WeatherCondition wc) {
 		weatherConditions.add(wc);
 	}
 }

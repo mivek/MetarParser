@@ -1,15 +1,23 @@
-/**
- * 
- */
 package com.mivek.model;
 
 /**
+ * Class representing a temperature with its date.
+ *
  * @author mivek
  *
  */
 public class TemperatureDated {
+	/**
+	 * The temperature.
+	 */
 	private Integer fTemperature;
+	/**
+	 * The day.
+	 */
 	private Integer fDay;
+	/**
+	 * The hour.
+	 */
 	private Integer fHour;
 
 	/**

@@ -1,9 +1,8 @@
-/**
- * 
- */
 package com.mivek.model;
 
 /**
+ * Class representing the validity of a TAF message.
+ *
  * @author mivek
  *
  */
@@ -30,7 +29,7 @@ public final class Validity extends AbstractValidity {
 	 * @param pEndDay
 	 *            the endDay to set
 	 */
-	public void setEndDay(Integer pEndDay) {
+	public void setEndDay(final Integer pEndDay) {
 		fEndDay = pEndDay;
 	}
 
@@ -45,7 +44,7 @@ public final class Validity extends AbstractValidity {
 	 * @param pEndHour
 	 *            the endHour to set
 	 */
-	public void setEndHour(Integer pEndHour) {
+	public void setEndHour(final Integer pEndHour) {
 		fEndHour = pEndHour;
 	}
 }

@@ -1,5 +1,10 @@
 package com.mivek.model;
 
+/**
+ * Interface for validity objects.
+ * @author mivek
+ *
+ */
 public interface IValidity {
 
 	/**
@@ -17,11 +22,11 @@ public interface IValidity {
 	/**
 	 * @return the startHour
 	 */
-	public Integer getStartHour();
+	Integer getStartHour();
 
 	/**
 	 * @param pStartHour
 	 *            the startHour to set
 	 */
-	public void setStartHour(Integer pStartHour);
+	void setStartHour(Integer pStartHour);
 }

@@ -1,22 +1,18 @@
-/**
- * 
- */
 package com.mivek.model;
 
 import com.mivek.enums.WeatherChangeType;
 
 /**
- * @author mivek
- * @param <E>
+ * Class representing a Tempo change in a taf message.
  *
+ * @author mivek
  */
 public final class TEMPOChange extends AbstractWeatherChange<Validity> {
 	/**
-	 * 
+	 * Default constructor.
 	 */
 	public TEMPOChange() {
-		super();
-		fType = WeatherChangeType.TEMPO;
+		super(WeatherChangeType.TEMPO);
 	}
 
 }

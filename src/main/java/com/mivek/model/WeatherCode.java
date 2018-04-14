@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.model;
 
 import java.time.LocalTime;
@@ -16,15 +13,15 @@ public abstract class WeatherCode {
 	/**
 	 * Integer for the day of the metar.
 	 */
-	protected Integer day;
+	private Integer day;
 	/**
 	 * Time of the metar.
 	 */
-	protected LocalTime time;
+	private LocalTime time;
 	/**
 	 * Airport of the metar.
 	 */
-	protected Airport airport;
+	private Airport airport;
 	/**
 	 * Visibility.
 	 */
@@ -36,7 +33,7 @@ public abstract class WeatherCode {
 	/**
 	 * List of weather conditions.
 	 */
-	protected List<WeatherCondition> weatherConditions;
+	private List<WeatherCondition> weatherConditions;
 	/**
 	 * Vertical visibility.
 	 */
@@ -48,8 +45,11 @@ public abstract class WeatherCode {
 	/**
 	 * List of clouds.
 	 */
-	protected List<Cloud> clouds;
+	private List<Cloud> clouds;
 
+	/**
+	 * Default contructor.
+	 */
 	public WeatherCode() {
 		weatherConditions = new ArrayList<>();
 		clouds = new ArrayList<>();

@@ -1,25 +1,32 @@
-/**
- * 
- */
 package com.mivek.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class representing a TAF.
+ *
  * @author mivek
  *
  */
 public class TAF extends WeatherCode {
 
 	/**
-	 * 
+	 * The valididty of the TAF.
 	 */
-	Validity fValidity;
-
-	List<BECMGChange> fBECMGs;
-	List<FMChange> fFMs;
-	List<TEMPOChange> fTempos;
+	private Validity fValidity;
+	/**
+	 * List of BECMG changes.
+	 */
+	private List<BECMGChange> fBECMGs;
+	/**
+	 * List of From changes.
+	 */
+	private List<FMChange> fFMs;
+	/**
+	 * List of Tempos changes.
+	 */
+	private List<TEMPOChange> fTempos;
 	/**
 	 * Constructor.
 	 */
@@ -41,7 +48,7 @@ public class TAF extends WeatherCode {
 	 * @param pValidity
 	 *            the validity to set
 	 */
-	public void setValidity(Validity pValidity) {
+	public void setValidity(final Validity pValidity) {
 		fValidity = pValidity;
 	}
 
@@ -66,15 +73,27 @@ public class TAF extends WeatherCode {
 		return fTempos;
 	}
 
-	public void addTempo(TEMPOChange pChange) {
+	/**
+	 * Adds a tempo change to the list.
+	 * @param pChange the change to add.
+	 */
+	public void addTempo(final TEMPOChange pChange) {
 		fTempos.add(pChange);
 	}
 
-	public void addBECMG(BECMGChange pChange) {
+	/**
+	 * Adds a BECMG to the list.
+	 * @param pChange the change to add.
+	 */
+	public void addBECMG(final BECMGChange pChange) {
 		fBECMGs.add(pChange);
 	}
 
-	public void addFM(FMChange pChange) {
+	/**
+	 * Adds a FM change to the list.
+	 * @param pChange the change to add.
+	 */
+	public void addFM(final FMChange pChange) {
 		fFMs.add(pChange);
 	}
 }

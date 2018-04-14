@@ -262,7 +262,7 @@ public class Airport {
 	}
 
 	@Override
-	public boolean equals(final Object obj) {
+	public final boolean equals(final Object obj) {
 		if (obj instanceof Airport) {
 			return this.icao.equals(((Airport) obj).getIcao());
 		}
@@ -270,7 +270,7 @@ public class Airport {
 	}
 
 	@Override
-	public int hashCode() {
+	public final int hashCode() {
 		int result;
 		result = 31 * icao.hashCode();
 		return result;

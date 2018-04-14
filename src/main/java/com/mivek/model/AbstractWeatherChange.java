@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.model;
 
 import java.util.ArrayList;
@@ -9,23 +6,59 @@ import java.util.List;
 import com.mivek.enums.WeatherChangeType;
 
 /**
+ * Class representing a weather change.
+ * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author mivek
  *
  */
 public abstract class AbstractWeatherChange<T extends AbstractValidity> {
-	protected WeatherChangeType fType;
+	/**
+	 * the type of change.
+	 */
+	private WeatherChangeType fType;
+	/**
+	 * the wind.
+	 */
 	private Wind fWind;
+	/**
+	 * The visibility.
+	 */
 	private Visibility fVisibility;
+	/**
+	 * The list of clouds.
+	 */
 	private List<Cloud> fClouds;
-	private ArrayList<WeatherCondition> fWeatherConditions;
+	/**
+	 * The list of weatherCondition.
+	 */
+	private List<WeatherCondition> fWeatherConditions;
+	/**
+	 * The validity of the change.
+	 */
 	private T fValidity;
+	/**
+	 * The probability of the change.
+	 */
 	private Integer probability;
+	/**
+	 * The maximum temperature.
+	 */
 	private TemperatureDated fMaxTemperature;
+	/**
+	 * The minimum temperature.
+	 */
 	private TemperatureDated fMinTemperature;
 
-	public AbstractWeatherChange() {
+	/**
+	 * Constructor with parameter.
+	 *
+	 * @param pType
+	 *            the type to set.
+	 */
+	protected AbstractWeatherChange(final WeatherChangeType pType) {
 		fClouds = new ArrayList<>();
 		fWeatherConditions = new ArrayList<>();
+		fType = pType;
 	}
 
 	/**
@@ -39,7 +72,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @param pVisibility
 	 *            the visibility to set
 	 */
-	public void setVisibility(Visibility pVisibility) {
+	public void setVisibility(final Visibility pVisibility) {
 		fVisibility = pVisibility;
 	}
 
@@ -54,7 +87,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @param pValidity
 	 *            the validity to set
 	 */
-	public void setValidity(T pValidity) {
+	public void setValidity(final T pValidity) {
 		fValidity = pValidity;
 	}
 
@@ -65,7 +98,13 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 		return fClouds;
 	}
 
-	public void addCloud(Cloud pCloud) {
+	/**
+	 * Adds a cloud to the list.
+	 *
+	 * @param pCloud
+	 *            the cloud to add.
+	 */
+	public void addCloud(final Cloud pCloud) {
 		fClouds.add(pCloud);
 	}
 
@@ -76,10 +115,19 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 		return fWeatherConditions;
 	}
 
-	public void addWeatherCondition(WeatherCondition pWeatherCondition) {
+	/**
+	 * Adds a weather condition to the list.
+	 *
+	 * @param pWeatherCondition
+	 *            the weather condition to add.
+	 */
+	public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
 		fWeatherConditions.add(pWeatherCondition);
 	}
 
+	/**
+	 * @return the type of change.
+	 */
 	public WeatherChangeType geType() {
 		return fType;
 	}
@@ -110,7 +158,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @param pWind
 	 *            the wind to set
 	 */
-	public void setWind(Wind pWind) {
+	public void setWind(final Wind pWind) {
 		fWind = pWind;
 	}
 
@@ -125,7 +173,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @param pMaxTemperature
 	 *            the maxTemperature to set
 	 */
-	public void setMaxTemperature(TemperatureDated pMaxTemperature) {
+	public void setMaxTemperature(final TemperatureDated pMaxTemperature) {
 		fMaxTemperature = pMaxTemperature;
 	}
 
@@ -140,7 +188,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @param pMinTemperature
 	 *            the minTemperature to set
 	 */
-	public void setMinTemperature(TemperatureDated pMinTemperature) {
+	public void setMinTemperature(final TemperatureDated pMinTemperature) {
 		fMinTemperature = pMinTemperature;
 	}
 
