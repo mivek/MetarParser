@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.facade;
 
 import java.io.BufferedReader;
@@ -14,21 +11,25 @@ import com.mivek.model.Metar;
 import com.mivek.parser.MetarParser;
 
 /**
- * @author mivek
+ * Class representing the facade for metars.
  *
+ * @author mivek
  */
-public class MetarFacade implements IWeatherCodeFacade<Metar> {
+public final class MetarFacade implements IWeatherCodeFacade<Metar> {
+	/**
+	 * Instance.
+	 */
 	private static MetarFacade instance = new MetarFacade();
 
 	/**
 	 * Method to parse a metar.
-	 * 
-	 * @param pCode,
+	 *
+	 * @param pCode
 	 *            the metar to decode.
 	 * @return a metar object.
 	 */
 	@Override
-	public Metar decode(String pCode) {
+	public Metar decode(final String pCode) {
 		return MetarParser.getInstance().parse(pCode);
 	}
 
@@ -40,8 +41,8 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 * @throws IOException When an error occurs.
 	 */
 	@Override
-	public Metar retrieveFromAirport(String icao) throws InvalidIcaoException, IOException {
-		if (icao.length() != 4) {
+	public Metar retrieveFromAirport(final String icao) throws InvalidIcaoException, IOException {
+		if (icao.length() != IWeatherCodeFacade.ICAO) {
 			throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
 		}
 		String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
@@ -62,7 +63,7 @@ public class MetarFacade implements IWeatherCodeFacade<Metar> {
 
 	/**
 	 * Returns a instance of the class.
-	 * 
+	 *
 	 * @return the instance of the class.
 	 */
 	public static MetarFacade getInstance() {
