@@ -10,52 +10,47 @@ package com.mivek.exception;
 public final class InvalidIcaoException extends Exception {
 
 	/**
-	 * 
+	 * Version UID.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 
+	 * Default constructor.
 	 */
 	public InvalidIcaoException() {
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param pMessage
+	 * @param pMessage the message.
 	 */
-	public InvalidIcaoException(String pMessage) {
+	public InvalidIcaoException(final String pMessage) {
 		super(pMessage);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param pCause
+	 * @param pCause the cause.
 	 */
-	public InvalidIcaoException(Throwable pCause) {
+	public InvalidIcaoException(final Throwable pCause) {
 		super(pCause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param pMessage
-	 * @param pCause
+	 * @param pMessage the message.
+	 * @param pCause the cause.
 	 */
-	public InvalidIcaoException(String pMessage, Throwable pCause) {
+	public InvalidIcaoException(final String pMessage, final Throwable pCause) {
 		super(pMessage, pCause);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param pMessage
-	 * @param pCause
+	 * @param pMessage the message.
+	 * @param pCause the cause.
 	 * @param pEnableSuppression
 	 * @param pWritableStackTrace
 	 */
 	public InvalidIcaoException(String pMessage, Throwable pCause, boolean pEnableSuppression,
 			boolean pWritableStackTrace) {
 		super(pMessage, pCause, pEnableSuppression, pWritableStackTrace);
-		// TODO Auto-generated constructor stub
 	}
 
 }
