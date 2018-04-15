@@ -16,11 +16,6 @@ import com.mivek.model.WeatherCode;
  */
 public interface IWeatherCodeFacade<T extends WeatherCode> {
 	/**
-	 * Const for icao length.
-	 */
-	int ICAO = 4;
-
-	/**
 	 * Decode method.
 	 * @param pCode the code to decode.
 	 * @return the decoded object corresponding to the message.
