@@ -15,7 +15,7 @@ import com.mivek.parser.MetarParser;
  *
  * @author mivek
  */
-public final class MetarFacade implements IWeatherCodeFacade<Metar> {
+public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 	/**
 	 * Instance.
 	 */
@@ -42,7 +42,7 @@ public final class MetarFacade implements IWeatherCodeFacade<Metar> {
 	 */
 	@Override
 	public Metar retrieveFromAirport(final String icao) throws InvalidIcaoException, IOException {
-		if (icao.length() != IWeatherCodeFacade.ICAO) {
+		if (icao.length() != AbstractWeatherCodeFacade.ICAO) {
 			throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
 		}
 		String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
@@ -50,15 +50,16 @@ public final class MetarFacade implements IWeatherCodeFacade<Metar> {
 		URL url = new URL(website);
 		URLConnection urlCo = url.openConnection();
 		BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()));
-		String[] lines = (String[]) br.lines().toArray();
+		String line = (String) br.lines().toArray()[1];
 		br.close();
-		return MetarParser.getInstance().parse(lines[1]);
+		return MetarParser.getInstance().parse(line);
 	}
 
 	/**
 	 * Private constructor.
 	 */
 	private MetarFacade() {
+		super(MetarParser.getInstance());
 	}
 
 	/**

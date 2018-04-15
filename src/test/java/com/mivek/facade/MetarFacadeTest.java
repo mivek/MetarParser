@@ -3,10 +3,13 @@ package com.mivek.facade;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -51,5 +54,12 @@ public class MetarFacadeTest {
 		// Clouds.
 		assertThat(res.getClouds(), is(not(empty())));
 
+	}
+
+	@Test
+	public void testRetrieveFromAirport() throws InvalidIcaoException, IOException {
+		Metar m = MetarFacade.getInstance().retrieveFromAirport("LFPG");
+		assertThat(m, notNullValue());
+		assertThat(m.getAirport().getIcao(), is("LFPG"));
 	}
 }
