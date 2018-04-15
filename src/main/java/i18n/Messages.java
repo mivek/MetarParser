@@ -231,17 +231,21 @@ public final class Messages {
 	public static final String CONVERTER_W = RESOURCE_BUNDLE.getString("Converter.W");
 
 	/**
-	 * TEMPO
+	 * TEMPO.
 	 */
 	public static final String TEMPO = RESOURCE_BUNDLE.getString("WeatherChangeType.TEMPO");
 	/**
-	 * FROM
+	 * FROM.
 	 */
 	public static final String FROM = RESOURCE_BUNDLE.getString("WeatherChangeType.FM");
 	/**
-	 * BECMG
+	 * BECMG.
 	 */
 	public static final String BECMG = RESOURCE_BUNDLE.getString("WeatherChangeType.BECMG");
+	/**
+	 * PROB.
+	 */
+	public static final String PROB = RESOURCE_BUNDLE.getString("WeatherChangeType.PROB");
 	/**
 	 * Private constructor.
 	 */
