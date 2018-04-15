@@ -18,7 +18,11 @@ public enum WeatherChangeType {
 	/**
 	 * Tempo enumeration.
 	 */
-	TEMPO("TEMPO", Messages.TEMPO);
+	TEMPO("TEMPO", Messages.TEMPO),
+	/**
+	 * Probability change.
+	 */
+	PROB("PROB", Messages.PROB);
 	/**
 	 * Shortcut attribute.
 	 */
