@@ -140,6 +140,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 		Wind wind = new Wind();
 		String[] windPart = Regex.pregMatch(WIND_REGEX, pStringWind);
 		wind.setDirection(Converter.degreesToDirection(windPart[1]));
+		wind.setDirectionDegrees(Integer.parseInt(windPart[1]));
 		wind.setSpeed(Integer.parseInt(windPart[2]));
 		if (windPart[3] != null) {
 			wind.setGust(Integer.parseInt(windPart[3]));

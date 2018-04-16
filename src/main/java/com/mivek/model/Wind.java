@@ -16,6 +16,10 @@ public class Wind {
 	 */
 	private String direction;
 	/**
+	 * Direction of the wind
+	 */
+	private int directionDegrees;
+	/**
 	 * The speed of the gust.
 	 */
 	private int gust;
@@ -144,6 +148,21 @@ public class Wind {
 	 */
 	public void setUnit(final String pUnit) {
 		this.unit = pUnit;
+	}
+
+	/**
+	 * @return the directionDegrees.
+	 */
+	public int getDirectionDegrees() {
+		return directionDegrees;
+	}
+
+	/**
+	 * @param pDirectionDegrees
+	 *            the directionDegrees to set.
+	 */
+	public void setDirectionDegrees(final int pDirectionDegrees) {
+		directionDegrees = pDirectionDegrees;
 	}
 
 }

@@ -93,6 +93,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 		assertNotNull(res);
 		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_N));
+		assertEquals(340, res.getDirectionDegrees());
 		assertEquals(8, res.getSpeed());
 		assertEquals(0, res.getGust());
 		assertEquals("KT", res.getUnit());
@@ -107,6 +108,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 
 		assertNotNull(res);
 		assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_SE));
+		assertEquals(120, res.getDirectionDegrees());
 		assertEquals(17, res.getSpeed());
 		assertEquals(20, res.getGust());
 		assertEquals("KT", res.getUnit());
