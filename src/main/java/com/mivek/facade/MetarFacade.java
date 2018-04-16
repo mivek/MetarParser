@@ -30,7 +30,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 	 */
 	@Override
 	public Metar decode(final String pCode) {
-		return MetarParser.getInstance().parse(pCode);
+		return getParser().parse(pCode);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 		BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()));
 		String line = (String) br.lines().toArray()[1];
 		br.close();
-		return MetarParser.getInstance().parse(line);
+		return getParser().parse(line);
 	}
 
 	/**

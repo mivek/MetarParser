@@ -23,4 +23,11 @@ public abstract class AbstractWeatherCodeFacade<T extends WeatherCode> implement
 		fParser = pParser;
 	}
 
+	/**
+	 * @return the parser.
+	 */
+	protected AbstractParser<T> getParser() {
+		return fParser;
+	}
+
 }

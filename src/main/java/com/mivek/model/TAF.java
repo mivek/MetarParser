@@ -28,6 +28,15 @@ public class TAF extends WeatherCode {
 	 */
 	private List<TEMPOChange> fTempos;
 	/**
+	 * List of probability changes.
+	 */
+	private List<PROBChange> fProbs;
+	/**
+	 * Probability of the metar.
+	 */
+	private Integer probability;
+
+	/**
 	 * Constructor.
 	 */
 	public TAF() {
@@ -74,6 +83,13 @@ public class TAF extends WeatherCode {
 	}
 
 	/**
+	 * @return the probs
+	 */
+	public List<PROBChange> getProbs() {
+		return fProbs;
+	}
+
+	/**
 	 * Adds a tempo change to the list.
 	 * @param pChange the change to add.
 	 */
@@ -95,5 +111,28 @@ public class TAF extends WeatherCode {
 	 */
 	public void addFM(final FMChange pChange) {
 		fFMs.add(pChange);
+	}
+
+	/**
+	 * Adds a PROB Change to the list.
+	 * @param pChange the change to add.
+	 */
+	public void addProb(final PROBChange pChange) {
+		fProbs.add(pChange);
+	}
+
+	/**
+	 * @return the probability
+	 */
+	public Integer getProbability() {
+		return probability;
+	}
+
+	/**
+	 * @param pProbability
+	 *            the probability to set
+	 */
+	public void setProbability(final Integer pProbability) {
+		probability = pProbability;
 	}
 }

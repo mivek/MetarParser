@@ -11,11 +11,13 @@ import com.mivek.model.BECMGChange;
 import com.mivek.model.BeginningValidity;
 import com.mivek.model.Cloud;
 import com.mivek.model.FMChange;
+import com.mivek.model.PROBChange;
 import com.mivek.model.TAF;
 import com.mivek.model.TEMPOChange;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
+import com.mivek.model.WeatherCondition;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 
@@ -24,12 +26,25 @@ import com.mivek.utils.Regex;
  *
  */
 public class TAFParser extends AbstractParser<TAF> {
+	/**
+	 * From string constant.
+	 */
 	private static final String FM = "FM";
-
+	/**
+	 * Tempo string constant.
+	 */
 	private static final String TEMPO = "TEMPO";
-
+	/**
+	 * Becoming string constant.
+	 */
 	private static final String BECMG = "BECMG";
-
+	/**
+	 * Probability string constant.
+	 */
+	private static final String PROB = "PROB";
+	/**
+	 * Regex for the validity.
+	 */
 	private static final String REGEX_VALIDITY = "^\\d{4}/\\d{4}$";
 
 	/**
@@ -38,15 +53,14 @@ public class TAFParser extends AbstractParser<TAF> {
 	private static TAFParser instance = new TAFParser();
 
 	/**
-	 * 
+	 * Defaut constructor.
 	 */
 	private TAFParser() {
 		super();
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @return the instance.
 	 */
 	public static TAFParser getInstance() {
 		return instance;
@@ -56,72 +70,103 @@ public class TAFParser extends AbstractParser<TAF> {
 	 * @see com.mivek.parser.AbstractParser#parse(java.lang.String)
 	 */
 	@Override
-	public TAF parse(String pTAFCode) {
-		String[] parts = pTAFCode.split(" ");
+	public TAF parse(final String pTAFCode) {
+		String[] lines = pTAFCode.split("\n");
 		String[] matches = null;
-		if (!parts[0].equals("TAF")) {
+		if (!lines[0].substring(0, 3).equals("TAF")) {
 			return null;
 		}
 		TAF taf = new TAF();
+
+		// Handle the 1st line.
+		String[] lines1parts = lines[0].split(" ");
+		int i = 1;
+		if (lines1parts[1].equals("TAF")) {
+			i = 2;
+		}
+
 		// Airport
-		Airport airport = getAirports().get(parts[1]);
+		Airport airport = getAirports().get(lines1parts[i]);
+		i++;
 		if (airport == null) {
 			return null;
 		}
 		taf.setAirport(airport);
 		taf.setMessage(pTAFCode);
 		// Day and time
-		taf.setDay(Integer.parseInt(parts[2].substring(0, 2)));
-		int hours = Integer.parseInt(parts[2].substring(2, 4));
-		int minutes = Integer.parseInt(parts[2].substring(4, 6));
+		taf.setDay(Integer.parseInt(lines1parts[i].substring(0, 2)));
+		int hours = Integer.parseInt(lines1parts[i].substring(2, 4));
+		int minutes = Integer.parseInt(lines1parts[i].substring(4, 6));
 		LocalTime t = LocalTime.of(hours, minutes);
 		taf.setTime(t);
-		
-		// Validity Time
-		taf.setValidity(parseValidity(parts[3]));
-		// Wind
-		taf.setWind(parseWind(parts[4]));
-		// Visibility
+
 		Visibility visibility = new Visibility();
-		visibility.setMainVisibility(Converter.convertVisibility(parts[5]));
 		taf.setVisibility(visibility);
+		// Validity Time
+		i++;
+		taf.setValidity(parseValidity(lines1parts[i]));
 
-		for (int i = 6; i < parts.length; i++) {
-			if (parts[i].equals(BECMG) || parts[i].equals(TEMPO) || parts[i].startsWith(FM)) {
+		// Wind
+		i++;
+		taf.setWind(parseWind(lines1parts[i]));
 
-				if (parts[i].equals(BECMG)) {
-					BECMGChange change = new BECMGChange();
-					i = iterChanges(i, parts, change);
-					taf.addBECMG(change);
-				} else if (parts[i].equals(TEMPO)) {
-					TEMPOChange change = new TEMPOChange();
-					i = iterChanges(i, parts, change);
-					taf.addTempo(change);
-				} else if (parts[i].startsWith(FM)) {
-					FMChange change = new FMChange();
-					change.setValidity(parseBasicValidity(parts[i]));
-					i++;
-					while (i < parts.length && !parts[i].equals(BECMG) && !parts[i].equals(TEMPO)
-							&& !parts[i].startsWith(FM)) {
-						processGeneralChanges(change, parts[i]);
-						i++;
-					}
-					taf.addFM(change);
-				}
-				i--;
-			} else if (Regex.match(CLOUD_REGEX, parts[i])) {
-				Cloud c = parseCloud(parts[i]);
+		// Handle rest of second line.
+		for (int j = i; j < lines1parts.length; j++) {
+			if (Regex.find(WIND_EXTREME_REGEX, lines1parts[j])) {
+				matches = Regex.pregMatch(WIND_EXTREME_REGEX, lines1parts[j]);
+				taf.getWind().setExtreme1(Integer.parseInt(matches[1]));
+				taf.getWind().setExtreme2(Integer.parseInt(matches[2]));
+			} else if (Regex.find(MAIN_VISIBILITY_REGEX, lines1parts[j])) {
+				matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, lines1parts[j]);
+				visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
+			} else if (Regex.find(MIN_VISIBILITY_REGEX, lines1parts[j])) {
+				matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, lines1parts[j]);
+				visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
+				visibility.setMinDirection(matches[1].substring(4));
+			} else if (Regex.find(CLOUD_REGEX, lines1parts[j])) {
+				Cloud c = parseCloud(lines1parts[j]);
 				if (c != null) {
 					taf.addCloud(c);
 				}
-			} else if (Regex.match(VERTICAL_VISIBILITY, parts[i])) {
-				matches = Regex.pregMatch(VERTICAL_VISIBILITY, parts[i]);
+			} else if (lines1parts[j].startsWith(PROB)) {
+				taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
+			} else if (Regex.match(VERTICAL_VISIBILITY, lines1parts[j])) {
+				matches = Regex.pregMatch(VERTICAL_VISIBILITY, lines1parts[j]);
 				taf.setVerticalVisibility(Integer.parseInt(matches[1]));
 			} else {
-				taf.addWeatherCondition(parseWeatherCondition(parts[i]));
+				WeatherCondition wc = parseWeatherCondition(lines1parts[j]);
+				if (wc != null) {
+					taf.addWeatherCondition(wc);
+				}
 			}
 		}
 
+		// Process other lines.
+		for (int j = 1; j < lines.length; j++) {
+			// Split the line.
+			String[] parts = lines[j].split(" ");
+			if (parts[0].equals(BECMG)) {
+				BECMGChange change = new BECMGChange();
+				iterChanges(1, parts, change);
+				taf.addBECMG(change);
+			} else if (parts[0].equals(TEMPO)) {
+				TEMPOChange change = new TEMPOChange();
+				iterChanges(1, parts, change);
+				taf.addTempo(change);
+			} else if (parts[0].equals(FM)) {
+				FMChange change = new FMChange();
+				change.setValidity(parseBasicValidity(parts[1]));
+				for (int k = 2; k < parts.length; k++) {
+					processGeneralChanges(change, parts[k]);
+				}
+				processGeneralChanges(change, parts[i]);
+				taf.addFM(change);
+			} else if (parts[0].startsWith(PROB)) {
+				PROBChange change = new PROBChange();
+				iterChanges(0, parts, change);
+				taf.addProb(change);
+			}
+		}
 		return taf;
 	}
 
@@ -143,8 +188,8 @@ public class TAFParser extends AbstractParser<TAF> {
 	 * @param pChange
 	 * @param pPart
 	 */
-	protected void processGeneralChanges(AbstractWeatherChange<?> pChange, String pPart) {
-		if (pPart.startsWith("PROB")) {
+	protected void processGeneralChanges(final AbstractWeatherChange<?> pChange, final String pPart) {
+		if (pPart.startsWith(PROB)) {
 			pChange.setProbability(Integer.parseInt(pPart.substring(4)));
 		} else if (pPart.startsWith("TX")) {
 			pChange.setMaxTemperature(parseTemperature(pPart));
@@ -162,7 +207,10 @@ public class TAFParser extends AbstractParser<TAF> {
 		} else if (Regex.match(WIND_REGEX, pPart)) {
 			pChange.setWind(parseWind(pPart));
 		} else {
-			pChange.addWeatherCondition(parseWeatherCondition(pPart));
+			WeatherCondition wc = parseWeatherCondition(pPart);
+			if (wc != null) {
+				pChange.addWeatherCondition(parseWeatherCondition(pPart));
+			}
 		}
 	}
 	/**
@@ -189,18 +237,24 @@ public class TAFParser extends AbstractParser<TAF> {
 		return validity;
 	}
 
-	protected int iterChanges(final int pIndex, final String[] pParts, final AbstractWeatherChange<Validity> pChange) {
-		int i = pIndex;
-		i++;
-		while (i < pParts.length && !pParts[i].equals(BECMG) && !pParts[i].equals(TEMPO) && !pParts[i].startsWith(FM)) {
+	/**
+	 * Iterates over the string array and build the abstractWeather change.
+	 * @param pIndex the starting index of the array.
+	 * @param pParts the array of string.
+	 * @param pChange the abstractWeatherChange to update.
+	 */
+	protected void iterChanges(final int pIndex, final String[] pParts, final AbstractWeatherChange<Validity> pChange) {
+		for (int i = pIndex; i < pParts.length; i++) {
 			processChanges(pChange, pParts[i]);
-			i++;
 		}
-		return i;
 	}
 
-
-	protected TemperatureDated parseTemperature(String pTempPart) {
+	/**
+	 * Parse the temperature.
+	 * @param pTempPart the string to parse.
+	 * @return a temperature with its date.
+	 */
+	protected TemperatureDated parseTemperature(final String pTempPart) {
 		TemperatureDated temperature = new TemperatureDated();
 		String[] parts = pTempPart.split("/");
 		if (parts[0].charAt(2) == 'M') {
