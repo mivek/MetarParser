@@ -153,13 +153,12 @@ public class TAFParser extends AbstractParser<TAF> {
 				TEMPOChange change = new TEMPOChange();
 				iterChanges(1, parts, change);
 				taf.addTempo(change);
-			} else if (parts[0].equals(FM)) {
+			} else if (parts[0].startsWith(FM)) {
 				FMChange change = new FMChange();
-				change.setValidity(parseBasicValidity(parts[1]));
-				for (int k = 2; k < parts.length; k++) {
+				change.setValidity(parseBasicValidity(parts[0]));
+				for (int k = 1; k < parts.length; k++) {
 					processGeneralChanges(change, parts[k]);
 				}
-				processGeneralChanges(change, parts[i]);
 				taf.addFM(change);
 			} else if (parts[0].startsWith(PROB)) {
 				PROBChange change = new PROBChange();

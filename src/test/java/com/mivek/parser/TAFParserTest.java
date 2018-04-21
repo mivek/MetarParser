@@ -7,12 +7,14 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.mivek.enums.CloudQuantity;
@@ -23,12 +25,11 @@ import com.mivek.enums.Phenomenon;
 import com.mivek.model.AbstractWeatherChange;
 import com.mivek.model.BECMGChange;
 import com.mivek.model.BeginningValidity;
-import com.mivek.model.Cloud;
+import com.mivek.model.FMChange;
 import com.mivek.model.TAF;
 import com.mivek.model.TEMPOChange;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
-import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 
 /**
@@ -248,102 +249,82 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 		// First BECMG
 		assertThat(res.getBECMGs(), hasSize(1));
-		// BECMG 1520/1522 CAVOK \n
-		// assertThat(res.getBECMGs().get(0).getValidity().getStartDay(), is(15));
-		// assertThat(res.getBECMGs().get(0).getValidity().getStartHour())
+		BECMGChange becmg = res.getBECMGs().get(0);
+		assertEquals(15, becmg.getValidity().getStartDay().intValue());
+		assertEquals(20, becmg.getValidity().getStartHour().intValue());
+		assertEquals(15, becmg.getValidity().getEndDay().intValue());
+		assertEquals(22, becmg.getValidity().getEndHour().intValue());
+
+		TEMPOChange tempo4 = res.getTempos().get(3);
+		assertEquals(16, tempo4.getValidity().getStartDay().intValue());
+		assertEquals(3, tempo4.getValidity().getStartHour().intValue());
+		assertEquals(16, tempo4.getValidity().getEndDay().intValue());
+		assertEquals(8, tempo4.getValidity().getEndHour().intValue());
+		assertEquals("3000m", tempo4.getVisibility().getMainVisibility());
+		assertThat(tempo4.getWeatherConditions(), hasSize(1));
+		assertNull(tempo4.getWeatherConditions().get(0).getIntensity());
+		assertNull(tempo4.getWeatherConditions().get(0).getDescriptive());
+		assertThat(tempo4.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+		assertEquals(Phenomenon.MIST, tempo4.getWeatherConditions().get(0).getPhenomenons().get(0));
+		assertThat(tempo4.getClouds(), hasSize(1));
+		assertEquals(CloudQuantity.BKN, tempo4.getClouds().get(0).getQuantity());
+		assertNull(tempo4.getClouds().get(0).getType());
+		assertEquals(6 * 30, tempo4.getClouds().get(0).getAltitude());
+		assertEquals(40, tempo4.getProbability().intValue());
+
+		TEMPOChange tempo5 = res.getTempos().get(4);
+		assertEquals(16, tempo5.getValidity().getStartDay().intValue());
+		assertEquals(4, tempo5.getValidity().getStartHour().intValue());
+		assertEquals(16, tempo5.getValidity().getEndDay().intValue());
+		assertEquals(7, tempo5.getValidity().getEndHour().intValue());
+		assertEquals("400m", tempo5.getVisibility().getMainVisibility());
+		assertThat(tempo5.getWeatherConditions(), hasSize(1));
+		assertNull(tempo5.getWeatherConditions().get(0).getIntensity());
+		assertEquals(Descriptive.PATCHES, tempo5.getWeatherConditions().get(0).getDescriptive());
+		assertThat(tempo5.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+		assertEquals(Phenomenon.FOG, tempo5.getWeatherConditions().get(0).getPhenomenons().get(0));
+		assertThat(tempo5.getClouds(), hasSize(1));
+		assertEquals(CloudQuantity.BKN, tempo5.getClouds().get(0).getQuantity());
+		assertEquals(2 * 30, tempo5.getClouds().get(0).getAltitude());
+		assertNull(tempo5.getClouds().get(0).getType());
+		assertThat(tempo5.getMaxTemperature(), notNullValue());
+		assertThat(tempo5.getMinTemperature(), notNullValue());
+		assertEquals(17, tempo5.getMaxTemperature().getTemperature().intValue());
+		assertEquals(15, tempo5.getMaxTemperature().getDay().intValue());
+		assertEquals(12, tempo5.getMaxTemperature().getHour().intValue());
+		assertEquals(7, tempo5.getMinTemperature().getTemperature().intValue());
+		assertEquals(16, tempo5.getMinTemperature().getDay().intValue());
+		assertEquals(5, tempo5.getMinTemperature().getHour().intValue());
 	}
 
-	@Ignore
-	public void parseTAFWithFMs() {
-		String tafCode = "TAF LLIB 061123Z 0612/0712 18006KT 9999 SCT020 TEMPO 0612/0613 7000 -RA BKN015 FM061300 34008KT 9999 SCT025 BECMG 0616/0618 VRB03KT 4000 BR SCT015 BECMG 0706/0709 16006KT 9999 NSW FEW035 TX15/0612Z TN05/0704Z";
+	@Test
+	public void testParseWithFM() {
+		String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n"
+				+ "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
+		
+		TAF res = TAFParser.getInstance().parse(message);
 
-		TAF res = fSut.parse(tafCode);
-
-		assertThat(res, is(not(nullValue())));
-		assertThat(res.getAirport(), is(fSut.getAirports().get("LLIB")));
-		assertThat(res.getDay(), is(6));
-		assertThat(res.getTime().getHour(), is(11));
-		assertThat(res.getTime().getMinute(), is(23));
-		assertThat(res.getValidity().getStartDay(), is(6));
-		assertThat(res.getValidity().getStartHour(), is(12));
-		assertThat(res.getValidity().getEndDay(), is(7));
-		assertThat(res.getValidity().getEndHour(), is(12));
-
-		// Wind
-		assertThat(res.getWind(), is(not(nullValue())));
-		assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("180")));
-		assertThat(res.getWind().getSpeed(), is(6));
-		assertThat(res.getWind().getGust(), is(0));
-		assertThat(res.getWind().getUnit(), is("KT"));
-
-		// Visibility
-		assertThat(res.getVisibility(), is(not(nullValue())));
-		assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
-		assertThat(res.getVisibility().getMinDirection(), is(nullValue()));
-		//Clouds
-		assertThat(res.getClouds(), hasSize(1));
-		assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
-		assertThat(res.getClouds().get(0).getAltitude(), is(30 * 20));
-
-		// Tempos
+		assertNotNull(res);
 		assertThat(res.getTempos(), hasSize(1));
-		assertThat(res.getTempos().get(0).getValidity().getStartDay(), is(6));
-		assertThat(res.getTempos().get(0).getValidity().getStartHour(), is(12));
-		assertThat(res.getTempos().get(0).getValidity().getEndDay(), is(6));
-		assertThat(res.getTempos().get(0).getValidity().getEndHour(), is(13));
-		assertThat(res.getTempos().get(0).getVisibility().getMainVisibility(), is("7000m"));
-		assertThat(res.getTempos().get(0).getWeatherConditions(), hasSize(1));
-		assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getIntensity(), is(Intensity.LIGHT));
-		assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getDescriptive(), is(nullValue()));
-		assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
-		assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
-		assertThat(res.getTempos().get(0).getClouds(), hasSize(1));
-		assertThat(res.getTempos().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
-		assertThat(res.getTempos().get(0).getClouds().get(0).getAltitude(), is(30 * 15));
-		assertThat(res.getTempos().get(0).getClouds().get(0).getType(), is(nullValue()));
+		assertThat(res.getFMs(), hasSize(2));
+		FMChange fm1 = res.getFMs().get(0);
+		assertEquals(21, fm1.getValidity().getStartDay().intValue());
+		assertEquals(23, fm1.getValidity().getStartHour().intValue());
+		assertEquals(0, fm1.getValidity().getStartMinutes().intValue());
+		assertEquals(300, fm1.getWind().getDirectionDegrees());
+		assertEquals(12, fm1.getWind().getSpeed());
+		assertEquals(22, fm1.getWind().getGust());
+		assertThat(fm1.getClouds(), hasSize(2));
+		assertEquals(CloudQuantity.FEW, fm1.getClouds().get(0).getQuantity());
+		assertEquals(50 * 30, fm1.getClouds().get(0).getAltitude());
+		assertNull(fm1.getClouds().get(0).getType());
+		assertEquals(CloudQuantity.SCT, fm1.getClouds().get(1).getQuantity());
+		assertEquals(250 * 30, fm1.getClouds().get(1).getAltitude());
+		assertNull(fm1.getClouds().get(1).getType());
 
-		// FMs
-		assertThat(res.getFMs(), hasSize(1));
-		assertThat(res.getFMs().get(0).getValidity().getStartDay(), is(6));
-		assertThat(res.getFMs().get(0).getValidity().getStartHour(), is(13));
-		assertThat(res.getFMs().get(0).getValidity().getStartMinutes(), is(0));
-		assertThat(res.getFMs().get(0).getWind(), is(not(nullValue())));
-		Wind FMWind = res.getFMs().get(0).getWind();
-		assertThat(FMWind.getDirection(), is(Converter.degreesToDirection("340")));
-		assertThat(FMWind.getSpeed(), is(8));
-		assertThat(FMWind.getExtreme1(), is(0));
-		assertThat(FMWind.getExtreme2(), is(0));
-		assertThat(FMWind.getGust(), is(0));
-		assertThat(FMWind.getUnit(), is("KT"));
-		assertThat(res.getFMs().get(0).getVisibility().getMainVisibility(), is(">10km"));
-		assertThat(res.getFMs().get(0).getClouds(), hasSize(1));
-		Cloud FMCloud = res.getFMs().get(0).getClouds().get(0);
-		assertThat(FMCloud.getQuantity(), is(CloudQuantity.SCT));
-		assertThat(FMCloud.getAltitude(), is(30 * 25));
-		assertThat(FMCloud.getType(), is(nullValue()));
-
-		// BECMS Only the second will be checks;
-		assertThat(res.getBECMGs(), hasSize(2));
-		BECMGChange becmg2 = res.getBECMGs().get(1);
-		assertThat(becmg2.getValidity().getStartDay(), is(7));
-		assertThat(becmg2.getValidity().getStartHour(), is(6));
-		assertThat(becmg2.getValidity().getEndDay(), is(7));
-		assertThat(becmg2.getValidity().getEndHour(), is(9));
-		assertThat(becmg2.getWind(), is(not(nullValue())));
-		assertThat(becmg2.getWind().getDirection(), is(Converter.degreesToDirection("160")));
-		assertThat(becmg2.getWind().getSpeed(), is(6));
-		assertThat(becmg2.getWind().getUnit(), is("KT"));
-		assertThat(becmg2.getVisibility(), is(not(nullValue())));
-		assertThat(becmg2.getVisibility().getMainVisibility(), is(">10km"));
-		assertThat(becmg2.getClouds(), hasSize(1));
-		assertThat(becmg2.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
-		assertThat(becmg2.getClouds().get(0).getAltitude(), is(30 * 35));
-		assertThat(becmg2.getMaxTemperature(), is(not(nullValue())));
-		assertThat(becmg2.getMaxTemperature().getTemperature(), is(15));
-		assertThat(becmg2.getMaxTemperature().getDay(), is(6));
-		assertThat(becmg2.getMaxTemperature().getHour(), is(12));
-		assertThat(becmg2.getMinTemperature().getTemperature(), is(5));
-		assertThat(becmg2.getMinTemperature().getDay(), is(7));
-		assertThat(becmg2.getMinTemperature().getHour(), is(4));
+		FMChange fm2 = res.getFMs().get(1);
+		assertEquals(22, fm2.getValidity().getStartDay().intValue());
+		assertEquals(7, fm2.getValidity().getStartHour().intValue());
+		assertEquals(0, fm2.getValidity().getStartMinutes().intValue());
 	}
 }

@@ -44,6 +44,7 @@ public class TAF extends WeatherCode {
 		fBECMGs = new ArrayList<>();
 		fFMs = new ArrayList<>();
 		fTempos = new ArrayList<>();
+		fProbs = new ArrayList<>();
 	}
 
 	/**

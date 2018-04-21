@@ -11,12 +11,20 @@ import com.mivek.model.TAF;
 import com.mivek.parser.TAFParser;
 
 /**
+ * Facade for TAF.
+ *
  * @author mivek
- * 
+ *
  */
 public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
+	/**
+	 * The instance of the facade.
+	 */
 	private static TAFFacade instance = new TAFFacade();
 
+	/**
+	 * Constructor.
+	 */
 	private TAFFacade() {
 		super(TAFParser.getInstance());
 	}
@@ -36,13 +44,17 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
 		BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
 		StringBuilder sb = new StringBuilder();
 		String inputLine;
+		br.readLine();
 		while ((inputLine = br.readLine()) != null) {
-			sb.append(inputLine).append("\n");
+			sb.append(inputLine.replace("      ", "")).append("\n");
 		}
 		br.close();
 		return getParser().parse(sb.toString());
 	}
 
+	/**
+	 * @return the instance of the facade.
+	 */
 	public static TAFFacade getInstance() {
 		return instance;
 	}
