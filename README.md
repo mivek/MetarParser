@@ -10,7 +10,7 @@ Use the MetarFacade class and its method decode to decode a metar.
 Use the MetarFacade class and its method retrieveFromAirport to get the metar of an airport. This metod take the icao code as parameter.
 
 ## Model
-
+[class diagram](model.jpg)
 ### Enumerations
 
 The application contains numerous enumarations to represent datas.
