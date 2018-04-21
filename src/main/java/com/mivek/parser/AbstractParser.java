@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.parser;
 
 import java.io.InputStream;
@@ -26,9 +23,15 @@ import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
 /**
+ *
  * @author mivek
+ * Abstract class for Parser.
+ * @param <T> concrete subclass of WeatherCode. Either a METAR or a TAF.
  */
 public abstract class AbstractParser<T extends WeatherCode> {
+	/**
+	 * Logger.
+	 */
 	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
 	/**
 	 * Path of airport file.
@@ -74,7 +77,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	private Map<String, Country> countries;
 
 	/**
-	 * 
+	 * Constructor.
 	 */
 	protected AbstractParser() {
 		initCountries();
@@ -131,9 +134,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * This method parses the wind part of the metar code. It parses the generic
 	 * part. Variable winds are not parsed by this method.
-	 * 
-	 * @param windPart
-	 *            An array of strings with wind elements.
+	 * @param pStringWind A string with wind elements.
 	 * @return a Wind element with the informations.
 	 */
 	protected Wind parseWind(final String pStringWind) {
@@ -152,8 +153,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * This method parses the cloud part of the metar.
 	 *
-	 * @param cloudPart
-	 *            Table of strings with clouds elements.
+	 * @param pCloudString string with clouds elements.
 	 * @return a decoded cloud with its quantity, its altitude and its type.
 	 */
 	protected Cloud parseCloud(final String pCloudString) {
@@ -161,7 +161,6 @@ public abstract class AbstractParser<T extends WeatherCode> {
 		String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, pCloudString);
 		try {
 			CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
-	
 			cloud.setQuantity(cq);
 			if (cloudPart[2] != null) {
 				cloud.setAltitude(30 * Integer.parseInt(cloudPart[2]));
@@ -222,6 +221,11 @@ public abstract class AbstractParser<T extends WeatherCode> {
 		return countries;
 	}
 
+	/**
+	 * Abstract method parse.
+	 * @param pCode the message to parse.
+	 * @return The decoded object.
+	 */
 	public abstract T parse(String pCode);
 
 }

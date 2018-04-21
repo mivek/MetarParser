@@ -16,7 +16,7 @@ public class Wind {
 	 */
 	private String direction;
 	/**
-	 * Direction of the wind
+	 * Direction of the wind.
 	 */
 	private int directionDegrees;
 	/**
