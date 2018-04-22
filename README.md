@@ -4,10 +4,11 @@
 # MetarParser
 
 
-This java lib provides a Metar decoder.
+This java lib provides a Metar and TAF decoder.
 
 Use the MetarFacade class and its method decode to decode a metar.
 Use the MetarFacade class and its method retrieveFromAirport to get the metar of an airport. This metod take the icao code as parameter.
+
 
 ## Model
 ![class diagram](model.jpg)
@@ -74,6 +75,12 @@ The wind class is composed of
   - the highest variable wind
   - the unit of the wind's speed
 
+### Metar
+The metar class is composed of
+  - the day of the metar
+  - the delivery time of the metar.
+  
+  
 ## Examples
 ### Parse a metar
 Instantiate the metarFacade and use its method parse.
@@ -93,6 +100,27 @@ String icao = "LFPG";
 MetarFacade facade = MetarFacade.getInstance();
 Metar metar = facade.retrieveFromAirport(icao);
 ```
+### Parse a taf
+Use the TAFFacade to decode the taf.
 
+```java
+String message = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n" 
+			      +"TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
+			      +"TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
+			      +"TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n" 
+			      +"BECMG 1520/1522 CAVOK \n"
+			      +"TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
+			      +"TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
+TAFFacade facade = TAFFacade.getInstance();
+TAF taf = facade.decode(message);
+```
+Lines of the message have to be separated by a "\n" character.
 
+### Retrieve a taf
+Use the TAFFacade and the method retrieveFromAirport with the ICAO code of the airport.
 
+```java
+String icao = "LFPG";
+TAFFacade facade = TAFFacade.getInstance();
+TAF taf = facade.retrieveFromAirport(icao);
+```

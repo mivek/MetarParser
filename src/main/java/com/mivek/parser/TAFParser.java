@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.parser;
 
 import java.time.LocalTime;
@@ -25,7 +22,7 @@ import com.mivek.utils.Regex;
  * @author mivek
  *
  */
-public class TAFParser extends AbstractParser<TAF> {
+public final class TAFParser extends AbstractParser<TAF> {
 	/**
 	 * From string constant.
 	 */
@@ -170,11 +167,11 @@ public class TAFParser extends AbstractParser<TAF> {
 	}
 
 	/**
-	 * TODO Add tests
-	 * @param change
-	 * @param pPart
+	 * Updates the change object according to the string.
+	 * @param change the change object to update.
+	 * @param pPart the string to parse.
 	 */
-	private void processChanges(final AbstractWeatherChange<Validity> change, String pPart) {
+	private void processChanges(final AbstractWeatherChange<Validity> change, final String pPart) {
 		if (Regex.match(REGEX_VALIDITY, pPart)) {
 			change.setValidity(parseValidity(pPart));
 		} else {
@@ -183,9 +180,9 @@ public class TAFParser extends AbstractParser<TAF> {
 	}
 
 	/**
-	 * 
-	 * @param pChange
-	 * @param pPart
+	 * Updates the change object according to the string.
+	 * @param pChange the change object to update.
+	 * @param pPart String containing the information.
 	 */
 	protected void processGeneralChanges(final AbstractWeatherChange<?> pChange, final String pPart) {
 		if (pPart.startsWith(PROB)) {
@@ -212,10 +209,11 @@ public class TAFParser extends AbstractParser<TAF> {
 			}
 		}
 	}
+
 	/**
-	 * 
-	 * @param pValidity
-	 * @return
+	 * Parse the validity part of a {@link TAFParser} or an {@link AbstractWeatherChange}.
+	 * @param pValidity the string representing the validity.
+	 * @return a {@link Validity} object.
 	 */
 	protected Validity parseValidity(final String pValidity) {
 		Validity validity = new Validity();
@@ -227,6 +225,11 @@ public class TAFParser extends AbstractParser<TAF> {
 		return validity;
 	}
 
+	/**
+	 * Parses the validity of a {@link FMChange} object.
+	 * @param pValidity the string to parse
+	 * @return a {@link BeginningValidity} object.
+	 */
 	protected BeginningValidity parseBasicValidity(final String pValidity) {
 		BeginningValidity validity = new BeginningValidity();
 		validity.setStartDay(Integer.parseInt(pValidity.substring(2, 4)));
