@@ -45,6 +45,16 @@ public class Cloud {
 	}
 
 	/**
+	 * Setter of the height (unit: feet).
+	 *
+	 * @param pHeight
+	 *            The height to set.
+	 */
+	public void setHeight(final int pHeight) {
+		this.altitude = pHeight/100*30;
+	}
+
+	/**
 	 * Setter of the altitude (unit: meters).
 	 *
 	 * @param pAltitude
