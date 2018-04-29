@@ -9,4 +9,4 @@ script:
   - mvn install
 
 after_script:
-  - ./cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t jacoco target/site/jacoco/jacoco.xml --exit-code $TRAVIS_TEST_RESULT
