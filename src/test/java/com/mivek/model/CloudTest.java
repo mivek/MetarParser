@@ -23,6 +23,20 @@ public class CloudTest {
 	}
 	
 	@Test
+	public void testSetHeightGetAltitude() {
+		Cloud c = new Cloud();
+		c.setHeight(300);
+		assertEquals(90, c.getAltitude());
+	}
+
+	@Test
+	public void testSetHeightGetHeight() {
+		Cloud c = new Cloud();
+		c.setHeight(300);
+		assertEquals(300, c.getHeight());
+	}
+
+	@Test
 	public void testToString() {
 		Cloud c = new Cloud();
 		c.setAltitude(90);
