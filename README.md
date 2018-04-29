@@ -8,6 +8,7 @@ This java lib provides a Metar decoder.
 
 Use the MetarFacade class and its method decode to decode a metar.
 Use the MetarFacade class and its method retrieveFromAirport to get the metar of an airport. This metod take the icao code as parameter.
+The trends of the metar are not parsed.
 
 ## Model
 ![class diagram](model.jpg)
@@ -79,7 +80,7 @@ The wind class is composed of
 Instantiate the metarFacade and use its method parse.
 
 ```java
-String code = "LFPG 131830Z 19005KT 170V250 9999 -SHRA FEW040TCU SCT086 16/08 Q1011 TEMPO SCT030TCU";
+String code = "LFPG 131830Z 19005KT 170V250 9999 -SHRA FEW040TCU SCT086 16/08 Q1011";
 MetarFacade facade = MetarFacade.getInstance();
 Metar metar = facade.decode(code);
 ```
