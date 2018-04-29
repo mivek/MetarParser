@@ -8,7 +8,5 @@ before_script:
 script:
   - mvn install
 
-JACOCO_SOURCE_PATH=src/main/java ./cc-test-reporter \
-  format-coverage target/site/jacoco/jacoco.xml     \
-  --input-type jacoco
-./cc-test-reporter upload-coverage
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
