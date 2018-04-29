@@ -14,7 +14,7 @@ import com.mivek.enums.CloudType;
  */
 public class Cloud {
 	/**
-	 * The altitude of the cloud.
+	 * The altitude of the cloud (unit: meters).
 	 */
 	private int altitude;
 	/**
@@ -27,7 +27,7 @@ public class Cloud {
 	private CloudType type;
 
 	/**
-	 * Getter of the altitude.
+	 * Getter of the altitude (unit: meters).
 	 *
 	 * @return int of altitude.
 	 */
@@ -36,7 +36,16 @@ public class Cloud {
 	}
 
 	/**
-	 * Setter of the altitude.
+	 * Getter of the height (unit: feet).
+	 *
+	 * @return int of altitude.
+	 */
+	public int getHeight() {
+		return altitude*100/30;
+	}
+
+	/**
+	 * Setter of the altitude (unit: meters).
 	 *
 	 * @param pAltitude
 	 *            The altitude to set.
@@ -88,7 +97,7 @@ public class Cloud {
 			res += " " + this.type.toString();
 		}
 		if (this.altitude != 0) {
-			res += " " + this.altitude + "m";
+			res += " " + getHeight() + "ft (approx " + this.altitude + "m)";
 		}
 
 		return res;
