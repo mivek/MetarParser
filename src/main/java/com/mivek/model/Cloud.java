@@ -8,15 +8,15 @@ import com.mivek.enums.CloudType;
  * Clouds are composed of :
  * 		a quantity
  * 		a type (optional)
- * 		an altitude (optional)
+ * 		an height (optional)
  * @author mivek
  *
  */
 public class Cloud {
 	/**
-	 * The altitude of the cloud (unit: meters).
+	 * The height of the cloud (unit: feet).
 	 */
-	private int altitude;
+	private int height;
 	/**
 	 * The quantity of the cloud.
 	 */
@@ -32,16 +32,16 @@ public class Cloud {
 	 * @return int of altitude.
 	 */
 	public int getAltitude() {
-		return altitude;
+		return height*30/100;
 	}
 
 	/**
 	 * Getter of the height (unit: feet).
 	 *
-	 * @return int of altitude.
+	 * @return int of height.
 	 */
 	public int getHeight() {
-		return altitude*100/30;
+		return height;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class Cloud {
 	 *            The height to set.
 	 */
 	public void setHeight(final int pHeight) {
-		this.altitude = pHeight/100*30;
+		this.height = pHeight;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Cloud {
 	 *            The altitude to set.
 	 */
 	public void setAltitude(final int pAltitude) {
-		this.altitude = pAltitude;
+		this.height = pAltitude*100/30;
 	}
 	/**
 	 * Getter of the quantity.
@@ -106,8 +106,8 @@ public class Cloud {
 		if (this.type != null) {
 			res += " " + this.type.toString();
 		}
-		if (this.altitude != 0) {
-			res += " " + getHeight() + "ft (approx " + this.altitude + "m)";
+		if (this.height != 0) {
+			res += " " + height + "ft (approx " + getAltitude() + "m)";
 		}
 
 		return res;
