@@ -12,7 +12,7 @@ import com.mivek.model.WeatherCode;
  * @author mivek
  *
  * @param <T>
- *            a concrete sub-class of WeatherCode
+ *            a concrete sub-class of {@link WeatherCode}
  */
 public interface IWeatherCodeFacade<T extends WeatherCode> {
 	/**

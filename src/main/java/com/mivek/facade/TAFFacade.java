@@ -46,7 +46,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
 		String inputLine;
 		br.readLine();
 		while ((inputLine = br.readLine()) != null) {
-			sb.append(inputLine.replace("      ", "")).append("\n");
+			sb.append(inputLine.replaceAll("\\s{2,}", "\n"));
 		}
 		br.close();
 		return getParser().parse(sb.toString());
