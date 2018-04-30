@@ -27,10 +27,12 @@ public class Cloud {
 	private CloudType type;
 
 	/**
-	 * Getter of the altitude (unit: meters).
+	 * Getter of the altitude (unit: meters, approximation).
 	 *
 	 * @return int of altitude.
+	 * @deprecated Use {@link #getHeight()}
 	 */
+	@Deprecated
 	public int getAltitude() {
 		return height*30/100;
 	}
@@ -59,7 +61,9 @@ public class Cloud {
 	 *
 	 * @param pAltitude
 	 *            The altitude to set.
+	 * @deprecated Use {@link #setHeight(int)}
 	 */
+	@Deprecated
 	public void setAltitude(final int pAltitude) {
 		this.height = pAltitude*100/30;
 	}
