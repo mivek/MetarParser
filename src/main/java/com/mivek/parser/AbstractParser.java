@@ -164,7 +164,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	
 			cloud.setQuantity(cq);
 			if (cloudPart[2] != null) {
-				cloud.setAltitude(30 * Integer.parseInt(cloudPart[2]));
+				cloud.setHeight(100 * Integer.parseInt(cloudPart[2]));
 				if (cloudPart[3] != null) {
 					CloudType ct = CloudType.valueOf(cloudPart[3]);
 					cloud.setType(ct);
