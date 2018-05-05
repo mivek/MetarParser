@@ -20,6 +20,7 @@ import com.mivek.model.RunwayInfo;
 import com.mivek.model.WeatherCode;
 
 /**
+ * Test class for {@link MetarParser}
  * @author mivek
  *
  */
@@ -27,6 +28,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 
 	private static MetarParser fSut;
 
+	@Override
 	MetarParser getSut() {
 		return fSut;
 	}
