@@ -10,20 +10,13 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
-import com.mivek.enums.Descriptive;
-import com.mivek.enums.Intensity;
-import com.mivek.enums.Phenomenon;
-import com.mivek.model.Airport;
-import com.mivek.model.Cloud;
-import com.mivek.model.Country;
-import com.mivek.model.WeatherCode;
-import com.mivek.model.WeatherCondition;
-import com.mivek.model.Wind;
+import com.mivek.enums.*;
+import com.mivek.model.*;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
+
+import i18n.Messages;
 
 /**
  * @author mivek
@@ -43,7 +36,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * Pattern regex for wind.
 	 */
-	protected static final String WIND_REGEX = "(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+	protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
 	/**
 	 * Pattern regex for extreme winds.
 	 */
@@ -139,8 +132,12 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	protected Wind parseWind(final String pStringWind) {
 		Wind wind = new Wind();
 		String[] windPart = Regex.pregMatch(WIND_REGEX, pStringWind);
-		wind.setDirection(Converter.degreesToDirection(windPart[1]));
-		wind.setDirectionDegrees(Integer.parseInt(windPart[1]));
+		String directionPart = windPart[1];
+		String direction = Converter.degreesToDirection(directionPart);
+		wind.setDirection(direction);
+		if (!direction.equals(Messages.CONVERTER_VRB)) {
+			wind.setDirectionDegrees(Integer.parseInt(windPart[1]));
+		}
 		wind.setSpeed(Integer.parseInt(windPart[2]));
 		if (windPart[3] != null) {
 			wind.setGust(Integer.parseInt(windPart[3]));

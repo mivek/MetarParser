@@ -12,11 +12,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
-import com.mivek.enums.Descriptive;
-import com.mivek.enums.Intensity;
-import com.mivek.enums.Phenomenon;
+import com.mivek.enums.*;
 import com.mivek.model.Cloud;
 import com.mivek.model.WeatherCode;
 import com.mivek.model.WeatherCondition;
@@ -115,6 +111,15 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 		assertEquals(17, res.getSpeed());
 		assertEquals(20, res.getGust());
 		assertEquals("KT", res.getUnit());
+	}
+
+	@Test
+	public void testParseWindVariable() {
+		String windPart = "VRB08KT";
+
+		Wind res = getSut().parseWind(windPart);
+
+		assertNotNull(res);
 	}
 
 	/*
