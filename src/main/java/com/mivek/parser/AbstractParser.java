@@ -2,6 +2,13 @@
  * 
  */
 package com.mivek.parser;
+import com.mivek.enums.*;
+import com.mivek.model.*;
+import com.mivek.utils.Converter;
+import com.mivek.utils.Regex;
+import com.opencsv.CSVReader;
+
+import i18n.Messages;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,13 +17,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.enums.*;
-import com.mivek.model.*;
-import com.mivek.utils.Converter;
-import com.mivek.utils.Regex;
-import com.opencsv.CSVReader;
-
-import i18n.Messages;
 
 /**
  * @author mivek
