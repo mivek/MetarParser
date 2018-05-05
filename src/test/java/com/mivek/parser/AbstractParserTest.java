@@ -55,6 +55,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SKC, res.getQuantity());
 		assertEquals(0, res.getAltitude());
+		assertEquals(0, res.getHeight());
 		assertNull(res.getType());
 	}
 
@@ -66,6 +67,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
 		assertEquals(480, res.getAltitude());
+		assertEquals(1600, res.getHeight());
 		assertNull(res.getType());
 	}
 
@@ -78,6 +80,7 @@ public abstract class AbstractParserTest<T extends WeatherCode> {
 		assertNotNull(res);
 		assertEquals(CloudQuantity.SCT, res.getQuantity());
 		assertEquals(30 * 26, res.getAltitude());
+		assertEquals(2600, res.getHeight());
 		assertNotNull(res.getType());
 		assertEquals(CloudType.CB, res.getType());
 	}

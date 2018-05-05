@@ -42,7 +42,7 @@ The airport class is composed of
 In this application a cloud is composed of 
   - CloudQuantity
   - CloudType (optional)
-  - altitude (optional)
+  - height (optional)
   
 #### Country
 A country is represented by its name.
