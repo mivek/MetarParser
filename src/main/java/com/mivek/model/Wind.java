@@ -18,7 +18,7 @@ public class Wind {
 	/**
 	 * Direction of the wind
 	 */
-	private int directionDegrees;
+	private Integer directionDegrees;
 	/**
 	 * The speed of the gust.
 	 */
@@ -153,7 +153,7 @@ public class Wind {
 	/**
 	 * @return the directionDegrees.
 	 */
-	public int getDirectionDegrees() {
+	public Integer getDirectionDegrees() {
 		return directionDegrees;
 	}
 
@@ -161,7 +161,7 @@ public class Wind {
 	 * @param pDirectionDegrees
 	 *            the directionDegrees to set.
 	 */
-	public void setDirectionDegrees(final int pDirectionDegrees) {
+	public void setDirectionDegrees(final Integer pDirectionDegrees) {
 		directionDegrees = pDirectionDegrees;
 	}
 

@@ -31,6 +31,7 @@ import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 
 /**
+ * Test class for {@link TAFParser}
  * @author mivek
  *
  */
@@ -38,7 +39,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	private static TAFParser fSut;
 
-
+	@Override
 	TAFParser getSut() {
 		return fSut;
 	}
