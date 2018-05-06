@@ -61,22 +61,26 @@ public final class Converter {
 			return Messages.CONVERTER_VRB;
 		}
 
-		if (isBetween(degrees, NORTH_EAST_MIN, NORTH_EAST_MAX)) {
-			res = Messages.CONVERTER_NE;
-		} else if (isBetween(degrees, NORTH_EAST_MAX, EAST)) {
-			res = Messages.CONVERTER_E;
-		} else if (isBetween(degrees, EAST, SOUTH_EAST)) {
-			res = Messages.CONVERTER_SE;
-		} else if (isBetween(degrees, SOUTH_EAST, SOUTH)) {
-			res = Messages.CONVERTER_S;
-		} else if (isBetween(degrees, SOUTH, SOUTH_WEST)) {
-			res = Messages.CONVERTER_SW;
-		} else if (isBetween(degrees, SOUTH_WEST, WEST)) {
-			res = Messages.CONVERTER_W;
-		} else if (isBetween(degrees, WEST, NORTH_WEST)) {
-			res = Messages.CONVERTER_NW;
+		if (isBetween(degrees, NORTH_EAST_MIN, SOUTH)) {
+			if (isBetween(degrees, NORTH_EAST_MIN, NORTH_EAST_MAX)) {
+				res = Messages.CONVERTER_NE;
+			} else if (isBetween(degrees, NORTH_EAST_MAX, EAST)) {
+				res = Messages.CONVERTER_E;
+			} else if (isBetween(degrees, EAST, SOUTH_EAST)) {
+				res = Messages.CONVERTER_SE;
+			} else if (isBetween(degrees, SOUTH_EAST, SOUTH)) {
+				res = Messages.CONVERTER_S;
+			}
 		} else {
-			res = Messages.CONVERTER_N;
+			if (isBetween(degrees, SOUTH, SOUTH_WEST)) {
+				res = Messages.CONVERTER_SW;
+			} else if (isBetween(degrees, SOUTH_WEST, WEST)) {
+				res = Messages.CONVERTER_W;
+			} else if (isBetween(degrees, WEST, NORTH_WEST)) {
+				res = Messages.CONVERTER_NW;
+			} else {
+				res = Messages.CONVERTER_N;
+			}
 		}
 		return res;
 	}
