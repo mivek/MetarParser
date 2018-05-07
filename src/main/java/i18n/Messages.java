@@ -179,6 +179,9 @@ public final class Messages {
 	 */
 	public static final String PHENOMENON_VA = RESOURCE_BUNDLE.getString("Phenomenon.VA");
 
+	/**
+	 * Message for invalid icao.
+	 */
 	public static final String INVALID_ICAO = RESOURCE_BUNDLE.getString("MetarFacade.InvalidIcao");
 
 	/**
@@ -246,6 +249,15 @@ public final class Messages {
 	 * PROB.
 	 */
 	public static final String PROB = RESOURCE_BUNDLE.getString("WeatherChangeType.PROB");
+	/**
+	 * AT.
+	 */
+	public static final String AT = RESOURCE_BUNDLE.getString("TimeIndicator.AT");
+	/**
+	 * TL.
+	 */
+	public static final String TL = RESOURCE_BUNDLE.getString("TimeIndicator.TL");
+
 	/**
 	 * Private constructor.
 	 */
