@@ -7,7 +7,7 @@ import com.mivek.model.Metar;
  * @author mivek
  *
  */
-public class AbstractMetarTrend extends AbstractTrend<Metar> {
+public abstract class AbstractMetarTrend extends AbstractTrend<Metar> {
 	/**
 	 * At attribute (can be null).
 	 */
