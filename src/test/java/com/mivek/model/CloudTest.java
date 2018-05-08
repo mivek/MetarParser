@@ -42,6 +42,7 @@ public class CloudTest {
 		c.setAltitude(90);
 		c.setQuantity(CloudQuantity.BKN);
 		c.setType(CloudType.CB);
-		assertEquals("Broken Cumunolinbus 300ft (approx 90m)", c.toString());
+		assertEquals(CloudQuantity.BKN.toString() + " " + CloudType.CB.toString() + " 300ft (approx 90m)",
+				c.toString());
 	}
 }
