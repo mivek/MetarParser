@@ -3,6 +3,13 @@
  */
 package com.mivek.parser;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.mivek.enums.*;
 import com.mivek.model.*;
 import com.mivek.utils.Converter;
@@ -10,13 +17,6 @@ import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
 import i18n.Messages;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -58,6 +58,18 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 * Pattern for the minimum visibility.
 	 */
 	protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
+	/**
+	 * From shortcut constant.
+	 */
+	protected static final String FM = "FM";
+	/**
+	 * Tempo shortcut constant.
+	 */
+	protected static final String TEMPO = "TEMPO";
+	/**
+	 * BECMG shortcut constant.
+	 */
+	protected static final String BECMG = "BECMG";
 	/**
 	 * Map of airports.
 	 */
