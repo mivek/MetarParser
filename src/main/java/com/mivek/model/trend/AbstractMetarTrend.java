@@ -1,5 +1,8 @@
 package com.mivek.model.trend;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mivek.enums.WeatherChangeType;
 import com.mivek.model.Metar;
 
@@ -8,61 +11,33 @@ import com.mivek.model.Metar;
  *
  */
 public abstract class AbstractMetarTrend extends AbstractTrend<Metar> {
-	/**
-	 * At attribute (can be null).
-	 */
-	private ATTime fAt;
-	/**
-	 * From attribute (can be null).
-	 */
-	private FMTime fFM;
-	/**
-	 * TILL attribute (can be null).
-	 */
-	private TLTime fTL;
 
+	/**
+	 * List containing the times properties of the trend.
+	 */
+	private List<AbstractMetarTrendTime> fTimes;
 	/**
 	 * Constructor.
 	 * @param pType the WeatherChangeType to set.
 	 */
 	protected AbstractMetarTrend(final WeatherChangeType pType) {
 		super(pType);
+		fTimes = new ArrayList<>();
 	}
 
 	/**
-	 * @return the at
+	 * @return the times
 	 */
-	public final ATTime getAt() {
-		return fAt;
+	public List<AbstractMetarTrendTime> getTimes() {
+		return fTimes;
 	}
+
 	/**
-	 * @param pAt the at to set
+	 * Adds a AbstractMetarTrendTime to the list.
+	 * @param pTime the element to add.
 	 */
-	public void setAt(final ATTime pAt) {
-		fAt = pAt;
+	public void addTime(final AbstractMetarTrendTime pTime) {
+		fTimes.add(pTime);
 	}
-	/**
-	 * @return the fM
-	 */
-	public FMTime getFM() {
-		return fFM;
-	}
-	/**
-	 * @param pFM the fM to set
-	 */
-	public void setFM(final FMTime pFM) {
-		fFM = pFM;
-	}
-	/**
-	 * @return the tL
-	 */
-	public final TLTime getTL() {
-		return fTL;
-	}
-	/**
-	 * @param pTL the tL to set
-	 */
-	public final void setTL(final TLTime pTL) {
-		fTL = pTL;
-	}
+
 }
