@@ -23,6 +23,8 @@ The application contains numerous enumarations to represent datas.
   - Intensity: to represent the intensity of a meteorological phenomenon.
   - Descriptive: to represent the descriptive of a meteorological phenomenon.
   - Phenomenon: to represent a phenomenon.
+  - WeatherChangeTime: to represent a trend.
+  - TimeIndicator: to represent the time of the trend.
   
 ### Classes
 
@@ -77,6 +79,18 @@ The wind class is composed of
   - the lowest variable wind
   - the highest variable wind
   - the unit of the wind's speed
+
+### Trends
+![trends diagram](trend.jpg)
+Numerous classes represents the trends. Trends are stored inside a list of the metar object `Metar.getTrends()`.
+Trends are composed of 
+  - a Type (BECMG or TEMPO)
+  - a wind
+  - a visibility and vertical visibility
+  - a list of clouds
+  - a list of weather conditions
+  - a list of `AbstractMetarTrendTime` to represent the time with its type (AT, FM, TL)
+
 
 ## Examples
 ### Parse a metar
