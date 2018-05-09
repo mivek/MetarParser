@@ -1,8 +1,5 @@
 package com.mivek.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mivek.enums.WeatherChangeType;
 
 /**
@@ -11,27 +8,11 @@ import com.mivek.enums.WeatherChangeType;
  * @author mivek
  *
  */
-public abstract class AbstractWeatherChange<T extends AbstractValidity> {
+public abstract class AbstractWeatherChange<T extends AbstractValidity> extends AbstractWeatherContainer {
 	/**
 	 * the type of change.
 	 */
 	private WeatherChangeType fType;
-	/**
-	 * the wind.
-	 */
-	private Wind fWind;
-	/**
-	 * The visibility.
-	 */
-	private Visibility fVisibility;
-	/**
-	 * The list of clouds.
-	 */
-	private List<Cloud> fClouds;
-	/**
-	 * The list of weatherCondition.
-	 */
-	private List<WeatherCondition> fWeatherConditions;
 	/**
 	 * The validity of the change.
 	 */
@@ -56,24 +37,8 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 *            the type to set.
 	 */
 	protected AbstractWeatherChange(final WeatherChangeType pType) {
-		fClouds = new ArrayList<>();
-		fWeatherConditions = new ArrayList<>();
+		super();
 		fType = pType;
-	}
-
-	/**
-	 * @return the visibility
-	 */
-	public Visibility getVisibility() {
-		return fVisibility;
-	}
-
-	/**
-	 * @param pVisibility
-	 *            the visibility to set
-	 */
-	public void setVisibility(final Visibility pVisibility) {
-		fVisibility = pVisibility;
 	}
 
 	/**
@@ -89,40 +54,6 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 */
 	public void setValidity(final T pValidity) {
 		fValidity = pValidity;
-	}
-
-	/**
-	 * @return the clouds
-	 */
-	public List<Cloud> getClouds() {
-		return fClouds;
-	}
-
-	/**
-	 * Adds a cloud to the list.
-	 *
-	 * @param pCloud
-	 *            the cloud to add.
-	 */
-	public void addCloud(final Cloud pCloud) {
-		fClouds.add(pCloud);
-	}
-
-	/**
-	 * @return the weatherConditions
-	 */
-	public List<WeatherCondition> getWeatherConditions() {
-		return fWeatherConditions;
-	}
-
-	/**
-	 * Adds a weather condition to the list.
-	 *
-	 * @param pWeatherCondition
-	 *            the weather condition to add.
-	 */
-	public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
-		fWeatherConditions.add(pWeatherCondition);
 	}
 
 	/**
@@ -145,21 +76,6 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 */
 	public void setProbability(final Integer pProbability) {
 		fProbability = pProbability;
-	}
-
-	/**
-	 * @return the wind
-	 */
-	public Wind getWind() {
-		return fWind;
-	}
-
-	/**
-	 * @param pWind
-	 *            the wind to set
-	 */
-	public void setWind(final Wind pWind) {
-		fWind = pWind;
 	}
 
 	/**
