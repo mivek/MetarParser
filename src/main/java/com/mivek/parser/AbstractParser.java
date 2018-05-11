@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 /**
  * @author mivek
  */
-public abstract class AbstractParser<T extends WeatherCode> {
+public abstract class AbstractParser<T extends AbstractWeatherCode> {
 	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
 	/**
 	 * Path of airport file.

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import com.mivek.enums.*;
 import com.mivek.model.Cloud;
-import com.mivek.model.WeatherCode;
+import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 
@@ -24,7 +24,7 @@ import com.mivek.model.Wind;
  *
  */
 @Ignore
-public abstract class AbstractParserTest<T extends WeatherCode> {
+public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
 	/*
 	 * ===========================
 	 * 

@@ -9,7 +9,7 @@ import java.util.List;
  * @author mivek
  *
  */
-public class Metar extends WeatherCode {
+public class Metar extends AbstractWeatherCode {
 	/**
 	 * Temperature.
 	 */
