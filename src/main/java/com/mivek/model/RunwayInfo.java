@@ -10,19 +10,19 @@ public class RunwayInfo {
 	/**
 	 * The name of the runway.
 	 */
-	private String name;
+	private String fName;
 	/**
 	 * The minimal visibility on the runway.
 	 */
-	private int minRange;
+	private int fMinRange;
 	/**
 	 * The maximal visibility on the runway.
 	 */
-	private int maxRange;
+	private int fMaxRange;
 	/**
 	 * The tread.
 	 */
-	private String trend;
+	private String fTrend;
 
 	/**
 	 * Getter of name.
@@ -30,7 +30,7 @@ public class RunwayInfo {
 	 * @return the name.
 	 */
 	public String getName() {
-		return name;
+		return fName;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class RunwayInfo {
 	 *            the name to set.
 	 */
 	public void setName(final String pName) {
-		this.name = pName;
+		fName = pName;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class RunwayInfo {
 	 * @return the minRange.
 	 */
 	public int getMinRange() {
-		return minRange;
+		return fMinRange;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class RunwayInfo {
 	 *            the minRange to set.
 	 */
 	public void setMinRange(final int pMinRange) {
-		this.minRange = pMinRange;
+		fMinRange = pMinRange;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class RunwayInfo {
 	 * @return maxRange.
 	 */
 	public int getMaxRange() {
-		return maxRange;
+		return fMaxRange;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class RunwayInfo {
 	 *            the maxrange to set.
 	 */
 	public void setMaxRange(final int pMaxRange) {
-		this.maxRange = pMaxRange;
+		fMaxRange = pMaxRange;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class RunwayInfo {
 	 * @return the trend.
 	 */
 	public String getTrend() {
-		return trend;
+		return fTrend;
 	}
 
 	/**
@@ -97,6 +97,6 @@ public class RunwayInfo {
 	 *            Trend to set.
 	 */
 	public void setTrend(final String pTrend) {
-		this.trend = pTrend;
+		fTrend = pTrend;
 	}
 }

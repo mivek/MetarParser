@@ -1,4 +1,6 @@
 /**
- * This package contains parsers of the library.
+ * Contains the parsers of the application.
+ *
+ * @author mivek
  */
 package com.mivek.parser;

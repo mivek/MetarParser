@@ -46,11 +46,11 @@ public enum Descriptive {
 	/**
 	 * Shortcut of the descriptive.
 	 */
-	private String shortcut = ""; //$NON-NLS-1$
+	private String fShortcut = ""; //$NON-NLS-1$
 	/**
 	 * Meaning of the descriptive.
 	 */
-	private String name = ""; //$NON-NLS-1$
+	private String fName = ""; //$NON-NLS-1$
 
 	/**
 	 * Connstructor.
@@ -61,13 +61,13 @@ public enum Descriptive {
 	 *            a string for the meaning.
 	 */
 	Descriptive(final String pShortcut, final String pName) {
-		this.shortcut = pShortcut;
-		this.name = pName;
+		fShortcut = pShortcut;
+		fName = pName;
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return fName;
 	}
 
 	/**
@@ -76,6 +76,6 @@ public enum Descriptive {
 	 * @return string.
 	 */
 	public String getShortcut() {
-		return this.shortcut;
+		return fShortcut;
 	}
 }

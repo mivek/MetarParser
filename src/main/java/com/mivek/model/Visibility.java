@@ -10,15 +10,15 @@ public class Visibility {
 	/**
 	 * mainVisibility of the metar.
 	 */
-	private String mainVisibility;
+	private String fMainVisibility;
 	/**
 	 * minimal visibility of the metar.
 	 */
-	private int minVisibility;
+	private int fMinVisibility;
 	/**
 	 * Direction of the minimal visibility.
 	 */
-	private String minDirection;
+	private String fMinDirection;
 
 	/**
 	 * Getter of the mainVisibility.
@@ -26,7 +26,7 @@ public class Visibility {
 	 * @return the mainvisibility.
 	 */
 	public String getMainVisibility() {
-		return mainVisibility;
+		return fMainVisibility;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Visibility {
 	 *            the main visibility to set.
 	 */
 	public void setMainVisibility(final String pMainVisibility) {
-		this.mainVisibility = pMainVisibility;
+		fMainVisibility = pMainVisibility;
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class Visibility {
 	 * @return the minimal visibility.
 	 */
 	public int getMinVisibility() {
-		return minVisibility;
+		return fMinVisibility;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Visibility {
 	 *            the minimal visibility to set.
 	 */
 	public void setMinVisibility(final int pMinVisibility) {
-		this.minVisibility = pMinVisibility;
+		fMinVisibility = pMinVisibility;
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Visibility {
 	 * @return the direction.
 	 */
 	public String getMinDirection() {
-		return minDirection;
+		return fMinDirection;
 	}
 
 	/**
@@ -74,6 +74,6 @@ public class Visibility {
 	 *            the minimal direction to set.
 	 */
 	public void setMinDirection(final String pMinDirection) {
-		this.minDirection = pMinDirection;
+		fMinDirection = pMinDirection;
 	}
 }

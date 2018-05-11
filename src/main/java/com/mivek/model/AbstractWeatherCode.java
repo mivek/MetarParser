@@ -8,58 +8,58 @@ import java.util.List;
  * @author mivek
  *
  */
-public abstract class WeatherCode {
+public abstract class AbstractWeatherCode {
 
 	/**
 	 * Integer for the day of the metar.
 	 */
-	private Integer day;
+	private Integer fDay;
 	/**
 	 * Time of the metar.
 	 */
-	private LocalTime time;
+	private LocalTime fTime;
 	/**
 	 * Airport of the metar.
 	 */
-	private Airport airport;
+	private Airport fAirport;
 	/**
 	 * Visibility.
 	 */
-	private Visibility visibility;
+	private Visibility fVisibility;
 	/**
 	 * Wind.
 	 */
-	private Wind wind;
+	private Wind fWind;
 	/**
 	 * List of weather conditions.
 	 */
-	private List<WeatherCondition> weatherConditions;
+	private List<WeatherCondition> fWeatherConditions;
 	/**
 	 * Vertical visibility.
 	 */
-	private Integer verticalVisibility;
+	private Integer fVerticalVisibility;
 	/**
 	 * Original message of the metar.
 	 */
-	private String message;
+	private String fMessage;
 	/**
 	 * List of clouds.
 	 */
-	private List<Cloud> clouds;
+	private List<Cloud> fClouds;
 
 	/**
 	 * Default contructor.
 	 */
-	public WeatherCode() {
-		weatherConditions = new ArrayList<>();
-		clouds = new ArrayList<>();
+	public AbstractWeatherCode() {
+		fWeatherConditions = new ArrayList<>();
+		fClouds = new ArrayList<>();
 	}
 
 	/**
 	 * @return the day
 	 */
 	public Integer getDay() {
-		return day;
+		return fDay;
 	}
 
 	/**
@@ -67,14 +67,14 @@ public abstract class WeatherCode {
 	 *            the day to set
 	 */
 	public void setDay(final Integer pDay) {
-		this.day = pDay;
+		fDay = pDay;
 	}
 
 	/**
 	 * @return the time
 	 */
 	public LocalTime getTime() {
-		return time;
+		return fTime;
 	}
 
 	/**
@@ -82,14 +82,14 @@ public abstract class WeatherCode {
 	 *            the time to set
 	 */
 	public void setTime(final LocalTime pTime) {
-		this.time = pTime;
+		fTime = pTime;
 	}
 
 	/**
 	 * @return the airport
 	 */
 	public Airport getAirport() {
-		return airport;
+		return fAirport;
 	}
 
 	/**
@@ -97,14 +97,14 @@ public abstract class WeatherCode {
 	 *            the airport to set
 	 */
 	public void setAirport(final Airport pAirport) {
-		this.airport = pAirport;
+		fAirport = pAirport;
 	}
 
 	/**
 	 * @return the visibility
 	 */
 	public Visibility getVisibility() {
-		return visibility;
+		return fVisibility;
 	}
 
 	/**
@@ -112,31 +112,31 @@ public abstract class WeatherCode {
 	 *            the visibility to set
 	 */
 	public void setVisibility(final Visibility pVisibility) {
-		this.visibility = pVisibility;
+		fVisibility = pVisibility;
 	}
 
 	/**
 	 * @return the weatherConditions
 	 */
 	public List<WeatherCondition> getWeatherConditions() {
-		return weatherConditions;
+		return fWeatherConditions;
 	}
 
 	/**
 	 * Adds a weatherCondition to the list.
 	 *
-	 * @param wc
+	 * @param pWeatherCondition
 	 *            the WeatherCondition to add.
 	 */
-	public void addWeatherCondition(final WeatherCondition wc) {
-		weatherConditions.add(wc);
+	public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
+		fWeatherConditions.add(pWeatherCondition);
 	}
 
 	/**
 	 * @return the wind
 	 */
 	public Wind getWind() {
-		return wind;
+		return fWind;
 	}
 
 	/**
@@ -144,14 +144,14 @@ public abstract class WeatherCode {
 	 *            the wind to set
 	 */
 	public void setWind(final Wind pWind) {
-		this.wind = pWind;
+		fWind = pWind;
 	}
 
 	/**
 	 * @return the verticalVisibility
 	 */
 	public Integer getVerticalVisibility() {
-		return verticalVisibility;
+		return fVerticalVisibility;
 	}
 
 	/**
@@ -159,14 +159,14 @@ public abstract class WeatherCode {
 	 *            the verticalVisibility to set
 	 */
 	public void setVerticalVisibility(final Integer pVerticalVisibility) {
-		this.verticalVisibility = pVerticalVisibility;
+		fVerticalVisibility = pVerticalVisibility;
 	}
 
 	/**
 	 * @return the message
 	 */
 	public String getMessage() {
-		return message;
+		return fMessage;
 	}
 
 	/**
@@ -174,24 +174,24 @@ public abstract class WeatherCode {
 	 *            the message to set
 	 */
 	public void setMessage(final String pMessage) {
-		this.message = pMessage;
+		fMessage = pMessage;
 	}
 
 	/**
 	 * @return the clouds
 	 */
 	public List<Cloud> getClouds() {
-		return clouds;
+		return fClouds;
 	}
 
 	/**
 	 * Adds a cloud to the list.
 	 *
-	 * @param cloud
+	 * @param pCloud
 	 *            The cloud to add.
 	 */
-	public void addCloud(final Cloud cloud) {
-		this.clouds.add(cloud);
+	public void addCloud(final Cloud pCloud) {
+		fClouds.add(pCloud);
 	}
 
 }

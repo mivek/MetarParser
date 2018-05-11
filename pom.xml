@@ -7,6 +7,15 @@
 	<name>metarParser</name>
 	<description>This project is a metar parser.
 Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string and retrieve a Metar Object.</description>
+	<url>https://github.com/mivek/MetarParser</url>
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/mivek/MetarParser</url>
+	</ciManagement>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/mivek/MetarParser/issues</url>
+	</issueManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.opencsv</groupId>
@@ -77,13 +86,4 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 			</plugin>
 		</plugins>
 	</build>
-	<url>https://github.com/mivek/MetarParser</url>
-	<ciManagement>
-		<system>travis-ci</system>
-		<url>https://travis-ci.org/mivek/MetarParser</url>
-	</ciManagement>
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/mivek/MetarParser/issues</url>
-	</issueManagement>
 </project>

@@ -26,11 +26,11 @@ public enum Intensity {
 	/**
 	 * The shortcut of the intensity.
 	 */
-	private String shortcut = ""; //$NON-NLS-1$
+	private String fShortcut = ""; //$NON-NLS-1$
 	/**
 	 * The meaning of the intensity.
 	 */
-	private String name = ""; //$NON-NLS-1$
+	private String fName = ""; //$NON-NLS-1$
 
 	/**
 	 * Constructor.
@@ -41,13 +41,13 @@ public enum Intensity {
 	 *            A string for the meaning.
 	 */
 	Intensity(final String pShortcut, final String pName) {
-		this.shortcut = pShortcut;
-		this.name = pName;
+		fShortcut = pShortcut;
+		fName = pName;
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return fName;
 	}
 
 	/**
@@ -56,21 +56,21 @@ public enum Intensity {
 	 * @return string.
 	 */
 	public String getShortcut() {
-		return this.shortcut;
+		return fShortcut;
 	}
 
 	/**
 	 * Returns the enum with the same shortcut than the value.
 	 *
-	 * @param value
+	 * @param pValue
 	 *            String of the intensity searched.
 	 * @return a intensity with the same shortcut.
 	 * @throws IllegalArgumentException
 	 *             error if not found.
 	 */
-	public static Intensity getEnum(final String value) throws IllegalArgumentException {
+	public static Intensity getEnum(final String pValue) throws IllegalArgumentException {
 		for (Intensity v : values()) {
-			if (v.getShortcut().equalsIgnoreCase(value)) {
+			if (v.getShortcut().equalsIgnoreCase(pValue)) {
 				return v;
 			}
 		}

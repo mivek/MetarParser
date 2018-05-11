@@ -80,21 +80,20 @@ public final class MetarParser extends AbstractParser<Metar> {
 	 * This is the main method of the parser. This method checks if the airport
 	 * exists. If it does then the metar code is decoded.
 	 *
-	 * @param metarCode
-	 *            String representing the metar.
+	 * @param pMetarCode String representing the metar.
 	 * @return a decoded metar object.
 	 */
 	@Override
-	public Metar parse(final String metarCode) {
+	public Metar parse(final String pMetarCode) {
 		Metar m = new Metar();
-		String[] metarTab = metarCode.split(" ");
+		String[] metarTab = pMetarCode.split(" ");
 		Airport airport = getAirports().get(metarTab[0]);
 		if (airport == null) {
 			return null;
 		}
 
 		m.setAirport(airport);
-		m.setMessage(metarCode);
+		m.setMessage(pMetarCode);
 		m.setDay(Integer.parseInt(metarTab[1].substring(0, 2)));
 		int hours = Integer.parseInt(metarTab[1].substring(2, 4));
 		int minutes = Integer.parseInt(metarTab[1].substring(4, 6));
@@ -169,12 +168,12 @@ public final class MetarParser extends AbstractParser<Metar> {
 	protected RunwayInfo parseRunWayAction(final String runWayPart) {
 		String[] matches;
 		RunwayInfo ri = new RunwayInfo();
-		if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart)))) {
+		if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart))) {
 			ri.setName(matches[1]);
 			ri.setMinRange(Integer.parseInt(matches[3]));
 			ri.setTrend(Converter.convertTrend(matches[4]));
 			return ri;
-		} else if (ArrayUtils.isNotEmpty((matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart)))) {
+		} else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart))) {
 			ri.setName(matches[1]);
 			ri.setMinRange(Integer.parseInt(matches[2]));
 			ri.setMaxRange(Integer.parseInt(matches[3]));

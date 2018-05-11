@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.parser;
 
 import java.io.InputStream;
@@ -10,8 +7,17 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.enums.*;
-import com.mivek.model.*;
+import com.mivek.enums.CloudQuantity;
+import com.mivek.enums.CloudType;
+import com.mivek.enums.Descriptive;
+import com.mivek.enums.Intensity;
+import com.mivek.enums.Phenomenon;
+import com.mivek.model.AbstractWeatherCode;
+import com.mivek.model.Airport;
+import com.mivek.model.Cloud;
+import com.mivek.model.Country;
+import com.mivek.model.WeatherCondition;
+import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
@@ -20,20 +26,11 @@ import i18n.Messages;
 
 
 /**
+ * Abstract class for parser.
  * @author mivek
+ * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
-public abstract class AbstractParser<T extends WeatherCode> {
-	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
-	/**
-	 * Path of airport file.
-	 */
-	private final InputStream airportsFile = AbstractParser.class.getClassLoader()
-			.getResourceAsStream("data/airports.dat");
-	/**
-	 * Path of countries file.
-	 */
-	private final InputStream countriesFile = AbstractParser.class.getClassLoader()
-			.getResourceAsStream("data/countries.dat");
+public abstract class AbstractParser<T extends AbstractWeatherCode> {
 	/**
 	 * Pattern regex for wind.
 	 */
@@ -70,17 +67,31 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 * BECMG shortcut constant.
 	 */
 	protected static final String BECMG = "BECMG";
+	/*
+	 * The logger.
+	 */
+	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
+	/**
+	 * Path of airport file.
+	 */
+	private final InputStream fAirportsFile = AbstractParser.class.getClassLoader()
+			.getResourceAsStream("data/airports.dat");
+	/**
+	 * Path of countries file.
+	 */
+	private final InputStream fCountriesFile = AbstractParser.class.getClassLoader()
+			.getResourceAsStream("data/countries.dat");
 	/**
 	 * Map of airports.
 	 */
-	private Map<String, Airport> airports;
+	private Map<String, Airport> fAirports;
 	/**
 	 * Map of countries.
 	 */
-	private Map<String, Country> countries;
+	private Map<String, Country> fCountries;
 
 	/**
-	 * 
+	 * Constructor.
 	 */
 	protected AbstractParser() {
 		initCountries();
@@ -91,16 +102,16 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 * Initiate airports map.
 	 */
 	private void initAirports() {
-		airports = new HashMap<>();
+		fAirports = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new InputStreamReader(airportsFile));
+			reader = new CSVReader(new InputStreamReader(fAirportsFile));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Airport airport = new Airport();
 				airport.setName(line[1]);
 				airport.setCity(line[2]);
-				airport.setCountry(countries.get(line[3]));
+				airport.setCountry(fCountries.get(line[3]));
 				airport.setIata(line[4]);
 				airport.setIcao(line[5]);
 				airport.setLatitude(Double.parseDouble(line[6]));
@@ -108,7 +119,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 				airport.setAltitude(Integer.parseInt(line[8]));
 				airport.setTimezone(line[9]);
 				airport.setDst(line[10]);
-				airports.put(airport.getIcao(), airport);
+				fAirports.put(airport.getIcao(), airport);
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.toString(), e);
@@ -119,15 +130,15 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 * Initiate countries map.
 	 */
 	private void initCountries() {
-		countries = new HashMap<>();
+		fCountries = new HashMap<>();
 		CSVReader reader;
 		try {
-			reader = new CSVReader(new InputStreamReader(countriesFile));
+			reader = new CSVReader(new InputStreamReader(fCountriesFile));
 			String[] line;
 			while ((line = reader.readNext()) != null) {
 				Country country = new Country();
 				country.setName(line[0]);
-				countries.put(country.getName(), country);
+				fCountries.put(country.getName(), country);
 			}
 		} catch (Exception e) {
 			LOGGER.log(Level.SEVERE, e.toString(), e);
@@ -136,10 +147,8 @@ public abstract class AbstractParser<T extends WeatherCode> {
 
 	/**
 	 * This method parses the wind part of the metar code. It parses the generic
-	 * part. Variable winds are not parsed by this method.
-	 * 
-	 * @param windPart
-	 *            An array of strings with wind elements.
+	 * part.
+	 * @param pStringWind a string with wind elements.
 	 * @return a Wind element with the informations.
 	 */
 	protected Wind parseWind(final String pStringWind) {
@@ -162,8 +171,7 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	/**
 	 * This method parses the cloud part of the metar.
 	 *
-	 * @param cloudPart
-	 *            Table of strings with clouds elements.
+	 * @param pCloudString string with cloud elements.
 	 * @return a decoded cloud with its quantity, its altitude and its type.
 	 */
 	protected Cloud parseCloud(final String pCloudString) {
@@ -171,7 +179,6 @@ public abstract class AbstractParser<T extends WeatherCode> {
 		String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, pCloudString);
 		try {
 			CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
-	
 			cloud.setQuantity(cq);
 			if (cloudPart[2] != null) {
 				cloud.setHeight(100 * Integer.parseInt(cloudPart[2]));
@@ -222,16 +229,21 @@ public abstract class AbstractParser<T extends WeatherCode> {
 	 * @return the airports
 	 */
 	public Map<String, Airport> getAirports() {
-		return airports;
+		return fAirports;
 	}
 
 	/**
 	 * @return the countries
 	 */
 	public Map<String, Country> getCountries() {
-		return countries;
+		return fCountries;
 	}
 
+	/**
+	 * Parse method.
+	 * @param pCode the message to parse.
+	 * @return the decoded object.
+	 */
 	public abstract T parse(String pCode);
 
 }

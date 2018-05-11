@@ -17,21 +17,21 @@ public class WeatherCondition {
 	/**
 	 * Intensity of the condition (optional).
 	 */
-	private Intensity intensity;
+	private Intensity fIntensity;
 	/**
 	 * Descriptive of the condition (optional).
 	 */
-	private Descriptive descriptive;
+	private Descriptive fDescriptive;
 	/**
 	 * List of phenomenons of the condition.
 	 */
-	private List<Phenomenon> phenomenons;
+	private List<Phenomenon> fPhenomenons;
 
 	/**
 	 * Constructor.
 	 */
 	public WeatherCondition() {
-		phenomenons = new ArrayList<>();
+		fPhenomenons = new ArrayList<>();
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class WeatherCondition {
 	 * @return the Intensity of the condition.
 	 */
 	public Intensity getIntensity() {
-		return intensity;
+		return fIntensity;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class WeatherCondition {
 	 *            The intensity to set.
 	 */
 	public void setIntensity(final Intensity pIntensity) {
-		this.intensity = pIntensity;
+		fIntensity = pIntensity;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class WeatherCondition {
 	 * @return the descriptive.
 	 */
 	public Descriptive getDescriptive() {
-		return descriptive;
+		return fDescriptive;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class WeatherCondition {
 	 *            the descriptive to set.
 	 */
 	public void setDescriptive(final Descriptive pDescriptive) {
-		this.descriptive = pDescriptive;
+		fDescriptive = pDescriptive;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class WeatherCondition {
 	 * @return a list of phenomenons.
 	 */
 	public List<Phenomenon> getPhenomenons() {
-		return phenomenons;
+		return fPhenomenons;
 	}
 
 	/**
@@ -88,17 +88,17 @@ public class WeatherCondition {
 	 *            the list to set.
 	 */
 	public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
-		this.phenomenons = pPhenomenons;
+		fPhenomenons = pPhenomenons;
 	}
 
 	/**
 	 * Adds a phenomenon to the list.
 	 *
-	 * @param p
+	 * @param pPhenomenon
 	 *            The Phenomenon to add.
 	 */
-	public void addPhenomenon(final Phenomenon p) {
-		this.phenomenons.add(p);
+	public void addPhenomenon(final Phenomenon pPhenomenon) {
+		fPhenomenons.add(pPhenomenon);
 	}
 
 	/**
@@ -107,6 +107,6 @@ public class WeatherCondition {
 	 * @return true if there is at least phenomenon.
 	 */
 	public boolean isValid() {
-		return !phenomenons.isEmpty();
+		return !fPhenomenons.isEmpty();
 	}
 }
