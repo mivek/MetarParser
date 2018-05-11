@@ -9,7 +9,7 @@ import java.util.List;
  * @author mivek
  *
  */
-public class TAF extends WeatherCode {
+public class TAF extends AbstractWeatherCode {
 
 	/**
 	 * The valididty of the TAF.

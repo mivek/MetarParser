@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
-import com.mivek.model.WeatherCode;
+import com.mivek.model.AbstractWeatherCode;
 
 /**
  * Test class for {@link MetarParser}
@@ -107,7 +107,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 	public void testParseNullAirport() {
 		String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
 
-		WeatherCode m = fSut.parse(metarString);
+		AbstractWeatherCode m = fSut.parse(metarString);
 
 		assertNull(m);
 	}

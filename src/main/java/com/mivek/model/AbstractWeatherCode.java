@@ -8,7 +8,7 @@ import java.util.List;
  * @author mivek
  *
  */
-public abstract class WeatherCode {
+public abstract class AbstractWeatherCode {
 
 	/**
 	 * Integer for the day of the metar.
@@ -50,7 +50,7 @@ public abstract class WeatherCode {
 	/**
 	 * Default contructor.
 	 */
-	public WeatherCode() {
+	public AbstractWeatherCode() {
 		fWeatherConditions = new ArrayList<>();
 		fClouds = new ArrayList<>();
 	}
