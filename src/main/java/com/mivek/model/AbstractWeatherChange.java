@@ -39,7 +39,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	/**
 	 * The probability of the change.
 	 */
-	private Integer probability;
+	private Integer fProbability;
 	/**
 	 * The maximum temperature.
 	 */
@@ -136,7 +136,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 * @return the probability
 	 */
 	public Integer getProbability() {
-		return probability;
+		return fProbability;
 	}
 
 	/**
@@ -144,7 +144,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> {
 	 *            the probability to set
 	 */
 	public void setProbability(final Integer pProbability) {
-		probability = pProbability;
+		fProbability = pProbability;
 	}
 
 	/**

@@ -16,15 +16,15 @@ public class Cloud {
 	/**
 	 * The height of the cloud (unit: feet).
 	 */
-	private int height;
+	private int fHeight;
 	/**
 	 * The quantity of the cloud.
 	 */
-	private CloudQuantity quantity;
+	private CloudQuantity fQuantity;
 	/**
 	 * The type of the cloud.
 	 */
-	private CloudType type;
+	private CloudType fType;
 
 	/**
 	 * Getter of the altitude (unit: meters, approximation).
@@ -34,7 +34,7 @@ public class Cloud {
 	 */
 	@Deprecated
 	public int getAltitude() {
-		return height*30/100;
+		return fHeight * 30 / 100;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class Cloud {
 	 * @return int of height.
 	 */
 	public int getHeight() {
-		return height;
+		return fHeight;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Cloud {
 	 *            The height to set.
 	 */
 	public void setHeight(final int pHeight) {
-		this.height = pHeight;
+		fHeight = pHeight;
 	}
 
 	/**
@@ -65,14 +65,14 @@ public class Cloud {
 	 */
 	@Deprecated
 	public void setAltitude(final int pAltitude) {
-		this.height = pAltitude*100/30;
+		fHeight = pAltitude * 100 / 30;
 	}
 	/**
 	 * Getter of the quantity.
 	 * @return a CloudQuantity.
 	 */
 	public CloudQuantity getQuantity() {
-		return quantity;
+		return fQuantity;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Cloud {
 	 *            The CloudQuantity to set.
 	 */
 	public void setQuantity(final CloudQuantity pQuantity) {
-		this.quantity = pQuantity;
+		fQuantity = pQuantity;
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class Cloud {
 	 * @return a CloudType.
 	 */
 	public CloudType getType() {
-		return type;
+		return fType;
 	}
 
 	/**
@@ -101,17 +101,17 @@ public class Cloud {
 	 *            The CloudType to set.
 	 */
 	public void setType(final CloudType pType) {
-		this.type = pType;
+		fType = pType;
 	}
 
 	@Override
 	public final String toString() {
-		String res = this.quantity.toString();
-		if (this.type != null) {
-			res += " " + this.type.toString();
+		String res = fQuantity.toString();
+		if (fType != null) {
+			res += " " + fType.toString();
 		}
-		if (this.height != 0) {
-			res += " " + height + "ft (approx " + getAltitude() + "m)";
+		if (fHeight != 0) {
+			res += " " + fHeight + "ft (approx " + getAltitude() + "m)";
 		}
 
 		return res;
