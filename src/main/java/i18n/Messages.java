@@ -178,7 +178,9 @@ public final class Messages {
 	 * Phenomenon volcanic ashes.
 	 */
 	public static final String PHENOMENON_VA = RESOURCE_BUNDLE.getString("Phenomenon.VA");
-
+	/**
+	 * Invalid icao message.
+	 */
 	public static final String INVALID_ICAO = RESOURCE_BUNDLE.getString("MetarFacade.InvalidIcao");
 
 	/**
