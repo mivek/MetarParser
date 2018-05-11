@@ -62,15 +62,15 @@ public enum Intensity {
 	/**
 	 * Returns the enum with the same shortcut than the value.
 	 *
-	 * @param value
+	 * @param pValue
 	 *            String of the intensity searched.
 	 * @return a intensity with the same shortcut.
 	 * @throws IllegalArgumentException
 	 *             error if not found.
 	 */
-	public static Intensity getEnum(final String value) throws IllegalArgumentException {
+	public static Intensity getEnum(final String pValue) throws IllegalArgumentException {
 		for (Intensity v : values()) {
-			if (v.getShortcut().equalsIgnoreCase(value)) {
+			if (v.getShortcut().equalsIgnoreCase(pValue)) {
 				return v;
 			}
 		}
