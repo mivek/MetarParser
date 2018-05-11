@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.facade;
 
 import com.mivek.model.AbstractWeatherCode;
@@ -27,7 +24,7 @@ public abstract class AbstractWeatherCodeFacade<T extends AbstractWeatherCode> i
 	 * Constructor.
 	 * @param pParser the parser to set.
 	 */
-	protected AbstractWeatherCodeFacade(AbstractParser<T> pParser) {
+	protected AbstractWeatherCodeFacade(final AbstractParser<T> pParser) {
 		fParser = pParser;
 	}
 
