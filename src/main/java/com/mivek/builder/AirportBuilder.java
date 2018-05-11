@@ -4,61 +4,60 @@ import com.mivek.model.Airport;
 import com.mivek.model.Country;
 
 /**
- *
+ * Builder for {@link Airport} class.
  * @author mivek
- *
  */
 public class AirportBuilder {
 	/**
 	 * The name of the airport.
 	 */
-	private String name;
+	private String fName;
 	/**
 	 * The city of the airport.
 	 */
-	private String city;
+	private String fCity;
 	/**
 	 * The country of the airport.
 	 */
-	private Country country;
+	private Country fCountry;
 	/**
 	 * The iata code of the airport.
 	 */
-	private String iata;
+	private String fIata;
 	/**
 	 * The icao code of the airport.
 	 */
-	private String icao;
+	private String fIcao;
 	/**
 	 * The latitude of the airport.
 	 */
-	private double latitude;
+	private double fLatitude;
 	/**
 	 * The longitude of the airport.
 	 */
-	private double longitude;
+	private double fLongitude;
 	/**
 	 * The altitude of the airport.
 	 */
-	private int altitude;
+	private int fAltitude;
 	/**
 	 * The timezone of the airport.
 	 */
-	private String timezone;
+	private String fTimezone;
 	/**
 	 * The dst of the airport.
 	 */
-	private String dst;
+	private String fDst;
 	/**
 	 * The tzDatabase of the aiport.
 	 */
-	private String tzDatabase;
+	private String fTzDatabase;
 
 	/**
 	 * Constructor. Adds a default icao code.
 	 */
 	public AirportBuilder() {
-		this.icao = "icao";
+		fIcao = "icao";
 	}
 
 	/**
@@ -69,7 +68,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withName(final String pName) {
-		this.name = pName;
+		fName = pName;
 		return this;
 	}
 
@@ -79,7 +78,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withName() {
-		this.name = "airport name";
+		fName = "airport name";
 		return this;
 	}
 
@@ -91,7 +90,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withCity(final String pCity) {
-		this.city = pCity;
+		fCity = pCity;
 		return this;
 	}
 
@@ -101,7 +100,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withCity() {
-		this.city = "city name";
+		fCity = "city name";
 		return this;
 	}
 
@@ -113,7 +112,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withCountry(final Country pCountry) {
-		this.country = pCountry;
+		fCountry = pCountry;
 		return this;
 	}
 
@@ -125,7 +124,7 @@ public class AirportBuilder {
 	public AirportBuilder withCountry() {
 		Country c = new Country();
 		c.setName("country name");
-		this.country = c;
+		fCountry = c;
 		return this;
 	}
 
@@ -137,7 +136,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withIata(final String pIata) {
-		this.iata = pIata;
+		fIata = pIata;
 		return this;
 	}
 
@@ -149,7 +148,7 @@ public class AirportBuilder {
 	 * @return an instance of the builder.
 	 */
 	public AirportBuilder withIcao(final String pIcao) {
-		this.icao = pIcao;
+		fIcao = pIcao;
 		return this;
 	}
 
@@ -161,7 +160,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withLongitude(final double pLongitude) {
-		this.longitude = pLongitude;
+		fLongitude = pLongitude;
 		return this;
 	}
 
@@ -171,7 +170,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withLongitude() {
-		this.longitude = 2.0;
+		fLongitude = 2.0;
 		return this;
 	}
 
@@ -183,7 +182,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withLatitude(final double pLatitude) {
-		this.latitude = pLatitude;
+		fLatitude = pLatitude;
 		return this;
 	}
 
@@ -193,7 +192,7 @@ public class AirportBuilder {
 	 * @return the instance of the builder.
 	 */
 	public AirportBuilder withLatitude() {
-		this.latitude = 2.0;
+		fLatitude = 2.0;
 		return this;
 	}
 
@@ -205,7 +204,7 @@ public class AirportBuilder {
 	 * @return an instance of the builder.
 	 */
 	public AirportBuilder withAltitude(final int pAltitude) {
-		this.altitude = pAltitude;
+		fAltitude = pAltitude;
 		return this;
 	}
 
@@ -215,7 +214,7 @@ public class AirportBuilder {
 	 * @return an instance of the builder.
 	 */
 	public AirportBuilder withAltitude() {
-		this.altitude = 1;
+		fAltitude = 1;
 		return this;
 	}
 
@@ -226,17 +225,17 @@ public class AirportBuilder {
 	 */
 	public Airport build() {
 		Airport a = new Airport();
-		a.setAltitude(altitude);
-		a.setCity(city);
-		a.setCountry(country);
-		a.setDst(dst);
-		a.setIata(iata);
-		a.setIcao(icao);
-		a.setLatitude(latitude);
-		a.setLongitude(longitude);
-		a.setName(name);
-		a.setTimezone(timezone);
-		a.setTzDatabase(tzDatabase);
+		a.setAltitude(fAltitude);
+		a.setCity(fCity);
+		a.setCountry(fCountry);
+		a.setDst(fDst);
+		a.setIata(fIata);
+		a.setIcao(fIcao);
+		a.setLatitude(fLatitude);
+		a.setLongitude(fLongitude);
+		a.setName(fName);
+		a.setTimezone(fTimezone);
+		a.setTzDatabase(fTzDatabase);
 		return a;
 	}
 }
