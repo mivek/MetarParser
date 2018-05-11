@@ -34,28 +34,25 @@ public enum CloudQuantity {
 	/**
 	 * Shortcut of the cloud quanity.
 	 */
-	private String shortcut = ""; //$NON-NLS-1$
+	private String fShortcut = ""; //$NON-NLS-1$
 	/**
 	 * The name of the quantity.
 	 */
-	private String name = ""; //$NON-NLS-1$
+	private String fName = ""; //$NON-NLS-1$
 
 	/**
 	 * Constructor.
-	 *
-	 * @param pShortcut
-	 *            a string representing the shortcut.
-	 * @param pName
-	 *            The meaning of the shortcut.
+	 * @param pShortcut a string representing the shortcut.
+	 * @param pName The meaning of the shortcut.
 	 */
 	CloudQuantity(final String pShortcut, final String pName) {
-		this.shortcut = pShortcut;
-		this.name = pName;
+		fShortcut = pShortcut;
+		fName = pName;
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return fName;
 	}
 
 	/**
@@ -64,8 +61,7 @@ public enum CloudQuantity {
 	 * @return a string.
 	 */
 	public String getShortcut() {
-		return this.shortcut;
+		return fShortcut;
 	}
-
 
 }

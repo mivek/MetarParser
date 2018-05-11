@@ -39,7 +39,7 @@ public enum WeatherChangeType {
 	 * @param pName
 	 *            the name of the enumeration
 	 */
-	private WeatherChangeType(final String pShortcut, final String pName) {
+	WeatherChangeType(final String pShortcut, final String pName) {
 		fShortcut = pShortcut;
 		fName = pName;
 	}
