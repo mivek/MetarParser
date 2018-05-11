@@ -49,14 +49,14 @@ public final class Converter {
 
 	/**
 	 * This method converter degrees to direction.
-	 * @param degreesStr a string representing the degrees.
+	 * @param pDegreesStr a string representing the degrees.
 	 * @return A string for the direction.
 	 */
-	public static String degreesToDirection(final String degreesStr) {
+	public static String degreesToDirection(final String pDegreesStr) {
 		double degrees = 0;
 		String res = "";
 		try {
-			degrees = Double.parseDouble(degreesStr);
+			degrees = Double.parseDouble(pDegreesStr);
 		} catch (NumberFormatException e) {
 			return Messages.CONVERTER_VRB;
 		}
@@ -88,61 +88,59 @@ public final class Converter {
 	/**
 	 * Checks if num is between lower and max.
 	 *
-	 * @param num
+	 * @param pNum
 	 *            double to test
-	 * @param lower
+	 * @param pLower
 	 *            the minimum value, included.
-	 * @param max
+	 * @param pMax
 	 *            The maximum value, exluded.
 	 * @return true if num is between lower and max, false otherwise.
 	 */
-	public static boolean isBetween(final double num, final double lower, final double max) {
-		return lower <= num && max > num;
+	public static boolean isBetween(final double pNum, final double pLower, final double pMax) {
+		return pLower <= pNum && pMax > pNum;
 	}
 
 	/**
 	 * Converts a string representing the visibility into a real visibility.
 	 *
-	 * @param input
+	 * @param pInput
 	 *            A string.
 	 * @return a string correctly formatted.
 	 */
-	public static String convertVisibility(final String input) {
-		if (input.equals("9999")) { //$NON-NLS-1$
+	public static String convertVisibility(final String pInput) {
+		if (pInput.equals("9999")) { //$NON-NLS-1$
 			return ">10km"; //$NON-NLS-1$
 		} else {
-			return Integer.parseInt(input) + "m"; //$NON-NLS-1$
+			return Integer.parseInt(pInput) + "m"; //$NON-NLS-1$
 		}
 	}
 
 	/**
 	 * Converts the metar part of temperature into integer.
 	 *
-	 * @param input
-	 *            The metar part of the temperature.
+	 * @param pInput The metar part of the temperature.
 	 * @return an integer of the temperature.
 	 */
-	public static int convertTemperature(final String input) {
-		if (input.startsWith("M")) { //$NON-NLS-1$
-			return -(Integer.parseInt(input.substring(1, 3)));
+	public static int convertTemperature(final String pInput) {
+		if (pInput.startsWith("M")) { //$NON-NLS-1$
+			return -(Integer.parseInt(pInput.substring(1, 3)));
 		} else {
-			return Integer.parseInt(input);
+			return Integer.parseInt(pInput);
 		}
 	}
 
 	/**
 	 * Converts the trend of clouds.
 	 *
-	 * @param input
-	 *            Single character string representing the trend.
+	 * @param pInput Single character string representing the trend.
 	 * @return The signification of the single caracter.
 	 */
-	public static String convertTrend(final String input) {
-		if (input.equals("U")) { //$NON-NLS-1$
+	public static String convertTrend(final String pInput) {
+		if (pInput.equals("U")) { //$NON-NLS-1$
 			return Messages.CONVERTER_U;
-		} else if (input.equals("D")) { //$NON-NLS-1$
+		} else if (pInput.equals("D")) { //$NON-NLS-1$
 			return Messages.CONVERTER_D;
-		} else if (input.equals("N")) { //$NON-NLS-1$
+		} else if (pInput.equals("N")) { //$NON-NLS-1$
 			return Messages.CONVERTER_NSC;
 		}
 		return ""; //$NON-NLS-1$
@@ -152,11 +150,10 @@ public final class Converter {
 	/**
 	 * Converts mercury pressure into pascals.
 	 *
-	 * @param input
-	 *            string of mercury.
+	 * @param pInput string of mercury.
 	 * @return double of the pressure in Pascals.
 	 */
-	public static double mercuryToPascal(final String input) {
-		return (3386 * (Double.parseDouble(input) / 100)) / 100;
+	public static double mercuryToPascal(final String pInput) {
+		return (3386 * (Double.parseDouble(pInput) / 100)) / 100;
 	}
 }
