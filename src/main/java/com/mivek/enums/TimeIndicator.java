@@ -29,7 +29,7 @@ public enum TimeIndicator {
 	 * @param pShortCut the shortcut of the indicator.
 	 * @param pName the name of the indicator.
 	 */
-	private TimeIndicator(final String pShortCut, final String pName) {
+	TimeIndicator(final String pShortCut, final String pName) {
 		fShortCut = pShortCut;
 		fName = pName;
 	}

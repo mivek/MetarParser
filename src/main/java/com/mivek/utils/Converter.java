@@ -162,12 +162,12 @@ public final class Converter {
 	/**
 	 * Converts a string representing a time to a LocalTime.
 	 * Eg: "0830" returns a LocalTime of 08:30.
-	 * @param input the string to convert.
+	 * @param pInput the string to convert.
 	 * @return the corresponding time.
 	 */
-	public static LocalTime stringToTime(final String input) {
-		int hours = Integer.parseInt(input.substring(0, 2));
-		int minutes = Integer.parseInt(input.substring(2));
+	public static LocalTime stringToTime(final String pInput) {
+		int hours = Integer.parseInt(pInput.substring(0, 2));
+		int minutes = Integer.parseInt(pInput.substring(2));
 		return LocalTime.of(hours, minutes);
 	}
 }

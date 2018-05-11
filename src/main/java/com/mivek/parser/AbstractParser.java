@@ -67,7 +67,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
 	 * BECMG shortcut constant.
 	 */
 	protected static final String BECMG = "BECMG";
-	/*
+	/**
 	 * The logger.
 	 */
 	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());

@@ -184,11 +184,11 @@ public final class MetarParser extends AbstractParser<Metar> {
 	}
 
 	/**
-	 * 
-	 * @param pIndex
-	 * @param pTrend
-	 * @param pParts
-	 * @return
+	 * Iterates over an array and parses the trends.
+	 * @param pIndex the starting index.
+	 * @param pTrend the trend to update
+	 * @param pParts an array of strings
+	 * @return the next index to parse.
 	 */
 	protected int iterTrend(final int pIndex, final AbstractMetarTrend pTrend, final String[] pParts) {
 		int i = pIndex + 1;
@@ -200,9 +200,9 @@ public final class MetarParser extends AbstractParser<Metar> {
 	}
 
 	/**
-	 * 
-	 * @param pTrend
-	 * @param pPart
+	 * Parses a string and updates the trend.
+	 * @param pTrend the abstractMetarTrend object to update.
+	 * @param pPart The token to parse.
 	 */
 	protected void processChange(final AbstractMetarTrend pTrend, final String pPart) {
 		if (pPart.startsWith(AT)) {

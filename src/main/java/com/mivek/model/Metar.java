@@ -41,7 +41,7 @@ public class Metar extends AbstractWeatherCode {
 	/**
 	 * List of trends.
 	 */
-	private List<AbstractMetarTrend> trends;
+	private List<AbstractMetarTrend> fTrends;
 
 	/**
 	 * Constructor.
@@ -49,7 +49,7 @@ public class Metar extends AbstractWeatherCode {
 	public Metar() {
 		super();
 		fRunways = new ArrayList<>();
-		trends = new ArrayList<>();
+		fTrends = new ArrayList<>();
 	}
 
 	/**
@@ -149,14 +149,14 @@ public class Metar extends AbstractWeatherCode {
 	 * @param pTrend the trend to add.
 	 */
 	public void addTrend(final AbstractMetarTrend pTrend) {
-		trends.add(Validate.notNull(pTrend));
+		fTrends.add(Validate.notNull(pTrend));
 	}
 
 	/**
 	 * @return the list of trends.
 	 */
 	public List<AbstractMetarTrend> getTrends() {
-		return trends;
+		return fTrends;
 	}
 
 }

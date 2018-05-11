@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.exception;
 
 /**
