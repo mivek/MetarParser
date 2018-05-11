@@ -22,6 +22,13 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 	private static MetarFacade instance = new MetarFacade();
 
 	/**
+	 * Private constructor.
+	 */
+	private MetarFacade() {
+		super(MetarParser.getInstance());
+	}
+
+	/**
 	 * Method to parse a metar.
 	 *
 	 * @param pCode
@@ -35,17 +42,17 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 
 	/**
 	 * Gets the metar of an airport.
-	 * @param icao String icao of the airport
+	 * @param pIcao String icao of the airport
 	 * @return the decoded metar.
 	 * @throws InvalidIcaoException When the icao is not valid.
 	 * @throws IOException When an error occurs.
 	 */
 	@Override
-	public Metar retrieveFromAirport(final String icao) throws InvalidIcaoException, IOException {
-		if (icao.length() != AbstractWeatherCodeFacade.ICAO) {
+	public Metar retrieveFromAirport(final String pIcao) throws InvalidIcaoException, IOException {
+		if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
 			throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
 		}
-		String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + icao.toUpperCase() //$NON-NLS-1$
+		String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
 				+ ".TXT"; //$NON-NLS-1$
 		URL url = new URL(website);
 		URLConnection urlCo = url.openConnection();
@@ -53,13 +60,6 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 		String line = (String) br.lines().toArray()[1];
 		br.close();
 		return MetarParser.getInstance().parse(line);
-	}
-
-	/**
-	 * Private constructor.
-	 */
-	private MetarFacade() {
-		super(MetarParser.getInstance());
 	}
 
 	/**
