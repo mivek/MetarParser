@@ -10,47 +10,47 @@ public class Airport {
 	/**
 	 * Name of the airport.
 	 */
-	private String name;
+	private String fName;
 	/**
 	 * Name of the city.
 	 */
-	private String city;
+	private String fCity;
 	/**
 	 * Country of the airport.
 	 */
-	private Country country;
+	private Country fCountry;
 	/**
 	 * Iata code of the airport.
 	 */
-	private String iata;
+	private String fIata;
 	/**
 	 * Icao code of the airport.
 	 */
-	private String icao;
+	private String fIcao;
 	/**
 	 * Latitude of the airport.
 	 */
-	private double latitude;
+	private double fLatitude;
 	/**
 	 * Longitude of the airport.
 	 */
-	private double longitude;
+	private double fLongitude;
 	/**
 	 * Altitude of the airport.
 	 */
-	private int altitude;
+	private int fAltitude;
 	/**
 	 * Timezone of the airport.
 	 */
-	private String timezone;
+	private String fTimezone;
 	/**
 	 * DST of the airport.
 	 */
-	private String dst;
+	private String fDst;
 	/**
 	 * tzdatabase of the aiport.
 	 */
-	private String tzDatabase;
+	private String fTzDatabase;
 
 	/**
 	 * Getter of name.
@@ -58,7 +58,7 @@ public class Airport {
 	 * @return string name.
 	 */
 	public String getName() {
-		return name;
+		return fName;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class Airport {
 	 *            name of the airport.
 	 */
 	public void setName(final String pName) {
-		this.name = pName;
+		fName = pName;
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class Airport {
 	 * @return string of city.
 	 */
 	public String getCity() {
-		return city;
+		return fCity;
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class Airport {
 	 *            string of the name of the city.
 	 */
 	public void setCity(final String pCity) {
-		this.city = pCity;
+		fCity = pCity;
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Airport {
 	 * @return a country object.
 	 */
 	public Country getCountry() {
-		return country;
+		return fCountry;
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class Airport {
 	 *            The country to set.
 	 */
 	public void setCountry(final Country pCountry) {
-		this.country = pCountry;
+		fCountry = pCountry;
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Airport {
 	 * @return string of iata.
 	 */
 	public String getIata() {
-		return iata;
+		return fIata;
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class Airport {
 	 *            string of iata.
 	 */
 	public void setIata(final String pIata) {
-		this.iata = pIata;
+		fIata = pIata;
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class Airport {
 	 * @return string icao code.
 	 */
 	public String getIcao() {
-		return icao;
+		return fIcao;
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class Airport {
 	 *            string of icao.
 	 */
 	public void setIcao(final String pIcao) {
-		this.icao = pIcao;
+		fIcao = pIcao;
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class Airport {
 	 * @return latitude.
 	 */
 	public double getLatitude() {
-		return latitude;
+		return fLatitude;
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class Airport {
 	 * @return longitude.
 	 */
 	public double getLongitude() {
-		return longitude;
+		return fLongitude;
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class Airport {
 	 * @return altitude.
 	 */
 	public int getAltitude() {
-		return altitude;
+		return fAltitude;
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class Airport {
 	 * @return string of timezone.
 	 */
 	public String getTimezone() {
-		return timezone;
+		return fTimezone;
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class Airport {
 	 *            timezone string to set.
 	 */
 	public void setTimezone(final String pTimezone) {
-		this.timezone = pTimezone;
+		fTimezone = pTimezone;
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class Airport {
 	 * @return string of dst.
 	 */
 	public String getDst() {
-		return dst;
+		return fDst;
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class Airport {
 	 *            the dst to set.
 	 */
 	public void setDst(final String pDst) {
-		this.dst = pDst;
+		fDst = pDst;
 	}
 
 	/**
@@ -218,7 +218,7 @@ public class Airport {
 	 * @return string of tzDatabase.
 	 */
 	public String getTzDatabase() {
-		return tzDatabase;
+		return fTzDatabase;
 	}
 
 	/**
@@ -228,7 +228,7 @@ public class Airport {
 	 *            The tzDatabase to set.
 	 */
 	public void setTzDatabase(final String pTzDatabase) {
-		this.tzDatabase = pTzDatabase;
+		fTzDatabase = pTzDatabase;
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class Airport {
 	 *            Latitude to set.
 	 */
 	public void setLatitude(final double pLatitude) {
-		this.latitude = pLatitude;
+		fLatitude = pLatitude;
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class Airport {
 	 *            to set.
 	 */
 	public void setLongitude(final double pLongitude) {
-		this.longitude = pLongitude;
+		fLongitude = pLongitude;
 	}
 
 	/**
@@ -258,13 +258,13 @@ public class Airport {
 	 *            the altitude to set.
 	 */
 	public void setAltitude(final int pAltitude) {
-		this.altitude = pAltitude;
+		fAltitude = pAltitude;
 	}
 
 	@Override
-	public final boolean equals(final Object obj) {
-		if (obj instanceof Airport) {
-			return this.icao.equals(((Airport) obj).getIcao());
+	public final boolean equals(final Object pObj) {
+		if (pObj instanceof Airport) {
+			return fIcao.equals(((Airport) pObj).getIcao());
 		}
 		return false;
 	}
@@ -272,12 +272,12 @@ public class Airport {
 	@Override
 	public final int hashCode() {
 		int result;
-		result = 31 * icao.hashCode();
+		result = 31 * fIcao.hashCode();
 		return result;
 	}
 
 	@Override
 	public final String toString() {
-		return this.name + " (" + this.icao + ")";
+		return fName + " (" + fIcao + ")";
 	}
 }

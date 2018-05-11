@@ -10,31 +10,31 @@ public class Wind {
 	/**
 	 * Speed of the wind.
 	 */
-	private int speed;
+	private int fSpeed;
 	/**
 	 * Direction of the wind.
 	 */
-	private String direction;
+	private String fDirection;
 	/**
-	 * Direction of the wind
+	 * Direction of the wind.
 	 */
-	private Integer directionDegrees;
+	private Integer fDirectionDegrees;
 	/**
 	 * The speed of the gust.
 	 */
-	private int gust;
+	private int fGust;
 	/**
 	 * The lowest speed of the extreme wind.
 	 */
-	private int extreme1;
+	private int fExtreme1;
 	/**
 	 * The maximum speed of the extreme wind.
 	 */
-	private int extreme2;
+	private int fExtreme2;
 	/**
 	 * The unit of the speed.
 	 */
-	private String unit;
+	private String fUnit;
 
 	/**
 	 * Getter of the speed.
@@ -42,7 +42,7 @@ public class Wind {
 	 * @return the speed.
 	 */
 	public int getSpeed() {
-		return speed;
+		return fSpeed;
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class Wind {
 	 *            the speed to set.
 	 */
 	public void setSpeed(final int pSpeed) {
-		this.speed = pSpeed;
+		fSpeed = pSpeed;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class Wind {
 	 * @return The Direction of the wind.
 	 */
 	public String getDirection() {
-		return direction;
+		return fDirection;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class Wind {
 	 *            the direction to set.
 	 */
 	public void setDirection(final String pDirection) {
-		this.direction = pDirection;
+		fDirection = pDirection;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Wind {
 	 * @return the gust.
 	 */
 	public int getGust() {
-		return gust;
+		return fGust;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Wind {
 	 *            the gust to set.
 	 */
 	public void setGust(final int pGust) {
-		this.gust = pGust;
+		fGust = pGust;
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class Wind {
 	 * @return the lowest extreme speed.
 	 */
 	public int getExtreme1() {
-		return extreme1;
+		return fExtreme1;
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class Wind {
 	 *            the speed to set.
 	 */
 	public void setExtreme1(final int pExtreme1) {
-		this.extreme1 = pExtreme1;
+		fExtreme1 = pExtreme1;
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class Wind {
 	 * @return the speed.
 	 */
 	public int getExtreme2() {
-		return extreme2;
+		return fExtreme2;
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class Wind {
 	 *            the speed to set.
 	 */
 	public void setExtreme2(final int pExtreme2) {
-		this.extreme2 = pExtreme2;
+		fExtreme2 = pExtreme2;
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class Wind {
 	 * @return the unit.
 	 */
 	public String getUnit() {
-		return unit;
+		return fUnit;
 	}
 
 	/**
@@ -147,14 +147,14 @@ public class Wind {
 	 *            The unit to set.
 	 */
 	public void setUnit(final String pUnit) {
-		this.unit = pUnit;
+		fUnit = pUnit;
 	}
 
 	/**
 	 * @return the directionDegrees.
 	 */
 	public Integer getDirectionDegrees() {
-		return directionDegrees;
+		return fDirectionDegrees;
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class Wind {
 	 *            the directionDegrees to set.
 	 */
 	public void setDirectionDegrees(final Integer pDirectionDegrees) {
-		directionDegrees = pDirectionDegrees;
+		fDirectionDegrees = pDirectionDegrees;
 	}
 
 }

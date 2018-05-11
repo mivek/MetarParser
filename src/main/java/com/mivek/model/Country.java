@@ -10,7 +10,7 @@ public class Country {
 	/**
 	 * Name of the country.
 	 */
-	private String name;
+	private String fName;
 
 	/**
 	 * Getter of name.
@@ -18,7 +18,7 @@ public class Country {
 	 * @return the name.
 	 */
 	public String getName() {
-		return this.name;
+		return fName;
 	}
 
 	/**
@@ -28,11 +28,11 @@ public class Country {
 	 *            the name to set.
 	 */
 	public void setName(final String pName) {
-		this.name = pName;
+		fName = pName;
 	}
 
 	@Override
 	public final String toString() {
-		return this.name;
+		return fName;
 	}
 }

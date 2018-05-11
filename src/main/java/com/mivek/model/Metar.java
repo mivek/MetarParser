@@ -13,40 +13,40 @@ public class Metar extends WeatherCode {
 	/**
 	 * Temperature.
 	 */
-	private Integer temperature;
+	private Integer fTemperature;
 	/**
 	 * Dew point.
 	 */
-	private Integer dewPoint;
+	private Integer fDewPoint;
 	/**
 	 * Altimeter.
 	 */
-	private Integer altimeter;
+	private Integer fAltimeter;
 	/**
 	 * Nosig value.
 	 */
-	private boolean nosig;
+	private boolean fNosig;
 	/**
 	 * Auto Value.
 	 */
-	private boolean auto;
+	private boolean fAuto;
 	/**
 	 * List of runways information.
 	 */
-	private List<RunwayInfo> runways;
+	private List<RunwayInfo> fRunways;
 	/**
 	 * Constructor.
 	 */
 	public Metar() {
 		super();
-		runways = new ArrayList<>();
+		fRunways = new ArrayList<>();
 	}
 
 	/**
 	 * @return the temperature
 	 */
 	public Integer getTemperature() {
-		return temperature;
+		return fTemperature;
 	}
 
 	/**
@@ -54,14 +54,14 @@ public class Metar extends WeatherCode {
 	 *            the temperature to set
 	 */
 	public void setTemperature(final Integer pTemperature) {
-		this.temperature = pTemperature;
+		fTemperature = pTemperature;
 	}
 
 	/**
 	 * @return the dewPoint
 	 */
 	public Integer getDewPoint() {
-		return dewPoint;
+		return fDewPoint;
 	}
 
 	/**
@@ -69,14 +69,14 @@ public class Metar extends WeatherCode {
 	 *            the dewPoint to set
 	 */
 	public void setDewPoint(final Integer pDewPoint) {
-		this.dewPoint = pDewPoint;
+		fDewPoint = pDewPoint;
 	}
 
 	/**
 	 * @return the altimeter
 	 */
 	public Integer getAltimeter() {
-		return altimeter;
+		return fAltimeter;
 	}
 
 	/**
@@ -84,31 +84,31 @@ public class Metar extends WeatherCode {
 	 *            the altimeter to set
 	 */
 	public void setAltimeter(final Integer pAltimeter) {
-		this.altimeter = pAltimeter;
+		fAltimeter = pAltimeter;
 	}
 
 	/**
 	 * @return the runways
 	 */
 	public List<RunwayInfo> getRunways() {
-		return runways;
+		return fRunways;
 	}
 
 	/**
 	 * Adds a runway to the list.
 	 *
-	 * @param ri
+	 * @param pRunwayInformation
 	 *            the runway to add.
 	 */
-	public void addRunwayInfo(final RunwayInfo ri) {
-		this.runways.add(ri);
+	public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
+		fRunways.add(pRunwayInformation);
 	}
 
 	/**
 	 * @return the nosig
 	 */
 	public boolean isNosig() {
-		return nosig;
+		return fNosig;
 	}
 
 	/**
@@ -116,14 +116,14 @@ public class Metar extends WeatherCode {
 	 *            the nosig to set
 	 */
 	public void setNosig(final boolean pNosig) {
-		this.nosig = pNosig;
+		fNosig = pNosig;
 	}
 
 	/**
 	 * @return the auto
 	 */
 	public boolean isAuto() {
-		return auto;
+		return fAuto;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Metar extends WeatherCode {
 	 *            the auto to set
 	 */
 	public void setAuto(final boolean pAuto) {
-		this.auto = pAuto;
+		fAuto = pAuto;
 	}
 
 }
