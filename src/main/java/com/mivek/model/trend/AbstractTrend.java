@@ -13,10 +13,9 @@ import com.mivek.model.Wind;
 
 /**
  * Abstract class for trends.
- * @param <WeatherCode> a concrete subclass of {@link com.mivek.model.WeatherCode}
  * @author mivek
  */
-public abstract class AbstractTrend<WeatherCode> {
+public abstract class AbstractTrend {
 	/**
 	 * Type of trend.
 	 */

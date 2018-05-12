@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mivek.enums.WeatherChangeType;
-import com.mivek.model.Metar;
 
 /**
+ * Abstract class for metar's trend.
  * @author mivek
- *
  */
-public abstract class AbstractMetarTrend extends AbstractTrend<Metar> {
+public abstract class AbstractMetarTrend extends AbstractTrend {
 
 	/**
 	 * List containing the times properties of the trend.
