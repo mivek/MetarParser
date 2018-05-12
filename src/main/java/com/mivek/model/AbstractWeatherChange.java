@@ -6,7 +6,6 @@ import com.mivek.enums.WeatherChangeType;
  * Class representing a weather change.
  * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author mivek
- *
  */
 public abstract class AbstractWeatherChange<T extends AbstractValidity> extends AbstractWeatherContainer {
 	/**
@@ -32,9 +31,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
 
 	/**
 	 * Constructor with parameter.
-	 *
-	 * @param pType
-	 *            the type to set.
+	 * @param pType the type to set.
 	 */
 	protected AbstractWeatherChange(final WeatherChangeType pType) {
 		super();
@@ -49,8 +46,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
 	}
 
 	/**
-	 * @param pValidity
-	 *            the validity to set
+	 * @param pValidity the validity to set
 	 */
 	public void setValidity(final T pValidity) {
 		fValidity = pValidity;
@@ -71,8 +67,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
 	}
 
 	/**
-	 * @param pProbability
-	 *            the probability to set
+	 * @param pProbability the probability to set
 	 */
 	public void setProbability(final Integer pProbability) {
 		fProbability = pProbability;
@@ -86,8 +81,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
 	}
 
 	/**
-	 * @param pMaxTemperature
-	 *            the maxTemperature to set
+	 * @param pMaxTemperature the maxTemperature to set
 	 */
 	public void setMaxTemperature(final TemperatureDated pMaxTemperature) {
 		fMaxTemperature = pMaxTemperature;
@@ -101,8 +95,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
 	}
 
 	/**
-	 * @param pMinTemperature
-	 *            the minTemperature to set
+	 * @param pMinTemperature the minTemperature to set
 	 */
 	public void setMinTemperature(final TemperatureDated pMinTemperature) {
 		fMinTemperature = pMinTemperature;

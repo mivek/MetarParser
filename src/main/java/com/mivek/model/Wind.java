@@ -4,7 +4,6 @@ package com.mivek.model;
  * Wind class.
  * TODO Change unit to enumeration class.
  * @author mivek
- *
  */
 public class Wind {
 	/**
@@ -38,7 +37,6 @@ public class Wind {
 
 	/**
 	 * Getter of the speed.
-	 *
 	 * @return the speed.
 	 */
 	public int getSpeed() {
@@ -47,9 +45,7 @@ public class Wind {
 
 	/**
 	 * Setter of the speed.
-	 *
-	 * @param pSpeed
-	 *            the speed to set.
+	 * @param pSpeed the speed to set.
 	 */
 	public void setSpeed(final int pSpeed) {
 		fSpeed = pSpeed;
@@ -57,7 +53,6 @@ public class Wind {
 
 	/**
 	 * Getter of the direction.
-	 *
 	 * @return The Direction of the wind.
 	 */
 	public String getDirection() {
@@ -66,9 +61,7 @@ public class Wind {
 
 	/**
 	 * Setter of the direction of the wind.
-	 *
-	 * @param pDirection
-	 *            the direction to set.
+	 * @param pDirection the direction to set.
 	 */
 	public void setDirection(final String pDirection) {
 		fDirection = pDirection;
@@ -76,7 +69,6 @@ public class Wind {
 
 	/**
 	 * Getter of the gust.
-	 *
 	 * @return the gust.
 	 */
 	public int getGust() {
@@ -85,9 +77,7 @@ public class Wind {
 
 	/**
 	 * Setter of the gust.
-	 *
-	 * @param pGust
-	 *            the gust to set.
+	 * @param pGust the gust to set.
 	 */
 	public void setGust(final int pGust) {
 		fGust = pGust;
@@ -95,7 +85,6 @@ public class Wind {
 
 	/**
 	 * Getter of the lowest extreme wind speed.
-	 *
 	 * @return the lowest extreme speed.
 	 */
 	public int getExtreme1() {
@@ -104,9 +93,7 @@ public class Wind {
 
 	/**
 	 * Setter of extreme1.
-	 *
-	 * @param pExtreme1
-	 *            the speed to set.
+	 * @param pExtreme1 the speed to set.
 	 */
 	public void setExtreme1(final int pExtreme1) {
 		fExtreme1 = pExtreme1;
@@ -114,7 +101,6 @@ public class Wind {
 
 	/**
 	 * Getter of the maximal extreme speed.
-	 *
 	 * @return the speed.
 	 */
 	public int getExtreme2() {
@@ -123,9 +109,7 @@ public class Wind {
 
 	/**
 	 * Setter.
-	 *
-	 * @param pExtreme2
-	 *            the speed to set.
+	 * @param pExtreme2 the speed to set.
 	 */
 	public void setExtreme2(final int pExtreme2) {
 		fExtreme2 = pExtreme2;
@@ -133,7 +117,6 @@ public class Wind {
 
 	/**
 	 * Getter of the unit.
-	 *
 	 * @return the unit.
 	 */
 	public String getUnit() {
@@ -142,9 +125,7 @@ public class Wind {
 
 	/**
 	 * Setter.
-	 *
-	 * @param pUnit
-	 *            The unit to set.
+	 * @param pUnit The unit to set.
 	 */
 	public void setUnit(final String pUnit) {
 		fUnit = pUnit;
@@ -158,8 +139,7 @@ public class Wind {
 	}
 
 	/**
-	 * @param pDirectionDegrees
-	 *            the directionDegrees to set.
+	 * @param pDirectionDegrees the directionDegrees to set.
 	 */
 	public void setDirectionDegrees(final Integer pDirectionDegrees) {
 		fDirectionDegrees = pDirectionDegrees;

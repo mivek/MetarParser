@@ -3,7 +3,6 @@ package com.mivek.model;
 /**
  * Interface for validity objects.
  * @author mivek
- *
  */
 public interface IValidity {
 
@@ -14,8 +13,7 @@ public interface IValidity {
 	Integer getStartDay();
 
 	/**
-	 * @param pStartDay
-	 *            the startDay to set
+	 * @param pStartDay the startDay to set
 	 */
 	void setStartDay(Integer pStartDay);
 
@@ -25,8 +23,7 @@ public interface IValidity {
 	Integer getStartHour();
 
 	/**
-	 * @param pStartHour
-	 *            the startHour to set
+	 * @param pStartHour the startHour to set
 	 */
 	void setStartHour(Integer pStartHour);
 }

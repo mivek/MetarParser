@@ -5,9 +5,7 @@ import java.util.List;
 
 /**
  * Metar class.
- *
  * @author mivek
- *
  */
 public class Metar extends AbstractWeatherCode {
 	/**
@@ -34,6 +32,7 @@ public class Metar extends AbstractWeatherCode {
 	 * List of runways information.
 	 */
 	private List<RunwayInfo> fRunways;
+
 	/**
 	 * Constructor.
 	 */
@@ -50,8 +49,7 @@ public class Metar extends AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pTemperature
-	 *            the temperature to set
+	 * @param pTemperature the temperature to set
 	 */
 	public void setTemperature(final Integer pTemperature) {
 		fTemperature = pTemperature;
@@ -65,8 +63,7 @@ public class Metar extends AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pDewPoint
-	 *            the dewPoint to set
+	 * @param pDewPoint the dewPoint to set
 	 */
 	public void setDewPoint(final Integer pDewPoint) {
 		fDewPoint = pDewPoint;
@@ -80,8 +77,7 @@ public class Metar extends AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pAltimeter
-	 *            the altimeter to set
+	 * @param pAltimeter the altimeter to set
 	 */
 	public void setAltimeter(final Integer pAltimeter) {
 		fAltimeter = pAltimeter;
@@ -96,9 +92,7 @@ public class Metar extends AbstractWeatherCode {
 
 	/**
 	 * Adds a runway to the list.
-	 *
-	 * @param pRunwayInformation
-	 *            the runway to add.
+	 * @param pRunwayInformation the runway to add.
 	 */
 	public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
 		fRunways.add(pRunwayInformation);
@@ -112,8 +106,7 @@ public class Metar extends AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pNosig
-	 *            the nosig to set
+	 * @param pNosig the nosig to set
 	 */
 	public void setNosig(final boolean pNosig) {
 		fNosig = pNosig;
@@ -127,8 +120,7 @@ public class Metar extends AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pAuto
-	 *            the auto to set
+	 * @param pAuto the auto to set
 	 */
 	public void setAuto(final boolean pAuto) {
 		fAuto = pAuto;
