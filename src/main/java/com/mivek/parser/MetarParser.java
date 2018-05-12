@@ -121,17 +121,13 @@ public final class MetarParser extends AbstractParser<Metar> {
 				m.setAltimeter(Integer.parseInt(matches[1]));
 			} else if (Regex.find(CLOUD_REGEX, metarTab[i])) {
 				Cloud c = parseCloud(metarTab[i]);
-				if (c != null) {
-					m.addCloud(c);
-				}
+				m.addCloud(c);
 			} else if (Regex.find(VERTICAL_VISIBILITY, metarTab[i])) {
 				matches = Regex.pregMatch(VERTICAL_VISIBILITY, metarTab[i]);
 				m.setVerticalVisibility(Integer.parseInt(matches[1]));
 			} else {
 				WeatherCondition wc = parseWeatherCondition(metarTab[i]);
-				if (wc != null) {
-					m.addWeatherCondition(wc);
-				}
+				m.addWeatherCondition(wc);
 			}
 		}
 		return m;
