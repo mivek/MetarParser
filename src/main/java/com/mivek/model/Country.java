@@ -2,9 +2,7 @@ package com.mivek.model;
 
 /**
  * Country class.
- *
  * @author mivek
- *
  */
 public class Country {
 	/**
@@ -14,7 +12,6 @@ public class Country {
 
 	/**
 	 * Getter of name.
-	 *
 	 * @return the name.
 	 */
 	public String getName() {
@@ -23,9 +20,7 @@ public class Country {
 
 	/**
 	 * Setter of name.
-	 *
-	 * @param pName
-	 *            the name to set.
+	 * @param pName the name to set.
 	 */
 	public void setName(final String pName) {
 		fName = pName;

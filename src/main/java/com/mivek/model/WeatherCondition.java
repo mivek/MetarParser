@@ -9,9 +9,7 @@ import com.mivek.enums.Phenomenon;
 
 /**
  * Weather condition class.
- *
  * @author mivek
- *
  */
 public class WeatherCondition {
 	/**
@@ -36,7 +34,6 @@ public class WeatherCondition {
 
 	/**
 	 * Getter of intensity.
-	 *
 	 * @return the Intensity of the condition.
 	 */
 	public Intensity getIntensity() {
@@ -45,9 +42,7 @@ public class WeatherCondition {
 
 	/**
 	 * Setter of intensity.
-	 *
-	 * @param pIntensity
-	 *            The intensity to set.
+	 * @param pIntensity The intensity to set.
 	 */
 	public void setIntensity(final Intensity pIntensity) {
 		fIntensity = pIntensity;
@@ -55,7 +50,6 @@ public class WeatherCondition {
 
 	/**
 	 * Getter of the descriptive.
-	 *
 	 * @return the descriptive.
 	 */
 	public Descriptive getDescriptive() {
@@ -64,9 +58,7 @@ public class WeatherCondition {
 
 	/**
 	 * Setter of the descriptive.
-	 *
-	 * @param pDescriptive
-	 *            the descriptive to set.
+	 * @param pDescriptive the descriptive to set.
 	 */
 	public void setDescriptive(final Descriptive pDescriptive) {
 		fDescriptive = pDescriptive;
@@ -74,7 +66,6 @@ public class WeatherCondition {
 
 	/**
 	 * Getter of the phenomenons list.
-	 *
 	 * @return a list of phenomenons.
 	 */
 	public List<Phenomenon> getPhenomenons() {
@@ -83,9 +74,7 @@ public class WeatherCondition {
 
 	/**
 	 * Setter of phenomenons list.
-	 *
-	 * @param pPhenomenons
-	 *            the list to set.
+	 * @param pPhenomenons the list to set.
 	 */
 	public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
 		fPhenomenons = pPhenomenons;
@@ -93,9 +82,7 @@ public class WeatherCondition {
 
 	/**
 	 * Adds a phenomenon to the list.
-	 *
-	 * @param pPhenomenon
-	 *            The Phenomenon to add.
+	 * @param pPhenomenon The Phenomenon to add.
 	 */
 	public void addPhenomenon(final Phenomenon pPhenomenon) {
 		fPhenomenons.add(pPhenomenon);
@@ -103,7 +90,6 @@ public class WeatherCondition {
 
 	/**
 	 * Checks if the weather condition is valid.
-	 *
 	 * @return true if there is at least phenomenon.
 	 */
 	public boolean isValid() {

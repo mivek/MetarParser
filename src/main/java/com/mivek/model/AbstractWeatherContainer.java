@@ -3,11 +3,8 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.Validate;
-
 /**
  * @author mivek
- *
  */
 public abstract class AbstractWeatherContainer {
 	/**
@@ -47,8 +44,7 @@ public abstract class AbstractWeatherContainer {
 	}
 
 	/**
-	 * @param pWind
-	 *            the wind to set
+	 * @param pWind fdsfsdfsd
 	 */
 	public final void setWind(final Wind pWind) {
 		fWind = pWind;
@@ -62,8 +58,7 @@ public abstract class AbstractWeatherContainer {
 	}
 
 	/**
-	 * @param pVisibility
-	 *            the visibility to set
+	 * @param pVisibility the visibility to set
 	 */
 	public final void setVisibility(final Visibility pVisibility) {
 		fVisibility = pVisibility;
@@ -88,7 +83,10 @@ public abstract class AbstractWeatherContainer {
 	 * @param pCloud the cloud to add.
 	 */
 	public void addCloud(final Cloud pCloud) {
-		fClouds.add(Validate.notNull(pCloud));
+		if (pCloud == null) {
+			return;
+		}
+		fClouds.add(pCloud);
 	}
 
 	/**
@@ -96,7 +94,10 @@ public abstract class AbstractWeatherContainer {
 	 * @param pWeatherCondition the weather condition to add.
 	 */
 	public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
-		fWeatherConditions.add(Validate.notNull(pWeatherCondition));
+		if (pWeatherCondition == null) {
+			return;
+		}
+		fWeatherConditions.add(pWeatherCondition);
 	}
 
 	/**

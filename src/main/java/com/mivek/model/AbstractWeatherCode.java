@@ -6,7 +6,6 @@ import java.util.List;
 
 /**
  * @author mivek
- *
  */
 public abstract class AbstractWeatherCode {
 
@@ -63,8 +62,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pDay
-	 *            the day to set
+	 * @param pDay the day to set
 	 */
 	public void setDay(final Integer pDay) {
 		fDay = pDay;
@@ -78,8 +76,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pTime
-	 *            the time to set
+	 * @param pTime the time to set
 	 */
 	public void setTime(final LocalTime pTime) {
 		fTime = pTime;
@@ -93,8 +90,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pAirport
-	 *            the airport to set
+	 * @param pAirport the airport to set
 	 */
 	public void setAirport(final Airport pAirport) {
 		fAirport = pAirport;
@@ -108,8 +104,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pVisibility
-	 *            the visibility to set
+	 * @param pVisibility the visibility to set
 	 */
 	public void setVisibility(final Visibility pVisibility) {
 		fVisibility = pVisibility;
@@ -124,9 +119,7 @@ public abstract class AbstractWeatherCode {
 
 	/**
 	 * Adds a weatherCondition to the list.
-	 *
-	 * @param pWeatherCondition
-	 *            the WeatherCondition to add.
+	 * @param pWeatherCondition the WeatherCondition to add.
 	 */
 	public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
 		fWeatherConditions.add(pWeatherCondition);
@@ -140,8 +133,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pWind
-	 *            the wind to set
+	 * @param pWind the wind to set
 	 */
 	public void setWind(final Wind pWind) {
 		fWind = pWind;
@@ -155,8 +147,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pVerticalVisibility
-	 *            the verticalVisibility to set
+	 * @param pVerticalVisibility the verticalVisibility to set
 	 */
 	public void setVerticalVisibility(final Integer pVerticalVisibility) {
 		fVerticalVisibility = pVerticalVisibility;
@@ -170,8 +161,7 @@ public abstract class AbstractWeatherCode {
 	}
 
 	/**
-	 * @param pMessage
-	 *            the message to set
+	 * @param pMessage the message to set
 	 */
 	public void setMessage(final String pMessage) {
 		fMessage = pMessage;
@@ -186,9 +176,7 @@ public abstract class AbstractWeatherCode {
 
 	/**
 	 * Adds a cloud to the list.
-	 *
-	 * @param pCloud
-	 *            The cloud to add.
+	 * @param pCloud The cloud to add.
 	 */
 	public void addCloud(final Cloud pCloud) {
 		fClouds.add(pCloud);

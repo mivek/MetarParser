@@ -2,9 +2,7 @@ package com.mivek.model;
 
 /**
  * Class representing a validity with start day, start hour and start minutes.
- *
  * @author mivek
- *
  */
 public class BeginningValidity extends AbstractValidity {
 	/**
@@ -20,8 +18,7 @@ public class BeginningValidity extends AbstractValidity {
 	}
 
 	/**
-	 * @param pStartMinutes
-	 *            the startMinutes to set
+	 * @param pStartMinutes the startMinutes to set
 	 */
 	public void setStartMinutes(final Integer pStartMinutes) {
 		fStartMinutes = pStartMinutes;
