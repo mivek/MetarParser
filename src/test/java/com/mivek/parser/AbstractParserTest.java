@@ -163,5 +163,5 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         assertNull(wc);
     }
 
-    abstract AbstractParser<T> getSut();
+    protected abstract AbstractParser<T> getSut();
 }

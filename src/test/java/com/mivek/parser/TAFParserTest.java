@@ -40,7 +40,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 	private static TAFParser fSut;
 
 	@Override
-	TAFParser getSut() {
+    protected TAFParser getSut() {
 		return fSut;
 	}
 

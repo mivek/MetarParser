@@ -39,7 +39,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 	private static MetarParser fSut;
 
 	@Override
-	MetarParser getSut() {
+    protected MetarParser getSut() {
 		return fSut;
 	}
 
