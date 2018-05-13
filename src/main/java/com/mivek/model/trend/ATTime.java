@@ -8,11 +8,11 @@ import com.mivek.enums.TimeIndicator;
  */
 public class ATTime extends AbstractMetarTrendTime {
 
-	/**
-	 * Constructor.
-	 */
-	public ATTime() {
-		super(TimeIndicator.AT);
-	}
+    /**
+     * Constructor.
+     */
+    public ATTime() {
+        super(TimeIndicator.AT);
+    }
 
 }

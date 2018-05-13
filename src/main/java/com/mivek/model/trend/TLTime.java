@@ -8,11 +8,11 @@ import com.mivek.enums.TimeIndicator;
  */
 public final class TLTime extends AbstractMetarTrendTime {
 
-	/**
-	 * Constructor.
-	 */
-	public TLTime() {
-		super(TimeIndicator.TL);
-	}
+    /**
+     * Constructor.
+     */
+    public TLTime() {
+        super(TimeIndicator.TL);
+    }
 
 }

@@ -8,11 +8,11 @@ import com.mivek.enums.TimeIndicator;
  */
 public class FMTime extends AbstractMetarTrendTime {
 
-	/**
-	 * Constructor.
-	 */
-	public FMTime() {
-		super(TimeIndicator.FM);
-	}
+    /**
+     * Constructor.
+     */
+    public FMTime() {
+        super(TimeIndicator.FM);
+    }
 
 }

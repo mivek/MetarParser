@@ -11,42 +11,42 @@ import com.mivek.enums.TimeIndicator;
  * @author mivek
  */
 public abstract class AbstractMetarTrendTime {
-	/**
-	 * Type of trend AT, FM or TL.
-	 */
-	private TimeIndicator fType;
-	/**
-	 * Time of the change.
-	 */
-	private LocalTime fTime;
+    /**
+     * Type of trend AT, FM or TL.
+     */
+    private TimeIndicator fType;
+    /**
+     * Time of the change.
+     */
+    private LocalTime fTime;
 
-	/**
-	 * Constructor.
-	 * @param pType the type of trend.
-	 */
-	protected AbstractMetarTrendTime(final TimeIndicator pType) {
-		fType = pType;
-	}
+    /**
+     * Constructor.
+     * @param pType the type of trend.
+     */
+    protected AbstractMetarTrendTime(final TimeIndicator pType) {
+        fType = pType;
+    }
 
-	/**
-	 * @return the time
-	 */
-	public LocalTime getTime() {
-		return fTime;
-	}
+    /**
+     * @return the time
+     */
+    public LocalTime getTime() {
+        return fTime;
+    }
 
-	/**
-	 * @param pTime the time to set
-	 */
-	public void setTime(final LocalTime pTime) {
-		fTime = Validate.notNull(pTime);
-	}
+    /**
+     * @param pTime the time to set
+     */
+    public void setTime(final LocalTime pTime) {
+        fTime = Validate.notNull(pTime);
+    }
 
-	/**
-	 * @return the type
-	 */
-	public TimeIndicator getType() {
-		return fType;
-	}
+    /**
+     * @return the type
+     */
+    public TimeIndicator getType() {
+        return fType;
+    }
 
 }
