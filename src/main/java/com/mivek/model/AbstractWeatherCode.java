@@ -4,6 +4,7 @@ import java.time.LocalTime;
 
 /**
  * @author mivek
+ * Parent class of {@link Metar} and {@link TAF}.
  */
 public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
 
@@ -24,13 +25,6 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
      * Original message of the metar.
      */
     private String fMessage;
-
-    /**
-     * Default contructor.
-     */
-    public AbstractWeatherCode() {
-        super();
-    }
 
     /**
      * @return the day
