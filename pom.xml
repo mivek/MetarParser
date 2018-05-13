@@ -4,6 +4,7 @@
 	<groupId>com.mivek</groupId>
 	<artifactId>metarParser</artifactId>
 	<name>metarParser</name>
+	<version>1.2</version>
 	<description>This project is a metar parser.
 Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string and retrieve a Metar Object.</description>
 	<url>https://github.com/mivek/MetarParser</url>
@@ -85,5 +86,4 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 			</plugin>
 		</plugins>
 	</build>
-	<version>1.2</version>
 </project>
