@@ -3,135 +3,152 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
+import com.mivek.model.trend.AbstractMetarTrend;
+
 /**
  * Metar class.
- *
  * @author mivek
- *
  */
-public class Metar extends WeatherCode {
-	/**
-	 * Temperature.
-	 */
-	private Integer temperature;
-	/**
-	 * Dew point.
-	 */
-	private Integer dewPoint;
-	/**
-	 * Altimeter.
-	 */
-	private Integer altimeter;
-	/**
-	 * Nosig value.
-	 */
-	private boolean nosig;
-	/**
-	 * Auto Value.
-	 */
-	private boolean auto;
-	/**
-	 * List of runways information.
-	 */
-	private List<RunwayInfo> runways;
-	/**
-	 * Constructor.
-	 */
-	public Metar() {
-		super();
-		runways = new ArrayList<>();
-	}
+public class Metar extends AbstractWeatherCode {
+    /**
+     * Temperature.
+     */
+    private Integer fTemperature;
+    /**
+     * Dew point.
+     */
+    private Integer fDewPoint;
+    /**
+     * Altimeter.
+     */
+    private Integer fAltimeter;
+    /**
+     * Nosig value.
+     */
+    private boolean fNosig;
+    /**
+     * Auto Value.
+     */
+    private boolean fAuto;
+    /**
+     * List of runways information.
+     */
+    private List<RunwayInfo> fRunways;
 
-	/**
-	 * @return the temperature
-	 */
-	public Integer getTemperature() {
-		return temperature;
-	}
+    /**
+     * List of trends.
+     */
+    private List<AbstractMetarTrend> fTrends;
 
-	/**
-	 * @param pTemperature
-	 *            the temperature to set
-	 */
-	public void setTemperature(final Integer pTemperature) {
-		this.temperature = pTemperature;
-	}
+    /**
+     * Constructor.
+     */
+    public Metar() {
+        super();
+        fRunways = new ArrayList<>();
+        fTrends = new ArrayList<>();
+    }
 
-	/**
-	 * @return the dewPoint
-	 */
-	public Integer getDewPoint() {
-		return dewPoint;
-	}
+    /**
+     * @return the temperature
+     */
+    public Integer getTemperature() {
+        return fTemperature;
+    }
 
-	/**
-	 * @param pDewPoint
-	 *            the dewPoint to set
-	 */
-	public void setDewPoint(final Integer pDewPoint) {
-		this.dewPoint = pDewPoint;
-	}
+    /**
+     * @param pTemperature the temperature to set
+     */
+    public void setTemperature(final Integer pTemperature) {
+        fTemperature = pTemperature;
+    }
 
-	/**
-	 * @return the altimeter
-	 */
-	public Integer getAltimeter() {
-		return altimeter;
-	}
+    /**
+     * @return the dewPoint
+     */
+    public Integer getDewPoint() {
+        return fDewPoint;
+    }
 
-	/**
-	 * @param pAltimeter
-	 *            the altimeter to set
-	 */
-	public void setAltimeter(final Integer pAltimeter) {
-		this.altimeter = pAltimeter;
-	}
+    /**
+     * @param pDewPoint the dewPoint to set
+     */
+    public void setDewPoint(final Integer pDewPoint) {
+        fDewPoint = pDewPoint;
+    }
 
-	/**
-	 * @return the runways
-	 */
-	public List<RunwayInfo> getRunways() {
-		return runways;
-	}
+    /**
+     * @return the altimeter
+     */
+    public Integer getAltimeter() {
+        return fAltimeter;
+    }
 
-	/**
-	 * Adds a runway to the list.
-	 *
-	 * @param ri
-	 *            the runway to add.
-	 */
-	public void addRunwayInfo(final RunwayInfo ri) {
-		this.runways.add(ri);
-	}
+    /**
+     * @param pAltimeter the altimeter to set
+     */
+    public void setAltimeter(final Integer pAltimeter) {
+        fAltimeter = pAltimeter;
+    }
 
-	/**
-	 * @return the nosig
-	 */
-	public boolean isNosig() {
-		return nosig;
-	}
+    /**
+     * @return the runways
+     */
+    public List<RunwayInfo> getRunways() {
+        return fRunways;
+    }
 
-	/**
-	 * @param pNosig
-	 *            the nosig to set
-	 */
-	public void setNosig(final boolean pNosig) {
-		this.nosig = pNosig;
-	}
+    /**
+     * Adds a runway to the list.
+     * @param pRunwayInformation the runway to add.
+     */
+    public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
+        fRunways.add(pRunwayInformation);
+    }
 
-	/**
-	 * @return the auto
-	 */
-	public boolean isAuto() {
-		return auto;
-	}
+    /**
+     * @return the nosig
+     */
+    public boolean isNosig() {
+        return fNosig;
+    }
 
-	/**
-	 * @param pAuto
-	 *            the auto to set
-	 */
-	public void setAuto(final boolean pAuto) {
-		this.auto = pAuto;
-	}
+    /**
+     * @param pNosig the nosig to set
+     */
+    public void setNosig(final boolean pNosig) {
+        fNosig = pNosig;
+    }
+
+    /**
+     * @return the auto
+     */
+    public boolean isAuto() {
+        return fAuto;
+    }
+
+    /**
+     * @param pAuto the auto to set
+     */
+    public void setAuto(final boolean pAuto) {
+        fAuto = pAuto;
+    }
+
+    /**
+     * Adds a trend to the list.
+     * @param pTrend the trend to add.
+     */
+    public void addTrend(final AbstractMetarTrend pTrend) {
+        fTrends.add(Validate.notNull(pTrend));
+    }
+
+    /**
+     * @return the list of trends.
+     */
+    public List<AbstractMetarTrend> getTrends() {
+        return fTrends;
+    }
 
 }

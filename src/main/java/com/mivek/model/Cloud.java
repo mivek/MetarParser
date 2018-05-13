@@ -4,93 +4,102 @@ import com.mivek.enums.CloudQuantity;
 import com.mivek.enums.CloudType;
 
 /**
- * Class representing a cloud element.
- * Clouds are composed of :
- * 		a quantity
- * 		a type (optional)
- * 		an altitude (optional)
+ * Class representing a cloud element. Clouds are composed of : a quantity a
+ * type (optional) an height (optional)
  * @author mivek
- *
  */
 public class Cloud {
-	/**
-	 * The altitude of the cloud.
-	 */
-	private int altitude;
-	/**
-	 * The quantity of the cloud.
-	 */
-	private CloudQuantity quantity;
-	/**
-	 * The type of the cloud.
-	 */
-	private CloudType type;
+    /**
+     * The height of the cloud (unit: feet).
+     */
+    private int fHeight;
+    /**
+     * The quantity of the cloud.
+     */
+    private CloudQuantity fQuantity;
+    /**
+     * The type of the cloud.
+     */
+    private CloudType fType;
 
-	/**
-	 * Getter of the altitude.
-	 *
-	 * @return int of altitude.
-	 */
-	public int getAltitude() {
-		return altitude;
-	}
+    /**
+     * Getter of the altitude (unit: meters, approximation).
+     * @return int of altitude.
+     * @deprecated Use {@link #getHeight()}
+     */
+    @Deprecated
+    public int getAltitude() {
+        return fHeight * 30 / 100;
+    }
 
-	/**
-	 * Setter of the altitude.
-	 *
-	 * @param pAltitude
-	 *            The altitude to set.
-	 */
-	public void setAltitude(final int pAltitude) {
-		this.altitude = pAltitude;
-	}
-	/**
-	 * Getter of the quantity.
-	 * @return a CloudQuantity.
-	 */
-	public CloudQuantity getQuantity() {
-		return quantity;
-	}
+    /**
+     * Getter of the height (unit: feet).
+     * @return int of height.
+     */
+    public int getHeight() {
+        return fHeight;
+    }
 
-	/**
-	 * Setter of CloudQuantity.
-	 *
-	 * @param pQuantity
-	 *            The CloudQuantity to set.
-	 */
-	public void setQuantity(final CloudQuantity pQuantity) {
-		this.quantity = pQuantity;
-	}
+    /**
+     * Setter of the height (unit: feet).
+     * @param pHeight The height to set.
+     */
+    public void setHeight(final int pHeight) {
+        fHeight = pHeight;
+    }
 
-	/**
-	 * Getter of type.
-	 *
-	 * @return a CloudType.
-	 */
-	public CloudType getType() {
-		return type;
-	}
+    /**
+     * Setter of the altitude (unit: meters).
+     * @param pAltitude The altitude to set.
+     * @deprecated Use {@link #setHeight(int)}
+     */
+    @Deprecated
+    public void setAltitude(final int pAltitude) {
+        fHeight = pAltitude * 100 / 30;
+    }
 
-	/**
-	 * Setter of cloud type.
-	 *
-	 * @param pType
-	 *            The CloudType to set.
-	 */
-	public void setType(final CloudType pType) {
-		this.type = pType;
-	}
+    /**
+     * Getter of the quantity.
+     * @return a CloudQuantity.
+     */
+    public CloudQuantity getQuantity() {
+        return fQuantity;
+    }
 
-	@Override
-	public final String toString() {
-		String res = this.quantity.toString();
-		if (this.type != null) {
-			res += " " + this.type.toString();
-		}
-		if (this.altitude != 0) {
-			res += " " + this.altitude + "m";
-		}
+    /**
+     * Setter of CloudQuantity.
+     * @param pQuantity The CloudQuantity to set.
+     */
+    public void setQuantity(final CloudQuantity pQuantity) {
+        fQuantity = pQuantity;
+    }
 
-		return res;
-	}
+    /**
+     * Getter of type.
+     * @return a CloudType.
+     */
+    public CloudType getType() {
+        return fType;
+    }
+
+    /**
+     * Setter of cloud type.
+     * @param pType The CloudType to set.
+     */
+    public void setType(final CloudType pType) {
+        fType = pType;
+    }
+
+    @Override
+    public final String toString() {
+        String res = fQuantity.toString();
+        if (fType != null) {
+            res += " " + fType.toString();
+        }
+        if (fHeight != 0) {
+            res += " " + fHeight + "ft (approx " + getAltitude() + "m)";
+        }
+
+        return res;
+    }
 }

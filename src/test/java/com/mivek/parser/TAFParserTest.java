@@ -32,7 +32,10 @@ import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.utils.Converter;
 
+import i18n.Messages;
+
 /**
+ * Test class for {@link TAFParser}
  * @author mivek
  *
  */
@@ -40,9 +43,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	private static TAFParser fSut;
 
-
 	@Override
-	TAFParser getSut() {
+    protected TAFParser getSut() {
 		return fSut;
 	}
 
@@ -101,6 +103,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(change.getClouds(), hasSize(1));
 		assertThat(change.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
 		assertThat(change.getClouds().get(0).getAltitude(), is(12 * 30));
+		assertThat(change.getClouds().get(0).getHeight(), is(1200));
 		assertThat(change.getClouds().get(0).getType(), is(CloudType.TCU));
 	}
 
@@ -222,9 +225,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
 		assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
 		assertThat(res.getTempos().get(1).getClouds(), hasSize(1));
-		assertThat(res.getTempos().get(1).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
-		assertThat(res.getTempos().get(1).getClouds().get(0).getType(), is(nullValue()));
-		assertThat(res.getTempos().get(1).getClouds().get(0).getAltitude(), is(30 * 2));
+        assertThat(res.getTempos().get(1).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
+        assertThat(res.getTempos().get(1).getClouds().get(0).getAltitude(), is(30 * 2));
+        assertThat(res.getTempos().get(1).getClouds().get(0).getHeight(), is(200));
 
 		// Third tempo
 		assertThat(res.getTempos().get(2).getValidity().getStartDay(), is(15));
@@ -245,7 +248,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getTempos().get(2).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
 		assertThat(res.getTempos().get(2).getClouds().get(1).getAltitude(), is(30 * 40));
 		assertThat(res.getTempos().get(2).getClouds().get(1).getType(), nullValue());
-		// assertTHat
 
 		// First BECMG
 		assertThat(res.getBECMGs(), hasSize(1));
@@ -299,19 +301,43 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testParseWithFM() {
-		String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n"
-				+ "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
+        String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n"
+                + "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
 		
-		TAF res = TAFParser.getInstance().parse(message);
-
+        TAF res = fSut.parse(message);
 		assertNotNull(res);
-		assertThat(res.getTempos(), hasSize(1));
+
+		assertThat(res, is(not(nullValue())));
+        assertThat(res.getAirport(), is(fSut.getAirports().get("KLWT")));
+        assertThat(res.getDay(), is(21));
+		assertThat(res.getTime().getHour(), is(11));
+        assertThat(res.getTime().getMinute(), is(20));
+        assertThat(res.getValidity().getStartDay(), is(21));
+		assertThat(res.getValidity().getStartHour(), is(12));
+        assertThat(res.getValidity().getEndDay(), is(22));
+		assertThat(res.getValidity().getEndHour(), is(12));
+
+		// Wind
+		assertThat(res.getWind(), is(not(nullValue())));
+        assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("200")));
+        assertThat(res.getWind().getSpeed(), is(8));
+		assertThat(res.getWind().getGust(), is(0));
+		assertThat(res.getWind().getUnit(), is("KT"));
+
+		// Visibility
+		assertThat(res.getVisibility(), is(not(nullValue())));
+		assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+		assertThat(res.getVisibility().getMinDirection(), is(nullValue()));
+		//Clouds
+		assertThat(res.getClouds(), hasSize(1));
+        assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SKC));
+
 		assertThat(res.getFMs(), hasSize(2));
 		FMChange fm1 = res.getFMs().get(0);
 		assertEquals(21, fm1.getValidity().getStartDay().intValue());
 		assertEquals(23, fm1.getValidity().getStartHour().intValue());
 		assertEquals(0, fm1.getValidity().getStartMinutes().intValue());
-		assertEquals(300, fm1.getWind().getDirectionDegrees());
+        assertEquals(300, fm1.getWind().getDirectionDegrees().intValue());
 		assertEquals(12, fm1.getWind().getSpeed());
 		assertEquals(22, fm1.getWind().getGust());
 		assertThat(fm1.getClouds(), hasSize(2));
@@ -321,10 +347,20 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertEquals(CloudQuantity.SCT, fm1.getClouds().get(1).getQuantity());
 		assertEquals(250 * 30, fm1.getClouds().get(1).getAltitude());
 		assertNull(fm1.getClouds().get(1).getType());
+        // Tempos
+        assertThat(res.getTempos(), hasSize(1));
+        assertThat(res.getTempos().get(0).getValidity().getStartDay(), is(21));
+		assertThat(res.getTempos().get(0).getValidity().getStartHour(), is(12));
+        assertThat(res.getTempos().get(0).getValidity().getEndDay(), is(21));
+        assertThat(res.getTempos().get(0).getValidity().getEndHour(), is(16));
+        assertEquals(Messages.CONVERTER_VRB, res.getTempos().get(0).getWind().getDirection());
+        assertThat(res.getTempos().get(0).getWind().getSpeed(), is(6));
 
 		FMChange fm2 = res.getFMs().get(1);
 		assertEquals(22, fm2.getValidity().getStartDay().intValue());
 		assertEquals(7, fm2.getValidity().getStartHour().intValue());
 		assertEquals(0, fm2.getValidity().getStartMinutes().intValue());
+        assertThat(fm2.getClouds(), hasSize(2));
+
 	}
 }
