@@ -43,7 +43,7 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<defaultGoal>install</defaultGoal>
 		<directory>${basedir}/target</directory>
-		<finalName>${project.artifactId}-${project.artifactId}</finalName>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.jacoco</groupId>
