@@ -2,9 +2,7 @@ package com.mivek.model;
 
 /**
  * Represents an airport.
- *
  * @author mivek
- *
  */
 public class Airport {
 	/**
@@ -54,7 +52,6 @@ public class Airport {
 
 	/**
 	 * Getter of name.
-	 *
 	 * @return string name.
 	 */
 	public String getName() {
@@ -63,9 +60,7 @@ public class Airport {
 
 	/**
 	 * Setter of name.
-	 *
-	 * @param pName
-	 *            name of the airport.
+	 * @param pName name of the airport.
 	 */
 	public void setName(final String pName) {
 		fName = pName;
@@ -73,7 +68,6 @@ public class Airport {
 
 	/**
 	 * Getter of city.
-	 *
 	 * @return string of city.
 	 */
 	public String getCity() {
@@ -82,9 +76,7 @@ public class Airport {
 
 	/**
 	 * Setter of the city.
-	 *
-	 * @param pCity
-	 *            string of the name of the city.
+	 * @param pCity string of the name of the city.
 	 */
 	public void setCity(final String pCity) {
 		fCity = pCity;
@@ -92,7 +84,6 @@ public class Airport {
 
 	/**
 	 * Getter of country.
-	 *
 	 * @return a country object.
 	 */
 	public Country getCountry() {
@@ -101,9 +92,7 @@ public class Airport {
 
 	/**
 	 * Setter of country.
-	 *
-	 * @param pCountry
-	 *            The country to set.
+	 * @param pCountry The country to set.
 	 */
 	public void setCountry(final Country pCountry) {
 		fCountry = pCountry;
@@ -111,7 +100,6 @@ public class Airport {
 
 	/**
 	 * Getter of iata.
-	 *
 	 * @return string of iata.
 	 */
 	public String getIata() {
@@ -120,9 +108,7 @@ public class Airport {
 
 	/**
 	 * Setter of iata code.
-	 *
-	 * @param pIata
-	 *            string of iata.
+	 * @param pIata string of iata.
 	 */
 	public void setIata(final String pIata) {
 		fIata = pIata;
@@ -130,7 +116,6 @@ public class Airport {
 
 	/**
 	 * Getter of Icao code.
-	 *
 	 * @return string icao code.
 	 */
 	public String getIcao() {
@@ -139,9 +124,7 @@ public class Airport {
 
 	/**
 	 * Setter of icao.
-	 *
-	 * @param pIcao
-	 *            string of icao.
+	 * @param pIcao string of icao.
 	 */
 	public void setIcao(final String pIcao) {
 		fIcao = pIcao;
@@ -149,7 +132,6 @@ public class Airport {
 
 	/**
 	 * Getter of latitude.
-	 *
 	 * @return latitude.
 	 */
 	public double getLatitude() {
@@ -158,7 +140,6 @@ public class Airport {
 
 	/**
 	 * Getter of longitude.
-	 *
 	 * @return longitude.
 	 */
 	public double getLongitude() {
@@ -167,7 +148,6 @@ public class Airport {
 
 	/**
 	 * Getter of altitude.
-	 *
 	 * @return altitude.
 	 */
 	public int getAltitude() {
@@ -176,7 +156,6 @@ public class Airport {
 
 	/**
 	 * Getter of timezone.
-	 *
 	 * @return string of timezone.
 	 */
 	public String getTimezone() {
@@ -185,9 +164,7 @@ public class Airport {
 
 	/**
 	 * Setter of timezone.
-	 *
-	 * @param pTimezone
-	 *            timezone string to set.
+	 * @param pTimezone timezone string to set.
 	 */
 	public void setTimezone(final String pTimezone) {
 		fTimezone = pTimezone;
@@ -195,7 +172,6 @@ public class Airport {
 
 	/**
 	 * Getter of DST.
-	 *
 	 * @return string of dst.
 	 */
 	public String getDst() {
@@ -204,9 +180,7 @@ public class Airport {
 
 	/**
 	 * Setter of DST.
-	 *
-	 * @param pDst
-	 *            the dst to set.
+	 * @param pDst the dst to set.
 	 */
 	public void setDst(final String pDst) {
 		fDst = pDst;
@@ -214,7 +188,6 @@ public class Airport {
 
 	/**
 	 * Getter of tzDatabase.
-	 *
 	 * @return string of tzDatabase.
 	 */
 	public String getTzDatabase() {
@@ -223,9 +196,7 @@ public class Airport {
 
 	/**
 	 * Setter of tzDatabase.
-	 *
-	 * @param pTzDatabase
-	 *            The tzDatabase to set.
+	 * @param pTzDatabase The tzDatabase to set.
 	 */
 	public void setTzDatabase(final String pTzDatabase) {
 		fTzDatabase = pTzDatabase;
@@ -233,9 +204,7 @@ public class Airport {
 
 	/**
 	 * Setter of latitude.
-	 *
-	 * @param pLatitude
-	 *            Latitude to set.
+	 * @param pLatitude Latitude to set.
 	 */
 	public void setLatitude(final double pLatitude) {
 		fLatitude = pLatitude;
@@ -243,9 +212,7 @@ public class Airport {
 
 	/**
 	 * Setter of longitude.
-	 *
-	 * @param pLongitude
-	 *            to set.
+	 * @param pLongitude to set.
 	 */
 	public void setLongitude(final double pLongitude) {
 		fLongitude = pLongitude;
@@ -253,9 +220,7 @@ public class Airport {
 
 	/**
 	 * Setter of altitude.
-	 *
-	 * @param pAltitude
-	 *            the altitude to set.
+	 * @param pAltitude the altitude to set.
 	 */
 	public void setAltitude(final int pAltitude) {
 		fAltitude = pAltitude;

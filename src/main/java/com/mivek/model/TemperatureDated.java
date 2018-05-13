@@ -2,9 +2,7 @@ package com.mivek.model;
 
 /**
  * Class representing a temperature with its date.
- *
  * @author mivek
- *
  */
 public class TemperatureDated {
 	/**
@@ -28,8 +26,7 @@ public class TemperatureDated {
 	}
 
 	/**
-	 * @param pTemperature
-	 *            the temperature to set
+	 * @param pTemperature the temperature to set
 	 */
 	public void setTemperature(final Integer pTemperature) {
 		fTemperature = pTemperature;
@@ -43,8 +40,7 @@ public class TemperatureDated {
 	}
 
 	/**
-	 * @param pDay
-	 *            the day to set
+	 * @param pDay the day to set
 	 */
 	public void setDay(final Integer pDay) {
 		fDay = pDay;
@@ -58,8 +54,7 @@ public class TemperatureDated {
 	}
 
 	/**
-	 * @param pHour
-	 *            the hour to set
+	 * @param pHour the hour to set
 	 */
 	public void setHour(final Integer pHour) {
 		fHour = pHour;
