@@ -1,5 +1,7 @@
 package com.mivek.utils;
 
+import java.time.LocalTime;
+
 import i18n.Messages;
 
 /**
@@ -155,5 +157,17 @@ public final class Converter {
 	 */
 	public static double mercuryToPascal(final String pInput) {
 		return (3386 * (Double.parseDouble(pInput) / 100)) / 100;
+	}
+
+	/**
+	 * Converts a string representing a time to a LocalTime.
+	 * Eg: "0830" returns a LocalTime of 08:30.
+	 * @param pInput the string to convert.
+	 * @return the corresponding time.
+	 */
+	public static LocalTime stringToTime(final String pInput) {
+		int hours = Integer.parseInt(pInput.substring(0, 2));
+		int minutes = Integer.parseInt(pInput.substring(2));
+		return LocalTime.of(hours, minutes);
 	}
 }

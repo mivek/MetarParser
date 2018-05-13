@@ -56,6 +56,18 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
 	 */
 	protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
 	/**
+	 * From shortcut constant.
+	 */
+	protected static final String FM = "FM";
+	/**
+	 * Tempo shortcut constant.
+	 */
+	protected static final String TEMPO = "TEMPO";
+	/**
+	 * BECMG shortcut constant.
+	 */
+	protected static final String BECMG = "BECMG";
+	/**
 	 * The logger.
 	 */
 	private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());

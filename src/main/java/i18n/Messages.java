@@ -249,6 +249,15 @@ public final class Messages {
 	 */
 	public static final String PROB = RESOURCE_BUNDLE.getString("WeatherChangeType.PROB");
 	/**
+	 * AT.
+	 */
+	public static final String AT = RESOURCE_BUNDLE.getString("TimeIndicator.AT");
+	/**
+	 * TL.
+	 */
+	public static final String TL = RESOURCE_BUNDLE.getString("TimeIndicator.TL");
+
+	/**
 	 * Private constructor.
 	 */
 	private Messages() {

@@ -3,6 +3,10 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.Validate;
+
+import com.mivek.model.trend.AbstractMetarTrend;
+
 /**
  * Metar class.
  * @author mivek
@@ -34,11 +38,17 @@ public class Metar extends AbstractWeatherCode {
 	private List<RunwayInfo> fRunways;
 
 	/**
+	 * List of trends.
+	 */
+	private List<AbstractMetarTrend> fTrends;
+
+	/**
 	 * Constructor.
 	 */
 	public Metar() {
 		super();
 		fRunways = new ArrayList<>();
+		fTrends = new ArrayList<>();
 	}
 
 	/**
@@ -124,6 +134,21 @@ public class Metar extends AbstractWeatherCode {
 	 */
 	public void setAuto(final boolean pAuto) {
 		fAuto = pAuto;
+	}
+
+	/**
+	 * Adds a trend to the list.
+	 * @param pTrend the trend to add.
+	 */
+	public void addTrend(final AbstractMetarTrend pTrend) {
+		fTrends.add(Validate.notNull(pTrend));
+	}
+
+	/**
+	 * @return the list of trends.
+	 */
+	public List<AbstractMetarTrend> getTrends() {
+		return fTrends;
 	}
 
 }

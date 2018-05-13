@@ -5,17 +5,7 @@ package com.mivek.parser;
 
 import java.time.LocalTime;
 
-import com.mivek.model.AbstractWeatherChange;
-import com.mivek.model.Airport;
-import com.mivek.model.BECMGChange;
-import com.mivek.model.BeginningValidity;
-import com.mivek.model.Cloud;
-import com.mivek.model.FMChange;
-import com.mivek.model.TAF;
-import com.mivek.model.TEMPOChange;
-import com.mivek.model.TemperatureDated;
-import com.mivek.model.Validity;
-import com.mivek.model.Visibility;
+import com.mivek.model.*;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 
@@ -23,13 +13,10 @@ import com.mivek.utils.Regex;
  * @author mivek
  *
  */
-public class TAFParser extends AbstractParser<TAF> {
-	private static final String FM = "FM";
-
-	private static final String TEMPO = "TEMPO";
-
-	private static final String BECMG = "BECMG";
-
+public final class TAFParser extends AbstractParser<TAF> {
+	/**
+	 * Validity regex.
+	 */
 	private static final String REGEX_VALIDITY = "^\\d{4}/\\d{4}$";
 
 	/**
@@ -38,7 +25,7 @@ public class TAFParser extends AbstractParser<TAF> {
 	private static TAFParser instance = new TAFParser();
 
 	/**
-	 * 
+	 * Constructor.
 	 */
 	private TAFParser() {
 		super();
