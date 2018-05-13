@@ -35,7 +35,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
     @Override
     public TAF retrieveFromAirport(final String pIcao) throws InvalidIcaoException, IOException, URISyntaxException {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
-            throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
+            throw new InvalidIcaoException(internationalization.Messages.INVALID_ICAO); // $NON-NLS-1$
         }
         String website = "http://tgftp.nws.noaa.gov/data/forecasts/taf/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
                 + ".TXT"; //$NON-NLS-1$

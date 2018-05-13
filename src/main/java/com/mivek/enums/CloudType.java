@@ -1,6 +1,6 @@
 package com.mivek.enums;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 /**
  * Enumeration for cloud type. The first attribute is the code used in the

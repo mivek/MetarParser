@@ -22,7 +22,7 @@ import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 /**
  * Abstract class for parser.

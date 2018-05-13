@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 public class ConverterTest {
 	

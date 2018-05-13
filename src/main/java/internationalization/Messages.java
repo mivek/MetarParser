@@ -1,4 +1,4 @@
-package i18n;
+package internationalization;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ public final class Messages {
     /**
      * Name of the bundle.
      */
-    private static final String BUNDLE_NAME = "i18n.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
 
     /**
      * Bundle variable.

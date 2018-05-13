@@ -60,7 +60,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertNotNull(ri);
 		assertEquals("26", ri.getName());
 		assertEquals(600, ri.getMinRange());
-		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertEquals("26L", ri.getName());
 		assertEquals(550, ri.getMinRange());
 		assertEquals(700, ri.getMaxRange());
-		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -102,7 +102,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertEquals(30, m.getTime().getMinute());
 		assertNotNull(m.getWind());
 		assertEquals(0, m.getWind().getSpeed());
-		assertEquals(i18n.Messages.CONVERTER_N, m.getWind().getDirection());
+		assertEquals(internationalization.Messages.CONVERTER_N, m.getWind().getDirection());
 		assertEquals("KT", m.getWind().getUnit());
 		assertEquals("350m", m.getVisibility().getMainVisibility());
 		assertThat(m.getRunways(), is(not(empty())));
@@ -110,7 +110,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		// Check if runways are correctly parsed
 		assertEquals("27L", m.getRunways().get(0).getName());
 		assertEquals(375, m.getRunways().get(0).getMinRange());
-		assertEquals(i18n.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
 	}
 
 	@Test

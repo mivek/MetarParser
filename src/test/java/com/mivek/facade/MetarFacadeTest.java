@@ -40,7 +40,7 @@ public class MetarFacadeTest {
 		assertEquals(30, res.getTime().getMinute());
 		// Wind
 		assertNotNull(res.getWind());
-		assertEquals(i18n.Messages.CONVERTER_S, res.getWind().getDirection());
+		assertEquals(internationalization.Messages.CONVERTER_S, res.getWind().getDirection());
 		assertEquals(13, res.getWind().getSpeed());
 		assertEquals("KT", res.getWind().getUnit());
 		// Visibility

@@ -32,7 +32,7 @@ import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.utils.Converter;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 /**
  * Test class for {@link TAFParser}
