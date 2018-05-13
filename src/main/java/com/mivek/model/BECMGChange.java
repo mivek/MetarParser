@@ -8,11 +8,11 @@ import com.mivek.enums.WeatherChangeType;
  */
 public class BECMGChange extends AbstractWeatherChange<Validity> {
 
-	/**
-	 * Constructor.
-	 */
-	public BECMGChange() {
-		super(WeatherChangeType.BECMG);
-	}
+    /**
+     * Constructor.
+     */
+    public BECMGChange() {
+        super(WeatherChangeType.BECMG);
+    }
 
 }

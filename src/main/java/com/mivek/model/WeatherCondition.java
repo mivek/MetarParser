@@ -12,87 +12,87 @@ import com.mivek.enums.Phenomenon;
  * @author mivek
  */
 public class WeatherCondition {
-	/**
-	 * Intensity of the condition (optional).
-	 */
-	private Intensity fIntensity;
-	/**
-	 * Descriptive of the condition (optional).
-	 */
-	private Descriptive fDescriptive;
-	/**
-	 * List of phenomenons of the condition.
-	 */
-	private List<Phenomenon> fPhenomenons;
+    /**
+     * Intensity of the condition (optional).
+     */
+    private Intensity fIntensity;
+    /**
+     * Descriptive of the condition (optional).
+     */
+    private Descriptive fDescriptive;
+    /**
+     * List of phenomenons of the condition.
+     */
+    private List<Phenomenon> fPhenomenons;
 
-	/**
-	 * Constructor.
-	 */
-	public WeatherCondition() {
-		fPhenomenons = new ArrayList<>();
-	}
+    /**
+     * Constructor.
+     */
+    public WeatherCondition() {
+        fPhenomenons = new ArrayList<>();
+    }
 
-	/**
-	 * Getter of intensity.
-	 * @return the Intensity of the condition.
-	 */
-	public Intensity getIntensity() {
-		return fIntensity;
-	}
+    /**
+     * Getter of intensity.
+     * @return the Intensity of the condition.
+     */
+    public Intensity getIntensity() {
+        return fIntensity;
+    }
 
-	/**
-	 * Setter of intensity.
-	 * @param pIntensity The intensity to set.
-	 */
-	public void setIntensity(final Intensity pIntensity) {
-		fIntensity = pIntensity;
-	}
+    /**
+     * Setter of intensity.
+     * @param pIntensity The intensity to set.
+     */
+    public void setIntensity(final Intensity pIntensity) {
+        fIntensity = pIntensity;
+    }
 
-	/**
-	 * Getter of the descriptive.
-	 * @return the descriptive.
-	 */
-	public Descriptive getDescriptive() {
-		return fDescriptive;
-	}
+    /**
+     * Getter of the descriptive.
+     * @return the descriptive.
+     */
+    public Descriptive getDescriptive() {
+        return fDescriptive;
+    }
 
-	/**
-	 * Setter of the descriptive.
-	 * @param pDescriptive the descriptive to set.
-	 */
-	public void setDescriptive(final Descriptive pDescriptive) {
-		fDescriptive = pDescriptive;
-	}
+    /**
+     * Setter of the descriptive.
+     * @param pDescriptive the descriptive to set.
+     */
+    public void setDescriptive(final Descriptive pDescriptive) {
+        fDescriptive = pDescriptive;
+    }
 
-	/**
-	 * Getter of the phenomenons list.
-	 * @return a list of phenomenons.
-	 */
-	public List<Phenomenon> getPhenomenons() {
-		return fPhenomenons;
-	}
+    /**
+     * Getter of the phenomenons list.
+     * @return a list of phenomenons.
+     */
+    public List<Phenomenon> getPhenomenons() {
+        return fPhenomenons;
+    }
 
-	/**
-	 * Setter of phenomenons list.
-	 * @param pPhenomenons the list to set.
-	 */
-	public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
-		fPhenomenons = pPhenomenons;
-	}
+    /**
+     * Setter of phenomenons list.
+     * @param pPhenomenons the list to set.
+     */
+    public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
+        fPhenomenons = pPhenomenons;
+    }
 
-	/**
-	 * Adds a phenomenon to the list.
-	 * @param pPhenomenon The Phenomenon to add.
-	 */
-	public void addPhenomenon(final Phenomenon pPhenomenon) {
-		fPhenomenons.add(pPhenomenon);
-	}
+    /**
+     * Adds a phenomenon to the list.
+     * @param pPhenomenon The Phenomenon to add.
+     */
+    public void addPhenomenon(final Phenomenon pPhenomenon) {
+        fPhenomenons.add(pPhenomenon);
+    }
 
-	/**
-	 * Checks if the weather condition is valid.
-	 * @return true if there is at least phenomenon.
-	 */
-	public boolean isValid() {
-		return !fPhenomenons.isEmpty();
-	}
+    /**
+     * Checks if the weather condition is valid.
+     * @return true if there is at least phenomenon.
+     */
+    public boolean isValid() {
+        return !fPhenomenons.isEmpty();
+    }
 }

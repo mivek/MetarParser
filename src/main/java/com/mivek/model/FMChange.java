@@ -8,11 +8,11 @@ import com.mivek.enums.WeatherChangeType;
  */
 public class FMChange extends AbstractWeatherChange<BeginningValidity> {
 
-	/**
-	 * Constructor.
-	 */
-	public FMChange() {
-		super(WeatherChangeType.FM);
-	}
+    /**
+     * Constructor.
+     */
+    public FMChange() {
+        super(WeatherChangeType.FM);
+    }
 
 }

@@ -6,24 +6,24 @@ package com.mivek.model;
  */
 public interface IValidity {
 
-	/**
-	 * @return the startDay
-	 */
+    /**
+     * @return the startDay
+     */
 
-	Integer getStartDay();
+    Integer getStartDay();
 
-	/**
-	 * @param pStartDay the startDay to set
-	 */
-	void setStartDay(Integer pStartDay);
+    /**
+     * @param pStartDay the startDay to set
+     */
+    void setStartDay(Integer pStartDay);
 
-	/**
-	 * @return the startHour
-	 */
-	Integer getStartHour();
+    /**
+     * @return the startHour
+     */
+    Integer getStartHour();
 
-	/**
-	 * @param pStartHour the startHour to set
-	 */
-	void setStartHour(Integer pStartHour);
+    /**
+     * @param pStartHour the startHour to set
+     */
+    void setStartHour(Integer pStartHour);
 }
