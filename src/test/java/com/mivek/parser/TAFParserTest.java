@@ -99,6 +99,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(change.getClouds(), hasSize(1));
 		assertThat(change.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
 		assertThat(change.getClouds().get(0).getAltitude(), is(12 * 30));
+		assertThat(change.getClouds().get(0).getHeight(), is(1200));
 		assertThat(change.getClouds().get(0).getType(), is(CloudType.TCU));
 	}
 
@@ -208,6 +209,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getTempos().get(1).getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
 		assertThat(res.getTempos().get(1).getClouds().get(0).getType(), is(CloudType.TCU));
 		assertThat(res.getTempos().get(1).getClouds().get(0).getAltitude(), is(30 * 20));
+		assertThat(res.getTempos().get(1).getClouds().get(0).getHeight(), is(2000));
 
 		assertThat(res.getBECMGs(), hasSize(2));
 		// First BECMG.
@@ -219,6 +221,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getBECMGs().get(0).getClouds(), hasSize(1));
 		assertThat(res.getBECMGs().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
 		assertThat(res.getBECMGs().get(0).getClouds().get(0).getAltitude(), is(30 * 20));
+		assertThat(res.getBECMGs().get(0).getClouds().get(0).getHeight(), is(2000));
 		assertThat(res.getBECMGs().get(0).getClouds().get(0).getType(), is(nullValue()));
 		assertThat(res.getBECMGs().get(0).getProbability(), is(40));
 
@@ -282,6 +285,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getClouds(), hasSize(1));
 		assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
 		assertThat(res.getClouds().get(0).getAltitude(), is(30 * 20));
+		assertThat(res.getClouds().get(0).getHeight(), is(2000));
 
 		// Tempos
 		assertThat(res.getTempos(), hasSize(1));
@@ -298,6 +302,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(res.getTempos().get(0).getClouds(), hasSize(1));
 		assertThat(res.getTempos().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
 		assertThat(res.getTempos().get(0).getClouds().get(0).getAltitude(), is(30 * 15));
+		assertThat(res.getTempos().get(0).getClouds().get(0).getHeight(), is(1500));
 		assertThat(res.getTempos().get(0).getClouds().get(0).getType(), is(nullValue()));
 
 		// FMs
@@ -318,6 +323,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		Cloud FMCloud = res.getFMs().get(0).getClouds().get(0);
 		assertThat(FMCloud.getQuantity(), is(CloudQuantity.SCT));
 		assertThat(FMCloud.getAltitude(), is(30 * 25));
+		assertThat(FMCloud.getHeight(), is(2500));
 		assertThat(FMCloud.getType(), is(nullValue()));
 
 		// BECMS Only the second will be checks;
@@ -336,6 +342,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertThat(becmg2.getClouds(), hasSize(1));
 		assertThat(becmg2.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
 		assertThat(becmg2.getClouds().get(0).getAltitude(), is(30 * 35));
+		assertThat(becmg2.getClouds().get(0).getHeight(), is(3500));
 		assertThat(becmg2.getMaxTemperature(), is(not(nullValue())));
 		assertThat(becmg2.getMaxTemperature().getTemperature(), is(15));
 		assertThat(becmg2.getMaxTemperature().getDay(), is(6));

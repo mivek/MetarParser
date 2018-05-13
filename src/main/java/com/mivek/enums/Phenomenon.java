@@ -102,11 +102,11 @@ public enum Phenomenon {
 	/**
 	 * Shortcut of the phenomenon.
 	 */
-	private String shortcut = ""; //$NON-NLS-1$
+	private String fShortcut = ""; //$NON-NLS-1$
 	/**
 	 * Name of the phenomenon.
 	 */
-	private String name = ""; //$NON-NLS-1$
+	private String fName = ""; //$NON-NLS-1$
 
 	/**
 	 * Constructor.
@@ -117,13 +117,13 @@ public enum Phenomenon {
 	 *            string for the name.
 	 */
 	Phenomenon(final String pShortcut, final String pName) {
-		this.shortcut = pShortcut;
-		this.name = pName;
+		fShortcut = pShortcut;
+		fName = pName;
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return fName;
 	}
 
 	/**
@@ -132,6 +132,6 @@ public enum Phenomenon {
 	 * @return string.
 	 */
 	public String getShortcut() {
-		return this.shortcut;
+		return fShortcut;
 	}
 }

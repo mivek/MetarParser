@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalTime;
+
 import org.junit.Test;
 
 import i18n.Messages;
@@ -68,5 +70,14 @@ public class ConverterTest {
 	public void testConvertTemperature() {
 		assertEquals(-10, Converter.convertTemperature("M10"));
 		assertEquals(10, Converter.convertTemperature("10"));
+	}
+
+	@Test
+	public void testStringToTime() {
+		String input = "0830";
+		LocalTime time = Converter.stringToTime(input);
+
+		assertEquals(8, time.getHour());
+		assertEquals(30, time.getMinute());
 	}
 }

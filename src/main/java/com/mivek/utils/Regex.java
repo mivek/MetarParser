@@ -25,14 +25,14 @@ public final class Regex {
 	 * Similar to PHP function preg_match. Search a match between the pattern
 	 * (regex) and the subject (input) and returns an array of string results.
 	 *
-	 * @param regex
+	 * @param pRegex
 	 *            The pattern
-	 * @param input
+	 * @param pInput
 	 *            The subject.
 	 * @return Array of matches.
 	 */
-	public static String[] pregMatch(final String regex, final String input) {
-		init(regex, input);
+	public static String[] pregMatch(final String pRegex, final String pInput) {
+		init(pRegex, pInput);
 
 		if (m.matches()) {
 			int length = m.groupCount() + 1;
@@ -48,28 +48,28 @@ public final class Regex {
 	/**
 	 * Tries to match the regex and the input.
 	 *
-	 * @param regex
+	 * @param pRegex
 	 *            The regex to test.
-	 * @param input
+	 * @param pInput
 	 *            the input to test.
 	 * @return true if the input matches the regex.
 	 */
-	public static boolean find(final String regex, final String input) {
-		init(regex, input);
+	public static boolean find(final String pRegex, final String pInput) {
+		init(pRegex, pInput);
 		return m.find();
 	}
 
 	/**
 	 * Returns the subsequence captured if the regex and the input matches.
 	 *
-	 * @param regex
+	 * @param pRegex
 	 *            The regex to test.
-	 * @param input
+	 * @param pInput
 	 *            The input string
 	 * @return the finding string.
 	 */
-	public static String findString(final String regex, final String input) {
-		if (find(regex, input)) {
+	public static String findString(final String pRegex, final String pInput) {
+		if (find(pRegex, pInput)) {
 			return m.group(1);
 		}
 		return null;
@@ -88,8 +88,14 @@ public final class Regex {
 		m = p.matcher(input);
 	}
 
-	public static boolean match(final String regex, final String input) {
-		init(regex, input);
+	/**
+	 * Checks if the input matches the regex.
+	 * @param pRegex the regex
+	 * @param pInput the input to test
+	 * @return true if the input matches the regex.
+	 */
+	public static boolean match(final String pRegex, final String pInput) {
+		init(pRegex, pInput);
 		return m.matches();
 	}
 }

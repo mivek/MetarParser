@@ -3,10 +3,19 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mivek</groupId>
 	<artifactId>metarParser</artifactId>
-	<version>1.1</version>
 	<name>metarParser</name>
+	<version>1.2</version>
 	<description>This project is a metar parser.
 Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string and retrieve a Metar Object.</description>
+	<url>https://github.com/mivek/MetarParser</url>
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/mivek/MetarParser</url>
+	</ciManagement>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/mivek/MetarParser/issues</url>
+	</issueManagement>
 	<dependencies>
 		<dependency>
 			<groupId>com.opencsv</groupId>
@@ -66,7 +75,7 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 						      <limit implementation="org.jacoco.report.check.Limit">
 						        <counter>INSTRUCTION</counter>
 						        <value>COVEREDRATIO</value>
-						        <minimum>0.82</minimum>
+						        <minimum>0.84</minimum>
 						      </limit>
 						    </limits>
 						  </rule>
@@ -77,14 +86,4 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 			</plugin>
 		</plugins>
 	</build>
-	<url>https://github.com/mivek/MetarParser</url>
-	<ciManagement>
-		<system>travis-ci</system>
-		<url>https://travis-ci.org/mivek/MetarParser</url>
-	</ciManagement>
-	<issueManagement>
-		<system>github</system>
-		<url>https://github.com/mivek/MetarParser/issues</url>
-	</issueManagement>
 </project>
-

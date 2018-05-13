@@ -2,101 +2,87 @@ package com.mivek.model;
 
 /**
  * Runway class.
- *
  * @author mivek
- *
  */
 public class RunwayInfo {
 	/**
 	 * The name of the runway.
 	 */
-	private String name;
+	private String fName;
 	/**
 	 * The minimal visibility on the runway.
 	 */
-	private int minRange;
+	private int fMinRange;
 	/**
 	 * The maximal visibility on the runway.
 	 */
-	private int maxRange;
+	private int fMaxRange;
 	/**
 	 * The tread.
 	 */
-	private String trend;
+	private String fTrend;
 
 	/**
 	 * Getter of name.
-	 *
 	 * @return the name.
 	 */
 	public String getName() {
-		return name;
+		return fName;
 	}
 
 	/**
 	 * Setter of name.
-	 *
-	 * @param pName
-	 *            the name to set.
+	 * @param pName the name to set.
 	 */
 	public void setName(final String pName) {
-		this.name = pName;
+		fName = pName;
 	}
 
 	/**
 	 * Getter of minimal range.
-	 *
 	 * @return the minRange.
 	 */
 	public int getMinRange() {
-		return minRange;
+		return fMinRange;
 	}
 
 	/**
 	 * The setter of minRange.
-	 *
-	 * @param pMinRange
-	 *            the minRange to set.
+	 * @param pMinRange the minRange to set.
 	 */
 	public void setMinRange(final int pMinRange) {
-		this.minRange = pMinRange;
+		fMinRange = pMinRange;
 	}
 
 	/**
 	 * Getter of maxRange.
-	 *
 	 * @return maxRange.
 	 */
 	public int getMaxRange() {
-		return maxRange;
+		return fMaxRange;
 	}
 
 	/**
 	 * Setter of maxRange.
-	 *
-	 * @param pMaxRange
-	 *            the maxrange to set.
+	 * @param pMaxRange the maxrange to set.
 	 */
 	public void setMaxRange(final int pMaxRange) {
-		this.maxRange = pMaxRange;
+		fMaxRange = pMaxRange;
 	}
 
 	/**
 	 * Getter of the trend.
-	 *
 	 * @return the trend.
 	 */
 	public String getTrend() {
-		return trend;
+		return fTrend;
 	}
 
 	/**
 	 * Setter of the trend.
-	 *
-	 * @param pTrend
-	 *            Trend to set.
+	 * @param pTrend Trend to set.
 	 */
 	public void setTrend(final String pTrend) {
-		this.trend = pTrend;
+		fTrend = pTrend;
 	}
 }

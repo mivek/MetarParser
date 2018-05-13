@@ -5,11 +5,9 @@ import java.util.List;
 
 /**
  * Class representing a TAF.
- *
  * @author mivek
- *
  */
-public class TAF extends WeatherCode {
+public class TAF extends AbstractWeatherCode {
 
 	/**
 	 * The valididty of the TAF.
@@ -27,6 +25,7 @@ public class TAF extends WeatherCode {
 	 * List of Tempos changes.
 	 */
 	private List<TEMPOChange> fTempos;
+
 	/**
 	 * Constructor.
 	 */
@@ -45,8 +44,7 @@ public class TAF extends WeatherCode {
 	}
 
 	/**
-	 * @param pValidity
-	 *            the validity to set
+	 * @param pValidity the validity to set
 	 */
 	public void setValidity(final Validity pValidity) {
 		fValidity = pValidity;

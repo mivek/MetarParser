@@ -9,104 +9,90 @@ import com.mivek.enums.Phenomenon;
 
 /**
  * Weather condition class.
- *
  * @author mivek
- *
  */
 public class WeatherCondition {
 	/**
 	 * Intensity of the condition (optional).
 	 */
-	private Intensity intensity;
+	private Intensity fIntensity;
 	/**
 	 * Descriptive of the condition (optional).
 	 */
-	private Descriptive descriptive;
+	private Descriptive fDescriptive;
 	/**
 	 * List of phenomenons of the condition.
 	 */
-	private List<Phenomenon> phenomenons;
+	private List<Phenomenon> fPhenomenons;
 
 	/**
 	 * Constructor.
 	 */
 	public WeatherCondition() {
-		phenomenons = new ArrayList<>();
+		fPhenomenons = new ArrayList<>();
 	}
 
 	/**
 	 * Getter of intensity.
-	 *
 	 * @return the Intensity of the condition.
 	 */
 	public Intensity getIntensity() {
-		return intensity;
+		return fIntensity;
 	}
 
 	/**
 	 * Setter of intensity.
-	 *
-	 * @param pIntensity
-	 *            The intensity to set.
+	 * @param pIntensity The intensity to set.
 	 */
 	public void setIntensity(final Intensity pIntensity) {
-		this.intensity = pIntensity;
+		fIntensity = pIntensity;
 	}
 
 	/**
 	 * Getter of the descriptive.
-	 *
 	 * @return the descriptive.
 	 */
 	public Descriptive getDescriptive() {
-		return descriptive;
+		return fDescriptive;
 	}
 
 	/**
 	 * Setter of the descriptive.
-	 *
-	 * @param pDescriptive
-	 *            the descriptive to set.
+	 * @param pDescriptive the descriptive to set.
 	 */
 	public void setDescriptive(final Descriptive pDescriptive) {
-		this.descriptive = pDescriptive;
+		fDescriptive = pDescriptive;
 	}
 
 	/**
 	 * Getter of the phenomenons list.
-	 *
 	 * @return a list of phenomenons.
 	 */
 	public List<Phenomenon> getPhenomenons() {
-		return phenomenons;
+		return fPhenomenons;
 	}
 
 	/**
 	 * Setter of phenomenons list.
-	 *
-	 * @param pPhenomenons
-	 *            the list to set.
+	 * @param pPhenomenons the list to set.
 	 */
 	public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
-		this.phenomenons = pPhenomenons;
+		fPhenomenons = pPhenomenons;
 	}
 
 	/**
 	 * Adds a phenomenon to the list.
-	 *
-	 * @param p
-	 *            The Phenomenon to add.
+	 * @param pPhenomenon The Phenomenon to add.
 	 */
-	public void addPhenomenon(final Phenomenon p) {
-		this.phenomenons.add(p);
+	public void addPhenomenon(final Phenomenon pPhenomenon) {
+		fPhenomenons.add(pPhenomenon);
 	}
 
 	/**
 	 * Checks if the weather condition is valid.
-	 *
 	 * @return true if there is at least phenomenon.
 	 */
 	public boolean isValid() {
-		return !phenomenons.isEmpty();
+		return !fPhenomenons.isEmpty();
 	}
 }

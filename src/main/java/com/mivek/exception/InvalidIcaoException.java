@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mivek.exception;
 
 /**
@@ -41,16 +38,4 @@ public final class InvalidIcaoException extends Exception {
 	public InvalidIcaoException(final String pMessage, final Throwable pCause) {
 		super(pMessage, pCause);
 	}
-
-	/**
-	 * @param pMessage the message.
-	 * @param pCause the cause.
-	 * @param pEnableSuppression
-	 * @param pWritableStackTrace
-	 */
-	public InvalidIcaoException(String pMessage, Throwable pCause, boolean pEnableSuppression,
-			boolean pWritableStackTrace) {
-		super(pMessage, pCause, pEnableSuppression, pWritableStackTrace);
-	}
-
 }

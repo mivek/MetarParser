@@ -2,9 +2,7 @@ package com.mivek.model;
 
 /**
  * Abstract class for the validity of a TAF.
- *
  * @author mivek
- *
  */
 public abstract class AbstractValidity implements IValidity {
 	/**
@@ -15,7 +13,9 @@ public abstract class AbstractValidity implements IValidity {
 	 * Beginning hour of the taf's validity.
 	 */
 	private Integer fStartHour;
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.mivek.model.IValidity#getStartDay()
 	 */
 	@Override
@@ -23,7 +23,8 @@ public abstract class AbstractValidity implements IValidity {
 		return fStartDay;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.mivek.model.IValidity#setStartDay(java.lang.Integer)
 	 */
 	@Override
@@ -31,7 +32,8 @@ public abstract class AbstractValidity implements IValidity {
 		fStartDay = pStartDay;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.mivek.model.IValidity#getStartHour()
 	 */
 	@Override
@@ -39,7 +41,8 @@ public abstract class AbstractValidity implements IValidity {
 		return fStartHour;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * @see com.mivek.model.IValidity#setStartHour(java.lang.Integer)
 	 */
 	@Override
