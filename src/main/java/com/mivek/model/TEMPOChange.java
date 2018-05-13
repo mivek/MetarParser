@@ -7,11 +7,11 @@ import com.mivek.enums.WeatherChangeType;
  * @author mivek
  */
 public final class TEMPOChange extends AbstractWeatherChange<Validity> {
-	/**
-	 * Default constructor.
-	 */
-	public TEMPOChange() {
-		super(WeatherChangeType.TEMPO);
-	}
+    /**
+     * Default constructor.
+     */
+    public TEMPOChange() {
+        super(WeatherChangeType.TEMPO);
+    }
 
 }

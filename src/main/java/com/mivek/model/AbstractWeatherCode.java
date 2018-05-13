@@ -7,84 +7,84 @@ import java.time.LocalTime;
  */
 public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
 
-	/**
-	 * Integer for the day of the metar.
-	 */
-	private Integer fDay;
-	/**
-	 * Time of the metar.
-	 */
-	private LocalTime fTime;
-	/**
-	 * Airport of the metar.
-	 */
-	private Airport fAirport;
+    /**
+     * Integer for the day of the metar.
+     */
+    private Integer fDay;
+    /**
+     * Time of the metar.
+     */
+    private LocalTime fTime;
+    /**
+     * Airport of the metar.
+     */
+    private Airport fAirport;
 
-	/**
-	 * Original message of the metar.
-	 */
-	private String fMessage;
+    /**
+     * Original message of the metar.
+     */
+    private String fMessage;
 
-	/**
-	 * Default contructor.
-	 */
-	public AbstractWeatherCode() {
-		super();
-	}
+    /**
+     * Default contructor.
+     */
+    public AbstractWeatherCode() {
+        super();
+    }
 
-	/**
-	 * @return the day
-	 */
-	public Integer getDay() {
-		return fDay;
-	}
+    /**
+     * @return the day
+     */
+    public Integer getDay() {
+        return fDay;
+    }
 
-	/**
-	 * @param pDay the day to set
-	 */
-	public void setDay(final Integer pDay) {
-		fDay = pDay;
-	}
+    /**
+     * @param pDay the day to set
+     */
+    public void setDay(final Integer pDay) {
+        fDay = pDay;
+    }
 
-	/**
-	 * @return the time
-	 */
-	public LocalTime getTime() {
-		return fTime;
-	}
+    /**
+     * @return the time
+     */
+    public LocalTime getTime() {
+        return fTime;
+    }
 
-	/**
-	 * @param pTime the time to set
-	 */
-	public void setTime(final LocalTime pTime) {
-		fTime = pTime;
-	}
+    /**
+     * @param pTime the time to set
+     */
+    public void setTime(final LocalTime pTime) {
+        fTime = pTime;
+    }
 
-	/**
-	 * @return the airport
-	 */
-	public Airport getAirport() {
-		return fAirport;
-	}
+    /**
+     * @return the airport
+     */
+    public Airport getAirport() {
+        return fAirport;
+    }
 
-	/**
-	 * @param pAirport the airport to set
-	 */
-	public void setAirport(final Airport pAirport) {
-		fAirport = pAirport;
-	}
+    /**
+     * @param pAirport the airport to set
+     */
+    public void setAirport(final Airport pAirport) {
+        fAirport = pAirport;
+    }
 
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return fMessage;
-	}
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return fMessage;
+    }
 
-	/**
-	 * @param pMessage the message to set
-	 */
-	public void setMessage(final String pMessage) {
-		fMessage = pMessage;
-	}
+    /**
+     * @param pMessage the message to set
+     */
+    public void setMessage(final String pMessage) {
+        fMessage = pMessage;
+    }
 }
