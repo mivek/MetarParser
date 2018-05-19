@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
+import com.mivek.model.trend.PROBTafTrend;
 import com.mivek.model.trend.TEMPOTafTrend;
 
 /**
@@ -31,7 +32,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * List of probability changes.
      */
-    private List<PROBChange> fProbs;
+    private List<PROBTafTrend> fProbs;
     /**
      * Probability of the metar.
      */
@@ -79,7 +80,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the probs
      */
-    public List<PROBChange> getProbs() {
+    public List<PROBTafTrend> getProbs() {
         return fProbs;
     }
 
@@ -95,7 +96,7 @@ public class TAF extends AbstractWeatherCode {
      * Adds a PROB Change to the list.
      * @param pChange the change to add.
      */
-    public void addProb(final PROBChange pChange) {
+    public void addProb(final PROBTafTrend pChange) {
         fProbs.add(pChange);
     }
 
