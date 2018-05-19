@@ -92,7 +92,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.mivek.model.trend.AbstractTafTrendject="metarParser" 
+  <class id="11" language="java" name="com.mivek.model.trend.AbstractTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/AbstractTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="627" y="1116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -101,8 +101,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.mivek.model.trend.BECMGChange" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/BECMGChange.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="12" language="java" ncom.mivek.model.trend.BECMGTafTrendafTrend" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/BECMGTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="415" y="949"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

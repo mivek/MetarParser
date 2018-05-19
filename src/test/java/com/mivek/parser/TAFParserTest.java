@@ -27,7 +27,7 @@ import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.trend.AbstractTafTrend;
-import com.mivek.model.trend.BECMGChange;
+import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMChange;
 import com.mivek.model.trend.TEMPOChange;
 import com.mivek.utils.Converter;
@@ -66,7 +66,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithTX() {
-		AbstractTafTrend<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGTafTrend();
 		String part = "TX15/0612Z";
 		fSut.processGeneralChanges(change, part);
 
@@ -81,7 +81,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithTN() {
-		AbstractTafTrend<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGTafTrend();
 		String part = "TN01/0612Z";
 		fSut.processGeneralChanges(change, part);
 
@@ -96,7 +96,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testProcessGeneralChangesCloudValid() {
-		AbstractTafTrend<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGTafTrend();
 		String part = "SCT012TCU";
 		fSut.processGeneralChanges(change, part);
 
@@ -109,7 +109,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testProcessGeneralChangesCloudNull() {
-		AbstractTafTrend<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGTafTrend();
 		String part = "NSW";
 		fSut.processGeneralChanges(change, part);
 
@@ -251,7 +251,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 		// First BECMG
 		assertThat(res.getBECMGs(), hasSize(1));
-		BECMGChange becmg = res.getBECMGs().get(0);
+		BECMGTafTrend becmg = res.getBECMGs().get(0);
 		assertEquals(15, becmg.getValidity().getStartDay().intValue());
 		assertEquals(20, becmg.getValidity().getStartHour().intValue());
 		assertEquals(15, becmg.getValidity().getEndDay().intValue());

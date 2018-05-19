@@ -3,7 +3,7 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mivek.model.trend.BECMGChange;
+import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMChange;
 import com.mivek.model.trend.TEMPOChange;
 
@@ -19,7 +19,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * List of BECMG changes.
      */
-    private List<BECMGChange> fBECMGs;
+    private List<BECMGTafTrend> fBECMGs;
     /**
      * List of From changes.
      */
@@ -65,7 +65,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the bECMGs
      */
-    public List<BECMGChange> getBECMGs() {
+    public List<BECMGTafTrend> getBECMGs() {
         return fBECMGs;
     }
 
@@ -118,7 +118,7 @@ public class TAF extends AbstractWeatherCode {
      * Adds a BECMG to the list.
      * @param pChange the change to add.
      */
-    public void addBECMG(final BECMGChange pChange) {
+    public void addBECMG(final BECMGTafTrend pChange) {
         fBECMGs.add(pChange);
     }
 

@@ -12,7 +12,7 @@ import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.trend.AbstractTafTrend;
-import com.mivek.model.trend.BECMGChange;
+import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMChange;
 import com.mivek.model.trend.TEMPOChange;
 import com.mivek.utils.Converter;
@@ -141,7 +141,7 @@ public final class TAFParser extends AbstractParser<TAF> {
             // Split the line.
             String[] parts = lines[j].split(" ");
             if (parts[0].equals(BECMG)) {
-                BECMGChange change = new BECMGChange();
+                BECMGTafTrend change = new BECMGTafTrend();
                 iterChanges(1, parts, change);
                 taf.addBECMG(change);
             } else if (parts[0].equals(TEMPO)) {
