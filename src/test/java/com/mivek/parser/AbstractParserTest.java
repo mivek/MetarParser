@@ -19,6 +19,7 @@ import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.Cloud;
+import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 
@@ -168,6 +169,15 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         String message = "LLLL 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
 
         assertNull(getSut().parse(message));
+    }
+
+    @Test
+    public void testParseMinimalVisibility() {
+        Visibility v = new Visibility();
+        String code = "1100w";
+        getSut().parseMinimalVisibility(v, code);
+        assertEquals(1100, v.getMinVisibility());
+        assertEquals("w", v.getMinDirection());
     }
 
     protected abstract AbstractParser<T> getSut();

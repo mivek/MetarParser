@@ -188,7 +188,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected void parseMinimalVisibility(final Visibility pVisibility, final String pVisibilityPart) {
         String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pVisibilityPart);
-        pVisibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
+        pVisibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
         pVisibility.setMinDirection(matches[1].substring(4));
     }
 
