@@ -65,8 +65,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.mivek.model.AbstractValidity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/AbstractValidity.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="com.mivek.model.trend.validity.AbstractValidity" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/AbstractValidity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="94" width="117" x="734" y="597"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -74,8 +75,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.mivek.model.Validity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Validity.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="com.mivek.model.trend.validity.Validity" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/Validity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="674" y="780"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -83,8 +84,9 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.mivek.model.BeginningValidity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/BeginningValidity.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="com.mivek.model.trend.validity.BeginningValidity" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/BeginningValidity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="920" y="799"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -110,7 +112,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mivek.model.trend.TEMPOTafTrendnd" project="metarParser" 
+  <class id="13" language="java" name="com.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="592" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

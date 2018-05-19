@@ -1,8 +1,8 @@
 package com.mivek.model.trend;
 
 import com.mivek.enums.WeatherChangeType;
-import com.mivek.model.AbstractValidity;
 import com.mivek.model.TemperatureDated;
+import com.mivek.model.trend.validity.AbstractValidity;
 
 /**
  * Class representing a weather change.

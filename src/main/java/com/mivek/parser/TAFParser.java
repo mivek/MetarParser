@@ -3,11 +3,9 @@ package com.mivek.parser;
 import java.time.LocalTime;
 
 import com.mivek.model.Airport;
-import com.mivek.model.BeginningValidity;
 import com.mivek.model.Cloud;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
-import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.trend.AbstractTafTrend;
@@ -15,6 +13,8 @@ import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.PROBTafTrend;
 import com.mivek.model.trend.TEMPOTafTrend;
+import com.mivek.model.trend.validity.BeginningValidity;
+import com.mivek.model.trend.validity.Validity;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 

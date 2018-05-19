@@ -7,6 +7,7 @@ import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.PROBTafTrend;
 import com.mivek.model.trend.TEMPOTafTrend;
+import com.mivek.model.trend.validity.Validity;
 
 /**
  * Class representing a TAF.

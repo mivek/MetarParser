@@ -11,12 +11,12 @@ import com.mivek.model.RunwayInfo;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
-import com.mivek.model.trend.ATTime;
 import com.mivek.model.trend.AbstractMetarTrend;
 import com.mivek.model.trend.BECMGMetarTrend;
-import com.mivek.model.trend.FMTime;
 import com.mivek.model.trend.TEMPOMetarTrend;
-import com.mivek.model.trend.TLTime;
+import com.mivek.model.trend.validity.ATTime;
+import com.mivek.model.trend.validity.FMTime;
+import com.mivek.model.trend.validity.TLTime;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 

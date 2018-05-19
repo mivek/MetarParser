@@ -22,14 +22,14 @@ import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
-import com.mivek.model.BeginningValidity;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
-import com.mivek.model.Validity;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.TEMPOTafTrend;
+import com.mivek.model.trend.validity.BeginningValidity;
+import com.mivek.model.trend.validity.Validity;
 import com.mivek.utils.Converter;
 
 import internationalization.Messages;

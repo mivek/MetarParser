@@ -20,8 +20,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.mivek.model.trend.AbstractMetarTrendTime" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/AbstractMetarTrendTime.java" binary="false" 
+  <class id="3" language="java" name="com.mivek.model.trend.validity.AbstractMetarTrendTime" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/AbstractMetarTrendTime.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="607" y="312"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -30,8 +30,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.mivek.model.trend.ATTime" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/ATTime.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="com.mivek.model.trend.validity.ATTime" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/ATTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="884" y="268"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -39,8 +39,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.mivek.model.trend.FMTime" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/FMTime.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="com.mivek.model.trend.validity.FMTime" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/FMTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="887" y="353"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -48,8 +48,8 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.mivek.model.trend.TLTime" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/TLTime.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="com.mivek.model.trend.validity.TLTime" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/validity/TLTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="872" y="149"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -79,37 +79,37 @@
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="2"/>  
   </generalization>  
-  <generalization id="10">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="2"/>  
-  </generalization>  
-  <generalization id="11">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="12">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="14">    
+  <association id="10">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="15" name="fTimes">        
+      <attribute id="11" name="fTimes">        
         <position height="0" width="0" x="288" y="-394"/>      
       </attribute>      
-      <multiplicity id="16" minimum="0" maximum="2147483647">        
+      <multiplicity id="12" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="288" y="-394"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="17">    
+  <generalization id="13">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="15">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
   </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
