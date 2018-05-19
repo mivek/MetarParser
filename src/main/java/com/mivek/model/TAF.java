@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mivek.model.trend.BECMGTafTrend;
-import com.mivek.model.trend.FMChange;
+import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.TEMPOChange;
 
 /**
@@ -23,7 +23,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * List of From changes.
      */
-    private List<FMChange> fFMs;
+    private List<FMTafTrend> fFMs;
     /**
      * List of Tempos changes.
      */
@@ -72,7 +72,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the fMs
      */
-    public List<FMChange> getFMs() {
+    public List<FMTafTrend> getFMs() {
         return fFMs;
     }
 
@@ -126,7 +126,7 @@ public class TAF extends AbstractWeatherCode {
      * Adds a FM change to the list.
      * @param pChange the change to add.
      */
-    public void addFM(final FMChange pChange) {
+    public void addFM(final FMTafTrend pChange) {
         fFMs.add(pChange);
     }
 

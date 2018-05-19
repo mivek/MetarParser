@@ -28,7 +28,7 @@ import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
-import com.mivek.model.trend.FMChange;
+import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.TEMPOChange;
 import com.mivek.utils.Converter;
 
@@ -333,7 +333,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SKC));
 
 		assertThat(res.getFMs(), hasSize(2));
-		FMChange fm1 = res.getFMs().get(0);
+		FMTafTrend fm1 = res.getFMs().get(0);
 		assertEquals(21, fm1.getValidity().getStartDay().intValue());
 		assertEquals(23, fm1.getValidity().getStartHour().intValue());
 		assertEquals(0, fm1.getValidity().getStartMinutes().intValue());
@@ -356,7 +356,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(Messages.CONVERTER_VRB, res.getTempos().get(0).getWind().getDirection());
         assertThat(res.getTempos().get(0).getWind().getSpeed(), is(6));
 
-		FMChange fm2 = res.getFMs().get(1);
+		FMTafTrend fm2 = res.getFMs().get(1);
 		assertEquals(22, fm2.getValidity().getStartDay().intValue());
 		assertEquals(7, fm2.getValidity().getStartHour().intValue());
 		assertEquals(0, fm2.getValidity().getStartMinutes().intValue());

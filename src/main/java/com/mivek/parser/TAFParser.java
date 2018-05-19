@@ -13,7 +13,7 @@ import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
-import com.mivek.model.trend.FMChange;
+import com.mivek.model.trend.FMTafTrend;
 import com.mivek.model.trend.TEMPOChange;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
@@ -149,7 +149,7 @@ public final class TAFParser extends AbstractParser<TAF> {
                 iterChanges(1, parts, change);
                 taf.addTempo(change);
             } else if (parts[0].startsWith(FM)) {
-                FMChange change = new FMChange();
+                FMTafTrend change = new FMTafTrend();
                 change.setValidity(parseBasicValidity(parts[0]));
                 for (int k = 1; k < parts.length; k++) {
                     processGeneralChanges(change, parts[k]);
@@ -225,7 +225,7 @@ public final class TAFParser extends AbstractParser<TAF> {
     }
 
     /**
-     * Parses the validity of a {@link FMChange} object.
+     * Parses the validity of a {@link FMTafTrend} object.
      * @param pValidity the string to parse
      * @return a {@link BeginningValidity} object.
      */

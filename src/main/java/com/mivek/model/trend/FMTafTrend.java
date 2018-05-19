@@ -7,12 +7,12 @@ import com.mivek.model.BeginningValidity;
  * Class representing From Changes.
  * @author mivek
  */
-public class FMChange extends AbstractTafTrend<BeginningValidity> {
+public class FMTafTrend extends AbstractTafTrend<BeginningValidity> {
 
     /**
      * Constructor.
      */
-    public FMChange() {
+    public FMTafTrend() {
         super(WeatherChangeType.FM);
     }
 
