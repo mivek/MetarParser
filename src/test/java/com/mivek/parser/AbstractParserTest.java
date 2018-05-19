@@ -163,5 +163,12 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         assertNull(wc);
     }
 
+    @Test
+    public void testParseWithoutAirport() {
+        String message = "LLLL 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
+
+        assertNull(getSut().parse(message));
+    }
+
     protected abstract AbstractParser<T> getSut();
 }

@@ -1,7 +1,5 @@
 package com.mivek.parser;
 
-import java.time.LocalTime;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.mivek.model.Airport;
@@ -91,11 +89,7 @@ public final class MetarParser extends AbstractParser<Metar> {
 
         m.setAirport(airport);
         m.setMessage(pMetarCode);
-        m.setDay(Integer.parseInt(metarTab[1].substring(0, 2)));
-        int hours = Integer.parseInt(metarTab[1].substring(2, 4));
-        int minutes = Integer.parseInt(metarTab[1].substring(4, 6));
-        LocalTime t = LocalTime.of(hours, minutes);
-        m.setTime(t);
+        parseDeliveryTime(m, metarTab[1]);
         Visibility visibility = new Visibility();
         m.setVisibility(visibility);
         int metarTabLength = metarTab.length;
@@ -105,16 +99,12 @@ public final class MetarParser extends AbstractParser<Metar> {
                 Wind wind = parseWind(metarTab[i]);
                 m.setWind(wind);
             } else if (Regex.find(WIND_EXTREME_REGEX, metarTab[i])) {
-                matches = Regex.pregMatch(WIND_EXTREME_REGEX, metarTab[i]);
-                m.getWind().setExtreme1(Integer.parseInt(matches[1]));
-                m.getWind().setExtreme2(Integer.parseInt(matches[2]));
+                parseExtremeWind(m.getWind(), metarTab[i]);
             } else if (Regex.find(MAIN_VISIBILITY_REGEX, metarTab[i])) {
                 matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, metarTab[i]);
                 visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
             } else if (Regex.find(MIN_VISIBILITY_REGEX, metarTab[i])) {
-                matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, metarTab[i]);
-                visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
-                visibility.setMinDirection(matches[1].substring(4));
+                parseMinimalVisibility(visibility, metarTab[i]);
             } else if ("NOSIG".equals(metarTab[i])) {
                 m.setNosig(true);
             } else if ("AUTO".equals(metarTab[i])) {

@@ -363,4 +363,24 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(fm2.getClouds(), hasSize(2));
 
 	}
+
+    @Test
+    public void testParseWith2Taf() {
+        String message = "TAF TAF LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
+
+        TAF result = fSut.parse(message);
+
+        assertNotNull(result);
+        assertThat(result.getProbability(), notNullValue());
+        assertEquals(30, result.getProbability().intValue());
+    }
+
+    @Test
+    public void testParseInvalidMessage() {
+        String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
+
+        TAF result = fSut.parse(message);
+
+        assertNull(result);
+    }
 }

@@ -1,7 +1,5 @@
 package com.mivek.parser;
 
-import java.time.LocalTime;
-
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
 import com.mivek.model.TAF;
@@ -91,11 +89,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setAirport(airport);
         taf.setMessage(pTAFCode);
         // Day and time
-        taf.setDay(Integer.parseInt(lines1parts[i].substring(0, 2)));
-        int hours = Integer.parseInt(lines1parts[i].substring(2, 4));
-        int minutes = Integer.parseInt(lines1parts[i].substring(4, 6));
-        LocalTime t = LocalTime.of(hours, minutes);
-        taf.setTime(t);
+        parseDeliveryTime(taf, lines1parts[i]);
 
         Visibility visibility = new Visibility();
         taf.setVisibility(visibility);
@@ -109,31 +103,23 @@ public final class TAFParser extends AbstractParser<TAF> {
         // Handle rest of second line.
         for (int j = i; j < lines1parts.length; j++) {
             if (Regex.find(WIND_EXTREME_REGEX, lines1parts[j])) {
-                matches = Regex.pregMatch(WIND_EXTREME_REGEX, lines1parts[j]);
-                taf.getWind().setExtreme1(Integer.parseInt(matches[1]));
-                taf.getWind().setExtreme2(Integer.parseInt(matches[2]));
+                parseExtremeWind(taf.getWind(), lines1parts[j]);
+            } else if (lines1parts[j].startsWith(PROB)) {
+                taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
             } else if (Regex.find(MAIN_VISIBILITY_REGEX, lines1parts[j])) {
                 matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, lines1parts[j]);
                 visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
             } else if (Regex.find(MIN_VISIBILITY_REGEX, lines1parts[j])) {
-                matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, lines1parts[j]);
-                visibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
-                visibility.setMinDirection(matches[1].substring(4));
+                parseMinimalVisibility(visibility, lines1parts[j]);
             } else if (Regex.find(CLOUD_REGEX, lines1parts[j])) {
                 Cloud c = parseCloud(lines1parts[j]);
-                if (c != null) {
-                    taf.addCloud(c);
-                }
-            } else if (lines1parts[j].startsWith(PROB)) {
-                taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
+                taf.addCloud(c);
             } else if (Regex.match(VERTICAL_VISIBILITY, lines1parts[j])) {
                 matches = Regex.pregMatch(VERTICAL_VISIBILITY, lines1parts[j]);
                 taf.setVerticalVisibility(Integer.parseInt(matches[1]));
             } else {
                 WeatherCondition wc = parseWeatherCondition(lines1parts[j]);
-                if (wc != null) {
-                    taf.addWeatherCondition(wc);
-                }
+                taf.addWeatherCondition(wc);
             }
         }
         // Process other lines.
@@ -191,9 +177,7 @@ public final class TAFParser extends AbstractParser<TAF> {
             pChange.setMinTemperature(parseTemperature(pPart));
         } else if (Regex.match(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
-            if (c != null) {
-                pChange.addCloud(c);
-            }
+            pChange.addCloud(c);
         } else if (Regex.match(MAIN_VISIBILITY_REGEX, pPart)) {
             Visibility changeVisibility = new Visibility();
             changeVisibility.setMainVisibility(Converter.convertVisibility(pPart));
@@ -201,10 +185,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         } else if (Regex.match(WIND_REGEX, pPart)) {
             pChange.setWind(parseWind(pPart));
         } else {
-            WeatherCondition wc = parseWeatherCondition(pPart);
-            if (wc != null) {
-                pChange.addWeatherCondition(parseWeatherCondition(pPart));
-            }
+            pChange.addWeatherCondition(parseWeatherCondition(pPart));
         }
     }
 
@@ -257,12 +238,7 @@ public final class TAFParser extends AbstractParser<TAF> {
     protected TemperatureDated parseTemperature(final String pTempPart) {
         TemperatureDated temperature = new TemperatureDated();
         String[] parts = pTempPart.split("/");
-        if (parts[0].charAt(2) == 'M') {
-            temperature.setTemperature(-Integer.parseInt(parts[0].substring(3)));
-        } else {
-            temperature.setTemperature(Integer.parseInt(parts[0].substring(2)));
-        }
-
+        temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));
         temperature.setDay(Integer.parseInt(parts[1].substring(0, 2)));
         temperature.setHour(Integer.parseInt(parts[1].substring(2, 4)));
         return temperature;
