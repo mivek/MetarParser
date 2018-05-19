@@ -22,7 +22,6 @@ import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
-import com.mivek.model.AbstractWeatherChange;
 import com.mivek.model.BECMGChange;
 import com.mivek.model.BeginningValidity;
 import com.mivek.model.FMChange;
@@ -30,6 +29,7 @@ import com.mivek.model.TAF;
 import com.mivek.model.TEMPOChange;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
+import com.mivek.model.trend.AbstractWeatherChange;
 import com.mivek.utils.Converter;
 
 import internationalization.Messages;

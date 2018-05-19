@@ -2,7 +2,6 @@ package com.mivek.parser;
 
 import java.time.LocalTime;
 
-import com.mivek.model.AbstractWeatherChange;
 import com.mivek.model.Airport;
 import com.mivek.model.BECMGChange;
 import com.mivek.model.BeginningValidity;
@@ -15,6 +14,7 @@ import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
+import com.mivek.model.trend.AbstractWeatherChange;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 

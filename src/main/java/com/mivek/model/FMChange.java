@@ -1,6 +1,7 @@
 package com.mivek.model;
 
 import com.mivek.enums.WeatherChangeType;
+import com.mivek.model.trend.AbstractWeatherChange;
 
 /**
  * Class representing From Changes.
