@@ -3,6 +3,8 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mivek.model.trend.BECMGChange;
+
 /**
  * Class representing a TAF.
  * @author mivek
