@@ -120,8 +120,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.mivek.model.FMChange" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/FMChange.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="14" language="java" name="com.mivek.model.trend.FMChange" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/FMChange.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="706" y="956"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mivek.model.trend.BECMGChange;
+import com.mivek.model.trend.FMChange;
 
 /**
  * Class representing a TAF.
