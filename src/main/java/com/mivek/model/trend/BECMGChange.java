@@ -7,7 +7,7 @@ import com.mivek.model.Validity;
  * Class representing a BECMG change of a TAF.
  * @author mivek
  */
-public class BECMGChange extends AbstractWeatherChange<Validity> {
+public class BECMGChange extends AbstractTafTrend<Validity> {
 
     /**
      * Constructor.

@@ -11,7 +11,7 @@ import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
-import com.mivek.model.trend.AbstractWeatherChange;
+import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGChange;
 import com.mivek.model.trend.FMChange;
 import com.mivek.model.trend.TEMPOChange;
@@ -169,7 +169,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param change the change object to update.
      * @param pPart the string to parse.
      */
-    private void processChanges(final AbstractWeatherChange<Validity> change, final String pPart) {
+    private void processChanges(final AbstractTafTrend<Validity> change, final String pPart) {
         if (Regex.match(REGEX_VALIDITY, pPart)) {
             change.setValidity(parseValidity(pPart));
         } else {
@@ -182,7 +182,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param pChange the change object to update.
      * @param pPart String containing the information.
      */
-    protected void processGeneralChanges(final AbstractWeatherChange<?> pChange, final String pPart) {
+    protected void processGeneralChanges(final AbstractTafTrend<?> pChange, final String pPart) {
         if (pPart.startsWith(PROB)) {
             pChange.setProbability(Integer.parseInt(pPart.substring(4)));
         } else if (pPart.startsWith("TX")) {
@@ -210,7 +210,7 @@ public final class TAFParser extends AbstractParser<TAF> {
 
     /**
      * Parse the validity part of a {@link TAFParser} or an
-     * {@link AbstractWeatherChange}.
+     * {@link AbstractTafTrend}.
      * @param pValidity the string representing the validity.
      * @return a {@link Validity} object.
      */
@@ -243,7 +243,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param pParts the array of string.
      * @param pChange the abstractWeatherChange to update.
      */
-    protected void iterChanges(final int pIndex, final String[] pParts, final AbstractWeatherChange<Validity> pChange) {
+    protected void iterChanges(final int pIndex, final String[] pParts, final AbstractTafTrend<Validity> pChange) {
         for (int i = pIndex; i < pParts.length; i++) {
             processChanges(pChange, pParts[i]);
         }

@@ -26,7 +26,7 @@ import com.mivek.model.BeginningValidity;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
-import com.mivek.model.trend.AbstractWeatherChange;
+import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGChange;
 import com.mivek.model.trend.FMChange;
 import com.mivek.model.trend.TEMPOChange;
@@ -55,7 +55,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithPROB() {
-		AbstractWeatherChange<?> change = new TEMPOChange();
+		AbstractTafTrend<?> change = new TEMPOChange();
 		String part = "PROB56";
 		fSut.processGeneralChanges(change, part);
 
@@ -66,7 +66,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithTX() {
-		AbstractWeatherChange<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGChange();
 		String part = "TX15/0612Z";
 		fSut.processGeneralChanges(change, part);
 
@@ -81,7 +81,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithTN() {
-		AbstractWeatherChange<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGChange();
 		String part = "TN01/0612Z";
 		fSut.processGeneralChanges(change, part);
 
@@ -96,7 +96,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testProcessGeneralChangesCloudValid() {
-		AbstractWeatherChange<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGChange();
 		String part = "SCT012TCU";
 		fSut.processGeneralChanges(change, part);
 
@@ -109,7 +109,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testProcessGeneralChangesCloudNull() {
-		AbstractWeatherChange<?> change = new BECMGChange();
+		AbstractTafTrend<?> change = new BECMGChange();
 		String part = "NSW";
 		fSut.processGeneralChanges(change, part);
 

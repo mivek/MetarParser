@@ -9,7 +9,7 @@ import com.mivek.model.TemperatureDated;
  * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author mivek
  */
-public abstract class AbstractWeatherChange<T extends AbstractValidity> extends AbstractTrend {
+public abstract class AbstractTafTrend<T extends AbstractValidity> extends AbstractTrend {
     /**
      * The validity of the change.
      */
@@ -31,7 +31,7 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
      * Constructor with parameter.
      * @param pType the type to set.
      */
-    protected AbstractWeatherChange(final WeatherChangeType pType) {
+    protected AbstractTafTrend(final WeatherChangeType pType) {
         super(pType);
     }
 

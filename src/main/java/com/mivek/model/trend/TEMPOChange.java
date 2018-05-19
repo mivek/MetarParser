@@ -7,7 +7,7 @@ import com.mivek.model.Validity;
  * Class representing a Tempo change in a taf message.
  * @author mivek
  */
-public final class TEMPOChange extends AbstractWeatherChange<Validity> {
+public final class TEMPOChange extends AbstractTafTrend<Validity> {
     /**
      * Default constructor.
      */
