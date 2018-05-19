@@ -29,7 +29,7 @@ import com.mivek.model.Validity;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
-import com.mivek.model.trend.TEMPOChange;
+import com.mivek.model.trend.TEMPOTafTrend;
 import com.mivek.utils.Converter;
 
 import internationalization.Messages;
@@ -55,7 +55,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
 	@Test
 	public void testprocessGeneralChangesWithPROB() {
-		AbstractTafTrend<?> change = new TEMPOChange();
+		AbstractTafTrend<?> change = new TEMPOTafTrend();
 		String part = "PROB56";
 		fSut.processGeneralChanges(change, part);
 
@@ -257,7 +257,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertEquals(15, becmg.getValidity().getEndDay().intValue());
 		assertEquals(22, becmg.getValidity().getEndHour().intValue());
 
-		TEMPOChange tempo4 = res.getTempos().get(3);
+		TEMPOTafTrend tempo4 = res.getTempos().get(3);
 		assertEquals(16, tempo4.getValidity().getStartDay().intValue());
 		assertEquals(3, tempo4.getValidity().getStartHour().intValue());
 		assertEquals(16, tempo4.getValidity().getEndDay().intValue());
@@ -274,7 +274,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 		assertEquals(6 * 30, tempo4.getClouds().get(0).getAltitude());
 		assertEquals(40, tempo4.getProbability().intValue());
 
-		TEMPOChange tempo5 = res.getTempos().get(4);
+		TEMPOTafTrend tempo5 = res.getTempos().get(4);
 		assertEquals(16, tempo5.getValidity().getStartDay().intValue());
 		assertEquals(4, tempo5.getValidity().getStartHour().intValue());
 		assertEquals(16, tempo5.getValidity().getEndDay().intValue());

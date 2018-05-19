@@ -110,8 +110,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mivek.model.trend.TEMPOChange" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOChange.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="com.mivek.model.trend.TEMPOTafTrendnd" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="592" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -119,7 +119,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="cocom.mivek.model.trend.FMTafTrend" project="metarParser" 
+  <class id="14" language="java" name="com.mivek.model.trend.FMTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/FMTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="706" y="956"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

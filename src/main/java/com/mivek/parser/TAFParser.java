@@ -14,7 +14,7 @@ import com.mivek.model.WeatherCondition;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
-import com.mivek.model.trend.TEMPOChange;
+import com.mivek.model.trend.TEMPOTafTrend;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 
@@ -145,7 +145,7 @@ public final class TAFParser extends AbstractParser<TAF> {
                 iterChanges(1, parts, change);
                 taf.addBECMG(change);
             } else if (parts[0].equals(TEMPO)) {
-                TEMPOChange change = new TEMPOChange();
+                TEMPOTafTrend change = new TEMPOTafTrend();
                 iterChanges(1, parts, change);
                 taf.addTempo(change);
             } else if (parts[0].startsWith(FM)) {

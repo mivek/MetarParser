@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
-import com.mivek.model.trend.TEMPOChange;
+import com.mivek.model.trend.TEMPOTafTrend;
 
 /**
  * Class representing a TAF.
@@ -27,7 +27,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * List of Tempos changes.
      */
-    private List<TEMPOChange> fTempos;
+    private List<TEMPOTafTrend> fTempos;
     /**
      * List of probability changes.
      */
@@ -87,7 +87,7 @@ public class TAF extends AbstractWeatherCode {
      * Adds a tempo change to the list.
      * @param pChange the change to add.
      */
-    public void addTempo(final TEMPOChange pChange) {
+    public void addTempo(final TEMPOTafTrend pChange) {
         fTempos.add(pChange);
     }
 
@@ -133,7 +133,7 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the tempos
      */
-    public List<TEMPOChange> getTempos() {
+    public List<TEMPOTafTrend> getTempos() {
         return fTempos;
     }
 }
