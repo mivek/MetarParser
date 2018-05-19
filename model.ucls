@@ -111,8 +111,8 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mivek.model.TEMPOChange" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/TEMPOChange.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="com.mivek.model.trend.TEMPOChange" project="metarParser" 
+    file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOChange.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="592" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

@@ -24,12 +24,12 @@ import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
 import com.mivek.model.BeginningValidity;
 import com.mivek.model.TAF;
-import com.mivek.model.TEMPOChange;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Validity;
 import com.mivek.model.trend.AbstractWeatherChange;
 import com.mivek.model.trend.BECMGChange;
 import com.mivek.model.trend.FMChange;
+import com.mivek.model.trend.TEMPOChange;
 import com.mivek.utils.Converter;
 
 import internationalization.Messages;

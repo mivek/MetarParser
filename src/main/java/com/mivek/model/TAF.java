@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mivek.model.trend.BECMGChange;
 import com.mivek.model.trend.FMChange;
+import com.mivek.model.trend.TEMPOChange;
 
 /**
  * Class representing a TAF.

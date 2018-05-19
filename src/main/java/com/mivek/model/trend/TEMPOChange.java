@@ -1,7 +1,7 @@
-package com.mivek.model;
+package com.mivek.model.trend;
 
 import com.mivek.enums.WeatherChangeType;
-import com.mivek.model.trend.AbstractWeatherChange;
+import com.mivek.model.Validity;
 
 /**
  * Class representing a Tempo change in a taf message.
