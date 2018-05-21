@@ -203,31 +203,23 @@ public final class MetarParser extends AbstractParser<Metar> {
             Wind wind = parseWind(pPart);
             pTrend.setWind(wind);
         } else if (Regex.find(WIND_EXTREME_REGEX, pPart)) {
-            String[] matches = Regex.pregMatch(WIND_EXTREME_REGEX, pPart);
-            pTrend.getWind().setExtreme1(Integer.parseInt(matches[1]));
-            pTrend.getWind().setExtreme2(Integer.parseInt(matches[2]));
+            parseExtremeWind(pTrend.getWind(), pPart);
         } else if (Regex.find(MAIN_VISIBILITY_REGEX, pPart)) {
             Visibility visibility = new Visibility();
             pTrend.setVisibility(visibility);
             String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, pPart);
             visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
-            String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pPart);
-            pTrend.getVisibility().setMinVisibility(Integer.parseInt(matches[1].substring(0, 3)));
-            pTrend.getVisibility().setMinDirection(matches[1].substring(4));
+            parseMinimalVisibility(pTrend.getVisibility(), pPart);
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
-            if (c != null) {
-                pTrend.addCloud(c);
-            }
+            pTrend.addCloud(c);
         } else if (Regex.find(VERTICAL_VISIBILITY, pPart)) {
             String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
             pTrend.setVerticalVisibility(Integer.parseInt(matches[1]));
         } else {
             WeatherCondition wc = parseWeatherCondition(pPart);
-            if (wc != null) {
-                pTrend.addWeatherCondition(wc);
-            }
+            pTrend.addWeatherCondition(wc);
         }
     }
 }
