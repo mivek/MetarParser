@@ -62,6 +62,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_CS = RESOURCE_BUNDLE.getString("CloudType.CS");
     /**
+     * Cloud type stratus.
+     */
+    public static final String CLOUD_TYPE_ST = RESOURCE_BUNDLE.getString("CloudType.ST");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");

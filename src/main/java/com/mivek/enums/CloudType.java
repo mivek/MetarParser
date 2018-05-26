@@ -31,7 +31,11 @@ public enum CloudType {
     /**
      * Altocumulus.
      */
-    AC("AC", Messages.CLOUD_TYPE_AC);
+    AC("AC", Messages.CLOUD_TYPE_AC),
+    /**
+     * Stratus.
+     */
+    ST("ST", Messages.CLOUD_TYPE_ST);
 
     /**
      * The shortcut of the cloud type.
