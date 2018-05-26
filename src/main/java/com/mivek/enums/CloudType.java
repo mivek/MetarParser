@@ -47,7 +47,11 @@ public enum CloudType {
     /**
      * Nimbostratus.
      */
-    NS("NS", Messages.CLOUD_TYPE_NS);
+    NS("NS", Messages.CLOUD_TYPE_NS),
+    /**
+     * Stratocumulus.
+     */
+    SC("SC", Messages.CLOUD_TYPE_SC);
 
     /**
      * The shortcut of the cloud type.
