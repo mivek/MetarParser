@@ -24,7 +24,7 @@ public abstract class AbstractWeatherContainer {
      */
     private List<WeatherCondition> fWeatherConditions;
     /**
-     * the vertical Visibility.
+     * the vertical Visibility in feet.
      */
     private Integer fVerticalVisibility;
 
@@ -101,7 +101,7 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @return the verticalVisibility
+     * @return the verticalVisibility in feet.
      */
     public int getVerticalVisibility() {
         return fVerticalVisibility;

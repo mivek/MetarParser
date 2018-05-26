@@ -252,7 +252,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pWeatherCode The weather code.
      * @param pTime the string to parse.
      */
-    public void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
+    protected void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
         pWeatherCode.setDay(Integer.parseInt(pTime.substring(0, 2)));
         int hours = Integer.parseInt(pTime.substring(2, 4));
         int minutes = Integer.parseInt(pTime.substring(4, 6));
@@ -263,14 +263,14 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /**
      * @return the airports
      */
-    public Map<String, Airport> getAirports() {
+    protected Map<String, Airport> getAirports() {
         return fAirports;
     }
 
     /**
      * @return the countries
      */
-    public Map<String, Country> getCountries() {
+    protected Map<String, Country> getCountries() {
         return fCountries;
     }
 

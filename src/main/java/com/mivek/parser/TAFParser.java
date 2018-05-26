@@ -111,12 +111,12 @@ public final class TAFParser extends AbstractParser<TAF> {
                 visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
             } else if (Regex.find(MIN_VISIBILITY_REGEX, lines1parts[j])) {
                 parseMinimalVisibility(visibility, lines1parts[j]);
+            } else if (Regex.match(VERTICAL_VISIBILITY, lines1parts[j])) {
+                matches = Regex.pregMatch(VERTICAL_VISIBILITY, lines1parts[j]);
+                taf.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
             } else if (Regex.find(CLOUD_REGEX, lines1parts[j])) {
                 Cloud c = parseCloud(lines1parts[j]);
                 taf.addCloud(c);
-            } else if (Regex.match(VERTICAL_VISIBILITY, lines1parts[j])) {
-                matches = Regex.pregMatch(VERTICAL_VISIBILITY, lines1parts[j]);
-                taf.setVerticalVisibility(Integer.parseInt(matches[1]));
             } else {
                 WeatherCondition wc = parseWeatherCondition(lines1parts[j]);
                 taf.addWeatherCondition(wc);
