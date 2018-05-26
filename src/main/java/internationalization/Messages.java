@@ -256,6 +256,18 @@ public final class Messages {
      * TL.
      */
     public static final String TL = RESOURCE_BUNDLE.getString("TimeIndicator.TL");
+    /**
+     * Error code: The entered code is invalid.
+     */
+    public static final String INVALID_MESSAGE = RESOURCE_BUNDLE.getString("ErrorCode.InvalidMessage");
+    /**
+     * Error code: No airport was found for this message.
+     */
+    public static final String AIRPORT_NOT_FOUND = RESOURCE_BUNDLE.getString("ErrorCode.AirportNotFound");
+    /**
+     * Error prefix: An error occured. N°
+     */
+    public static final String ERROR_PREFIX = RESOURCE_BUNDLE.getString("Error.prefix");
 
     /**
      * Private constructor.
