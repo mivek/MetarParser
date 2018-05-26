@@ -54,6 +54,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_CC = RESOURCE_BUNDLE.getString("CloudType.CC");
     /**
+     * Cloud type cirrostratus.
+     */
+    public static final String CLOUD_TYPE_CS = RESOURCE_BUNDLE.getString("CloudType.CS");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");

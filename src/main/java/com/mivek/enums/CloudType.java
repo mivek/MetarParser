@@ -23,7 +23,11 @@ public enum CloudType {
     /**
      * Cirrocumulus.
      */
-    CC("CC", Messages.CLOUD_TYPE_CC);
+    CC("CC", Messages.CLOUD_TYPE_CC),
+    /**
+     * Cirrostratus.
+     */
+    CS("CS", Messages.CLOUD_TYPE_CS);
 
     /**
      * The shortcut of the cloud type.
