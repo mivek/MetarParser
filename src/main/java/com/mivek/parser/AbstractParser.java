@@ -301,12 +301,12 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
             parseMinimalVisibility(pContainer.getVisibility(), pPart);
+        } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
+            String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
+            pContainer.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
             pContainer.addCloud(c);
-        } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
-            String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
-            pContainer.setVerticalVisibility(Integer.parseInt(matches[1]));
         } else {
             WeatherCondition wc = parseWeatherCondition(pPart);
             pContainer.addWeatherCondition(wc);

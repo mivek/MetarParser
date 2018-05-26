@@ -99,9 +99,10 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setWind(parseWind(lines1parts[i]));
         // Handle rest of second line.
         for (int j = i; j < lines1parts.length; j++) {
-            generalParse(taf, lines1parts[j]);
             if (lines1parts[j].startsWith(PROB)) {
                 taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
+            } else {
+                generalParse(taf, lines1parts[j]);
             }
         }
         // Process other lines.
