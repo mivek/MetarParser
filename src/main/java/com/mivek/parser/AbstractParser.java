@@ -14,6 +14,7 @@ import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
 import com.mivek.model.AbstractWeatherCode;
+import com.mivek.model.AbstractWeatherContainer;
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
 import com.mivek.model.Country;
@@ -281,4 +282,34 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     public abstract T parse(String pCode);
 
+    /**
+     * Method that parses common elements of a abstract weather container.
+     * @param pContainer The object to update
+     * @param pPart the token to parse.
+     */
+    public void generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
+        if (Regex.find(WIND_REGEX, pPart)) {
+            Wind wind = parseWind(pPart);
+            pContainer.setWind(wind);
+        } else if (Regex.find(WIND_EXTREME_REGEX, pPart)) {
+            parseExtremeWind(pContainer.getWind(), pPart);
+        } else if (Regex.find(MAIN_VISIBILITY_REGEX, pPart)) {
+            String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, pPart);
+            if (pContainer.getVisibility() == null) {
+                pContainer.setVisibility(new Visibility());
+            }
+            pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
+            parseMinimalVisibility(pContainer.getVisibility(), pPart);
+        } else if (Regex.find(CLOUD_REGEX, pPart)) {
+            Cloud c = parseCloud(pPart);
+            pContainer.addCloud(c);
+        } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
+            String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
+            pContainer.setVerticalVisibility(Integer.parseInt(matches[1]));
+        } else {
+            WeatherCondition wc = parseWeatherCondition(pPart);
+            pContainer.addWeatherCondition(wc);
+        }
+    }
 }
