@@ -15,7 +15,11 @@ public enum CloudType {
     /**
      * towering cumulus, cumulus congestus.
      */
-    TCU("TCU", Messages.CLOUD_TYPE_TCU); //$NON-NLS-1$
+    TCU("TCU", Messages.CLOUD_TYPE_TCU), //$NON-NLS-1$
+    /**
+     * Cirrus.
+     */
+    CI("CI", Messages.CLOUD_TYPE_CI);
 
     /**
      * The shortcut of the cloud type.
