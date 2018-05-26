@@ -21,10 +21,11 @@ import internationalization.Messages;
 
 @Ignore
 public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCode> {
-    protected abstract AbstractWeatherCodeFacade<T> getSut();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    protected abstract AbstractWeatherCodeFacade<T> getSut();
+
 
     @Test
     public void testRetrieveFromAirportInvalid() throws Exception {

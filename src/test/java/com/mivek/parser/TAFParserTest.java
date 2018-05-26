@@ -384,4 +384,12 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         thrown.expectMessage(containsString(Messages.INVALID_MESSAGE));
         fSut.parse(message);
     }
+
+    @Test
+    public void testParseInvalidAirport() throws ParseException {
+        String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(containsString(Messages.AIRPORT_NOT_FOUND));
+        fSut.parse(message);
+    }
 }
