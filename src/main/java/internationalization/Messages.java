@@ -46,6 +46,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_TCU = RESOURCE_BUNDLE.getString("CloudType.TCU");
     /**
+     * CloudType altocumulus.
+     */
+    public static final String CLOUD_TYPE_AC = RESOURCE_BUNDLE.getString("CloudType.AC");
+    /**
      * Cloud type cirrus.
      */
     public static final String CLOUD_TYPE_CI = RESOURCE_BUNDLE.getString("CloudType.CI");
