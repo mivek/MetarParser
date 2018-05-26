@@ -74,6 +74,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_AS = RESOURCE_BUNDLE.getString("CloudType.AS");
     /**
+     * Cloud type Nimbostratus.
+     */
+    public static final String CLOUD_TYPE_NS = RESOURCE_BUNDLE.getString("CloudType.NS");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");
