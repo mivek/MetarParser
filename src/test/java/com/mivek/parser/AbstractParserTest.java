@@ -10,13 +10,16 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.mivek.enums.CloudQuantity;
 import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
+import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.Cloud;
 import com.mivek.model.Visibility;
@@ -29,6 +32,8 @@ import com.mivek.model.Wind;
  */
 @Ignore
 public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     /*
      * ===========================
      * TEST ParseCloud
@@ -165,10 +170,10 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWithoutAirport() {
+    public void testParseWithoutAirport() throws ParseException {
         String message = "LLLL 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
-
-        assertNull(getSut().parse(message));
+        thrown.expect(ParseException.class);
+        getSut().parse(message);
     }
 
     @Test

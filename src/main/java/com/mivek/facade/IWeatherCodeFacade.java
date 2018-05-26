@@ -3,7 +3,7 @@ package com.mivek.facade;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.mivek.exception.InvalidIcaoException;
+import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 
 /**
@@ -16,16 +16,17 @@ public interface IWeatherCodeFacade<T extends AbstractWeatherCode> {
      * Decode method.
      * @param pCode the code to decode.
      * @return the decoded object corresponding to the message.
+     * @throws ParseException when an error occurs during the parsing.
      */
-    T decode(String pCode);
+    T decode(String pCode) throws ParseException;
 
     /**
      * Retrieve code and decoded object from airport with icao.
      * @param pIcao the icao of the airport
      * @return the decoded object
-     * @throws InvalidIcaoException when the icao is invalid.
      * @throws IOException When an error occurs
      * @throws URISyntaxException When an error occurs.
+     * @throws ParseException when an error occurs during the parsing.
      */
-    T retrieveFromAirport(String pIcao) throws InvalidIcaoException, IOException, URISyntaxException;
+    T retrieveFromAirport(String pIcao) throws ParseException, IOException, URISyntaxException;
 }

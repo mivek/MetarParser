@@ -2,6 +2,8 @@ package com.mivek.parser;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.mivek.exception.ErrorCodes;
+import com.mivek.exception.ParseException;
 import com.mivek.model.Airport;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
@@ -74,14 +76,15 @@ public final class MetarParser extends AbstractParser<Metar> {
      * exists. If it does then the metar code is decoded.
      * @param pMetarCode String representing the metar.
      * @return a decoded metar object.
+     * @throws ParseException when an error occurs.
      */
     @Override
-    public Metar parse(final String pMetarCode) {
+    public Metar parse(final String pMetarCode) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = pMetarCode.split(" ");
         Airport airport = getAirports().get(metarTab[0]);
         if (airport == null) {
-            return null;
+            throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);
         }
 
         m.setAirport(airport);

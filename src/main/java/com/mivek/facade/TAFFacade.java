@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import com.mivek.exception.InvalidIcaoException;
+import com.mivek.exception.ErrorCodes;
+import com.mivek.exception.ParseException;
 import com.mivek.model.TAF;
 import com.mivek.parser.TAFParser;
 
@@ -28,14 +29,14 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
     }
 
     @Override
-    public TAF decode(final String pCode) {
+    public TAF decode(final String pCode) throws ParseException {
         return getParser().parse(pCode);
     }
 
     @Override
-    public TAF retrieveFromAirport(final String pIcao) throws InvalidIcaoException, IOException, URISyntaxException {
+    public TAF retrieveFromAirport(final String pIcao) throws IOException, URISyntaxException, ParseException {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
-            throw new InvalidIcaoException(internationalization.Messages.INVALID_ICAO); // $NON-NLS-1$
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
         String website = "http://tgftp.nws.noaa.gov/data/forecasts/taf/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
                 + ".TXT"; //$NON-NLS-1$

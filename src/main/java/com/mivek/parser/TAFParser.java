@@ -1,5 +1,7 @@
 package com.mivek.parser;
 
+import com.mivek.exception.ErrorCodes;
+import com.mivek.exception.ParseException;
 import com.mivek.model.Airport;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
@@ -63,10 +65,10 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @see com.mivek.parser.AbstractParser#parse(java.lang.String)
      */
     @Override
-    public TAF parse(final String pTAFCode) {
+    public TAF parse(final String pTAFCode) throws ParseException {
         String[] lines = pTAFCode.split("\n");
         if (!lines[0].substring(0, 3).equals("TAF")) {
-            return null;
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE);
         }
         TAF taf = new TAF();
 
@@ -81,7 +83,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         Airport airport = getAirports().get(lines1parts[i]);
         i++;
         if (airport == null) {
-            return null;
+            throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);
         }
         taf.setAirport(airport);
         taf.setMessage(pTAFCode);
