@@ -1,11 +1,9 @@
 package com.mivek.parser;
 
 import com.mivek.model.Airport;
-import com.mivek.model.Cloud;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.Visibility;
-import com.mivek.model.WeatherCondition;
 import com.mivek.model.trend.AbstractTafTrend;
 import com.mivek.model.trend.BECMGTafTrend;
 import com.mivek.model.trend.FMTafTrend;
@@ -67,7 +65,6 @@ public final class TAFParser extends AbstractParser<TAF> {
     @Override
     public TAF parse(final String pTAFCode) {
         String[] lines = pTAFCode.split("\n");
-        String[] matches = null;
         if (!lines[0].substring(0, 3).equals("TAF")) {
             return null;
         }
@@ -102,24 +99,9 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setWind(parseWind(lines1parts[i]));
         // Handle rest of second line.
         for (int j = i; j < lines1parts.length; j++) {
-            if (Regex.find(WIND_EXTREME_REGEX, lines1parts[j])) {
-                parseExtremeWind(taf.getWind(), lines1parts[j]);
-            } else if (lines1parts[j].startsWith(PROB)) {
+            generalParse(taf, lines1parts[j]);
+            if (lines1parts[j].startsWith(PROB)) {
                 taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
-            } else if (Regex.find(MAIN_VISIBILITY_REGEX, lines1parts[j])) {
-                matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, lines1parts[j]);
-                visibility.setMainVisibility(Converter.convertVisibility(matches[1]));
-            } else if (Regex.find(MIN_VISIBILITY_REGEX, lines1parts[j])) {
-                parseMinimalVisibility(visibility, lines1parts[j]);
-            } else if (Regex.match(VERTICAL_VISIBILITY, lines1parts[j])) {
-                matches = Regex.pregMatch(VERTICAL_VISIBILITY, lines1parts[j]);
-                taf.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
-            } else if (Regex.find(CLOUD_REGEX, lines1parts[j])) {
-                Cloud c = parseCloud(lines1parts[j]);
-                taf.addCloud(c);
-            } else {
-                WeatherCondition wc = parseWeatherCondition(lines1parts[j]);
-                taf.addWeatherCondition(wc);
             }
         }
         // Process other lines.
@@ -175,18 +157,8 @@ public final class TAFParser extends AbstractParser<TAF> {
             pChange.setMaxTemperature(parseTemperature(pPart));
         } else if (pPart.startsWith("TN")) {
             pChange.setMinTemperature(parseTemperature(pPart));
-        } else if (Regex.match(CLOUD_REGEX, pPart)) {
-            Cloud c = parseCloud(pPart);
-            pChange.addCloud(c);
-        } else if (Regex.match(MAIN_VISIBILITY_REGEX, pPart)) {
-            Visibility changeVisibility = new Visibility();
-            changeVisibility.setMainVisibility(Converter.convertVisibility(pPart));
-            pChange.setVisibility(changeVisibility);
-        } else if (Regex.match(WIND_REGEX, pPart)) {
-            pChange.setWind(parseWind(pPart));
-        } else {
-            pChange.addWeatherCondition(parseWeatherCondition(pPart));
         }
+        generalParse(pChange, pPart);
     }
 
     /**
