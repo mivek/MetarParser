@@ -50,6 +50,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_CI = RESOURCE_BUNDLE.getString("CloudType.CI");
     /**
+     * Cloud type corrocumulus.
+     */
+    public static final String CLOUD_TYPE_CC = RESOURCE_BUNDLE.getString("CloudType.CC");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");
