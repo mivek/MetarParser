@@ -26,7 +26,7 @@ public abstract class AbstractWeatherContainer {
     /**
      * the vertical Visibility.
      */
-    private int fVerticalVisibility;
+    private Integer fVerticalVisibility;
 
     /**
      * Constructor to initialize the lists.
