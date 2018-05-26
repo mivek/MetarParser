@@ -1,17 +1,15 @@
-package com.mivek.model;
+package com.mivek.model.trend;
 
 import com.mivek.enums.WeatherChangeType;
+import com.mivek.model.TemperatureDated;
+import com.mivek.model.trend.validity.AbstractValidity;
 
 /**
  * Class representing a weather change.
  * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author mivek
  */
-public abstract class AbstractWeatherChange<T extends AbstractValidity> extends AbstractWeatherContainer {
-    /**
-     * the type of change.
-     */
-    private WeatherChangeType fType;
+public abstract class AbstractTafTrend<T extends AbstractValidity> extends AbstractTrend {
     /**
      * The validity of the change.
      */
@@ -33,9 +31,8 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
      * Constructor with parameter.
      * @param pType the type to set.
      */
-    protected AbstractWeatherChange(final WeatherChangeType pType) {
-        super();
-        fType = pType;
+    protected AbstractTafTrend(final WeatherChangeType pType) {
+        super(pType);
     }
 
     /**
@@ -52,12 +49,6 @@ public abstract class AbstractWeatherChange<T extends AbstractValidity> extends 
         fValidity = pValidity;
     }
 
-    /**
-     * @return the type of change.
-     */
-    public WeatherChangeType geType() {
-        return fType;
-    }
 
     /**
      * @return the probability

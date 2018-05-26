@@ -3,12 +3,17 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mivek.model.trend.BECMGTafTrend;
+import com.mivek.model.trend.FMTafTrend;
+import com.mivek.model.trend.PROBTafTrend;
+import com.mivek.model.trend.TEMPOTafTrend;
+import com.mivek.model.trend.validity.Validity;
+
 /**
  * Class representing a TAF.
  * @author mivek
  */
 public class TAF extends AbstractWeatherCode {
-
     /**
      * The valididty of the TAF.
      */
@@ -16,15 +21,23 @@ public class TAF extends AbstractWeatherCode {
     /**
      * List of BECMG changes.
      */
-    private List<BECMGChange> fBECMGs;
+    private List<BECMGTafTrend> fBECMGs;
     /**
      * List of From changes.
      */
-    private List<FMChange> fFMs;
+    private List<FMTafTrend> fFMs;
     /**
      * List of Tempos changes.
      */
-    private List<TEMPOChange> fTempos;
+    private List<TEMPOTafTrend> fTempos;
+    /**
+     * List of probability changes.
+     */
+    private List<PROBTafTrend> fProbs;
+    /**
+     * Probability of the metar.
+     */
+    private Integer fProbability;
 
     /**
      * Constructor.
@@ -34,6 +47,7 @@ public class TAF extends AbstractWeatherCode {
         fBECMGs = new ArrayList<>();
         fFMs = new ArrayList<>();
         fTempos = new ArrayList<>();
+        fProbs = new ArrayList<>();
     }
 
     /**
@@ -53,37 +67,60 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the bECMGs
      */
-    public List<BECMGChange> getBECMGs() {
+    public List<BECMGTafTrend> getBECMGs() {
         return fBECMGs;
     }
 
     /**
      * @return the fMs
      */
-    public List<FMChange> getFMs() {
+    public List<FMTafTrend> getFMs() {
         return fFMs;
     }
 
     /**
-     * @return the tempos
+     * @return the probs
      */
-    public List<TEMPOChange> getTempos() {
-        return fTempos;
+    public List<PROBTafTrend> getProbs() {
+        return fProbs;
     }
 
     /**
      * Adds a tempo change to the list.
      * @param pChange the change to add.
      */
-    public void addTempo(final TEMPOChange pChange) {
+    public void addTempo(final TEMPOTafTrend pChange) {
         fTempos.add(pChange);
+    }
+
+    /**
+     * Adds a PROB Change to the list.
+     * @param pChange the change to add.
+     */
+    public void addProb(final PROBTafTrend pChange) {
+        fProbs.add(pChange);
+    }
+
+    /**
+     * @return the probability
+     */
+    public Integer getProbability() {
+        return fProbability;
+    }
+
+    /**
+     * @param pProbability
+     * the probability to set
+     */
+    public void setProbability(final Integer pProbability) {
+        fProbability = pProbability;
     }
 
     /**
      * Adds a BECMG to the list.
      * @param pChange the change to add.
      */
-    public void addBECMG(final BECMGChange pChange) {
+    public void addBECMG(final BECMGTafTrend pChange) {
         fBECMGs.add(pChange);
     }
 
@@ -91,7 +128,14 @@ public class TAF extends AbstractWeatherCode {
      * Adds a FM change to the list.
      * @param pChange the change to add.
      */
-    public void addFM(final FMChange pChange) {
+    public void addFM(final FMTafTrend pChange) {
         fFMs.add(pChange);
+    }
+
+    /**
+     * @return the tempos
+     */
+    public List<TEMPOTafTrend> getTempos() {
+        return fTempos;
     }
 }

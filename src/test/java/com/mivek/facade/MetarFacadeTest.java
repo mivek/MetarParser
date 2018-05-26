@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.Metar;
-import com.mivek.parser.MetarParser;
 
 public class MetarFacadeTest {
 
@@ -32,7 +31,7 @@ public class MetarFacadeTest {
 		Metar res = MetarFacade.getInstance().decode(code);
 
 		assertNotNull(res);
-		assertEquals(MetarParser.getInstance().getAirports().get("LFPG"), res.getAirport());
+        assertEquals("LFPG", res.getAirport().getIcao());
 		assertEquals(25, res.getDay().intValue());
 		// Time
 		assertNotNull(res.getTime());
@@ -40,7 +39,7 @@ public class MetarFacadeTest {
 		assertEquals(30, res.getTime().getMinute());
 		// Wind
 		assertNotNull(res.getWind());
-		assertEquals(i18n.Messages.CONVERTER_S, res.getWind().getDirection());
+		assertEquals(internationalization.Messages.CONVERTER_S, res.getWind().getDirection());
 		assertEquals(13, res.getWind().getSpeed());
 		assertEquals("KT", res.getWind().getUnit());
 		// Visibility

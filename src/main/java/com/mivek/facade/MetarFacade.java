@@ -29,8 +29,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 
     /**
      * Method to parse a metar.
-     * @param pCode
-     * the metar to decode.
+     * @param pCode the metar to decode.
      * @return a metar object.
      */
     @Override
@@ -48,7 +47,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
     @Override
     public Metar retrieveFromAirport(final String pIcao) throws InvalidIcaoException, IOException {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
-            throw new InvalidIcaoException(i18n.Messages.INVALID_ICAO); // $NON-NLS-1$
+            throw new InvalidIcaoException(internationalization.Messages.INVALID_ICAO); // $NON-NLS-1$
         }
         String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
                 + ".TXT"; //$NON-NLS-1$

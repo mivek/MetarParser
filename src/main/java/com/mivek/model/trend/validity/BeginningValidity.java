@@ -1,4 +1,4 @@
-package com.mivek.model;
+package com.mivek.model.trend.validity;
 
 /**
  * Class representing a validity with start day, start hour and start minutes.

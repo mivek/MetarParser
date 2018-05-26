@@ -19,6 +19,7 @@ import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.Cloud;
+import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 
@@ -92,7 +93,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_N));
+        assertThat(res.getDirection(), is(internationalization.Messages.CONVERTER_N));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
         assertEquals(0, res.getGust());
@@ -107,7 +108,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(i18n.Messages.CONVERTER_SE));
+        assertThat(res.getDirection(), is(internationalization.Messages.CONVERTER_SE));
         assertEquals(Integer.valueOf(120), res.getDirectionDegrees());
         assertEquals(17, res.getSpeed());
         assertEquals(20, res.getGust());
@@ -121,7 +122,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertEquals(i18n.Messages.CONVERTER_VRB, res.getDirection());
+        assertEquals(internationalization.Messages.CONVERTER_VRB, res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
     }
@@ -161,6 +162,22 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
         assertNull(wc);
+    }
+
+    @Test
+    public void testParseWithoutAirport() {
+        String message = "LLLL 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
+
+        assertNull(getSut().parse(message));
+    }
+
+    @Test
+    public void testParseMinimalVisibility() {
+        Visibility v = new Visibility();
+        String code = "1100w";
+        getSut().parseMinimalVisibility(v, code);
+        assertEquals(1100, v.getMinVisibility());
+        assertEquals("w", v.getMinDirection());
     }
 
     protected abstract AbstractParser<T> getSut();

@@ -1,4 +1,4 @@
-package com.mivek.model;
+package com.mivek.model.trend.validity;
 
 /**
  * Abstract class for the validity of a TAF.

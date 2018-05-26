@@ -1,4 +1,4 @@
-package com.mivek.model.trend;
+package com.mivek.model.trend.validity;
 
 import java.time.LocalTime;
 

@@ -26,7 +26,9 @@ import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.Cloud;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
+import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
+import com.mivek.model.Wind;
 import com.mivek.model.trend.AbstractMetarTrend;
 
 /**
@@ -60,7 +62,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertNotNull(ri);
 		assertEquals("26", ri.getName());
 		assertEquals(600, ri.getMinRange());
-		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -72,7 +74,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertEquals("26L", ri.getName());
 		assertEquals(550, ri.getMinRange());
 		assertEquals(700, ri.getMaxRange());
-		assertEquals(i18n.Messages.CONVERTER_U, ri.getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_U, ri.getTrend());
 	}
 
 	@Test
@@ -102,7 +104,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertEquals(30, m.getTime().getMinute());
 		assertNotNull(m.getWind());
 		assertEquals(0, m.getWind().getSpeed());
-		assertEquals(i18n.Messages.CONVERTER_N, m.getWind().getDirection());
+		assertEquals(internationalization.Messages.CONVERTER_N, m.getWind().getDirection());
 		assertEquals("KT", m.getWind().getUnit());
 		assertEquals("350m", m.getVisibility().getMainVisibility());
 		assertThat(m.getRunways(), is(not(empty())));
@@ -110,7 +112,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		// Check if runways are correctly parsed
 		assertEquals("27L", m.getRunways().get(0).getName());
 		assertEquals(375, m.getRunways().get(0).getMinRange());
-		assertEquals(i18n.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
+		assertEquals(internationalization.Messages.CONVERTER_NSC, m.getRunways().get(0).getTrend());
 	}
 
 	@Test
@@ -254,4 +256,48 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 		assertEquals(18, trend.getTimes().get(1).getTime().getHour());
 		assertEquals(30, trend.getTimes().get(1).getTime().getMinute());
 	}
+
+    @Test
+    public void testParseWithMinVisibility() {
+        String code = "LFPG 161430Z 24015G25KT 5000 1100w";
+
+        Metar m = fSut.parse(code);
+
+        assertNotNull(m);
+        assertEquals(16, m.getDay().intValue());
+        assertEquals(14, m.getTime().getHour());
+        assertEquals(30, m.getTime().getMinute());
+        assertNotNull(m.getWind());
+        Wind w = m.getWind();
+        assertEquals(240, w.getDirectionDegrees().intValue());
+        assertEquals(15, w.getSpeed());
+        assertEquals(25, w.getGust());
+        assertNotNull(m.getVisibility());
+        Visibility v = m.getVisibility();
+        assertEquals("5000m", v.getMainVisibility());
+        assertEquals(1100, v.getMinVisibility());
+        assertEquals("w", v.getMinDirection());
+    }
+
+    @Test
+    public void testParseWithVerticalVisibility() {
+        String code = "LFLL 160730Z 28002KT 0350 FG VV002";
+
+        Metar m = fSut.parse(code);
+
+        assertNotNull(m);
+        assertEquals(16, m.getDay().intValue());
+        assertEquals(7, m.getTime().getHour());
+        assertEquals(30, m.getTime().getMinute());
+        assertNotNull(m.getWind());
+        Wind w = m.getWind();
+        assertEquals(280, w.getDirectionDegrees().intValue());
+        assertEquals(2, w.getSpeed());
+
+        assertNotNull(m.getVisibility());
+        assertEquals("350m", m.getVisibility().getMainVisibility());
+        assertThat(m.getWeatherConditions(), hasSize(1));
+        assertEquals(Phenomenon.FOG, m.getWeatherConditions().get(0).getPhenomenons().get(0));
+        assertEquals(200, m.getVerticalVisibility());
+    }
 }

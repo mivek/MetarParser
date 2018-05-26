@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mivek.enums.WeatherChangeType;
+import com.mivek.model.trend.validity.AbstractMetarTrendTime;
 
 /**
  * Abstract class for metar's trend.

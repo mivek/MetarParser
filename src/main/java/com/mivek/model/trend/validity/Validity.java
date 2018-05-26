@@ -1,4 +1,4 @@
-package com.mivek.model;
+package com.mivek.model.trend.validity;
 
 /**
  * Class representing the validity of a TAF message.

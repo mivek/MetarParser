@@ -2,7 +2,7 @@ package com.mivek.utils;
 
 import java.time.LocalTime;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 /**
  * This class is used to convert data.

@@ -2,6 +2,7 @@ package com.mivek.parser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -16,17 +17,19 @@ import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.Airport;
 import com.mivek.model.Cloud;
 import com.mivek.model.Country;
+import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
-import i18n.Messages;
+import internationalization.Messages;
 
 /**
  * Abstract class for parser.
  * @author mivek
+ * Abstract class for Parser.
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
@@ -67,7 +70,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected static final String BECMG = "BECMG";
     /**
-     * The logger.
+     * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
     /**
@@ -168,6 +171,28 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     }
 
     /**
+     * Parses the wind.
+     * @param pWind the wind to update
+     * @param pExtremeWind String with extreme wind information
+     */
+    protected void parseExtremeWind(final Wind pWind, final String pExtremeWind) {
+        String[] matches = Regex.pregMatch(WIND_EXTREME_REGEX, pExtremeWind);
+        pWind.setExtreme1(Integer.parseInt(matches[1]));
+        pWind.setExtreme2(Integer.parseInt(matches[2]));
+    }
+
+    /**
+     * Parses the minimal visibility and updates the visibility object.
+     * @param pVisibility the visibility object
+     * @param pVisibilityPart the string containing the information.
+     */
+    protected void parseMinimalVisibility(final Visibility pVisibility, final String pVisibilityPart) {
+        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pVisibilityPart);
+        pVisibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
+        pVisibility.setMinDirection(matches[1].substring(4));
+    }
+
+    /**
      * This method parses the cloud part of the metar.
      * @param pCloudString string with cloud elements.
      * @return a decoded cloud with its quantity, its altitude and its type.
@@ -223,23 +248,36 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     }
 
     /**
+     * Parses the string containing the delivery time.
+     * @param pWeatherCode The weather code.
+     * @param pTime the string to parse.
+     */
+    protected void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
+        pWeatherCode.setDay(Integer.parseInt(pTime.substring(0, 2)));
+        int hours = Integer.parseInt(pTime.substring(2, 4));
+        int minutes = Integer.parseInt(pTime.substring(4, 6));
+        LocalTime t = LocalTime.of(hours, minutes);
+        pWeatherCode.setTime(t);
+    }
+
+    /**
      * @return the airports
      */
-    public Map<String, Airport> getAirports() {
+    protected Map<String, Airport> getAirports() {
         return fAirports;
     }
 
     /**
      * @return the countries
      */
-    public Map<String, Country> getCountries() {
+    protected Map<String, Country> getCountries() {
         return fCountries;
     }
 
     /**
-     * Parse method.
+     * Abstract method parse.
      * @param pCode the message to parse.
-     * @return the decoded object.
+     * @return The decoded object.
      */
     public abstract T parse(String pCode);
 

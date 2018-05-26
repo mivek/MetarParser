@@ -1,17 +1,18 @@
-package com.mivek.model;
+package com.mivek.model.trend;
 
 import com.mivek.enums.WeatherChangeType;
+import com.mivek.model.trend.validity.Validity;
 
 /**
  * Class representing a BECMG change of a TAF.
  * @author mivek
  */
-public class BECMGChange extends AbstractWeatherChange<Validity> {
+public class BECMGTafTrend extends AbstractTafTrend<Validity> {
 
     /**
      * Constructor.
      */
-    public BECMGChange() {
+    public BECMGTafTrend() {
         super(WeatherChangeType.BECMG);
     }
 
