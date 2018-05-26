@@ -46,6 +46,10 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_TCU = RESOURCE_BUNDLE.getString("CloudType.TCU");
     /**
+     * Cloud type cirrus.
+     */
+    public static final String CLOUD_TYPE_CI = RESOURCE_BUNDLE.getString("CloudType.CI");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");
@@ -256,7 +260,6 @@ public final class Messages {
      * TL.
      */
     public static final String TL = RESOURCE_BUNDLE.getString("TimeIndicator.TL");
-
     /**
      * Private constructor.
      */
