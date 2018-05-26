@@ -12,7 +12,7 @@ import com.mivek.exception.InvalidIcaoException;
 import com.mivek.model.TAF;
 
 public class TAFFacadeTest {
-	TAFFacade sut = TAFFacade.getInstance();
+    private TAFFacade sut = TAFFacade.getInstance();
 
 	@Test(expected = InvalidIcaoException.class)
 	public void testRetrieveFromAirportInvalid() throws Exception {
