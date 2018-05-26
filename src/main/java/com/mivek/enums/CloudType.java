@@ -39,7 +39,11 @@ public enum CloudType {
     /**
      * Cumulus.
      */
-    CU("CU", Messages.CLOUD_TYPE_CU);
+    CU("CU", Messages.CLOUD_TYPE_CU),
+    /**
+     * Astrostratus.
+     */
+    AS("AS", Messages.CLOUD_TYPE_AS);
 
     /**
      * The shortcut of the cloud type.
