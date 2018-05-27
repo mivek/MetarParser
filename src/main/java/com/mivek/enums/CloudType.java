@@ -15,7 +15,43 @@ public enum CloudType {
     /**
      * towering cumulus, cumulus congestus.
      */
-    TCU("TCU", Messages.CLOUD_TYPE_TCU); //$NON-NLS-1$
+    TCU("TCU", Messages.CLOUD_TYPE_TCU), //$NON-NLS-1$
+    /**
+     * Cirrus.
+     */
+    CI("CI", Messages.CLOUD_TYPE_CI),
+    /**
+     * Cirrocumulus.
+     */
+    CC("CC", Messages.CLOUD_TYPE_CC),
+    /**
+     * Cirrostratus.
+     */
+    CS("CS", Messages.CLOUD_TYPE_CS),
+    /**
+     * Altocumulus.
+     */
+    AC("AC", Messages.CLOUD_TYPE_AC),
+    /**
+     * Stratus.
+     */
+    ST("ST", Messages.CLOUD_TYPE_ST),
+    /**
+     * Cumulus.
+     */
+    CU("CU", Messages.CLOUD_TYPE_CU),
+    /**
+     * Astrostratus.
+     */
+    AS("AS", Messages.CLOUD_TYPE_AS),
+    /**
+     * Nimbostratus.
+     */
+    NS("NS", Messages.CLOUD_TYPE_NS),
+    /**
+     * Stratocumulus.
+     */
+    SC("SC", Messages.CLOUD_TYPE_SC);
 
     /**
      * The shortcut of the cloud type.

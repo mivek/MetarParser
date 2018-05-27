@@ -46,6 +46,42 @@ public final class Messages {
      */
     public static final String CLOUD_TYPE_TCU = RESOURCE_BUNDLE.getString("CloudType.TCU");
     /**
+     * CloudType altocumulus.
+     */
+    public static final String CLOUD_TYPE_AC = RESOURCE_BUNDLE.getString("CloudType.AC");
+    /**
+     * Cloud type cirrus.
+     */
+    public static final String CLOUD_TYPE_CI = RESOURCE_BUNDLE.getString("CloudType.CI");
+    /**
+     * Cloud type corrocumulus.
+     */
+    public static final String CLOUD_TYPE_CC = RESOURCE_BUNDLE.getString("CloudType.CC");
+    /**
+     * Cloud type cirrostratus.
+     */
+    public static final String CLOUD_TYPE_CS = RESOURCE_BUNDLE.getString("CloudType.CS");
+    /**
+     * Cloud type stratus.
+     */
+    public static final String CLOUD_TYPE_ST = RESOURCE_BUNDLE.getString("CloudType.ST");
+    /**
+     * Cloud type Cumulus.
+     */
+    public static final String CLOUD_TYPE_CU = RESOURCE_BUNDLE.getString("CloudType.CU");
+    /**
+     * Cloud type Astrostratus.
+     */
+    public static final String CLOUD_TYPE_AS = RESOURCE_BUNDLE.getString("CloudType.AS");
+    /**
+     * Cloud type Nimbostratus.
+     */
+    public static final String CLOUD_TYPE_NS = RESOURCE_BUNDLE.getString("CloudType.NS");
+    /**
+     * Cloud type stratocumulus.
+     */
+    public static final String CLOUD_TYPE_SC = RESOURCE_BUNDLE.getString("CloudType.SC");
+    /**
      * Descriptive patches.
      */
     public static final String DESCRIPTIVE_BC = RESOURCE_BUNDLE.getString("Descriptive.BC");
@@ -268,7 +304,6 @@ public final class Messages {
      * Error prefix: An error occured. N°
      */
     public static final String ERROR_PREFIX = RESOURCE_BUNDLE.getString("Error.prefix");
-
     /**
      * Private constructor.
      */
