@@ -21,18 +21,6 @@ import com.mivek.utils.Regex;
  */
 public final class TAFParser extends AbstractParser<TAF> {
     /**
-     * From string constant.
-     */
-    private static final String FM = "FM";
-    /**
-     * Tempo string constant.
-     */
-    private static final String TEMPO = "TEMPO";
-    /**
-     * Becoming string constant.
-     */
-    private static final String BECMG = "BECMG";
-    /**
      * Probability string constant.
      */
     private static final String PROB = "PROB";
