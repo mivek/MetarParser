@@ -3,29 +3,19 @@ package com.mivek.facade;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
-import com.mivek.exception.InvalidIcaoException;
+import com.mivek.exception.ParseException;
 import com.mivek.model.Metar;
 
-public class MetarFacadeTest {
-
-
-	@Test(expected = InvalidIcaoException.class)
-	public void testRetrieveFromAirportInvalid() throws Exception {
-		MetarFacade.getInstance().retrieveFromAirport("RAndomeString");
-	}
-
+public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
 	@Test
-	public void testDecodeValidMetar() {
+    public void testDecodeValidMetar() throws ParseException {
 		String code = "LFPG 251830Z 17013KT 9999 OVC006 04/03 Q1012 NOSIG";
 
 		Metar res = MetarFacade.getInstance().decode(code);
@@ -55,10 +45,8 @@ public class MetarFacadeTest {
 
 	}
 
-	@Test
-	public void testRetrieveFromAirport() throws InvalidIcaoException, IOException {
-		Metar m = MetarFacade.getInstance().retrieveFromAirport("LFPG");
-		assertThat(m, notNullValue());
-		assertThat(m.getAirport().getIcao(), is("LFPG"));
-	}
+    @Override
+    protected AbstractWeatherCodeFacade<Metar> getSut() {
+        return MetarFacade.getInstance();
+    }
 }

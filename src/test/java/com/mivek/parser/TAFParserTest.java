@@ -3,6 +3,7 @@
  */
 package com.mivek.parser;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -22,6 +23,7 @@ import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
+import com.mivek.exception.ParseException;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
 import com.mivek.model.trend.AbstractTafTrend;
@@ -159,7 +161,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 	}
 
 	@Test
-	public void testParseValid() {
+    public void testParseValid() throws ParseException {
 		String taf = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n" 
 			      +"TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
 			      +"TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
@@ -300,7 +302,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 	}
 
 	@Test
-	public void testParseWithFM() {
+    public void testParseWithFM() throws ParseException {
         String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n"
                 + "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
 		
@@ -365,7 +367,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 	}
 
     @Test
-    public void testParseWith2Taf() {
+    public void testParseWith2Taf() throws ParseException {
         String message = "TAF TAF LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
 
         TAF result = fSut.parse(message);
@@ -376,11 +378,18 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseInvalidMessage() {
+    public void testParseInvalidMessage() throws ParseException {
         String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(containsString(Messages.INVALID_MESSAGE));
+        fSut.parse(message);
+    }
 
-        TAF result = fSut.parse(message);
-
-        assertNull(result);
+    @Test
+    public void testParseInvalidAirport() throws ParseException {
+        String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(containsString(Messages.AIRPORT_NOT_FOUND));
+        fSut.parse(message);
     }
 }

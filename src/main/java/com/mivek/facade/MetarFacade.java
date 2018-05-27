@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.mivek.exception.InvalidIcaoException;
+import com.mivek.exception.ErrorCodes;
+import com.mivek.exception.ParseException;
 import com.mivek.model.Metar;
 import com.mivek.parser.MetarParser;
 
@@ -27,27 +28,15 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
         super(MetarParser.getInstance());
     }
 
-    /**
-     * Method to parse a metar.
-     * @param pCode the metar to decode.
-     * @return a metar object.
-     */
     @Override
-    public Metar decode(final String pCode) {
+    public Metar decode(final String pCode) throws ParseException {
         return getParser().parse(pCode);
     }
 
-    /**
-     * Gets the metar of an airport.
-     * @param pIcao String icao of the airport
-     * @return the decoded metar.
-     * @throws InvalidIcaoException When the icao is not valid.
-     * @throws IOException When an error occurs.
-     */
     @Override
-    public Metar retrieveFromAirport(final String pIcao) throws InvalidIcaoException, IOException {
+    public Metar retrieveFromAirport(final String pIcao) throws IOException, ParseException {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
-            throw new InvalidIcaoException(internationalization.Messages.INVALID_ICAO); // $NON-NLS-1$
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
         }
         String website = "http://tgftp.nws.noaa.gov/data/observations/metar/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
                 + ".TXT"; //$NON-NLS-1$

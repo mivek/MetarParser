@@ -13,6 +13,7 @@ import com.mivek.enums.CloudType;
 import com.mivek.enums.Descriptive;
 import com.mivek.enums.Intensity;
 import com.mivek.enums.Phenomenon;
+import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.AbstractWeatherContainer;
 import com.mivek.model.Airport;
@@ -278,9 +279,10 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /**
      * Abstract method parse.
      * @param pCode the message to parse.
+     * @throws ParseException when an error occurs during parsing.
      * @return The decoded object.
      */
-    public abstract T parse(String pCode);
+    public abstract T parse(String pCode) throws ParseException;
 
     /**
      * Method that parses common elements of a abstract weather container.
