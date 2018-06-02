@@ -41,15 +41,18 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         String website = "http://tgftp.nws.noaa.gov/data/forecasts/taf/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
                 + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
-        BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-        StringBuilder sb = new StringBuilder();
-        String inputLine;
-        br.readLine();
-        while ((inputLine = br.readLine()) != null) {
-            sb.append(inputLine.replaceAll("\\s{2,}", "\n"));
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+            StringBuilder sb = new StringBuilder();
+            String inputLine;
+            br.readLine();
+            while ((inputLine = br.readLine()) != null) {
+                sb.append(inputLine.replaceAll("\\s{2,}", "\n"));
+            }
+            return getParser().parse(sb.toString());
+        } catch (Exception e) {
+            throw e;
         }
-        br.close();
-        return getParser().parse(sb.toString());
+
     }
 
     /**
