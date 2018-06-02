@@ -1,5 +1,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5a43aa095704d449799e969b26119af)](https://app.codacy.com/app/mivek/MetarParser?utm_source=github.com&utm_medium=referral&utm_content=mivek/MetarParser&utm_campaign=badger)
+Master:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
+Develop:
+[![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=develop)](https://travis-ci.org/mivek/MetarParser)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/maintainability)](https://codeclimate.com/github/mivek/MetarParser/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/test_coverage)](https://codeclimate.com/github/mivek/MetarParser/test_coverage)
 # MetarParser
