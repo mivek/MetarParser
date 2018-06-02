@@ -28,8 +28,11 @@ public enum CloudQuantity {
     /**
      * Overcast.
      */
-    OVC("OVC", Messages.CLOUD_QUANTITY_OVC); //$NON-NLS-1$
-
+    OVC("OVC", Messages.CLOUD_QUANTITY_OVC), //$NON-NLS-1$
+    /**
+     * No significant cloud.
+     */
+    NSC("NSC", Messages.CLOUD_QUANTITY_NSC); //$NON-NLS-1$
     /**
      * Shortcut of the cloud quanity.
      */
