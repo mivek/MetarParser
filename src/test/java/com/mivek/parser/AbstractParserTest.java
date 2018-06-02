@@ -88,6 +88,14 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         assertEquals(CloudType.CB, res.getType());
     }
 
+    @Test
+    public void testParseCloudWithNSC() {
+        String cloud = "NSC";
+        Cloud res = getSut().parseCloud(cloud);
+        assertNotNull(res);
+        assertEquals(CloudQuantity.NSC, res.getQuantity());
+    }
+
     /**
      * ===================== TEST ParseWind ==================== *
      */

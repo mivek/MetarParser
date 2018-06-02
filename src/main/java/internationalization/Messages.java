@@ -38,6 +38,10 @@ public final class Messages {
      */
     public static final String CLOUD_QUANTITY_SKC = RESOURCE_BUNDLE.getString("CloudQuantity.SKC");
     /**
+     * Cloud quantity no significant cloud.
+     */
+    public static final String CLOUD_QUANTITY_NSC = RESOURCE_BUNDLE.getString("CloudQuantity.NSC");
+    /**
      * Cloud type cumulonimbus.
      */
     public static final String CLOUD_TYPE_CB = RESOURCE_BUNDLE.getString("CloudType.CB");
