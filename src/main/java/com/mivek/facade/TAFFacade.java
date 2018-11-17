@@ -19,7 +19,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
     /**
      * The instance of the facade.
      */
-    private static TAFFacade instance = new TAFFacade();
+    private static final TAFFacade INSTANCE = new TAFFacade();
 
     /**
      * Constructor.
@@ -52,13 +52,12 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         } catch (Exception e) {
             throw e;
         }
-
     }
 
     /**
      * @return the instance of the facade.
      */
     public static TAFFacade getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }

@@ -19,7 +19,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
     /**
      * Instance.
      */
-    private static MetarFacade instance = new MetarFacade();
+    private static final MetarFacade INSTANCE = new MetarFacade();
 
     /**
      * Private constructor.
@@ -42,10 +42,13 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
                 + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         URLConnection urlCo = url.openConnection();
-        BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()));
-        String line = (String) br.lines().toArray()[1];
-        br.close();
-        return getParser().parse(line);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()))) {
+            String line = (String) br.lines().toArray()[1];
+            br.close();
+            return getParser().parse(line);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     /**
@@ -53,6 +56,6 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
      * @return the instance of the class.
      */
     public static MetarFacade getInstance() {
-        return instance;
+        return INSTANCE;
     }
 }
