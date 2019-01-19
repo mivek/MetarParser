@@ -44,7 +44,7 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pWind fdsfsdfsd
+     * @param pWind the wind element to set.
      */
     public final void setWind(final Wind pWind) {
         fWind = pWind;
