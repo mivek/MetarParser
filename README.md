@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5a43aa095704d449799e969b26119af)](https://app.codacy.com/app/mivek/MetarParser?utm_source=github.com&utm_medium=referral&utm_content=mivek/MetarParser&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e5a43aa095704d449799e969b26119af)](https://app.codacy.com/app/mivek/MetarParser?utm_source=github.com&utm_medium=referral&utm_content=mivek/MetarParser&utm_campaign=badger)
 Master:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
