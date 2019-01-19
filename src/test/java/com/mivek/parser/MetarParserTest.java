@@ -300,6 +300,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("350m", m.getVisibility().getMainVisibility());
         assertThat(m.getWeatherConditions(), hasSize(1));
         assertEquals(Phenomenon.FOG, m.getWeatherConditions().get(0).getPhenomenons().get(0));
-        assertEquals(200, m.getVerticalVisibility());
+        assertNotNull(m.getVerticalVisibility());
+        assertEquals(200, m.getVerticalVisibility().intValue());
     }
 }

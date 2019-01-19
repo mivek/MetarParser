@@ -4,6 +4,7 @@
 package com.mivek.model;
 
 import static org.hamcrest.Matchers.empty;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
@@ -26,5 +27,15 @@ public class AbstractWeatherContainerTest {
 		Metar m = new Metar();
 		m.addCloud(null);
 		assertThat(m.getClouds(), empty());
+	}
+	
+	@Test
+	public void testGetVerticalVisibility() {
+	    //GIVEN a metar object with a null vertical visibility
+	    Metar m = new Metar();
+	    //WHEN retrieving the vertical visibility
+	    Integer result = m.getVerticalVisibility();
+	    //THEN the result is null, not a null pointer expection
+	    assertNull(result);
 	}
 }

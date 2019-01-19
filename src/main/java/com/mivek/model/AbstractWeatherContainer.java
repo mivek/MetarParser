@@ -103,14 +103,14 @@ public abstract class AbstractWeatherContainer {
     /**
      * @return the verticalVisibility in feet.
      */
-    public int getVerticalVisibility() {
+    public Integer getVerticalVisibility() {
         return fVerticalVisibility;
     }
 
     /**
      * @param pVerticalVisibility the verticalVisibility to set
      */
-    public void setVerticalVisibility(final int pVerticalVisibility) {
+    public void setVerticalVisibility(final Integer pVerticalVisibility) {
         fVerticalVisibility = pVerticalVisibility;
     }
 }
