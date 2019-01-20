@@ -57,7 +57,9 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 		                </goals>
 		                <configuration>
 		                    <mutationThreshold>86</mutationThreshold>
-		                    <excludedMethods></excludedMethods>
+		                    <excludedClasses>
+		                      <param>internationalization.Messages</param>
+		                    </excludedClasses>
 		                </configuration>
 				    </execution>
 				</executions>
