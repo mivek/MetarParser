@@ -26,6 +26,8 @@ import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
 
+import internationalization.Messages;
+
 /**
  * Test class for {@link AbstractParser}
  * @author mivek
@@ -106,7 +108,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(internationalization.Messages.CONVERTER_N));
+        assertThat(res.getDirection(), is(Messages.getInstance().getConverterN()));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
         assertEquals(0, res.getGust());
@@ -121,7 +123,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(internationalization.Messages.CONVERTER_SE));
+        assertThat(res.getDirection(), is(Messages.getInstance().getConverterSE()));
         assertEquals(Integer.valueOf(120), res.getDirectionDegrees());
         assertEquals(17, res.getSpeed());
         assertEquals(20, res.getGust());
@@ -135,7 +137,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertEquals(internationalization.Messages.CONVERTER_VRB, res.getDirection());
+        assertEquals(Messages.getInstance().getConverterVRB(), res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
     }

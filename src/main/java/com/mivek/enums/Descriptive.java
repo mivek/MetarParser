@@ -11,35 +11,35 @@ public enum Descriptive {
     /**
      * Showers.
      */
-    SHOWERS("SH", Messages.DESCRIPTIVE_SH), //$NON-NLS-1$
+    SHOWERS("SH", Messages.getInstance().getDescriptiveSH()), //$NON-NLS-1$
     /**
      * Shallow.
      */
-    SHALLOW("MI", Messages.DESCRIPTIVE_MI), //$NON-NLS-1$
+    SHALLOW("MI", Messages.getInstance().getDescriptiveMI()), //$NON-NLS-1$
     /**
      * Patches.
      */
-    PATCHES("BC", Messages.DESCRIPTIVE_BC), //$NON-NLS-1$
+    PATCHES("BC", Messages.getInstance().getDescriptiveBC()), //$NON-NLS-1$
     /**
      * Partial.
      */
-    PARTIAL("PR", Messages.DESCRIPTIVE_PR), //$NON-NLS-1$
+    PARTIAL("PR", Messages.getInstance().getDescriptivePR()), //$NON-NLS-1$
     /**
      * Low drifting.
      */
-    DRIFTING("DR", Messages.DESCRIPTIVE_DR), //$NON-NLS-1$
+    DRIFTING("DR", Messages.getInstance().getDescriptiveDR()), //$NON-NLS-1$
     /**
      * Thunderstorm.
      */
-    THUNDERSTORM("TS", Messages.DESCRIPTIVE_TS), //$NON-NLS-1$
+    THUNDERSTORM("TS", Messages.getInstance().getDescriptiveTS()), //$NON-NLS-1$
     /**
      * blowing.
      */
-    BLOWING("BL", Messages.DESCRIPTIVE_BL), //$NON-NLS-1$
+    BLOWING("BL", Messages.getInstance().getDescriptiveBL()), //$NON-NLS-1$
     /**
      * Freezing.
      */
-    FREEZING("FZ", Messages.DESCRIPTIVE_FZ); //$NON-NLS-1$
+    FREEZING("FZ", Messages.getInstance().getDescriptiveFZ()); //$NON-NLS-1$
 
     /**
      * Shortcut of the descriptive.

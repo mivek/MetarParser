@@ -31,7 +31,7 @@ public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCod
     public void testRetrieveFromAirportInvalid() throws Exception {
         thrown.expect(ParseException.class);
         thrown.expect(hasProperty("errorCode"));
-        thrown.expectMessage(containsString(Messages.INVALID_ICAO));
+        thrown.expectMessage(containsString(Messages.getInstance().getInvalidIcao()));
         getSut().retrieveFromAirport("RAndomeString");
     }
 

@@ -12,15 +12,15 @@ public enum Intensity {
     /**
      * Light intensity.
      */
-    LIGHT("-", Messages.INTENSITY_LIGHT), //$NON-NLS-1$
+    LIGHT("-", Messages.getInstance().getIntensityLight()), //$NON-NLS-1$
     /**
      * Heavy intensity.
      */
-    HEAVY("+", Messages.INTENSITY_HEAVY), //$NON-NLS-1$
+    HEAVY("+", Messages.getInstance().getIntensityHeavy()), //$NON-NLS-1$
     /**
      * In vicinity.
      */
-    IN_VICINITY("VC", Messages.INTENSITY_VC); //$NON-NLS-1$
+    IN_VICINITY("VC", Messages.getInstance().getIntensityVC()); //$NON-NLS-1$
 
     /**
      * The shortcut of the intensity.

@@ -161,7 +161,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         String directionPart = windPart[1];
         String direction = Converter.degreesToDirection(directionPart);
         wind.setDirection(direction);
-        if (!direction.equals(Messages.CONVERTER_VRB)) {
+        if (!direction.equals(Messages.getInstance().getConverterVRB())) {
             wind.setDirectionDegrees(Integer.parseInt(windPart[1]));
         }
         wind.setSpeed(Integer.parseInt(windPart[2]));

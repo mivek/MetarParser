@@ -8,11 +8,11 @@ import internationalization.Messages;
  */
 public enum TimeIndicator {
     /** The AT value of the metar trend. */
-    AT("AT", Messages.AT),
+    AT("AT", Messages.getInstance().getAt()),
     /** The FM value of the metar trend. */
-    FM("FM", Messages.FROM),
+    FM("FM", Messages.getInstance().getFrom()),
     /** The TL value of the metar trend. */
-    TL("TL", Messages.TL);
+    TL("TL", Messages.getInstance().getTl());
 
     /**
      * Shortcut of the time indicator.

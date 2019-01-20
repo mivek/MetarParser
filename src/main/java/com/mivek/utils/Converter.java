@@ -60,28 +60,28 @@ public final class Converter {
         try {
             degrees = Double.parseDouble(pDegreesStr);
         } catch (NumberFormatException e) {
-            return Messages.CONVERTER_VRB;
+            return Messages.getInstance().getConverterVRB();
         }
 
         if (isBetween(degrees, NORTH_EAST_MIN, SOUTH)) {
             if (isBetween(degrees, NORTH_EAST_MIN, NORTH_EAST_MAX)) {
-                res = Messages.CONVERTER_NE;
+                res = Messages.getInstance().getConverterNE();
             } else if (isBetween(degrees, NORTH_EAST_MAX, EAST)) {
-                res = Messages.CONVERTER_E;
+                res = Messages.getInstance().getConverterE();
             } else if (isBetween(degrees, EAST, SOUTH_EAST)) {
-                res = Messages.CONVERTER_SE;
+                res = Messages.getInstance().getConverterSE();
             } else if (isBetween(degrees, SOUTH_EAST, SOUTH)) {
-                res = Messages.CONVERTER_S;
+                res = Messages.getInstance().getConverterS();
             }
         } else {
             if (isBetween(degrees, SOUTH, SOUTH_WEST)) {
-                res = Messages.CONVERTER_SW;
+                res = Messages.getInstance().getConverterSW();
             } else if (isBetween(degrees, SOUTH_WEST, WEST)) {
-                res = Messages.CONVERTER_W;
+                res = Messages.getInstance().getConverterW();
             } else if (isBetween(degrees, WEST, NORTH_WEST)) {
-                res = Messages.CONVERTER_NW;
+                res = Messages.getInstance().getConverterNW();
             } else {
-                res = Messages.CONVERTER_N;
+                res = Messages.getInstance().getConverterN();
             }
         }
         return res;
@@ -135,11 +135,11 @@ public final class Converter {
      */
     public static String convertTrend(final String pInput) {
         if ("U".equals(pInput)) { //$NON-NLS-1$
-            return Messages.CONVERTER_U;
+            return Messages.getInstance().getConverterU();
         } else if ("D".equals(pInput)) { //$NON-NLS-1$
-            return Messages.CONVERTER_D;
+            return Messages.getInstance().getConverterD();
         } else if ("N".equals(pInput)) { //$NON-NLS-1$
-            return Messages.CONVERTER_NSC;
+            return Messages.getInstance().getConverterNSC();
         }
         return ""; //$NON-NLS-1$
     }

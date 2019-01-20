@@ -9,19 +9,19 @@ public enum WeatherChangeType {
     /**
      * From enumeration.
      */
-    FM("FM", Messages.FROM),
+    FM("FM", Messages.getInstance().getFrom()),
     /**
      * Becoming enumeration.
      */
-    BECMG("BECMG", Messages.BECMG),
+    BECMG("BECMG", Messages.getInstance().getBecmg()),
     /**
      * Tempo enumeration.
      */
-    TEMPO("TEMPO", Messages.TEMPO),
+    TEMPO("TEMPO", Messages.getInstance().getTempo()),
     /**
      * Probability change.
      */
-    PROB("PROB", Messages.PROB);
+    PROB("PROB", Messages.getInstance().getProb());
     /**
      * Shortcut attribute.
      */
