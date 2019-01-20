@@ -12,27 +12,27 @@ public enum CloudQuantity {
     /**
      * Sky clear.
      */
-    SKC("SKC", Messages.CLOUD_QUANTITY_SKC), //$NON-NLS-1$
+    SKC("SKC", Messages.getInstance().getCloudQuantitySKC()), //$NON-NLS-1$
     /**
      * Few clouds.
      */
-    FEW("FEW", Messages.CLOUD_QUANTITY_FEW), //$NON-NLS-1$
+    FEW("FEW", Messages.getInstance().getCloudQuantityFEW()), //$NON-NLS-1$
     /**
      * Broken ceiling.
      */
-    BKN("BKN", Messages.CLOUD_QUANTITY_BKN), //$NON-NLS-1$
+    BKN("BKN", Messages.getInstance().getCloudQuantityBKN()), //$NON-NLS-1$
     /**
      * Scattered.
      */
-    SCT("SCT", Messages.CLOUD_QUANTITY_SCT), //$NON-NLS-1$
+    SCT("SCT", Messages.getInstance().getCloudQuantitySCT()), //$NON-NLS-1$
     /**
      * Overcast.
      */
-    OVC("OVC", Messages.CLOUD_QUANTITY_OVC), //$NON-NLS-1$
+    OVC("OVC", Messages.getInstance().getCloudQuantityOVC()), //$NON-NLS-1$
     /**
      * No significant cloud.
      */
-    NSC("NSC", Messages.CLOUD_QUANTITY_NSC); //$NON-NLS-1$
+    NSC("NSC", Messages.getInstance().getCloudQuantityNSC()); //$NON-NLS-1$
     /**
      * Shortcut of the cloud quanity.
      */

@@ -11,47 +11,47 @@ public enum CloudType {
     /**
      * cumulonimbus.
      */
-    CB("CB", Messages.CLOUD_TYPE_CB), //$NON-NLS-1$
+    CB("CB", Messages.getInstance().getCloudTypeCB()), //$NON-NLS-1$
     /**
      * towering cumulus, cumulus congestus.
      */
-    TCU("TCU", Messages.CLOUD_TYPE_TCU), //$NON-NLS-1$
+    TCU("TCU", Messages.getInstance().getCloudTypeTCU()), //$NON-NLS-1$
     /**
      * Cirrus.
      */
-    CI("CI", Messages.CLOUD_TYPE_CI),
+    CI("CI", Messages.getInstance().getCloudTypeCI()),
     /**
      * Cirrocumulus.
      */
-    CC("CC", Messages.CLOUD_TYPE_CC),
+    CC("CC", Messages.getInstance().getCloudTypeCC()),
     /**
      * Cirrostratus.
      */
-    CS("CS", Messages.CLOUD_TYPE_CS),
+    CS("CS", Messages.getInstance().getCloudTypeCS()),
     /**
      * Altocumulus.
      */
-    AC("AC", Messages.CLOUD_TYPE_AC),
+    AC("AC", Messages.getInstance().getCloudTypeAC()),
     /**
      * Stratus.
      */
-    ST("ST", Messages.CLOUD_TYPE_ST),
+    ST("ST", Messages.getInstance().getCloudTypeST()),
     /**
      * Cumulus.
      */
-    CU("CU", Messages.CLOUD_TYPE_CU),
+    CU("CU", Messages.getInstance().getCloudTypeCU()),
     /**
      * Astrostratus.
      */
-    AS("AS", Messages.CLOUD_TYPE_AS),
+    AS("AS", Messages.getInstance().getCloudTypeAS()),
     /**
      * Nimbostratus.
      */
-    NS("NS", Messages.CLOUD_TYPE_NS),
+    NS("NS", Messages.getInstance().getCloudTypeNS()),
     /**
      * Stratocumulus.
      */
-    SC("SC", Messages.CLOUD_TYPE_SC);
+    SC("SC", Messages.getInstance().getCloudTypeSC());
 
     /**
      * The shortcut of the cloud type.
