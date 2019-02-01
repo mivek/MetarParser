@@ -46,7 +46,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /**
      * Pattern for the main visibility.
      */
-    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d)$";
+    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d)(|NDV)$";
     /**
      * Pattern to recognize clouds.
      */
