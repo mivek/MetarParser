@@ -2,10 +2,9 @@ package io.github.mivek.facade;
 
 import org.junit.Ignore;
 
-import com.mivek.model.TAF;
-
 import io.github.mivek.facade.AbstractWeatherCodeFacade;
 import io.github.mivek.facade.TAFFacade;
+import io.github.mivek.model.TAF;
 
 @Ignore
 public class TAFFacadeTest extends AbstractWeatherCodeFacadeTest<TAF> {

@@ -3,9 +3,8 @@ package io.github.mivek.facade;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import com.mivek.model.AbstractWeatherCode;
-
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.AbstractWeatherCode;
 
 /**
  * Interface for facade.

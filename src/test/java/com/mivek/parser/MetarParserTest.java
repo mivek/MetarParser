@@ -17,14 +17,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mivek.model.Cloud;
-import com.mivek.model.Metar;
-import com.mivek.model.RunwayInfo;
-import com.mivek.model.Visibility;
-import com.mivek.model.WeatherCondition;
-import com.mivek.model.Wind;
-import com.mivek.model.trend.AbstractMetarTrend;
-
 import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
@@ -33,6 +25,13 @@ import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.Cloud;
+import io.github.mivek.model.Metar;
+import io.github.mivek.model.RunwayInfo;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.WeatherCondition;
+import io.github.mivek.model.Wind;
+import io.github.mivek.model.trend.AbstractMetarTrend;
 
 /**
  * Test class for {@link MetarParser}

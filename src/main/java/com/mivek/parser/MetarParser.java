@@ -2,19 +2,18 @@ package com.mivek.parser;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.mivek.model.Airport;
-import com.mivek.model.Metar;
-import com.mivek.model.RunwayInfo;
-import com.mivek.model.Visibility;
-import com.mivek.model.trend.AbstractMetarTrend;
-import com.mivek.model.trend.BECMGMetarTrend;
-import com.mivek.model.trend.TEMPOMetarTrend;
-import com.mivek.model.trend.validity.ATTime;
-import com.mivek.model.trend.validity.FMTime;
-import com.mivek.model.trend.validity.TLTime;
-
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.Airport;
+import io.github.mivek.model.Metar;
+import io.github.mivek.model.RunwayInfo;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivek.model.trend.BECMGMetarTrend;
+import io.github.mivek.model.trend.TEMPOMetarTrend;
+import io.github.mivek.model.trend.validity.ATTime;
+import io.github.mivek.model.trend.validity.FMTime;
+import io.github.mivek.model.trend.validity.TLTime;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
 

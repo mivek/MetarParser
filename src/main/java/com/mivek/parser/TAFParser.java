@@ -1,19 +1,18 @@
 package com.mivek.parser;
 
-import com.mivek.model.Airport;
-import com.mivek.model.TAF;
-import com.mivek.model.TemperatureDated;
-import com.mivek.model.Visibility;
-import com.mivek.model.trend.AbstractTafTrend;
-import com.mivek.model.trend.BECMGTafTrend;
-import com.mivek.model.trend.FMTafTrend;
-import com.mivek.model.trend.PROBTafTrend;
-import com.mivek.model.trend.TEMPOTafTrend;
-import com.mivek.model.trend.validity.BeginningValidity;
-import com.mivek.model.trend.validity.Validity;
-
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.Airport;
+import io.github.mivek.model.TAF;
+import io.github.mivek.model.TemperatureDated;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.trend.AbstractTafTrend;
+import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.PROBTafTrend;
+import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.validity.BeginningValidity;
+import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
 

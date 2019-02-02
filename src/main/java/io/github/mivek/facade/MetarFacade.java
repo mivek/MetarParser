@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.mivek.model.Metar;
 import com.mivek.parser.MetarParser;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.Metar;
 
 /**
  * Class representing the facade for metars.

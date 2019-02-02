@@ -2,7 +2,7 @@
 <class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="com.mivek.model.Airport" project="metarParser" 
+  <class id="1" language="java" name="io.github.mivek.model.Airport" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Airport.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="289" y="101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -11,7 +11,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.mivek.model.Wind" project="metarParser" 
+  <class id="2" language="java" name="io.github.mivek.model.Wind" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Wind.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="939" y="192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -20,7 +20,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.mivek.model.Metar" project="metarParser" 
+  <class id="3" language="java" name="io.github.mivek.model.Metar" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Metar.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="260" y="611"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -29,7 +29,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.mivek.model.TAF" project="metarParser" 
+  <class id="4" language="java" name="io.github.mivek.model.TAF" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/TAF.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="445" y="621"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -38,7 +38,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.mivek.model.Visibility" project="metarParser" 
+  <class id="5" language="java" name="io.github.mivek.model.Visibility" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Visibility.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="765" y="123"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -47,7 +47,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.mivek.model.WeatherCondition" project="metarParser" 
+  <class id="6" language="java" name="io.github.mivek.model.WeatherCondition" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/WeatherCondition.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="806" y="449"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -56,7 +56,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.mivek.model.Cloud" project="metarParser" 
+  <class id="7" language="java" name="io.github.mivek.model.Cloud" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Cloud.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="992" y="360"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -65,7 +65,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.mivek.model.trend.validity.AbstractValidity" project="metarParser" 
+  <class id="8" language="java" name="io.github.mivek.model.trend.validity.AbstractValidity" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/AbstractValidity.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="94" width="117" x="734" y="597"/>    
@@ -75,7 +75,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.mivek.model.trend.validity.Validity" project="metarParser" 
+  <class id="9" language="java" name="io.github.mivek.model.trend.validity.Validity" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/Validity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="674" y="780"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -84,7 +84,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.mivek.model.trend.validity.BeginningValidity" project="metarParser" 
+  <class id="10" language="java" name="io.github.mivek.model.trend.validity.BeginningValidity" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/BeginningValidity.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="920" y="799"/>    
@@ -94,7 +94,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.mivek.model.trend.AbstractTafTrend" project="metarParser" 
+  <class id="11" language="java" name="io.github.mivek.model.trend.AbstractTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/AbstractTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="627" y="1116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -103,7 +103,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.mivek.model.trend.BECMGTafTrend" project="metarParser" 
+  <class id="12" language="java" name="io.github.mivek.model.trend.BECMGTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/BECMGTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="394" y="951"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -112,7 +112,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
+  <class id="13" language="java" name="io.github.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="560" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -121,7 +121,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="com.mivek.model.trend.FMTafTrend" project="metarParser" 
+  <class id="14" language="java" name="io.github.mivek.model.trend.FMTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/FMTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="690" y="959"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -130,7 +130,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="com.mivek.model.TemperatureDated" project="metarParser" 
+  <class id="15" language="java" name="io.github.mivek.model.TemperatureDated" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/TemperatureDated.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="648" y="1302"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -193,7 +193,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <class id="22" language="java" name="com.mivek.model.AbstractWeatherCode" project="metarParser" 
+  <class id="22" language="java" name="io.github.mivek.model.AbstractWeatherCode" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/AbstractWeatherCode.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="130" width="153" x="227" y="292"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -202,7 +202,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="com.mivek.model.RunwayInfo" project="metarParser" 
+  <class id="23" language="java" name="io.github.mivek.model.RunwayInfo" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/RunwayInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="130" width="98" x="210" y="749"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -211,7 +211,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="com.mivek.model.Country" project="metarParser" 
+  <class id="24" language="java" name="io.github.mivek.model.Country" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/Country.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="76" width="91" x="500" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -220,7 +220,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="com.mivek.model.AbstractWeatherContainer" project="metarParser" 
+  <class id="25" language="java" name="io.github.mivek.model.AbstractWeatherContainer" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/AbstractWeatherContainer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="517" y="247"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

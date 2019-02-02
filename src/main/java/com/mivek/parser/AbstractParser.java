@@ -8,14 +8,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.model.AbstractWeatherCode;
-import com.mivek.model.AbstractWeatherContainer;
-import com.mivek.model.Airport;
-import com.mivek.model.Cloud;
-import com.mivek.model.Country;
-import com.mivek.model.Visibility;
-import com.mivek.model.WeatherCondition;
-import com.mivek.model.Wind;
 import com.opencsv.CSVReader;
 
 import internationalization.Messages;
@@ -25,6 +17,14 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.AbstractWeatherCode;
+import io.github.mivek.model.AbstractWeatherContainer;
+import io.github.mivek.model.Airport;
+import io.github.mivek.model.Cloud;
+import io.github.mivek.model.Country;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.WeatherCondition;
+import io.github.mivek.model.Wind;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
 

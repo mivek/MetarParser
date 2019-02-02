@@ -18,15 +18,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mivek.model.TAF;
-import com.mivek.model.TemperatureDated;
-import com.mivek.model.trend.AbstractTafTrend;
-import com.mivek.model.trend.BECMGTafTrend;
-import com.mivek.model.trend.FMTafTrend;
-import com.mivek.model.trend.TEMPOTafTrend;
-import com.mivek.model.trend.validity.BeginningValidity;
-import com.mivek.model.trend.validity.Validity;
-
 import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
@@ -34,6 +25,14 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.TAF;
+import io.github.mivek.model.TemperatureDated;
+import io.github.mivek.model.trend.AbstractTafTrend;
+import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.validity.BeginningValidity;
+import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 
 /**

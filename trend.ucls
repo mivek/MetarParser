@@ -2,7 +2,7 @@
 <class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
-  <class id="1" language="java" name="com.mivek.model.trend.AbstractTrend" project="metarParser" 
+  <class id="1" language="java" name="io.github.mivek.model.trend.AbstractTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/AbstractTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="339" y="121"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -11,7 +11,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.mivek.model.trend.AbstractMetarTrend" project="metarParser" 
+  <class id="2" language="java" name="io.github.mivek.model.trend.AbstractMetarTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/AbstractMetarTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="561" y="178"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -20,7 +20,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.mivek.model.trend.validity.AbstractMetarTrendTime" project="metarParser" 
+  <class id="3" language="java" name="io.github.mivek.model.trend.validity.AbstractMetarTrendTime" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/AbstractMetarTrendTime.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="856" y="173"/>    
@@ -30,7 +30,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.mivek.model.trend.validity.ATTime" project="metarParser" 
+  <class id="4" language="java" name="io.github.mivek.model.trend.validity.ATTime" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/ATTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1017" y="331"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -39,7 +39,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="com.mivek.model.trend.validity.FMTime" project="metarParser" 
+  <class id="5" language="java" name="io.github.mivek.model.trend.validity.FMTime" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/FMTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="962" y="408"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -48,7 +48,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.mivek.model.trend.validity.TLTime" project="metarParser" 
+  <class id="6" language="java" name="io.github.mivek.model.trend.validity.TLTime" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/validity/TLTime.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="776" y="405"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -57,7 +57,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="com.mivek.model.trend.BECMGMetarTrend" project="metarParser" 
+  <class id="7" language="java" name="io.github.mivek.model.trend.BECMGMetarTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/BECMGMetarTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="433" y="318"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -66,7 +66,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.mivek.model.trend.TEMPOMetarTrend" project="metarParser" 
+  <class id="8" language="java" name="io.github.mivek.model.trend.TEMPOMetarTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOMetarTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="580" y="393"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -75,7 +75,7 @@
       <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.mivek.model.trend.AbstractTafTrend" project="metarParser" 
+  <class id="9" language="java" name="io.github.mivek.model.trend.AbstractTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/AbstractTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="198" y="277"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -84,7 +84,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.mivek.model.trend.BECMGTafTrend" project="metarParser" 
+  <class id="10" language="java" name="io.github.mivek.model.trend.BECMGTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/BECMGTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="58" width="114" x="-1" y="391"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -93,7 +93,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.mivek.model.trend.FMTafTrend" project="metarParser" 
+  <class id="11" language="java" name="io.github.mivek.model.trend.FMTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/FMTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="177" y="434"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -102,7 +102,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="com.mivek.model.trend.PROBTafTrend" project="metarParser" 
+  <class id="12" language="java" name="io.github.mivek.model.trend.PROBTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/PROBTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="58" width="109" x="272" y="417"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -111,7 +111,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="com.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
+  <class id="13" language="java" name="io.github.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="256" y="524"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
