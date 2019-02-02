@@ -392,4 +392,27 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         thrown.expectMessage(containsString(Messages.getInstance().getAirportNotFound()));
         fSut.parse(message);
     }
+    @Test
+    public void testParseWithNauticalMilesVisibility() throws ParseException {
+        //GIVEN a TAF message with nautical miles visibility;
+        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
+                "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n" +
+                "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
+
+        //WHEN parsing the message.
+        TAF result = fSut.parse(message);
+        //THEN the visibility of the main event is 6 SM
+        assertNotNull(result);
+        assertNotNull(result.getVisibility());
+        assertEquals("6SM", result.getVisibility().getMainVisibility());
+        //THEN the visibility of the first tempo is 11/2 SM
+        assertNotNull(result.getTempos().get(0).getVisibility());
+        assertEquals("11/2SM", result.getTempos().get(0).getVisibility().getMainVisibility());
+        //THEN the visibility of the second tempo is 3/4 SM
+        assertNotNull(result.getTempos().get(1).getVisibility());
+        assertEquals("3/4SM", result.getTempos().get(1).getVisibility().getMainVisibility());
+        // Then the visibility of the FROM part is 2SN
+        assertNotNull(result.getFMs().get(0).getVisibility());
+        assertEquals("2SM", result.getFMs().get(0).getVisibility().getMainVisibility());
+    }
 }
