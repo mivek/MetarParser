@@ -1,6 +1,5 @@
 package io.github.mivek.facade;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -14,9 +13,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import internationalization.Messages;
+import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
-import io.github.mivek.facade.AbstractWeatherCodeFacade;
 import io.github.mivek.model.AbstractWeatherCode;
 
 @Ignore
@@ -30,8 +28,7 @@ public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCod
     @Test
     public void testRetrieveFromAirportInvalid() throws Exception {
         thrown.expect(ParseException.class);
-        thrown.expect(hasProperty("errorCode"));
-        thrown.expectMessage(containsString(Messages.getInstance().getInvalidIcao()));
+        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_INVALID_ICAO)));
         getSut().retrieveFromAirport("RAndomeString");
     }
 
