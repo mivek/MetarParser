@@ -1,4 +1,4 @@
-package com.mivek.facade;
+package io.github.mivek.facade;
 
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
@@ -14,6 +14,8 @@ import com.mivek.model.Metar;
 
 import internationalization.Messages;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.facade.AbstractWeatherCodeFacade;
+import io.github.mivek.facade.MetarFacade;
 
 public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
     @Test

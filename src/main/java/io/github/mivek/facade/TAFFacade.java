@@ -1,4 +1,4 @@
-package com.mivek.facade;
+package io.github.mivek.facade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,8 +41,8 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
-        String website = NOAA_TAF_URL + pIcao.toUpperCase() //$NON-NLS-1$
-        + ".TXT"; //$NON-NLS-1$
+        String website = NOAA_TAF_URL + pIcao.toUpperCase() // $NON-NLS-1$
+                + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             StringBuilder sb = new StringBuilder();

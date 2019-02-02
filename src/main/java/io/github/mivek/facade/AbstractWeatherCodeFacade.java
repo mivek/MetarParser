@@ -1,4 +1,4 @@
-package com.mivek.facade;
+package io.github.mivek.facade;
 
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.parser.AbstractParser;

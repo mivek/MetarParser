@@ -1,4 +1,4 @@
-package com.mivek.facade;
+package io.github.mivek.facade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,8 +41,8 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
         }
-        String website = NOAA_METAR_URL + pIcao.toUpperCase() //$NON-NLS-1$
-        + ".TXT"; //$NON-NLS-1$
+        String website = NOAA_METAR_URL + pIcao.toUpperCase() // $NON-NLS-1$
+                + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         URLConnection urlCo = url.openConnection();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()))) {

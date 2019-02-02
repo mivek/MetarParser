@@ -1,4 +1,4 @@
-package com.mivek.facade;
+package io.github.mivek.facade;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasProperty;
@@ -18,6 +18,7 @@ import com.mivek.model.AbstractWeatherCode;
 
 import internationalization.Messages;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.facade.AbstractWeatherCodeFacade;
 
 @Ignore
 public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCode> {
