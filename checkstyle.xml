@@ -57,7 +57,6 @@ Checkstyle configuration that checks the sun coding conventions.
     <module name="RightCurly"/>
     <module name="AvoidInlineConditionals">
       <property name="severity" value="ignore"/>
-      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
     </module>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>
