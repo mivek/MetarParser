@@ -11,11 +11,11 @@ import com.mivek.model.trend.PROBTafTrend;
 import com.mivek.model.trend.TEMPOTafTrend;
 import com.mivek.model.trend.validity.BeginningValidity;
 import com.mivek.model.trend.validity.Validity;
-import com.mivek.utils.Converter;
-import com.mivek.utils.Regex;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.utils.Converter;
+import io.github.mivek.utils.Regex;
 
 /**
  * @author mivek

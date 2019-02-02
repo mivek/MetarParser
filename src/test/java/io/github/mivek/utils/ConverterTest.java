@@ -1,4 +1,4 @@
-package com.mivek.utils;
+package io.github.mivek.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,6 +9,7 @@ import java.time.LocalTime;
 import org.junit.Test;
 
 import internationalization.Messages;
+import io.github.mivek.utils.Converter;
 
 public class ConverterTest {
 

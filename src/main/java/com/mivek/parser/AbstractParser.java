@@ -16,8 +16,6 @@ import com.mivek.model.Country;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
-import com.mivek.utils.Converter;
-import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
 import internationalization.Messages;
@@ -27,6 +25,8 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.utils.Converter;
+import io.github.mivek.utils.Regex;
 
 /**
  * Abstract class for parser.

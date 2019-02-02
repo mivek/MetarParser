@@ -1,4 +1,4 @@
-package com.mivek.utils;
+package io.github.mivek.utils;
 
 import static org.hamcrest.Matchers.arrayContainingInAnyOrder;
 import static org.hamcrest.Matchers.arrayWithSize;
@@ -10,6 +10,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import io.github.mivek.utils.Regex;
 
 public class RegexTest {
 	

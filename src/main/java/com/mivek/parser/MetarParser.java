@@ -12,11 +12,11 @@ import com.mivek.model.trend.TEMPOMetarTrend;
 import com.mivek.model.trend.validity.ATTime;
 import com.mivek.model.trend.validity.FMTime;
 import com.mivek.model.trend.validity.TLTime;
-import com.mivek.utils.Converter;
-import com.mivek.utils.Regex;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.utils.Converter;
+import io.github.mivek.utils.Regex;
 
 /**
  * This controller contains methods that parse the metar code. This class is a

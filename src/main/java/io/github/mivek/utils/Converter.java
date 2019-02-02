@@ -1,4 +1,4 @@
-package com.mivek.utils;
+package io.github.mivek.utils;
 
 import java.time.LocalTime;
 
