@@ -139,7 +139,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <enumeration id="16" language="java" name="com.mivek.enums.CloudQuantity" project="metarParser" 
+  <enumeration id="16" language="java" name="io.github.mivek.enums.CloudQuantity" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/CloudQuantity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="184" width="122" x="27" y="1151"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -148,7 +148,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <enumeration id="17" language="java" name="com.mivek.enums.CloudType" project="metarParser" 
+  <enumeration id="17" language="java" name="io.github.mivek.enums.CloudType" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/CloudType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="130" width="119" x="170" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -157,7 +157,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <enumeration id="18" language="java" name="com.mivek.enums.Descriptive" project="metarParser" 
+  <enumeration id="18" language="java" name="io.github.mivek.enums.Descriptive" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/Descriptive.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="378" y="1508"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -166,7 +166,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <enumeration id="19" language="java" name="com.mivek.enums.Intensity" project="metarParser" 
+  <enumeration id="19" language="java" name="io.github.mivek.enums.Intensity" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/Intensity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="91" y="1455"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -175,7 +175,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <enumeration id="20" language="java" name="com.mivek.enums.Phenomenon" project="metarParser" 
+  <enumeration id="20" language="java" name="io.github.mivek.enums.Phenomenon" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/Phenomenon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="650" y="1634"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -184,7 +184,7 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </enumeration>  
-  <enumeration id="21" language="java" name="com.mivek.enums.WeatherChangeType" project="metarParser" 
+  <enumeration id="21" language="java" name="io.github.mivek.enums.WeatherChangeType" project="metarParser" 
     file="/metarParser/src/main/java/com/mivek/enums/WeatherChangeType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="877" y="1407"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

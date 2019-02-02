@@ -1,4 +1,4 @@
-package com.mivek.enums;
+package io.github.mivek.enums;
 
 import internationalization.Messages;
 

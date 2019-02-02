@@ -18,11 +18,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
-import com.mivek.enums.Descriptive;
-import com.mivek.enums.Intensity;
-import com.mivek.enums.Phenomenon;
 import com.mivek.exception.ParseException;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
@@ -35,6 +30,11 @@ import com.mivek.model.trend.validity.Validity;
 import com.mivek.utils.Converter;
 
 import internationalization.Messages;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.Phenomenon;
 
 /**
  * Test class for {@link TAFParser}

@@ -1,6 +1,6 @@
 package com.mivek.model.trend.validity;
 
-import com.mivek.enums.TimeIndicator;
+import io.github.mivek.enums.TimeIndicator;
 
 /**
  * This class represents the AT part of the trend in a metar.

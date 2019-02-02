@@ -1,7 +1,7 @@
 package com.mivek.model;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
 
 /**
  * Class representing a cloud element. Clouds are composed of : a quantity a

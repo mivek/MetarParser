@@ -8,11 +8,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
-import com.mivek.enums.Descriptive;
-import com.mivek.enums.Intensity;
-import com.mivek.enums.Phenomenon;
 import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.AbstractWeatherContainer;
@@ -27,6 +22,11 @@ import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
 
 import internationalization.Messages;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.Phenomenon;
 
 /**
  * Abstract class for parser.

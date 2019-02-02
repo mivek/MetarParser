@@ -3,9 +3,9 @@ package com.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mivek.enums.Descriptive;
-import com.mivek.enums.Intensity;
-import com.mivek.enums.Phenomenon;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.Phenomenon;
 
 /**
  * Weather condition class.

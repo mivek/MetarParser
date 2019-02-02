@@ -1,6 +1,6 @@
 package com.mivek.model.trend;
 
-import com.mivek.enums.WeatherChangeType;
+import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * BECMG class for metar.

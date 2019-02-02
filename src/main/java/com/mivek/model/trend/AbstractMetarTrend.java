@@ -3,8 +3,9 @@ package com.mivek.model.trend;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mivek.enums.WeatherChangeType;
 import com.mivek.model.trend.validity.AbstractMetarTrendTime;
+
+import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * Abstract class for metar's trend.

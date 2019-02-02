@@ -2,4 +2,4 @@
  * This package contains enumerations of the application.
  * @author mivek
  */
-package com.mivek.enums;
+package io.github.mivek.enums;

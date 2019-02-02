@@ -1,7 +1,8 @@
 package com.mivek.model.trend;
 
-import com.mivek.enums.WeatherChangeType;
 import com.mivek.model.trend.validity.BeginningValidity;
+
+import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * Class representing From Changes.

@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.mivek.enums.CloudQuantity;
-import com.mivek.enums.CloudType;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
 
 public class CloudTest {
 	@Test

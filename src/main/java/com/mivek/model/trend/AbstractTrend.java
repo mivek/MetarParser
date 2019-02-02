@@ -1,7 +1,8 @@
 package com.mivek.model.trend;
 
-import com.mivek.enums.WeatherChangeType;
 import com.mivek.model.AbstractWeatherContainer;
+
+import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * Abstract class for trends.

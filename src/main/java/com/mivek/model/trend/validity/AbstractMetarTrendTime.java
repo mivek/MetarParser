@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 import org.apache.commons.lang3.Validate;
 
-import com.mivek.enums.TimeIndicator;
+import io.github.mivek.enums.TimeIndicator;
 
 /**
  * Abstract class for the time trend in a metar.
