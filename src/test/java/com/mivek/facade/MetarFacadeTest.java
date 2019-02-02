@@ -10,10 +10,10 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.mivek.exception.ParseException;
 import com.mivek.model.Metar;
 
 import internationalization.Messages;
+import io.github.mivek.exception.ParseException;
 
 public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
     @Test

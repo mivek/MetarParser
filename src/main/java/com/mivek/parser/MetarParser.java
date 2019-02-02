@@ -2,8 +2,6 @@ package com.mivek.parser;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.mivek.exception.ErrorCodes;
-import com.mivek.exception.ParseException;
 import com.mivek.model.Airport;
 import com.mivek.model.Metar;
 import com.mivek.model.RunwayInfo;
@@ -16,6 +14,9 @@ import com.mivek.model.trend.validity.FMTime;
 import com.mivek.model.trend.validity.TLTime;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
+
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseException;
 
 /**
  * This controller contains methods that parse the metar code. This class is a

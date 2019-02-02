@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 import com.mivek.model.AbstractWeatherContainer;
 import com.mivek.model.Airport;
@@ -27,6 +26,7 @@ import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.exception.ParseException;
 
 /**
  * Abstract class for parser.

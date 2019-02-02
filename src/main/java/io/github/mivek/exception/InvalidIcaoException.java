@@ -1,4 +1,4 @@
-package com.mivek.exception;
+package io.github.mivek.exception;
 
 /**
  * @author mivek

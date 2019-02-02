@@ -14,10 +14,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import com.mivek.exception.ParseException;
 import com.mivek.model.AbstractWeatherCode;
 
 import internationalization.Messages;
+import io.github.mivek.exception.ParseException;
 
 @Ignore
 public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCode> {

@@ -1,4 +1,4 @@
 /**
  * @author mivek This package contains all exceptions of the application.
  */
-package com.mivek.exception;
+package io.github.mivek.exception;

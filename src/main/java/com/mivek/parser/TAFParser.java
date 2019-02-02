@@ -1,7 +1,5 @@
 package com.mivek.parser;
 
-import com.mivek.exception.ErrorCodes;
-import com.mivek.exception.ParseException;
 import com.mivek.model.Airport;
 import com.mivek.model.TAF;
 import com.mivek.model.TemperatureDated;
@@ -15,6 +13,9 @@ import com.mivek.model.trend.validity.BeginningValidity;
 import com.mivek.model.trend.validity.Validity;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
+
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseException;
 
 /**
  * @author mivek
