@@ -1,4 +1,4 @@
-package internationalization;
+package io.github.mivekinternationalization;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

@@ -17,7 +17,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
@@ -32,6 +31,7 @@ import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
 import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link MetarParser}

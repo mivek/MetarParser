@@ -1,6 +1,6 @@
 package io.github.mivek.enums;
 
-import internationalization.Messages;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Enumeration for cloud type. The first attribute is the code used in the

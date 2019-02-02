@@ -58,7 +58,7 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 		                <configuration>
 		                    <mutationThreshold>86</mutationThreshold>
 		                    <excludedClasses>
-		                      <param>internationalization.Messages</param>
+		                      <param>io.github.mivekinternationalization.Messages</param>
 		                    </excludedClasses>
 		                </configuration>
 				    </execution>

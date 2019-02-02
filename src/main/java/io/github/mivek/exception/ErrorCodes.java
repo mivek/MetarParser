@@ -1,6 +1,6 @@
 package io.github.mivek.exception;
 
-import internationalization.Messages;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * @author mivek

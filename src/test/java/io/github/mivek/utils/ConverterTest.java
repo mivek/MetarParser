@@ -8,8 +8,8 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 
-import internationalization.Messages;
 import io.github.mivek.utils.Converter;
+import io.github.mivekinternationalization.Messages;
 
 public class ConverterTest {
 

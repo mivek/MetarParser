@@ -1,6 +1,6 @@
 package io.github.mivek.enums;
 
-import internationalization.Messages;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Enumeration for phenomenon.

@@ -18,7 +18,6 @@ import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
@@ -35,6 +34,7 @@ import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link TAFParser}

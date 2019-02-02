@@ -1,10 +1,12 @@
-package internationalization;
+package io.github.mivekinternationalization;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.Locale;
 
 import org.junit.Test;
+
+import io.github.mivekinternationalization.Messages;
 
 public class MessagesTest {
 

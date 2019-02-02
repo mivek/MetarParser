@@ -14,7 +14,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
@@ -26,6 +25,7 @@ import io.github.mivek.model.Cloud;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link AbstractParser}

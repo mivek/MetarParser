@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import com.opencsv.CSVReader;
 
-import internationalization.Messages;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
@@ -27,6 +26,7 @@ import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
+import io.github.mivekinternationalization.Messages;
 
 /**
  * Abstract class for parser.
