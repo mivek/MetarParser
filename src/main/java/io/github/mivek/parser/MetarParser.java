@@ -1,4 +1,4 @@
-package com.mivek.parser;
+package io.github.mivek.parser;
 
 import org.apache.commons.lang3.ArrayUtils;
 

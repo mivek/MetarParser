@@ -1,8 +1,7 @@
 package io.github.mivek.facade;
 
-import com.mivek.parser.AbstractParser;
-
 import io.github.mivek.model.AbstractWeatherCode;
+import io.github.mivek.parser.AbstractParser;
 
 /**
  * Abstract facade.

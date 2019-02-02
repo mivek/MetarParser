@@ -1,10 +1,10 @@
 /**
  *
  */
-package com.mivek.parser;
+package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -24,6 +24,7 @@ import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
@@ -380,7 +381,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     public void testParseInvalidMessage() throws ParseException {
         String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
         thrown.expect(ParseException.class);
-        thrown.expectMessage(containsString(Messages.getInstance().getInvalidMessage()));
+        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_INVALID_MESSAGE)));
         fSut.parse(message);
     }
 
@@ -388,7 +389,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     public void testParseInvalidAirport() throws ParseException {
         String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
         thrown.expect(ParseException.class);
-        thrown.expectMessage(containsString(Messages.getInstance().getAirportNotFound()));
+        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
         fSut.parse(message);
     }
 }

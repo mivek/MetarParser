@@ -6,11 +6,10 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import com.mivek.parser.TAFParser;
-
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.TAF;
+import io.github.mivek.parser.TAFParser;
 
 /**
  * Facade for TAF.

@@ -3,4 +3,4 @@
  *
  * @author mivek
  */
-package com.mivek.parser;
+package io.github.mivek.parser;

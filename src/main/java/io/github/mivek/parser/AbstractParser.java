@@ -1,4 +1,4 @@
-package com.mivek.parser;
+package io.github.mivek.parser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;

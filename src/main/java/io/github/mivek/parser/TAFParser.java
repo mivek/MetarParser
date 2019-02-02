@@ -1,4 +1,4 @@
-package com.mivek.parser;
+package io.github.mivek.parser;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
@@ -50,7 +50,7 @@ public final class TAFParser extends AbstractParser<TAF> {
 
     /*
      * (non-Javadoc)
-     * @see com.mivek.parser.AbstractParser#parse(java.lang.String)
+     * @see io.github.mivek.parser.AbstractParser#parse(java.lang.String)
      */
     @Override
     public TAF parse(final String pTAFCode) throws ParseException {

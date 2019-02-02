@@ -1,4 +1,4 @@
-package com.mivek.parser;
+package io.github.mivek.parser;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
