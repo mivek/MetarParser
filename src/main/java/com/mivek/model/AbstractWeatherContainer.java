@@ -116,7 +116,7 @@ public abstract class AbstractWeatherContainer {
     /**
      * @param pWindShear the windShear to set
      */
-    public void setWindShear(WindShear pWindShear) {
+    public void setWindShear(final WindShear pWindShear) {
         fWindShear = pWindShear;
     }
 }
