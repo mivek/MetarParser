@@ -22,6 +22,7 @@ import com.mivek.model.Country;
 import com.mivek.model.Visibility;
 import com.mivek.model.WeatherCondition;
 import com.mivek.model.Wind;
+import com.mivek.model.WindShear;
 import com.mivek.utils.Converter;
 import com.mivek.utils.Regex;
 import com.opencsv.CSVReader;
@@ -35,41 +36,25 @@ import internationalization.Messages;
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
-    /**
-     * Pattern regex for wind.
-     */
+    /** Pattern regex for wind. */
     protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
-    /**
-     * Pattern regex for extreme winds.
-     */
+    /** Pattern regex for windshear. */
+    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    /** Pattern regex for extreme winds. */
     protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
-    /**
-     * Pattern for the main visibility.
-     */
+    /** Pattern for the main visibility. */
     protected static final String MAIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d)$";
-    /**
-     * Pattern to recognize clouds.
-     */
+    /** Pattern to recognize clouds. */
     protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
-    /**
-     * Pattern for the vertical visibility.
-     */
+    /** Pattern for the vertical visibility. */
     protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
-    /**
-     * Pattern for the minimum visibility.
-     */
+    /** Pattern for the minimum visibility. */
     protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
-    /**
-     * From shortcut constant.
-     */
+    /** From shortcut constant. */
     protected static final String FM = "FM";
-    /**
-     * Tempo shortcut constant.
-     */
+    /** Tempo shortcut constant. */
     protected static final String TEMPO = "TEMPO";
-    /**
-     * BECMG shortcut constant.
-     */
+    /** BECMG shortcut constant. */
     protected static final String BECMG = "BECMG";
     /**
      * Logger.
@@ -158,17 +143,41 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected Wind parseWind(final String pStringWind) {
         Wind wind = new Wind();
         String[] windPart = Regex.pregMatch(WIND_REGEX, pStringWind);
-        String directionPart = windPart[1];
-        String direction = Converter.degreesToDirection(directionPart);
-        wind.setDirection(direction);
+        setWindElements(wind, windPart[1], windPart[2], windPart[3], windPart[4]);
+        return wind;
+    }
+
+    /**
+     * Sets the elements of the wind.
+     * @param pWind the wind element.
+     * @param pDirection the direction of the wind in degrees.
+     * @param pSpeed the speed of the wind
+     * @param pGust the speed of the gust if any
+     * @param pUnit the unit.
+     */
+    private void setWindElements(final Wind pWind, final String pDirection, final String pSpeed, final String pGust, final String pUnit) {
+        String direction = Converter.degreesToDirection(pDirection);
+        pWind.setDirection(direction);
         if (!direction.equals(Messages.getInstance().getConverterVRB())) {
-            wind.setDirectionDegrees(Integer.parseInt(windPart[1]));
+            pWind.setDirectionDegrees(Integer.parseInt(pDirection));
         }
-        wind.setSpeed(Integer.parseInt(windPart[2]));
-        if (windPart[3] != null) {
-            wind.setGust(Integer.parseInt(windPart[3]));
+        pWind.setSpeed(Integer.parseInt(pSpeed));
+        if (pGust != null) {
+            pWind.setGust(Integer.parseInt(pGust));
         }
-        wind.setUnit(windPart[4]);
+        pWind.setUnit(pUnit);
+    }
+
+    /**
+     * Parses the wind shear part.
+     * @param pStringWindShear the string to parse
+     * @return a wind shear object.
+     */
+    protected WindShear parseWindShear(final String pStringWindShear) {
+        WindShear wind = new WindShear();
+        String[] windPart = Regex.pregMatch(WIND_SHEAR_REGEX, pStringWindShear);
+        wind.setHeight(100 * Integer.parseInt(windPart[1]));
+        setWindElements(wind, windPart[2], windPart[3], windPart[4], windPart[5]);
         return wind;
     }
 
@@ -290,7 +299,10 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pPart the token to parse.
      */
     public void generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
-        if (Regex.find(WIND_REGEX, pPart)) {
+        if (Regex.find(WIND_SHEAR_REGEX, pPart)) {
+            WindShear windShear = parseWindShear(pPart);
+            pContainer.setWindShear(windShear);
+        } else if (Regex.find(WIND_REGEX, pPart)) {
             Wind wind = parseWind(pPart);
             pContainer.setWind(wind);
         } else if (Regex.find(WIND_EXTREME_REGEX, pPart)) {
