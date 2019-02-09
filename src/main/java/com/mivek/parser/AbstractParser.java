@@ -43,7 +43,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern regex for extreme winds. */
     protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
     /** Pattern for the main visibility. */
-    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d)$";
+    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$";
     /** Pattern to recognize clouds. */
     protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
     /** Pattern for the vertical visibility. */
@@ -312,7 +312,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             if (pContainer.getVisibility() == null) {
                 pContainer.setVisibility(new Visibility());
             }
-            pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+            parseMainVisibility(pContainer.getVisibility(), matches);
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
             parseMinimalVisibility(pContainer.getVisibility(), pPart);
         } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
@@ -325,5 +325,16 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             WeatherCondition wc = parseWeatherCondition(pPart);
             pContainer.addWeatherCondition(wc);
         }
+    }
+
+    /**
+     * Sets the main vibility of a visibility object.
+     * When matches[1] is null then the visibility is in SM.
+     * Otherwise the visibility is in meters and is converted.
+     * @param pVisibility the visibility object to update.
+     * @param matches the array containing regex matches.
+     */
+    protected void parseMainVisibility(final Visibility pVisibility, final String[] matches) {
+        pVisibility.setMainVisibility(matches[1] == null ? matches[0] : Converter.convertVisibility(matches[1]));
     }
 }

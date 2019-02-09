@@ -16,6 +16,8 @@ import com.mivek.parser.TAFParser;
  * @author mivek
  */
 public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
+    /** URL to retrieve the TAF from. */
+    private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
     /**
      * The instance of the facade.
      */
@@ -38,8 +40,8 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
-        String website = "http://tgftp.nws.noaa.gov/data/forecasts/taf/stations/" + pIcao.toUpperCase() //$NON-NLS-1$
-                + ".TXT"; //$NON-NLS-1$
+        String website = NOAA_TAF_URL + pIcao.toUpperCase() //$NON-NLS-1$
+        + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             StringBuilder sb = new StringBuilder();

@@ -96,8 +96,13 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 										<limit implementation="org.jacoco.report.check.Limit">
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.84</minimum>
+											<minimum>0.93</minimum>
 										</limit>
+										<limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.91</minimum>
+                                        </limit>
 									</limits>
 								</rule>
 							</rules>

@@ -320,4 +320,13 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(m.getVerticalVisibility());
         assertEquals(200, m.getVerticalVisibility().intValue());
     }
+
+    @Test
+    public void testParseVisibilityWithNDV() throws ParseException {
+        String code = "LSZL 300320Z AUTO 00000KT 9999NDV BKN060 OVC074 00/M04 Q1001\n" +
+                "RMK=";
+        Metar m = fSut.parse(code);
+        assertNotNull(m);
+        assertEquals(">10km", m.getVisibility().getMainVisibility());
+    }
 }
