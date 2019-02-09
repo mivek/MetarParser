@@ -91,9 +91,14 @@ The wind class is composed of
   - the speed
   - the direction
   - the speed of the gust
-  - the lowest variable wind
-  - the highest variable wind
+  - the minimal wind variation in degrees
+  - the maximal wind variation in degrees
   - the unit of the wind's speed
+  
+#### WindShear
+This class is a subclass of Wind.
+It is composed of
+  - the height of the wind shear.
 
 ### Trends
 ![trends diagram](trend.jpg)

@@ -43,7 +43,7 @@ import internationalization.Messages;
  */
 public class TAFParserTest extends AbstractParserTest<TAF> {
 
-    private static TAFParser fSut;
+    private TAFParser fSut;
 
     @Override
     protected TAFParser getSut() {
@@ -383,6 +383,35 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         thrown.expect(ParseException.class);
         thrown.expectMessage(containsString(Messages.getInstance().getInvalidMessage()));
         fSut.parse(message);
+    }
+
+    @Test
+    public void testParseWithWindShear() throws ParseException {
+        // GIVEN a TAF message with windshear in principal part and from part.
+        String message = "TAF KMKE 011530 0116/0218 WS020/24045KT\n" + "FM010200 17005KT P6SM SKC WS020/23055KT ";
+        // WHEN parsing the message.
+        TAF result = fSut.parse(message);
+
+        assertEquals(message, result.getMessage());
+        // THEN the windshear of the principle part is decoded
+        assertNotNull(result);
+        assertNotNull(result.getWindShear());
+        assertEquals(2000, result.getWindShear().getHeight());
+        assertEquals(240, result.getWindShear().getDirectionDegrees().intValue());
+        assertEquals(45, result.getWindShear().getSpeed());
+
+        // Checks on the from part.
+        FMTafTrend fm = result.getFMs().get(0);
+        assertNotNull(fm);
+        // Checks on the wind of the FM
+        assertNotNull(fm.getWind());
+        assertEquals(170, fm.getWind().getDirectionDegrees().intValue());
+        assertEquals(5, fm.getWind().getSpeed());
+        // Checks on the wind shear of the fm
+        assertNotNull(fm.getWindShear());
+        assertEquals(2000, fm.getWindShear().getHeight());
+        assertEquals(230, fm.getWindShear().getDirectionDegrees().intValue());
+        assertEquals(55, fm.getWindShear().getSpeed());
     }
 
     @Test

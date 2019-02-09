@@ -41,7 +41,7 @@ import internationalization.Messages;
  */
 public class MetarParserTest extends AbstractParserTest<Metar> {
 
-    private static MetarParser fSut;
+    private MetarParser fSut;
 
     @Override
     protected MetarParser getSut() {
@@ -279,6 +279,23 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("5000m", v.getMainVisibility());
         assertEquals(1100, v.getMinVisibility());
         assertEquals("w", v.getMinDirection());
+    }
+
+    @Test
+    public void testParseWithMaximalWind() throws ParseException {
+        // Given a code with wind variation.
+        String code = "LFPG 161430Z 24015G25KT 180V300";
+        //WHEN parsing the code.
+        Metar m = fSut.parse(code);
+        // THEN the wind contains information on variation
+        assertNotNull(m);
+        assertEquals(240, m.getWind().getDirectionDegrees().intValue());
+        assertEquals(15, m.getWind().getSpeed());
+        assertEquals(25, m.getWind().getGust());
+        assertEquals("KT", m.getWind().getUnit());
+        assertEquals(180, m.getWind().getExtreme1());
+        assertEquals(300, m.getWind().getExtreme2());
+
     }
 
     @Test

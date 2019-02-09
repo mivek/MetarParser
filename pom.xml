@@ -51,17 +51,19 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 				<artifactId>pitest-maven</artifactId>
 				<version>1.4.0</version>
 				<executions>
-				    <execution>
-					    <goals>
-		                    <goal>mutationCoverage</goal>
-		                </goals>
-		                <configuration>
-		                    <mutationThreshold>86</mutationThreshold>
-		                    <excludedClasses>
-		                      <param>internationalization.Messages</param>
-		                    </excludedClasses>
-		                </configuration>
-				    </execution>
+					<execution>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+						<configuration>
+							<mutationThreshold>88</mutationThreshold>
+							<coverageThreshold>94</coverageThreshold>
+							<targetClasses>
+								<param>com.mivek.model.*</param>
+								<param>com.mivek.parser.*</param>
+							</targetClasses>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>

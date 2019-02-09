@@ -86,7 +86,11 @@ public final class TAFParser extends AbstractParser<TAF> {
 
         // Wind
         i++;
-        taf.setWind(parseWind(lines1parts[i]));
+        if (lines1parts[i].startsWith("WS")) {
+            taf.setWindShear(parseWindShear(lines1parts[i]));
+        } else {
+            taf.setWind(parseWind(lines1parts[i]));
+        }
         // Handle rest of second line.
         for (int j = i; j < lines1parts.length; j++) {
             if (lines1parts[j].startsWith(PROB)) {

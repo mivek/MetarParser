@@ -7,26 +7,18 @@ import java.util.List;
  * @author mivek
  */
 public abstract class AbstractWeatherContainer {
-    /**
-     * The wind.
-     */
+    /** The wind. */
     private Wind fWind;
-    /**
-     * The visibility.
-     */
+    /** The visibility. */
     private Visibility fVisibility;
-    /**
-     * The list of clouds.
-     */
+    /** The list of clouds. */
     private List<Cloud> fClouds;
-    /**
-     * The list of weatherConditions.
-     */
+    /** The list of weatherConditions. */
     private List<WeatherCondition> fWeatherConditions;
-    /**
-     * the vertical Visibility in feet.
-     */
+    /** the vertical Visibility in feet. */
     private Integer fVerticalVisibility;
+    /** The wind shear. */
+    private WindShear fWindShear;
 
     /**
      * Constructor to initialize the lists.
@@ -112,5 +104,19 @@ public abstract class AbstractWeatherContainer {
      */
     public void setVerticalVisibility(final Integer pVerticalVisibility) {
         fVerticalVisibility = pVerticalVisibility;
+    }
+
+    /**
+     * @return the windShear
+     */
+    public WindShear getWindShear() {
+        return fWindShear;
+    }
+
+    /**
+     * @param pWindShear the windShear to set
+     */
+    public void setWindShear(final WindShear pWindShear) {
+        fWindShear = pWindShear;
     }
 }
