@@ -15,13 +15,13 @@ The trends of the metar are not parsed.
 
 ## Table of content
 1. [Model](https://github.com/mivek/MetarParser#model)
-	1. [Enumerations](https://github.com/mivek/MetarParser#enumerations)
-	2. [Classes](https://github.com/mivek/MetarParser#classes)
+    1. [Enumerations](https://github.com/mivek/MetarParser#enumerations)
+    2. [Classes](https://github.com/mivek/MetarParser#classes)
 2. [Examples](https://github.com/mivek/MetarParser#examples)
-	1. [Parse a metar](https://github.com/mivek/MetarParser#parse-a-metar)
-	2. [Retrieve a metar](https://github.com/mivek/MetarParser#retrieve-the-metar-of-an-airport)
-	3. [Parse a taf](https://github.com/mivek/MetarParser#parse-a-taf)
-	4. [Retrieve a taf](https://github.com/mivek/MetarParser#retrieve-a-taf)
+    1. [Parse a metar](https://github.com/mivek/MetarParser#parse-a-metar)
+    2. [Retrieve a metar](https://github.com/mivek/MetarParser#retrieve-the-metar-of-an-airport)
+    3. [Parse a taf](https://github.com/mivek/MetarParser#parse-a-taf)
+    4. [Retrieve a taf](https://github.com/mivek/MetarParser#retrieve-a-taf)
 3. [Internationalization](https://github.com/mivek/MetarParser#io.github.mivekinternationalization)
 
 
@@ -91,9 +91,15 @@ The wind class is composed of
   - the speed
   - the direction
   - the speed of the gust
-  - the lowest variable wind
-  - the highest variable wind
+  - the minimal wind variation in degrees
+  - the maximal wind variation in degrees
   - the unit of the wind's speed
+  
+#### WindShear
+This class is a subclass of Wind.
+It is composed of
+  - the height of the wind shear.
+
 
 ### Trends
 ![trends diagram](trend.jpg)
@@ -131,12 +137,12 @@ Use the TAFFacade to decode the taf.
 
 ```java
 String message = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n" 
-			      +"TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
-			      +"TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
-			      +"TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n" 
-			      +"BECMG 1520/1522 CAVOK \n"
-			      +"TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
-			      +"TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
+                  +"TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
+                  +"TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
+                  +"TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n" 
+                  +"BECMG 1520/1522 CAVOK \n"
+                  +"TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
+                  +"TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
 TAFFacade facade = TAFFacade.getInstance();
 TAF taf = facade.decode(message);
 ```

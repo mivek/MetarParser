@@ -6,33 +6,19 @@ package io.github.mivek.model;
  * @author mivek
  */
 public class Wind {
-    /**
-     * Speed of the wind.
-     */
+    /** Speed of the wind. */
     private int fSpeed;
-    /**
-     * Direction of the wind.
-     */
+    /** Direction of the wind. */
     private String fDirection;
-    /**
-     * Direction of the wind.
-     */
+    /** Direction of the wind. */
     private Integer fDirectionDegrees;
-    /**
-     * The speed of the gust.
-     */
+    /** The speed of the gust. */
     private int fGust;
-    /**
-     * The lowest speed of the extreme wind.
-     */
+    /** The minimal variation of the wind. */
     private int fExtreme1;
-    /**
-     * The maximum speed of the extreme wind.
-     */
+    /** The maximum variation of the wind. */
     private int fExtreme2;
-    /**
-     * The unit of the speed.
-     */
+    /** The unit of the speed. */
     private String fUnit;
 
     /**
@@ -84,8 +70,8 @@ public class Wind {
     }
 
     /**
-     * Getter of the lowest extreme wind speed.
-     * @return the lowest extreme speed.
+     * Getter of the minimal variation of the wind.
+     * @return the minimal variation of the wind.
      */
     public int getExtreme1() {
         return fExtreme1;
@@ -93,15 +79,15 @@ public class Wind {
 
     /**
      * Setter of extreme1.
-     * @param pExtreme1 the speed to set.
+     * @param pExtreme1 the minimal wind variation to set.
      */
     public void setExtreme1(final int pExtreme1) {
         fExtreme1 = pExtreme1;
     }
 
     /**
-     * Getter of the maximal extreme speed.
-     * @return the speed.
+     * Getter of the maximal wind variation.
+     * @return the wind variation.
      */
     public int getExtreme2() {
         return fExtreme2;
@@ -109,7 +95,7 @@ public class Wind {
 
     /**
      * Setter.
-     * @param pExtreme2 the speed to set.
+     * @param pExtreme2 the wind variation to set.
      */
     public void setExtreme2(final int pExtreme2) {
         fExtreme2 = pExtreme2;

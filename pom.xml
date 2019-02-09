@@ -51,17 +51,19 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 				<artifactId>pitest-maven</artifactId>
 				<version>1.4.0</version>
 				<executions>
-				    <execution>
-					    <goals>
-		                    <goal>mutationCoverage</goal>
-		                </goals>
-		                <configuration>
-		                    <mutationThreshold>86</mutationThreshold>
-		                    <excludedClasses>
-		                      <param>io.github.mivekinternationalization.Messages</param>
-		                    </excludedClasses>
-		                </configuration>
-				    </execution>
+					<execution>
+						<goals>
+							<goal>mutationCoverage</goal>
+						</goals>
+						<configuration>
+							<mutationThreshold>83</mutationThreshold>
+							<coverageThreshold>94</coverageThreshold>
+							<targetClasses>
+								<param>io.github.mivek.model.*</param>
+								<param>io.github.mivek.parser.*</param>
+							</targetClasses>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -94,8 +96,13 @@ Use the MetarFacade and its method &quot;parse()&quot; to parse a metar string a
 										<limit implementation="org.jacoco.report.check.Limit">
 											<counter>INSTRUCTION</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.84</minimum>
+											<minimum>0.93</minimum>
 										</limit>
+										<limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.91</minimum>
+                                        </limit>
 									</limits>
 								</rule>
 							</rules>

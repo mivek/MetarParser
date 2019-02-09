@@ -43,7 +43,7 @@ import io.github.mivekinternationalization.Messages;
  */
 public class TAFParserTest extends AbstractParserTest<TAF> {
 
-    private static TAFParser fSut;
+    private TAFParser fSut;
 
     @Override
     protected TAFParser getSut() {
@@ -386,10 +386,62 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
+    public void testParseWithWindShear() throws ParseException {
+        // GIVEN a TAF message with windshear in principal part and from part.
+        String message = "TAF KMKE 011530 0116/0218 WS020/24045KT\n" + "FM010200 17005KT P6SM SKC WS020/23055KT ";
+        // WHEN parsing the message.
+        TAF result = fSut.parse(message);
+
+        assertEquals(message, result.getMessage());
+        // THEN the windshear of the principle part is decoded
+        assertNotNull(result);
+        assertNotNull(result.getWindShear());
+        assertEquals(2000, result.getWindShear().getHeight());
+        assertEquals(240, result.getWindShear().getDirectionDegrees().intValue());
+        assertEquals(45, result.getWindShear().getSpeed());
+
+        // Checks on the from part.
+        FMTafTrend fm = result.getFMs().get(0);
+        assertNotNull(fm);
+        // Checks on the wind of the FM
+        assertNotNull(fm.getWind());
+        assertEquals(170, fm.getWind().getDirectionDegrees().intValue());
+        assertEquals(5, fm.getWind().getSpeed());
+        // Checks on the wind shear of the fm
+        assertNotNull(fm.getWindShear());
+        assertEquals(2000, fm.getWindShear().getHeight());
+        assertEquals(230, fm.getWindShear().getDirectionDegrees().intValue());
+        assertEquals(55, fm.getWindShear().getSpeed());
+    }
+
+    @Test
     public void testParseInvalidAirport() throws ParseException {
         String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
         thrown.expect(ParseException.class);
         thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
         fSut.parse(message);
+    }
+    @Test
+    public void testParseWithNauticalMilesVisibility() throws ParseException {
+        //GIVEN a TAF message with nautical miles visibility;
+        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
+                "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n" +
+                "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
+
+        //WHEN parsing the message.
+        TAF result = fSut.parse(message);
+        //THEN the visibility of the main event is 6 SM
+        assertNotNull(result);
+        assertNotNull(result.getVisibility());
+        assertEquals("6SM", result.getVisibility().getMainVisibility());
+        //THEN the visibility of the first tempo is 11/2 SM
+        assertNotNull(result.getTempos().get(0).getVisibility());
+        assertEquals("11/2SM", result.getTempos().get(0).getVisibility().getMainVisibility());
+        //THEN the visibility of the second tempo is 3/4 SM
+        assertNotNull(result.getTempos().get(1).getVisibility());
+        assertEquals("3/4SM", result.getTempos().get(1).getVisibility().getMainVisibility());
+        // Then the visibility of the FROM part is 2SN
+        assertNotNull(result.getFMs().get(0).getVisibility());
+        assertEquals("2SM", result.getFMs().get(0).getVisibility().getMainVisibility());
     }
 }

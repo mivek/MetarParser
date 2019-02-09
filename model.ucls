@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+<class-diagram version="1.2.3" icons="true" automaticImage="JPEG" always-add-relationships="false" 
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
   router="FAN">  
   <class id="1" language="java" name="io.github.mivek.model.Airport" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Airport.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/Airport.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="289" y="101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -12,7 +12,7 @@
     </display>  
   </class>  
   <class id="2" language="java" name="io.github.mivek.model.Wind" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Wind.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/Wind.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="939" y="192"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -21,7 +21,7 @@
     </display>  
   </class>  
   <class id="3" language="java" name="io.github.mivek.model.Metar" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Metar.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/Metar.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="260" y="611"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -30,7 +30,7 @@
     </display>  
   </class>  
   <class id="4" language="java" name="io.github.mivek.model.TAF" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/TAF.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/TAF.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="445" y="621"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -39,7 +39,7 @@
     </display>  
   </class>  
   <class id="5" language="java" name="io.github.mivek.model.Visibility" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Visibility.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/Visibility.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="765" y="123"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -48,8 +48,8 @@
     </display>  
   </class>  
   <class id="6" language="java" name="io.github.mivek.model.WeatherCondition" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/WeatherCondition.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="806" y="449"/>    
+    file="/metarParser/src/main/java/io/github/mivek/model/WeatherCondition.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="544" y="425"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,8 +57,8 @@
     </display>  
   </class>  
   <class id="7" language="java" name="io.github.mivek.model.Cloud" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Cloud.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="992" y="360"/>    
+    file="/metarParser/src/main/java/io/github/mivek/model/Cloud.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="782" y="426"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
     </display>  
   </class>  
   <class id="8" language="java" name="io.github.mivek.model.trend.validity.AbstractValidity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/validity/AbstractValidity.java" binary="false" 
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/validity/AbstractValidity.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="94" width="117" x="734" y="597"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -76,7 +76,8 @@
     </display>  
   </class>  
   <class id="9" language="java" name="io.github.mivek.model.trend.validity.Validity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/validity/Validity.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/validity/Validity.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="674" y="780"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -85,7 +86,7 @@
     </display>  
   </class>  
   <class id="10" language="java" name="io.github.mivek.model.trend.validity.BeginningValidity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/validity/BeginningValidity.java" binary="false" 
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/validity/BeginningValidity.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="920" y="799"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -95,7 +96,8 @@
     </display>  
   </class>  
   <class id="11" language="java" name="io.github.mivek.model.trend.AbstractTafTrend" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/AbstractTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/AbstractTafTrend.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="627" y="1116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -104,7 +106,8 @@
     </display>  
   </class>  
   <class id="12" language="java" name="io.github.mivek.model.trend.BECMGTafTrend" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/BECMGTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/BECMGTafTrend.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="394" y="951"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -113,7 +116,8 @@
     </display>  
   </class>  
   <class id="13" language="java" name="io.github.mivek.model.trend.TEMPOTafTrend" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/TEMPOTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/TEMPOTafTrend.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="560" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -122,7 +126,7 @@
     </display>  
   </class>  
   <class id="14" language="java" name="io.github.mivek.model.trend.FMTafTrend" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/trend/FMTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/trend/FMTafTrend.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="690" y="959"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -131,7 +135,7 @@
     </display>  
   </class>  
   <class id="15" language="java" name="io.github.mivek.model.TemperatureDated" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/TemperatureDated.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/TemperatureDated.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="648" y="1302"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -140,7 +144,7 @@
     </display>  
   </class>  
   <enumeration id="16" language="java" name="io.github.mivek.enums.CloudQuantity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/CloudQuantity.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/CloudQuantity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="184" width="122" x="27" y="1151"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -149,7 +153,7 @@
     </display>  
   </enumeration>  
   <enumeration id="17" language="java" name="io.github.mivek.enums.CloudType" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/CloudType.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/CloudType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="130" width="119" x="170" y="1143"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -158,7 +162,7 @@
     </display>  
   </enumeration>  
   <enumeration id="18" language="java" name="io.github.mivek.enums.Descriptive" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/Descriptive.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/Descriptive.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="378" y="1508"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -167,7 +171,7 @@
     </display>  
   </enumeration>  
   <enumeration id="19" language="java" name="io.github.mivek.enums.Intensity" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/Intensity.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/Intensity.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="91" y="1455"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -176,7 +180,7 @@
     </display>  
   </enumeration>  
   <enumeration id="20" language="java" name="io.github.mivek.enums.Phenomenon" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/Phenomenon.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/Phenomenon.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="650" y="1634"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -185,7 +189,7 @@
     </display>  
   </enumeration>  
   <enumeration id="21" language="java" name="io.github.mivek.enums.WeatherChangeType" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/enums/WeatherChangeType.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/enums/WeatherChangeType.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="877" y="1407"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -194,7 +198,8 @@
     </display>  
   </enumeration>  
   <class id="22" language="java" name="io.github.mivek.model.AbstractWeatherCode" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/AbstractWeatherCode.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/AbstractWeatherCode.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="130" width="153" x="227" y="292"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -203,7 +208,7 @@
     </display>  
   </class>  
   <class id="23" language="java" name="io.github.mivek.model.RunwayInfo" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/RunwayInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/RunwayInfo.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="130" width="98" x="210" y="749"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -212,7 +217,7 @@
     </display>  
   </class>  
   <class id="24" language="java" name="io.github.mivek.model.Country" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/Country.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/metarParser/src/main/java/io/github/mivek/model/Country.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="76" width="91" x="500" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -220,216 +225,222 @@
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="io.github.mivek.model.AbstractWeatherContainer" project="metarParser" 
-    file="/metarParser/src/main/java/com/mivek/model/AbstractWeatherContainer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="517" y="247"/>    
+  <class id="25" language="java" name="io.github.mivek.model.WindShear" project="metarParser" 
+    file="/metarParser/src/main/java/io/github/mivek/model/WindShear.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="76" width="102" x="892" y="355"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
-  <generalization id="26">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="11"/>  
-  </generalization>  
+  <class id="26" language="java" name="io.github.mivek.model.AbstractWeatherContainer" project="metarParser" 
+    file="/metarParser/src/main/java/io/github/mivek/model/AbstractWeatherContainer.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="545" y="252"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
+    </display>  
+  </class>  
   <association id="27">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="28" name="fBECMGs">        
-        <position height="0" width="0" x="-21" y="2"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-21" y="2"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="31" name="fMinTemperature">        
-        <position height="18" width="88" x="696" y="1211"/>      
-      </attribute>      
-      <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="33">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <generalization id="34">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="35">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="36" name="fWind">        
+      <attribute id="28" name="fValidity">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="37" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="39" name="fTempos">        
-        <position height="0" width="0" x="-32" y="0"/>      
-      </attribute>      
-      <multiplicity id="40" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-32" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="42" name="fVisibility">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="43" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="45" name="fMaxTemperature">        
-        <position height="18" width="92" x="489" y="1217"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="48" name="fRunways">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="51" name="fValidity">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="52" minimum="0" maximum="1">        
+      <multiplicity id="29" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="54" name="fFMs">        
-        <position height="0" width="0" x="-16" y="3"/>      
-      </attribute>      
-      <multiplicity id="55" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-16" y="3"/>      
-      </multiplicity>    
+  <association id="30">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="31" name="fWindShear"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
+    <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="56">    
+  <association id="33">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="34" name="fWind"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="36">    
     <end type="SOURCE" refId="10"/>    
     <end type="TARGET" refId="8"/>  
   </generalization>  
-  <generalization id="57">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="11"/>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="22"/>  
   </generalization>  
-  <association id="58">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="59" name="fClouds">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="60" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="61">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="62" name="fCountry">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="63" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="64">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="65" name="fWeatherConditions">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="38">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="39" name="fWeatherConditions"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="67">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="25"/>  
-  </generalization>  
-  <association id="68">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="69" name="fAirport">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="70" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
+  <association id="41">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="42" name="fClouds"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="71">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="22"/>  
+  <generalization id="44">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="26"/>  
   </generalization>  
-  <association id="72">    
+  <association id="45">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="46" name="fBECMGs">        
+        <position height="0" width="0" x="-21" y="2"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-21" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
     <bendpoint x="862" y="1017"/>    
     <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="73" name="fValidity">        
+      <attribute id="49" name="fValidity">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="74" minimum="0" maximum="1">        
+      <multiplicity id="50" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="75">    
+  <generalization id="51">    
     <end type="SOURCE" refId="12"/>    
     <end type="TARGET" refId="11"/>  
   </generalization>  
+  <generalization id="52">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <association id="53">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="54" name="fTempos">        
+        <position height="0" width="0" x="-32" y="0"/>      
+      </attribute>      
+      <multiplicity id="55" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-32" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="57" name="fCountry">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="60" name="fRunways">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="62">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="63">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="64" name="fAirport">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="65" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="67">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="68" name="fMinTemperature">        
+        <position height="18" width="88" x="696" y="1211"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="71" name="fFMs">        
+        <position height="0" width="0" x="-16" y="3"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-16" y="3"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="74">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="75" name="fMaxTemperature">        
+        <position height="18" width="92" x="489" y="1217"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="77">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="78">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="79" name="fVisibility"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
