@@ -1,5 +1,0 @@
-/**
- * @author mivek
- *
- */
-package internationalization;
