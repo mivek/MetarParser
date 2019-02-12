@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
@@ -41,19 +42,34 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
         String website = NOAA_TAF_URL + pIcao.toUpperCase() // $NON-NLS-1$
-                + ".TXT"; //$NON-NLS-1$
+        + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             StringBuilder sb = new StringBuilder();
             String inputLine;
+            // Throw the first line since it is not part of the TAF event.
             br.readLine();
             while ((inputLine = br.readLine()) != null) {
-                sb.append(inputLine.replaceAll("\\s{2,}", "\n"));
+                // Remove tabs and add line returns.
+                sb.append(inputLine.replaceAll("\\s{2,}", "")).append("\n");
             }
-            return getParser().parse(sb.toString());
-        } catch (Exception e) {
-            throw e;
+            return getParser().parse(format(sb.toString()));
         }
+    }
+
+    /**
+     * Reformat the first line of the code.
+     * @param pCode the first line of the TAF event.
+     * @return the formated taf code.
+     * @throws ParseException when an error occurs.
+     */
+    protected String format(final String pCode) throws ParseException {
+        String[] lines = pCode.split("\n");
+        if (!TAFParser.TAF.equals(lines[0].trim())) {
+            return pCode;
+        }
+        // Case of TAF AMD, the 2 first lines must be merged.
+        return Arrays.stream(lines).reduce((x, y) -> x + y + "\n").orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE));
     }
 
     /**
