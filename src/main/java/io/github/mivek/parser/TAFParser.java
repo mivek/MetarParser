@@ -20,13 +20,11 @@ import io.github.mivek.utils.Regex;
  * @author mivek
  */
 public final class TAFParser extends AbstractParser<TAF> {
-    /**
-     * Probability string constant.
-     */
+    /** String constant for TAF. */
+    public static final String TAF = "TAF";
+    /** Probability string constant. */
     private static final String PROB = "PROB";
-    /**
-     * Regex for the validity.
-     */
+    /** Regex for the validity. */
     private static final String REGEX_VALIDITY = "^\\d{4}/\\d{4}$";
 
     /**
@@ -55,20 +53,24 @@ public final class TAFParser extends AbstractParser<TAF> {
     @Override
     public TAF parse(final String pTAFCode) throws ParseException {
         String[] lines = pTAFCode.split("\n");
-        if (!lines[0].substring(0, 3).equals("TAF")) {
+        if (!TAF.equals(lines[0].substring(0, 3))) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE);
         }
         TAF taf = new TAF();
 
         // Handle the 1st line.
-        String[] lines1parts = lines[0].split(" ");
+        String[] line1parts = lines[0].split(" ");
         int i = 1;
-        if (lines1parts[1].equals("TAF")) {
+        if (TAF.equals(line1parts[1])) {
             i = 2;
         }
-
+        // Handle case the taf event is AMD.
+        if ("AMD".equals(line1parts[i])) {
+            taf.setAmendment(true);
+            i++;
+        }
         // Airport
-        Airport airport = getAirports().get(lines1parts[i]);
+        Airport airport = getAirports().get(line1parts[i]);
         i++;
         if (airport == null) {
             throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);
@@ -76,27 +78,27 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setAirport(airport);
         taf.setMessage(pTAFCode);
         // Day and time
-        parseDeliveryTime(taf, lines1parts[i]);
+        parseDeliveryTime(taf, line1parts[i]);
 
         Visibility visibility = new Visibility();
         taf.setVisibility(visibility);
         // Validity Time
         i++;
-        taf.setValidity(parseValidity(lines1parts[i]));
+        taf.setValidity(parseValidity(line1parts[i]));
 
         // Wind
         i++;
-        if (lines1parts[i].startsWith("WS")) {
-            taf.setWindShear(parseWindShear(lines1parts[i]));
+        if (line1parts[i].startsWith("WS")) {
+            taf.setWindShear(parseWindShear(line1parts[i]));
         } else {
-            taf.setWind(parseWind(lines1parts[i]));
+            taf.setWind(parseWind(line1parts[i]));
         }
         // Handle rest of second line.
-        for (int j = i; j < lines1parts.length; j++) {
-            if (lines1parts[j].startsWith(PROB)) {
-                taf.setProbability(Integer.valueOf(lines1parts[j].substring(4)));
+        for (int j = i; j < line1parts.length; j++) {
+            if (line1parts[j].startsWith(PROB)) {
+                taf.setProbability(Integer.valueOf(line1parts[j].substring(4)));
             } else {
-                generalParse(taf, lines1parts[j]);
+                generalParse(taf, line1parts[j]);
             }
         }
         // Process other lines.

@@ -14,30 +14,20 @@ import io.github.mivek.model.trend.validity.Validity;
  * @author mivek
  */
 public class TAF extends AbstractWeatherCode {
-    /**
-     * The valididty of the TAF.
-     */
+    /** The valididty of the TAF. */
     private Validity fValidity;
-    /**
-     * List of BECMG changes.
-     */
+    /** List of BECMG changes. */
     private List<BECMGTafTrend> fBECMGs;
-    /**
-     * List of From changes.
-     */
+    /** List of From changes. */
     private List<FMTafTrend> fFMs;
-    /**
-     * List of Tempos changes.
-     */
+    /** List of Tempos changes. */
     private List<TEMPOTafTrend> fTempos;
-    /**
-     * List of probability changes.
-     */
+    /** List of probability changes. */
     private List<PROBTafTrend> fProbs;
-    /**
-     * Probability of the metar.
-     */
+    /** Probability of the metar. */
     private Integer fProbability;
+    /**Indicate if the taf event is ameded.*/
+    private boolean fAmendment;
 
     /**
      * Constructor.
@@ -137,5 +127,19 @@ public class TAF extends AbstractWeatherCode {
      */
     public List<TEMPOTafTrend> getTempos() {
         return fTempos;
+    }
+
+    /**
+     * @return the amendment
+     */
+    public boolean isAmendment() {
+        return fAmendment;
+    }
+
+    /**
+     * @param pAmendment the amendment to set
+     */
+    public void setAmendment(final boolean pAmendment) {
+        fAmendment = pAmendment;
     }
 }
