@@ -11,9 +11,11 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -443,5 +445,22 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         // Then the visibility of the FROM part is 2SN
         assertNotNull(result.getFMs().get(0).getVisibility());
         assertEquals("2SM", result.getFMs().get(0).getVisibility().getMainVisibility());
+        assertFalse(result.isAmendment());
+    }
+
+    @Test
+    public void testParseWithAMDTAF() throws ParseException {
+        //GIVEN an amended TAF
+        String message = "TAF AMD LFPO 100742Z 1007/1112 21018G35KT 9999 BKN025 \r\n" +
+                "      TEMPO 1007/1009 4000 RA BKN014 SCT020CB PROB40 \r\n" +
+                "      TEMPO 1007/1009 22020G45KT \r\n" +
+                "      TEMPO 1010/1017 24022G45KT SHRA SCT030CB PROB30 \r\n" +
+                "      TEMPO 1012/1016 -TSRA \r\n" +
+                "      BECMG 1020/1023 24013KT SCT023 \r\n" +
+                "      TEMPO 1104/1112 4000 -SHRA BKN012 BKN020TCU";
+        //WHEN parsing the message
+        TAF result = fSut.parse(message);
+        //Then the taf is correctly parsed and the amendment attribute is true.
+        assertTrue(result.isAmendment());
     }
 }
