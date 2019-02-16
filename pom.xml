@@ -212,7 +212,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 						<configuration>
 							<autoVersionSubmodules>true</autoVersionSubmodules>
 							<useReleaseProfile>false</useReleaseProfile>
-							<releaseProfiles>release</releaseProfiles>
+							<releaseProfiles>ossrh</releaseProfiles>
 							<goals>deploy</goals>
 						</configuration>
 					</plugin>
