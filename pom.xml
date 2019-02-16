@@ -11,7 +11,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 	<url>https://github.com/mivek/MetarParser</url>
 	<scm>
 		<url>https://github.com/mivek/MetarParser/tree/master</url>
-		<connection>scm:git:git://github.com/mivek/MetarParser.git</connection>
+		<connection>scm:git:git://github.com:mivek/MetarParser.git</connection>
 		<developerConnection>scm:git:git@github.com:mivek/MetarParser.git</developerConnection>
 	</scm>
 	<ciManagement>
