@@ -141,7 +141,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 
 	<profiles>
 		<profile>
-			<id>ossrh</id>
+			<id>release</id>
 			<distributionManagement>
 				<snapshotRepository>
 					<id>ossrh</id>
