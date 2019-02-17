@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import com.opencsv.CSVReader;
 
@@ -36,20 +37,22 @@ import io.github.mivekinternationalization.Messages;
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
+    /** Pattern regex for the intensity of a phenomenon. */
+    protected static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
     /** Pattern regex for wind. */
-    protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final Pattern WIND_REGEX = Pattern.compile("(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
     /** Pattern regex for windshear. */
-    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final Pattern WIND_SHEAR_REGEX = Pattern.compile("WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
     /** Pattern regex for extreme winds. */
-    protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
+    protected static final Pattern WIND_EXTREME_REGEX = Pattern.compile("^(\\d{3})V(\\d{3})");
     /** Pattern for the main visibility. */
-    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$";
+    protected static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$");
     /** Pattern to recognize clouds. */
-    protected static final String CLOUD_REGEX = "^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$";
+    protected static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
     /** Pattern for the vertical visibility. */
-    protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
+    protected static final Pattern VERTICAL_VISIBILITY = Pattern.compile("^VV(\\d{3})$");
     /** Pattern for the minimum visibility. */
-    protected static final String MIN_VISIBILITY_REGEX = "^(\\d{4}[a-z])$";
+    protected static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[a-z])$");
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */
@@ -239,18 +242,18 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected WeatherCondition parseWeatherCondition(final String weatherPart) {
         WeatherCondition wc = new WeatherCondition();
         String match = null;
-        if (Regex.find("^(-|\\+|VC)", weatherPart)) {
-            match = Regex.findString("^(-|\\+|VC)", weatherPart);
+        if (Regex.find(INTENSITY_REGEX, weatherPart)) {
+            match = Regex.findString(INTENSITY_REGEX, weatherPart);
             Intensity i = Intensity.getEnum(match);
             wc.setIntensity(i);
         }
         for (Descriptive des : Descriptive.values()) {
-            if (Regex.findString("(" + des.getShortcut() + ")", weatherPart) != null) {
+            if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
                 wc.setDescriptive(des);
             }
         }
         for (Phenomenon phe : Phenomenon.values()) {
-            if (Regex.findString("(" + phe.getShortcut() + ")", weatherPart) != null) {
+            if (Regex.findString(Pattern.compile("(" + phe.getShortcut() + ")"), weatherPart) != null) {
                 wc.addPhenomenon(phe);
             }
         }
