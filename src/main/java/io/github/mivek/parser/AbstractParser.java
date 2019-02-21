@@ -56,6 +56,8 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected static final String TEMPO = "TEMPO";
     /** BECMG shortcut constant. */
     protected static final String BECMG = "BECMG";
+    /** Pattern for CAVOK. */
+    protected static final String CAVOK = "CAVOK";
     /**
      * Logger.
      */
@@ -318,6 +320,12 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
             String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
             pContainer.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
+        } else if (CAVOK.equals(pPart)) {
+            pContainer.setCavok(true);
+            if (pContainer.getVisibility() == null) {
+                pContainer.setVisibility(new Visibility());
+            }
+            pContainer.getVisibility().setMainVisibility(">10km");
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
             pContainer.addCloud(c);

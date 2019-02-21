@@ -19,6 +19,8 @@ public abstract class AbstractWeatherContainer {
     private Integer fVerticalVisibility;
     /** The wind shear. */
     private WindShear fWindShear;
+    /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
+    private boolean fCavok;
 
     /**
      * Constructor to initialize the lists.
@@ -118,5 +120,19 @@ public abstract class AbstractWeatherContainer {
      */
     public void setWindShear(final WindShear pWindShear) {
         fWindShear = pWindShear;
+    }
+
+    /**
+     * @return the cavok
+     */
+    public boolean isCavok() {
+        return fCavok;
+    }
+
+    /**
+     * @param pCavok the cavok to set
+     */
+    public void setCavok(final boolean pCavok) {
+        fCavok = pCavok;
     }
 }

@@ -327,4 +327,16 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(m);
         assertEquals(">10km", m.getVisibility().getMainVisibility());
     }
+
+    @Test
+    public void testParseWithCavok() throws ParseException {
+        // GIVEN a metar with token CAVOK
+        String code = "LFPG 212030Z 03003KT CAVOK 09/06 Q1031 NOSIG";
+        // WHEN parsing the metar.
+        Metar m = fSut.parse(code);
+        // THEN the attribute cavok is true and the main visibility is > 10km.
+        assertNotNull(m);
+        assertTrue(m.isCavok());
+        assertEquals(">10km", m.getVisibility().getMainVisibility());
+    }
 }

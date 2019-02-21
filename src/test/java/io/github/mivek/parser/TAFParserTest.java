@@ -463,4 +463,23 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         //Then the taf is correctly parsed and the amendment attribute is true.
         assertTrue(result.isAmendment());
     }
+
+    @Test
+    public void testParseWithCavok() throws ParseException {
+        // GIVEN a TAF with CAVOK in the main part and in a BECMG part.
+        String message = "TAF LFPG 211700Z 2118/2224 VRB03KT CAVOK TX15/2215Z TN02/2205Z \n" +
+                "BECMG 2122/2124 3000 BR \n" +
+                "TEMPO 2202/2209 0800 BCFG PROB30 \n" +
+                "TEMPO 2203/2209 0500 FG  \n" +
+                "BECMG 2211/2213 09006KT CAVOK";
+
+        // WHEN parsing the event.
+        TAF result = fSut.parse(message);
+        // THEN the result is CAVOK and the second BECMG is also cavok.
+        assertNotNull(result);
+        assertTrue(result.isCavok());
+        assertEquals(">10km", result.getVisibility().getMainVisibility());
+        assertTrue(result.getBECMGs().get(1).isCavok());
+        assertEquals(">10km", result.getBECMGs().get(1).getVisibility().getMainVisibility());
+    }
 }
