@@ -5,6 +5,7 @@ jdk:
   - openjdk8
 before_install:
   - echo $TRAVIS_BRANCH
+  - echo $TRAVIS_PULL_REQUEST
   - if [ "$TRAVIS_BRANCH" = "develop" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
   - if [ "$TRAVIS_BRANCH" = "develop" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
 
