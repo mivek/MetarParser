@@ -13,7 +13,7 @@ before_script:
   - ./cc-test-reporter before-build
   
 script:
-  - if [ "$TRAVIS_BRANCH" = "develop" ]; then mvn clean deploy --settings .settings.xml -P release ossrh ; else mvn install; fi
+  - if [ "$TRAVIS_BRANCH" = "develop" ]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn install; fi
 
 after_script:
 # Upload code coverage to code climate - with workaround for jacoco
