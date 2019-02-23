@@ -1,17 +1,20 @@
 language: java
-env:
-  global:
-    - CC_TEST_REPORTER_ID=80f941339411bc7abca6636030897e70dad49f2693f1bcc14ab9fda1b86bf63d
-before_install:
-  - sudo apt-get install jq
 
+jdk:
+  - oraclejdk8
+  - openjdk8
+before_install:
+  - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+  - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
+  on:
+    branch: develop
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   
 script:
-  - mvn install
+  - if [ "$TRAVIS_BRANCH" = "develop" ]; then mvn clean deploy --settings .settings.xml -P release ossrh ; else mvn install; fi
 
 after_script:
 # Upload code coverage to code climate - with workaround for jacoco
