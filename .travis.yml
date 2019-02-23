@@ -4,8 +4,8 @@ jdk:
   - oraclejdk8
   - openjdk8
 before_install:
-  - if [ "$TRAVIS_BRANCH" = "develop" ] && ["$TRAVIS_PULL_REQUEST" ="false"]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
-  - if [ "$TRAVIS_BRANCH" = "develop" ] && ["$TRAVIS_PULL_REQUEST" ="false"]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+  - if [ "$TRAVIS_BRANCH" = "develop" ] ; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
+  - if [ "$TRAVIS_BRANCH" = "develop" ] ; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -13,7 +13,7 @@ before_script:
   - ./cc-test-reporter before-build
   
 script:
-  - if [ "$TRAVIS_BRANCH" = "develop" ] && ["$TRAVIS_PULL_REQUEST" ="false"]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn install; fi
+  - if [ "$TRAVIS_BRANCH" = "develop" ] ; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn install; fi
 
 after_script:
 # Upload code coverage to code climate - with workaround for jacoco
