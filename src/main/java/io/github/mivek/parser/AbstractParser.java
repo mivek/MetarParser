@@ -39,17 +39,17 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern regex for wind. */
     protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
     /** Pattern regex for windshear. */
-    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
     /** Pattern regex for extreme winds. */
     protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
     /** Pattern for the main visibility. */
     protected static final String MAIN_VISIBILITY_REGEX = "^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$";
     /** Pattern to recognize clouds. */
-    protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
+    protected static final String CLOUD_REGEX = "^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$";
     /** Pattern for the vertical visibility. */
     protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
     /** Pattern for the minimum visibility. */
-    protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
+    protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d[a-z])$";
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */

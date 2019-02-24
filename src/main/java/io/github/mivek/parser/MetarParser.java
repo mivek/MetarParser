@@ -42,7 +42,7 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Pattern of the temperature block.
      */
-    private static final String TEMPERATURE_REGEX = "^(M?\\d\\d)\\/(M?\\d\\d)$";
+    private static final String TEMPERATURE_REGEX = "^(M?\\d{2})\\/(M?\\d{2})$";
     /**
      * Pattern of the altimeter (Pascals).
      */
