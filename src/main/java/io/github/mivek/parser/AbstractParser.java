@@ -49,7 +49,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern for the vertical visibility. */
     protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
     /** Pattern for the minimum visibility. */
-    protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d[a-z])$";
+    protected static final String MIN_VISIBILITY_REGEX = "^(\\d{4}[a-z])$";
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */
