@@ -75,23 +75,28 @@ public abstract class AbstractWeatherContainer {
     /**
      * Adds a cloud to the list.
      * @param pCloud the cloud to add.
+     * @return true if the cloud has been added in the list, false otherwise.
      */
-    public void addCloud(final Cloud pCloud) {
+    public boolean addCloud(final Cloud pCloud) {
         if (pCloud == null) {
-            return;
+            return false;
         }
         fClouds.add(pCloud);
+        return true;
     }
 
     /**
      * Adds a weather condition to the list.
      * @param pWeatherCondition the weather condition to add.
+     * @return true if the weather condition has been added to the list, false
+     * otherwise.
      */
-    public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
+    public boolean addWeatherCondition(final WeatherCondition pWeatherCondition) {
         if (pWeatherCondition == null) {
-            return;
+            return false;
         }
         fWeatherConditions.add(pWeatherCondition);
+        return true;
     }
 
     /**

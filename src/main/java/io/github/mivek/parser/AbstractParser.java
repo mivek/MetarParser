@@ -39,17 +39,17 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern regex for wind. */
     protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
     /** Pattern regex for windshear. */
-    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
     /** Pattern regex for extreme winds. */
     protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
     /** Pattern for the main visibility. */
     protected static final String MAIN_VISIBILITY_REGEX = "^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$";
     /** Pattern to recognize clouds. */
-    protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
+    protected static final String CLOUD_REGEX = "^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$";
     /** Pattern for the vertical visibility. */
     protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
     /** Pattern for the minimum visibility. */
-    protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
+    protected static final String MIN_VISIBILITY_REGEX = "^(\\d{4}[a-z])$";
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */
@@ -299,8 +299,9 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * Method that parses common elements of a abstract weather container.
      * @param pContainer The object to update
      * @param pPart the token to parse.
+     * @return boolean if the token pPart as been parsed.
      */
-    public void generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
+    public boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
         if (Regex.find(WIND_SHEAR_REGEX, pPart)) {
             WindShear windShear = parseWindShear(pPart);
             pContainer.setWindShear(windShear);
@@ -328,11 +329,12 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             pContainer.getVisibility().setMainVisibility(">10km");
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
-            pContainer.addCloud(c);
+            return pContainer.addCloud(c);
         } else {
             WeatherCondition wc = parseWeatherCondition(pPart);
-            pContainer.addWeatherCondition(wc);
+            return pContainer.addWeatherCondition(wc);
         }
+        return true;
     }
 
     /**
