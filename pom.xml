@@ -81,7 +81,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 							<goal>mutationCoverage</goal>
 						</goals>
 						<configuration>
-							<mutationThreshold>83</mutationThreshold>
+							<mutationThreshold>84</mutationThreshold>
 							<coverageThreshold>94</coverageThreshold>
 							<targetClasses>
 								<param>io.github.mivek.model.*</param>
