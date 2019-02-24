@@ -36,7 +36,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
     }
 
     @Override
-    public Metar retrieveFromAirport(final String pIcao) throws IOException, ParseException {
+    public Metar retrieveFromAirport(final String pIcao) throws ParseException, IOException {
         if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
         }
@@ -45,11 +45,8 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
         URL url = new URL(website);
         URLConnection urlCo = url.openConnection();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream()))) {
-            String line = (String) br.lines().toArray()[1];
-            br.close();
+            String line = br.lines().toArray(String[]::new)[1];
             return getParser().parse(line);
-        } catch (Exception e) {
-            throw e;
         }
     }
 
