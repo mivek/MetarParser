@@ -95,8 +95,9 @@ public final class MetarParser extends AbstractParser<Metar> {
         int metarTabLength = metarTab.length;
         for (int i = 2; i < metarTabLength; i++) {
             String[] matches;
-            generalParse(m, metarTab[i]);
-            if ("NOSIG".equals(metarTab[i])) {
+            if (generalParse(m, metarTab[i])) {
+                continue;
+            } else if ("NOSIG".equals(metarTab[i])) {
                 m.setNosig(true);
             } else if ("AUTO".equals(metarTab[i])) {
                 m.setAuto(true);

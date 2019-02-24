@@ -299,39 +299,47 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * Method that parses common elements of a abstract weather container.
      * @param pContainer The object to update
      * @param pPart the token to parse.
+     * @return boolean if the token pPart as been parsed.
      */
-    public void generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
+    public boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
         if (Regex.find(WIND_SHEAR_REGEX, pPart)) {
             WindShear windShear = parseWindShear(pPart);
             pContainer.setWindShear(windShear);
+            return true;
         } else if (Regex.find(WIND_REGEX, pPart)) {
             Wind wind = parseWind(pPart);
             pContainer.setWind(wind);
+            return true;
         } else if (Regex.find(WIND_EXTREME_REGEX, pPart)) {
             parseExtremeWind(pContainer.getWind(), pPart);
+            return true;
         } else if (Regex.find(MAIN_VISIBILITY_REGEX, pPart)) {
             String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, pPart);
             if (pContainer.getVisibility() == null) {
                 pContainer.setVisibility(new Visibility());
             }
             parseMainVisibility(pContainer.getVisibility(), matches);
+            return true;
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
             parseMinimalVisibility(pContainer.getVisibility(), pPart);
+            return true;
         } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
             String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
             pContainer.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
+            return true;
         } else if (CAVOK.equals(pPart)) {
             pContainer.setCavok(true);
             if (pContainer.getVisibility() == null) {
                 pContainer.setVisibility(new Visibility());
             }
             pContainer.getVisibility().setMainVisibility(">10km");
+            return true;
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
-            pContainer.addCloud(c);
+            return pContainer.addCloud(c);
         } else {
             WeatherCondition wc = parseWeatherCondition(pPart);
-            pContainer.addWeatherCondition(wc);
+            return pContainer.addWeatherCondition(wc);
         }
     }
 

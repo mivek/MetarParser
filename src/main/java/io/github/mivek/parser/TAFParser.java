@@ -154,8 +154,9 @@ public final class TAFParser extends AbstractParser<TAF> {
             pChange.setMaxTemperature(parseTemperature(pPart));
         } else if (pPart.startsWith("TN")) {
             pChange.setMinTemperature(parseTemperature(pPart));
+        } else {
+            generalParse(pChange, pPart);
         }
-        generalParse(pChange, pPart);
     }
 
     /**
