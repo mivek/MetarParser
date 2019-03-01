@@ -21,6 +21,8 @@ public abstract class AbstractWeatherContainer {
     private WindShear fWindShear;
     /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
     private boolean fCavok;
+    /**Contains the remarks.*/
+    private String fRemark;
 
     /**
      * Constructor to initialize the lists.
@@ -139,5 +141,19 @@ public abstract class AbstractWeatherContainer {
      */
     public void setCavok(final boolean pCavok) {
         fCavok = pCavok;
+    }
+
+    /**
+     * @return the remark
+     */
+    public String getRemark() {
+        return fRemark;
+    }
+
+    /**
+     * @param pRemark the remark to set
+     */
+    public void setRemark(final String pRemark) {
+        fRemark = pRemark;
     }
 }
