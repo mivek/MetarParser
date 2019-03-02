@@ -1,5 +1,7 @@
 package io.github.mivek.parser;
 
+import java.util.regex.Pattern;
+
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
@@ -25,7 +27,7 @@ public final class TAFParser extends AbstractParser<TAF> {
     /** Probability string constant. */
     private static final String PROB = "PROB";
     /** Regex for the validity. */
-    private static final String REGEX_VALIDITY = "^\\d{4}/\\d{4}$";
+    private static final Pattern REGEX_VALIDITY = Pattern.compile("^\\d{4}/\\d{4}$");
 
     /**
      * Instance of the TAFParser.

@@ -17,7 +17,7 @@ before_script:
   
 script:
   # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
-  - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn install; fi
+  - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn clean install; fi
 
 after_script:
 # Upload code coverage to code climate - with workaround for jacoco
