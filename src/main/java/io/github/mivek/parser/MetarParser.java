@@ -103,6 +103,8 @@ public final class MetarParser extends AbstractParser<Metar> {
                 m.setNosig(true);
             } else if ("AUTO".equals(metarTab[i])) {
                 m.setAuto(true);
+            } else if (RMK.equals(metarTab[i])) {
+                parseRMK(m, metarTab, i);
             } else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
                 RunwayInfo ri = parseRunWayAction(metarTab[i]);
                 m.addRunwayInfo(ri);
