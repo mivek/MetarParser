@@ -145,12 +145,12 @@ public final class Converter {
     }
 
     /**
-     * Converts mercury pressure into pascals.
-     * @param pInput string of mercury.
+     * Converts inches of mercury pressure into hecto pascals.
+     * @param pInchesMercury string of mercury.
      * @return double of the pressure in Pascals.
      */
-    public static double mercuryToPascal(final String pInput) {
-        return (3386 * (Double.parseDouble(pInput) / 100)) / 100;
+    public static double inchesMercuryToHPascal(final double pInchesMercury) {
+        return 33.8639 * pInchesMercury;
     }
 
     /**

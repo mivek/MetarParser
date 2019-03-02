@@ -339,4 +339,15 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertTrue(m.isCavok());
         assertEquals(">10km", m.getVisibility().getMainVisibility());
     }
+
+    @Test
+    public void testParseWithAltimeterInMercury() throws ParseException {
+        // GIVEN a metar with altimeter in inches of mercury
+        String code = "KTTN 051853Z 04011KT 9999 VCTS SN FZFG BKN003 OVC010 M02/M02 A3006";
+        // WHEN parsing the metar
+        Metar m = fSut.parse(code);
+        // THEN the altimeter is converted in HPa
+        assertNotNull(m);
+        assertEquals(Integer.valueOf(1017), m.getAltimeter());
+    }
 }
