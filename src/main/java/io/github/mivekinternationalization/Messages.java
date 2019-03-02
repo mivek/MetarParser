@@ -13,7 +13,7 @@ public final class Messages {
     /** Name of the bundle. */
     private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
     /** Bundle variable. */
-    private static ResourceBundle fResourceBundle;
+    private ResourceBundle fResourceBundle;
     /** Cloud quantity broken. */
     private String fCloudQuantityBKN;
     /** Cloud quantity few. */
