@@ -69,7 +69,7 @@ public final class MetarParser extends AbstractParser<Metar> {
     @Override
     public Metar parse(final String pMetarCode) throws ParseException {
         Metar m = new Metar();
-        String[] metarTab = pMetarCode.split(" ");
+        String[] metarTab = tokenize(pMetarCode);
         Airport airport = getAirports().get(metarTab[0]);
         if (airport == null) {
             throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);

@@ -61,7 +61,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         TAF taf = new TAF();
 
         // Handle the 1st line.
-        String[] line1parts = lines[0].split(" ");
+        String[] line1parts = tokenize(lines[0]);
         int i = 1;
         if (TAF.equals(line1parts[1])) {
             i = 2;
@@ -108,7 +108,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         // Process other lines.
         for (int j = 1; j < lines.length; j++) {
             // Split the line.
-            String[] parts = lines[j].split(" ");
+            String[] parts = tokenize(lines[j]);
             if (parts[0].equals(BECMG)) {
                 BECMGTafTrend change = new BECMGTafTrend();
                 iterChanges(1, parts, change);
