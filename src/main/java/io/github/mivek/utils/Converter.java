@@ -70,7 +70,7 @@ public final class Converter {
                 res = Messages.getInstance().getConverterE();
             } else if (isBetween(degrees, EAST, SOUTH_EAST)) {
                 res = Messages.getInstance().getConverterSE();
-            } else if (isBetween(degrees, SOUTH_EAST, SOUTH)) {
+            } else {
                 res = Messages.getInstance().getConverterS();
             }
         } else {

@@ -13,7 +13,7 @@ public final class Messages {
     /** Name of the bundle. */
     private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
     /** Bundle variable. */
-    private ResourceBundle fResourceBundle;
+    private static ResourceBundle fResourceBundle;
     /** Cloud quantity broken. */
     private String fCloudQuantityBKN;
     /** Cloud quantity few. */
@@ -764,5 +764,13 @@ public final class Messages {
      */
     public String getErrorPrefix() {
         return fErrorPrefix;
+    }
+
+    /**
+     * @param pString the string to get
+     * @return the translation of pString
+     */
+    public String getString(final String pString) {
+        return fResourceBundle.getString(pString);
     }
 }
