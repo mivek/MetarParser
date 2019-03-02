@@ -8,58 +8,32 @@ import io.github.mivekinternationalization.Messages;
  * @author mivek
  */
 public enum CloudType {
-    /**
-     * cumulonimbus.
-     */
-    CB("CB", Messages.getInstance().getCloudTypeCB()), //$NON-NLS-1$
-    /**
-     * towering cumulus, cumulus congestus.
-     */
-    TCU("TCU", Messages.getInstance().getCloudTypeTCU()), //$NON-NLS-1$
-    /**
-     * Cirrus.
-     */
-    CI("CI", Messages.getInstance().getCloudTypeCI()),
-    /**
-     * Cirrocumulus.
-     */
-    CC("CC", Messages.getInstance().getCloudTypeCC()),
-    /**
-     * Cirrostratus.
-     */
-    CS("CS", Messages.getInstance().getCloudTypeCS()),
-    /**
-     * Altocumulus.
-     */
-    AC("AC", Messages.getInstance().getCloudTypeAC()),
-    /**
-     * Stratus.
-     */
-    ST("ST", Messages.getInstance().getCloudTypeST()),
-    /**
-     * Cumulus.
-     */
-    CU("CU", Messages.getInstance().getCloudTypeCU()),
-    /**
-     * Astrostratus.
-     */
-    AS("AS", Messages.getInstance().getCloudTypeAS()),
-    /**
-     * Nimbostratus.
-     */
-    NS("NS", Messages.getInstance().getCloudTypeNS()),
-    /**
-     * Stratocumulus.
-     */
-    SC("SC", Messages.getInstance().getCloudTypeSC());
+    /** cumulonimbus. */
+    CB("CB", Messages.getInstance().getString("CloudType.CB")), //$NON-NLS-1$
+    /** towering cumulus, cumulus congestus. */
+    TCU("TCU", Messages.getInstance().getString("CloudType.TCU")), //$NON-NLS-1$
+    /** Cirrus. */
+    CI("CI", Messages.getInstance().getString("CloudType.CI")),
+    /** Cirrocumulus. */
+    CC("CC", Messages.getInstance().getString("CloudType.CC")),
+    /** Cirrostratus. */
+    CS("CS", Messages.getInstance().getString("CloudType.CS")),
+    /** Altocumulus. */
+    AC("AC", Messages.getInstance().getString("CloudType.AC")),
+    /** Stratus. */
+    ST("ST", Messages.getInstance().getString("CloudType.ST")),
+    /** Cumulus. */
+    CU("CU", Messages.getInstance().getString("CloudType.CU")),
+    /** Astrostratus. */
+    AS("AS", Messages.getInstance().getString("CloudType.AS")),
+    /** Nimbostratus. */
+    NS("NS", Messages.getInstance().getString("CloudType.NS")),
+    /** Stratocumulus. */
+    SC("SC", Messages.getInstance().getString("CloudType.SC"));
 
-    /**
-     * The shortcut of the cloud type.
-     */
+    /** The shortcut of the cloud type. */
     private String fShortcut = ""; //$NON-NLS-1$
-    /**
-     * The name of the cloud type.
-     */
+    /** The name of the cloud type. */
     private String fName = ""; //$NON-NLS-1$
 
     /**

@@ -6,29 +6,17 @@ import io.github.mivekinternationalization.Messages;
  * @author mivek
  */
 public enum WeatherChangeType {
-    /**
-     * From enumeration.
-     */
-    FM("FM", Messages.getInstance().getFrom()),
-    /**
-     * Becoming enumeration.
-     */
-    BECMG("BECMG", Messages.getInstance().getBecmg()),
-    /**
-     * Tempo enumeration.
-     */
-    TEMPO("TEMPO", Messages.getInstance().getTempo()),
-    /**
-     * Probability change.
-     */
-    PROB("PROB", Messages.getInstance().getProb());
-    /**
-     * Shortcut attribute.
-     */
+    /** From enumeration. */
+    FM("FM", Messages.getInstance().getString("WeatherChangeType.FM")),
+    /** Becoming enumeration. */
+    BECMG("BECMG", Messages.getInstance().getString("WeatherChangeType.BECMG")),
+    /** Tempo enumeration. */
+    TEMPO("TEMPO", Messages.getInstance().getString("WeatherChangeType.TEMPO")),
+    /** Probability change. */
+    PROB("PROB", Messages.getInstance().getString("WeatherChangeType.PROB"));
+    /** Shortcut attribute. */
     private String fShortcut = "";
-    /**
-     * Name of the enumeration.
-     */
+    /** Name of the enumeration. */
     private String fName = "";
 
     /**

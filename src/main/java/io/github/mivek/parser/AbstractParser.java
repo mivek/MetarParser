@@ -172,7 +172,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void setWindElements(final Wind pWind, final String pDirection, final String pSpeed, final String pGust, final String pUnit) {
         String direction = Converter.degreesToDirection(pDirection);
         pWind.setDirection(direction);
-        if (!direction.equals(Messages.getInstance().getConverterVRB())) {
+        if (!direction.equals(Messages.getInstance().getString("Converter.VRB"))) {
             pWind.setDirectionDegrees(Integer.parseInt(pDirection));
         }
         pWind.setSpeed(Integer.parseInt(pSpeed));
@@ -259,6 +259,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         for (Descriptive des : Descriptive.values()) {
             if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
                 wc.setDescriptive(des);
+                break;
             }
         }
         for (Phenomenon phe : Phenomenon.values()) {
