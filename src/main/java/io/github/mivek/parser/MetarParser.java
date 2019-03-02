@@ -1,5 +1,7 @@
 package io.github.mivek.parser;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import io.github.mivek.exception.ErrorCodes;
@@ -26,17 +28,17 @@ public final class MetarParser extends AbstractParser<Metar> {
     /** Instance of the class. */
     private static MetarParser instance = new MetarParser();
     /** Pattern regex for runway with min and max range visibility. */
-    private static final String RUNWAY_MAX_RANGE_REGEX = "^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})";
+    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})");
     /** Pattern regex for runway visibility. */
-    private static final String RUNWAY_REGEX = "^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$";
+    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$");
     /** Pattern to recognize a runway. */
-    private static final String GENERIC_RUNWAY_REGEX = "^(R\\d{2}\\w?\\/)";
+    private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?\\/)");
     /** Pattern of the temperature block. */
-    private static final String TEMPERATURE_REGEX = "^(M?\\d{2})\\/(M?\\d{2})$";
+    private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})\\/(M?\\d{2})$");
     /** Pattern of the altimeter (Pascals). */
-    private static final String ALTIMETER_REGEX = "^Q(\\d{4})$";
+    private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
     /** Pattern for the altimeter in inches of mercury. */
-    private static final String ALTIMETER_MERCURY_REGEX = "^A(\\d{4})$";
+    private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
     /** Constant string for TL. */
     private static final String TILL = "TL";
     /** Constant string for AT. */
@@ -87,6 +89,8 @@ public final class MetarParser extends AbstractParser<Metar> {
                 m.setNosig(true);
             } else if ("AUTO".equals(metarTab[i])) {
                 m.setAuto(true);
+            } else if (RMK.equals(metarTab[i])) {
+                parseRMK(m, metarTab, i);
             } else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
                 RunwayInfo ri = parseRunWayAction(metarTab[i]);
                 m.addRunwayInfo(ri);

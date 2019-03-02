@@ -482,4 +482,30 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertTrue(result.getBECMGs().get(1).isCavok());
         assertEquals(">10km", result.getBECMGs().get(1).getVisibility().getMainVisibility());
     }
+
+    @Test
+    public void testParseWithRMKInTempo() throws ParseException {
+        // GIVEN a TAF with remark in second tempo.
+        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 FM301200 10008KT 2SM -SN OVC010 \n"
+                + "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
+        // WHEN parsing the event.
+        TAF result = fSut.parse(message);
+        // THEN the second tempo contains the remark.
+        assertNotNull(result);
+        assertNotNull(result.getTempos().get(1));
+        assertNotNull(result.getTempos().get(1).getRemark());
+        assertEquals("FCST BASED ON AUTO OBS. NXT FCST BY 301400Z", result.getTempos().get(1).getRemark());
+    }
+
+    @Test
+    public void testParseWithRMK() throws ParseException {
+        // GIVEN a TAF with remark.
+        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 FM301200 10008KT 2SM -SN OVC010 \n"
+                + "TEMPO 3012/3022 3/4SM -SN VV007";
+        // WHEN parsing the event.
+        TAF result = fSut.parse(message);
+        // THEN the second tempo contains the remark.
+        assertNotNull(result);
+        assertEquals("FCST BASED ON AUTO OBS. NXT FCST BY 301400Z", result.getRemark());
+    }
 }
