@@ -8,7 +8,6 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 
-import io.github.mivek.utils.Converter;
 import io.github.mivekinternationalization.Messages;
 
 public class ConverterTest {
@@ -63,8 +62,8 @@ public class ConverterTest {
     }
 
     @Test
-    public void testMercuryToPascal() {
-        assertEquals(1018, Converter.mercuryToPascal("3006"), 1);
+    public void testInchesMercuryToHPascal() {
+        assertEquals(1013.25, Converter.inchesMercuryToHPascal(29.92), 0.1);
     }
 
     @Test

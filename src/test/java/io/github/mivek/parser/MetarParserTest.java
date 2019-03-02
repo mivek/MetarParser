@@ -341,6 +341,17 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
+    public void testParseWithAltimeterInMercury() throws ParseException {
+        // GIVEN a metar with altimeter in inches of mercury
+        String code = "KTTN 051853Z 04011KT 9999 VCTS SN FZFG BKN003 OVC010 M02/M02 A3006";
+        // WHEN parsing the metar
+        Metar m = fSut.parse(code);
+        // THEN the altimeter is converted in HPa
+        assertNotNull(m);
+        assertEquals(Integer.valueOf(1017), m.getAltimeter());
+    }
+
+    @Test
     public void testParseWithRMK() throws ParseException {
         //GIVEN a metar with RMK
         String code = "CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 Q1001 RMK SF5NS3 SLP134";

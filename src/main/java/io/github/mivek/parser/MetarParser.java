@@ -25,37 +25,23 @@ import io.github.mivek.utils.Regex;
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
-    /**
-     * Instance of the class.
-     */
+    /** Instance of the class. */
     private static MetarParser instance = new MetarParser();
-    /**
-     * Pattern regex for runway with min and max range visibility.
-     */
+    /** Pattern regex for runway with min and max range visibility. */
     private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})");
-    /**
-     * Pattern regex for runway visibility.
-     */
+    /** Pattern regex for runway visibility. */
     private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$");
-    /**
-     * Pattern to recognize a runway.
-     */
+    /** Pattern to recognize a runway. */
     private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?\\/)");
-    /**
-     * Pattern of the temperature block.
-     */
+    /** Pattern of the temperature block. */
     private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})\\/(M?\\d{2})$");
-    /**
-     * Pattern of the altimeter (Pascals).
-     */
+    /** Pattern of the altimeter (Pascals). */
     private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
-    /**
-     * Constant string for TL.
-     */
+    /** Pattern for the altimeter in inches of mercury. */
+    private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
+    /** Constant string for TL. */
     private static final String TILL = "TL";
-    /**
-     * Constant string for AT.
-     */
+    /** Constant string for AT. */
     private static final String AT = "AT";
 
     /**
@@ -115,6 +101,10 @@ public final class MetarParser extends AbstractParser<Metar> {
             } else if (Regex.find(ALTIMETER_REGEX, metarTab[i])) {
                 matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
                 m.setAltimeter(Integer.parseInt(matches[1]));
+            } else if (Regex.find(ALTIMETER_MERCURY_REGEX, metarTab[i])) {
+                matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, metarTab[i]);
+                double mercury = Double.parseDouble(matches[1]) / 100;
+                m.setAltimeter(Integer.valueOf((int) Converter.inchesMercuryToHPascal(mercury)));
             } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
                 AbstractMetarTrend trend;
                 if (metarTab[i].equals(TEMPO)) {
@@ -190,5 +180,4 @@ public final class MetarParser extends AbstractParser<Metar> {
             generalParse(pTrend, pPart);
         }
     }
-
 }
