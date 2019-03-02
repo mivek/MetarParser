@@ -765,4 +765,12 @@ public final class Messages {
     public String getErrorPrefix() {
         return fErrorPrefix;
     }
+
+    /**
+     * @param pString the string to get
+     * @return the translation of pString
+     */
+    public String getString(final String pString) {
+        return fResourceBundle.getString(pString);
+    }
 }

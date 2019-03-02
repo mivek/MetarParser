@@ -1,13 +1,17 @@
 package io.github.mivek.parser;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -39,6 +43,8 @@ import io.github.mivekinternationalization.Messages;
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
+    /** Pattern regex to tokenize the code. */
+    protected static final Pattern TOKENIZE_REGEX = Pattern.compile("(\\d \\d\\/\\dSM|\\S+)");
     /** Pattern regex for the intensity of a phenomenon. */
     protected static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
     /** Pattern regex for wind. */
@@ -48,7 +54,9 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern regex for extreme winds. */
     protected static final Pattern WIND_EXTREME_REGEX = Pattern.compile("^(\\d{3})V(\\d{3})");
     /** Pattern for the main visibility. */
-    protected static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$");
+    protected static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$");
+    /** Pattern for the main visibility in SM. */
+    protected static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^(\\d)*(\\s)?((\\d\\/\\d)?SM)$");
     /** Pattern to recognize clouds. */
     protected static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
     /** Pattern for the vertical visibility. */
@@ -102,10 +110,8 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private void initAirports() {
         fAirports = new HashMap<>();
-        CSVReader reader;
-        try {
-            reader = new CSVReader(new InputStreamReader(fAirportsFile));
-            String[] line;
+        String[] line;
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile))) {
             while ((line = reader.readNext()) != null) {
                 Airport airport = new Airport();
                 airport.setName(line[1]);
@@ -120,7 +126,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
                 airport.setDst(line[10]);
                 fAirports.put(airport.getIcao(), airport);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
         }
     }
@@ -130,10 +136,8 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private void initCountries() {
         fCountries = new HashMap<>();
-        CSVReader reader;
-        try {
-            reader = new CSVReader(new InputStreamReader(fCountriesFile));
-            String[] line;
+        String[] line;
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile))) {
             while ((line = reader.readNext()) != null) {
                 Country country = new Country();
                 country.setName(line[0]);
@@ -323,7 +327,13 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             if (pContainer.getVisibility() == null) {
                 pContainer.setVisibility(new Visibility());
             }
-            parseMainVisibility(pContainer.getVisibility(), matches);
+            pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        } else if (Regex.find(MAIN_VISIBILITY_SM_REGEX, pPart)) {
+            String[] matches = Regex.pregMatch(MAIN_VISIBILITY_SM_REGEX, pPart);
+            if (pContainer.getVisibility() == null) {
+                pContainer.setVisibility(new Visibility());
+            }
+            pContainer.getVisibility().setMainVisibility(matches[0]);
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
             parseMinimalVisibility(pContainer.getVisibility(), pPart);
         } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
@@ -345,17 +355,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         return true;
     }
 
-    /**
-     * Sets the main vibility of a visibility object.
-     * When matches[1] is null then the visibility is in SM.
-     * Otherwise the visibility is in meters and is converted.
-     * @param pVisibility the visibility object to update.
-     * @param matches the array containing regex matches.
-     */
-    protected void parseMainVisibility(final Visibility pVisibility, final String[] matches) {
-        pVisibility.setMainVisibility(matches[1] == null ? matches[0] : Converter.convertVisibility(matches[1]));
-    }
-
     /***
      * Adds the remark part to the event.
      * @param pContainer the event to update
@@ -365,5 +364,21 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
         String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
         pContainer.setRemark(Arrays.stream(subArray).collect(Collectors.joining(" ")));
+    }
+
+    /**
+     * Splits a string between spaces except if the space is between two digits with
+     * SM.
+     * @param pCode the string to parse
+     * @return a array of tokens
+     */
+    protected String[] tokenize(final String pCode) {
+        List<String> tokens = new ArrayList<>();
+
+        Matcher m = TOKENIZE_REGEX.matcher(pCode);
+        while (m.find()) {
+            tokens.add(m.group(1));
+        }
+        return tokens.toArray(new String[0]);
     }
 }

@@ -32,6 +32,7 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
             { "05009KT", true }, // Wind
             { "030V113", true }, // Wind variable
             { "9999", true }, // Main visibility
+            { "6 1/2SM", true}, //Main visibility SM
             { "1100w", true }, // Min visibility
             { "VV002", true }, // Vertical visibility
             { "CAVOK", true }, // CAVOK
