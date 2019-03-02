@@ -339,4 +339,15 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertTrue(m.isCavok());
         assertEquals(">10km", m.getVisibility().getMainVisibility());
     }
+
+    @Test
+    public void testParseWithRMK() throws ParseException {
+        //GIVEN a metar with RMK
+        String code = "CYWG 172000Z 30015G25KT 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 Q1001 RMK SF5NS3 SLP134";
+        // WHEN parsing the metar
+        Metar m = fSut.parse(code);
+        // THEN the remark is not null
+        assertNotNull(m);
+        assertEquals("SF5NS3 SLP134", m.getRemark());
+    }
 }

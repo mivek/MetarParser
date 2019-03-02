@@ -3,10 +3,12 @@ package io.github.mivek.parser;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.opencsv.CSVReader;
 
@@ -58,10 +60,13 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected static final String BECMG = "BECMG";
     /** Pattern for CAVOK. */
     protected static final String CAVOK = "CAVOK";
+    /** Pattern for RMK. */
+    protected static final String RMK = "RMK";
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
+
     /**
      * Path of airport file.
      */
@@ -346,5 +351,16 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected void parseMainVisibility(final Visibility pVisibility, final String[] matches) {
         pVisibility.setMainVisibility(matches[1] == null ? matches[0] : Converter.convertVisibility(matches[1]));
+    }
+
+    /***
+     * Adds the remark part to the event.
+     * @param pContainer the event to update
+     * @param pParts the tokens of the event
+     * @param index the RMK index in the event.
+     */
+    protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
+        String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
+        pContainer.setRemark(Arrays.stream(subArray).collect(Collectors.joining(" ")));
     }
 }
