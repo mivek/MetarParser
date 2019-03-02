@@ -294,13 +294,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     }
 
     /**
-     * @return the countries
-     */
-    protected Map<String, Country> getCountries() {
-        return fCountries;
-    }
-
-    /**
      * Abstract method parse.
      * @param pCode the message to parse.
      * @throws ParseException when an error occurs during parsing.
