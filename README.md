@@ -1,3 +1,5 @@
+Master:
+[![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
 Develop:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=develop)](https://travis-ci.org/mivek/MetarParser)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/maintainability)](https://codeclimate.com/github/mivek/MetarParser/maintainability)
