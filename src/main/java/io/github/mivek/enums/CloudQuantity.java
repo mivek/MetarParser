@@ -9,37 +9,22 @@ import io.github.mivekinternationalization.Messages;
  * @author mivek
  */
 public enum CloudQuantity {
-    /**
-     * Sky clear.
-     */
-    SKC("SKC", Messages.getInstance().getCloudQuantitySKC()), //$NON-NLS-1$
-    /**
-     * Few clouds.
-     */
-    FEW("FEW", Messages.getInstance().getCloudQuantityFEW()), //$NON-NLS-1$
-    /**
-     * Broken ceiling.
-     */
-    BKN("BKN", Messages.getInstance().getCloudQuantityBKN()), //$NON-NLS-1$
-    /**
-     * Scattered.
-     */
-    SCT("SCT", Messages.getInstance().getCloudQuantitySCT()), //$NON-NLS-1$
-    /**
-     * Overcast.
-     */
-    OVC("OVC", Messages.getInstance().getCloudQuantityOVC()), //$NON-NLS-1$
-    /**
-     * No significant cloud.
-     */
-    NSC("NSC", Messages.getInstance().getCloudQuantityNSC()); //$NON-NLS-1$
-    /**
-     * Shortcut of the cloud quanity.
-     */
+    /** Sky clear. */
+    SKC("SKC", Messages.getInstance().getString("CloudQuantity.SKC")), //$NON-NLS-1$
+    /** Few clouds. */
+    FEW("FEW", Messages.getInstance().getString("CloudQuantity.FEW")), //$NON-NLS-1$
+    /** Broken ceiling. */
+    BKN("BKN", Messages.getInstance().getString("CloudQuantity.BKN")), //$NON-NLS-1$
+    /** Scattered. */
+    SCT("SCT", Messages.getInstance().getString("CloudQuantity.SCT")), //$NON-NLS-1$
+    /** Overcast. */
+    OVC("OVC", Messages.getInstance().getString("CloudQuantity.OVC")), //$NON-NLS-1$
+    /** No significant cloud. */
+    NSC("NSC", Messages.getInstance().getString("CloudQuantity.NSC")); //$NON-NLS-1$
+
+    /** Shortcut of the cloud quanity. */
     private String fShortcut = ""; //$NON-NLS-1$
-    /**
-     * The name of the quantity.
-     */
+    /** The name of the quantity. */
     private String fName = ""; //$NON-NLS-1$
 
     /**

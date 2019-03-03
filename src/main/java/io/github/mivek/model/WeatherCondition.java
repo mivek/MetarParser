@@ -73,14 +73,6 @@ public class WeatherCondition {
     }
 
     /**
-     * Setter of phenomenons list.
-     * @param pPhenomenons the list to set.
-     */
-    public void setPhenomenons(final List<Phenomenon> pPhenomenons) {
-        fPhenomenons = pPhenomenons;
-    }
-
-    /**
      * Adds a phenomenon to the list.
      * @param pPhenomenon The Phenomenon to add.
      */

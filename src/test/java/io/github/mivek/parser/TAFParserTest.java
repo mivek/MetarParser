@@ -357,7 +357,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(0).getValidity().getStartHour(), is(12));
         assertThat(res.getTempos().get(0).getValidity().getEndDay(), is(21));
         assertThat(res.getTempos().get(0).getValidity().getEndHour(), is(16));
-        assertEquals(Messages.getInstance().getConverterVRB(), res.getTempos().get(0).getWind().getDirection());
+        assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getTempos().get(0).getWind().getDirection());
         assertThat(res.getTempos().get(0).getWind().getSpeed(), is(6));
 
         FMTafTrend fm2 = res.getFMs().get(1);

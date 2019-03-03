@@ -8,11 +8,11 @@ import io.github.mivekinternationalization.Messages;
  */
 public enum TimeIndicator {
     /** The AT value of the metar trend. */
-    AT("AT", Messages.getInstance().getAt()),
+    AT("AT", Messages.getInstance().getString("TimeIndicator.AT")),
     /** The FM value of the metar trend. */
-    FM("FM", Messages.getInstance().getFrom()),
+    FM("FM", Messages.getInstance().getString("WeatherChangeType.FM")),
     /** The TL value of the metar trend. */
-    TL("TL", Messages.getInstance().getTl());
+    TL("TL", Messages.getInstance().getString("TimeIndicator.TL"));
 
     /**
      * Shortcut of the time indicator.
