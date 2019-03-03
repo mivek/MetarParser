@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.mivek</groupId>
 	<artifactId>metarParser</artifactId>
@@ -11,8 +13,8 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 		<url>https://github.com/mivek/MetarParser/tree/master</url>
 		<connection>scm:git:git@github.com:mivek/MetarParser.git</connection>
 		<developerConnection>scm:git:git@github.com:mivek/MetarParser.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	<ciManagement>
 		<system>travis-ci</system>
 		<url>https://travis-ci.org/mivek/MetarParser</url>
@@ -71,6 +73,16 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 		<directory>${basedir}/target</directory>
 		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M3</version>
+			</plugin>
 			<plugin>
 				<groupId>org.pitest</groupId>
 				<artifactId>pitest-maven</artifactId>
@@ -135,7 +147,6 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 					</execution>
 				</executions>
 			</plugin>
-
 		</plugins>
 	</build>
 

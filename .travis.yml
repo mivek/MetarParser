@@ -24,3 +24,16 @@ after_script:
   - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
   - cd src/main/java/
   - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
+
+before_deploy: bash before_deploy.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST $NAME $EMAIL
+
+deploy:
+  provider: releases
+  file: target/metarParser-$version.jar
+  api_key:
+    secure: $GITHUB_OATH
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
+    branch: master
