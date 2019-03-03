@@ -8,46 +8,26 @@ import io.github.mivekinternationalization.Messages;
  * @author mivek
  */
 public enum Descriptive {
-    /**
-     * Showers.
-     */
-    SHOWERS("SH", Messages.getInstance().getDescriptiveSH()), //$NON-NLS-1$
-    /**
-     * Shallow.
-     */
-    SHALLOW("MI", Messages.getInstance().getDescriptiveMI()), //$NON-NLS-1$
-    /**
-     * Patches.
-     */
-    PATCHES("BC", Messages.getInstance().getDescriptiveBC()), //$NON-NLS-1$
-    /**
-     * Partial.
-     */
-    PARTIAL("PR", Messages.getInstance().getDescriptivePR()), //$NON-NLS-1$
-    /**
-     * Low drifting.
-     */
-    DRIFTING("DR", Messages.getInstance().getDescriptiveDR()), //$NON-NLS-1$
-    /**
-     * Thunderstorm.
-     */
-    THUNDERSTORM("TS", Messages.getInstance().getDescriptiveTS()), //$NON-NLS-1$
-    /**
-     * blowing.
-     */
-    BLOWING("BL", Messages.getInstance().getDescriptiveBL()), //$NON-NLS-1$
-    /**
-     * Freezing.
-     */
-    FREEZING("FZ", Messages.getInstance().getDescriptiveFZ()); //$NON-NLS-1$
+    /** Showers. */
+    SHOWERS("SH", Messages.getInstance().getString("Descriptive.SH")), //$NON-NLS-1$
+    /** Shallow. */
+    SHALLOW("MI", Messages.getInstance().getString("Descriptive.MI")), //$NON-NLS-1$
+    /** Patches. */
+    PATCHES("BC", Messages.getInstance().getString("Descriptive.BC")), //$NON-NLS-1$
+    /** Partial. */
+    PARTIAL("PR", Messages.getInstance().getString("Descriptive.PR")), //$NON-NLS-1$
+    /** Low drifting. */
+    DRIFTING("DR", Messages.getInstance().getString("Descriptive.DR")), //$NON-NLS-1$
+    /** Thunderstorm. */
+    THUNDERSTORM("TS", Messages.getInstance().getString("Descriptive.TS")), //$NON-NLS-1$
+    /** blowing. */
+    BLOWING("BL", Messages.getInstance().getString("Descriptive.BC")), //$NON-NLS-1$
+    /** Freezing. */
+    FREEZING("FZ", Messages.getInstance().getString("Descriptive.FZ")); //$NON-NLS-1$
 
-    /**
-     * Shortcut of the descriptive.
-     */
+    /** Shortcut of the descriptive. */
     private String fShortcut = ""; //$NON-NLS-1$
-    /**
-     * Meaning of the descriptive.
-     */
+    /** Meaning of the descriptive. */
     private String fName = ""; //$NON-NLS-1$
 
     /**

@@ -28,9 +28,9 @@ public class ConverterTest {
 
     @Test
     public void testConvertTrend() {
-        assertEquals(Messages.getInstance().getConverterU(), Converter.convertTrend("U"));
-        assertEquals(Messages.getInstance().getConverterD(), Converter.convertTrend("D"));
-        assertEquals(Messages.getInstance().getConverterNSC(), Converter.convertTrend("N"));
+        assertEquals(Messages.getInstance().getString("Converter.U"), Converter.convertTrend("U"));
+        assertEquals(Messages.getInstance().getString("Converter.D"), Converter.convertTrend("D"));
+        assertEquals(Messages.getInstance().getString("Converter.NSC"), Converter.convertTrend("N"));
         assertEquals("", Converter.convertTrend("Random string"));
     }
 

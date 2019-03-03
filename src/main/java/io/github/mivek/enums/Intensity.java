@@ -9,26 +9,16 @@ import io.github.mivekinternationalization.Messages;
  * @author mivek
  */
 public enum Intensity {
-    /**
-     * Light intensity.
-     */
-    LIGHT("-", Messages.getInstance().getIntensityLight()), //$NON-NLS-1$
-    /**
-     * Heavy intensity.
-     */
-    HEAVY("+", Messages.getInstance().getIntensityHeavy()), //$NON-NLS-1$
-    /**
-     * In vicinity.
-     */
-    IN_VICINITY("VC", Messages.getInstance().getIntensityVC()); //$NON-NLS-1$
+    /** Light intensity. */
+    LIGHT("-", Messages.getInstance().getString("Intensity.-")), //$NON-NLS-1$
+    /** Heavy intensity. */
+    HEAVY("+", Messages.getInstance().getString("Intensity.+")), //$NON-NLS-1$
+    /** In vicinity. */
+    IN_VICINITY("VC", Messages.getInstance().getString("Intensity.VC")); //$NON-NLS-1$
 
-    /**
-     * The shortcut of the intensity.
-     */
+    /** The shortcut of the intensity. */
     private String fShortcut = ""; //$NON-NLS-1$
-    /**
-     * The meaning of the intensity.
-     */
+    /** The meaning of the intensity. */
     private String fName = ""; //$NON-NLS-1$
 
     /**
