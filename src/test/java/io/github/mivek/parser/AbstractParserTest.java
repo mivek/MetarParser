@@ -108,7 +108,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getConverterN()));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.N")));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
         assertEquals(0, res.getGust());
@@ -123,7 +123,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getConverterSE()));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.SE")));
         assertEquals(Integer.valueOf(120), res.getDirectionDegrees());
         assertEquals(17, res.getSpeed());
         assertEquals(20, res.getGust());
@@ -137,7 +137,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertEquals(Messages.getInstance().getConverterVRB(), res.getDirection());
+        assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
     }

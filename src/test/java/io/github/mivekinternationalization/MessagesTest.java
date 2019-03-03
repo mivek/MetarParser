@@ -6,22 +6,20 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import io.github.mivekinternationalization.Messages;
-
 public class MessagesTest {
 
     @Test
-    public void testSetLocalee() {
+    public void testSetLocale() {
         // Given a french locale
         Messages.getInstance().setLocale(Locale.FRENCH);
-        assertEquals("Peu", Messages.getInstance().getCloudQuantityFEW());
+        assertEquals("Peu", Messages.getInstance().getString("CloudQuantity.FEW"));
         // WHEN Changing the locale to english
         Messages.getInstance().setLocale(Locale.ENGLISH);
         // THEN The locale is changed and so is the message.
-        assertEquals("Few", Messages.getInstance().getCloudQuantityFEW());
+        assertEquals("Few", Messages.getInstance().getString("CloudQuantity.FEW"));
         // When Changing the locale to german.
         Messages.getInstance().setLocale(Locale.GERMAN);
         // Then the message is in german.
-        assertEquals("gering", Messages.getInstance().getCloudQuantityFEW());
+        assertEquals("gering", Messages.getInstance().getString("CloudQuantity.FEW"));
     }
 }
