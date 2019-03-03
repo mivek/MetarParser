@@ -1,12 +1,10 @@
 package io.github.mivek.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import io.github.mivek.model.Airport;
 
 public class AirportTest {
     private Airport sut;
@@ -26,9 +24,10 @@ public class AirportTest {
         Airport other2 = new Airport();
         other2.setIcao("498");
 
-        assertEquals(sut, sut);
-        assertEquals(other1, sut);
-        assertNotEquals(other2, sut);
-        assertNotEquals(null, sut);
+        assertTrue(sut.equals(sut));
+        assertTrue(sut.equals(other1));
+        assertFalse(sut.equals(other2));
+        assertFalse(sut.equals(null));
+        assertFalse(sut.equals(new Object()));
     }
 }

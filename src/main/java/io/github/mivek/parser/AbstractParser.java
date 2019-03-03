@@ -1,12 +1,19 @@
 package io.github.mivek.parser;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.opencsv.CSVReader;
 
@@ -36,30 +43,41 @@ import io.github.mivekinternationalization.Messages;
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
+    /** Pattern regex to tokenize the code. */
+    protected static final Pattern TOKENIZE_REGEX = Pattern.compile("(\\d \\d\\/\\dSM|\\S+)");
+    /** Pattern regex for the intensity of a phenomenon. */
+    protected static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
     /** Pattern regex for wind. */
-    protected static final String WIND_REGEX = "(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final Pattern WIND_REGEX = Pattern.compile("(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
     /** Pattern regex for windshear. */
-    protected static final String WIND_SHEAR_REGEX = "WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)";
+    protected static final Pattern WIND_SHEAR_REGEX = Pattern.compile("WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
     /** Pattern regex for extreme winds. */
-    protected static final String WIND_EXTREME_REGEX = "^(\\d{3})V(\\d{3})";
+    protected static final Pattern WIND_EXTREME_REGEX = Pattern.compile("^(\\d{3})V(\\d{3})");
     /** Pattern for the main visibility. */
-    protected static final String MAIN_VISIBILITY_REGEX = "^(\\d{4})(|NDV)$|^(\\d+(\\/\\d)?)SM$";
+    protected static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$");
+    /** Pattern for the main visibility in SM. */
+    protected static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^(\\d)*(\\s)?((\\d\\/\\d)?SM)$");
     /** Pattern to recognize clouds. */
-    protected static final String CLOUD_REGEX = "^(\\w{3})(\\d{3})?(\\w{2,3})?$";
+    protected static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
     /** Pattern for the vertical visibility. */
-    protected static final String VERTICAL_VISIBILITY = "^VV(\\d{3})$";
+    protected static final Pattern VERTICAL_VISIBILITY = Pattern.compile("^VV(\\d{3})$");
     /** Pattern for the minimum visibility. */
-    protected static final String MIN_VISIBILITY_REGEX = "^(\\d\\d\\d\\d\\w)$";
+    protected static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[a-z])$");
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */
     protected static final String TEMPO = "TEMPO";
     /** BECMG shortcut constant. */
     protected static final String BECMG = "BECMG";
+    /** Pattern for CAVOK. */
+    protected static final String CAVOK = "CAVOK";
+    /** Pattern for RMK. */
+    protected static final String RMK = "RMK";
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
+
     /**
      * Path of airport file.
      */
@@ -92,10 +110,8 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private void initAirports() {
         fAirports = new HashMap<>();
-        CSVReader reader;
-        try {
-            reader = new CSVReader(new InputStreamReader(fAirportsFile));
-            String[] line;
+        String[] line;
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile))) {
             while ((line = reader.readNext()) != null) {
                 Airport airport = new Airport();
                 airport.setName(line[1]);
@@ -110,7 +126,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
                 airport.setDst(line[10]);
                 fAirports.put(airport.getIcao(), airport);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
         }
     }
@@ -120,10 +136,8 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private void initCountries() {
         fCountries = new HashMap<>();
-        CSVReader reader;
-        try {
-            reader = new CSVReader(new InputStreamReader(fCountriesFile));
-            String[] line;
+        String[] line;
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile))) {
             while ((line = reader.readNext()) != null) {
                 Country country = new Country();
                 country.setName(line[0]);
@@ -158,7 +172,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void setWindElements(final Wind pWind, final String pDirection, final String pSpeed, final String pGust, final String pUnit) {
         String direction = Converter.degreesToDirection(pDirection);
         pWind.setDirection(direction);
-        if (!direction.equals(Messages.getInstance().getConverterVRB())) {
+        if (!direction.equals(Messages.getInstance().getString("Converter.VRB"))) {
             pWind.setDirectionDegrees(Integer.parseInt(pDirection));
         }
         pWind.setSpeed(Integer.parseInt(pSpeed));
@@ -237,18 +251,19 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     protected WeatherCondition parseWeatherCondition(final String weatherPart) {
         WeatherCondition wc = new WeatherCondition();
         String match = null;
-        if (Regex.find("^(-|\\+|VC)", weatherPart)) {
-            match = Regex.findString("^(-|\\+|VC)", weatherPart);
+        if (Regex.find(INTENSITY_REGEX, weatherPart)) {
+            match = Regex.findString(INTENSITY_REGEX, weatherPart);
             Intensity i = Intensity.getEnum(match);
             wc.setIntensity(i);
         }
         for (Descriptive des : Descriptive.values()) {
-            if (Regex.findString("(" + des.getShortcut() + ")", weatherPart) != null) {
+            if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
                 wc.setDescriptive(des);
+                break;
             }
         }
         for (Phenomenon phe : Phenomenon.values()) {
-            if (Regex.findString("(" + phe.getShortcut() + ")", weatherPart) != null) {
+            if (Regex.findString(Pattern.compile("(" + phe.getShortcut() + ")"), weatherPart) != null) {
                 wc.addPhenomenon(phe);
             }
         }
@@ -279,13 +294,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     }
 
     /**
-     * @return the countries
-     */
-    protected Map<String, Country> getCountries() {
-        return fCountries;
-    }
-
-    /**
      * Abstract method parse.
      * @param pCode the message to parse.
      * @throws ParseException when an error occurs during parsing.
@@ -297,8 +305,9 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * Method that parses common elements of a abstract weather container.
      * @param pContainer The object to update
      * @param pPart the token to parse.
+     * @return boolean if the token pPart as been parsed.
      */
-    public void generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
+    public boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
         if (Regex.find(WIND_SHEAR_REGEX, pPart)) {
             WindShear windShear = parseWindShear(pPart);
             pContainer.setWindShear(windShear);
@@ -312,29 +321,58 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             if (pContainer.getVisibility() == null) {
                 pContainer.setVisibility(new Visibility());
             }
-            parseMainVisibility(pContainer.getVisibility(), matches);
+            pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        } else if (Regex.find(MAIN_VISIBILITY_SM_REGEX, pPart)) {
+            String[] matches = Regex.pregMatch(MAIN_VISIBILITY_SM_REGEX, pPart);
+            if (pContainer.getVisibility() == null) {
+                pContainer.setVisibility(new Visibility());
+            }
+            pContainer.getVisibility().setMainVisibility(matches[0]);
         } else if (Regex.find(MIN_VISIBILITY_REGEX, pPart)) {
             parseMinimalVisibility(pContainer.getVisibility(), pPart);
         } else if (Regex.match(VERTICAL_VISIBILITY, pPart)) {
             String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
             pContainer.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
+        } else if (CAVOK.equals(pPart)) {
+            pContainer.setCavok(true);
+            if (pContainer.getVisibility() == null) {
+                pContainer.setVisibility(new Visibility());
+            }
+            pContainer.getVisibility().setMainVisibility(">10km");
         } else if (Regex.find(CLOUD_REGEX, pPart)) {
             Cloud c = parseCloud(pPart);
-            pContainer.addCloud(c);
+            return pContainer.addCloud(c);
         } else {
             WeatherCondition wc = parseWeatherCondition(pPart);
-            pContainer.addWeatherCondition(wc);
+            return pContainer.addWeatherCondition(wc);
         }
+        return true;
+    }
+
+    /***
+     * Adds the remark part to the event.
+     * @param pContainer the event to update
+     * @param pParts the tokens of the event
+     * @param index the RMK index in the event.
+     */
+    protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
+        String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
+        pContainer.setRemark(Arrays.stream(subArray).collect(Collectors.joining(" ")));
     }
 
     /**
-     * Sets the main vibility of a visibility object.
-     * When matches[1] is null then the visibility is in SM.
-     * Otherwise the visibility is in meters and is converted.
-     * @param pVisibility the visibility object to update.
-     * @param matches the array containing regex matches.
+     * Splits a string between spaces except if the space is between two digits with
+     * SM.
+     * @param pCode the string to parse
+     * @return a array of tokens
      */
-    protected void parseMainVisibility(final Visibility pVisibility, final String[] matches) {
-        pVisibility.setMainVisibility(matches[1] == null ? matches[0] : Converter.convertVisibility(matches[1]));
+    protected String[] tokenize(final String pCode) {
+        List<String> tokens = new ArrayList<>();
+
+        Matcher m = TOKENIZE_REGEX.matcher(pCode);
+        while (m.find()) {
+            tokens.add(m.group(1));
+        }
+        return tokens.toArray(new String[0]);
     }
 }

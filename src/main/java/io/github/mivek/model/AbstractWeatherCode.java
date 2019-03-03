@@ -8,23 +8,15 @@ import java.time.LocalTime;
  */
 public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
 
-    /**
-     * Integer for the day of the metar.
-     */
+    /** Integer for the day of the metar. */
     private Integer fDay;
-    /**
-     * Time of the metar.
-     */
+    /** Time of the metar. */
     private LocalTime fTime;
-    /**
-     * Airport of the metar.
-     */
+    /** Airport of the metar. */
     private Airport fAirport;
-
-    /**
-     * Original message of the metar.
-     */
+    /** Original message of the metar. */
     private String fMessage;
+
 
     /**
      * @return the day

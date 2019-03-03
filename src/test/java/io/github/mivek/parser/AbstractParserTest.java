@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -107,7 +108,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getConverterN()));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.N")));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
         assertEquals(0, res.getGust());
@@ -122,7 +123,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getConverterSE()));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.SE")));
         assertEquals(Integer.valueOf(120), res.getDirectionDegrees());
         assertEquals(17, res.getSpeed());
         assertEquals(20, res.getGust());
@@ -136,7 +137,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         Wind res = getSut().parseWind(windPart);
 
         assertNotNull(res);
-        assertEquals(Messages.getInstance().getConverterVRB(), res.getDirection());
+        assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
     }
@@ -192,6 +193,19 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         getSut().parseMinimalVisibility(v, code);
         assertEquals(1100, v.getMinVisibility());
         assertEquals("w", v.getMinDirection());
+    }
+
+    @Test
+    public void testTokenize() {
+        // GIVEN a string with 1 1/2SM
+        String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
+        String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
+        // WHEN tokenizing the string
+        String[] result = getSut().tokenize(code);
+        // THEN the visibility part is 1 1/2SM
+        assertNotNull(result);
+        assertArrayEquals(tokens, result);
+
     }
 
     protected abstract AbstractParser<T> getSut();

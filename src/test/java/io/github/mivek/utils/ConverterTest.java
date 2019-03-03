@@ -8,37 +8,9 @@ import java.time.LocalTime;
 
 import org.junit.Test;
 
-import io.github.mivek.utils.Converter;
 import io.github.mivekinternationalization.Messages;
 
 public class ConverterTest {
-
-    @Test
-    public void testdegreesToDirectionVRB() {
-        String res = Converter.degreesToDirection("anyString");
-        assertEquals(Messages.getInstance().getConverterVRB(), res);
-    }
-
-    @Test
-    public void testdegreesToDirectionN() {
-        String res1 = Converter.degreesToDirection("2");
-        String res2 = Converter.degreesToDirection("345");
-
-        assertEquals(Messages.getInstance().getConverterN(), res1);
-        assertEquals(Messages.getInstance().getConverterN(), res2);
-    }
-
-    @Test
-    public void testToDirection() {
-        assertEquals(Messages.getInstance().getConverterE(), Converter.degreesToDirection("80"));
-        assertEquals(Messages.getInstance().getConverterNE(), Converter.degreesToDirection("30"));
-        assertEquals(Messages.getInstance().getConverterS(), Converter.degreesToDirection("200"));
-        assertEquals(Messages.getInstance().getConverterW(), Converter.degreesToDirection("280"));
-        assertEquals(Messages.getInstance().getConverterNW(), Converter.degreesToDirection("300"));
-        assertEquals(Messages.getInstance().getConverterSE(), Converter.degreesToDirection("130"));
-        assertEquals(Messages.getInstance().getConverterSW(), Converter.degreesToDirection("230"));
-    }
-
     @Test
     public void testBetween() {
 
@@ -56,15 +28,15 @@ public class ConverterTest {
 
     @Test
     public void testConvertTrend() {
-        assertEquals(Messages.getInstance().getConverterU(), Converter.convertTrend("U"));
-        assertEquals(Messages.getInstance().getConverterD(), Converter.convertTrend("D"));
-        assertEquals(Messages.getInstance().getConverterNSC(), Converter.convertTrend("N"));
+        assertEquals(Messages.getInstance().getString("Converter.U"), Converter.convertTrend("U"));
+        assertEquals(Messages.getInstance().getString("Converter.D"), Converter.convertTrend("D"));
+        assertEquals(Messages.getInstance().getString("Converter.NSC"), Converter.convertTrend("N"));
         assertEquals("", Converter.convertTrend("Random string"));
     }
 
     @Test
-    public void testMercuryToPascal() {
-        assertEquals(1018, Converter.mercuryToPascal("3006"), 1);
+    public void testInchesMercuryToHPascal() {
+        assertEquals(1013.25, Converter.inchesMercuryToHPascal(29.92), 0.1);
     }
 
     @Test

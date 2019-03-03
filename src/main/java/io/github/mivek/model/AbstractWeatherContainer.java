@@ -19,6 +19,10 @@ public abstract class AbstractWeatherContainer {
     private Integer fVerticalVisibility;
     /** The wind shear. */
     private WindShear fWindShear;
+    /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
+    private boolean fCavok;
+    /**Contains the remarks.*/
+    private String fRemark;
 
     /**
      * Constructor to initialize the lists.
@@ -73,23 +77,28 @@ public abstract class AbstractWeatherContainer {
     /**
      * Adds a cloud to the list.
      * @param pCloud the cloud to add.
+     * @return true if the cloud has been added in the list, false otherwise.
      */
-    public void addCloud(final Cloud pCloud) {
+    public boolean addCloud(final Cloud pCloud) {
         if (pCloud == null) {
-            return;
+            return false;
         }
         fClouds.add(pCloud);
+        return true;
     }
 
     /**
      * Adds a weather condition to the list.
      * @param pWeatherCondition the weather condition to add.
+     * @return true if the weather condition has been added to the list, false
+     * otherwise.
      */
-    public void addWeatherCondition(final WeatherCondition pWeatherCondition) {
+    public boolean addWeatherCondition(final WeatherCondition pWeatherCondition) {
         if (pWeatherCondition == null) {
-            return;
+            return false;
         }
         fWeatherConditions.add(pWeatherCondition);
+        return true;
     }
 
     /**
@@ -118,5 +127,33 @@ public abstract class AbstractWeatherContainer {
      */
     public void setWindShear(final WindShear pWindShear) {
         fWindShear = pWindShear;
+    }
+
+    /**
+     * @return the cavok
+     */
+    public boolean isCavok() {
+        return fCavok;
+    }
+
+    /**
+     * @param pCavok the cavok to set
+     */
+    public void setCavok(final boolean pCavok) {
+        fCavok = pCavok;
+    }
+
+    /**
+     * @return the remark
+     */
+    public String getRemark() {
+        return fRemark;
+    }
+
+    /**
+     * @param pRemark the remark to set
+     */
+    public void setRemark(final String pRemark) {
+        fRemark = pRemark;
     }
 }

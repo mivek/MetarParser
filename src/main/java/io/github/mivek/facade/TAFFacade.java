@@ -46,13 +46,9 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         URL url = new URL(website);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
             StringBuilder sb = new StringBuilder();
-            String inputLine;
             // Throw the first line since it is not part of the TAF event.
             br.readLine();
-            while ((inputLine = br.readLine()) != null) {
-                // Remove tabs and add line returns.
-                sb.append(inputLine.replaceAll("\\s{2,}", "")).append("\n");
-            }
+            br.lines().forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
             return getParser().parse(format(sb.toString()));
         }
     }

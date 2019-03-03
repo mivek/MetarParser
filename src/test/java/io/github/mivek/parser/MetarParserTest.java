@@ -3,8 +3,8 @@
  */
 package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -23,6 +23,7 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Cloud;
 import io.github.mivek.model.Metar;
@@ -64,7 +65,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(ri);
         assertEquals("26", ri.getName());
         assertEquals(600, ri.getMinRange());
-        assertEquals(Messages.getInstance().getConverterU(), ri.getTrend());
+        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
     }
 
     @Test
@@ -76,7 +77,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("26L", ri.getName());
         assertEquals(550, ri.getMinRange());
         assertEquals(700, ri.getMaxRange());
-        assertEquals(Messages.getInstance().getConverterU(), ri.getTrend());
+        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
     }
 
     @Test
@@ -106,7 +107,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(30, m.getTime().getMinute());
         assertNotNull(m.getWind());
         assertEquals(0, m.getWind().getSpeed());
-        assertEquals(Messages.getInstance().getConverterN(), m.getWind().getDirection());
+        assertEquals(Messages.getInstance().getString("Converter.N"), m.getWind().getDirection());
         assertEquals("KT", m.getWind().getUnit());
         assertEquals("350m", m.getVisibility().getMainVisibility());
         assertThat(m.getRunways(), is(not(empty())));
@@ -114,14 +115,14 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // Check if runways are correctly parsed
         assertEquals("27L", m.getRunways().get(0).getName());
         assertEquals(375, m.getRunways().get(0).getMinRange());
-        assertEquals(Messages.getInstance().getConverterNSC(), m.getRunways().get(0).getTrend());
+        assertEquals(Messages.getInstance().getString("Converter.NSC"), m.getRunways().get(0).getTrend());
     }
 
     @Test
     public void testParseNullAirport() throws ParseException {
         String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
         thrown.expect(ParseException.class);
-        thrown.expectMessage(containsString(Messages.getInstance().getAirportNotFound()));
+        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
         fSut.parse(metarString);
     }
 
@@ -326,5 +327,41 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         Metar m = fSut.parse(code);
         assertNotNull(m);
         assertEquals(">10km", m.getVisibility().getMainVisibility());
+    }
+
+    @Test
+    public void testParseWithCavok() throws ParseException {
+        // GIVEN a metar with token CAVOK
+        String code = "LFPG 212030Z 03003KT CAVOK 09/06 Q1031 NOSIG";
+        // WHEN parsing the metar.
+        Metar m = fSut.parse(code);
+        // THEN the attribute cavok is true and the main visibility is > 10km.
+        assertNotNull(m);
+        assertTrue(m.isCavok());
+        assertEquals(">10km", m.getVisibility().getMainVisibility());
+    }
+
+    @Test
+    public void testParseWithAltimeterInMercury() throws ParseException {
+        // GIVEN a metar with altimeter in inches of mercury
+        String code = "KTTN 051853Z 04011KT 9999 VCTS SN FZFG BKN003 OVC010 M02/M02 A3006";
+        // WHEN parsing the metar
+        Metar m = fSut.parse(code);
+        // THEN the altimeter is converted in HPa
+        assertNotNull(m);
+        assertEquals(Integer.valueOf(1017), m.getAltimeter());
+    }
+
+    @Test
+    public void testParseWithRMK() throws ParseException {
+        //GIVEN a metar with RMK
+        String code = "CYWG 172000Z 30015G25KT 1 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 Q1001 RMK SF5NS3 SLP134";
+        // WHEN parsing the metar
+        Metar m = fSut.parse(code);
+        // THEN the remark is not null
+        assertNotNull(m);
+        assertNotNull(m.getVisibility());
+        assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
+        assertEquals("SF5NS3 SLP134", m.getRemark());
     }
 }

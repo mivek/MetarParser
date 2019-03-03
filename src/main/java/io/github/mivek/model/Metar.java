@@ -21,7 +21,7 @@ public class Metar extends AbstractWeatherCode {
      */
     private Integer fDewPoint;
     /**
-     * Altimeter.
+     * Altimeter in HPa..
      */
     private Integer fAltimeter;
     /**
@@ -80,7 +80,7 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @return the altimeter
+     * @return the altimeter in HPa.
      */
     public Integer getAltimeter() {
         return fAltimeter;

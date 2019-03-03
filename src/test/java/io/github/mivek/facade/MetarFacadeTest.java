@@ -11,8 +11,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import io.github.mivek.exception.ParseException;
-import io.github.mivek.facade.AbstractWeatherCodeFacade;
-import io.github.mivek.facade.MetarFacade;
 import io.github.mivek.model.Metar;
 import io.github.mivekinternationalization.Messages;
 
@@ -32,7 +30,7 @@ public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
         assertEquals(30, res.getTime().getMinute());
         // Wind
         assertNotNull(res.getWind());
-        assertEquals(Messages.getInstance().getConverterS(), res.getWind().getDirection());
+        assertEquals(Messages.getInstance().getString("Converter.S"), res.getWind().getDirection());
         assertEquals(13, res.getWind().getSpeed());
         assertEquals("KT", res.getWind().getUnit());
         // Visibility

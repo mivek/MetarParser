@@ -1,5 +1,7 @@
 package io.github.mivek.parser;
 
+import java.util.regex.Pattern;
+
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
@@ -25,7 +27,7 @@ public final class TAFParser extends AbstractParser<TAF> {
     /** Probability string constant. */
     private static final String PROB = "PROB";
     /** Regex for the validity. */
-    private static final String REGEX_VALIDITY = "^\\d{4}/\\d{4}$";
+    private static final Pattern REGEX_VALIDITY = Pattern.compile("^\\d{4}/\\d{4}$");
 
     /**
      * Instance of the TAFParser.
@@ -59,7 +61,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         TAF taf = new TAF();
 
         // Handle the 1st line.
-        String[] line1parts = lines[0].split(" ");
+        String[] line1parts = tokenize(lines[0]);
         int i = 1;
         if (TAF.equals(line1parts[1])) {
             i = 2;
@@ -97,6 +99,8 @@ public final class TAFParser extends AbstractParser<TAF> {
         for (int j = i; j < line1parts.length; j++) {
             if (line1parts[j].startsWith(PROB)) {
                 taf.setProbability(Integer.valueOf(line1parts[j].substring(4)));
+            } else if (RMK.equals(line1parts[j])) {
+                parseRMK(taf, line1parts, j);
             } else {
                 generalParse(taf, line1parts[j]);
             }
@@ -104,7 +108,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         // Process other lines.
         for (int j = 1; j < lines.length; j++) {
             // Split the line.
-            String[] parts = lines[j].split(" ");
+            String[] parts = tokenize(lines[j]);
             if (parts[0].equals(BECMG)) {
                 BECMGTafTrend change = new BECMGTafTrend();
                 iterChanges(1, parts, change);
@@ -154,8 +158,9 @@ public final class TAFParser extends AbstractParser<TAF> {
             pChange.setMaxTemperature(parseTemperature(pPart));
         } else if (pPart.startsWith("TN")) {
             pChange.setMinTemperature(parseTemperature(pPart));
+        } else {
+            generalParse(pChange, pPart);
         }
-        generalParse(pChange, pPart);
     }
 
     /**
@@ -195,7 +200,11 @@ public final class TAFParser extends AbstractParser<TAF> {
      */
     protected void iterChanges(final int pIndex, final String[] pParts, final AbstractTafTrend<Validity> pChange) {
         for (int i = pIndex; i < pParts.length; i++) {
-            processChanges(pChange, pParts[i]);
+            if (RMK.equals(pParts[i])) {
+                parseRMK(pChange, pParts, i);
+            } else {
+                processChanges(pChange, pParts[i]);
+            }
         }
     }
 
