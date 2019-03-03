@@ -7,25 +7,15 @@ import io.github.mivekinternationalization.Messages;
  *
  */
 public enum ErrorCodes {
-    /**
-     * Error for an invalid ICAO.
-     */
-    ERROR_CODE_INVALID_ICAO(1, Messages.getInstance().getInvalidIcao()),
-    /**
-     * Error for an invalid message.
-     */
-    ERROR_CODE_INVALID_MESSAGE(2, Messages.getInstance().getInvalidMessage()),
-    /**
-     * Error code for when the airport is not found.
-     */
-    ERROR_CODE_AIRPORT_NOT_FOUND(3, Messages.getInstance().getAirportNotFound());
-    /**
-     * The code of the error.
-     */
+    /** Error for an invalid ICAO. */
+    ERROR_CODE_INVALID_ICAO(1, Messages.getInstance().getString("MetarFacade.InvalidIcao")),
+    /** Error for an invalid message. */
+    ERROR_CODE_INVALID_MESSAGE(2, Messages.getInstance().getString("ErrorCode.InvalidMessage")),
+    /** Error code for when the airport is not found. */
+    ERROR_CODE_AIRPORT_NOT_FOUND(3, Messages.getInstance().getString("ErrorCode.AirportNotFound"));
+    /** The code of the error. */
     private int fCode;
-    /**
-     * The message of the error.
-     */
+    /** The message of the error. */
     private String fMessage;
 
     /**
@@ -54,6 +44,6 @@ public enum ErrorCodes {
 
     @Override
     public String toString() {
-        return Messages.getInstance().getErrorPrefix() + getCode() + " " + getMessage();
+        return Messages.getInstance().getString("Error.prefix") + getCode() + " " + getMessage();
     }
 }
