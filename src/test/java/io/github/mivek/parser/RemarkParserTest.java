@@ -4,6 +4,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,5 +39,29 @@ public class RemarkParserTest {
         // THEN the token is parsed and translated
         assertNotNull(remark);
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.AO2")));
+    }
+
+    @Test
+    public void testParseWithWindPeakAtTheHour() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a RMK with Peak wind at the hour.
+        String code = "AO1 PK WND 28045/15";
+        // WHEN parsing the remark.
+        String remark = fSut.parse(code);
+        // THEN the token is parsed and translated
+        assertNotNull(remark);
+        assertThat(remark, containsString("peak wind of 45 knots from 280 degrees at :15"));
+    }
+
+    @Test
+    public void testParseWithWindPeakAtAnotherHour() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a RMK with Peak wind at the hour.
+        String code = "AO1 PK WND 28045/1515";
+        // WHEN parsing the remark.
+        String remark = fSut.parse(code);
+        // THEN the token is parsed and translated
+        assertNotNull(remark);
+        assertThat(remark, containsString("peak wind of 45 knots from 280 degrees at 15:15"));
     }
 }
