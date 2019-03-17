@@ -88,4 +88,15 @@ public class RemarkParserTest {
         assertNotNull(remark);
         assertThat(remark, containsString("wind shift accompanied by frontal passage at 15:30"));
     }
+
+    @Test
+    public void testParseTowerVisibility() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a rmk with tower visibility
+        String code = "AO1 TWR VIS 16 1/2";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the tower visibility is decoded
+        assertThat(remark, containsString("tower visibility of 16 1/2 statute miles"));
+    }
 }

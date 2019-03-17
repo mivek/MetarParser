@@ -22,7 +22,8 @@ public final class RemarkParser {
     private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})");
     /** Wind shift fopa pattern. */
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
-
+    /** Tower visibility. */
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS (\\d+(\\s{1}\\d{1}\\/\\d{1})?)");
     /***
      * Private constructor.
      */
@@ -59,6 +60,10 @@ public final class RemarkParser {
                 sb.append(Messages.getInstance().getString("Remark.WindShift", windShiftParts[1] == null ? "" : windShiftParts[1], windShiftParts[2]));
                 sb.append(" ");
                 rmk = rmk.replaceAll(WIND_SHIFT.pattern(), "").trim();
+            } else if (Regex.find(TOWER_VISIBILITY, rmk)) {
+                String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.TowerVisibility", towerVisibilityParts[1])).append(" ");
+                rmk = rmk.replaceAll(TOWER_VISIBILITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
