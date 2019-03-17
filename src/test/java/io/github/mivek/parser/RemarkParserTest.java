@@ -132,4 +132,16 @@ public class RemarkParserTest {
         // THEN the sector visibility is decoded
         assertThat(remark, containsString("visibility of 2 1/2 SM in the North East direction"));
     }
+
+    @Test
+    public void testParseSecondLocationVisibility() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a rmk with visibility at second location
+        String code = "AO1 VIS 2 1/2 RWY11";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the visibility at second location is decoded
+        assertThat(remark, containsString("visibility of 2 1/2 SM mesured by a second sensor located at RWY11"));
+    }
+
 }
