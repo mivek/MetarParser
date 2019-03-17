@@ -23,9 +23,9 @@ public final class RemarkParser {
     /** Wind shift fopa pattern. */
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
     /** Tower visibility. */
-    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS (\\d+(\\s{1}\\d{1}\\/\\d{1})?)");
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?((\\d\\/\\d)?))");
     /**Surface visibility.*/
-    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS (\\d+(\\s{1}\\d{1}\\/\\d{1})?)");
+    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?((\\d\\/\\d)?))");
     /***
      * Private constructor.
      */
