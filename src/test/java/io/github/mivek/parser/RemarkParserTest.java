@@ -99,4 +99,15 @@ public class RemarkParserTest {
         // THEN the tower visibility is decoded
         assertThat(remark, containsString("tower visibility of 16 1/2 statute miles"));
     }
+
+    @Test
+    public void testParseSurfaceVisibility() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a rmk with surface visibility
+        String code = "AO1 SFC VIS 16 1/2";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the tower visibility is decoded
+        assertThat(remark, containsString("surface visibility of 16 1/2 statute miles"));
+    }
 }

@@ -23,7 +23,9 @@ public final class RemarkParser {
     /** Wind shift fopa pattern. */
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
     /** Tower visibility. */
-    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS (\\d+(\\s{1}\\d{1}\\/\\d{1})?)");
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?((\\d\\/\\d)?))");
+    /**Surface visibility.*/
+    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?((\\d\\/\\d)?))");
     /***
      * Private constructor.
      */
@@ -64,6 +66,10 @@ public final class RemarkParser {
                 String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, rmk);
                 sb.append(Messages.getInstance().getString("Remark.TowerVisibility", towerVisibilityParts[1])).append(" ");
                 rmk = rmk.replaceAll(TOWER_VISIBILITY.pattern(), "").trim();
+            } else if (Regex.find(SURFACE_VISIBILITY, rmk)) {
+                String[] surfaceVisivilityParts = Regex.pregMatch(SURFACE_VISIBILITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.SurfaceVisibility", surfaceVisivilityParts[1])).append(" ");
+                rmk = rmk.replaceAll(SURFACE_VISIBILITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
