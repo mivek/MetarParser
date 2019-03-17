@@ -23,12 +23,13 @@ public final class RemarkParser {
     /** Wind shift fopa pattern. */
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
     /** Tower visibility. */
-    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?((\\d\\/\\d)?))");
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?\\/?\\d))");
     /** Surface visibility. */
-    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?((\\d\\/\\d)?))");
+    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?(\\d?\\/?\\d))");
     /** Variable prevailing visibility. */
-    private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d\\/\\d)?)V((\\d)*( )?(\\d\\/\\d)?)");
-
+    private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d))V((\\d)*( )?(\\d?\\/?\\d))");
+    /** Sector visibility. */
+    private static final Pattern SECTOR_VISIBILITY = Pattern.compile("^VIS ([A-Z]{1,2}) ((\\d)*( )?(\\d?\\/?\\d))");
     /***
      * Private constructor.
      */
@@ -76,6 +77,11 @@ public final class RemarkParser {
                 String[] visibilityParts = Regex.pregMatch(VARIABLE_PREVAILING_VISIBILITY, rmk);
                 sb.append(Messages.getInstance().getString("Remark.VariablePrevailingVisibility", visibilityParts[1], visibilityParts[5])).append(" ");
                 rmk = rmk.replaceAll(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
+            } else if (Regex.find(SECTOR_VISIBILITY, rmk)) {
+                String[] sectorVisibilityParts = Regex.pregMatch(SECTOR_VISIBILITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.SectorVisibility", Messages.getInstance().getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2]))
+                .append(" ");
+                rmk = rmk.replaceAll(SECTOR_VISIBILITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);

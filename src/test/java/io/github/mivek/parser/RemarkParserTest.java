@@ -121,4 +121,15 @@ public class RemarkParserTest {
         // THEN the variable prevailing visibility is decoded
         assertThat(remark, containsString("variable prevailing visibility between 1/2 and 2 SM"));
     }
+
+    @Test
+    public void testParseSectorVisibility() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a rmk with sector visibility
+        String code = "AO1 VIS NE 2 1/2";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the sector visibility is decoded
+        assertThat(remark, containsString("visibility of 2 1/2 SM in the North East direction"));
+    }
 }
