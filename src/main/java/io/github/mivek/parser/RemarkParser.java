@@ -1,6 +1,5 @@
 package io.github.mivek.parser;
 
-import java.text.MessageFormat;
 import java.util.regex.Pattern;
 
 import io.github.mivek.utils.Regex;
@@ -19,6 +18,10 @@ public final class RemarkParser {
     private static final Pattern AO2 = Pattern.compile("^AO2");
     /**Wind peak pattern.*/
     private static final Pattern WIND_PEAK = Pattern.compile("^PK WND (\\d{3})(\\d{2,3})\\/(\\d{2})?(\\d{2})");
+    /** Wind shift pattern. */
+    private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})");
+    /** Wind shift fopa pattern. */
+    private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
 
     /***
      * Private constructor.
@@ -41,9 +44,21 @@ public final class RemarkParser {
                 sb.append(Messages.getInstance().getString("Remark.AO2")).append(" ");
                 rmk = rmk.replaceAll(AO2.pattern(), "").trim();
             } else if (Regex.find(WIND_PEAK, rmk)) {
-                String[] elmts = Regex.pregMatch(WIND_PEAK, rmk);
-                sb.append(MessageFormat.format(Messages.getInstance().getString("Remark.PeakWind"), elmts[1], elmts[2], elmts[3] == null ? "" : elmts[3], elmts[4]));
+                String[] windPeakParts = Regex.pregMatch(WIND_PEAK, rmk);
+                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], windPeakParts[3] == null ? "" : windPeakParts[3],
+                        windPeakParts[4]));
+                sb.append(" ");
                 rmk = rmk.replaceAll(WIND_PEAK.pattern(), "").trim();
+            } else if (Regex.find(WIND_SHIFT_FROPA, rmk)) {
+                String[] windShiftParts = Regex.pregMatch(WIND_SHIFT_FROPA, rmk);
+                sb.append(Messages.getInstance().getString("Remark.WindShift.FROPA", windShiftParts[1] == null ? "" : windShiftParts[1], windShiftParts[2]));
+                sb.append(" ");
+                rmk = rmk.replaceAll(WIND_SHIFT_FROPA.pattern(), "");
+            } else if (Regex.find(WIND_SHIFT, rmk)) {
+                String[] windShiftParts = Regex.pregMatch(WIND_SHIFT, rmk);
+                sb.append(Messages.getInstance().getString("Remark.WindShift", windShiftParts[1] == null ? "" : windShiftParts[1], windShiftParts[2]));
+                sb.append(" ");
+                rmk = rmk.replaceAll(WIND_SHIFT.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
