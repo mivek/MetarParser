@@ -30,6 +30,9 @@ public final class RemarkParser {
     private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d))V((\\d)*( )?(\\d?\\/?\\d))");
     /** Sector visibility. */
     private static final Pattern SECTOR_VISIBILITY = Pattern.compile("^VIS ([A-Z]{1,2}) ((\\d)*( )?(\\d?\\/?\\d))");
+    /** Visibility at second location. */
+    private static final Pattern SECOND_LOCATION_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d)) (\\w+)");
+
     /***
      * Private constructor.
      */
@@ -82,6 +85,10 @@ public final class RemarkParser {
                 sb.append(Messages.getInstance().getString("Remark.SectorVisibility", Messages.getInstance().getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2]))
                 .append(" ");
                 rmk = rmk.replaceAll(SECTOR_VISIBILITY.pattern(), "").trim();
+            } else if (Regex.find(SECOND_LOCATION_VISIBILITY, rmk)) {
+                String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.SecondLocationVisibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
+                rmk = rmk.replaceAll(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
