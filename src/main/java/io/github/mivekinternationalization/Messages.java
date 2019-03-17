@@ -1,5 +1,6 @@
 package io.github.mivekinternationalization;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -44,5 +45,14 @@ public final class Messages {
      */
     public String getString(final String pString) {
         return fResourceBundle.getString(pString);
+    }
+
+    /**
+     * @param pString the translation to get
+     * @param pArguments the arguments to fill
+     * @return the translation of pString with the arguments.
+     */
+    public String getString(final String pString, final Object... pArguments) {
+        return MessageFormat.format(getString(pString), pArguments);
     }
 }
