@@ -107,7 +107,18 @@ public class RemarkParserTest {
         String code = "AO1 SFC VIS 16 1/2";
         // WHEN parsing the remark
         String remark = fSut.parse(code);
-        // THEN the tower visibility is decoded
+        // THEN the surface visibility is decoded
         assertThat(remark, containsString("surface visibility of 16 1/2 statute miles"));
+    }
+
+    @Test
+    public void testParsePrevailingVisibility() {
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        // GIVEN a rmk with variable prevailing visibility
+        String code = "AO1 VIS 1/2V2";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the variable prevailing visibility is decoded
+        assertThat(remark, containsString("variable prevailing visibility between 1/2 and 2 SM"));
     }
 }

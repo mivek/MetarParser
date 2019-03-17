@@ -16,7 +16,7 @@ public final class RemarkParser {
     private static final Pattern AO1 = Pattern.compile("^AO1");
     /** Automated station with precipitation. */
     private static final Pattern AO2 = Pattern.compile("^AO2");
-    /**Wind peak pattern.*/
+    /** Wind peak pattern. */
     private static final Pattern WIND_PEAK = Pattern.compile("^PK WND (\\d{3})(\\d{2,3})\\/(\\d{2})?(\\d{2})");
     /** Wind shift pattern. */
     private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})");
@@ -24,8 +24,11 @@ public final class RemarkParser {
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
     /** Tower visibility. */
     private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?((\\d\\/\\d)?))");
-    /**Surface visibility.*/
+    /** Surface visibility. */
     private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?((\\d\\/\\d)?))");
+    /** Variable prevailing visibility. */
+    private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d\\/\\d)?)V((\\d)*( )?(\\d\\/\\d)?)");
+
     /***
      * Private constructor.
      */
@@ -48,8 +51,7 @@ public final class RemarkParser {
                 rmk = rmk.replaceAll(AO2.pattern(), "").trim();
             } else if (Regex.find(WIND_PEAK, rmk)) {
                 String[] windPeakParts = Regex.pregMatch(WIND_PEAK, rmk);
-                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], windPeakParts[3] == null ? "" : windPeakParts[3],
-                        windPeakParts[4]));
+                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], windPeakParts[3] == null ? "" : windPeakParts[3], windPeakParts[4]));
                 sb.append(" ");
                 rmk = rmk.replaceAll(WIND_PEAK.pattern(), "").trim();
             } else if (Regex.find(WIND_SHIFT_FROPA, rmk)) {
@@ -70,6 +72,10 @@ public final class RemarkParser {
                 String[] surfaceVisivilityParts = Regex.pregMatch(SURFACE_VISIBILITY, rmk);
                 sb.append(Messages.getInstance().getString("Remark.SurfaceVisibility", surfaceVisivilityParts[1])).append(" ");
                 rmk = rmk.replaceAll(SURFACE_VISIBILITY.pattern(), "").trim();
+            } else if (Regex.find(VARIABLE_PREVAILING_VISIBILITY, rmk)) {
+                String[] visibilityParts = Regex.pregMatch(VARIABLE_PREVAILING_VISIBILITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.VariablePrevailingVisibility", visibilityParts[1], visibilityParts[5])).append(" ");
+                rmk = rmk.replaceAll(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
@@ -78,7 +84,6 @@ public final class RemarkParser {
         }
         return sb.toString();
     }
-
 
     /**
      * @return the instance of the parser.
