@@ -3,11 +3,6 @@ PR=$2
 name=$3
 email=$4
 
-echo $branchName
-echo $PR
-echo $name
-echo $email
-
 if  [ $1 = "master" ] && [ $2 = "false" ]
 then
 	git config --local user.name $3
