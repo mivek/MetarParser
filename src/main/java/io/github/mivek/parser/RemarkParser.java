@@ -32,6 +32,12 @@ public final class RemarkParser {
     private static final Pattern SECTOR_VISIBILITY = Pattern.compile("^VIS ([A-Z]{1,2}) ((\\d)*( )?(\\d?\\/?\\d))");
     /** Visibility at second location. */
     private static final Pattern SECOND_LOCATION_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d)) (\\w+)");
+    /** Tornadic activity with beginning time. */
+    private static final Pattern TORNADIC_ACTIVITY_BEGINNING = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (B(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
+    /** Tornadic activity with ending time. */
+    private static final Pattern TORNADIC_ACTIVITY_ENDING = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
+    /** Tornadic activity with beginning and ending time. */
+    private static final Pattern TORNADIC_ACTIVITY_BEG_END = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (B(\\d{2})?(\\d{2}))(E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
 
     /***
      * Private constructor.
@@ -89,6 +95,22 @@ public final class RemarkParser {
                 String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, rmk);
                 sb.append(Messages.getInstance().getString("Remark.SecondLocationVisibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
                 rmk = rmk.replaceAll(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
+            } else if (Regex.find(TORNADIC_ACTIVITY_BEG_END, rmk)) {
+                String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, rmk);
+                sb.append(Messages.getInstance().getString("Remark.TornadicActivity.BegEnd", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
+                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6] == null ? "" : tornadicParts[6], tornadicParts[7], tornadicParts[9],
+                                Messages.getInstance().getString("Converter." + tornadicParts[10]))).append(" ");
+                rmk = rmk.replaceAll(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
+            } else if (Regex.find(TORNADIC_ACTIVITY_BEGINNING, rmk)) {
+                String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, rmk);
+                sb.append(Messages.getInstance().getString("Remark.TornadicActivity.Beginning", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
+                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                rmk = rmk.replaceAll(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
+            } else if (Regex.find(TORNADIC_ACTIVITY_ENDING, rmk)) {
+                String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, rmk);
+                sb.append(Messages.getInstance().getString("Remark.TornadicActivity.Ending", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
+                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                rmk = rmk.replaceAll(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
