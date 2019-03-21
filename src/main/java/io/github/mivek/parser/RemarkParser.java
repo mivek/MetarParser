@@ -38,6 +38,8 @@ public final class RemarkParser {
     private static final Pattern TORNADIC_ACTIVITY_ENDING = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
     /** Tornadic activity with beginning and ending time. */
     private static final Pattern TORNADIC_ACTIVITY_BEG_END = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (B(\\d{2})?(\\d{2}))(E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
+    /** Beginning and ending of precipitation. */
+    private static final Pattern PRECIPITATION_BEG_END = Pattern.compile("^(([A-Z]{2})?([A-Z]{2})B(\\d{2})?(\\d{2})E(\\d{2})?(\\d{2}))");
 
     /***
      * Private constructor.
@@ -61,17 +63,17 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(AO2.pattern(), "").trim();
             } else if (Regex.find(WIND_PEAK, rmk)) {
                 String[] windPeakParts = Regex.pregMatch(WIND_PEAK, rmk);
-                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], windPeakParts[3] == null ? "" : windPeakParts[3], windPeakParts[4]));
+                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_PEAK.pattern(), "").trim();
             } else if (Regex.find(WIND_SHIFT_FROPA, rmk)) {
                 String[] windShiftParts = Regex.pregMatch(WIND_SHIFT_FROPA, rmk);
-                sb.append(Messages.getInstance().getString("Remark.WindShift.FROPA", windShiftParts[1] == null ? "" : windShiftParts[1], windShiftParts[2]));
+                sb.append(Messages.getInstance().getString("Remark.WindShift.FROPA", verifyString(windShiftParts[1]), windShiftParts[2]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_SHIFT_FROPA.pattern(), "");
             } else if (Regex.find(WIND_SHIFT, rmk)) {
                 String[] windShiftParts = Regex.pregMatch(WIND_SHIFT, rmk);
-                sb.append(Messages.getInstance().getString("Remark.WindShift", windShiftParts[1] == null ? "" : windShiftParts[1], windShiftParts[2]));
+                sb.append(Messages.getInstance().getString("Remark.WindShift", verifyString(windShiftParts[1]), windShiftParts[2]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_SHIFT.pattern(), "").trim();
             } else if (Regex.find(TOWER_VISIBILITY, rmk)) {
@@ -98,19 +100,27 @@ public final class RemarkParser {
             } else if (Regex.find(TORNADIC_ACTIVITY_BEG_END, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, rmk);
                 sb.append(Messages.getInstance().getString("Remark.TornadicActivity.BegEnd", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6] == null ? "" : tornadicParts[6], tornadicParts[7], tornadicParts[9],
-                                Messages.getInstance().getString("Converter." + tornadicParts[10]))).append(" ");
+                        verifyString(tornadicParts[3]), tornadicParts[4], verifyString(tornadicParts[6]), tornadicParts[7], tornadicParts[9],
+                        Messages.getInstance().getString("Converter." + tornadicParts[10]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEGINNING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, rmk);
                 sb.append(Messages.getInstance().getString("Remark.TornadicActivity.Beginning", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                        verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_ENDING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, rmk);
                 sb.append(Messages.getInstance().getString("Remark.TornadicActivity.Ending", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        tornadicParts[3] == null ? "" : tornadicParts[3], tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                        verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
+            } else if (Regex.find(PRECIPITATION_BEG_END, rmk)) {
+                String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, rmk);
+                sb.append(
+                        Messages.getInstance().getString("Remark.PrecipitationBegEnd", precipitationBegEnd[2] == null ? "" : Messages.getInstance().getString("Descriptive." + precipitationBegEnd[2]),
+                                Messages.getInstance().getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5],
+                                verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
+                .append(" ");
+                rmk = rmk.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
@@ -118,6 +128,18 @@ public final class RemarkParser {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Checks if the string is null.
+     * @param pString the string to test
+     * @return empty string if null pString otherwise.
+     */
+    private String verifyString(final String pString) {
+        if (pString == null) {
+            return "";
+        }
+        return pString;
     }
 
     /**

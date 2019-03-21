@@ -200,4 +200,20 @@ public class RemarkParserTest {
         assertThat(remark, containsString("waterspout ending at 15:16 12 SM North East of the station"));
     }
 
+    @Test
+    public void testParseBeginningEndPrecipitation() {
+        String code = "AO1 RAB05E30SNB1520E1655";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("rain beginning at :05 ending at :30"));
+        assertThat(remark, containsString("snow beginning at 15:20 ending at 16:55"));
+    }
+
+    @Test
+    public void testParseBeginningEndPrecipitationWithDescriptive() {
+        String code = "AO1 SHRAB05E30SHSNB20E55";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("showers of rain beginning at :05 ending at :30"));
+        assertThat(remark, containsString("showers of snow beginning at :20 ending at :55"));
+    }
+
 }
