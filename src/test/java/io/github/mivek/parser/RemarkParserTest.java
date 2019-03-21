@@ -17,6 +17,7 @@ public class RemarkParserTest {
     @Before
     public void setUp() {
         fSut = RemarkParser.getInstance();
+        Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
@@ -43,7 +44,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParseWithWindPeakAtTheHour() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a RMK with Peak wind at the hour.
         String code = "AO1 PK WND 28045/15";
         // WHEN parsing the remark.
@@ -55,7 +55,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParseWithWindPeakAtAnotherHour() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a RMK with Peak wind at the hour.
         String code = "AO1 PK WND 28045/1515";
         // WHEN parsing the remark.
@@ -67,7 +66,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParseWindShiftAtTheHour() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a RMK with Wind shift at the hour
         String code = "AO1 WSHFT 30";
         // WHEN parsing the remark.
@@ -78,8 +76,18 @@ public class RemarkParserTest {
     }
 
     @Test
+    public void testParseWindShift() {
+        // GIVEN a RMK with Wind shift at the hour
+        String code = "AO1 WSHFT 1530";
+        // WHEN parsing the remark.
+        String remark = fSut.parse(code);
+        // THEN the remark contains the decoded wind shift
+        assertNotNull(remark);
+        assertThat(remark, containsString("wind shift at 15:30"));
+    }
+
+    @Test
     public void testParseWindShiftWithFrontal() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a RMK with wind shift with frontal passage
         String code = "AO1 WSHFT 1530 FROPA";
         // WHEN parsing the remark
@@ -90,8 +98,18 @@ public class RemarkParserTest {
     }
 
     @Test
+    public void testParseWindShiftWithFrontalAtTheHour() {
+        // GIVEN a RMK with wind shift with frontal passage
+        String code = "AO1 WSHFT 30 FROPA";
+        // WHEN parsing the remark
+        String remark = fSut.parse(code);
+        // THEN the remark contains the decoded wind shift fropa
+        assertNotNull(remark);
+        assertThat(remark, containsString("wind shift accompanied by frontal passage at :30"));
+    }
+
+    @Test
     public void testParseTowerVisibility() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a rmk with tower visibility
         String code = "AO1 TWR VIS 16 1/2";
         // WHEN parsing the remark
@@ -102,7 +120,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParseSurfaceVisibility() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a rmk with surface visibility
         String code = "AO1 SFC VIS 16 1/2";
         // WHEN parsing the remark
@@ -113,7 +130,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParsePrevailingVisibility() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a rmk with variable prevailing visibility
         String code = "AO1 VIS 1/2V2";
         // WHEN parsing the remark
@@ -124,7 +140,6 @@ public class RemarkParserTest {
 
     @Test
     public void testParseSectorVisibility() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a rmk with sector visibility
         String code = "AO1 VIS NE 2 1/2";
         // WHEN parsing the remark
@@ -135,13 +150,54 @@ public class RemarkParserTest {
 
     @Test
     public void testParseSecondLocationVisibility() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         // GIVEN a rmk with visibility at second location
         String code = "AO1 VIS 2 1/2 RWY11";
         // WHEN parsing the remark
         String remark = fSut.parse(code);
         // THEN the visibility at second location is decoded
         assertThat(remark, containsString("visibility of 2 1/2 SM mesured by a second sensor located at RWY11"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithTornado() {
+        String code = "A01 TORNADO B13 6 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("tornado beginning at :13 6 SM North East of the station"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithTornadoAndHour() {
+        String code = "A01 TORNADO B1513 6 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("tornado beginning at 15:13 6 SM North East of the station"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithFunnelCloud() {
+        String code = "AO1 FUNNEL CLOUD B1513E1630 6 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("funnel cloud beginning at 15:13 ending at 16:30 6 SM North East of the station"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithFunnelCloudAndHourEnd() {
+        String code = "AO1 FUNNEL CLOUD B13E1630 6 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("funnel cloud beginning at :13 ending at 16:30 6 SM North East of the station"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithWaterSproutAndEndingTimeOnlyMinutes() {
+        String code = "AO1 WATERSPOUT E16 12 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("waterspout ending at :16 12 SM North East of the station"));
+    }
+
+    @Test
+    public void testParseTornadicActivityWithWaterSproutAndEndingTime() {
+        String code = "AO1 WATERSPOUT E1516 12 NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("waterspout ending at 15:16 12 SM North East of the station"));
     }
 
 }
