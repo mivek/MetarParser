@@ -216,4 +216,11 @@ public class RemarkParserTest {
         assertThat(remark, containsString("showers of snow beginning at :20 ending at :55"));
     }
 
+    @Test
+    public void testParseBeginningThunderstorm() {
+        String code = "AO1 TSB0159E30";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("thunderstorm beginning at 01:59 ending at :30"));
+    }
+
 }
