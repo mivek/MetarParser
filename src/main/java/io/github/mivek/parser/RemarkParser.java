@@ -44,6 +44,10 @@ public final class RemarkParser {
     private static final Pattern THUNDERSTORM_LOCATION_MOVING = Pattern.compile("^TS ([A-Z]{2}) MOV ([A-Z]{2})");
     /** Thunderstorm location. */
     private static final Pattern THUNDERSTORM_LOCATION = Pattern.compile("^TS ([A-Z]{2})");
+    /** Hail size less than. */
+    private static final Pattern HAIL_SIZE_LESS_THAN = Pattern.compile("^GR LESS THAN ((\\d )?(\\d\\/\\d)?)");
+    /** Hail size. */
+    private static final Pattern HAIL_SIZE = Pattern.compile("^GR ((\\d\\/\\d)|((\\d) ?(\\d\\/\\d)?))");
 
     /***
      * Private constructor.
@@ -134,6 +138,14 @@ public final class RemarkParser {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, rmk);
                 sb.append(Messages.getInstance().getString("Remark.Thunderstorm.Location", Messages.getInstance().getString("Converter." + thunderStormParts[1]))).append(" ");
                 rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION.pattern(), "").trim();
+            } else if (Regex.find(HAIL_SIZE, rmk)) {
+                String[] hailParts = Regex.pregMatch(HAIL_SIZE, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Hail", hailParts[1])).append(" ");
+                rmk = rmk.replaceFirst(HAIL_SIZE.pattern(), "").trim();
+            } else if (Regex.find(HAIL_SIZE_LESS_THAN, rmk)) {
+                String[] hailParts = Regex.pregMatch(HAIL_SIZE_LESS_THAN, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
+                rmk = rmk.replaceFirst(HAIL_SIZE_LESS_THAN.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);

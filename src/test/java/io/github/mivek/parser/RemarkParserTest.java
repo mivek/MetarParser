@@ -237,4 +237,18 @@ public class RemarkParserTest {
         assertThat(remark, containsString("thunderstorm South East of the station moving towards North East"));
     }
 
+    @Test
+    public void testParseHailSize() {
+        String code = "AO1 GR 1 3/4";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("largest hailstones with a diameter of 1 3/4 inches"));
+    }
+
+    @Test
+    public void testParseHailSizeWithLesserThan() {
+        String code = "AO1 GR LESS THAN 1/4";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("largest hailstones with a diameter less than 1/4 inches"));
+    }
+
 }
