@@ -258,4 +258,18 @@ public class RemarkParserTest {
         assertThat(remark, containsString("moderate snow pellets"));
     }
 
+    @Test
+    public void testParseVirgaWithDirection() {
+        String code = "AO1 VIRGA SW";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("virga South West from the station"));
+    }
+
+    @Test
+    public void testParseVirga() {
+        String code = "AO1 VIRGA";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("virga"));
+    }
+
 }
