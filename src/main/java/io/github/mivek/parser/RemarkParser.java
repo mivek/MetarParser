@@ -48,6 +48,8 @@ public final class RemarkParser {
     private static final Pattern HAIL_SIZE_LESS_THAN = Pattern.compile("^GR LESS THAN ((\\d )?(\\d\\/\\d)?)");
     /** Hail size. */
     private static final Pattern HAIL_SIZE = Pattern.compile("^GR ((\\d\\/\\d)|((\\d) ?(\\d\\/\\d)?))");
+    /** Snow pellets intensity. */
+    private static final Pattern SNOW_PELLETS_INTENSITY = Pattern.compile("^GS (LGT|MOD|HVY)");
 
     /***
      * Private constructor.
@@ -146,6 +148,10 @@ public final class RemarkParser {
                 String[] hailParts = Regex.pregMatch(HAIL_SIZE_LESS_THAN, rmk);
                 sb.append(Messages.getInstance().getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
                 rmk = rmk.replaceFirst(HAIL_SIZE_LESS_THAN.pattern(), "").trim();
+            } else if (Regex.find(SNOW_PELLETS_INTENSITY, rmk)) {
+                String[] intensityParts = Regex.pregMatch(SNOW_PELLETS_INTENSITY, rmk);
+                sb.append(Messages.getInstance().getString("Remark.SnowPellets", Messages.getInstance().getString("Remark." + intensityParts[1]))).append(" ");
+                rmk = rmk.replaceFirst(SNOW_PELLETS_INTENSITY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
