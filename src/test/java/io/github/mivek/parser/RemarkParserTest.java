@@ -251,4 +251,11 @@ public class RemarkParserTest {
         assertThat(remark, containsString("largest hailstones with a diameter less than 1/4 inches"));
     }
 
+    @Test
+    public void testParseSnowPellets() {
+        String code = "AO1 GS MOD";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("moderate snow pellets"));
+    }
+
 }
