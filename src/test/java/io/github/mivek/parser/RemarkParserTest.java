@@ -223,4 +223,18 @@ public class RemarkParserTest {
         assertThat(remark, containsString("thunderstorm beginning at 01:59 ending at :30"));
     }
 
+    @Test
+    public void testParseThunderStormLocation() {
+        String code = "AO1 TS SE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("thunderstorm South East of the station"));
+    }
+
+    @Test
+    public void testParseThunderStormLocationWithMoving() {
+        String code = "AO1 TS SE MOV NE";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("thunderstorm South East of the station moving towards North East"));
+    }
+
 }

@@ -40,6 +40,10 @@ public final class RemarkParser {
     private static final Pattern TORNADIC_ACTIVITY_BEG_END = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (B(\\d{2})?(\\d{2}))(E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
     /** Beginning and ending of precipitation. */
     private static final Pattern PRECIPITATION_BEG_END = Pattern.compile("^(([A-Z]{2})?([A-Z]{2})B(\\d{2})?(\\d{2})E(\\d{2})?(\\d{2}))");
+    /** Thunderstorm location moving. */
+    private static final Pattern THUNDERSTORM_LOCATION_MOVING = Pattern.compile("^TS ([A-Z]{2}) MOV ([A-Z]{2})");
+    /** Thunderstorm location. */
+    private static final Pattern THUNDERSTORM_LOCATION = Pattern.compile("^TS ([A-Z]{2})");
 
     /***
      * Private constructor.
@@ -121,6 +125,15 @@ public final class RemarkParser {
                                 verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
                 .append(" ");
                 rmk = rmk.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
+            } else if (Regex.find(THUNDERSTORM_LOCATION_MOVING, rmk)) {
+                String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION_MOVING, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Thunderstorm.Location.Moving",
+                        Messages.getInstance().getString("Converter." + thunderStormParts[1]), Messages.getInstance().getString("Converter." + thunderStormParts[2]))).append(" ");
+                rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION_MOVING.pattern(), "").trim();
+            } else if (Regex.find(THUNDERSTORM_LOCATION, rmk)) {
+                String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Thunderstorm.Location", Messages.getInstance().getString("Converter." + thunderStormParts[1]))).append(" ");
+                rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
