@@ -285,4 +285,18 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("broken layer at 2,000 feet composed of smoke"));
     }
+
+    @Test
+    public void testParseVariableSkyConditionWithoutLayer() {
+        String code = "BKN V OVC";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("cloud layer varying between broken and overcast"));
+    }
+
+    @Test
+    public void testParseVariableSkyCondition() {
+        String code = "BKN014 V OVC";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("cloud layer at 1,400 feet varying between broken and overcast"));
+    }
 }

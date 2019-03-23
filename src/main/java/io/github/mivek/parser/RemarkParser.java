@@ -58,7 +58,10 @@ public final class RemarkParser {
     private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
     /** Obscuration pattern. */
     private static final Pattern OBSCURATION = Pattern.compile("^([A-Z]{2}) ([A-Z]{3})(\\d{3})");
-
+    /** Variable sky condition with height. */
+    private static final Pattern VARIABLE_SKY_HEIGHT = Pattern.compile("^([A-Z]{3})(\\d{3}) V ([A-Z]{3})");
+    /** Variable sky condition. */
+    private static final Pattern VARIABLE_SKY = Pattern.compile("^([A-Z]{3}) V ([A-Z]{3})");
     /***
      * Private constructor.
      */
@@ -180,6 +183,19 @@ public final class RemarkParser {
                 String obscDetail = Messages.getInstance().getString("Phenomenon." + obscuration[1]);
                 sb.append(Messages.getInstance().getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
                 rmk = rmk.replaceFirst(OBSCURATION.pattern(), "").trim();
+            } else if (Regex.find(VARIABLE_SKY_HEIGHT, rmk)) {
+                String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, rmk);
+                String layer1 = Messages.getInstance().getString("CloudQuantity." + variableSky[1]);
+                int height = Integer.parseInt(variableSky[2]) * 100;
+                String layer2 = Messages.getInstance().getString("CloudQuantity." + variableSky[3]);
+                sb.append(Messages.getInstance().getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
+                rmk = rmk.replaceFirst(VARIABLE_SKY_HEIGHT.pattern(), "").trim();
+            } else if (Regex.find(VARIABLE_SKY, rmk)) {
+                String[] variableSky = Regex.pregMatch(VARIABLE_SKY, rmk);
+                String layer1 = Messages.getInstance().getString("CloudQuantity." + variableSky[1]);
+                String layer2 = Messages.getInstance().getString("CloudQuantity." + variableSky[2]);
+                sb.append(Messages.getInstance().getString("Remark.Variable.Sky.Condition", layer1, layer2)).append(" ");
+                rmk = rmk.replaceFirst(VARIABLE_SKY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
