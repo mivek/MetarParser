@@ -25,6 +25,7 @@ import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Cloud;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
@@ -32,7 +33,6 @@ import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
 import io.github.mivek.model.trend.AbstractMetarTrend;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link MetarParser}
