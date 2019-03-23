@@ -7,7 +7,7 @@ jobs:
   include:
     - if: branch in (develop, master)
       jdk: oraclejdk8
-    - if: branch = master
+    - if: branch = develop
       jdk: openjdk8
 
 before_install:
