@@ -23,6 +23,7 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Airport;
@@ -34,7 +35,6 @@ import io.github.mivek.model.Wind;
 import io.github.mivek.model.WindShear;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * Abstract class for parser.
