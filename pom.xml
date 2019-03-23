@@ -35,6 +35,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 		<maven.source.plugin.version>3.0.0</maven.source.plugin.version>
 		<maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
 		<maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<developers>
