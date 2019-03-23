@@ -64,10 +64,15 @@ public final class RemarkParser {
     private static final Pattern VARIABLE_SKY = Pattern.compile("^([A-Z]{3}) V ([A-Z]{3})");
     /** Ceiling height second location. */
     private static final Pattern CEILING_SECOND_LOCATION = Pattern.compile("^CIG (\\d{3}) (\\w+)");
+
+    /** Message instance. */
+    private final Messages fMessages;
+
     /***
      * Private constructor.
      */
     private RemarkParser() {
+        fMessages = Messages.getInstance();
     }
 
     /**
@@ -79,131 +84,131 @@ public final class RemarkParser {
         StringBuilder sb = new StringBuilder();
         while (!rmk.equals("")) {
             if (Regex.find(AO1, rmk)) {
-                sb.append(Messages.getInstance().getString("Remark.AO1")).append(" ");
+                sb.append(fMessages.getString("Remark.AO1")).append(" ");
                 rmk = rmk.replaceFirst(AO1.pattern(), "").trim();
             } else if (Regex.find(AO2, rmk)) {
-                sb.append(Messages.getInstance().getString("Remark.AO2")).append(" ");
+                sb.append(fMessages.getString("Remark.AO2")).append(" ");
                 rmk = rmk.replaceFirst(AO2.pattern(), "").trim();
             } else if (Regex.find(WIND_PEAK, rmk)) {
                 String[] windPeakParts = Regex.pregMatch(WIND_PEAK, rmk);
-                sb.append(Messages.getInstance().getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
+                sb.append(fMessages.getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_PEAK.pattern(), "").trim();
             } else if (Regex.find(WIND_SHIFT_FROPA, rmk)) {
                 String[] windShiftParts = Regex.pregMatch(WIND_SHIFT_FROPA, rmk);
-                sb.append(Messages.getInstance().getString("Remark.WindShift.FROPA", verifyString(windShiftParts[1]), windShiftParts[2]));
+                sb.append(fMessages.getString("Remark.WindShift.FROPA", verifyString(windShiftParts[1]), windShiftParts[2]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_SHIFT_FROPA.pattern(), "");
             } else if (Regex.find(WIND_SHIFT, rmk)) {
                 String[] windShiftParts = Regex.pregMatch(WIND_SHIFT, rmk);
-                sb.append(Messages.getInstance().getString("Remark.WindShift", verifyString(windShiftParts[1]), windShiftParts[2]));
+                sb.append(fMessages.getString("Remark.WindShift", verifyString(windShiftParts[1]), windShiftParts[2]));
                 sb.append(" ");
                 rmk = rmk.replaceFirst(WIND_SHIFT.pattern(), "").trim();
             } else if (Regex.find(TOWER_VISIBILITY, rmk)) {
                 String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
+                sb.append(fMessages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
                 rmk = rmk.replaceFirst(TOWER_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(SURFACE_VISIBILITY, rmk)) {
                 String[] surfaceVisivilityParts = Regex.pregMatch(SURFACE_VISIBILITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Surface.Visibility", surfaceVisivilityParts[1])).append(" ");
+                sb.append(fMessages.getString("Remark.Surface.Visibility", surfaceVisivilityParts[1])).append(" ");
                 rmk = rmk.replaceFirst(SURFACE_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(VARIABLE_PREVAILING_VISIBILITY, rmk)) {
                 String[] visibilityParts = Regex.pregMatch(VARIABLE_PREVAILING_VISIBILITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Variable.Prevailing.Visibility", visibilityParts[1], visibilityParts[5])).append(" ");
+                sb.append(fMessages.getString("Remark.Variable.Prevailing.Visibility", visibilityParts[1], visibilityParts[5])).append(" ");
                 rmk = rmk.replaceFirst(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(SECTOR_VISIBILITY, rmk)) {
                 String[] sectorVisibilityParts = Regex.pregMatch(SECTOR_VISIBILITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Sector.Visibility", Messages.getInstance().getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2]))
+                sb.append(fMessages.getString("Remark.Sector.Visibility", fMessages.getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2]))
                 .append(" ");
                 rmk = rmk.replaceFirst(SECTOR_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(SECOND_LOCATION_VISIBILITY, rmk)) {
                 String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Second.Location.Visibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
+                sb.append(fMessages.getString("Remark.Second.Location.Visibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
                 rmk = rmk.replaceFirst(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEG_END, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Tornadic.Activity.BegEnd", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
+                sb.append(fMessages.getString("Remark.Tornadic.Activity.BegEnd", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")),
                         verifyString(tornadicParts[3]), tornadicParts[4], verifyString(tornadicParts[6]), tornadicParts[7], tornadicParts[9],
-                        Messages.getInstance().getString("Converter." + tornadicParts[10]))).append(" ");
+                        fMessages.getString("Converter." + tornadicParts[10]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEGINNING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Tornadic.Activity.Beginning", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                sb.append(fMessages.getString("Remark.Tornadic.Activity.Beginning", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]),
+                        tornadicParts[4], tornadicParts[6], fMessages.getString("Converter." + tornadicParts[7]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_ENDING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Tornadic.Activity.Ending", Messages.getInstance().getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6], Messages.getInstance().getString("Converter." + tornadicParts[7]))).append(" ");
+                sb.append(fMessages.getString("Remark.Tornadic.Activity.Ending", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4],
+                        tornadicParts[6], fMessages.getString("Converter." + tornadicParts[7]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
             } else if (Regex.find(PRECIPITATION_BEG_END, rmk)) {
                 String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, rmk);
                 sb.append(
-                        Messages.getInstance().getString("Remark.Precipitation.Beg.End",
-                                precipitationBegEnd[2] == null ? "" : Messages.getInstance().getString("Descriptive." + precipitationBegEnd[2]),
-                                        Messages.getInstance().getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5],
-                                        verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
+                        fMessages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : fMessages.getString("Descriptive." + precipitationBegEnd[2]),
+                                fMessages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5],
+                                verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
                 .append(" ");
                 rmk = rmk.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
             } else if (Regex.find(THUNDERSTORM_LOCATION_MOVING, rmk)) {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION_MOVING, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Thunderstorm.Location.Moving",
-                        Messages.getInstance().getString("Converter." + thunderStormParts[1]), Messages.getInstance().getString("Converter." + thunderStormParts[2]))).append(" ");
+                sb.append(
+                        fMessages.getString("Remark.Thunderstorm.Location.Moving", fMessages.getString("Converter." + thunderStormParts[1]), fMessages.getString("Converter." + thunderStormParts[2])))
+                .append(" ");
                 rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION_MOVING.pattern(), "").trim();
             } else if (Regex.find(THUNDERSTORM_LOCATION, rmk)) {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Thunderstorm.Location", Messages.getInstance().getString("Converter." + thunderStormParts[1]))).append(" ");
+                sb.append(fMessages.getString("Remark.Thunderstorm.Location", fMessages.getString("Converter." + thunderStormParts[1]))).append(" ");
                 rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION.pattern(), "").trim();
             } else if (Regex.find(HAIL_SIZE, rmk)) {
                 String[] hailParts = Regex.pregMatch(HAIL_SIZE, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Hail", hailParts[1])).append(" ");
+                sb.append(fMessages.getString("Remark.Hail", hailParts[1])).append(" ");
                 rmk = rmk.replaceFirst(HAIL_SIZE.pattern(), "").trim();
             } else if (Regex.find(HAIL_SIZE_LESS_THAN, rmk)) {
                 String[] hailParts = Regex.pregMatch(HAIL_SIZE_LESS_THAN, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
+                sb.append(fMessages.getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
                 rmk = rmk.replaceFirst(HAIL_SIZE_LESS_THAN.pattern(), "").trim();
             } else if (Regex.find(SNOW_PELLETS_INTENSITY, rmk)) {
                 String[] intensityParts = Regex.pregMatch(SNOW_PELLETS_INTENSITY, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Snow.Pellets", Messages.getInstance().getString("Remark." + intensityParts[1]))).append(" ");
+                sb.append(fMessages.getString("Remark.Snow.Pellets", fMessages.getString("Remark." + intensityParts[1]))).append(" ");
                 rmk = rmk.replaceFirst(SNOW_PELLETS_INTENSITY.pattern(), "").trim();
             } else if (Regex.find(VIRGA_DIRECTION, rmk)) {
                 String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, rmk);
-                sb.append(Messages.getInstance().getString("Remark.Virga.Direction", Messages.getInstance().getString("Converter." + virgaDirection[1]))).append(" ");
+                sb.append(fMessages.getString("Remark.Virga.Direction", fMessages.getString("Converter." + virgaDirection[1]))).append(" ");
                 rmk = rmk.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
             } else if (Regex.find(VIRGA, rmk)) {
-                sb.append(Messages.getInstance().getString("Remark.Virga.Direction")).append(" ");
+                sb.append(fMessages.getString("Remark.Virga.Direction")).append(" ");
                 rmk = rmk.replaceFirst(VIRGA.pattern(), "").trim();
             } else if (Regex.find(CEILING_HEIGHT, rmk)) {
                 String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, rmk);
                 int min = Integer.parseInt(ceilingParts[1]) * 100;
                 int max = Integer.parseInt(ceilingParts[2]) * 100;
-                sb.append(Messages.getInstance().getString("Remark.Ceiling.Height", min, max)).append(" ");
+                sb.append(fMessages.getString("Remark.Ceiling.Height", min, max)).append(" ");
                 rmk = rmk.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
             } else if (Regex.find(OBSCURATION, rmk)) {
                 String[] obscuration = Regex.pregMatch(OBSCURATION, rmk);
-                String layer = Messages.getInstance().getString("CloudQuantity." + obscuration[2]);
+                String layer = fMessages.getString("CloudQuantity." + obscuration[2]);
                 int height = Integer.parseInt(obscuration[3]) * 100;
-                String obscDetail = Messages.getInstance().getString("Phenomenon." + obscuration[1]);
-                sb.append(Messages.getInstance().getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
+                String obscDetail = fMessages.getString("Phenomenon." + obscuration[1]);
+                sb.append(fMessages.getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
                 rmk = rmk.replaceFirst(OBSCURATION.pattern(), "").trim();
             } else if (Regex.find(VARIABLE_SKY_HEIGHT, rmk)) {
                 String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, rmk);
-                String layer1 = Messages.getInstance().getString("CloudQuantity." + variableSky[1]);
+                String layer1 = fMessages.getString("CloudQuantity." + variableSky[1]);
                 int height = Integer.parseInt(variableSky[2]) * 100;
-                String layer2 = Messages.getInstance().getString("CloudQuantity." + variableSky[3]);
-                sb.append(Messages.getInstance().getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
+                String layer2 = fMessages.getString("CloudQuantity." + variableSky[3]);
+                sb.append(fMessages.getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
                 rmk = rmk.replaceFirst(VARIABLE_SKY_HEIGHT.pattern(), "").trim();
             } else if (Regex.find(VARIABLE_SKY, rmk)) {
                 String[] variableSky = Regex.pregMatch(VARIABLE_SKY, rmk);
-                String layer1 = Messages.getInstance().getString("CloudQuantity." + variableSky[1]);
-                String layer2 = Messages.getInstance().getString("CloudQuantity." + variableSky[2]);
-                sb.append(Messages.getInstance().getString("Remark.Variable.Sky.Condition", layer1, layer2)).append(" ");
+                String layer1 = fMessages.getString("CloudQuantity." + variableSky[1]);
+                String layer2 = fMessages.getString("CloudQuantity." + variableSky[2]);
+                sb.append(fMessages.getString("Remark.Variable.Sky.Condition", layer1, layer2)).append(" ");
                 rmk = rmk.replaceFirst(VARIABLE_SKY.pattern(), "").trim();
             } else if (Regex.find(CEILING_SECOND_LOCATION, rmk)) {
                 String[] ceilingParts = Regex.pregMatch(CEILING_SECOND_LOCATION, rmk);
                 int height = 100 * Integer.parseInt(ceilingParts[1]);
                 String location = ceilingParts[2];
-                sb.append(Messages.getInstance().getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
+                sb.append(fMessages.getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
                 rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
