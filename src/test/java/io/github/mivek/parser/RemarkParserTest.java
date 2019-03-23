@@ -160,14 +160,14 @@ public class RemarkParserTest {
 
     @Test
     public void testParseTornadicActivityWithTornado() {
-        String code = "A01 TORNADO B13 6 NE";
+        String code = "AO1 TORNADO B13 6 NE";
         String remark = fSut.parse(code);
         assertThat(remark, containsString("tornado beginning at :13 6 SM North East of the station"));
     }
 
     @Test
     public void testParseTornadicActivityWithTornadoAndHour() {
-        String code = "A01 TORNADO B1513 6 NE";
+        String code = "AO1 TORNADO B1513 6 NE";
         String remark = fSut.parse(code);
         assertThat(remark, containsString("tornado beginning at 15:13 6 SM North East of the station"));
     }
