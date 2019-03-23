@@ -54,6 +54,8 @@ public final class RemarkParser {
     private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
     /** Virga. */
     private static final Pattern VIRGA = Pattern.compile("^VIRGA");
+    /** Ceiling height. */
+    private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
 
     /***
      * Private constructor.
@@ -161,9 +163,14 @@ public final class RemarkParser {
                 sb.append(Messages.getInstance().getString("Remark.Virga.Direction", Messages.getInstance().getString("Converter." + virgaDirection[1]))).append(" ");
                 rmk = rmk.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
             } else if (Regex.find(VIRGA, rmk)) {
-                Regex.pregMatch(VIRGA, rmk);
                 sb.append(Messages.getInstance().getString("Remark.Virga.Direction")).append(" ");
                 rmk = rmk.replaceFirst(VIRGA.pattern(), "").trim();
+            } else if (Regex.find(CEILING_HEIGHT, rmk)) {
+                String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, rmk);
+                int min = Integer.parseInt(ceilingParts[1]) * 100;
+                int max = Integer.parseInt(ceilingParts[2]) * 100;
+                sb.append(Messages.getInstance().getString("Remark.Ceiling.Height", min, max)).append(" ");
+                rmk = rmk.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
