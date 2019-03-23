@@ -1,5 +1,7 @@
 package io.github.mivek.parser;
 
+import java.util.MissingResourceException;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import io.github.mivek.utils.Regex;
@@ -11,7 +13,8 @@ import io.github.mivekinternationalization.Messages;
 public final class RemarkParser {
     /** The instance of the parser. */
     private static final RemarkParser INSTANCE = new RemarkParser();
-
+    /** The logger instance. */
+    private static final Logger LOGGER = Logger.getLogger(RemarkParser.class.getName());
     /** No precipitation automated stations. */
     private static final Pattern AO1 = Pattern.compile("^AO1");
     /** Automated station with precipitation. */
@@ -212,7 +215,13 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
-                sb.append(strSlit[0]);
+                String token = strSlit[0];
+                try {
+                    token = fMessages.getString("Remark." + token);
+                } catch (MissingResourceException e) {
+                    LOGGER.info("Remark token \"" + token + "\" is unknown.");
+                }
+                sb.append(token).append(" ");
                 rmk = strSlit.length == 1 ? "" : strSlit[1];
             }
         }
