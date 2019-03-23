@@ -56,6 +56,8 @@ public final class RemarkParser {
     private static final Pattern VIRGA = Pattern.compile("^VIRGA");
     /** Ceiling height. */
     private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
+    /** Obscuration pattern. */
+    private static final Pattern OBSCURATION = Pattern.compile("^([A-Z]{2}) ([A-Z]{3})(\\d{3})");
 
     /***
      * Private constructor.
@@ -171,6 +173,13 @@ public final class RemarkParser {
                 int max = Integer.parseInt(ceilingParts[2]) * 100;
                 sb.append(Messages.getInstance().getString("Remark.Ceiling.Height", min, max)).append(" ");
                 rmk = rmk.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
+            } else if (Regex.find(OBSCURATION, rmk)) {
+                String[] obscuration = Regex.pregMatch(OBSCURATION, rmk);
+                String layer = Messages.getInstance().getString("CloudQuantity." + obscuration[2]);
+                int height = Integer.parseInt(obscuration[3]) * 100;
+                String obscDetail = Messages.getInstance().getString("Phenomenon." + obscuration[1]);
+                sb.append(Messages.getInstance().getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
+                rmk = rmk.replaceFirst(OBSCURATION.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);

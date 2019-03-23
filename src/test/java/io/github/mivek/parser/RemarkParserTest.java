@@ -278,4 +278,11 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("ceiling varying between 500 and 1,000 feet"));
     }
+
+    @Test
+    public void testParseObscurations() {
+        String code = "AO1 FU BKN020";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("broken layer at 2,000 feet composed of smoke"));
+    }
 }
