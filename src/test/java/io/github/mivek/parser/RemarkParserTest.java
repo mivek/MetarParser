@@ -299,4 +299,11 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("cloud layer at 1,400 feet varying between broken and overcast"));
     }
+
+    @Test
+    public void testParseCeilingSecondLocation() {
+        String code = "CIG 002 RWY11";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("ceiling of 200 feet mesured by a second sensor located at RWY11"));
+    }
 }
