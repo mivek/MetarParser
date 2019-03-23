@@ -272,4 +272,10 @@ public class RemarkParserTest {
         assertThat(remark, containsString("virga"));
     }
 
+    @Test
+    public void testParseCeilingHeight() {
+        String code = "AO1 CIG 005V010";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("ceiling varying between 500 and 1,000 feet"));
+    }
 }
