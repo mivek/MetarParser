@@ -5,6 +5,11 @@ env:
 jdk:
   - oraclejdk8
   - openjdk8
+jobs:
+  exclude:
+    - if: branch = master
+      jdk: openjdk8
+
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
   - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
