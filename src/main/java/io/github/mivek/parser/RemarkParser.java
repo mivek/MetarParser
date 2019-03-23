@@ -62,6 +62,8 @@ public final class RemarkParser {
     private static final Pattern VARIABLE_SKY_HEIGHT = Pattern.compile("^([A-Z]{3})(\\d{3}) V ([A-Z]{3})");
     /** Variable sky condition. */
     private static final Pattern VARIABLE_SKY = Pattern.compile("^([A-Z]{3}) V ([A-Z]{3})");
+    /** Ceiling height second location. */
+    private static final Pattern CEILING_SECOND_LOCATION = Pattern.compile("^CIG (\\d{3}) (\\w+)");
     /***
      * Private constructor.
      */
@@ -196,6 +198,12 @@ public final class RemarkParser {
                 String layer2 = Messages.getInstance().getString("CloudQuantity." + variableSky[2]);
                 sb.append(Messages.getInstance().getString("Remark.Variable.Sky.Condition", layer1, layer2)).append(" ");
                 rmk = rmk.replaceFirst(VARIABLE_SKY.pattern(), "").trim();
+            } else if (Regex.find(CEILING_SECOND_LOCATION, rmk)) {
+                String[] ceilingParts = Regex.pregMatch(CEILING_SECOND_LOCATION, rmk);
+                int height = 100 * Integer.parseInt(ceilingParts[1]);
+                String location = ceilingParts[2];
+                sb.append(Messages.getInstance().getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
+                rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
