@@ -50,6 +50,10 @@ public final class RemarkParser {
     private static final Pattern HAIL_SIZE = Pattern.compile("^GR ((\\d\\/\\d)|((\\d) ?(\\d\\/\\d)?))");
     /** Snow pellets intensity. */
     private static final Pattern SNOW_PELLETS_INTENSITY = Pattern.compile("^GS (LGT|MOD|HVY)");
+    /** Virga with direction. */
+    private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
+    /** Virga. */
+    private static final Pattern VIRGA = Pattern.compile("^VIRGA");
 
     /***
      * Private constructor.
@@ -152,6 +156,14 @@ public final class RemarkParser {
                 String[] intensityParts = Regex.pregMatch(SNOW_PELLETS_INTENSITY, rmk);
                 sb.append(Messages.getInstance().getString("Remark.SnowPellets", Messages.getInstance().getString("Remark." + intensityParts[1]))).append(" ");
                 rmk = rmk.replaceFirst(SNOW_PELLETS_INTENSITY.pattern(), "").trim();
+            } else if (Regex.find(VIRGA_DIRECTION, rmk)) {
+                String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Virga.Direction", Messages.getInstance().getString("Converter." + virgaDirection[1]))).append(" ");
+                rmk = rmk.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
+            } else if (Regex.find(VIRGA, rmk)) {
+                Regex.pregMatch(VIRGA, rmk);
+                sb.append(Messages.getInstance().getString("Remark.Virga.Direction")).append(" ");
+                rmk = rmk.replaceFirst(VIRGA.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 sb.append(strSlit[0]);
