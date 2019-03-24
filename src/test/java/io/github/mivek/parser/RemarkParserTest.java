@@ -320,4 +320,12 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("sea level pressure of 998.2 HPa"));
     }
+
+    @Test
+    public void testParseSnowIncreasingRapidly() {
+        String code = "AO1 SNINCR 2/10";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("snow depth increase of 2 inches in the past hour with a total depth on the ground of 10 inches"));
+    }
+
 }
