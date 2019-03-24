@@ -55,8 +55,6 @@ public final class RemarkParser {
     private static final Pattern SNOW_PELLETS_INTENSITY = Pattern.compile("^GS (LGT|MOD|HVY)");
     /** Virga with direction. */
     private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
-    /** Virga. */
-    private static final Pattern VIRGA = Pattern.compile("^VIRGA");
     /** Ceiling height. */
     private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
     /** Obscuration pattern. */
@@ -121,8 +119,7 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(SECTOR_VISIBILITY, rmk)) {
                 String[] sectorVisibilityParts = Regex.pregMatch(SECTOR_VISIBILITY, rmk);
-                sb.append(fMessages.getString("Remark.Sector.Visibility", fMessages.getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2]))
-                .append(" ");
+                sb.append(fMessages.getString("Remark.Sector.Visibility", fMessages.getString("Converter." + sectorVisibilityParts[1]), sectorVisibilityParts[2])).append(" ");
                 rmk = rmk.replaceFirst(SECTOR_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(SECOND_LOCATION_VISIBILITY, rmk)) {
                 String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, rmk);
@@ -130,9 +127,8 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEG_END, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, rmk);
-                sb.append(fMessages.getString("Remark.Tornadic.Activity.BegEnd", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")),
-                        verifyString(tornadicParts[3]), tornadicParts[4], verifyString(tornadicParts[6]), tornadicParts[7], tornadicParts[9],
-                        fMessages.getString("Converter." + tornadicParts[10]))).append(" ");
+                sb.append(fMessages.getString("Remark.Tornadic.Activity.BegEnd", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4],
+                        verifyString(tornadicParts[6]), tornadicParts[7], tornadicParts[9], fMessages.getString("Converter." + tornadicParts[10]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEGINNING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, rmk);
@@ -146,11 +142,9 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
             } else if (Regex.find(PRECIPITATION_BEG_END, rmk)) {
                 String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, rmk);
-                sb.append(
-                        fMessages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : fMessages.getString("Descriptive." + precipitationBegEnd[2]),
-                                fMessages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5],
-                                verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
-                .append(" ");
+                sb.append(fMessages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : fMessages.getString("Descriptive." + precipitationBegEnd[2]),
+                        fMessages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5], verifyString(precipitationBegEnd[6]),
+                        precipitationBegEnd[7])).append(" ");
                 rmk = rmk.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
             } else if (Regex.find(THUNDERSTORM_LOCATION_MOVING, rmk)) {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION_MOVING, rmk);
@@ -178,9 +172,6 @@ public final class RemarkParser {
                 String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, rmk);
                 sb.append(fMessages.getString("Remark.Virga.Direction", fMessages.getString("Converter." + virgaDirection[1]))).append(" ");
                 rmk = rmk.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
-            } else if (Regex.find(VIRGA, rmk)) {
-                sb.append(fMessages.getString("Remark.Virga.Direction")).append(" ");
-                rmk = rmk.replaceFirst(VIRGA.pattern(), "").trim();
             } else if (Regex.find(CEILING_HEIGHT, rmk)) {
                 String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, rmk);
                 int min = Integer.parseInt(ceilingParts[1]) * 100;
