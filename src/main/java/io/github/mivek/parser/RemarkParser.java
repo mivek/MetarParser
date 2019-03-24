@@ -67,6 +67,8 @@ public final class RemarkParser {
     private static final Pattern CEILING_SECOND_LOCATION = Pattern.compile("^CIG (\\d{3}) (\\w+)");
     /** Sea level pressure. */
     private static final Pattern SEAL_LEVEL_PRESSURE = Pattern.compile("^SLP(\\d{2})(\\d)");
+    /** Snow increasing rapidly. */
+    private static final Pattern SNOW_INCR_RAPIDLY = Pattern.compile("^SNINCR (\\d+)\\/(\\d+)");
 
     /** Message instance. */
     private final Messages fMessages;
@@ -217,6 +219,10 @@ public final class RemarkParser {
                 pressure = pressure + sealevelParts[1] + "." + sealevelParts[2];
                 sb.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
                 rmk = rmk.replaceFirst(SEAL_LEVEL_PRESSURE.pattern(), "").trim();
+            } else if (Regex.find(SNOW_INCR_RAPIDLY, rmk)) {
+                String[] snowParts = Regex.pregMatch(SNOW_INCR_RAPIDLY, rmk);
+                sb.append(fMessages.getString("Remark.Snow.Increasing.Rapidly", snowParts[1], snowParts[2])).append(" ");
+                rmk = rmk.replaceFirst(SNOW_INCR_RAPIDLY.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 String token = strSlit[0];
