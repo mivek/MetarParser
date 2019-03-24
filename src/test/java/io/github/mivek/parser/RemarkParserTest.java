@@ -327,4 +327,5 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("snow depth increase of 2 inches in the past hour with a total depth on the ground of 10 inches"));
     }
+
 }
