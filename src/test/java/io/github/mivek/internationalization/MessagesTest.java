@@ -1,4 +1,4 @@
-package io.github.mivekinternationalization;
+package io.github.mivek.internationalization;
 
 import static org.junit.Assert.assertEquals;
 

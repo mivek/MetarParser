@@ -2,9 +2,14 @@ language: java
 env:
   global:
     - CC_TEST_REPORTER_ID=80f941339411bc7abca6636030897e70dad49f2693f1bcc14ab9fda1b86bf63d
-jdk:
-  - oraclejdk8
-  - openjdk8
+
+jobs:
+  include:
+    - if: branch in (develop, master)
+      jdk: oraclejdk8
+    - if: branch = develop
+      jdk: openjdk8
+
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
   - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi

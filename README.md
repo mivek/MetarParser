@@ -23,7 +23,7 @@ The trends of the metar are not parsed.
     2. [Retrieve a metar](https://github.com/mivek/MetarParser#retrieve-the-metar-of-an-airport)
     3. [Parse a taf](https://github.com/mivek/MetarParser#parse-a-taf)
     4. [Retrieve a taf](https://github.com/mivek/MetarParser#retrieve-a-taf)
-4. [Internationalization](https://github.com/mivek/MetarParser#io.github.mivekinternationalization)
+4. [Internationalization](https://github.com/mivek/MetarParser#internationalization)
 
 ## Adding the dependency
 ```xml

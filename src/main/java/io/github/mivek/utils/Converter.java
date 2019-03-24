@@ -2,7 +2,7 @@ package io.github.mivek.utils;
 
 import java.time.LocalTime;
 
-import io.github.mivekinternationalization.Messages;
+import io.github.mivek.internationalization.Messages;
 
 /**
  * This class is used to convert data.

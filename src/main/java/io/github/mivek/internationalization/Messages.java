@@ -1,4 +1,4 @@
-package io.github.mivekinternationalization;
+package io.github.mivek.internationalization;
 
 import java.text.MessageFormat;
 import java.util.Locale;
