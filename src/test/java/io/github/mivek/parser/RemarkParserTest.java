@@ -9,7 +9,7 @@ import java.util.Locale;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.github.mivekinternationalization.Messages;
+import io.github.mivek.internationalization.Messages;
 
 public class RemarkParserTest {
     RemarkParser fSut;

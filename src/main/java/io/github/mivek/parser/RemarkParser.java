@@ -4,8 +4,8 @@ import java.util.MissingResourceException;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.utils.Regex;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * @author mivek
