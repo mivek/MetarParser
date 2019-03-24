@@ -306,4 +306,18 @@ public class RemarkParserTest {
         String remark = fSut.parse(code);
         assertThat(remark, containsString("ceiling of 200 feet mesured by a second sensor located at RWY11"));
     }
+
+    @Test
+    public void testParseSealLevelPressure() {
+        String code = "AO1 SLP134";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("sea level pressure of 1013.4 HPa"));
+    }
+
+    @Test
+    public void testParseSealLevelPressure2() {
+        String code = "AO1 SLP982";
+        String remark = fSut.parse(code);
+        assertThat(remark, containsString("sea level pressure of 998.2 HPa"));
+    }
 }
