@@ -363,6 +363,6 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(m);
         assertNotNull(m.getVisibility());
         assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
-        assertThat(m.getRemark(), containsString("SF5NS3 SLP134"));
+        assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 }
