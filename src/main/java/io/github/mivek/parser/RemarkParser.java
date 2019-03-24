@@ -65,6 +65,8 @@ public final class RemarkParser {
     private static final Pattern VARIABLE_SKY = Pattern.compile("^([A-Z]{3}) V ([A-Z]{3})");
     /** Ceiling height second location. */
     private static final Pattern CEILING_SECOND_LOCATION = Pattern.compile("^CIG (\\d{3}) (\\w+)");
+    /** Sea level pressure. */
+    private static final Pattern SEAL_LEVEL_PRESSURE = Pattern.compile("^SLP(\\d{2})(\\d)");
 
     /** Message instance. */
     private final Messages fMessages;
@@ -204,6 +206,17 @@ public final class RemarkParser {
                 String location = ceilingParts[2];
                 sb.append(fMessages.getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
                 rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
+            } else if (Regex.find(SEAL_LEVEL_PRESSURE, rmk)) {
+                String[] sealevelParts = Regex.pregMatch(SEAL_LEVEL_PRESSURE, rmk);
+                String pressure = "";
+                if (sealevelParts[1].startsWith("1")) {
+                    pressure = "10";
+                } else if (sealevelParts[1].startsWith("9")) {
+                    pressure = "9";
+                }
+                pressure = pressure + sealevelParts[1] + "." + sealevelParts[2];
+                sb.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
+                rmk = rmk.replaceFirst(SEAL_LEVEL_PRESSURE.pattern(), "").trim();
             } else {
                 String[] strSlit = rmk.split(" ", 2);
                 String token = strSlit[0];
