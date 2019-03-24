@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
@@ -44,7 +47,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         String website = NOAA_TAF_URL + pIcao.toUpperCase() // $NON-NLS-1$
         + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
             // Throw the first line since it is not part of the TAF event.
             br.readLine();
@@ -63,6 +66,11 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
         String[] lines = pCode.split("\n");
         if (!TAFParser.TAF.equals(lines[0].trim())) {
             return pCode;
+        }
+        if ("AMD TAF".equals(lines[1].trim())) {
+            List<String> list = new ArrayList<>(Arrays.asList(lines));
+            list.remove(1);
+            lines = list.toArray(new String[0]);
         }
         // Case of TAF AMD, the 2 first lines must be merged.
         return Arrays.stream(lines).reduce((x, y) -> x + y + "\n").orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE));
