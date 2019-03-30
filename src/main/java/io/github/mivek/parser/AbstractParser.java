@@ -3,6 +3,7 @@ package io.github.mivek.parser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -114,7 +115,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void initAirports() {
         fAirports = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile))) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile, StandardCharsets.UTF_8))) {
             while ((line = reader.readNext()) != null) {
                 Airport airport = new Airport();
                 airport.setName(line[1]);
@@ -140,7 +141,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void initCountries() {
         fCountries = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile))) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile, StandardCharsets.UTF_8))) {
             while ((line = reader.readNext()) != null) {
                 Country country = new Country();
                 country.setName(line[0]);
