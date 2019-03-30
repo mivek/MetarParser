@@ -15,10 +15,7 @@ public final class RemarkParser {
     private static final RemarkParser INSTANCE = new RemarkParser();
     /** The logger instance. */
     private static final Logger LOGGER = Logger.getLogger(RemarkParser.class.getName());
-    /** No precipitation automated stations. */
-    private static final Pattern AO1 = Pattern.compile("^AO1");
-    /** Automated station with precipitation. */
-    private static final Pattern AO2 = Pattern.compile("^AO2");
+
     /** Wind peak pattern. */
     private static final Pattern WIND_PEAK = Pattern.compile("^PK WND (\\d{3})(\\d{2,3})\\/(\\d{2})?(\\d{2})");
     /** Wind shift pattern. */
@@ -88,13 +85,7 @@ public final class RemarkParser {
         String rmk = pRemark;
         StringBuilder sb = new StringBuilder();
         while (!rmk.equals("")) {
-            if (Regex.find(AO1, rmk)) {
-                sb.append(fMessages.getString("Remark.AO1")).append(" ");
-                rmk = rmk.replaceFirst(AO1.pattern(), "").trim();
-            } else if (Regex.find(AO2, rmk)) {
-                sb.append(fMessages.getString("Remark.AO2")).append(" ");
-                rmk = rmk.replaceFirst(AO2.pattern(), "").trim();
-            } else if (Regex.find(WIND_PEAK, rmk)) {
+            if (Regex.find(WIND_PEAK, rmk)) {
                 String[] windPeakParts = Regex.pregMatch(WIND_PEAK, rmk);
                 sb.append(fMessages.getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
                 sb.append(" ");
