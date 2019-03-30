@@ -3,6 +3,7 @@
  */
 package io.github.mivek.parser;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
@@ -362,6 +363,6 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(m);
         assertNotNull(m.getVisibility());
         assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
-        assertEquals("SF5NS3 SLP134", m.getRemark());
+        assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 }

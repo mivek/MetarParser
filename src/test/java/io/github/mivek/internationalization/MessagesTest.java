@@ -12,11 +12,11 @@ public class MessagesTest {
     public void testSetLocale() {
         // Given a french locale
         Messages.getInstance().setLocale(Locale.FRENCH);
-        assertEquals("Peu", Messages.getInstance().getString("CloudQuantity.FEW"));
+        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
         // WHEN Changing the locale to english
         Messages.getInstance().setLocale(Locale.ENGLISH);
         // THEN The locale is changed and so is the message.
-        assertEquals("Few", Messages.getInstance().getString("CloudQuantity.FEW"));
+        assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
         // When Changing the locale to german.
         Messages.getInstance().setLocale(Locale.GERMAN);
         // Then the message is in german.

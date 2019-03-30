@@ -98,12 +98,15 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private Map<String, Country> fCountries;
 
+    /** The remark parser. */
+    private final RemarkParser fRemarkParser;
     /**
      * Constructor.
      */
     protected AbstractParser() {
         initCountries();
         initAirports();
+        fRemarkParser = RemarkParser.getInstance();
     }
 
     /**
@@ -358,7 +361,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
         String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
-        pContainer.setRemark(Arrays.stream(subArray).collect(Collectors.joining(" ")));
+        pContainer.setRemark(fRemarkParser.parse(Arrays.stream(subArray).collect(Collectors.joining(" "))));
     }
 
     /**
