@@ -1,5 +1,7 @@
 package io.github.mivek.model.trend.validity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Abstract class for the validity of a TAF.
  * @author mivek
@@ -14,40 +16,33 @@ public abstract class AbstractValidity implements IValidity {
      */
     private Integer fStartHour;
 
-    /*
-     * (non-Javadoc)
-     * @see io.github.mivek.model.IValidity#getStartDay()
-     */
+
     @Override
-    public Integer getStartDay() {
+    public final Integer getStartDay() {
         return fStartDay;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see io.github.mivek.model.IValidity#setStartDay(java.lang.Integer)
-     */
     @Override
-    public void setStartDay(final Integer pStartDay) {
+    public final void setStartDay(final Integer pStartDay) {
         fStartDay = pStartDay;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see io.github.mivek.model.IValidity#getStartHour()
-     */
     @Override
-    public Integer getStartHour() {
+    public final Integer getStartHour() {
         return fStartHour;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see io.github.mivek.model.IValidity#setStartHour(java.lang.Integer)
-     */
     @Override
-    public void setStartHour(final Integer pStartHour) {
+    public final void setStartHour(final Integer pStartHour) {
         fStartHour = pStartHour;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("starting day of the month", fStartDay).
+                append("starting hour of the day", fStartHour).
+                toString();
     }
 
 }
