@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Class representing a temperature with its date.
  * @author mivek
@@ -60,4 +62,12 @@ public class TemperatureDated {
         fHour = pHour;
     }
 
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).
+                append("temperature (°C)", fTemperature).
+                append("day of the month", fDay).
+                append("hour of the day", fHour).
+                toString();
+    }
 }

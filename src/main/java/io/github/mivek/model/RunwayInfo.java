@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Runway class.
  * @author mivek
@@ -84,5 +86,16 @@ public class RunwayInfo {
      */
     public void setTrend(final String pTrend) {
         fTrend = pTrend;
+    }
+
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).
+                append("name", fName).
+                append("min visibility", fMinRange).
+                append("max visibility", fMaxRange).
+                append("trend", fTrend).
+                toString();
+
     }
 }
