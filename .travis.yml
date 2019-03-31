@@ -3,6 +3,16 @@ env:
   global:
     - CC_TEST_REPORTER_ID=80f941339411bc7abca6636030897e70dad49f2693f1bcc14ab9fda1b86bf63d
 
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+ddons:
+  sonarcloud:
+    organization: "mivek-github"
+    token:
+      secure: $SONARCLOUD_TOKEN
+
 jobs:
   include:
     - if: branch in (develop, master)
@@ -25,6 +35,7 @@ script:
   - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn clean install; fi
 
 after_script:
+  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 # Upload code coverage to code climate - with workaround for jacoco
   - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
   - cd src/main/java/
