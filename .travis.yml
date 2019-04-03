@@ -22,7 +22,7 @@ jobs:
 
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
-  - bash script/before_install.sh
+  - bash scripts/before_install.sh
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -31,7 +31,7 @@ before_script:
   
 script:
   # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
-  - bash script/script.sh
+  - bash scripts/script.sh
 
 after_script:
   - mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
@@ -40,7 +40,7 @@ after_script:
   - cd src/main/java/
   - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
 
-before_deploy: bash script/before_deploy.sh
+before_deploy: bash scripts/before_deploy.sh
 
 deploy:
   provider: releases
