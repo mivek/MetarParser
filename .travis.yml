@@ -23,6 +23,8 @@ jobs:
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
   - bash scripts/before_install.sh
+install:
+  - mvn compile test-compile
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
@@ -34,7 +36,6 @@ script:
   - bash scripts/script.sh
 
 after_script:
-  - mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 # Upload code coverage to code climate - with workaround for jacoco
   - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
   - cd src/main/java/
