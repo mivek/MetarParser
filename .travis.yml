@@ -6,7 +6,7 @@ env:
 cache:
   directories:
     - '$HOME/.m2/repository'
-#    - '$HOME/.sonar/cache'
+    - '$HOME/.sonar/cache'
 ddons:
   sonarcloud:
     organization: "mivek-github"
