@@ -2,8 +2,8 @@ Master:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
 Develop:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=develop)](https://travis-ci.org/mivek/MetarParser)
-[![Maintainability](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/maintainability)](https://codeclimate.com/github/mivek/MetarParser/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/test_coverage)](https://codeclimate.com/github/mivek/MetarParser/test_coverage)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 # MetarParser
 
 
