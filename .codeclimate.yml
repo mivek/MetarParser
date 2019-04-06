@@ -33,7 +33,7 @@ checks:
       
 plugins:
   checkstyle:
-    enabled: true
+    enabled: false
     config:
       file: "checkstyle.xml"
   pmd:
