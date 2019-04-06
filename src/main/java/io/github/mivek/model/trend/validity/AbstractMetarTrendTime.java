@@ -49,4 +49,8 @@ public abstract class AbstractMetarTrendTime {
         return fType;
     }
 
+    @Override
+    public final String toString() {
+        return fType + " " + fTime;
+    }
 }
