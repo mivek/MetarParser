@@ -1,7 +1,4 @@
 language: java
-env:
-  global:
-    - CC_TEST_REPORTER_ID=80f941339411bc7abca6636030897e70dad49f2693f1bcc14ab9fda1b86bf63d
 
 cache:
   directories:
@@ -23,23 +20,13 @@ jobs:
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
   - bash scripts/before_install.sh
+
 install:
   - mvn compile test-compile
-
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
   
 script:
   # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
   - bash scripts/script.sh
-
-after_script:
-# Upload code coverage to code climate - with workaround for jacoco
-  - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
-  - cd src/main/java/
-  - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
 
 before_deploy: bash scripts/before_deploy.sh
 
