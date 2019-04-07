@@ -17,7 +17,7 @@ public class VisibilityTest {
         String des = sut.toString();
 
         assertThat(des, Matchers.containsString("main visibility=>10km"));
-        assertThat(des, Matchers.containsString("min direction=SE"));
-        assertThat(des, Matchers.containsString("min visibility=200"));
+        assertThat(des, Matchers.containsString("minimum visibility direction=SE"));
+        assertThat(des, Matchers.containsString("minimum visibility=200"));
     }
 }

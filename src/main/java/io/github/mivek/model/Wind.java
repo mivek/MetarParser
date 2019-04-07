@@ -133,6 +133,9 @@ public class Wind {
         fDirectionDegrees = pDirectionDegrees;
     }
 
+    /**
+     * @return a description of the wind component.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this).
