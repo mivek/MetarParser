@@ -1,39 +1,16 @@
-/**
- *
- */
 package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.Phenomenon;
-import io.github.mivek.enums.TimeIndicator;
-import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.Cloud;
-import io.github.mivek.model.Metar;
-import io.github.mivek.model.RunwayInfo;
-import io.github.mivek.model.Visibility;
-import io.github.mivek.model.WeatherCondition;
-import io.github.mivek.model.Wind;
+import io.github.mivek.model.*;
 import io.github.mivek.model.trend.AbstractMetarTrend;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 /**
  * Test class for {@link MetarParser}
@@ -280,6 +257,11 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("5000m", v.getMainVisibility());
         assertEquals(1100, v.getMinVisibility());
         assertEquals("w", v.getMinDirection());
+        String des = m.toString();
+
+        assertThat(des, containsString("day of the month=16"));
+        assertThat(des, containsString("time of report=14:30"));
+        assertThat(des, containsString("direction (degrees)=240"));
     }
 
     @Test
@@ -320,6 +302,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(Phenomenon.FOG, m.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertNotNull(m.getVerticalVisibility());
         assertEquals(200, m.getVerticalVisibility().intValue());
+        assertThat(m.toString(), containsString("main visibility=350m"));
     }
 
     @Test
@@ -340,6 +323,9 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertNotNull(m);
         assertTrue(m.isCavok());
         assertEquals(">10km", m.getVisibility().getMainVisibility());
+        assertEquals(Integer.valueOf(9), m.getTemperature());
+        assertEquals(Integer.valueOf(6), m.getDewPoint());
+        assertTrue(m.isNosig());
     }
 
     @Test

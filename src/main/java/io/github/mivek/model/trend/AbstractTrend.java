@@ -27,5 +27,4 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
     public final WeatherChangeType getType() {
         return fType;
     }
-
 }
