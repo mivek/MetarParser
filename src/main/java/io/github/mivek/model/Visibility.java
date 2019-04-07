@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Visisbility class.
  * @author mivek
@@ -64,5 +66,13 @@ public class Visibility {
      */
     public void setMinDirection(final String pMinDirection) {
         fMinDirection = pMinDirection;
+    }
+
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).
+                append("main visibility", fMainVisibility).
+                append("minimum visibility", fMinVisibility).
+                append("minimum visibility direction", fMinDirection).toString();
     }
 }

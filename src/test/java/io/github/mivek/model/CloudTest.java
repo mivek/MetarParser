@@ -1,12 +1,12 @@
 package io.github.mivek.model;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
-import io.github.mivek.model.Cloud;
+import org.hamcrest.Matchers;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class CloudTest {
 	@Test
@@ -43,7 +43,9 @@ public class CloudTest {
 		c.setAltitude(90);
 		c.setQuantity(CloudQuantity.BKN);
 		c.setType(CloudType.CB);
-		assertEquals(CloudQuantity.BKN.toString() + " " + CloudType.CB.toString() + " 300ft (approx 90m)",
-				c.toString());
+		assertThat(c.toString(), Matchers.containsString("type="+CloudType.CB.toString()));
+		assertThat(c.toString(), Matchers.containsString("quantity="+CloudQuantity.BKN.toString()));
+		assertThat(c.toString(), Matchers.containsString("height (ft)=300"));
+		assertThat(c.toString(), Matchers.containsString("height (m)=90"));
 	}
 }
