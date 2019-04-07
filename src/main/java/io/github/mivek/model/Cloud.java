@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 
@@ -92,14 +94,11 @@ public class Cloud {
 
     @Override
     public final String toString() {
-        String res = fQuantity.toString();
-        if (fType != null) {
-            res += " " + fType.toString();
-        }
-        if (fHeight != 0) {
-            res += " " + fHeight + "ft (approx " + getAltitude() + "m)";
-        }
-
-        return res;
+        return new ToStringBuilder(this).
+                append("quantity", fQuantity).
+                append("type", fType).
+                append("height (ft)", fHeight).
+                append("height (m)", getAltitude()).
+                toString();
     }
 }

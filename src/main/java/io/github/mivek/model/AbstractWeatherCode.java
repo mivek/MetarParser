@@ -2,6 +2,8 @@ package io.github.mivek.model;
 
 import java.time.LocalTime;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * @author mivek
  * Parent class of {@link Metar} and {@link TAF}.
@@ -72,5 +74,19 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
      */
     public void setMessage(final String pMessage) {
         fMessage = pMessage;
+    }
+
+    /**
+     * @return a description of the object.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("day of the month", fDay).
+                append("time of report", fTime).
+                append("airport", fAirport).
+                appendSuper(super.toString()).
+                append("original message", fMessage).
+                toString();
     }
 }

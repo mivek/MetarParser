@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Class representing the wind shear.
  * @author mivek
@@ -20,5 +22,13 @@ public class WindShear extends Wind {
      */
     public void setHeight(final int pHeight) {
         fHeight = pHeight;
+    }
+
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).
+                appendSuper(super.toString()).
+                append("height (feet)", fHeight).
+                toString();
     }
 }

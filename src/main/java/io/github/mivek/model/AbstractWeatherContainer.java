@@ -3,6 +3,8 @@ package io.github.mivek.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * @author mivek
  */
@@ -155,5 +157,22 @@ public abstract class AbstractWeatherContainer {
      */
     public void setRemark(final String pRemark) {
         fRemark = pRemark;
+    }
+
+    /**
+     * @return string describing the object.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                appendToString(fWind.toString()).
+                appendToString(fVisibility.toString()).
+                append("vertical visibility (ft)", fVerticalVisibility).
+                append("clouds", fClouds.toString()).
+                append("weather conditions", fWeatherConditions.toString()).
+                appendToString(fWindShear.toString()).
+                append("cavok", fCavok).
+                append("remark", fRemark).
+                toString();
     }
 }
