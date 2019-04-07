@@ -21,12 +21,12 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.model.Cloud;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link AbstractParser}

@@ -3,6 +3,7 @@
  */
 package io.github.mivek.parser;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
@@ -17,6 +18,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +30,7 @@ import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.trend.AbstractTafTrend;
@@ -36,7 +40,6 @@ import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * Test class for {@link TAFParser}
@@ -55,6 +58,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Before
     public void setUp() {
         fSut = TAFParser.getInstance();
+        Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
@@ -494,7 +498,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(result);
         assertNotNull(result.getTempos().get(1));
         assertNotNull(result.getTempos().get(1).getRemark());
-        assertEquals("FCST BASED ON AUTO OBS. NXT FCST BY 301400Z", result.getTempos().get(1).getRemark());
+        assertThat(result.getTempos().get(1).getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
     }
 
     @Test
@@ -506,6 +510,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
         // THEN the second tempo contains the remark.
         assertNotNull(result);
-        assertEquals("FCST BASED ON AUTO OBS. NXT FCST BY 301400Z", result.getRemark());
+        assertThat(result.getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
     }
 }

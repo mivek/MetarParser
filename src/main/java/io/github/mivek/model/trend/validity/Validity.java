@@ -1,5 +1,7 @@
 package io.github.mivek.model.trend.validity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Class representing the validity of a TAF message.
  * @author mivek
@@ -41,5 +43,14 @@ public final class Validity extends AbstractValidity {
      */
     public void setEndHour(final Integer pEndHour) {
         fEndHour = pEndHour;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                appendSuper(super.toString()).
+                append("end day of the month", fEndDay).
+                append("end hour of the day", fEndHour).
+                toString();
     }
 }

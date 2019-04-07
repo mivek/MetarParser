@@ -1,5 +1,7 @@
 package io.github.mivek.model;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Wind class.
  * TODO Change unit to enumeration class.
@@ -131,4 +133,19 @@ public class Wind {
         fDirectionDegrees = pDirectionDegrees;
     }
 
+    /**
+     * @return a description of the wind component.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("speed", fSpeed).
+                append("unit", fUnit).
+                append("direction", fDirection).
+                append("direction (degrees)", fDirectionDegrees).
+                append("gusts", fGust).
+                append("minimal wind variation", fExtreme1).
+                append("maximal wind variation", fExtreme2).
+                toString();
+    }
 }

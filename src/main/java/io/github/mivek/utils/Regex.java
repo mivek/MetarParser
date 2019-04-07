@@ -30,7 +30,7 @@ public final class Regex {
     public static String[] pregMatch(final Pattern pPattern, final String pInput) {
         init(pPattern, pInput);
 
-        if (m.matches()) {
+        if (m.find()) {
             int length = m.groupCount() + 1;
             String[] matches = new String[length];
             for (int i = 0; i < length; i++) {

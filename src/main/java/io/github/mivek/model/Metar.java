@@ -1,11 +1,11 @@
 package io.github.mivek.model;
 
+import io.github.mivek.model.trend.AbstractMetarTrend;
+import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.lang3.Validate;
-
-import io.github.mivek.model.trend.AbstractMetarTrend;
 
 /**
  * Metar class.
@@ -151,4 +151,16 @@ public class Metar extends AbstractWeatherCode {
         return fTrends;
     }
 
+    @Override public final String toString() {
+        return new ToStringBuilder(this).
+                appendSuper(super.toString()).
+                append("temperature", fTemperature).
+                append("dew point", fDewPoint).
+                append("altimeter (hPa)", fAltimeter).
+                append("nosig", fNosig).
+                append("auto", fAuto).
+                append("runways information", fRunways.toString()).
+                append("trends", fTrends.toString()).
+                toString();
+    }
 }

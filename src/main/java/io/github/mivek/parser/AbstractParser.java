@@ -3,6 +3,7 @@ package io.github.mivek.parser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Airport;
@@ -34,7 +36,6 @@ import io.github.mivek.model.Wind;
 import io.github.mivek.model.WindShear;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
-import io.github.mivekinternationalization.Messages;
 
 /**
  * Abstract class for parser.
@@ -97,12 +98,15 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     private Map<String, Country> fCountries;
 
+    /** The remark parser. */
+    private final RemarkParser fRemarkParser;
     /**
      * Constructor.
      */
     protected AbstractParser() {
         initCountries();
         initAirports();
+        fRemarkParser = RemarkParser.getInstance();
     }
 
     /**
@@ -111,7 +115,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void initAirports() {
         fAirports = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile))) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile, StandardCharsets.UTF_8))) {
             while ((line = reader.readNext()) != null) {
                 Airport airport = new Airport();
                 airport.setName(line[1]);
@@ -137,7 +141,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private void initCountries() {
         fCountries = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile))) {
+        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile, StandardCharsets.UTF_8))) {
             while ((line = reader.readNext()) != null) {
                 Country country = new Country();
                 country.setName(line[0]);
@@ -357,7 +361,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
         String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
-        pContainer.setRemark(Arrays.stream(subArray).collect(Collectors.joining(" ")));
+        pContainer.setRemark(fRemarkParser.parse(Arrays.stream(subArray).collect(Collectors.joining(" "))));
     }
 
     /**

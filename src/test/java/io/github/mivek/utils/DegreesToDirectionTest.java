@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import io.github.mivekinternationalization.Messages;
+import io.github.mivek.internationalization.Messages;
 
 @RunWith(Parameterized.class)
 public class DegreesToDirectionTest {

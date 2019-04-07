@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.mivek</groupId>
 	<artifactId>metarParser</artifactId>
-	<version>1.4</version>
+	<version>1.5</version>
 	<name>metarParser</name>
 	<description>This project is a metar parser.
 Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.</description>
@@ -37,6 +37,7 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 		<maven.source.plugin.version>3.0.0</maven.source.plugin.version>
 		<maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
 		<maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<developers>
@@ -77,6 +78,19 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
+			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>3.1.11</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>verify</phase>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

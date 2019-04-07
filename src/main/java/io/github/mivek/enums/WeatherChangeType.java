@@ -1,6 +1,6 @@
 package io.github.mivek.enums;
 
-import io.github.mivekinternationalization.Messages;
+import io.github.mivek.internationalization.Messages;
 
 /**
  * @author mivek

@@ -2,8 +2,8 @@ Master:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
 Develop:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=develop)](https://travis-ci.org/mivek/MetarParser)
-[![Maintainability](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/maintainability)](https://codeclimate.com/github/mivek/MetarParser/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/bfd4e09cccf432218d40/test_coverage)](https://codeclimate.com/github/mivek/MetarParser/test_coverage)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 # MetarParser
 
 
@@ -23,14 +23,14 @@ The trends of the metar are not parsed.
     2. [Retrieve a metar](https://github.com/mivek/MetarParser#retrieve-the-metar-of-an-airport)
     3. [Parse a taf](https://github.com/mivek/MetarParser#parse-a-taf)
     4. [Retrieve a taf](https://github.com/mivek/MetarParser#retrieve-a-taf)
-4. [Internationalization](https://github.com/mivek/MetarParser#io.github.mivekinternationalization)
+4. [Internationalization](https://github.com/mivek/MetarParser#internationalization)
 
 ## Adding the dependency
 ```xml
 <dependency>
   <groupId>io.github.mivek</groupId>
   <artifactId>metarParser</artifactId>
-  <version>1.3</version>
+  <version>1.4</version>
 </dependency>
 ```
 Or check [here](https://search.maven.org/artifact/io.github.mivek/metarParser/1.3/jar) if you are not using maven.

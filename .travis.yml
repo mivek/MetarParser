@@ -1,31 +1,34 @@
 language: java
-env:
-  global:
-    - CC_TEST_REPORTER_ID=80f941339411bc7abca6636030897e70dad49f2693f1bcc14ab9fda1b86bf63d
-jdk:
-  - oraclejdk8
-  - openjdk8
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+addons:
+  sonarcloud:
+    organization: "mivek-github"
+    token:
+      secure: $SONARCLOUD_TOKEN
+
+jobs:
+  include:
+    - if: branch in (develop, master)
+      jdk: oraclejdk8
+    - if: branch = develop
+      jdk: openjdk8
+
 before_install:
   # Retrieve keys only if building branch is either develop or master and not a pull request
-  - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import; fi
-  - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust; fi
+  - bash scripts/before_install.sh
 
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
+install:
+  - mvn compile test-compile
   
 script:
   # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
-  - if ([ "$TRAVIS_BRANCH" = "develop" ] || [ "$TRAVIS_BRANCH" = "master" ]) && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then mvn clean deploy --settings .settings.xml -P release,ossrh ; else mvn clean install; fi
+  - bash scripts/script.sh
 
-after_script:
-# Upload code coverage to code climate - with workaround for jacoco
-  - cp target/site/jacoco/jacoco.xml src/main/java/jacoco.xml
-  - cd src/main/java/
-  - ../../../cc-test-reporter after-build -t jacoco --exit-code $TRAVIS_TEST_RESULT
-
-before_deploy: bash before_deploy.sh $TRAVIS_BRANCH $TRAVIS_PULL_REQUEST $NAME $EMAIL
+before_deploy: bash scripts/before_deploy.sh
 
 deploy:
   provider: releases
@@ -35,5 +38,4 @@ deploy:
   skip_cleanup: true
   draft: true
   on:
-    tags: true
     branch: master
