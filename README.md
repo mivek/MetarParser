@@ -30,7 +30,7 @@ The trends of the metar are not parsed.
 <dependency>
   <groupId>io.github.mivek</groupId>
   <artifactId>metarParser</artifactId>
-  <version>1.4</version>
+  <version>1.5</version>
 </dependency>
 ```
 Or check [here](https://search.maven.org/artifact/io.github.mivek/metarParser/1.3/jar) if you are not using maven.
