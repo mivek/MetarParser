@@ -29,7 +29,7 @@ public class BeginningValidity extends AbstractValidity {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                appendToString(super.toString()).
+                appendSuper(super.toString()).
                 append("starting minute", fStartMinutes).
                 toString();
     }
