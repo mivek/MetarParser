@@ -32,7 +32,7 @@ before_deploy: bash scripts/before_deploy.sh
 
 deploy:
   provider: releases
-  file: target/metarParser-$version.jar
+  file: target/metarParser-$VERSION.jar
   api_key:
     secure: $GITHUB_OATH
   skip_cleanup: true
