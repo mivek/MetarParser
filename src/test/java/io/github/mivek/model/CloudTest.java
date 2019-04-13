@@ -51,7 +51,7 @@ public class CloudTest {
 		assertThat(c.toString(), Matchers.containsString("height (m)=90"));
 	}
 
-	@Test public void Should_Pass_All_Pojo_Tests() {
+	@Test public void testPojo() {
 		// given
 		final Class<?> classUnderTest = Cloud.class;
 		// then

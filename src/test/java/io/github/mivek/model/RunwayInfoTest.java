@@ -24,7 +24,7 @@ public class RunwayInfoTest {
         assertThat(des, Matchers.containsString("trend=rising"));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = RunwayInfo.class;
         // then

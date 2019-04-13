@@ -31,7 +31,7 @@ public class WindTest {
         assertThat(desc, containsString("unit=KM/H"));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = Wind.class;
         // then

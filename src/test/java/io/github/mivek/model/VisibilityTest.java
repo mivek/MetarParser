@@ -23,7 +23,7 @@ public class VisibilityTest {
         assertThat(des, Matchers.containsString("minimum visibility=200"));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = Visibility.class;
         // then

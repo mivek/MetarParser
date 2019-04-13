@@ -9,15 +9,14 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class WindShearTest {
 
-    @Test
-    public void testToString(){
+    @Test public void testToString() {
         WindShear sut = new WindShear();
         sut.setHeight(500);
 
         assertThat(sut.toString(), Matchers.containsString("height (feet)=500"));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = WindShear.class;
         // then

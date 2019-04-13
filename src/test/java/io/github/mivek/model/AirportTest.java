@@ -61,7 +61,7 @@ public class AirportTest {
         assertEquals(altitude, sut.getAltitude());
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = Airport.class;
         // then

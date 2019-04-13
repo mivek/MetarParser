@@ -22,7 +22,7 @@ public class TemperatureDatedTest {
         assertThat(des, containsString("temperature (°C)=20"));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = TemperatureDated.class;
         // then

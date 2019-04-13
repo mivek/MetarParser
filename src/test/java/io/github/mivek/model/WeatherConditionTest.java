@@ -27,7 +27,7 @@ public class WeatherConditionTest {
         assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString()));
     }
 
-    @Test public void Should_Pass_All_Pojo_Tests() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = WeatherCondition.class;
         // then
