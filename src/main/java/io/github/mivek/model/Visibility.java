@@ -7,25 +7,19 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author mivek
  */
 public class Visibility {
-    /**
-     * mainVisibility of the metar.
-     */
-    private String fMainVisibility;
-    /**
-     * minimal visibility of the metar.
-     */
-    private int fMinVisibility;
-    /**
-     * Direction of the minimal visibility.
-     */
-    private String fMinDirection;
+    /** mainVisibility of the metar. */
+    private String mainVisibility;
+    /** minimal visibility of the metar. */
+    private int minVisibility;
+    /** Direction of the minimal visibility. */
+    private String minDirection;
 
     /**
      * Getter of the mainVisibility.
      * @return the mainvisibility.
      */
     public String getMainVisibility() {
-        return fMainVisibility;
+        return mainVisibility;
     }
 
     /**
@@ -33,7 +27,7 @@ public class Visibility {
      * @param pMainVisibility the main visibility to set.
      */
     public void setMainVisibility(final String pMainVisibility) {
-        fMainVisibility = pMainVisibility;
+        mainVisibility = pMainVisibility;
     }
 
     /**
@@ -41,7 +35,7 @@ public class Visibility {
      * @return the minimal visibility.
      */
     public int getMinVisibility() {
-        return fMinVisibility;
+        return minVisibility;
     }
 
     /**
@@ -49,7 +43,7 @@ public class Visibility {
      * @param pMinVisibility the minimal visibility to set.
      */
     public void setMinVisibility(final int pMinVisibility) {
-        fMinVisibility = pMinVisibility;
+        minVisibility = pMinVisibility;
     }
 
     /**
@@ -57,7 +51,7 @@ public class Visibility {
      * @return the direction.
      */
     public String getMinDirection() {
-        return fMinDirection;
+        return minDirection;
     }
 
     /**
@@ -65,14 +59,14 @@ public class Visibility {
      * @param pMinDirection the minimal direction to set.
      */
     public void setMinDirection(final String pMinDirection) {
-        fMinDirection = pMinDirection;
+        minDirection = pMinDirection;
     }
 
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("main visibility", fMainVisibility).
-                append("minimum visibility", fMinVisibility).
-                append("minimum visibility direction", fMinDirection).toString();
+                append("main visibility", mainVisibility).
+                append("minimum visibility", minVisibility).
+                append("minimum visibility direction", minDirection).toString();
     }
 }

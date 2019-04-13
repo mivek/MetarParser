@@ -7,67 +7,61 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author mivek
  */
 public class TemperatureDated {
-    /**
-     * The temperature.
-     */
-    private Integer fTemperature;
-    /**
-     * The day.
-     */
-    private Integer fDay;
-    /**
-     * The hour.
-     */
-    private Integer fHour;
+    /** The temperature. */
+    private Integer temperature;
+    /** The day. */
+    private Integer day;
+    /** The hour. */
+    private Integer hour;
 
     /**
      * @return the temperature
      */
     public Integer getTemperature() {
-        return fTemperature;
+        return temperature;
     }
 
     /**
      * @param pTemperature the temperature to set
      */
     public void setTemperature(final Integer pTemperature) {
-        fTemperature = pTemperature;
+        temperature = pTemperature;
     }
 
     /**
      * @return the day
      */
     public Integer getDay() {
-        return fDay;
+        return day;
     }
 
     /**
      * @param pDay the day to set
      */
     public void setDay(final Integer pDay) {
-        fDay = pDay;
+        day = pDay;
     }
 
     /**
      * @return the hour
      */
     public Integer getHour() {
-        return fHour;
+        return hour;
     }
 
     /**
      * @param pHour the hour to set
      */
     public void setHour(final Integer pHour) {
-        fHour = pHour;
+        hour = pHour;
     }
 
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("temperature (°C)", fTemperature).
-                append("day of the month", fDay).
-                append("hour of the day", fHour).
+                append("temperature (°C)", temperature).
+                append("day of the month", day).
+                append("hour of the day", hour).
                 toString();
     }
 }
