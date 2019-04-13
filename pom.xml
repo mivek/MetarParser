@@ -47,6 +47,13 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 		</developer>
 	</developers>
 
+	<repositories>
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.opencsv</groupId>
@@ -63,6 +70,12 @@ Use the MetarFacade and its method "parse()" to parse a metar string and retriev
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>pl.pojo</groupId>
+			<artifactId>pojo-tester</artifactId>
+			<version>0.7.6</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

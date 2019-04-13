@@ -11,46 +11,46 @@ public final class Validity extends AbstractValidity {
     /**
      * Ending day of the taf's validity.
      */
-    private Integer fEndDay;
+    private Integer endDay;
     /**
      * Ending hour of the taf's validity.
      */
-    private Integer fEndHour;
+    private Integer endHour;
 
     /**
      * @return the endDay
      */
     public Integer getEndDay() {
-        return fEndDay;
+        return endDay;
     }
 
     /**
      * @param pEndDay the endDay to set
      */
     public void setEndDay(final Integer pEndDay) {
-        fEndDay = pEndDay;
+        endDay = pEndDay;
     }
 
     /**
      * @return the endHour
      */
     public Integer getEndHour() {
-        return fEndHour;
+        return endHour;
     }
 
     /**
      * @param pEndHour the endHour to set
      */
     public void setEndHour(final Integer pEndHour) {
-        fEndHour = pEndHour;
+        endHour = pEndHour;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("end day of the month", fEndDay).
-                append("end hour of the day", fEndHour).
+                append("end day of the month", endDay).
+                append("end hour of the day", endHour).
                 toString();
     }
 }

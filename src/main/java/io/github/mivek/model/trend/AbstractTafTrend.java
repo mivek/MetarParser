@@ -10,22 +10,14 @@ import io.github.mivek.model.trend.validity.AbstractValidity;
  * @author mivek
  */
 public abstract class AbstractTafTrend<T extends AbstractValidity> extends AbstractTrend {
-    /**
-     * The validity of the change.
-     */
-    private T fValidity;
-    /**
-     * The probability of the change.
-     */
-    private Integer fProbability;
-    /**
-     * The maximum temperature.
-     */
-    private TemperatureDated fMaxTemperature;
-    /**
-     * The minimum temperature.
-     */
-    private TemperatureDated fMinTemperature;
+    /** The validity of the change. */
+    private T validity;
+    /** The probability of the change. */
+    private Integer probability;
+    /** The maximum temperature. */
+    private TemperatureDated maxTemperature;
+    /** The minimum temperature. */
+    private TemperatureDated minTemperature;
 
     /**
      * Constructor with parameter.
@@ -39,14 +31,14 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
      * @return the validity
      */
     public T getValidity() {
-        return fValidity;
+        return validity;
     }
 
     /**
      * @param pValidity the validity to set
      */
     public void setValidity(final T pValidity) {
-        fValidity = pValidity;
+        validity = pValidity;
     }
 
 
@@ -54,42 +46,42 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
      * @return the probability
      */
     public Integer getProbability() {
-        return fProbability;
+        return probability;
     }
 
     /**
      * @param pProbability the probability to set
      */
     public void setProbability(final Integer pProbability) {
-        fProbability = pProbability;
+        probability = pProbability;
     }
 
     /**
      * @return the maxTemperature
      */
     public TemperatureDated getMaxTemperature() {
-        return fMaxTemperature;
+        return maxTemperature;
     }
 
     /**
      * @param pMaxTemperature the maxTemperature to set
      */
     public void setMaxTemperature(final TemperatureDated pMaxTemperature) {
-        fMaxTemperature = pMaxTemperature;
+        maxTemperature = pMaxTemperature;
     }
 
     /**
      * @return the minTemperature
      */
     public TemperatureDated getMinTemperature() {
-        return fMinTemperature;
+        return minTemperature;
     }
 
     /**
      * @param pMinTemperature the minTemperature to set
      */
     public void setMinTemperature(final TemperatureDated pMinTemperature) {
-        fMinTemperature = pMinTemperature;
+        minTemperature = pMinTemperature;
     }
 
 }

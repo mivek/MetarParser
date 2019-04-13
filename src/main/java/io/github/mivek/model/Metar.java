@@ -12,92 +12,77 @@ import java.util.List;
  * @author mivek
  */
 public class Metar extends AbstractWeatherCode {
-    /**
-     * Temperature.
-     */
-    private Integer fTemperature;
-    /**
-     * Dew point.
-     */
-    private Integer fDewPoint;
-    /**
-     * Altimeter in HPa..
-     */
-    private Integer fAltimeter;
-    /**
-     * Nosig value.
-     */
-    private boolean fNosig;
-    /**
-     * Auto Value.
-     */
-    private boolean fAuto;
-    /**
-     * List of runways information.
-     */
-    private List<RunwayInfo> fRunways;
-
-    /**
-     * List of trends.
-     */
-    private List<AbstractMetarTrend> fTrends;
+    /** Temperature. */
+    private Integer temperature;
+    /** Dew point. */
+    private Integer dewPoint;
+    /** Altimeter in HPa. */
+    private Integer altimeter;
+    /** Nosig value. */
+    private boolean nosig;
+    /** Auto Value. */
+    private boolean auto;
+    /** List of runways information. */
+    private List<RunwayInfo> runways;
+    /** List of trends. */
+    private List<AbstractMetarTrend> trends;
 
     /**
      * Constructor.
      */
     public Metar() {
         super();
-        fRunways = new ArrayList<>();
-        fTrends = new ArrayList<>();
+        runways = new ArrayList<>();
+        trends = new ArrayList<>();
     }
 
     /**
      * @return the temperature
      */
     public Integer getTemperature() {
-        return fTemperature;
+        return temperature;
     }
 
     /**
      * @param pTemperature the temperature to set
      */
     public void setTemperature(final Integer pTemperature) {
-        fTemperature = pTemperature;
+        temperature = pTemperature;
     }
 
     /**
      * @return the dewPoint
      */
     public Integer getDewPoint() {
-        return fDewPoint;
+        return dewPoint;
     }
 
     /**
      * @param pDewPoint the dewPoint to set
      */
     public void setDewPoint(final Integer pDewPoint) {
-        fDewPoint = pDewPoint;
+        dewPoint = pDewPoint;
     }
 
     /**
      * @return the altimeter in HPa.
      */
     public Integer getAltimeter() {
-        return fAltimeter;
+        return altimeter;
     }
 
     /**
      * @param pAltimeter the altimeter to set
      */
     public void setAltimeter(final Integer pAltimeter) {
-        fAltimeter = pAltimeter;
+        altimeter = pAltimeter;
     }
 
     /**
      * @return the runways
      */
     public List<RunwayInfo> getRunways() {
-        return fRunways;
+        return runways;
     }
 
     /**
@@ -105,35 +90,35 @@ public class Metar extends AbstractWeatherCode {
      * @param pRunwayInformation the runway to add.
      */
     public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
-        fRunways.add(pRunwayInformation);
+        runways.add(pRunwayInformation);
     }
 
     /**
      * @return the nosig
      */
     public boolean isNosig() {
-        return fNosig;
+        return nosig;
     }
 
     /**
      * @param pNosig the nosig to set
      */
     public void setNosig(final boolean pNosig) {
-        fNosig = pNosig;
+        nosig = pNosig;
     }
 
     /**
      * @return the auto
      */
     public boolean isAuto() {
-        return fAuto;
+        return auto;
     }
 
     /**
      * @param pAuto the auto to set
      */
     public void setAuto(final boolean pAuto) {
-        fAuto = pAuto;
+        auto = pAuto;
     }
 
     /**
@@ -141,26 +126,26 @@ public class Metar extends AbstractWeatherCode {
      * @param pTrend the trend to add.
      */
     public void addTrend(final AbstractMetarTrend pTrend) {
-        fTrends.add(Validate.notNull(pTrend));
+        trends.add(Validate.notNull(pTrend));
     }
 
     /**
      * @return the list of trends.
      */
     public List<AbstractMetarTrend> getTrends() {
-        return fTrends;
+        return trends;
     }
 
     @Override public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("temperature", fTemperature).
-                append("dew point", fDewPoint).
-                append("altimeter (hPa)", fAltimeter).
-                append("nosig", fNosig).
-                append("auto", fAuto).
-                append("runways information", fRunways.toString()).
-                append("trends", fTrends.toString()).
+                append("temperature", temperature).
+                append("dew point", dewPoint).
+                append("altimeter (hPa)", altimeter).
+                append("nosig", nosig).
+                append("auto", auto).
+                append("runways information", runways.toString()).
+                append("trends", trends.toString()).
                 toString();
     }
 }

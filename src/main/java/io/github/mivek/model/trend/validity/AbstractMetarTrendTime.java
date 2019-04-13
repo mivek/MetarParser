@@ -1,10 +1,9 @@
 package io.github.mivek.model.trend.validity;
 
-import java.time.LocalTime;
-
+import io.github.mivek.enums.TimeIndicator;
 import org.apache.commons.lang3.Validate;
 
-import io.github.mivek.enums.TimeIndicator;
+import java.time.LocalTime;
 
 /**
  * Abstract class for the time trend in a metar.
@@ -14,43 +13,43 @@ public abstract class AbstractMetarTrendTime {
     /**
      * Type of trend AT, FM or TL.
      */
-    private TimeIndicator fType;
+    private TimeIndicator type;
     /**
      * Time of the change.
      */
-    private LocalTime fTime;
+    private LocalTime time;
 
     /**
      * Constructor.
      * @param pType the type of trend.
      */
     protected AbstractMetarTrendTime(final TimeIndicator pType) {
-        fType = pType;
+        this.type = pType;
     }
 
     /**
      * @return the time
      */
     public LocalTime getTime() {
-        return fTime;
+        return time;
     }
 
     /**
      * @param pTime the time to set
      */
     public void setTime(final LocalTime pTime) {
-        fTime = Validate.notNull(pTime);
+        time = Validate.notNull(pTime);
     }
 
     /**
      * @return the type
      */
     public TimeIndicator getType() {
-        return fType;
+        return type;
     }
 
     @Override
     public final String toString() {
-        return fType + " " + fTime;
+        return type + " " + time;
     }
 }

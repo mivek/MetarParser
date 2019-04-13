@@ -1,8 +1,8 @@
 package io.github.mivek.model;
 
-import java.time.LocalTime;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.time.LocalTime;
 
 /**
  * @author mivek
@@ -11,69 +11,69 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
 
     /** Integer for the day of the metar. */
-    private Integer fDay;
+    private Integer day;
     /** Time of the metar. */
-    private LocalTime fTime;
+    private LocalTime time;
     /** Airport of the metar. */
-    private Airport fAirport;
+    private Airport airport;
     /** Original message of the metar. */
-    private String fMessage;
+    private String message;
 
 
     /**
      * @return the day
      */
     public Integer getDay() {
-        return fDay;
+        return day;
     }
 
     /**
      * @param pDay the day to set
      */
     public void setDay(final Integer pDay) {
-        fDay = pDay;
+        day = pDay;
     }
 
     /**
      * @return the time
      */
     public LocalTime getTime() {
-        return fTime;
+        return time;
     }
 
     /**
      * @param pTime the time to set
      */
     public void setTime(final LocalTime pTime) {
-        fTime = pTime;
+        time = pTime;
     }
 
     /**
      * @return the airport
      */
     public Airport getAirport() {
-        return fAirport;
+        return airport;
     }
 
     /**
      * @param pAirport the airport to set
      */
     public void setAirport(final Airport pAirport) {
-        fAirport = pAirport;
+        airport = pAirport;
     }
 
     /**
      * @return the message
      */
     public String getMessage() {
-        return fMessage;
+        return message;
     }
 
     /**
      * @param pMessage the message to set
      */
     public void setMessage(final String pMessage) {
-        fMessage = pMessage;
+        message = pMessage;
     }
 
     /**
@@ -82,11 +82,11 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     @Override
     public String toString() {
         return new ToStringBuilder(this).
-                append("day of the month", fDay).
-                append("time of report", fTime).
-                append("airport", fAirport).
+                append("day of the month", day).
+                append("time of report", time).
+                append("airport", airport).
                 appendSuper(super.toString()).
-                append("original message", fMessage).
+                append("original message", message).
                 toString();
     }
 }

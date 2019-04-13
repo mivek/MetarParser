@@ -1,10 +1,10 @@
 package io.github.mivek.model.trend;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class for metar's trend.
@@ -14,7 +14,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
     /**
      * List containing the times properties of the trend.
      */
-    private List<AbstractMetarTrendTime> fTimes;
+    private List<AbstractMetarTrendTime> times;
 
     /**
      * Constructor.
@@ -22,14 +22,14 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
      */
     protected AbstractMetarTrend(final WeatherChangeType pType) {
         super(pType);
-        fTimes = new ArrayList<>();
+        times = new ArrayList<>();
     }
 
     /**
      * @return the times
      */
     public List<AbstractMetarTrendTime> getTimes() {
-        return fTimes;
+        return times;
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
      * @param pTime the element to add.
      */
     public void addTime(final AbstractMetarTrendTime pTime) {
-        fTimes.add(pTime);
+        times.add(pTime);
     }
 
 }

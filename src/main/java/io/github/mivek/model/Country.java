@@ -8,14 +8,14 @@ public class Country {
     /**
      * Name of the country.
      */
-    private String fName;
+    private String name;
 
     /**
      * Getter of name.
      * @return the name.
      */
     public String getName() {
-        return fName;
+        return name;
     }
 
     /**
@@ -23,11 +23,11 @@ public class Country {
      * @param pName the name to set.
      */
     public void setName(final String pName) {
-        fName = pName;
+        name = pName;
     }
 
     @Override
     public final String toString() {
-        return fName;
+        return name;
     }
 }
