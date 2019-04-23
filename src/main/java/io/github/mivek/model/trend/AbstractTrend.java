@@ -2,6 +2,7 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.AbstractWeatherContainer;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Abstract class for trends.
@@ -24,5 +25,12 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
      */
     public final WeatherChangeType getType() {
         return type;
+    }
+
+    /**
+     * @return a description of the object
+     */
+    public String toString() {
+        return new ToStringBuilder(this).appendToString(type.toString()).appendSuper(super.toString()).toString();
     }
 }

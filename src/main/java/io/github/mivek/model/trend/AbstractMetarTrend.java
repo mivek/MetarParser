@@ -2,6 +2,7 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,13 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
      */
     public void addTime(final AbstractMetarTrendTime pTime) {
         times.add(pTime);
+    }
+
+    /**
+     * @return a description of the object.
+     */
+    @Override public String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).append(times.toString()).toString();
     }
 
 }
