@@ -5,6 +5,7 @@ import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.PROBTafTrend;
 import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.Validity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,5 +142,10 @@ public class TAF extends AbstractWeatherCode {
      */
     public void setAmendment(final boolean pAmendment) {
         amendment = pAmendment;
+    }
+
+    @Override public final String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append("probability", probability).append("amendment", amendment)
+                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(probs.toString()).toString();
     }
 }

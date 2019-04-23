@@ -1,33 +1,6 @@
-/**
- *
- */
 package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Locale;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.Intensity;
-import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -40,6 +13,13 @@ import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Locale;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 /**
  * Test class for {@link TAFParser}
@@ -190,7 +170,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(Integer.valueOf(12), res.getValidity().getEndHour());
         // Checks on wind.
         assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("170")));
-        assertThat(res.getWind().getSpeed(), is(05));
+        assertThat(res.getWind().getSpeed(), is(5));
         assertThat(res.getWind().getGust(), is(0));
         assertThat(res.getWind().getUnit(), is("KT"));
         // Checks on visibility.
@@ -511,5 +491,10 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         // THEN the second tempo contains the remark.
         assertNotNull(result);
         assertThat(result.getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
+        String description = result.toString();
+        assertThat(description, containsString("starting day of the month=30"));
+        assertThat(description, containsString("starting hour of the day=10"));
+        assertThat(description, containsString("end day of the month=30"));
+        assertThat(description, containsString("end hour of the day=12"));
     }
 }
