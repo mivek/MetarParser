@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
 
@@ -17,9 +18,9 @@ public class TemperatureDatedTest {
 
         String des = temp.toString();
 
-        assertThat(des, containsString("day of the month=10"));
-        assertThat(des, containsString("hour of the day=15"));
-        assertThat(des, containsString("temperature (°C)=20"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.day.month") + "=10"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.day.hour") + "=15"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.temperature") + "=20"));
     }
 
     @Test public void testPojo() {

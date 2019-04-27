@@ -3,6 +3,7 @@ package io.github.mivek.model;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import pl.pojo.tester.api.FieldPredicate;
@@ -22,8 +23,8 @@ public class WeatherConditionTest {
 
         String desc = sut.toString();
 
-        assertThat(desc, Matchers.containsString("intensity="+Intensity.LIGHT.toString()));
-        assertThat(desc, Matchers.containsString("descriptive="+Descriptive.SHOWERS.toString()));
+        assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.intensity") + "=" + Intensity.LIGHT.toString()));
+        assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.descriptive") + "=" + Descriptive.SHOWERS.toString()));
         assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString()));
     }
 
