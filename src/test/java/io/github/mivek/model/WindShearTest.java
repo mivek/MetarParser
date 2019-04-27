@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import pl.pojo.tester.api.assertion.Method;
@@ -13,7 +14,7 @@ public class WindShearTest {
         WindShear sut = new WindShear();
         sut.setHeight(500);
 
-        assertThat(sut.toString(), Matchers.containsString("height (feet)=500"));
+        assertThat(sut.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=500"));
     }
 
     @Test public void testPojo() {

@@ -1,5 +1,6 @@
 package io.github.mivek.model.trend.validity;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -49,8 +50,8 @@ public final class Validity extends AbstractValidity {
     public String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("end day of the month", endDay).
-                append("end hour of the day", endHour).
+                append(Messages.getInstance().getString("ToString.end.day.month"), endDay).
+                append(Messages.getInstance().getString("ToString.end.hour.day"), endHour).
                 toString();
     }
 }

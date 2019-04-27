@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -65,8 +66,8 @@ public class Visibility {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("main visibility", mainVisibility).
-                append("minimum visibility", minVisibility).
-                append("minimum visibility direction", minDirection).toString();
+                append(Messages.getInstance().getString("ToString.visibility.main"), mainVisibility).
+                append(Messages.getInstance().getString("ToString.visibility.min"), minVisibility).
+                append(Messages.getInstance().getString("ToString.visibility.min.direction"), minDirection).toString();
     }
 }

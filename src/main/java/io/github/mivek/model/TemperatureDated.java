@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -59,9 +60,9 @@ public class TemperatureDated {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("temperature (°C)", temperature).
-                append("day of the month", day).
-                append("hour of the day", hour).
+                append(Messages.getInstance().getString("ToString.temperature"), temperature).
+                append(Messages.getInstance().getString("ToString.day.month"), day).
+                append(Messages.getInstance().getString("ToString.day.hour"), hour).
                 toString();
     }
 }

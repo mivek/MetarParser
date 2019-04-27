@@ -16,8 +16,6 @@ import io.github.mivek.utils.Converter;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Locale;
-
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -38,7 +36,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Before
     public void setUp() {
         fSut = TAFParser.getInstance();
-        Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
@@ -478,7 +475,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(result);
         assertNotNull(result.getTempos().get(1));
         assertNotNull(result.getTempos().get(1).getRemark());
-        assertThat(result.getTempos().get(1).getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
+        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        assertThat(result.getTempos().get(1).getRemark(), containsString(rmk));
     }
 
     @Test
@@ -490,11 +489,14 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
         // THEN the second tempo contains the remark.
         assertNotNull(result);
-        assertThat(result.getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
+        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        assertThat(result.getRemark(), containsString(rmk));
         String description = result.toString();
-        assertThat(description, containsString("starting day of the month=30"));
-        assertThat(description, containsString("starting hour of the day=10"));
-        assertThat(description, containsString("end day of the month=30"));
-        assertThat(description, containsString("end hour of the day=12"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.start.day.month") + "=30"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.start.hour.day") + "=10"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.end.day.month") + "=30"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.end.hour.day") + "=12"));
     }
+
 }

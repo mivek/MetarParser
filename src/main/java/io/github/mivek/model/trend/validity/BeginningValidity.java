@@ -1,5 +1,6 @@
 package io.github.mivek.model.trend.validity;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -28,7 +29,7 @@ public class BeginningValidity extends AbstractValidity {
     public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("starting minute", startMinutes).
+                append(Messages.getInstance().getString("ToString.start.minute"), startMinutes).
                 toString();
     }
 }

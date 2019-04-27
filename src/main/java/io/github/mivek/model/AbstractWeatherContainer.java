@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
@@ -171,14 +172,14 @@ public abstract class AbstractWeatherContainer {
         if (visibility != null) {
             builder.appendToString(visibility.toString());
         }
-        builder.append("vertical visibility (ft)", verticalVisibility).
-                append("clouds", clouds.toString()).
-                append("weather conditions", weatherConditions.toString());
+        builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility).
+                append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
+                append(Messages.getInstance().getString("ToString.weather.conditions"), weatherConditions.toString());
         if (windShear != null) {
             builder.appendToString(windShear.toString());
         }
-        builder.append("cavok", cavok).
-                append("remark", remark);
+        builder.append(Messages.getInstance().getString("ToString.cavok"), cavok).
+                append(Messages.getInstance().getString("ToString.remark"), remark);
         return builder.toString();
     }
 }

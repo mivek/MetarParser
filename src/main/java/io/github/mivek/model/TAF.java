@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.BECMGTafTrend;
 import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.PROBTafTrend;
@@ -145,7 +146,8 @@ public class TAF extends AbstractWeatherCode {
     }
 
     @Override public final String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append("probability", probability).append("amendment", amendment)
-                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(probs.toString()).toString();
+        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.probability"), probability)
+                .append(Messages.getInstance().getString("ToString.amendment"), amendment).appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString())
+                .appendToString(probs.toString()).toString();
     }
 }
