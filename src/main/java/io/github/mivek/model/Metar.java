@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.AbstractMetarTrend;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -139,13 +140,13 @@ public class Metar extends AbstractWeatherCode {
     @Override public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("temperature", temperature).
-                append("dew point", dewPoint).
-                append("altimeter (hPa)", altimeter).
-                append("nosig", nosig).
-                append("auto", auto).
-                append("runways information", runways.toString()).
-                append("trends", trends.toString()).
+                append(Messages.getInstance().getString("ToString.temperature"), temperature).
+                append(Messages.getInstance().getString("ToString.dew.point"), dewPoint).
+                append(Messages.getInstance().getString("ToString.altimeter"), altimeter).
+                append(Messages.getInstance().getString("ToString.nosig"), nosig).
+                append(Messages.getInstance().getString("ToString.auto"), auto).
+                append(Messages.getInstance().getString("ToString.runway.info"), runways.toString()).
+                append(Messages.getInstance().getString("ToString.trends"), trends.toString()).
                 toString();
     }
 }

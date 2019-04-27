@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -139,13 +140,13 @@ public class Wind {
     @Override
     public String toString() {
         return new ToStringBuilder(this).
-                append("speed", speed).
-                append("unit", unit).
-                append("direction", direction).
-                append("direction (degrees)", directionDegrees).
-                append("gusts", gust).
-                append("minimal wind variation", extreme1).
-                append("maximal wind variation", extreme2).
+                append(Messages.getInstance().getString("ToString.wind.speed"), speed).
+                append(Messages.getInstance().getString("ToString.wind.unit"), unit).
+                append(Messages.getInstance().getString("ToString.wind.direction"), direction).
+                append(Messages.getInstance().getString("ToString.wind.direction.degrees"), directionDegrees).
+                append(Messages.getInstance().getString("ToString.wind.gusts"), gust).
+                append(Messages.getInstance().getString("ToString.wind.min.variation"), extreme1).
+                append(Messages.getInstance().getString("ToString.wind.max.variation"), extreme2).
                 toString();
     }
 }

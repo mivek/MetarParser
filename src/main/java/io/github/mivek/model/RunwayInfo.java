@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -83,10 +84,10 @@ public class RunwayInfo {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("name", name).
-                append("min visibility", minRange).
-                append("max visibility", maxRange).
-                append("trend", trend).
+                append(Messages.getInstance().getString("ToString.name"), name).
+                append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
+                append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
+                append(Messages.getInstance().getString("ToString.trend"), trend).
                 toString();
 
     }
