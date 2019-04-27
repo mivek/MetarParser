@@ -1,6 +1,7 @@
 package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.trend.validity.AbstractValidity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -92,9 +93,9 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
                 appendToString(validity.toString()).
-                append("probability", probability).
-                append("maximum temperature", maxTemperature).
-                append("minimum temperature", minTemperature).
+                append(Messages.getInstance().getString("ToString.probability"), probability).
+                append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature).
+                append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).
                 toString();
     }
 }

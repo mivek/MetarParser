@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalTime;
@@ -82,11 +83,11 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     @Override
     public String toString() {
         return new ToStringBuilder(this).
-                append("day of the month", day).
-                append("time of report", time).
-                append("airport", airport).
+                append(Messages.getInstance().getString("ToString.day.month"), day).
+                append(Messages.getInstance().getString("ToString.report.time"), time).
+                append(Messages.getInstance().getString("ToString.airport"), airport).
                 appendSuper(super.toString()).
-                append("original message", message).
+                append(Messages.getInstance().getString("ToString.message"), message).
                 toString();
     }
 }

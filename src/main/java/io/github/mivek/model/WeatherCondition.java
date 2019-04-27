@@ -3,6 +3,7 @@ package io.github.mivek.model;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
@@ -86,9 +87,9 @@ public class WeatherCondition {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("intensity", intensity).
-                append("descriptive", descriptive).
-                append("phenomenons", phenomenons.toString()).
+                append(Messages.getInstance().getString("ToString.intensity"), intensity).
+                append(Messages.getInstance().getString("ToString.descriptive"), descriptive).
+                append(Messages.getInstance().getString("ToString.phenomenons"), phenomenons.toString()).
                 toString();
     }
 }

@@ -1,19 +1,15 @@
-/**
- *
- */
 package io.github.mivek.parser;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
+import io.github.mivek.model.AbstractWeatherCode;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import io.github.mivek.model.AbstractWeatherCode;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author mivek
@@ -56,10 +52,4 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
     protected abstract T getWeatherCode();
 
     protected abstract AbstractParser<T> getSut();
-    // protected T abstract getWeatherCode() {
-    // Metar m = new Metar();
-    // m.setVisibility(new Visibility());
-    // m.setWind(new Wind());
-    // return m;
-    // }
 }

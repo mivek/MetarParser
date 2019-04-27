@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -28,7 +29,7 @@ public class WindShear extends Wind {
     public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("height (feet)", height).
+                append(Messages.getInstance().getString("ToString.height.feet"), height).
                 toString();
     }
 }

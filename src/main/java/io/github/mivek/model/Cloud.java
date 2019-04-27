@@ -2,6 +2,7 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -88,10 +89,10 @@ public class Cloud {
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("quantity", quantity).
-                append("type", type).
-                append("height (ft)", height).
-                append("height (m)", getAltitude()).
+                append(Messages.getInstance().getString("ToString.quantity"), quantity).
+                append(Messages.getInstance().getString("ToString.type"), type).
+                append(Messages.getInstance().getString("ToString.height.feet"), height).
+                append(Messages.getInstance().getString("ToString.height.meter"), getAltitude()).
                 toString();
     }
 }
