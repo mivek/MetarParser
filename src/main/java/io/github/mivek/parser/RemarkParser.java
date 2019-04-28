@@ -1,11 +1,11 @@
 package io.github.mivek.parser;
 
+import io.github.mivek.internationalization.Messages;
+import io.github.mivek.utils.Regex;
+
 import java.util.MissingResourceException;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
-
-import io.github.mivek.internationalization.Messages;
-import io.github.mivek.utils.Regex;
 
 /**
  * @author mivek
@@ -175,11 +175,15 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
             } else if (Regex.find(OBSCURATION, rmk)) {
                 String[] obscuration = Regex.pregMatch(OBSCURATION, rmk);
-                String layer = fMessages.getString("CloudQuantity." + obscuration[2]);
-                int height = Integer.parseInt(obscuration[3]) * 100;
-                String obscDetail = fMessages.getString("Phenomenon." + obscuration[1]);
-                sb.append(fMessages.getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
-                rmk = rmk.replaceFirst(OBSCURATION.pattern(), "").trim();
+                try {
+                    String layer = fMessages.getString("CloudQuantity." + obscuration[2]);
+                    int height = Integer.parseInt(obscuration[3]) * 100;
+                    String obscDetail = fMessages.getString("Phenomenon." + obscuration[1]);
+                    sb.append(fMessages.getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
+                    rmk = rmk.replaceFirst(OBSCURATION.pattern(), "").trim();
+                } catch (MissingResourceException mre) {
+                    rmk = defaultRemark(rmk, sb);
+                }
             } else if (Regex.find(VARIABLE_SKY_HEIGHT, rmk)) {
                 String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, rmk);
                 String layer1 = fMessages.getString("CloudQuantity." + variableSky[1]);
@@ -201,11 +205,11 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
             } else if (Regex.find(SEAL_LEVEL_PRESSURE, rmk)) {
                 String[] sealevelParts = Regex.pregMatch(SEAL_LEVEL_PRESSURE, rmk);
-                String pressure = "";
-                if (sealevelParts[1].startsWith("1")) {
-                    pressure = "10";
-                } else if (sealevelParts[1].startsWith("9")) {
+                String pressure;
+                if (sealevelParts[1].startsWith("9")) {
                     pressure = "9";
+                } else {
+                    pressure = "10";
                 }
                 pressure = pressure + sealevelParts[1] + "." + sealevelParts[2];
                 sb.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
@@ -215,18 +219,31 @@ public final class RemarkParser {
                 sb.append(fMessages.getString("Remark.Snow.Increasing.Rapidly", snowParts[1], snowParts[2])).append(" ");
                 rmk = rmk.replaceFirst(SNOW_INCR_RAPIDLY.pattern(), "").trim();
             } else {
-                String[] strSlit = rmk.split(" ", 2);
-                String token = strSlit[0];
-                try {
-                    token = fMessages.getString("Remark." + token);
-                } catch (MissingResourceException e) {
-                    LOGGER.info("Remark token \"" + token + "\" is unknown.");
-                }
-                sb.append(token).append(" ");
-                rmk = strSlit.length == 1 ? "" : strSlit[1];
+                rmk = defaultRemark(rmk, sb);
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * Handle the default behavior when a remark token is not recognized by regex.
+     *
+     * @param pRmk the remark string
+     * @param pSb  The string builder containing the parsed message of the remark
+     * @return the remark string.
+     */
+    private String defaultRemark(final String pRmk, final StringBuilder pSb) {
+        String rmk = pRmk;
+        String[] strSlit = rmk.split(" ", 2);
+        String token = strSlit[0];
+        try {
+            token = fMessages.getString("Remark." + token);
+        } catch (MissingResourceException e) {
+            LOGGER.info("Remark token \"" + token + "\" is unknown.");
+        }
+        pSb.append(token).append(" ");
+        rmk = strSlit.length == 1 ? "" : strSlit[1];
+        return rmk;
     }
 
     /**
