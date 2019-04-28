@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class RemarkParserTest {
-    RemarkParser sut;
+    private RemarkParser sut;
 
     @Before public void setUp() {
         sut = RemarkParser.getInstance();
