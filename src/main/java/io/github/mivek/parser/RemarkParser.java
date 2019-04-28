@@ -225,8 +225,16 @@ public final class RemarkParser {
         return sb.toString();
     }
 
-    private String defaultRemark(String pRmk, final StringBuilder pSb) {
-        String[] strSlit = pRmk.split(" ", 2);
+    /**
+     * Handle the default behavior when a remark token is not recognized by regex.
+     *
+     * @param pRmk the remark string
+     * @param pSb  The string builder containing the parsed message of the remark
+     * @return the remark string.
+     */
+    private String defaultRemark(final String pRmk, final StringBuilder pSb) {
+        String rmk = pRmk;
+        String[] strSlit = rmk.split(" ", 2);
         String token = strSlit[0];
         try {
             token = fMessages.getString("Remark." + token);
@@ -234,8 +242,8 @@ public final class RemarkParser {
             LOGGER.info("Remark token \"" + token + "\" is unknown.");
         }
         pSb.append(token).append(" ");
-        pRmk = strSlit.length == 1 ? "" : strSlit[1];
-        return pRmk;
+        rmk = strSlit.length == 1 ? "" : strSlit[1];
+        return rmk;
     }
 
     /**
