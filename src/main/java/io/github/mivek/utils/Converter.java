@@ -1,8 +1,8 @@
 package io.github.mivek.utils;
 
-import java.time.LocalTime;
-
 import io.github.mivek.internationalization.Messages;
+
+import java.time.LocalTime;
 
 /**
  * This class is used to convert data.
@@ -10,38 +10,22 @@ import io.github.mivek.internationalization.Messages;
  */
 public final class Converter {
 
-    /**
-     * North East minimal degrees.
-     */
-    protected static final double NORTH_EAST_MIN = 22.5;
-    /**
-     * North east maximal degrees.
-     */
-    protected static final double NORTH_EAST_MAX = 67.5;
-    /**
-     * East degrees.
-     */
-    protected static final double EAST = 112.5;
-    /**
-     * South East degrees.
-     */
-    protected static final double SOUTH_EAST = 157.5;
-    /**
-     * South degrees.
-     */
-    protected static final double SOUTH = 202.5;
-    /**
-     * North West degrees.
-     */
-    protected static final double NORTH_WEST = 337.5;
-    /**
-     * West degrees.
-     */
-    protected static final double WEST = 292.5;
-    /**
-     * South west degrees.
-     */
-    protected static final double SOUTH_WEST = 247.5;
+    /** North East minimal degrees. */
+    private static final double NORTH_EAST_MIN = 22.5;
+    /** North east maximal degrees. */
+    private static final double NORTH_EAST_MAX = 67.5;
+    /** East degrees. */
+    private static final double EAST = 112.5;
+    /** South East degrees. */
+    private static final double SOUTH_EAST = 157.5;
+    /** South degrees. */
+    private static final double SOUTH = 202.5;
+    /** North West degrees. */
+    private static final double NORTH_WEST = 337.5;
+    /** West degrees. */
+    private static final double WEST = 292.5;
+    /** South west degrees. */
+    private static final double SOUTH_WEST = 247.5;
 
     /**
      * Private constructor.
@@ -55,8 +39,8 @@ public final class Converter {
      * @return A string for the direction.
      */
     public static String degreesToDirection(final String pDegreesStr) {
-        double degrees = 0;
-        String res = "";
+        double degrees;
+        String res;
         try {
             degrees = Double.parseDouble(pDegreesStr);
         } catch (NumberFormatException e) {
@@ -97,7 +81,7 @@ public final class Converter {
      * The maximum value, exluded.
      * @return true if num is between lower and max, false otherwise.
      */
-    public static boolean isBetween(final double pNum, final double pLower, final double pMax) {
+    static boolean isBetween(final double pNum, final double pLower, final double pMax) {
         return pLower <= pNum && pMax > pNum;
     }
 
