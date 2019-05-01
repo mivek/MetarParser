@@ -17,21 +17,21 @@ public final class RemarkParser {
     private static final Logger LOGGER = Logger.getLogger(RemarkParser.class.getName());
 
     /** Wind peak pattern. */
-    private static final Pattern WIND_PEAK = Pattern.compile("^PK WND (\\d{3})(\\d{2,3})\\/(\\d{2})?(\\d{2})");
+    private static final Pattern WIND_PEAK = Pattern.compile("^PK WND (\\d{3})(\\d{2,3})/(\\d{2})?(\\d{2})");
     /** Wind shift pattern. */
     private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})");
     /** Wind shift fopa pattern. */
     private static final Pattern WIND_SHIFT_FROPA = Pattern.compile("^WSHFT (\\d{2})?(\\d{2}) FROPA");
     /** Tower visibility. */
-    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?\\/?\\d))");
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?/?\\d))");
     /** Surface visibility. */
-    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?(\\d?\\/?\\d))");
+    private static final Pattern SURFACE_VISIBILITY = Pattern.compile("^SFC VIS ((\\d)*( )?(\\d?/?\\d))");
     /** Variable prevailing visibility. */
-    private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d))V((\\d)*( )?(\\d?\\/?\\d))");
+    private static final Pattern VARIABLE_PREVAILING_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?/?\\d))V((\\d)*( )?(\\d?/?\\d))");
     /** Sector visibility. */
-    private static final Pattern SECTOR_VISIBILITY = Pattern.compile("^VIS ([A-Z]{1,2}) ((\\d)*( )?(\\d?\\/?\\d))");
+    private static final Pattern SECTOR_VISIBILITY = Pattern.compile("^VIS ([A-Z]{1,2}) ((\\d)*( )?(\\d?/?\\d))");
     /** Visibility at second location. */
-    private static final Pattern SECOND_LOCATION_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?\\/?\\d)) (\\w+)");
+    private static final Pattern SECOND_LOCATION_VISIBILITY = Pattern.compile("^VIS ((\\d)*( )?(\\d?/?\\d)) (\\w+)");
     /** Tornadic activity with beginning time. */
     private static final Pattern TORNADIC_ACTIVITY_BEGINNING = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (B(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
     /** Tornadic activity with ending time. */
@@ -45,9 +45,9 @@ public final class RemarkParser {
     /** Thunderstorm location. */
     private static final Pattern THUNDERSTORM_LOCATION = Pattern.compile("^TS ([A-Z]{2})");
     /** Hail size less than. */
-    private static final Pattern HAIL_SIZE_LESS_THAN = Pattern.compile("^GR LESS THAN ((\\d )?(\\d\\/\\d)?)");
+    private static final Pattern HAIL_SIZE_LESS_THAN = Pattern.compile("^GR LESS THAN ((\\d )?(\\d/\\d)?)");
     /** Hail size. */
-    private static final Pattern HAIL_SIZE = Pattern.compile("^GR ((\\d\\/\\d)|((\\d) ?(\\d\\/\\d)?))");
+    private static final Pattern HAIL_SIZE = Pattern.compile("^GR ((\\d/\\d)|((\\d) ?(\\d/\\d)?))");
     /** Snow pellets intensity. */
     private static final Pattern SNOW_PELLETS_INTENSITY = Pattern.compile("^GS (LGT|MOD|HVY)");
     /** Virga with direction. */
@@ -65,7 +65,7 @@ public final class RemarkParser {
     /** Sea level pressure. */
     private static final Pattern SEAL_LEVEL_PRESSURE = Pattern.compile("^SLP(\\d{2})(\\d)");
     /** Snow increasing rapidly. */
-    private static final Pattern SNOW_INCR_RAPIDLY = Pattern.compile("^SNINCR (\\d+)\\/(\\d+)");
+    private static final Pattern SNOW_INCR_RAPIDLY = Pattern.compile("^SNINCR (\\d+)/(\\d+)");
 
     /** Message instance. */
     private final Messages fMessages;
@@ -127,8 +127,9 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_BEGINNING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, rmk);
-                sb.append(fMessages.getString("Remark.Tornadic.Activity.Beginning", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]),
-                        tornadicParts[4], tornadicParts[6], fMessages.getString("Converter." + tornadicParts[7]))).append(" ");
+                sb.append(fMessages
+                        .getString("Remark.Tornadic.Activity.Beginning", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4],
+                                tornadicParts[6], fMessages.getString("Converter." + tornadicParts[7]))).append(" ");
                 rmk = rmk.replaceFirst(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
             } else if (Regex.find(TORNADIC_ACTIVITY_ENDING, rmk)) {
                 String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, rmk);
@@ -145,7 +146,7 @@ public final class RemarkParser {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION_MOVING, rmk);
                 sb.append(
                         fMessages.getString("Remark.Thunderstorm.Location.Moving", fMessages.getString("Converter." + thunderStormParts[1]), fMessages.getString("Converter." + thunderStormParts[2])))
-                .append(" ");
+                        .append(" ");
                 rmk = rmk.replaceFirst(THUNDERSTORM_LOCATION_MOVING.pattern(), "").trim();
             } else if (Regex.find(THUNDERSTORM_LOCATION, rmk)) {
                 String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, rmk);
@@ -205,13 +206,13 @@ public final class RemarkParser {
                 rmk = rmk.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
             } else if (Regex.find(SEAL_LEVEL_PRESSURE, rmk)) {
                 String[] sealevelParts = Regex.pregMatch(SEAL_LEVEL_PRESSURE, rmk);
-                String pressure;
+                StringBuilder pressure = new StringBuilder();
                 if (sealevelParts[1].startsWith("9")) {
-                    pressure = "9";
+                    pressure.append("9");
                 } else {
-                    pressure = "10";
+                    pressure.append("10");
                 }
-                pressure = pressure + sealevelParts[1] + "." + sealevelParts[2];
+                pressure.append(sealevelParts[1]).append(".").append(sealevelParts[2]);
                 sb.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
                 rmk = rmk.replaceFirst(SEAL_LEVEL_PRESSURE.pattern(), "").trim();
             } else if (Regex.find(SNOW_INCR_RAPIDLY, rmk)) {
@@ -248,6 +249,7 @@ public final class RemarkParser {
 
     /**
      * Checks if the string is null.
+     *
      * @param pString the string to test
      * @return empty string if null pString otherwise.
      */

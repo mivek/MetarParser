@@ -1,9 +1,5 @@
 package io.github.mivek.parser;
 
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
@@ -18,6 +14,9 @@ import io.github.mivek.model.trend.validity.FMTime;
 import io.github.mivek.model.trend.validity.TLTime;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.regex.Pattern;
 
 /**
  * This controller contains methods that parse the metar code. This class is a
@@ -28,13 +27,13 @@ public final class MetarParser extends AbstractParser<Metar> {
     /** Instance of the class. */
     private static MetarParser instance = new MetarParser();
     /** Pattern regex for runway with min and max range visibility. */
-    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\d{4})V(\\d{3})(\\w{0,2})");
+    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\d{4})V(\\d{3})(\\w{0,2})");
     /** Pattern regex for runway visibility. */
-    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)\\/(\\w)?(\\d{4})(\\w{0,2})$");
+    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\w)?(\\d{4})(\\w{0,2})$");
     /** Pattern to recognize a runway. */
-    private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?\\/)");
+    private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?/)");
     /** Pattern of the temperature block. */
-    private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})\\/(M?\\d{2})$");
+    private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})/(M?\\d{2})$");
     /** Pattern of the altimeter (Pascals). */
     private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
     /** Pattern for the altimeter in inches of mercury. */
@@ -83,37 +82,37 @@ public final class MetarParser extends AbstractParser<Metar> {
         int metarTabLength = metarTab.length;
         for (int i = 2; i < metarTabLength; i++) {
             String[] matches;
-            if (generalParse(m, metarTab[i])) {
-                continue;
-            } else if ("NOSIG".equals(metarTab[i])) {
-                m.setNosig(true);
-            } else if ("AUTO".equals(metarTab[i])) {
-                m.setAuto(true);
-            } else if (RMK.equals(metarTab[i])) {
-                parseRMK(m, metarTab, i);
-            } else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
-                RunwayInfo ri = parseRunWayAction(metarTab[i]);
-                m.addRunwayInfo(ri);
-            } else if (Regex.find(TEMPERATURE_REGEX, metarTab[i])) {
-                matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]);
-                m.setTemperature(Converter.convertTemperature(matches[1]));
-                m.setDewPoint(Converter.convertTemperature(matches[2]));
-            } else if (Regex.find(ALTIMETER_REGEX, metarTab[i])) {
-                matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
-                m.setAltimeter(Integer.parseInt(matches[1]));
-            } else if (Regex.find(ALTIMETER_MERCURY_REGEX, metarTab[i])) {
-                matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, metarTab[i]);
-                double mercury = Double.parseDouble(matches[1]) / 100;
-                m.setAltimeter(Integer.valueOf((int) Converter.inchesMercuryToHPascal(mercury)));
-            } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
-                AbstractMetarTrend trend;
-                if (metarTab[i].equals(TEMPO)) {
-                    trend = new TEMPOMetarTrend();
-                } else {
-                    trend = new BECMGMetarTrend();
+            if (!generalParse(m, metarTab[i])) {
+                if ("NOSIG".equals(metarTab[i])) {
+                    m.setNosig(true);
+                } else if ("AUTO".equals(metarTab[i])) {
+                    m.setAuto(true);
+                } else if (RMK.equals(metarTab[i])) {
+                    parseRMK(m, metarTab, i);
+                } else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
+                    RunwayInfo ri = parseRunWayAction(metarTab[i]);
+                    m.addRunwayInfo(ri);
+                } else if (Regex.find(TEMPERATURE_REGEX, metarTab[i])) {
+                    matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]);
+                    m.setTemperature(Converter.convertTemperature(matches[1]));
+                    m.setDewPoint(Converter.convertTemperature(matches[2]));
+                } else if (Regex.find(ALTIMETER_REGEX, metarTab[i])) {
+                    matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
+                    m.setAltimeter(Integer.parseInt(matches[1]));
+                } else if (Regex.find(ALTIMETER_MERCURY_REGEX, metarTab[i])) {
+                    matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, metarTab[i]);
+                    double mercury = Double.parseDouble(matches[1]) / 100;
+                    m.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
+                } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
+                    AbstractMetarTrend trend;
+                    if (metarTab[i].equals(TEMPO)) {
+                        trend = new TEMPOMetarTrend();
+                    } else {
+                        trend = new BECMGMetarTrend();
+                    }
+                    i = iterTrend(i, trend, metarTab);
+                    m.addTrend(trend);
                 }
-                i = iterTrend(i, trend, metarTab);
-                m.addTrend(trend);
             }
         }
         return m;
