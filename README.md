@@ -4,6 +4,8 @@ Develop:
 [![Build Status](https://travis-ci.org/mivek/MetarParser.svg?branch=develop)](https://travis-ci.org/mivek/MetarParser)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
+
+![](jetbrains_small.png)
 # MetarParser
 
 
@@ -176,3 +178,5 @@ To change the locale use the method `setLocale(Locale)` of the class `Messages.j
 Messages.getInstance().setLocale(Locale.FRENCH); // Changes the locale to french.
 ```
 If you are willing to add a new locale please see [Contributing.md file](CONTRIBUTING.md).
+
+[Jetbrains](https://www.jetbrains.com/?from=metarParser) open source project.
