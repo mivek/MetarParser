@@ -32,14 +32,17 @@ script:
   # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
   - bash scripts/script.sh
 
-before_deploy: bash scripts/before_deploy.sh
+before_deploy:
+  - VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+  - bash scripts/before_deploy.sh ${VERSION}
 
 deploy:
   provider: releases
-  file: target/metarParser-$VERSION.jar
+  file: target/metarParser-${VERSION}.jar
   api_key:
     secure: $GITHUB_OATH
   skip_cleanup: true
   draft: true
+  name: ${VERSION}
   on:
     branch: master
