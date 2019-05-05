@@ -124,14 +124,16 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @return a object with parsed informations.
      */
     protected RunwayInfo parseRunWayAction(final String runWayPart) {
-        String[] matches;
         RunwayInfo ri = new RunwayInfo();
-        if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart))) {
+        String[] matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart);
+        if (ArrayUtils.isNotEmpty(matches)) {
             ri.setName(matches[1]);
             ri.setMinRange(Integer.parseInt(matches[3]));
             ri.setTrend(Converter.convertTrend(matches[4]));
             return ri;
-        } else if (ArrayUtils.isNotEmpty(matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart))) {
+        }
+        matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart);
+        if (ArrayUtils.isNotEmpty(matches)) {
             ri.setName(matches[1]);
             ri.setMinRange(Integer.parseInt(matches[2]));
             ri.setMaxRange(Integer.parseInt(matches[3]));
