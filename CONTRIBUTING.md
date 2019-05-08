@@ -21,8 +21,11 @@ If you want to add a new feature, open an issue describing the feature you want 
 *   Update the pom
     *   For a feature bump the minor version of the pom. Eg: 1.6.0 -> 1.7.0
     *   For a bug or a clean bump the patch version of the pom. Eg: 1.6.0 -> 1.6.1
+
 *   Update the README with the new version of the project
+
 *   Add new code and the tests
+
 *   Push code and create the pull request towards the master branch
 
 **Internationalization**
