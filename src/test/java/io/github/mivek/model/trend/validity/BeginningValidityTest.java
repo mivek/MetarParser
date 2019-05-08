@@ -1,5 +1,6 @@
 package io.github.mivek.model.trend.validity;
 
+import io.github.mivek.internationalization.Messages;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.containsString;
@@ -15,9 +16,9 @@ public class BeginningValidityTest {
         sut.setStartMinutes(20);
 
         String desc = sut.toString();
-        assertThat(desc, containsString("starting day of the month=10"));
-        assertThat(desc, containsString("starting hour of the day=15"));
-        assertThat(desc, containsString("starting minute=20"));
+        assertThat(desc, containsString(Messages.getInstance().getString("ToString.start.day.month") + "=10"));
+        assertThat(desc, containsString(Messages.getInstance().getString("ToString.start.hour.day") + "=15"));
+        assertThat(desc, containsString(Messages.getInstance().getString("ToString.start.minute") + "=20"));
 
     }
 }

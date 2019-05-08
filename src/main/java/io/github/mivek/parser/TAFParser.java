@@ -1,22 +1,18 @@
 package io.github.mivek.parser;
 
-import java.util.regex.Pattern;
-
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.Visibility;
-import io.github.mivek.model.trend.AbstractTafTrend;
-import io.github.mivek.model.trend.BECMGTafTrend;
-import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.PROBTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
@@ -198,7 +194,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param pParts the array of string.
      * @param pChange the abstractWeatherChange to update.
      */
-    protected void iterChanges(final int pIndex, final String[] pParts, final AbstractTafTrend<Validity> pChange) {
+    private void iterChanges(final int pIndex, final String[] pParts, final AbstractTafTrend<Validity> pChange) {
         for (int i = pIndex; i < pParts.length; i++) {
             if (RMK.equals(pParts[i])) {
                 parseRMK(pChange, pParts, i);

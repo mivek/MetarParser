@@ -227,6 +227,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         AbstractMetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertEquals(Phenomenon.RAIN, wc.getPhenomenons().get(0));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(trend.getTimes(), hasSize(2));
         assertEquals(TimeIndicator.FM, trend.getTimes().get(0).getType());
@@ -235,6 +236,11 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(TimeIndicator.TL, trend.getTimes().get(1).getType());
         assertEquals(18, trend.getTimes().get(1).getTime().getHour());
         assertEquals(30, trend.getTimes().get(1).getTime().getMinute());
+        String toString = m.toString();
+        assertThat(toString, containsString(Messages.getInstance().getString("WeatherChangeType.FM") + " 17:00"));
+        assertThat(toString, containsString(Messages.getInstance().getString("TimeIndicator.TL") + " 18:30"));
+        assertThat(toString, containsString(Descriptive.SHOWERS.toString()));
+        assertThat(toString, containsString(Phenomenon.RAIN.toString()));
     }
 
     @Test
@@ -259,9 +265,9 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("w", v.getMinDirection());
         String des = m.toString();
 
-        assertThat(des, containsString("day of the month=16"));
-        assertThat(des, containsString("time of report=14:30"));
-        assertThat(des, containsString("direction (degrees)=240"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.day.month") + "=16"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.report.time") + "=14:30"));
+        assertThat(des, containsString(Messages.getInstance().getString("ToString.wind.direction.degrees") + "=240"));
     }
 
     @Test
@@ -302,7 +308,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(Phenomenon.FOG, m.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertNotNull(m.getVerticalVisibility());
         assertEquals(200, m.getVerticalVisibility().intValue());
-        assertThat(m.toString(), containsString("main visibility=350m"));
+        assertThat(m.toString(), containsString(Messages.getInstance().getString("ToString.visibility.main") + "=350m"));
     }
 
     @Test
@@ -351,4 +357,5 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
+
 }

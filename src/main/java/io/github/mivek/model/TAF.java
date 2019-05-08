@@ -1,13 +1,15 @@
 package io.github.mivek.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.BECMGTafTrend;
 import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.PROBTafTrend;
 import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.Validity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class representing a TAF.
@@ -15,64 +17,64 @@ import io.github.mivek.model.trend.validity.Validity;
  */
 public class TAF extends AbstractWeatherCode {
     /** The valididty of the TAF. */
-    private Validity fValidity;
+    private Validity validity;
     /** List of BECMG changes. */
-    private List<BECMGTafTrend> fBECMGs;
+    private List<BECMGTafTrend> bECMGs;
     /** List of From changes. */
-    private List<FMTafTrend> fFMs;
+    private List<FMTafTrend> fMs;
     /** List of Tempos changes. */
-    private List<TEMPOTafTrend> fTempos;
+    private List<TEMPOTafTrend> tempos;
     /** List of probability changes. */
-    private List<PROBTafTrend> fProbs;
+    private List<PROBTafTrend> probs;
     /** Probability of the metar. */
-    private Integer fProbability;
+    private Integer probability;
     /**Indicate if the taf event is ameded.*/
-    private boolean fAmendment;
+    private boolean amendment;
 
     /**
      * Constructor.
      */
     public TAF() {
         super();
-        fBECMGs = new ArrayList<>();
-        fFMs = new ArrayList<>();
-        fTempos = new ArrayList<>();
-        fProbs = new ArrayList<>();
+        bECMGs = new ArrayList<>();
+        fMs = new ArrayList<>();
+        tempos = new ArrayList<>();
+        probs = new ArrayList<>();
     }
 
     /**
      * @return the validity
      */
     public Validity getValidity() {
-        return fValidity;
+        return validity;
     }
 
     /**
      * @param pValidity the validity to set
      */
     public void setValidity(final Validity pValidity) {
-        fValidity = pValidity;
+        validity = pValidity;
     }
 
     /**
      * @return the bECMGs
      */
     public List<BECMGTafTrend> getBECMGs() {
-        return fBECMGs;
+        return bECMGs;
     }
 
     /**
      * @return the fMs
      */
     public List<FMTafTrend> getFMs() {
-        return fFMs;
+        return fMs;
     }
 
     /**
      * @return the probs
      */
     public List<PROBTafTrend> getProbs() {
-        return fProbs;
+        return probs;
     }
 
     /**
@@ -80,7 +82,7 @@ public class TAF extends AbstractWeatherCode {
      * @param pChange the change to add.
      */
     public void addTempo(final TEMPOTafTrend pChange) {
-        fTempos.add(pChange);
+        tempos.add(pChange);
     }
 
     /**
@@ -88,14 +90,14 @@ public class TAF extends AbstractWeatherCode {
      * @param pChange the change to add.
      */
     public void addProb(final PROBTafTrend pChange) {
-        fProbs.add(pChange);
+        probs.add(pChange);
     }
 
     /**
      * @return the probability
      */
     public Integer getProbability() {
-        return fProbability;
+        return probability;
     }
 
     /**
@@ -103,7 +105,7 @@ public class TAF extends AbstractWeatherCode {
      * the probability to set
      */
     public void setProbability(final Integer pProbability) {
-        fProbability = pProbability;
+        probability = pProbability;
     }
 
     /**
@@ -111,7 +113,7 @@ public class TAF extends AbstractWeatherCode {
      * @param pChange the change to add.
      */
     public void addBECMG(final BECMGTafTrend pChange) {
-        fBECMGs.add(pChange);
+        bECMGs.add(pChange);
     }
 
     /**
@@ -119,27 +121,33 @@ public class TAF extends AbstractWeatherCode {
      * @param pChange the change to add.
      */
     public void addFM(final FMTafTrend pChange) {
-        fFMs.add(pChange);
+        fMs.add(pChange);
     }
 
     /**
      * @return the tempos
      */
     public List<TEMPOTafTrend> getTempos() {
-        return fTempos;
+        return tempos;
     }
 
     /**
      * @return the amendment
      */
     public boolean isAmendment() {
-        return fAmendment;
+        return amendment;
     }
 
     /**
      * @param pAmendment the amendment to set
      */
     public void setAmendment(final boolean pAmendment) {
-        fAmendment = pAmendment;
+        amendment = pAmendment;
+    }
+
+    @Override public final String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.probability"), probability)
+                .append(Messages.getInstance().getString("ToString.amendment"), amendment).appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString())
+                .appendToString(probs.toString()).toString();
     }
 }

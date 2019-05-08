@@ -1,5 +1,6 @@
 package io.github.mivek.model.trend.validity;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -10,38 +11,40 @@ public abstract class AbstractValidity implements IValidity {
     /**
      * Beginning day of the taf's validity.
      */
-    private Integer fStartDay;
+    private Integer startDay;
     /**
      * Beginning hour of the taf's validity.
      */
-    private Integer fStartHour;
+    private Integer startHour;
 
 
     @Override
     public final Integer getStartDay() {
-        return fStartDay;
+        return startDay;
     }
 
     @Override
     public final void setStartDay(final Integer pStartDay) {
-        fStartDay = pStartDay;
+        startDay = pStartDay;
     }
 
     @Override
     public final Integer getStartHour() {
-        return fStartHour;
+        return startHour;
     }
 
     @Override
     public final void setStartHour(final Integer pStartHour) {
-        fStartHour = pStartHour;
+        startHour = pStartHour;
     }
 
-    @Override
-    public String toString() {
+    /**
+     * @return a string describing the object.
+     */
+    @Override public String toString() {
         return new ToStringBuilder(this).
-                append("starting day of the month", fStartDay).
-                append("starting hour of the day", fStartHour).
+                append(Messages.getInstance().getString("ToString.start.day.month"), startDay).
+                append(Messages.getInstance().getString("ToString.start.hour.day"), startHour).
                 toString();
     }
 

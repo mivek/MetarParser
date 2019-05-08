@@ -4,38 +4,37 @@ cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+
 addons:
   sonarcloud:
     organization: "mivek-github"
     token:
       secure: $SONARCLOUD_TOKEN
 
-jobs:
-  include:
-    - if: branch in (develop, master)
-      jdk: oraclejdk8
-    - if: branch = develop
-      jdk: openjdk8
+jdk: oraclejdk8
 
 before_install:
-  # Retrieve keys only if building branch is either develop or master and not a pull request
+  # Retrieve keys only if build is not on a pull request
   - bash scripts/before_install.sh
 
 install:
   - mvn compile test-compile
   
 script:
-  # If the branch is either develop or master then the deploy goal is used otherwise the maven install is used
+  # If the branch is master then the deploy goal is used otherwise the maven install is used
   - bash scripts/script.sh
 
-before_deploy: bash scripts/before_deploy.sh
+before_deploy:
+  - VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+  - bash scripts/before_deploy.sh ${VERSION}
 
 deploy:
   provider: releases
-  file: target/metarParser-$version.jar
+  file: target/metarParser-${VERSION}.jar
   api_key:
     secure: $GITHUB_OATH
   skip_cleanup: true
   draft: true
+  name: ${VERSION}
   on:
     branch: master

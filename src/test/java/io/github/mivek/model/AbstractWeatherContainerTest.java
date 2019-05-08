@@ -3,14 +3,11 @@
  */
 package io.github.mivek.model;
 
+import org.junit.Test;
+
 import static org.hamcrest.Matchers.empty;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-
-import org.junit.Test;
-
-import io.github.mivek.model.AbstractWeatherContainer;
-import io.github.mivek.model.Metar;
 
 /**
  * Test class for {@link AbstractWeatherContainer}.

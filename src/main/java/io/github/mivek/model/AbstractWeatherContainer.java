@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
@@ -10,70 +11,70 @@ import java.util.List;
  */
 public abstract class AbstractWeatherContainer {
     /** The wind. */
-    private Wind fWind;
+    private Wind wind;
     /** The visibility. */
-    private Visibility fVisibility;
+    private Visibility visibility;
     /** The list of clouds. */
-    private List<Cloud> fClouds;
+    private List<Cloud> clouds;
     /** The list of weatherConditions. */
-    private List<WeatherCondition> fWeatherConditions;
+    private List<WeatherCondition> weatherConditions;
     /** the vertical Visibility in feet. */
-    private Integer fVerticalVisibility;
+    private Integer verticalVisibility;
     /** The wind shear. */
-    private WindShear fWindShear;
+    private WindShear windShear;
     /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
-    private boolean fCavok;
+    private boolean cavok;
     /**Contains the remarks.*/
-    private String fRemark;
+    private String remark;
 
     /**
      * Constructor to initialize the lists.
      */
     public AbstractWeatherContainer() {
-        fClouds = new ArrayList<>();
-        fWeatherConditions = new ArrayList<>();
+        clouds = new ArrayList<>();
+        weatherConditions = new ArrayList<>();
     }
 
     /**
      * @return the wind
      */
     public final Wind getWind() {
-        return fWind;
+        return wind;
     }
 
     /**
      * @param pWind the wind element to set.
      */
     public final void setWind(final Wind pWind) {
-        fWind = pWind;
+        wind = pWind;
     }
 
     /**
      * @return the visibility
      */
     public final Visibility getVisibility() {
-        return fVisibility;
+        return visibility;
     }
 
     /**
      * @param pVisibility the visibility to set
      */
     public final void setVisibility(final Visibility pVisibility) {
-        fVisibility = pVisibility;
+        visibility = pVisibility;
     }
 
     /**
      * @return the clouds
      */
     public final List<Cloud> getClouds() {
-        return fClouds;
+        return clouds;
     }
 
     /**
      * @return the weatherConditions
      */
     public final List<WeatherCondition> getWeatherConditions() {
-        return fWeatherConditions;
+        return weatherConditions;
     }
 
     /**
@@ -85,7 +86,7 @@ public abstract class AbstractWeatherContainer {
         if (pCloud == null) {
             return false;
         }
-        fClouds.add(pCloud);
+        clouds.add(pCloud);
         return true;
     }
 
@@ -99,7 +100,7 @@ public abstract class AbstractWeatherContainer {
         if (pWeatherCondition == null) {
             return false;
         }
-        fWeatherConditions.add(pWeatherCondition);
+        weatherConditions.add(pWeatherCondition);
         return true;
     }
 
@@ -107,56 +108,56 @@ public abstract class AbstractWeatherContainer {
      * @return the verticalVisibility in feet.
      */
     public Integer getVerticalVisibility() {
-        return fVerticalVisibility;
+        return verticalVisibility;
     }
 
     /**
      * @param pVerticalVisibility the verticalVisibility to set
      */
     public void setVerticalVisibility(final Integer pVerticalVisibility) {
-        fVerticalVisibility = pVerticalVisibility;
+        verticalVisibility = pVerticalVisibility;
     }
 
     /**
      * @return the windShear
      */
     public WindShear getWindShear() {
-        return fWindShear;
+        return windShear;
     }
 
     /**
      * @param pWindShear the windShear to set
      */
     public void setWindShear(final WindShear pWindShear) {
-        fWindShear = pWindShear;
+        windShear = pWindShear;
     }
 
     /**
      * @return the cavok
      */
     public boolean isCavok() {
-        return fCavok;
+        return cavok;
     }
 
     /**
      * @param pCavok the cavok to set
      */
     public void setCavok(final boolean pCavok) {
-        fCavok = pCavok;
+        cavok = pCavok;
     }
 
     /**
      * @return the remark
      */
     public String getRemark() {
-        return fRemark;
+        return remark;
     }
 
     /**
      * @param pRemark the remark to set
      */
     public void setRemark(final String pRemark) {
-        fRemark = pRemark;
+        remark = pRemark;
     }
 
     /**
@@ -165,20 +166,20 @@ public abstract class AbstractWeatherContainer {
     @Override
     public String toString() {
         ToStringBuilder builder = new ToStringBuilder(this);
-        if (fWind != null) {
-            builder.appendToString(fWind.toString());
+        if (wind != null) {
+            builder.appendToString(wind.toString());
         }
-        if (fVisibility != null) {
-            builder.appendToString(fVisibility.toString());
+        if (visibility != null) {
+            builder.appendToString(visibility.toString());
         }
-        builder.append("vertical visibility (ft)", fVerticalVisibility).
-                append("clouds", fClouds.toString()).
-                append("weather conditions", fWeatherConditions.toString());
-        if (fWindShear != null) {
-            builder.appendToString(fWindShear.toString());
+        builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility).
+                append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
+                append(Messages.getInstance().getString("ToString.weather.conditions"), weatherConditions.toString());
+        if (windShear != null) {
+            builder.appendToString(windShear.toString());
         }
-        builder.append("cavok", fCavok).
-                append("remark", fRemark);
+        builder.append(Messages.getInstance().getString("ToString.cavok"), cavok).
+                append(Messages.getInstance().getString("ToString.remark"), remark);
         return builder.toString();
     }
 }

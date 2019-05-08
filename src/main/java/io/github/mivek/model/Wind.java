@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -9,26 +10,26 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class Wind {
     /** Speed of the wind. */
-    private int fSpeed;
+    private int speed;
     /** Direction of the wind. */
-    private String fDirection;
+    private String direction;
     /** Direction of the wind. */
-    private Integer fDirectionDegrees;
+    private Integer directionDegrees;
     /** The speed of the gust. */
-    private int fGust;
+    private int gust;
     /** The minimal variation of the wind. */
-    private int fExtreme1;
+    private int extreme1;
     /** The maximum variation of the wind. */
-    private int fExtreme2;
+    private int extreme2;
     /** The unit of the speed. */
-    private String fUnit;
+    private String unit;
 
     /**
      * Getter of the speed.
      * @return the speed.
      */
     public int getSpeed() {
-        return fSpeed;
+        return speed;
     }
 
     /**
@@ -36,7 +37,7 @@ public class Wind {
      * @param pSpeed the speed to set.
      */
     public void setSpeed(final int pSpeed) {
-        fSpeed = pSpeed;
+        speed = pSpeed;
     }
 
     /**
@@ -44,7 +45,7 @@ public class Wind {
      * @return The Direction of the wind.
      */
     public String getDirection() {
-        return fDirection;
+        return direction;
     }
 
     /**
@@ -52,7 +53,7 @@ public class Wind {
      * @param pDirection the direction to set.
      */
     public void setDirection(final String pDirection) {
-        fDirection = pDirection;
+        direction = pDirection;
     }
 
     /**
@@ -60,7 +61,7 @@ public class Wind {
      * @return the gust.
      */
     public int getGust() {
-        return fGust;
+        return gust;
     }
 
     /**
@@ -68,7 +69,7 @@ public class Wind {
      * @param pGust the gust to set.
      */
     public void setGust(final int pGust) {
-        fGust = pGust;
+        gust = pGust;
     }
 
     /**
@@ -76,7 +77,7 @@ public class Wind {
      * @return the minimal variation of the wind.
      */
     public int getExtreme1() {
-        return fExtreme1;
+        return extreme1;
     }
 
     /**
@@ -84,7 +85,7 @@ public class Wind {
      * @param pExtreme1 the minimal wind variation to set.
      */
     public void setExtreme1(final int pExtreme1) {
-        fExtreme1 = pExtreme1;
+        extreme1 = pExtreme1;
     }
 
     /**
@@ -92,7 +93,7 @@ public class Wind {
      * @return the wind variation.
      */
     public int getExtreme2() {
-        return fExtreme2;
+        return extreme2;
     }
 
     /**
@@ -100,7 +101,7 @@ public class Wind {
      * @param pExtreme2 the wind variation to set.
      */
     public void setExtreme2(final int pExtreme2) {
-        fExtreme2 = pExtreme2;
+        extreme2 = pExtreme2;
     }
 
     /**
@@ -108,7 +109,7 @@ public class Wind {
      * @return the unit.
      */
     public String getUnit() {
-        return fUnit;
+        return unit;
     }
 
     /**
@@ -116,21 +117,21 @@ public class Wind {
      * @param pUnit The unit to set.
      */
     public void setUnit(final String pUnit) {
-        fUnit = pUnit;
+        unit = pUnit;
     }
 
     /**
      * @return the directionDegrees.
      */
     public Integer getDirectionDegrees() {
-        return fDirectionDegrees;
+        return directionDegrees;
     }
 
     /**
      * @param pDirectionDegrees the directionDegrees to set.
      */
     public void setDirectionDegrees(final Integer pDirectionDegrees) {
-        fDirectionDegrees = pDirectionDegrees;
+        directionDegrees = pDirectionDegrees;
     }
 
     /**
@@ -139,13 +140,13 @@ public class Wind {
     @Override
     public String toString() {
         return new ToStringBuilder(this).
-                append("speed", fSpeed).
-                append("unit", fUnit).
-                append("direction", fDirection).
-                append("direction (degrees)", fDirectionDegrees).
-                append("gusts", fGust).
-                append("minimal wind variation", fExtreme1).
-                append("maximal wind variation", fExtreme2).
+                append(Messages.getInstance().getString("ToString.wind.speed"), speed).
+                append(Messages.getInstance().getString("ToString.wind.unit"), unit).
+                append(Messages.getInstance().getString("ToString.wind.direction"), direction).
+                append(Messages.getInstance().getString("ToString.wind.direction.degrees"), directionDegrees).
+                append(Messages.getInstance().getString("ToString.wind.gusts"), gust).
+                append(Messages.getInstance().getString("ToString.wind.min.variation"), extreme1).
+                append(Messages.getInstance().getString("ToString.wind.max.variation"), extreme2).
                 toString();
     }
 }

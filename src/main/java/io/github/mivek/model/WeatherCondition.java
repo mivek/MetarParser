@@ -1,37 +1,31 @@
 package io.github.mivek.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.internationalization.Messages;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Weather condition class.
  * @author mivek
  */
 public class WeatherCondition {
-    /**
-     * Intensity of the condition (optional).
-     */
-    private Intensity fIntensity;
-    /**
-     * Descriptive of the condition (optional).
-     */
-    private Descriptive fDescriptive;
-    /**
-     * List of phenomenons of the condition.
-     */
-    private List<Phenomenon> fPhenomenons;
+    /** Intensity of the condition (optional). */
+    private Intensity intensity;
+    /** Descriptive of the condition (optional). */
+    private Descriptive descriptive;
+    /** List of phenomenons of the condition. */
+    private List<Phenomenon> phenomenons;
 
     /**
      * Constructor.
      */
     public WeatherCondition() {
-        fPhenomenons = new ArrayList<>();
+        phenomenons = new ArrayList<>();
     }
 
     /**
@@ -39,7 +33,7 @@ public class WeatherCondition {
      * @return the Intensity of the condition.
      */
     public Intensity getIntensity() {
-        return fIntensity;
+        return intensity;
     }
 
     /**
@@ -47,7 +41,7 @@ public class WeatherCondition {
      * @param pIntensity The intensity to set.
      */
     public void setIntensity(final Intensity pIntensity) {
-        fIntensity = pIntensity;
+        intensity = pIntensity;
     }
 
     /**
@@ -55,7 +49,7 @@ public class WeatherCondition {
      * @return the descriptive.
      */
     public Descriptive getDescriptive() {
-        return fDescriptive;
+        return descriptive;
     }
 
     /**
@@ -63,7 +57,7 @@ public class WeatherCondition {
      * @param pDescriptive the descriptive to set.
      */
     public void setDescriptive(final Descriptive pDescriptive) {
-        fDescriptive = pDescriptive;
+        descriptive = pDescriptive;
     }
 
     /**
@@ -71,7 +65,7 @@ public class WeatherCondition {
      * @return a list of phenomenons.
      */
     public List<Phenomenon> getPhenomenons() {
-        return fPhenomenons;
+        return phenomenons;
     }
 
     /**
@@ -79,7 +73,7 @@ public class WeatherCondition {
      * @param pPhenomenon The Phenomenon to add.
      */
     public void addPhenomenon(final Phenomenon pPhenomenon) {
-        fPhenomenons.add(pPhenomenon);
+        phenomenons.add(pPhenomenon);
     }
 
     /**
@@ -87,15 +81,15 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !fPhenomenons.isEmpty();
+        return !phenomenons.isEmpty();
     }
 
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("intensity", fIntensity).
-                append("descriptive", fDescriptive).
-                append("phenomenons", fPhenomenons.toString()).
+                append(Messages.getInstance().getString("ToString.intensity"), intensity).
+                append(Messages.getInstance().getString("ToString.descriptive"), descriptive).
+                append(Messages.getInstance().getString("ToString.phenomenons"), phenomenons.toString()).
                 toString();
     }
 }

@@ -1,33 +1,6 @@
-/**
- *
- */
 package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Locale;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.Intensity;
-import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -40,6 +13,11 @@ import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 /**
  * Test class for {@link TAFParser}
@@ -58,7 +36,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Before
     public void setUp() {
         fSut = TAFParser.getInstance();
-        Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
@@ -190,7 +167,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(Integer.valueOf(12), res.getValidity().getEndHour());
         // Checks on wind.
         assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("170")));
-        assertThat(res.getWind().getSpeed(), is(05));
+        assertThat(res.getWind().getSpeed(), is(5));
         assertThat(res.getWind().getGust(), is(0));
         assertThat(res.getWind().getUnit(), is("KT"));
         // Checks on visibility.
@@ -498,7 +475,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(result);
         assertNotNull(result.getTempos().get(1));
         assertNotNull(result.getTempos().get(1).getRemark());
-        assertThat(result.getTempos().get(1).getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
+        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        assertThat(result.getTempos().get(1).getRemark(), containsString(rmk));
     }
 
     @Test
@@ -510,6 +489,14 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
         // THEN the second tempo contains the remark.
         assertNotNull(result);
-        assertThat(result.getRemark(), containsString("forecast based on AUTO OBS. next forecast BY 301400Z"));
+        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        assertThat(result.getRemark(), containsString(rmk));
+        String description = result.toString();
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.start.day.month") + "=30"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.start.hour.day") + "=10"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.end.day.month") + "=30"));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.end.hour.day") + "=12"));
     }
+
 }

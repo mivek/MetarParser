@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -7,29 +8,21 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author mivek
  */
 public class RunwayInfo {
-    /**
-     * The name of the runway.
-     */
-    private String fName;
-    /**
-     * The minimal visibility on the runway.
-     */
-    private int fMinRange;
-    /**
-     * The maximal visibility on the runway.
-     */
-    private int fMaxRange;
-    /**
-     * The tread.
-     */
-    private String fTrend;
+    /** The name of the runway. */
+    private String name;
+    /** The minimal visibility on the runway. */
+    private int minRange;
+    /** The maximal visibility on the runway. */
+    private int maxRange;
+    /** The tread. */
+    private String trend;
 
     /**
      * Getter of name.
      * @return the name.
      */
     public String getName() {
-        return fName;
+        return name;
     }
 
     /**
@@ -37,7 +30,7 @@ public class RunwayInfo {
      * @param pName the name to set.
      */
     public void setName(final String pName) {
-        fName = pName;
+        name = pName;
     }
 
     /**
@@ -45,7 +38,7 @@ public class RunwayInfo {
      * @return the minRange.
      */
     public int getMinRange() {
-        return fMinRange;
+        return minRange;
     }
 
     /**
@@ -53,7 +46,7 @@ public class RunwayInfo {
      * @param pMinRange the minRange to set.
      */
     public void setMinRange(final int pMinRange) {
-        fMinRange = pMinRange;
+        minRange = pMinRange;
     }
 
     /**
@@ -61,7 +54,7 @@ public class RunwayInfo {
      * @return maxRange.
      */
     public int getMaxRange() {
-        return fMaxRange;
+        return maxRange;
     }
 
     /**
@@ -69,7 +62,7 @@ public class RunwayInfo {
      * @param pMaxRange the maxrange to set.
      */
     public void setMaxRange(final int pMaxRange) {
-        fMaxRange = pMaxRange;
+        maxRange = pMaxRange;
     }
 
     /**
@@ -77,7 +70,7 @@ public class RunwayInfo {
      * @return the trend.
      */
     public String getTrend() {
-        return fTrend;
+        return trend;
     }
 
     /**
@@ -85,16 +78,16 @@ public class RunwayInfo {
      * @param pTrend Trend to set.
      */
     public void setTrend(final String pTrend) {
-        fTrend = pTrend;
+        trend = pTrend;
     }
 
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
-                append("name", fName).
-                append("min visibility", fMinRange).
-                append("max visibility", fMaxRange).
-                append("trend", fTrend).
+                append(Messages.getInstance().getString("ToString.name"), name).
+                append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
+                append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
+                append(Messages.getInstance().getString("ToString.trend"), trend).
                 toString();
 
     }

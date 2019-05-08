@@ -5,57 +5,35 @@ package io.github.mivek.model;
  * @author mivek
  */
 public class Airport {
-    /**
-     * Name of the airport.
-     */
-    private String fName;
-    /**
-     * Name of the city.
-     */
-    private String fCity;
-    /**
-     * Country of the airport.
-     */
-    private Country fCountry;
-    /**
-     * Iata code of the airport.
-     */
-    private String fIata;
-    /**
-     * Icao code of the airport.
-     */
-    private String fIcao;
-    /**
-     * Latitude of the airport.
-     */
-    private double fLatitude;
-    /**
-     * Longitude of the airport.
-     */
-    private double fLongitude;
-    /**
-     * Altitude of the airport.
-     */
-    private int fAltitude;
-    /**
-     * Timezone of the airport.
-     */
-    private String fTimezone;
-    /**
-     * DST of the airport.
-     */
-    private String fDst;
-    /**
-     * tzdatabase of the aiport.
-     */
-    private String fTzDatabase;
+    /** Name of the airport. */
+    private String name;
+    /** Name of the city. */
+    private String city;
+    /** Country of the airport. */
+    private Country country;
+    /** Iata code of the airport. */
+    private String iata;
+    /** Icao code of the airport. */
+    private String icao;
+    /** Latitude of the airport. */
+    private double latitude;
+    /** Longitude of the airport. */
+    private double longitude;
+    /** Altitude of the airport. */
+    private int altitude;
+    /** Timezone of the airport. */
+    private String timezone;
+    /** DST of the airport. */
+    private String dst;
+    /** tzdatabase of the aiport. */
+    private String tzDatabase;
 
     /**
      * Getter of name.
      * @return string name.
      */
     public String getName() {
-        return fName;
+        return name;
     }
 
     /**
@@ -63,7 +41,7 @@ public class Airport {
      * @param pName name of the airport.
      */
     public void setName(final String pName) {
-        fName = pName;
+        name = pName;
     }
 
     /**
@@ -71,7 +49,7 @@ public class Airport {
      * @return string of city.
      */
     public String getCity() {
-        return fCity;
+        return city;
     }
 
     /**
@@ -79,7 +57,7 @@ public class Airport {
      * @param pCity string of the name of the city.
      */
     public void setCity(final String pCity) {
-        fCity = pCity;
+        city = pCity;
     }
 
     /**
@@ -87,7 +65,7 @@ public class Airport {
      * @return a country object.
      */
     public Country getCountry() {
-        return fCountry;
+        return country;
     }
 
     /**
@@ -95,7 +73,7 @@ public class Airport {
      * @param pCountry The country to set.
      */
     public void setCountry(final Country pCountry) {
-        fCountry = pCountry;
+        country = pCountry;
     }
 
     /**
@@ -103,7 +81,7 @@ public class Airport {
      * @return string of iata.
      */
     public String getIata() {
-        return fIata;
+        return iata;
     }
 
     /**
@@ -111,7 +89,7 @@ public class Airport {
      * @param pIata string of iata.
      */
     public void setIata(final String pIata) {
-        fIata = pIata;
+        iata = pIata;
     }
 
     /**
@@ -119,7 +97,7 @@ public class Airport {
      * @return string icao code.
      */
     public String getIcao() {
-        return fIcao;
+        return icao;
     }
 
     /**
@@ -127,7 +105,7 @@ public class Airport {
      * @param pIcao string of icao.
      */
     public void setIcao(final String pIcao) {
-        fIcao = pIcao;
+        icao = pIcao;
     }
 
     /**
@@ -135,7 +113,16 @@ public class Airport {
      * @return latitude.
      */
     public double getLatitude() {
-        return fLatitude;
+        return latitude;
+    }
+
+    /**
+     * Setter of latitude.
+     *
+     * @param pLatitude Latitude to set.
+     */
+    public void setLatitude(final double pLatitude) {
+        latitude = pLatitude;
     }
 
     /**
@@ -143,7 +130,16 @@ public class Airport {
      * @return longitude.
      */
     public double getLongitude() {
-        return fLongitude;
+        return longitude;
+    }
+
+    /**
+     * Setter of longitude.
+     *
+     * @param pLongitude to set.
+     */
+    public void setLongitude(final double pLongitude) {
+        longitude = pLongitude;
     }
 
     /**
@@ -151,7 +147,16 @@ public class Airport {
      * @return altitude.
      */
     public int getAltitude() {
-        return fAltitude;
+        return altitude;
+    }
+
+    /**
+     * Setter of altitude.
+     *
+     * @param pAltitude the altitude to set.
+     */
+    public void setAltitude(final int pAltitude) {
+        altitude = pAltitude;
     }
 
     /**
@@ -159,7 +164,7 @@ public class Airport {
      * @return string of timezone.
      */
     public String getTimezone() {
-        return fTimezone;
+        return timezone;
     }
 
     /**
@@ -167,7 +172,7 @@ public class Airport {
      * @param pTimezone timezone string to set.
      */
     public void setTimezone(final String pTimezone) {
-        fTimezone = pTimezone;
+        timezone = pTimezone;
     }
 
     /**
@@ -175,7 +180,7 @@ public class Airport {
      * @return string of dst.
      */
     public String getDst() {
-        return fDst;
+        return dst;
     }
 
     /**
@@ -183,7 +188,7 @@ public class Airport {
      * @param pDst the dst to set.
      */
     public void setDst(final String pDst) {
-        fDst = pDst;
+        dst = pDst;
     }
 
     /**
@@ -191,7 +196,7 @@ public class Airport {
      * @return string of tzDatabase.
      */
     public String getTzDatabase() {
-        return fTzDatabase;
+        return tzDatabase;
     }
 
     /**
@@ -199,37 +204,13 @@ public class Airport {
      * @param pTzDatabase The tzDatabase to set.
      */
     public void setTzDatabase(final String pTzDatabase) {
-        fTzDatabase = pTzDatabase;
-    }
-
-    /**
-     * Setter of latitude.
-     * @param pLatitude Latitude to set.
-     */
-    public void setLatitude(final double pLatitude) {
-        fLatitude = pLatitude;
-    }
-
-    /**
-     * Setter of longitude.
-     * @param pLongitude to set.
-     */
-    public void setLongitude(final double pLongitude) {
-        fLongitude = pLongitude;
-    }
-
-    /**
-     * Setter of altitude.
-     * @param pAltitude the altitude to set.
-     */
-    public void setAltitude(final int pAltitude) {
-        fAltitude = pAltitude;
+        tzDatabase = pTzDatabase;
     }
 
     @Override
     public final boolean equals(final Object pObj) {
         if (pObj instanceof Airport) {
-            return fIcao.equals(((Airport) pObj).getIcao());
+            return icao.equals(((Airport) pObj).getIcao());
         }
         return false;
     }
@@ -237,12 +218,12 @@ public class Airport {
     @Override
     public final int hashCode() {
         int result;
-        result = 31 * fIcao.hashCode();
+        result = 31 * icao.hashCode();
         return result;
     }
 
     @Override
     public final String toString() {
-        return fName + " (" + fIcao + ")";
+        return name + " (" + icao + ")";
     }
 }

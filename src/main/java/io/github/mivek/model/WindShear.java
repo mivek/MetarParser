@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -7,28 +8,28 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author mivek
  */
 public class WindShear extends Wind {
-    /** The fHeight of the wind shear in feet. */
-    private int fHeight;
+    /** The height of the wind shear in feet. */
+    private int height;
 
     /**
      * @return the height
      */
     public int getHeight() {
-        return fHeight;
+        return height;
     }
 
     /**
      * @param pHeight the height to set
      */
     public void setHeight(final int pHeight) {
-        fHeight = pHeight;
+        height = pHeight;
     }
 
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
-                append("height (feet)", fHeight).
+                append(Messages.getInstance().getString("ToString.height.feet"), height).
                 toString();
     }
 }
