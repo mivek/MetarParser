@@ -6,8 +6,13 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.*;
 import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivek.parser.command.metar.Command;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -31,41 +36,6 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         fSut = MetarParser.getInstance();
     }
 
-    /**
-     * ======================== Test ParseRunWays ========================
-     */
-    @Test
-    public void testParseRunwayActionSimple() {
-        String riString = "R26/0600U";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-
-        assertNotNull(ri);
-        assertEquals("26", ri.getName());
-        assertEquals(600, ri.getMinRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
-    }
-
-    @Test
-    public void testParseRunWaysComplex() {
-        String riString = "R26L/0550V700U";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-        assertNotNull(ri);
-        assertEquals("26L", ri.getName());
-        assertEquals(550, ri.getMinRange());
-        assertEquals(700, ri.getMaxRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
-    }
-
-    @Test
-    public void testParseRunWayNull() {
-        String riString = "R26R/AZEZFDFS";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-
-        assertNull(ri);
-    }
 
     /**
      * =========================== Test ParseMetarAction ===========================
@@ -363,4 +333,18 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
+    @Test public void testBuildListPattern() {
+        List<Pattern> patterns = fSut.buildListPattern();
+
+        assertNotNull(patterns);
+        assertThat(patterns, hasSize(4));
+    }
+
+    @Test public void testBuildCommand() {
+        Map<Pattern, Command> map = fSut.buildCommand();
+
+        assertNotNull(map);
+        assertThat(map.entrySet(), hasSize(4));
+
+    }
 }

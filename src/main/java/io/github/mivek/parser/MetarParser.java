@@ -4,17 +4,20 @@ import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
-import io.github.mivek.model.RunwayInfo;
 import io.github.mivek.model.trend.AbstractMetarTrend;
 import io.github.mivek.model.trend.BECMGMetarTrend;
 import io.github.mivek.model.trend.TEMPOMetarTrend;
 import io.github.mivek.model.trend.validity.ATTime;
 import io.github.mivek.model.trend.validity.FMTime;
 import io.github.mivek.model.trend.validity.TLTime;
+import io.github.mivek.parser.command.metar.*;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
-import org.apache.commons.lang3.ArrayUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -23,30 +26,33 @@ import java.util.regex.Pattern;
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
-    /** Instance of the class. */
-    private static MetarParser instance = new MetarParser();
-    /** Pattern regex for runway with min and max range visibility. */
-    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\d{4})V(\\d{3})(\\w{0,2})");
-    /** Pattern regex for runway visibility. */
-    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\w)?(\\d{4})(\\w{0,2})$");
+    /** Pattern of the temperature block. */
+    public static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})/(M?\\d{2})$");
+    /** Pattern of the altimeter (Pascals). */
+    public static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
+    /** Pattern for the altimeter in inches of mercury. */
+    public static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
     /** Pattern to recognize a runway. */
     private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?/)");
-    /** Pattern of the temperature block. */
-    private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})/(M?\\d{2})$");
-    /** Pattern of the altimeter (Pascals). */
-    private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
-    /** Pattern for the altimeter in inches of mercury. */
-    private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
     /** Constant string for TL. */
     private static final String TILL = "TL";
     /** Constant string for AT. */
     private static final String AT = "AT";
+    /** Instance of the class. */
+    private static MetarParser instance = new MetarParser();
+    /** The command map. */
+    private final Map<Pattern, Command> commandMap;
+    /** The list of patterns. */
+    private final List<Pattern> patternList;
+
 
     /**
      * Private constructor.
      */
     private MetarParser() {
         super();
+        patternList = buildListPattern();
+        commandMap = buildCommand();
     }
 
     /**
@@ -78,7 +84,6 @@ public final class MetarParser extends AbstractParser<Metar> {
         parseDeliveryTime(m, metarTab[1]);
         int metarTabLength = metarTab.length;
         for (int i = 2; i < metarTabLength; i++) {
-            String[] matches;
             if (!generalParse(m, metarTab[i])) {
                 if ("NOSIG".equals(metarTab[i])) {
                     m.setNosig(true);
@@ -86,29 +91,13 @@ public final class MetarParser extends AbstractParser<Metar> {
                     m.setAuto(true);
                 } else if (RMK.equals(metarTab[i])) {
                     parseRMK(m, metarTab, i);
-                } else if (Regex.find(GENERIC_RUNWAY_REGEX, metarTab[i])) {
-                    RunwayInfo ri = parseRunWayAction(metarTab[i]);
-                    m.addRunwayInfo(ri);
-                } else if (Regex.find(TEMPERATURE_REGEX, metarTab[i])) {
-                    matches = Regex.pregMatch(TEMPERATURE_REGEX, metarTab[i]);
-                    m.setTemperature(Converter.convertTemperature(matches[1]));
-                    m.setDewPoint(Converter.convertTemperature(matches[2]));
-                } else if (Regex.find(ALTIMETER_REGEX, metarTab[i])) {
-                    matches = Regex.pregMatch(ALTIMETER_REGEX, metarTab[i]);
-                    m.setAltimeter(Integer.parseInt(matches[1]));
-                } else if (Regex.find(ALTIMETER_MERCURY_REGEX, metarTab[i])) {
-                    matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, metarTab[i]);
-                    double mercury = Double.parseDouble(matches[1]) / 100;
-                    m.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
                 } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
                     AbstractMetarTrend trend;
-                    if (metarTab[i].equals(TEMPO)) {
-                        trend = new TEMPOMetarTrend();
-                    } else {
-                        trend = new BECMGMetarTrend();
-                    }
+                    trend = initTrend(metarTab[i]);
                     i = iterTrend(i, trend, metarTab);
                     m.addTrend(trend);
+                } else {
+                    iterPatterns(m, metarTab[i]);
                 }
             }
         }
@@ -116,28 +105,33 @@ public final class MetarParser extends AbstractParser<Metar> {
     }
 
     /**
-     * This method parses the string and returns an object.
-     * @param runWayPart String containing the runway info
-     * @return a object with parsed informations.
+     * Initiate the trend according to string.
+     *
+     * @param pS the string to parse.
+     * @return a concrete Trends object.
      */
-    protected RunwayInfo parseRunWayAction(final String runWayPart) {
-        RunwayInfo ri = new RunwayInfo();
-        String[] matches = Regex.pregMatch(RUNWAY_REGEX, runWayPart);
-        if (ArrayUtils.isNotEmpty(matches)) {
-            ri.setName(matches[1]);
-            ri.setMinRange(Integer.parseInt(matches[3]));
-            ri.setTrend(Converter.convertTrend(matches[4]));
-            return ri;
+    private AbstractMetarTrend initTrend(final String pS) {
+        AbstractMetarTrend trend;
+        if (pS.equals(TEMPO)) {
+            trend = new TEMPOMetarTrend();
+        } else {
+            trend = new BECMGMetarTrend();
         }
-        matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, runWayPart);
-        if (ArrayUtils.isNotEmpty(matches)) {
-            ri.setName(matches[1]);
-            ri.setMinRange(Integer.parseInt(matches[2]));
-            ri.setMaxRange(Integer.parseInt(matches[3]));
-            ri.setTrend(Converter.convertTrend(matches[4]));
-            return ri;
+        return trend;
+    }
+
+    /**
+     * Iterate over the patterns and builds the metar.
+     * @param pM the metar
+     * @param pInput the string to parse.
+     */
+    private void iterPatterns(final Metar pM, final String pInput) {
+        for (Pattern p : patternList) {
+            if (Regex.find(p, pInput)) {
+                Command command = commandMap.get(p);
+                command.execute(pM, pInput);
+            }
         }
-        return null;
     }
 
     /**
@@ -147,7 +141,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param pParts an array of strings
      * @return the next index to parse.
      */
-    protected int iterTrend(final int pIndex, final AbstractMetarTrend pTrend, final String[] pParts) {
+    private int iterTrend(final int pIndex, final AbstractMetarTrend pTrend, final String[] pParts) {
         int i = pIndex + 1;
         while (i < pParts.length && !pParts[i].equals(TEMPO) && !pParts[i].equals(BECMG)) {
             processChange(pTrend, pParts[i]);
@@ -161,7 +155,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param pTrend the abstractMetarTrend object to update.
      * @param pPart The token to parse.
      */
-    protected void processChange(final AbstractMetarTrend pTrend, final String pPart) {
+    private void processChange(final AbstractMetarTrend pTrend, final String pPart) {
         if (pPart.startsWith(AT)) {
             ATTime at = new ATTime();
             at.setTime(Converter.stringToTime(pPart.substring(2)));
@@ -178,4 +172,33 @@ public final class MetarParser extends AbstractParser<Metar> {
             generalParse(pTrend, pPart);
         }
     }
+
+    /**
+     * Builds the map of command.
+     *
+     * @return the map of command.
+     */
+    protected Map<Pattern, Command> buildCommand() {
+        Map<Pattern, Command> map = new HashMap<>();
+        map.put(GENERIC_RUNWAY_REGEX, new RunwayCommand());
+        map.put(TEMPERATURE_REGEX, new TemperatureCommand());
+        map.put(ALTIMETER_REGEX, new AltimeterCommand());
+        map.put(ALTIMETER_MERCURY_REGEX, new AltimeterMecuryCommand());
+        return map;
+    }
+
+    /**
+     * Builds the list of patterns.
+     *
+     * @return the list of patterns.
+     */
+    protected List<Pattern> buildListPattern() {
+        List<Pattern> patterns = new ArrayList<>();
+        patterns.add(GENERIC_RUNWAY_REGEX);
+        patterns.add(TEMPERATURE_REGEX);
+        patterns.add(ALTIMETER_REGEX);
+        patterns.add(ALTIMETER_MERCURY_REGEX);
+        return patterns;
+    }
+
 }
