@@ -5,7 +5,6 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.Visibility;
 import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
@@ -77,20 +76,10 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setMessage(pTAFCode);
         // Day and time
         parseDeliveryTime(taf, line1parts[i]);
-
-        Visibility visibility = new Visibility();
-        taf.setVisibility(visibility);
         // Validity Time
         i++;
         taf.setValidity(parseValidity(line1parts[i]));
 
-        // Wind
-        i++;
-        if (line1parts[i].startsWith("WS")) {
-            taf.setWindShear(parseWindShear(line1parts[i]));
-        } else {
-            taf.setWind(parseWind(line1parts[i]));
-        }
         // Handle rest of second line.
         for (int j = i; j < line1parts.length; j++) {
             if (line1parts[j].startsWith(PROB)) {
@@ -105,28 +94,38 @@ public final class TAFParser extends AbstractParser<TAF> {
         for (int j = 1; j < lines.length; j++) {
             // Split the line.
             String[] parts = tokenize(lines[j]);
-            if (parts[0].equals(BECMG)) {
-                BECMGTafTrend change = new BECMGTafTrend();
-                iterChanges(1, parts, change);
-                taf.addBECMG(change);
-            } else if (parts[0].equals(TEMPO)) {
-                TEMPOTafTrend change = new TEMPOTafTrend();
-                iterChanges(1, parts, change);
-                taf.addTempo(change);
-            } else if (parts[0].startsWith(FM)) {
-                FMTafTrend change = new FMTafTrend();
-                change.setValidity(parseBasicValidity(parts[0]));
-                for (int k = 1; k < parts.length; k++) {
-                    processGeneralChanges(change, parts[k]);
-                }
-                taf.addFM(change);
-            } else if (parts[0].startsWith(PROB)) {
-                PROBTafTrend change = new PROBTafTrend();
-                iterChanges(0, parts, change);
-                taf.addProb(change);
-            }
+            processLines(taf, parts);
         }
         return taf;
+    }
+
+    /**
+     * Handles the parsing of a line.
+     *
+     * @param pTaf   the TAF object to build
+     * @param pParts the token of the line
+     */
+    private void processLines(final TAF pTaf, final String[] pParts) {
+        if (pParts[0].equals(BECMG)) {
+            BECMGTafTrend change = new BECMGTafTrend();
+            iterChanges(1, pParts, change);
+            pTaf.addBECMG(change);
+        } else if (pParts[0].equals(TEMPO)) {
+            TEMPOTafTrend change = new TEMPOTafTrend();
+            iterChanges(1, pParts, change);
+            pTaf.addTempo(change);
+        } else if (pParts[0].startsWith(FM)) {
+            FMTafTrend change = new FMTafTrend();
+            change.setValidity(parseBasicValidity(pParts[0]));
+            for (int k = 1; k < pParts.length; k++) {
+                processGeneralChanges(change, pParts[k]);
+            }
+            pTaf.addFM(change);
+        } else if (pParts[0].startsWith(PROB)) {
+            PROBTafTrend change = new PROBTafTrend();
+            iterChanges(0, pParts, change);
+            pTaf.addProb(change);
+        }
     }
 
     /**
