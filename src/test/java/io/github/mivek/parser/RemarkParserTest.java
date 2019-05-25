@@ -1,7 +1,7 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.remark.Command;
+import io.github.mivek.parser.command.remark.Command;
 import org.junit.Before;
 import org.junit.Test;
 

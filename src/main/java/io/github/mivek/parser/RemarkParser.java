@@ -1,7 +1,7 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.remark.*;
+import io.github.mivek.parser.command.remark.*;
 import io.github.mivek.utils.Regex;
 
 import java.util.*;

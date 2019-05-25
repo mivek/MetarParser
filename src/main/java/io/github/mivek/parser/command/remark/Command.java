@@ -1,4 +1,4 @@
-package io.github.mivek.parser.remark;
+package io.github.mivek.parser.command.remark;
 
 /**
  * @author mivek

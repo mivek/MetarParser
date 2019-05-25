@@ -1,4 +1,4 @@
-package io.github.mivek.parser.remark;
+package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.parser.RemarkParser;
