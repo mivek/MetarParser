@@ -5,7 +5,6 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
-import io.github.mivek.model.Visibility;
 import io.github.mivek.model.trend.AbstractMetarTrend;
 import io.github.mivek.model.trend.BECMGMetarTrend;
 import io.github.mivek.model.trend.TEMPOMetarTrend;
@@ -77,8 +76,6 @@ public final class MetarParser extends AbstractParser<Metar> {
         m.setAirport(airport);
         m.setMessage(pMetarCode);
         parseDeliveryTime(m, metarTab[1]);
-        Visibility visibility = new Visibility();
-        m.setVisibility(visibility);
         int metarTabLength = metarTab.length;
         for (int i = 2; i < metarTabLength; i++) {
             String[] matches;

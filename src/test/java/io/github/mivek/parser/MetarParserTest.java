@@ -87,6 +87,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(0, m.getWind().getSpeed());
         assertEquals(Messages.getInstance().getString("Converter.N"), m.getWind().getDirection());
         assertEquals("KT", m.getWind().getUnit());
+        assertNotNull(m.getVisibility());
+        assertEquals(metarString, m.getMessage());
         assertEquals("350m", m.getVisibility().getMainVisibility());
         assertThat(m.getRunways(), is(not(empty())));
         assertThat(m.getRunways(), hasSize(8));
@@ -241,6 +243,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(toString, containsString(Messages.getInstance().getString("TimeIndicator.TL") + " 18:30"));
         assertThat(toString, containsString(Descriptive.SHOWERS.toString()));
         assertThat(toString, containsString(Phenomenon.RAIN.toString()));
+        assertNotNull(m.getVisibility());
+        assertEquals(">10km", m.getVisibility().getMainVisibility());
     }
 
     @Test
@@ -331,6 +335,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(">10km", m.getVisibility().getMainVisibility());
         assertEquals(Integer.valueOf(9), m.getTemperature());
         assertEquals(Integer.valueOf(6), m.getDewPoint());
+        assertEquals(Integer.valueOf(1031), m.getAltimeter());
         assertTrue(m.isNosig());
     }
 
