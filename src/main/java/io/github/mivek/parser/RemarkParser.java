@@ -1,10 +1,39 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.command.remark.*;
+import io.github.mivek.parser.command.remark.CeilingHeightCommand;
+import io.github.mivek.parser.command.remark.CeilingSecondLocationCommand;
+import io.github.mivek.parser.command.remark.Command;
+import io.github.mivek.parser.command.remark.HailSizeCommand;
+import io.github.mivek.parser.command.remark.ObscurationCommand;
+import io.github.mivek.parser.command.remark.PrecipitationBegEndCommand;
+import io.github.mivek.parser.command.remark.PrevailingVisibilityCommand;
+import io.github.mivek.parser.command.remark.SeaLevelPressureCommand;
+import io.github.mivek.parser.command.remark.SecondLocationVisibilityCommand;
+import io.github.mivek.parser.command.remark.SectorVisibilityCommand;
+import io.github.mivek.parser.command.remark.SmallHailSizeCommand;
+import io.github.mivek.parser.command.remark.SnowIncreaseCommand;
+import io.github.mivek.parser.command.remark.SnowPelletsCommand;
+import io.github.mivek.parser.command.remark.SurfaceVisibilityCommand;
+import io.github.mivek.parser.command.remark.ThunderStormLocationCommand;
+import io.github.mivek.parser.command.remark.ThunderStormLocationMovingCommand;
+import io.github.mivek.parser.command.remark.TornadicActivityBegCommand;
+import io.github.mivek.parser.command.remark.TornadicActivityBegEndCommand;
+import io.github.mivek.parser.command.remark.TornadicActivityEndCommand;
+import io.github.mivek.parser.command.remark.TowerVisibilityCommand;
+import io.github.mivek.parser.command.remark.VariableSkyCommand;
+import io.github.mivek.parser.command.remark.VariableSkyHeightCommand;
+import io.github.mivek.parser.command.remark.VirgaDirectionCommand;
+import io.github.mivek.parser.command.remark.WindPeakCommand;
+import io.github.mivek.parser.command.remark.WindShiftCommand;
+import io.github.mivek.parser.command.remark.WindShiftFropaCommand;
 import io.github.mivek.utils.Regex;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 

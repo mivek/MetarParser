@@ -10,7 +10,11 @@ import io.github.mivek.model.trend.TEMPOMetarTrend;
 import io.github.mivek.model.trend.validity.ATTime;
 import io.github.mivek.model.trend.validity.FMTime;
 import io.github.mivek.model.trend.validity.TLTime;
-import io.github.mivek.parser.command.metar.*;
+import io.github.mivek.parser.command.metar.AltimeterCommand;
+import io.github.mivek.parser.command.metar.AltimeterMecuryCommand;
+import io.github.mivek.parser.command.metar.Command;
+import io.github.mivek.parser.command.metar.RunwayCommand;
+import io.github.mivek.parser.command.metar.TemperatureCommand;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
 
