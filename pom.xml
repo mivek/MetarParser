@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mivek</groupId>
     <artifactId>metarParser</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2-SNAPSHOT</version>
     <name>metarParser</name>
     <description>This project is a metar parser.
         Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
@@ -120,7 +120,7 @@
                             <goal>mutationCoverage</goal>
                         </goals>
                         <configuration>
-                            <mutationThreshold>90</mutationThreshold>
+                            <mutationThreshold>98</mutationThreshold>
                             <coverageThreshold>99</coverageThreshold>
                             <targetClasses>
                                 <param>io.github.mivek.parser.*</param>
@@ -165,6 +165,11 @@
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
                                             <minimum>0.97</minimum>
+                                        </limit>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.96</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
