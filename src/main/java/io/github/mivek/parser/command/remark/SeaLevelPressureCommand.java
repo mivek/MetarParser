@@ -32,3 +32,4 @@ public class SeaLevelPressureCommand implements Command {
         return pRemark.replaceFirst(RemarkParser.SEAL_LEVEL_PRESSURE.pattern(), "").trim();
     }
 }
+

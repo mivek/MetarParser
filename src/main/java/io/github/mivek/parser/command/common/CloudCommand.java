@@ -41,3 +41,4 @@ public final class CloudCommand implements Command {
         }
     }
 }
+
