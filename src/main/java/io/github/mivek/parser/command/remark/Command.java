@@ -7,7 +7,7 @@ public interface Command {
 
     /**
      * @param pRemark        the remark to parse.
-     * @param pStringBuilder the stringbuilder containing the decoded remark
+     * @param pStringBuilder the string builder containing the decoded remark
      * @return the remark without the parsed part
      */
     String execute(String pRemark, StringBuilder pStringBuilder);
@@ -24,4 +24,10 @@ public interface Command {
         }
         return pString;
     }
+
+    /**
+     * @param pInput the input string to test.
+     * @return true if the input can be handled by the command.
+     */
+    boolean canParse(String pInput);
 }

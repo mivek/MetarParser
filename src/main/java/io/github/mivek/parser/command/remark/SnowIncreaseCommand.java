@@ -1,13 +1,17 @@
 package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.RemarkParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
-public class SnowIncreaseCommand implements Command {
+public final class SnowIncreaseCommand implements Command {
+    /** Snow increasing rapidly. */
+    private static final Pattern SNOW_INCR_RAPIDLY = Pattern.compile("^SNINCR (\\d+)/(\\d+)");
+
     /** The message instance. */
     private final Messages fMessages;
 
@@ -18,9 +22,13 @@ public class SnowIncreaseCommand implements Command {
         fMessages = Messages.getInstance();
     }
 
-    @Override public final String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] snowParts = Regex.pregMatch(RemarkParser.SNOW_INCR_RAPIDLY, pRemark);
+    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+        String[] snowParts = Regex.pregMatch(SNOW_INCR_RAPIDLY, pRemark);
         pStringBuilder.append(fMessages.getString("Remark.Snow.Increasing.Rapidly", snowParts[1], snowParts[2])).append(" ");
-        return pRemark.replaceFirst(RemarkParser.SNOW_INCR_RAPIDLY.pattern(), "").trim();
+        return pRemark.replaceFirst(SNOW_INCR_RAPIDLY.pattern(), "").trim();
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(SNOW_INCR_RAPIDLY, pInput);
     }
 }

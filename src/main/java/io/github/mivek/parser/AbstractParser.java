@@ -44,22 +44,7 @@ import java.util.regex.Pattern;
  * @param <T> a concrete subclass of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractParser<T extends AbstractWeatherCode> {
-    /** Pattern regex for wind. */
-    public static final Pattern WIND_REGEX = Pattern.compile("(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
-    /** Pattern regex for windshear. */
-    public static final Pattern WIND_SHEAR_REGEX = Pattern.compile("WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
-    /** Pattern regex for extreme winds. */
-    public static final Pattern WIND_EXTREME_REGEX = Pattern.compile("^(\\d{3})V(\\d{3})");
-    /** Pattern for the main visibility. */
-    public static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$");
-    /** Pattern for the main visibility in SM. */
-    public static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^(\\d)*(\\s)?((\\d\\/\\d)?SM)$");
-    /** Pattern to recognize clouds. */
-    public static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
-    /** Pattern for the vertical visibility. */
-    public static final Pattern VERTICAL_VISIBILITY = Pattern.compile("^VV(\\d{3})$");
-    /** Pattern for the minimum visibility. */
-    public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[a-z])$");
+
     /** From shortcut constant. */
     protected static final String FM = "FM";
     /** Tempo shortcut constant. */
@@ -101,11 +86,9 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
 
     /** The remark parser. */
     private final RemarkParser fRemarkParser;
-    /** The list of patterns. */
-    private final List<Pattern> patterns;
+    /** The list of commands. */
+    private final List<Command> commands;
 
-    /** The map of commands. */
-    private final Map<Pattern, Command> commandMap;
     /**
      * Constructor.
      */
@@ -113,8 +96,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         initCountries();
         initAirports();
         fRemarkParser = RemarkParser.getInstance();
-        patterns = buildPatternsList();
-        commandMap = buildCommands();
+        commands = buildCommands();
     }
 
     /**
@@ -166,7 +148,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pVisibilityPart the string containing the information.
      */
     protected void parseMinimalVisibility(final Visibility pVisibility, final String pVisibilityPart) {
-        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pVisibilityPart);
+        String[] matches = Regex.pregMatch(MinimalVisibilityCommand.MIN_VISIBILITY_REGEX, pVisibilityPart);
         pVisibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
         pVisibility.setMinDirection(matches[1].substring(4));
     }
@@ -247,9 +229,9 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             pContainer.getVisibility().setMainVisibility(">10km");
             return true;
         }
-        for (Pattern p : patterns) {
-            if (Regex.find(p, pPart)) {
-                Command command = commandMap.get(p);
+
+        for (Command command : commands) {
+            if (command.canParse(pPart)) {
                 return command.execute(pContainer, pPart);
             }
         }
@@ -286,37 +268,22 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         return tokens.toArray(new String[0]);
     }
 
-    /**
-     * @return the list of patterns
-     */
-    protected List<Pattern> buildPatternsList() {
-        List<Pattern> listPattern = new ArrayList<>();
-        listPattern.add(WIND_SHEAR_REGEX);
-        listPattern.add(WIND_REGEX);
-        listPattern.add(WIND_EXTREME_REGEX);
-        listPattern.add(MAIN_VISIBILITY_REGEX);
-        listPattern.add(MAIN_VISIBILITY_SM_REGEX);
-        listPattern.add(MIN_VISIBILITY_REGEX);
-        listPattern.add(VERTICAL_VISIBILITY);
-        listPattern.add(CLOUD_REGEX);
-        return listPattern;
-    }
 
     /**
      * Builds the map of command map.
      *
      * @return the patterns with their command.
      */
-    protected Map<Pattern, Command> buildCommands() {
-        Map<Pattern, Command> map = new HashMap<>();
-        map.put(WIND_SHEAR_REGEX, new WindShearCommand());
-        map.put(WIND_REGEX, new WindCommand());
-        map.put(WIND_EXTREME_REGEX, new WindExtremeCommand());
-        map.put(MAIN_VISIBILITY_REGEX, new MainVisibilityCommand());
-        map.put(MAIN_VISIBILITY_SM_REGEX, new MainVisibilityNauticalMilesCommand());
-        map.put(MIN_VISIBILITY_REGEX, new MinimalVisibilityCommand());
-        map.put(VERTICAL_VISIBILITY, new VerticalVisibilityCommand());
-        map.put(CLOUD_REGEX, new CloudCommand());
-        return map;
+    protected List<Command> buildCommands() {
+        List<Command> commandList = new ArrayList<>();
+        commandList.add(new WindShearCommand());
+        commandList.add(new WindCommand());
+        commandList.add(new WindExtremeCommand());
+        commandList.add(new MainVisibilityCommand());
+        commandList.add(new MainVisibilityNauticalMilesCommand());
+        commandList.add(new MinimalVisibilityCommand());
+        commandList.add(new VerticalVisibilityCommand());
+        commandList.add(new CloudCommand());
+        return commandList;
     }
 }

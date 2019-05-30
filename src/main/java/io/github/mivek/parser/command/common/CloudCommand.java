@@ -4,13 +4,17 @@ import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Cloud;
-import io.github.mivek.parser.AbstractParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
 public final class CloudCommand implements Command {
+    /** Pattern to recognize clouds. */
+    private static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
+
     @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         Cloud c = parseCloud(pPart);
         return pContainer.addCloud(c);
@@ -24,7 +28,7 @@ public final class CloudCommand implements Command {
      */
     protected Cloud parseCloud(final String pCloudString) {
         Cloud cloud = new Cloud();
-        String[] cloudPart = Regex.pregMatch(AbstractParser.CLOUD_REGEX, pCloudString);
+        String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, pCloudString);
         try {
             CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
             cloud.setQuantity(cq);
@@ -39,6 +43,10 @@ public final class CloudCommand implements Command {
         } catch (IllegalArgumentException e) {
             return null;
         }
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(CLOUD_REGEX, pInput);
     }
 }
 

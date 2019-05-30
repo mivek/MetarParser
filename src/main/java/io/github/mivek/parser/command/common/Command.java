@@ -22,4 +22,10 @@ public interface Command {
     default boolean getReturnValue() {
         return true;
     }
+
+    /**
+     * @param pInput the input string to test.
+     * @return true if the input can be handled by the command.
+     */
+    boolean canParse(String pInput);
 }

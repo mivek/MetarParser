@@ -16,4 +16,10 @@ public interface Command {
      * @param pPart  the string to parse.
      */
     void execute(Metar pMetar, String pPart);
+
+    /**
+     * @param pInput the input string to test.
+     * @return true if the input can be handled by the command.
+     */
+    boolean canParse(String pInput);
 }

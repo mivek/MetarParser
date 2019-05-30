@@ -1,18 +1,25 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.*;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.TimeIndicator;
+import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.*;
+import io.github.mivek.model.Cloud;
+import io.github.mivek.model.Metar;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.WeatherCondition;
+import io.github.mivek.model.Wind;
 import io.github.mivek.model.trend.AbstractMetarTrend;
 import io.github.mivek.parser.command.metar.Command;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -333,18 +340,11 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
-    @Test public void testBuildListPattern() {
-        List<Pattern> patterns = fSut.buildListPattern();
+    @Test public void testBuildCommandList() {
+        List<Command> list = fSut.buildCommandList();
 
-        assertNotNull(patterns);
-        assertThat(patterns, hasSize(4));
-    }
-
-    @Test public void testBuildCommand() {
-        Map<Pattern, Command> map = fSut.buildCommand();
-
-        assertNotNull(map);
-        assertThat(map.entrySet(), hasSize(4));
+        assertNotNull(list);
+        assertThat(list, hasSize(4));
 
     }
 }

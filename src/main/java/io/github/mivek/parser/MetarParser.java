@@ -16,13 +16,9 @@ import io.github.mivek.parser.command.metar.Command;
 import io.github.mivek.parser.command.metar.RunwayCommand;
 import io.github.mivek.parser.command.metar.TemperatureCommand;
 import io.github.mivek.utils.Converter;
-import io.github.mivek.utils.Regex;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * This controller contains methods that parse the metar code. This class is a
@@ -30,24 +26,15 @@ import java.util.regex.Pattern;
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
-    /** Pattern of the temperature block. */
-    public static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})/(M?\\d{2})$");
-    /** Pattern of the altimeter (Pascals). */
-    public static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
-    /** Pattern for the altimeter in inches of mercury. */
-    public static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
-    /** Pattern to recognize a runway. */
-    private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?/)");
+
     /** Constant string for TL. */
     private static final String TILL = "TL";
     /** Constant string for AT. */
     private static final String AT = "AT";
     /** Instance of the class. */
     private static MetarParser instance = new MetarParser();
-    /** The command map. */
-    private final Map<Pattern, Command> commandMap;
-    /** The list of patterns. */
-    private final List<Pattern> patternList;
+    /** The command list. */
+    private final List<Command> commands;
 
 
     /**
@@ -55,8 +42,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      */
     private MetarParser() {
         super();
-        patternList = buildListPattern();
-        commandMap = buildCommand();
+        commands = buildCommandList();
     }
 
     /**
@@ -101,7 +87,7 @@ public final class MetarParser extends AbstractParser<Metar> {
                     i = iterTrend(i, trend, metarTab);
                     m.addTrend(trend);
                 } else {
-                    iterPatterns(m, metarTab[i]);
+                    iterCommands(m, metarTab[i]);
                 }
             }
         }
@@ -125,14 +111,13 @@ public final class MetarParser extends AbstractParser<Metar> {
     }
 
     /**
-     * Iterate over the patterns and builds the metar.
+     * Iterate over the commands and builds the metar.
      * @param pM the metar
      * @param pInput the string to parse.
      */
-    private void iterPatterns(final Metar pM, final String pInput) {
-        for (Pattern p : patternList) {
-            if (Regex.find(p, pInput)) {
-                Command command = commandMap.get(p);
+    private void iterCommands(final Metar pM, final String pInput) {
+        for (Command command : commands) {
+            if (command.canParse(pInput)) {
                 command.execute(pM, pInput);
             }
         }
@@ -178,31 +163,15 @@ public final class MetarParser extends AbstractParser<Metar> {
     }
 
     /**
-     * Builds the map of command.
-     *
-     * @return the map of command.
+     * @return The list of commands used by this parser.
      */
-    protected Map<Pattern, Command> buildCommand() {
-        Map<Pattern, Command> map = new HashMap<>();
-        map.put(GENERIC_RUNWAY_REGEX, new RunwayCommand());
-        map.put(TEMPERATURE_REGEX, new TemperatureCommand());
-        map.put(ALTIMETER_REGEX, new AltimeterCommand());
-        map.put(ALTIMETER_MERCURY_REGEX, new AltimeterMecuryCommand());
-        return map;
-    }
+    protected List<Command> buildCommandList() {
+        List<Command> commandList = new ArrayList<>();
+        commandList.add(new RunwayCommand());
+        commandList.add(new TemperatureCommand());
+        commandList.add(new AltimeterCommand());
+        commandList.add(new AltimeterMecuryCommand());
 
-    /**
-     * Builds the list of patterns.
-     *
-     * @return the list of patterns.
-     */
-    protected List<Pattern> buildListPattern() {
-        List<Pattern> patterns = new ArrayList<>();
-        patterns.add(GENERIC_RUNWAY_REGEX);
-        patterns.add(TEMPERATURE_REGEX);
-        patterns.add(ALTIMETER_REGEX);
-        patterns.add(ALTIMETER_MERCURY_REGEX);
-        return patterns;
+        return commandList;
     }
-
 }

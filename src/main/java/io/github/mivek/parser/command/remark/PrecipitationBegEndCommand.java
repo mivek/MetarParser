@@ -1,13 +1,16 @@
 package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.RemarkParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
-public class PrecipitationBegEndCommand implements Command {
+public final class PrecipitationBegEndCommand implements Command {
+    /** Beginning and ending of precipitation. */
+    private static final Pattern PRECIPITATION_BEG_END = Pattern.compile("^(([A-Z]{2})?([A-Z]{2})B(\\d{2})?(\\d{2})E(\\d{2})?(\\d{2}))");
 
     /** The message instance. */
     private final Messages fMessages;
@@ -19,11 +22,15 @@ public class PrecipitationBegEndCommand implements Command {
         fMessages = Messages.getInstance();
     }
 
-    @Override public final String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] precipitationBegEnd = Regex.pregMatch(RemarkParser.PRECIPITATION_BEG_END, pRemark);
+    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+        String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, pRemark);
         pStringBuilder.append(fMessages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : fMessages.getString("Descriptive." + precipitationBegEnd[2]),
                 fMessages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5], verifyString(precipitationBegEnd[6]),
                 precipitationBegEnd[7])).append(" ");
-        return pRemark.replaceFirst(RemarkParser.PRECIPITATION_BEG_END.pattern(), "").trim();
+        return pRemark.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(PRECIPITATION_BEG_END, pInput);
     }
 }

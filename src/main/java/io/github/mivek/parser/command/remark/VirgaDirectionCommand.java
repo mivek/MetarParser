@@ -1,13 +1,17 @@
 package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.RemarkParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
-public class VirgaDirectionCommand implements Command {
+public final class VirgaDirectionCommand implements Command {
+    /** Virga with direction. */
+    private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
+
     /** The message instance. */
     private final Messages fMessages;
 
@@ -18,9 +22,13 @@ public class VirgaDirectionCommand implements Command {
         fMessages = Messages.getInstance();
     }
 
-    @Override public final String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] virgaDirection = Regex.pregMatch(RemarkParser.VIRGA_DIRECTION, pRemark);
-        pStringBuilder.append(fMessages.getString("Remark.Virga.Direction", fMessages.getString(RemarkParser.CONVERTER + virgaDirection[1]))).append(" ");
-        return pRemark.replaceFirst(RemarkParser.VIRGA_DIRECTION.pattern(), "").trim();
+    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+        String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, pRemark);
+        pStringBuilder.append(fMessages.getString("Remark.Virga.Direction", fMessages.getString("Converter." + virgaDirection[1]))).append(" ");
+        return pRemark.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(VIRGA_DIRECTION, pInput);
     }
 }

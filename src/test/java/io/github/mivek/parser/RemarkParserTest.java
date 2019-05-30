@@ -6,8 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
@@ -346,17 +344,10 @@ public class RemarkParserTest {
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1009.1")));
     }
 
-    @Test public void testBuildPatternList() {
-        List<Pattern> patterns = sut.buildPatternList();
+    @Test public void testBuildCommandList() {
+        List<Command> commands = sut.buildCommandList();
 
-        assertNotNull(patterns);
-        assertThat(patterns, hasSize(25));
-    }
-
-    @Test public void testBuildCommandMap() {
-        Map<Pattern, Command> commandMap = sut.buildCommandMap();
-
-        assertNotNull(commandMap);
-        assertThat(commandMap.entrySet(), hasSize(25));
+        assertNotNull(commands);
+        assertThat(commands, hasSize(25));
     }
 }

@@ -1,13 +1,16 @@
 package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.RemarkParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
-public class SeaLevelPressureCommand implements Command {
+public final class SeaLevelPressureCommand implements Command {
+    /** Sea level pressure. */
+    private static final Pattern SEAL_LEVEL_PRESSURE = Pattern.compile("^SLP(\\d{2})(\\d)");
 
     /** The message instance. */
     private Messages fMessages;
@@ -19,8 +22,8 @@ public class SeaLevelPressureCommand implements Command {
         fMessages = Messages.getInstance();
     }
 
-    @Override public final String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] sealevelParts = Regex.pregMatch(RemarkParser.SEAL_LEVEL_PRESSURE, pRemark);
+    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+        String[] sealevelParts = Regex.pregMatch(SEAL_LEVEL_PRESSURE, pRemark);
         StringBuilder pressure = new StringBuilder();
         if (sealevelParts[1].startsWith("9")) {
             pressure.append("9");
@@ -29,7 +32,11 @@ public class SeaLevelPressureCommand implements Command {
         }
         pressure.append(sealevelParts[1]).append(".").append(sealevelParts[2]);
         pStringBuilder.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
-        return pRemark.replaceFirst(RemarkParser.SEAL_LEVEL_PRESSURE.pattern(), "").trim();
+        return pRemark.replaceFirst(SEAL_LEVEL_PRESSURE.pattern(), "").trim();
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(SEAL_LEVEL_PRESSURE, pInput);
     }
 }
 

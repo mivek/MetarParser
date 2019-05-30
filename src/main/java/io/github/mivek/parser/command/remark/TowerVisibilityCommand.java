@@ -1,13 +1,16 @@
 package io.github.mivek.parser.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.RemarkParser;
 import io.github.mivek.utils.Regex;
+
+import java.util.regex.Pattern;
 
 /**
  * @author mivek
  */
-public class TowerVisibilityCommand implements Command {
+public final class TowerVisibilityCommand implements Command {
+    /** Tower visibility. */
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?/?\\d))");
 
     /** The messages instance. */
     private final Messages fMessages;
@@ -19,9 +22,13 @@ public class TowerVisibilityCommand implements Command {
         fMessages = Messages.getInstance();
     }
 
-    @Override public final String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] towerVisibilityParts = Regex.pregMatch(RemarkParser.TOWER_VISIBILITY, pRemark);
+    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+        String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, pRemark);
         pStringBuilder.append(fMessages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
-        return pRemark.replaceFirst(RemarkParser.TOWER_VISIBILITY.pattern(), "").trim();
+        return pRemark.replaceFirst(TOWER_VISIBILITY.pattern(), "").trim();
+    }
+
+    @Override public boolean canParse(final String pInput) {
+        return Regex.find(TOWER_VISIBILITY, pInput);
     }
 }
