@@ -10,19 +10,14 @@ import io.github.mivek.model.trend.TEMPOMetarTrend;
 import io.github.mivek.model.trend.validity.ATTime;
 import io.github.mivek.model.trend.validity.FMTime;
 import io.github.mivek.model.trend.validity.TLTime;
-import io.github.mivek.parser.command.metar.AltimeterCommand;
-import io.github.mivek.parser.command.metar.AltimeterMecuryCommand;
 import io.github.mivek.parser.command.metar.Command;
-import io.github.mivek.parser.command.metar.RunwayCommand;
-import io.github.mivek.parser.command.metar.TemperatureCommand;
+import io.github.mivek.parser.command.metar.MetarParserCommandSupplier;
 import io.github.mivek.utils.Converter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This controller contains methods that parse the metar code. This class is a
  * singleton.
+ *
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
@@ -33,20 +28,20 @@ public final class MetarParser extends AbstractParser<Metar> {
     private static final String AT = "AT";
     /** Instance of the class. */
     private static MetarParser instance = new MetarParser();
-    /** The command list. */
-    private final List<Command> commands;
-
+    /** The command supplier. */
+    private final MetarParserCommandSupplier supplier;
 
     /**
      * Private constructor.
      */
     private MetarParser() {
         super();
-        commands = buildCommandList();
+        supplier = new MetarParserCommandSupplier();
     }
 
     /**
      * Get instance method.
+     *
      * @return the instance of MetarParser.
      */
     public static MetarParser getInstance() {
@@ -56,12 +51,12 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * This is the main method of the parser. This method checks if the airport
      * exists. If it does then the metar code is decoded.
+     *
      * @param pMetarCode String representing the metar.
      * @return a decoded metar object.
      * @throws ParseException when an error occurs.
      */
-    @Override
-    public Metar parse(final String pMetarCode) throws ParseException {
+    @Override public Metar parse(final String pMetarCode) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = tokenize(pMetarCode);
         Airport airport = getAirports().get(metarTab[0]);
@@ -81,13 +76,14 @@ public final class MetarParser extends AbstractParser<Metar> {
                     m.setAuto(true);
                 } else if (RMK.equals(metarTab[i])) {
                     parseRMK(m, metarTab, i);
+                    break;
                 } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
                     AbstractMetarTrend trend;
                     trend = initTrend(metarTab[i]);
                     i = iterTrend(i, trend, metarTab);
                     m.addTrend(trend);
                 } else {
-                    iterCommands(m, metarTab[i]);
+                    executeCommand(m, metarTab[i]);
                 }
             }
         }
@@ -111,20 +107,21 @@ public final class MetarParser extends AbstractParser<Metar> {
     }
 
     /**
-     * Iterate over the commands and builds the metar.
-     * @param pM the metar
+     * Execute the command given by the supplier.
+     *
+     * @param pM     the metar
      * @param pInput the string to parse.
      */
-    private void iterCommands(final Metar pM, final String pInput) {
-        for (Command command : commands) {
-            if (command.canParse(pInput)) {
-                command.execute(pM, pInput);
-            }
+    private void executeCommand(final Metar pM, final String pInput) {
+        Command command = supplier.get(pInput);
+        if (command != null) {
+            command.execute(pM, pInput);
         }
     }
 
     /**
      * Iterates over an array and parses the trends.
+     *
      * @param pIndex the starting index.
      * @param pTrend the trend to update
      * @param pParts an array of strings
@@ -141,8 +138,9 @@ public final class MetarParser extends AbstractParser<Metar> {
 
     /**
      * Parses a string and updates the trend.
+     *
      * @param pTrend the abstractMetarTrend object to update.
-     * @param pPart The token to parse.
+     * @param pPart  The token to parse.
      */
     private void processChange(final AbstractMetarTrend pTrend, final String pPart) {
         if (pPart.startsWith(AT)) {
@@ -162,16 +160,4 @@ public final class MetarParser extends AbstractParser<Metar> {
         }
     }
 
-    /**
-     * @return The list of commands used by this parser.
-     */
-    protected List<Command> buildCommandList() {
-        List<Command> commandList = new ArrayList<>();
-        commandList.add(new RunwayCommand());
-        commandList.add(new TemperatureCommand());
-        commandList.add(new AltimeterCommand());
-        commandList.add(new AltimeterMecuryCommand());
-
-        return commandList;
-    }
 }

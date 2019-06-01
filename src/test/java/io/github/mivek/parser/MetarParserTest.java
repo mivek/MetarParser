@@ -15,11 +15,8 @@ import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.model.Wind;
 import io.github.mivek.model.trend.AbstractMetarTrend;
-import io.github.mivek.parser.command.metar.Command;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -325,6 +322,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // THEN the altimeter is converted in HPa
         assertNotNull(m);
         assertEquals(Integer.valueOf(1017), m.getAltimeter());
+        assertThat(m.getWeatherConditions(), is(notNullValue()));
+        assertThat(m.getWeatherConditions(), hasSize(3));
     }
 
     @Test
@@ -340,11 +339,4 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
-    @Test public void testBuildCommandList() {
-        List<Command> list = fSut.buildCommandList();
-
-        assertNotNull(list);
-        assertThat(list, hasSize(4));
-
-    }
 }

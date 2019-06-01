@@ -51,9 +51,17 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         assertThat(wc.getPhenomenons(), hasItems(Phenomenon.RAIN, Phenomenon.HAIL));
     }
 
+    @Test public void testParseWCNotNull() {
+        String wcPart = "-SH";
+
+        WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
+
+        assertNotNull(wc);
+    }
+
     @Test
     public void testParseWCNull() {
-        String wcPart = "-SH";
+        String wcPart = "SH";
 
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 

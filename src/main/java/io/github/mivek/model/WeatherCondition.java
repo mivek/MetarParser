@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Weather condition class.
+ *
  * @author mivek
  */
 public class WeatherCondition {
@@ -30,6 +31,7 @@ public class WeatherCondition {
 
     /**
      * Getter of intensity.
+     *
      * @return the Intensity of the condition.
      */
     public Intensity getIntensity() {
@@ -38,6 +40,7 @@ public class WeatherCondition {
 
     /**
      * Setter of intensity.
+     *
      * @param pIntensity The intensity to set.
      */
     public void setIntensity(final Intensity pIntensity) {
@@ -46,6 +49,7 @@ public class WeatherCondition {
 
     /**
      * Getter of the descriptive.
+     *
      * @return the descriptive.
      */
     public Descriptive getDescriptive() {
@@ -54,6 +58,7 @@ public class WeatherCondition {
 
     /**
      * Setter of the descriptive.
+     *
      * @param pDescriptive the descriptive to set.
      */
     public void setDescriptive(final Descriptive pDescriptive) {
@@ -62,6 +67,7 @@ public class WeatherCondition {
 
     /**
      * Getter of the phenomenons list.
+     *
      * @return a list of phenomenons.
      */
     public List<Phenomenon> getPhenomenons() {
@@ -70,6 +76,7 @@ public class WeatherCondition {
 
     /**
      * Adds a phenomenon to the list.
+     *
      * @param pPhenomenon The Phenomenon to add.
      */
     public void addPhenomenon(final Phenomenon pPhenomenon) {
@@ -78,14 +85,14 @@ public class WeatherCondition {
 
     /**
      * Checks if the weather condition is valid.
+     *
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !phenomenons.isEmpty();
+        return !phenomenons.isEmpty() || (intensity != null && descriptive != null);
     }
 
-    @Override
-    public final String toString() {
+    @Override public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.intensity"), intensity).
                 append(Messages.getInstance().getString("ToString.descriptive"), descriptive).
