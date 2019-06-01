@@ -339,4 +339,12 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
+    @Test public void testParseRMK() {
+        Metar m = new Metar();
+        String[] array = { "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
+        getSut().parseRMK(m, array, 0);
+        String rmk = m.getRemark();
+        assertNotNull(rmk);
+        assertThat(rmk, not(containsString("RMK")));
+    }
 }
