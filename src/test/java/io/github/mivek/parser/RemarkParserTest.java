@@ -1,14 +1,10 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.parser.command.remark.Command;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -342,12 +338,5 @@ public class RemarkParserTest {
         String remark = sut.parse(code);
         assertThat(remark, containsString("CF1AC8 CF TR"));
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1009.1")));
-    }
-
-    @Test public void testBuildCommandList() {
-        List<Command> commands = sut.buildCommandList();
-
-        assertNotNull(commands);
-        assertThat(commands, hasSize(25));
     }
 }
