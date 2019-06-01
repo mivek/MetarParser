@@ -18,7 +18,7 @@ public final class VariableSkyHeightCommand implements Command {
     /**
      * Default constructor.
      */
-    public VariableSkyHeightCommand() {
+    VariableSkyHeightCommand() {
         fMessages = Messages.getInstance();
     }
 

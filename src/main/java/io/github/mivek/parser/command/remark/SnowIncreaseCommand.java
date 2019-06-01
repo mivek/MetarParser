@@ -18,7 +18,7 @@ public final class SnowIncreaseCommand implements Command {
     /**
      * Default constructor.
      */
-    public SnowIncreaseCommand() {
+    SnowIncreaseCommand() {
         fMessages = Messages.getInstance();
     }
 

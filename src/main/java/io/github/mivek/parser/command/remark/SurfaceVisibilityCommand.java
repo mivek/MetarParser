@@ -18,7 +18,7 @@ public final class SurfaceVisibilityCommand implements Command {
     /**
      * Default constructor.
      */
-    public SurfaceVisibilityCommand() {
+    SurfaceVisibilityCommand() {
         fMessages = Messages.getInstance();
     }
 

@@ -18,7 +18,7 @@ public final class VirgaDirectionCommand implements Command {
     /**
      * Default constructor.
      */
-    public VirgaDirectionCommand() {
+    VirgaDirectionCommand() {
         fMessages = Messages.getInstance();
     }
 

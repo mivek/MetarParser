@@ -18,7 +18,7 @@ public final class VariableSkyCommand implements Command {
     /**
      * Default constructor.
      */
-    public VariableSkyCommand() {
+    VariableSkyCommand() {
         fMessages = Messages.getInstance();
     }
 

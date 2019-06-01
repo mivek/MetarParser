@@ -19,7 +19,7 @@ public final class WindShiftCommand implements Command {
     /**
      * Default constructor.
      */
-    public WindShiftCommand() {
+    WindShiftCommand() {
         fMessages = Messages.getInstance();
     }
 

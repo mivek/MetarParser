@@ -18,7 +18,7 @@ public final class SeaLevelPressureCommand implements Command {
     /**
      * Default constructor.
      */
-    public SeaLevelPressureCommand() {
+    SeaLevelPressureCommand() {
         fMessages = Messages.getInstance();
     }
 

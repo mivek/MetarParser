@@ -19,7 +19,7 @@ public final class WindPeakCommand implements Command {
     /**
      * Default constructor.
      */
-    public WindPeakCommand() {
+    WindPeakCommand() {
         fMessages = Messages.getInstance();
     }
 

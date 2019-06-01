@@ -19,7 +19,7 @@ public final class SecondLocationVisibilityCommand implements Command {
     /**
      * Default constructor.
      */
-    public SecondLocationVisibilityCommand() {
+    SecondLocationVisibilityCommand() {
         fMessages = Messages.getInstance();
     }
 

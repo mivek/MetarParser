@@ -19,7 +19,7 @@ public final class SmallHailSizeCommand implements Command {
     /**
      * Default constructor.
      */
-    public SmallHailSizeCommand() {
+    SmallHailSizeCommand() {
         fMessages = Messages.getInstance();
     }
 

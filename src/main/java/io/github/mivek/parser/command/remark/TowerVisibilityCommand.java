@@ -18,7 +18,7 @@ public final class TowerVisibilityCommand implements Command {
     /**
      * Default constructor.
      */
-    public TowerVisibilityCommand() {
+    TowerVisibilityCommand() {
         fMessages = Messages.getInstance();
     }
 

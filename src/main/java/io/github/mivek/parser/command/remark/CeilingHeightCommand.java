@@ -18,7 +18,7 @@ public final class CeilingHeightCommand implements Command {
     /**
      * Default constructor.
      */
-    public CeilingHeightCommand() {
+    CeilingHeightCommand() {
         fMessages = Messages.getInstance();
     }
 

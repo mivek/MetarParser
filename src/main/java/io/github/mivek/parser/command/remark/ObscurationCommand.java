@@ -18,7 +18,7 @@ public final class ObscurationCommand implements Command {
     /**
      * Default constructor.
      */
-    public ObscurationCommand() {
+    ObscurationCommand() {
         fMessages = Messages.getInstance();
     }
 

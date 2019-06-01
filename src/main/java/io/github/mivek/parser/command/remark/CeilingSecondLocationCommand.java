@@ -18,7 +18,7 @@ public final class CeilingSecondLocationCommand implements Command {
     /**
      * Default constructor.
      */
-    public CeilingSecondLocationCommand() {
+    CeilingSecondLocationCommand() {
         fMessages = Messages.getInstance();
     }
 

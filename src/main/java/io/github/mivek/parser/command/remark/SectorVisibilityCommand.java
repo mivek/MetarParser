@@ -18,7 +18,7 @@ public final class SectorVisibilityCommand implements Command {
     /**
      * Default constrctor.
      */
-    public SectorVisibilityCommand() {
+    SectorVisibilityCommand() {
         fMessages = Messages.getInstance();
     }
 

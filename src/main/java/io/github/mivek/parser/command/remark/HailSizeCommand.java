@@ -18,7 +18,7 @@ public final class HailSizeCommand implements Command {
     /**
      * Default constructor.
      */
-    public HailSizeCommand() {
+    HailSizeCommand() {
         fMessages = Messages.getInstance();
     }
 

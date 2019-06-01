@@ -18,7 +18,7 @@ public final class ThunderStormLocationMovingCommand implements Command {
     /**
      * Default constructor.
      */
-    public ThunderStormLocationMovingCommand() {
+    ThunderStormLocationMovingCommand() {
         fMessages = Messages.getInstance();
     }
 

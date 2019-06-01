@@ -18,7 +18,7 @@ public final class TornadicActivityBegEndCommand implements Command {
     /**
      * Default constructor.
      */
-    public TornadicActivityBegEndCommand() {
+    TornadicActivityBegEndCommand() {
         fMessages = Messages.getInstance();
     }
 

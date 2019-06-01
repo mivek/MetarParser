@@ -18,7 +18,7 @@ public final class PrecipitationBegEndCommand implements Command {
     /**
      * Default constructor.
      */
-    public PrecipitationBegEndCommand() {
+    PrecipitationBegEndCommand() {
         fMessages = Messages.getInstance();
     }
 

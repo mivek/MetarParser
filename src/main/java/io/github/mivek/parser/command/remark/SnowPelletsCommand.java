@@ -18,7 +18,7 @@ public final class SnowPelletsCommand implements Command {
     /**
      * Default constructor.
      */
-    public SnowPelletsCommand() {
+    SnowPelletsCommand() {
         fMessages = Messages.getInstance();
     }
 

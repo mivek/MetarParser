@@ -18,7 +18,7 @@ public final class WindShiftFropaCommand implements Command {
     /**
      * Default constructor.
      */
-    public WindShiftFropaCommand() {
+    WindShiftFropaCommand() {
         fMessages = Messages.getInstance();
     }
 

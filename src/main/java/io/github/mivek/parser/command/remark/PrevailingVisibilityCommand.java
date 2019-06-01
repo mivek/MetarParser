@@ -17,7 +17,7 @@ public final class PrevailingVisibilityCommand implements Command {
     /**
      * Default constructor.
      */
-    public PrevailingVisibilityCommand() {
+    PrevailingVisibilityCommand() {
         fMessages = Messages.getInstance();
     }
 
