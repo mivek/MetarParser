@@ -12,8 +12,7 @@ public final class RemarkParser {
     /** The instance of the parser. */
     private static final RemarkParser INSTANCE = new RemarkParser();
 
-    /** List of commands. */
-
+    /** The command supplier. */
     private final RemarkCommandSupplier supplier;
     /***
      * Private constructor.
@@ -32,7 +31,6 @@ public final class RemarkParser {
         while (!rmk.equals("")) {
             try {
                 rmk = supplier.get(rmk).execute(rmk, sb);
-
             } catch (MissingResourceException e) {
                 rmk = supplier.getDefaultCommand().execute(rmk, sb);
             }
