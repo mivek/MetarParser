@@ -29,7 +29,7 @@ public final class CommonCommandSupplier implements CommandSupplier<Command> {
     }
 
     /**
-     * Builds list of commands
+     * Builds list of commands.
      *
      * @return the list of commands.
      */
