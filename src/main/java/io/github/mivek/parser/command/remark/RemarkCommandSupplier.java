@@ -37,7 +37,7 @@ public final class RemarkCommandSupplier implements CommandSupplier<Command> {
      *
      * @return the list
      */
-    List<Command> buildCommandList() {
+    protected List<Command> buildCommandList() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new WindPeakCommand());
         commandList.add(new WindShiftFropaCommand());
