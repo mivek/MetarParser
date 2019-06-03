@@ -1,10 +1,19 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.*;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.TimeIndicator;
+import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.*;
+import io.github.mivek.model.Cloud;
+import io.github.mivek.model.Metar;
+import io.github.mivek.model.Visibility;
+import io.github.mivek.model.WeatherCondition;
+import io.github.mivek.model.Wind;
 import io.github.mivek.model.trend.AbstractMetarTrend;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,41 +40,6 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         fSut = MetarParser.getInstance();
     }
 
-    /**
-     * ======================== Test ParseRunWays ========================
-     */
-    @Test
-    public void testParseRunwayActionSimple() {
-        String riString = "R26/0600U";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-
-        assertNotNull(ri);
-        assertEquals("26", ri.getName());
-        assertEquals(600, ri.getMinRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
-    }
-
-    @Test
-    public void testParseRunWaysComplex() {
-        String riString = "R26L/0550V700U";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-        assertNotNull(ri);
-        assertEquals("26L", ri.getName());
-        assertEquals(550, ri.getMinRange());
-        assertEquals(700, ri.getMaxRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
-    }
-
-    @Test
-    public void testParseRunWayNull() {
-        String riString = "R26R/AZEZFDFS";
-
-        RunwayInfo ri = fSut.parseRunWayAction(riString);
-
-        assertNull(ri);
-    }
 
     /**
      * =========================== Test ParseMetarAction ===========================
@@ -87,6 +61,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(0, m.getWind().getSpeed());
         assertEquals(Messages.getInstance().getString("Converter.N"), m.getWind().getDirection());
         assertEquals("KT", m.getWind().getUnit());
+        assertNotNull(m.getVisibility());
+        assertEquals(metarString, m.getMessage());
         assertEquals("350m", m.getVisibility().getMainVisibility());
         assertThat(m.getRunways(), is(not(empty())));
         assertThat(m.getRunways(), hasSize(8));
@@ -241,6 +217,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(toString, containsString(Messages.getInstance().getString("TimeIndicator.TL") + " 18:30"));
         assertThat(toString, containsString(Descriptive.SHOWERS.toString()));
         assertThat(toString, containsString(Phenomenon.RAIN.toString()));
+        assertNotNull(m.getVisibility());
+        assertEquals(">10km", m.getVisibility().getMainVisibility());
     }
 
     @Test
@@ -331,6 +309,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(">10km", m.getVisibility().getMainVisibility());
         assertEquals(Integer.valueOf(9), m.getTemperature());
         assertEquals(Integer.valueOf(6), m.getDewPoint());
+        assertEquals(Integer.valueOf(1031), m.getAltimeter());
         assertTrue(m.isNosig());
     }
 
@@ -343,6 +322,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // THEN the altimeter is converted in HPa
         assertNotNull(m);
         assertEquals(Integer.valueOf(1017), m.getAltimeter());
+        assertThat(m.getWeatherConditions(), is(notNullValue()));
+        assertThat(m.getWeatherConditions(), hasSize(3));
     }
 
     @Test
@@ -358,4 +339,12 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
+    @Test public void testParseRMK() {
+        Metar m = new Metar();
+        String[] array = { "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
+        getSut().parseRMK(m, array, 0);
+        String rmk = m.getRemark();
+        assertNotNull(rmk);
+        assertThat(rmk, not(containsString("RMK")));
+    }
 }

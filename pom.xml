@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mivek</groupId>
     <artifactId>metarParser</artifactId>
-    <version>1.6.1</version>
+    <version>1.6.2</version>
     <name>metarParser</name>
     <description>This project is a metar parser.
         Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
@@ -34,7 +34,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.source.plugin.version>3.0.1</maven.source.plugin.version>
+        <maven.source.plugin.version>3.1.0</maven.source.plugin.version>
         <maven.javadoc.plugin.version>3.1.0</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -113,14 +113,14 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.7</version>
+                <version>1.4.8</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>mutationCoverage</goal>
                         </goals>
                         <configuration>
-                            <mutationThreshold>90</mutationThreshold>
+                            <mutationThreshold>94</mutationThreshold>
                             <coverageThreshold>99</coverageThreshold>
                             <targetClasses>
                                 <param>io.github.mivek.parser.*</param>
@@ -132,7 +132,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.3</version>
+                <version>0.8.4</version>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
@@ -163,6 +163,11 @@
                                         </limit>
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.96</minimum>
+                                        </limit>
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
                                             <minimum>0.97</minimum>
                                         </limit>
