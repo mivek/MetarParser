@@ -1,6 +1,10 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.*;
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -155,7 +159,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF res = fSut.parse(taf);
 
         assertThat(res, is(not(nullValue())));
-        assertEquals(fSut.getAirports().get("LFPG"), res.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("LFPG").get(), res.getAirport());
         // Check on time delivery.
         assertEquals(Integer.valueOf(15), res.getDay());
         assertEquals(5, res.getTime().getHour());
@@ -293,7 +297,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(res);
 
         assertThat(res, is(not(nullValue())));
-        assertThat(res.getAirport(), is(fSut.getAirports().get("KLWT")));
+        assertThat(res.getAirport(), is(fSut.getAirportSupplier().get("KLWT").get()));
         assertThat(res.getDay(), is(21));
         assertThat(res.getTime().getHour(), is(11));
         assertThat(res.getTime().getMinute(), is(20));
