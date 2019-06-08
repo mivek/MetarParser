@@ -1,6 +1,6 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.parser.command.remark.RemarkCommandSupplier;
+import io.github.mivek.command.remark.RemarkCommandSupplier;
 
 import java.util.MissingResourceException;
 
