@@ -18,6 +18,10 @@ import java.util.List;
 public class TAF extends AbstractWeatherCode {
     /** The valididty of the TAF. */
     private Validity validity;
+    /** The maximum temperature. */
+    private TemperatureDated maxTemperature;
+    /** The minimum temperature. */
+    private TemperatureDated minTemperature;
     /** List of BECMG changes. */
     private List<BECMGTafTrend> bECMGs;
     /** List of From changes. */
@@ -26,8 +30,6 @@ public class TAF extends AbstractWeatherCode {
     private List<TEMPOTafTrend> tempos;
     /** List of probability changes. */
     private List<PROBTafTrend> probs;
-    /** Probability of the metar. */
-    private Integer probability;
     /**Indicate if the taf event is ameded.*/
     private boolean amendment;
 
@@ -54,6 +56,33 @@ public class TAF extends AbstractWeatherCode {
      */
     public void setValidity(final Validity pValidity) {
         validity = pValidity;
+    }
+    /**
+     * @return the maxTemperature
+     */
+    public TemperatureDated getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    /**
+     * @param pMaxTemperature the maxTemperature to set
+     */
+    public void setMaxTemperature(final TemperatureDated pMaxTemperature) {
+        maxTemperature = pMaxTemperature;
+    }
+
+    /**
+     * @return the minTemperature
+     */
+    public TemperatureDated getMinTemperature() {
+        return minTemperature;
+    }
+
+    /**
+     * @param pMinTemperature the minTemperature to set
+     */
+    public void setMinTemperature(final TemperatureDated pMinTemperature) {
+        minTemperature = pMinTemperature;
     }
 
     /**
@@ -94,21 +123,6 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @return the probability
-     */
-    public Integer getProbability() {
-        return probability;
-    }
-
-    /**
-     * @param pProbability
-     * the probability to set
-     */
-    public void setProbability(final Integer pProbability) {
-        probability = pProbability;
-    }
-
-    /**
      * Adds a BECMG to the list.
      * @param pChange the change to add.
      */
@@ -145,9 +159,13 @@ public class TAF extends AbstractWeatherCode {
         amendment = pAmendment;
     }
 
-    @Override public final String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.probability"), probability)
-                .append(Messages.getInstance().getString("ToString.amendment"), amendment).appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString())
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString())
+                .append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
+                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature)
+                .append(Messages.getInstance().getString("ToString.amendment"), amendment)
+                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString())
                 .appendToString(probs.toString()).toString();
     }
 }

@@ -6,7 +6,7 @@ import io.github.mivek.model.trend.validity.Validity;
 /**
  * @author mivek
  */
-public class PROBTafTrend extends AbstractTafTrend<Validity> {
+public class PROBTafTrend extends AbstractTafProbTrend<Validity> {
 
     /**
      * Constructor.
