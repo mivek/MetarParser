@@ -16,7 +16,8 @@ If you want to add a new feature, open an issue describing the feature you want 
 
 **Development flow**
 
-*   Create a branch from master. Prefix the branch name with the type of branch you want to create. Eg: "feature/", "bugfix/", "clean/"
+*   Create a branch from master. Prefix the branch name with the type of branch you want to create. Eg: "feature/", "bugfix/", "clean/".
+The keywords feature, bugfix and clean are mandatory for branch name.
 
 *   Update the pom
     *   For a feature bump the minor version of the pom. Eg: 1.6.0 -> 1.7.0

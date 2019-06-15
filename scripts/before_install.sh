@@ -6,7 +6,7 @@ if  [ "$TRAVIS_SECURE_ENV_VARS" = "true" ] && [ "$TRAVIS_PULL_REQUEST" = "false"
     echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
 fi
 
-if [[ $1 =~ (Merge pull request.*bugfix) ]] ; then
+if [[ $1 =~ (Merge pull request.*bugfix) ]] || [[ $1 =~ (Merge pull request.*clean) ]]; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
     $isPRMerged=true
 elif [[ $1 =~ (Merge pull request.*feature) ]] ; then
