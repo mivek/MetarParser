@@ -14,7 +14,7 @@ elif [[ $1 =~ (Merge pull request.*feature) ]] ; then
     isPRMerged=true
 fi
 
-if [[ $isPRMerged = true ]] ; then
+if [ "$isPRMerged" = true ] ; then
     git config --global user.email "travis@travis-ci.org"
     git config --global user.name "Travis CI"
     git add pom.xml
