@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 isPRMerged=false
 
-if  [ "$TRAVIS_SECURE_ENV_VARS" = "true" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ];then
+if  [[ "$TRAVIS_SECURE_ENV_VARS" = "true" ]] && [[ "$TRAVIS_PULL_REQUEST" = "false" ]] && [[ "$TRAVIS_BRANCH" = "master" ]];then
     echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
     echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
 fi
@@ -14,7 +14,7 @@ elif [[ $1 =~ (Merge pull request.*feature) ]] ; then
     isPRMerged=true
 fi
 
-if [ "$isPRMerged" = true ] ; then
+if [[ "$isPRMerged" = true ]] ; then
     git config --global user.email "travis@travis-ci.org"
     git config --global user.name "Travis CI"
     git add pom.xml
