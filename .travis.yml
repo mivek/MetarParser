@@ -1,3 +1,4 @@
+dist: trusty
 language: java
 
 cache:
@@ -15,18 +16,17 @@ jdk: oraclejdk8
 
 before_install:
   # Retrieve keys only if build is not on a pull request
-  - bash scripts/before_install.sh
+  - bash scripts/before_install.sh $TRAVIS_COMMIT_MESSAGE
 
 install:
   - mvn compile test-compile
-  
+
 script:
   # If the branch is master then the deploy goal is used otherwise the maven install is used
-  - bash scripts/script.sh
+  - bash scripts/script.sh $TRAVIS_COMMIT_MESSAGE
 
 before_deploy:
   - VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-  - bash scripts/before_deploy.sh ${VERSION}
 
 deploy:
   provider: releases
