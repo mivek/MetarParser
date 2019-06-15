@@ -120,7 +120,7 @@
                             <goal>mutationCoverage</goal>
                         </goals>
                         <configuration>
-                            <mutationThreshold>94</mutationThreshold>
+                            <mutationThreshold>98</mutationThreshold>
                             <coverageThreshold>99</coverageThreshold>
                             <targetClasses>
                                 <param>io.github.mivek.parser.*</param>
