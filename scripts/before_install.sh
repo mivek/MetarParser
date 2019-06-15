@@ -7,7 +7,7 @@ if  [[ "$TRAVIS_SECURE_ENV_VARS" = "true" ]] && [[ "$TRAVIS_PULL_REQUEST" = "fal
 fi
 
 if [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*bugfix) ]] || [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*clean) ]]; then
-    mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
+    mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit
     isPRMerged=true
 elif [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*feature) ]] ; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
