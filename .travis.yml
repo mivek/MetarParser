@@ -16,7 +16,7 @@ jdk: oraclejdk8
 
 before_install:
   # Retrieve keys only if build is not on a pull request
-  - bash scripts/before_install.sh $TRAVIS_COMMIT_MESSAGE
+  - bash scripts/before_install.sh
 
 install:
   - mvn compile test-compile
