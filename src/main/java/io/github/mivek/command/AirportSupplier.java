@@ -56,7 +56,7 @@ public final class AirportSupplier implements Supplier<Optional<Airport>> {
                 fAirports.put(airport.getIcao(), airport);
             }
         } catch (IOException exception) {
-            throw new RuntimeException(exception.getMessage());
+            throw new IllegalStateException(exception.getMessage());
         }
     }
 

@@ -8,10 +8,10 @@ fi
 
 if [[ $1 =~ (Merge pull request.*bugfix) ]] || [[ $1 =~ (Merge pull request.*clean) ]]; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
-    $isPRMerged=true
+    isPRMerged=true
 elif [[ $1 =~ (Merge pull request.*feature) ]] ; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
-    $isPRMerged=true
+    isPRMerged=true
 fi
 
 if [[ $isPRMerged = true ]] ; then
