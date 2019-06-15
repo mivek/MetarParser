@@ -1,3 +1,4 @@
+dist: trusty
 language: java
 
 cache:
@@ -19,14 +20,13 @@ before_install:
 
 install:
   - mvn compile test-compile
-  
+
 script:
   # If the branch is master then the deploy goal is used otherwise the maven install is used
   - bash scripts/script.sh
 
 before_deploy:
   - VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-  - bash scripts/before_deploy.sh ${VERSION}
 
 deploy:
   provider: releases

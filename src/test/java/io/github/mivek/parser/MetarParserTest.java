@@ -53,7 +53,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
 
         assertNotNull(m);
 
-        assertEquals(fSut.getAirports().get("LFPG"), m.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("LFPG").get(), m.getAirport());
         assertEquals(Integer.valueOf(17), m.getDay());
         assertEquals(8, m.getTime().getHour());
         assertEquals(30, m.getTime().getMinute());

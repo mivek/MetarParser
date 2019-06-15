@@ -1,33 +1,23 @@
 package io.github.mivek.parser;
 
-import com.opencsv.CSVReader;
+import io.github.mivek.command.AirportSupplier;
+import io.github.mivek.command.common.Command;
+import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.common.MinimalVisibilityCommand;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.model.AbstractWeatherContainer;
-import io.github.mivek.model.Airport;
-import io.github.mivek.model.Country;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
-import io.github.mivek.parser.command.common.Command;
-import io.github.mivek.parser.command.common.CommonCommandSupplier;
-import io.github.mivek.parser.command.common.MinimalVisibilityCommand;
 import io.github.mivek.utils.Regex;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,75 +44,24 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     private static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
     /** Pattern for CAVOK. */
     private static final String CAVOK = "CAVOK";
-    /** Logger. */
-    private static final Logger LOGGER = Logger.getLogger(AbstractParser.class.getName());
-
-    /** Path of airport file. */
-    private final InputStream fAirportsFile = AbstractParser.class.getClassLoader().getResourceAsStream("data/airports.dat");
-    /** Path of countries file. */
-    private final InputStream fCountriesFile = AbstractParser.class.getClassLoader().getResourceAsStream("data/countries.dat");
     /** The common command commonSupplier. */
     private final CommonCommandSupplier commonSupplier;
-    /** Map of airports. */
-    private Map<String, Airport> fAirports;
     /** The remark parser. */
-    private final RemarkParser fRemarkParser;
-    /** Map of countries. */
-    private Map<String, Country> fCountries;
+    private final RemarkParser remarkParser;
+    /** The airport supplier. */
+    private final AirportSupplier airportSupplier;
 
     /**
-     * Constructor.
+     * Dependency injection constructor.
+     * @param pCommonCommandSupplier the common command supplier
+     * @param pRemarkParser the remark parser.
+     * @param pAirportSupplier the airport supplier.
      */
-    protected AbstractParser() {
-        commonSupplier = new CommonCommandSupplier();
-        initCountries();
-        initAirports();
-        fRemarkParser = RemarkParser.getInstance();
+    protected AbstractParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
+        commonSupplier = pCommonCommandSupplier;
+        remarkParser = pRemarkParser;
+        airportSupplier = pAirportSupplier;
     }
-
-    /**
-     * Initiate airports map.
-     */
-    private void initAirports() {
-        fAirports = new HashMap<>();
-        String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fAirportsFile, StandardCharsets.UTF_8))) {
-            while ((line = reader.readNext()) != null) {
-                Airport airport = new Airport();
-                airport.setName(line[1]);
-                airport.setCity(line[2]);
-                airport.setCountry(fCountries.get(line[3]));
-                airport.setIata(line[4]);
-                airport.setIcao(line[5]);
-                airport.setLatitude(Double.parseDouble(line[6]));
-                airport.setLongitude(Double.parseDouble(line[7]));
-                airport.setAltitude(Integer.parseInt(line[8]));
-                airport.setTimezone(line[9]);
-                airport.setDst(line[10]);
-                fAirports.put(airport.getIcao(), airport);
-            }
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
-        }
-    }
-
-    /**
-     * Initiate countries map.
-     */
-    private void initCountries() {
-        fCountries = new HashMap<>();
-        String[] line;
-        try (CSVReader reader = new CSVReader(new InputStreamReader(fCountriesFile, StandardCharsets.UTF_8))) {
-            while ((line = reader.readNext()) != null) {
-                Country country = new Country();
-                country.setName(line[0]);
-                fCountries.put(country.getName(), country);
-            }
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
-        }
-    }
-
     /**
      * Parses the minimal visibility and updates the visibility object.
      *
@@ -182,13 +121,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     }
 
     /**
-     * @return the airports
-     */
-    protected Map<String, Airport> getAirports() {
-        return fAirports;
-    }
-
-    /**
      * Abstract method parse.
      *
      * @param pCode the message to parse.
@@ -221,7 +153,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
 
         WeatherCondition wc = parseWeatherCondition(pPart);
         return pContainer.addWeatherCondition(wc);
-
     }
 
     /***
@@ -232,7 +163,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      */
     protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
         String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
-        pContainer.setRemark(fRemarkParser.parse(String.join(" ", subArray)));
+        pContainer.setRemark(remarkParser.parse(String.join(" ", subArray)));
     }
 
     /**
@@ -250,5 +181,12 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
             tokens.add(m.group(1));
         }
         return tokens.toArray(new String[0]);
+    }
+
+    /**
+     * @return the Airport supplier.
+     */
+    protected AirportSupplier getAirportSupplier() {
+        return airportSupplier;
     }
 }

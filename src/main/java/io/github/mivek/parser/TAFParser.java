@@ -1,5 +1,7 @@
 package io.github.mivek.parser;
 
+import io.github.mivek.command.AirportSupplier;
+import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
@@ -31,18 +33,26 @@ public final class TAFParser extends AbstractParser<TAF> {
     private static final String TN = "TN";
     /** Regex for the validity. */
     private static final Pattern REGEX_VALIDITY = Pattern.compile("^\\d{4}/\\d{4}$");
-    /**
-     * Instance of the TAFParser.
-     */
+    /** Instance of the TAFParser. */
     private static TAFParser instance = new TAFParser();
 
     /**
-     * Constructor.
+     * Default constructor.
      */
     private TAFParser() {
-        super();
+        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier());
     }
 
+    /**
+     * Dependency injection constructor.
+     *
+     * @param pCommonCommandSupplier the common command supplier
+     * @param pRemarkParser          the remark parser.
+     * @param pAirportSupplier       the airport supplier.
+     */
+    protected TAFParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
+        super(pCommonCommandSupplier, pRemarkParser, pAirportSupplier);
+    }
     /**
      * @return the instance.
      */
@@ -74,11 +84,8 @@ public final class TAFParser extends AbstractParser<TAF> {
             i++;
         }
         // Airport
-        Airport airport = getAirports().get(line1parts[i]);
+        Airport airport = getAirportSupplier().get(line1parts[i]).orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND));
         i++;
-        if (airport == null) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);
-        }
         taf.setAirport(airport);
         taf.setMessage(pTAFCode);
         // Day and time

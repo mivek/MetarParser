@@ -1,5 +1,9 @@
 package io.github.mivek.parser;
 
+import io.github.mivek.command.AirportSupplier;
+import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.metar.Command;
+import io.github.mivek.command.metar.MetarParserCommandSupplier;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
@@ -10,8 +14,6 @@ import io.github.mivek.model.trend.TEMPOMetarTrend;
 import io.github.mivek.model.trend.validity.ATTime;
 import io.github.mivek.model.trend.validity.FMTime;
 import io.github.mivek.model.trend.validity.TLTime;
-import io.github.mivek.parser.command.metar.Command;
-import io.github.mivek.parser.command.metar.MetarParserCommandSupplier;
 import io.github.mivek.utils.Converter;
 
 /**
@@ -21,7 +23,6 @@ import io.github.mivek.utils.Converter;
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
-
     /** Constant string for TL. */
     private static final String TILL = "TL";
     /** Constant string for AT. */
@@ -35,8 +36,21 @@ public final class MetarParser extends AbstractParser<Metar> {
      * Private constructor.
      */
     private MetarParser() {
-        super();
-        supplier = new MetarParserCommandSupplier();
+        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new MetarParserCommandSupplier());
+    }
+
+    /**
+     * Dependency injection constructor.
+     *
+     * @param pCommonCommandSupplier      the command command supplier
+     * @param pRemarkParser               the remark parser
+     * @param pMetarParserCommandSupplier the metar command supplier.
+     * @param pAirportSupplier            the airport supplier
+     */
+    protected MetarParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier,
+            final MetarParserCommandSupplier pMetarParserCommandSupplier) {
+        super(pCommonCommandSupplier, pRemarkParser, pAirportSupplier);
+        supplier = pMetarParserCommandSupplier;
     }
 
     /**
@@ -59,11 +73,7 @@ public final class MetarParser extends AbstractParser<Metar> {
     @Override public Metar parse(final String pMetarCode) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = tokenize(pMetarCode);
-        Airport airport = getAirports().get(metarTab[0]);
-        if (airport == null) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND);
-        }
-
+        Airport airport = getAirportSupplier().get(metarTab[0]).orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND));
         m.setAirport(airport);
         m.setMessage(pMetarCode);
         parseDeliveryTime(m, metarTab[1]);
