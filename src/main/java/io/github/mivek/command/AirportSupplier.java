@@ -73,7 +73,7 @@ public final class AirportSupplier implements Supplier<Optional<Airport>> {
                 fCountries.put(country.getName(), country);
             }
         } catch (IOException exception) {
-            throw new RuntimeException(exception.getMessage());
+            throw new IllegalStateException(exception.getMessage());
         }
     }
 
