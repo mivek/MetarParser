@@ -65,10 +65,10 @@ public final class Regex {
     }
 
     /**
-     * Initiate the pattern and the matcher.
+     * Initiates and returns a matcher of the compiled pattern.
      * @param pPattern the compiled pattern regex.
      * @param pInput the input to test.
-     * The input to test.
+     * @return the initiated matcher.
      */
     private static Matcher init(final Pattern pPattern, final String pInput) {
         return pPattern.matcher(pInput);
