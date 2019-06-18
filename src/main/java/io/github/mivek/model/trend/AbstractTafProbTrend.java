@@ -13,6 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends AbstractTafTrend<T> {
 
+    /** Probability of the trend. */
     private Integer probability;
 
     /**

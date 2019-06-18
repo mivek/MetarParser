@@ -1,8 +1,6 @@
 package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
-import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.trend.validity.AbstractValidity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

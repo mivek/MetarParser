@@ -7,7 +7,11 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.*;
+import io.github.mivek.model.trend.AbstractTafTrend;
+import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.PROBTafTrend;
+import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
@@ -27,9 +31,9 @@ public final class TAFParser extends AbstractParser<TAF> {
     public static final String TAF = "TAF";
     /** Probability string constant. */
     private static final String PROB = "PROB";
-    /** Temperature Maximum Constant */
+    /** Temperature Maximum Constant. */
     private static final String TX = "TX";
-    /** Temperature Minimum Constant */
+    /** Temperature Minimum Constant. */
     private static final String TN = "TN";
     /** Regex for the validity. */
     private static final Pattern REGEX_VALIDITY = Pattern.compile("^\\d{4}/\\d{4}$");
@@ -117,7 +121,7 @@ public final class TAFParser extends AbstractParser<TAF> {
     }
 
     /**
-     * Extracts all lines and tokenize them
+     * Extracts all lines and tokenize them.
      * @param pTAFCode raw TAF which may already contains some linebreaks
      * @return 2d jagged array containing lines and their tokens
      */
@@ -207,8 +211,8 @@ public final class TAFParser extends AbstractParser<TAF> {
     /**
      * parses the probability out of PROB??
      *
-     * @param pPart
-     * @return
+     * @param pPart the string to parse.
+     * @return probability of the trend.
      */
     protected int parseProbability(final String pPart) {
         return Integer.parseInt(pPart.substring(4));
