@@ -8,10 +8,6 @@ import java.util.regex.Pattern;
  * @author mivek
  */
 public final class Regex {
-    /**
-     * Matcher (input).
-     */
-    private static Matcher m;
 
     /**
      * Private constructor.
@@ -28,7 +24,7 @@ public final class Regex {
      * @return Array of matches.
      */
     public static String[] pregMatch(final Pattern pPattern, final String pInput) {
-        init(pPattern, pInput);
+        Matcher m = init(pPattern, pInput);
 
         if (m.find()) {
             int length = m.groupCount() + 1;
@@ -49,7 +45,7 @@ public final class Regex {
      * @return true if the input matches the regex.
      */
     public static boolean find(final Pattern pPattern, final String pInput) {
-        init(pPattern, pInput);
+        Matcher m = init(pPattern, pInput);
         return m.find();
     }
 
@@ -61,20 +57,21 @@ public final class Regex {
      * @return the finding string.
      */
     public static String findString(final Pattern pPattern, final String pInput) {
-        if (find(pPattern, pInput)) {
+        Matcher m = init(pPattern, pInput);
+        if (m.find()) {
             return m.group(1);
         }
         return null;
     }
 
     /**
-     * Initiate the pattern and the matcher.
+     * Initiates and returns a matcher of the compiled pattern.
      * @param pPattern the compiled pattern regex.
      * @param pInput the input to test.
-     * The input to test.
+     * @return the initiated matcher.
      */
-    private static void init(final Pattern pPattern, final String pInput) {
-        m = pPattern.matcher(pInput);
+    private static Matcher init(final Pattern pPattern, final String pInput) {
+        return pPattern.matcher(pInput);
     }
 
     /**
@@ -84,7 +81,7 @@ public final class Regex {
      * @return true if the input matches the regex.
      */
     public static boolean match(final Pattern pPattern, final String pInput) {
-        init(pPattern, pInput);
+        Matcher m = init(pPattern, pInput);
         return m.matches();
     }
 }
