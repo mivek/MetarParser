@@ -17,7 +17,11 @@ import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author mivek
@@ -27,6 +31,10 @@ public final class TAFParser extends AbstractParser<TAF> {
     public static final String TAF = "TAF";
     /** Probability string constant. */
     private static final String PROB = "PROB";
+    /** Temperature Maximum Constant. */
+    private static final String TX = "TX";
+    /** Temperature Minimum Constant. */
+    private static final String TN = "TN";
     /** Regex for the validity. */
     private static final Pattern REGEX_VALIDITY = Pattern.compile("^\\d{4}/\\d{4}$");
     /** Instance of the TAFParser. */
@@ -62,14 +70,14 @@ public final class TAFParser extends AbstractParser<TAF> {
      */
     @Override
     public TAF parse(final String pTAFCode) throws ParseException {
-        String[] lines = pTAFCode.split("\n");
-        if (!TAF.equals(lines[0].substring(0, 3))) {
+        String[][] lines = extractLineTokens(pTAFCode);
+        if (!TAF.equals(lines[0][0])) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE);
         }
         TAF taf = new TAF();
 
         // Handle the 1st line.
-        String[] line1parts = tokenize(lines[0]);
+        String[] line1parts = lines[0];
         int i = 1;
         if (TAF.equals(line1parts[1])) {
             i = 2;
@@ -92,21 +100,50 @@ public final class TAFParser extends AbstractParser<TAF> {
 
         // Handle rest of second line.
         for (int j = i; j < line1parts.length; j++) {
-            if (line1parts[j].startsWith(PROB)) {
-                taf.setProbability(Integer.valueOf(line1parts[j].substring(4)));
-            } else if (RMK.equals(line1parts[j])) {
+            String part = line1parts[j];
+            if (RMK.equals(part)) {
                 parseRMK(taf, line1parts, j);
+            } else if (part.startsWith(TX)) {
+                taf.setMaxTemperature(parseTemperature(part));
+            } else if (part.startsWith(TN)) {
+                taf.setMinTemperature(parseTemperature(part));
             } else {
-                generalParse(taf, line1parts[j]);
+                generalParse(taf, part);
             }
         }
         // Process other lines.
         for (int j = 1; j < lines.length; j++) {
             // Split the line.
-            String[] parts = tokenize(lines[j]);
+            String[] parts = lines[j];
             processLines(taf, parts);
         }
         return taf;
+    }
+
+    /**
+     * Extracts all lines and tokenize them.
+     * @param pTAFCode raw TAF which may already contains some linebreaks
+     * @return 2d jagged array containing lines and their tokens
+     */
+    private String[][] extractLineTokens(final String pTAFCode) {
+        String cleanedInput = pTAFCode
+                .replace("\n", " ")   // remove all linebreaks
+                .replaceAll("\\s{2,}", " ");  // remove unnecessary whitespaces
+
+        String[] lines = cleanedInput
+                .replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|BECMG|FM|PROB)", "\n$1")
+                .split("\n");
+        String[][] lineTokens = Arrays.stream(lines).map(this::tokenize).toArray(String[][]::new);
+        if (lineTokens.length > 1) {
+            // often temperatures are set in the end of the TAF report
+            String[] last = lineTokens[lines.length - 1];
+            List<String> temperatures = Arrays.stream(last).filter(code -> code.startsWith(TX) || code.startsWith(TN)).collect(Collectors.toList());
+            if (!temperatures.isEmpty()) {
+                lineTokens[0] = Stream.concat(Arrays.stream(lineTokens[0]), temperatures.stream()).toArray(String[]::new);
+                lineTokens[lines.length - 1] = Arrays.stream(last).filter(code -> !code.startsWith(TX) && !code.startsWith(TN)).toArray(String[]::new);
+            }
+        }
+        return lineTokens;
     }
 
     /**
@@ -132,14 +169,24 @@ public final class TAFParser extends AbstractParser<TAF> {
             }
             pTaf.addFM(change);
         } else if (pParts[0].startsWith(PROB)) {
-            PROBTafTrend change = new PROBTafTrend();
-            iterChanges(0, pParts, change);
-            pTaf.addProb(change);
+            int probability = parseProbability(pParts[0]);
+            if (pParts.length > 1 && pParts[1].equals(TEMPO)) {
+                TEMPOTafTrend change = new TEMPOTafTrend();
+                iterChanges(2, pParts, change);
+                change.setProbability(probability);
+                pTaf.addTempo(change);
+            } else {
+                PROBTafTrend change = new PROBTafTrend();
+                change.setProbability(probability);
+                iterChanges(1, pParts, change);
+                pTaf.addProb(change);
+            }
         }
     }
 
     /**
      * Updates the change object according to the string.
+     *
      * @param change the change object to update.
      * @param pPart the string to parse.
      */
@@ -153,19 +200,22 @@ public final class TAFParser extends AbstractParser<TAF> {
 
     /**
      * Updates the change object according to the string.
+     *
      * @param pChange the change object to update.
      * @param pPart String containing the information.
      */
     protected void processGeneralChanges(final AbstractTafTrend<?> pChange, final String pPart) {
-        if (pPart.startsWith(PROB)) {
-            pChange.setProbability(Integer.parseInt(pPart.substring(4)));
-        } else if (pPart.startsWith("TX")) {
-            pChange.setMaxTemperature(parseTemperature(pPart));
-        } else if (pPart.startsWith("TN")) {
-            pChange.setMinTemperature(parseTemperature(pPart));
-        } else {
-            generalParse(pChange, pPart);
-        }
+        generalParse(pChange, pPart);
+    }
+
+    /**
+     * parses the probability out of PROB??
+     *
+     * @param pPart the string to parse.
+     * @return probability of the trend.
+     */
+    protected int parseProbability(final String pPart) {
+        return Integer.parseInt(pPart.substring(4));
     }
 
     /**

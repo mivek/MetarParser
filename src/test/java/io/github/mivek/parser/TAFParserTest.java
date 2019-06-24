@@ -10,10 +10,7 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.AbstractTafTrend;
-import io.github.mivek.model.trend.BECMGTafTrend;
-import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
@@ -42,43 +39,23 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         fSut = TAFParser.getInstance();
     }
 
-    @Test
-    public void testprocessGeneralChangesWithPROB() {
-        AbstractTafTrend<?> change = new TEMPOTafTrend();
-        String part = "PROB56";
-        fSut.processGeneralChanges(change, part);
-
-        assertThat(change.getProbability(), is(56));
-        assertThat(change.getClouds(), is(empty()));
-        assertThat(change.getWeatherConditions(), is(empty()));
-    }
 
     @Test
-    public void testprocessGeneralChangesWithTX() {
+    public void testProcessGeneralChangesWithTX() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "TX15/0612Z";
         fSut.processGeneralChanges(change, part);
 
-        assertThat(change.getMaxTemperature(), is(not(nullValue())));
-        assertThat(change.getMaxTemperature().getTemperature(), is(15));
-        assertThat(change.getMaxTemperature().getDay(), is(6));
-        assertThat(change.getMaxTemperature().getHour(), is(12));
-        assertThat(change.getMinTemperature(), is(nullValue()));
         assertThat(change.getClouds(), is(empty()));
         assertThat(change.getWeatherConditions(), is(empty()));
     }
 
     @Test
-    public void testprocessGeneralChangesWithTN() {
+    public void testProcessGeneralChangesWithTN() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "TN01/0612Z";
         fSut.processGeneralChanges(change, part);
 
-        assertThat(change.getMinTemperature(), is(not(nullValue())));
-        assertThat(change.getMinTemperature().getTemperature(), is(1));
-        assertThat(change.getMinTemperature().getDay(), is(6));
-        assertThat(change.getMinTemperature().getHour(), is(12));
-        assertThat(change.getMaxTemperature(), is(nullValue()));
         assertThat(change.getClouds(), is(empty()));
         assertThat(change.getWeatherConditions(), is(empty()));
     }
@@ -138,6 +115,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getDay(), is(6));
         assertThat(res.getHour(), is(12));
     }
+
     @Test
     public void testParseBeginningValidity() {
         String validity = "FM061300";
@@ -148,14 +126,15 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseValid() throws ParseException {
+    public void testParseValidWithInvalidLineBreaks() throws ParseException {
         String taf = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n"
-                +"TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
-                +"TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
-                +"TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n"
-                +"BECMG 1520/1522 CAVOK \n"
-                +"TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
-                +"TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
+                + "TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
+                + "TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
+                + "TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n"
+                + "BECMG 1520/1522 CAVOK \n"
+                + "TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
+                + "TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
+
         TAF res = fSut.parse(taf);
 
         assertThat(res, is(not(nullValue())));
@@ -179,8 +158,18 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         //Check on clouds.
         assertThat(res.getClouds(), hasSize(1));
         assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
-        assertThat(res.getClouds().get(0).getAltitude(), is(30*12));
+        assertThat(res.getClouds().get(0).getAltitude(), is(30 * 12));
         assertThat(res.getClouds().get(0).getType(), nullValue());
+
+        assertThat(res.getMaxTemperature(), notNullValue());
+        assertThat(res.getMinTemperature(), notNullValue());
+        assertEquals(17, res.getMaxTemperature().getTemperature().intValue());
+        assertEquals(15, res.getMaxTemperature().getDay().intValue());
+        assertEquals(12, res.getMaxTemperature().getHour().intValue());
+        assertEquals(7, res.getMinTemperature().getTemperature().intValue());
+        assertEquals(16, res.getMinTemperature().getDay().intValue());
+        assertEquals(5, res.getMinTemperature().getHour().intValue());
+
         // Check that no weatherCondition
         assertThat(res.getWeatherConditions(), empty());
         // Checks on tempos.
@@ -198,9 +187,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.MIST));
         assertThat(res.getTempos().get(0).getClouds(), hasSize(1));
         assertThat(res.getTempos().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
-        assertThat(res.getTempos().get(0).getClouds().get(0).getAltitude(), is(6*30));
+        assertThat(res.getTempos().get(0).getClouds().get(0).getAltitude(), is(6 * 30));
         assertThat(res.getTempos().get(0).getClouds().get(0).getType(), nullValue());
-        assertThat(res.getTempos().get(0).getProbability(), is(40));
+        assertThat(res.getTempos().get(0).getProbability(), nullValue());
         // Second tempo
         assertThat(res.getTempos().get(1).getValidity().getStartDay(), is(15));
         assertThat(res.getTempos().get(1).getValidity().getStartHour(), is(6));
@@ -217,7 +206,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(1).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
         assertThat(res.getTempos().get(1).getClouds().get(0).getAltitude(), is(30 * 2));
         assertThat(res.getTempos().get(1).getClouds().get(0).getHeight(), is(200));
-
+        assertThat(res.getTempos().get(1).getProbability(), is(40));
         // Third tempo
         assertThat(res.getTempos().get(2).getValidity().getStartDay(), is(15));
         assertThat(res.getTempos().get(2).getValidity().getStartHour(), is(12));
@@ -237,6 +226,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(2).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
         assertThat(res.getTempos().get(2).getClouds().get(1).getAltitude(), is(30 * 40));
         assertThat(res.getTempos().get(2).getClouds().get(1).getType(), nullValue());
+        assertThat(res.getTempos().get(2).getProbability(), is(40));
 
         // First BECMG
         assertThat(res.getBECMGs(), hasSize(1));
@@ -246,6 +236,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(15, becmg.getValidity().getEndDay().intValue());
         assertEquals(22, becmg.getValidity().getEndHour().intValue());
 
+        // Fourth Tempo
         TEMPOTafTrend tempo4 = res.getTempos().get(3);
         assertEquals(16, tempo4.getValidity().getStartDay().intValue());
         assertEquals(3, tempo4.getValidity().getStartHour().intValue());
@@ -261,8 +252,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(CloudQuantity.BKN, tempo4.getClouds().get(0).getQuantity());
         assertNull(tempo4.getClouds().get(0).getType());
         assertEquals(6 * 30, tempo4.getClouds().get(0).getAltitude());
-        assertEquals(40, tempo4.getProbability().intValue());
+        assertNull(tempo4.getProbability());
 
+        // Fifth Tempo
         TEMPOTafTrend tempo5 = res.getTempos().get(4);
         assertEquals(16, tempo5.getValidity().getStartDay().intValue());
         assertEquals(4, tempo5.getValidity().getStartHour().intValue());
@@ -278,14 +270,231 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(CloudQuantity.BKN, tempo5.getClouds().get(0).getQuantity());
         assertEquals(2 * 30, tempo5.getClouds().get(0).getAltitude());
         assertNull(tempo5.getClouds().get(0).getType());
-        assertThat(tempo5.getMaxTemperature(), notNullValue());
-        assertThat(tempo5.getMinTemperature(), notNullValue());
-        assertEquals(17, tempo5.getMaxTemperature().getTemperature().intValue());
-        assertEquals(15, tempo5.getMaxTemperature().getDay().intValue());
-        assertEquals(12, tempo5.getMaxTemperature().getHour().intValue());
-        assertEquals(7, tempo5.getMinTemperature().getTemperature().intValue());
-        assertEquals(16, tempo5.getMinTemperature().getDay().intValue());
-        assertEquals(5, tempo5.getMinTemperature().getHour().intValue());
+        assertThat(tempo5.getProbability(), is(40));
+    }
+
+    @Test
+    public void testParseValidWithoutLineBreaks() throws ParseException {
+        String taf = "TAF LSZH 292025Z 2921/3103 VRB03KT 9999 FEW020 BKN080 TX20/3014Z TN06/3003Z " +
+                "PROB30 TEMPO 2921/2923 SHRA " +
+                "BECMG 3001/3004 4000 MIFG NSC " +
+                "PROB40 3003/3007 1500 BCFG SCT004 " +
+                "PROB30 3004/3007 0800 FG VV003 " +
+                "BECMG 3006/3009 9999 FEW030 " +
+                "PROB40 TEMPO 3012/3017 30008KT";
+
+        TAF res = fSut.parse(taf);
+
+        assertThat(res, is(not(nullValue())));
+        assertEquals(fSut.getAirportSupplier().get("LSZH").get(), res.getAirport());
+        // Check on time delivery.
+        assertEquals(29, res.getDay().intValue());
+        assertEquals(20, res.getTime().getHour());
+        assertEquals(25, res.getTime().getMinute());
+        // Checks on validity.
+        assertEquals(29, res.getValidity().getStartDay().intValue());
+        assertEquals(21, res.getValidity().getStartHour().intValue());
+        assertEquals(31, res.getValidity().getEndDay().intValue());
+        assertEquals(3, res.getValidity().getEndHour().intValue());
+        // Checks on wind.
+        assertThat(res.getWind().getDirectionDegrees(), nullValue());
+        assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("VRB")));
+        assertThat(res.getWind().getSpeed(), is(3));
+        assertThat(res.getWind().getGust(), is(0));
+        assertThat(res.getWind().getUnit(), is("KT"));
+        // Checks on visibility.
+        assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+        //Check on clouds.
+        assertThat(res.getClouds(), hasSize(2));
+        assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
+        assertThat(res.getClouds().get(0).getHeight(), is(2000));
+        assertThat(res.getClouds().get(0).getType(), nullValue());
+
+        assertThat(res.getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
+        assertThat(res.getClouds().get(1).getHeight(), is(8000));
+        assertThat(res.getClouds().get(1).getType(), nullValue());
+        // Check that no weatherCondition
+        assertThat(res.getWeatherConditions(), empty());
+        // Check max temperature
+        assertThat(res.getMaxTemperature().getDay(), is(30));
+        assertThat(res.getMaxTemperature().getHour(), is(14));
+        assertThat(res.getMaxTemperature().getTemperature(), is(20));
+        // Check min temperature
+        assertThat(res.getMinTemperature().getDay(), is(30));
+        assertThat(res.getMinTemperature().getHour(), is(03));
+        assertThat(res.getMinTemperature().getTemperature(), is(6));
+
+        // Checks on tempos.
+        assertThat(res.getTempos(), hasSize(2));
+        // Checks on BECOMGs.
+        assertThat(res.getBECMGs(), hasSize(2));
+        // Checks on probs.
+        assertThat(res.getProbs(), hasSize(2));
+
+        // First TEMPO
+        TEMPOTafTrend tempo0 = res.getTempos().get(0);
+        assertThat(tempo0.getValidity().getStartDay(), is(29));
+        assertThat(tempo0.getValidity().getStartHour(), is(21));
+        assertThat(tempo0.getValidity().getEndDay(), is(29));
+        assertThat(tempo0.getValidity().getEndHour(), is(23));
+        assertThat(tempo0.getWeatherConditions(), hasSize(1));
+        assertThat(tempo0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
+        assertThat(tempo0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHOWERS));
+        assertThat(tempo0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(tempo0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
+        assertThat(tempo0.getProbability(), is(30));
+
+        // First BECOMG
+        BECMGTafTrend becmg0 = res.getBECMGs().get(0);
+        assertThat(becmg0.getValidity().getStartDay(), is(30));
+        assertThat(becmg0.getValidity().getStartHour(), is(1));
+        assertThat(becmg0.getValidity().getEndDay(), is(30));
+        assertThat(becmg0.getValidity().getEndHour(), is(4));
+        assertThat(becmg0.getVisibility().getMainVisibility(), is("4000m"));
+        assertThat(becmg0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
+        assertThat(becmg0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHALLOW));
+        assertThat(becmg0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(becmg0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
+        assertThat(becmg0.getClouds().get(0).getQuantity(), is(CloudQuantity.NSC));
+
+        // First PROB
+        PROBTafTrend prob0 = res.getProbs().get(0);
+        assertThat(prob0.getValidity().getStartDay(), is(30));
+        assertThat(prob0.getValidity().getStartHour(), is(3));
+        assertThat(prob0.getValidity().getEndDay(), is(30));
+        assertThat(prob0.getValidity().getEndHour(), is(7));
+        assertThat(prob0.getVisibility().getMainVisibility(), is("1500m"));
+        assertThat(prob0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
+        assertThat(prob0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.PATCHES));
+        assertThat(prob0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(prob0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
+        assertThat(prob0.getClouds(), hasSize(1));
+        assertThat(prob0.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
+        assertThat(prob0.getClouds().get(0).getHeight(), is(400));
+        assertThat(prob0.getClouds().get(0).getType(), nullValue());
+        assertThat(prob0.getProbability(), is(40));
+
+        // Second PROB
+        PROBTafTrend prob1 = res.getProbs().get(1);
+        assertThat(prob1.getValidity().getStartDay(), is(30));
+        assertThat(prob1.getValidity().getStartHour(), is(4));
+        assertThat(prob1.getValidity().getEndDay(), is(30));
+        assertThat(prob1.getValidity().getEndHour(), is(7));
+        assertThat(prob1.getVisibility().getMainVisibility(), is("800m"));
+        assertThat(prob1.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
+        assertThat(prob1.getWeatherConditions().get(0).getDescriptive(), is(nullValue()));
+        assertThat(prob1.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(prob1.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
+        assertThat(prob1.getVerticalVisibility(), is(300));
+        assertThat(prob1.getClouds(), hasSize(0));
+        assertThat(prob1.getProbability(), is(30));
+
+        // Second BECOMG
+        BECMGTafTrend becmg1 = res.getBECMGs().get(1);
+        assertThat(becmg1.getValidity().getStartDay(), is(30));
+        assertThat(becmg1.getValidity().getStartHour(), is(6));
+        assertThat(becmg1.getValidity().getEndDay(), is(30));
+        assertThat(becmg1.getValidity().getEndHour(), is(9));
+        assertThat(becmg1.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg1.getWeatherConditions(), hasSize(0));
+        assertThat(becmg1.getClouds(), hasSize(1));
+        assertThat(becmg1.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
+        assertThat(becmg1.getClouds().get(0).getHeight(), is(3000));
+        assertThat(becmg1.getClouds().get(0).getType(), nullValue());
+
+        // Second TEMPO
+        TEMPOTafTrend tempo1 = res.getTempos().get(1);
+        assertThat(tempo1.getValidity().getStartDay(), is(30));
+        assertThat(tempo1.getValidity().getStartHour(), is(12));
+        assertThat(tempo1.getValidity().getEndDay(), is(30));
+        assertThat(tempo1.getValidity().getEndHour(), is(17));
+        assertThat(tempo1.getWeatherConditions(), hasSize(0));
+        assertThat(tempo1.getWind().getDirectionDegrees(), is(300));
+        assertThat(tempo1.getWind().getDirection(), is(Converter.degreesToDirection("300.0")));
+        assertThat(tempo1.getWind().getSpeed(), is(8));
+        assertThat(tempo1.getWind().getGust(), is(0));
+        assertThat(tempo1.getWind().getUnit(), is("KT"));
+        assertThat(tempo1.getProbability(), is(40));
+    }
+
+    @Test
+    public void testParseValidWithoutLineBreaksAndEndingTemperature() throws ParseException {
+        String taf = "TAF KLSV 120700Z 1207/1313 VRB06KT 9999 SCT250 QNH2992INS BECMG 1217/1218 10010G15KT 9999 SCT250 QNH2980INS BECMG 1303/1304 VRB06KT 9999 FEW250 QNH2979INS TX42/1223Z TN24/1213Z";
+
+        TAF res = fSut.parse(taf);
+
+        assertThat(res, is(not(nullValue())));
+        assertEquals(fSut.getAirportSupplier().get("KLSV").get(), res.getAirport());
+        // Check on time delivery.
+        assertEquals(12, res.getDay().intValue());
+        assertEquals(7, res.getTime().getHour());
+        assertEquals(0, res.getTime().getMinute());
+        // Checks on validity.
+        assertEquals(12, res.getValidity().getStartDay().intValue());
+        assertEquals(7, res.getValidity().getStartHour().intValue());
+        assertEquals(13, res.getValidity().getEndDay().intValue());
+        assertEquals(13, res.getValidity().getEndHour().intValue());
+        // Checks on wind.
+        assertThat(res.getWind().getDirectionDegrees(), nullValue());
+        assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("VRB")));
+        assertThat(res.getWind().getSpeed(), is(6));
+        assertThat(res.getWind().getGust(), is(0));
+        assertThat(res.getWind().getUnit(), is("KT"));
+        // Checks on visibility.
+        assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+        //Check on clouds.
+        assertThat(res.getClouds(), hasSize(1));
+        assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
+        assertThat(res.getClouds().get(0).getHeight(), is(25000));
+        assertThat(res.getClouds().get(0).getType(), nullValue());
+
+        // Check that no weatherCondition
+        assertThat(res.getWeatherConditions(), empty());
+        // Check max temperature
+        assertThat(res.getMaxTemperature().getDay(), is(12));
+        assertThat(res.getMaxTemperature().getHour(), is(23));
+        assertThat(res.getMaxTemperature().getTemperature(), is(42));
+        // Check min temperature
+        assertThat(res.getMinTemperature().getDay(), is(12));
+        assertThat(res.getMinTemperature().getHour(), is(13));
+        assertThat(res.getMinTemperature().getTemperature(), is(24));
+
+        // Checks on BECOMGs.
+        assertThat(res.getBECMGs(), hasSize(2));
+
+        // First BECOMG
+        BECMGTafTrend becmg0 = res.getBECMGs().get(0);
+        assertThat(becmg0.getValidity().getStartDay(), is(12));
+        assertThat(becmg0.getValidity().getStartHour(), is(17));
+        assertThat(becmg0.getValidity().getEndDay(), is(12));
+        assertThat(becmg0.getValidity().getEndHour(), is(18));
+        assertThat(becmg0.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg0.getWeatherConditions(), hasSize(0));
+        assertThat(becmg0.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
+        assertThat(becmg0.getClouds().get(0).getHeight(), is(25000));
+        assertThat(becmg0.getWind().getDirectionDegrees(), is(100));
+        assertThat(becmg0.getWind().getDirection(), is(Converter.degreesToDirection("100.0")));
+        assertThat(becmg0.getWind().getSpeed(), is(10));
+        assertThat(becmg0.getWind().getGust(), is(15));
+        assertThat(becmg0.getWind().getUnit(), is("KT"));
+
+        // Second BECOMG
+        BECMGTafTrend becmg1 = res.getBECMGs().get(1);
+        assertThat(becmg1.getValidity().getStartDay(), is(13));
+        assertThat(becmg1.getValidity().getStartHour(), is(3));
+        assertThat(becmg1.getValidity().getEndDay(), is(13));
+        assertThat(becmg1.getValidity().getEndHour(), is(4));
+        assertThat(becmg1.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg1.getWind().getDirectionDegrees(), nullValue());
+        assertThat(becmg1.getWind().getDirection(), is(Converter.degreesToDirection("VRB")));
+        assertThat(becmg1.getWind().getSpeed(), is(6));
+        assertThat(becmg1.getWind().getGust(), is(0));
+        assertThat(becmg1.getWind().getUnit(), is("KT"));
+        assertThat(becmg1.getWeatherConditions(), hasSize(0));
+        assertThat(becmg1.getClouds(), hasSize(1));
+        assertThat(becmg1.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
+        assertThat(becmg1.getClouds().get(0).getHeight(), is(25000));
+        assertThat(becmg1.getClouds().get(0).getType(), nullValue());
     }
 
     @Test
@@ -360,8 +569,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
 
         assertNotNull(result);
-        assertThat(result.getProbability(), notNullValue());
-        assertEquals(30, result.getProbability().intValue());
+        assertThat(result.getProbs(), hasSize(1));
+        assertThat(result.getProbs().get(0).getProbability(), is(30));
     }
 
     @Test
@@ -408,6 +617,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
         fSut.parse(message);
     }
+
     @Test
     public void testParseWithNauticalMilesVisibility() throws ParseException {
         //GIVEN a TAF message with nautical miles visibility;
