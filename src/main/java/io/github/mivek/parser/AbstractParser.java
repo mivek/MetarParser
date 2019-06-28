@@ -15,10 +15,7 @@ import io.github.mivek.model.WeatherCondition;
 import io.github.mivek.utils.Regex;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
