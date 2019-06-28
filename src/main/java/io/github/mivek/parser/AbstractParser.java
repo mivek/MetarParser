@@ -39,7 +39,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /** Pattern for RMK. */
     protected static final String RMK = "RMK";
     /** Pattern regex to tokenize the code. */
-    private static final Pattern TOKENIZE_REGEX = Pattern.compile("(\\d \\d/\\dSM|\\S+)");
+    private static final Pattern TOKENIZE_REGEX = Pattern.compile("\\s((?=\\d/\\dSM)(?<!\\s\\d\\s)|(?!\\d/\\dSM))|=\\z");
     /** Pattern regex for the intensity of a phenomenon. */
     private static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
     /** Pattern for CAVOK. */
@@ -174,13 +174,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @return a array of tokens
      */
     protected String[] tokenize(final String pCode) {
-        List<String> tokens = new ArrayList<>();
-
-        Matcher m = TOKENIZE_REGEX.matcher(pCode);
-        while (m.find()) {
-            tokens.add(m.group(1));
-        }
-        return tokens.toArray(new String[0]);
+        return TOKENIZE_REGEX.split(pCode);
     }
 
     /**

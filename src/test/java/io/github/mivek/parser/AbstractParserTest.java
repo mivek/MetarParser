@@ -88,7 +88,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     public void testTokenize() {
         // GIVEN a string with 1 1/2SM
         String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
-        String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
+        String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017" };
         // WHEN tokenizing the string
         String[] result = getSut().tokenize(code);
         // THEN the visibility part is 1 1/2SM
