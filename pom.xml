@@ -113,7 +113,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.4.8</version>
+                <version>1.4.9</version>
                 <executions>
                     <execution>
                         <goals>
