@@ -18,9 +18,9 @@ public enum Phenomenon {
     /** Snow grains. */
     SNOW_GRAINS("SG", Messages.getInstance().getString("Phenomenon.SG")), //$NON-NLS-1$
     /** Ice pellets. */
-    ICE_PELLETS("IC", Messages.getInstance().getString("Phenomenon.IC")), //$NON-NLS-1$
+    ICE_PELLETS("PL", Messages.getInstance().getString("Phenomenon.PL")), //$NON-NLS-1$
     /** Ice crystals. */
-    ICE_CRYSTALS("PL", Messages.getInstance().getString("Phenomenon.PL")), //$NON-NLS-1$
+    ICE_CRYSTALS("IC", Messages.getInstance().getString("Phenomenon.IC")), //$NON-NLS-1$
     /** Hail. */
     HAIL("GR", Messages.getInstance().getString("Phenomenon.GR")), //$NON-NLS-1$
     /** Small hail. */
@@ -55,9 +55,9 @@ public enum Phenomenon {
     FUNNEL_CLOUD("FC", Messages.getInstance().getString("Phenomenon.FC")); //$NON-NLS-1$
 
     /** Shortcut of the phenomenon. */
-    private String fShortcut = ""; //$NON-NLS-1$
+    private String fShortcut;
     /** Name of the phenomenon. */
-    private String fName = ""; //$NON-NLS-1$
+    private String fName;
 
     /**
      * Constructor.
