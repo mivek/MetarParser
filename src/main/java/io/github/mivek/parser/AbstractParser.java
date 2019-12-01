@@ -53,7 +53,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pRemarkParser the remark parser.
      * @param pAirportSupplier the airport supplier.
      */
-    protected AbstractParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
+    AbstractParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
         commonSupplier = pCommonCommandSupplier;
         remarkParser = pRemarkParser;
         airportSupplier = pAirportSupplier;
@@ -66,7 +66,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @return a weather condition with its intensity, its descriptor and the
      * phenomenon.
      */
-    protected WeatherCondition parseWeatherCondition(final String weatherPart) {
+    WeatherCondition parseWeatherCondition(final String weatherPart) {
         WeatherCondition wc = new WeatherCondition();
         String match;
         if (Regex.find(INTENSITY_REGEX, weatherPart)) {
@@ -97,7 +97,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pWeatherCode The weather code.
      * @param pTime        the string to parse.
      */
-    protected void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
+    void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
         pWeatherCode.setDay(Integer.parseInt(pTime.substring(0, 2)));
         int hours = Integer.parseInt(pTime.substring(2, 4));
         int minutes = Integer.parseInt(pTime.substring(4, 6));
@@ -121,7 +121,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pPart      the token to parse.
      * @return boolean if the token pPart as been parsed.
      */
-    protected boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
+    boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
         if (CAVOK.equals(pPart)) {
             pContainer.setCavok(true);
             if (pContainer.getVisibility() == null) {
@@ -146,7 +146,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pParts the tokens of the event
      * @param index the RMK index in the event.
      */
-    protected void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
+    void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
         String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
         pContainer.setRemark(remarkParser.parse(String.join(" ", subArray)));
     }
@@ -158,14 +158,14 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
      * @param pCode the string to parse
      * @return a array of tokens
      */
-    protected String[] tokenize(final String pCode) {
+    String[] tokenize(final String pCode) {
         return TOKENIZE_REGEX.split(pCode);
     }
 
     /**
      * @return the Airport supplier.
      */
-    protected AirportSupplier getAirportSupplier() {
+    AirportSupplier getAirportSupplier() {
         return airportSupplier;
     }
 }
