@@ -1,6 +1,7 @@
 package io.github.mivek.command;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Country;
 import io.github.mivek.parser.AbstractParser;
@@ -55,7 +56,7 @@ public final class AirportSupplier implements Supplier<Optional<Airport>> {
                 airport.setDst(line[10]);
                 fAirports.put(airport.getIcao(), airport);
             }
-        } catch (IOException exception) {
+        } catch (IOException | CsvValidationException exception) {
             throw new IllegalStateException(exception.getMessage());
         }
     }
@@ -72,7 +73,7 @@ public final class AirportSupplier implements Supplier<Optional<Airport>> {
                 country.setName(line[0]);
                 fCountries.put(country.getName(), country);
             }
-        } catch (IOException exception) {
+        } catch (IOException | CsvValidationException exception) {
             throw new IllegalStateException(exception.getMessage());
         }
     }
