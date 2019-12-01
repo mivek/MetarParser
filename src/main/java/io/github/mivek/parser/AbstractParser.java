@@ -3,7 +3,6 @@ package io.github.mivek.parser;
 import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.Command;
 import io.github.mivek.command.common.CommonCommandSupplier;
-import io.github.mivek.command.common.MinimalVisibilityCommand;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
@@ -58,17 +57,6 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         commonSupplier = pCommonCommandSupplier;
         remarkParser = pRemarkParser;
         airportSupplier = pAirportSupplier;
-    }
-    /**
-     * Parses the minimal visibility and updates the visibility object.
-     *
-     * @param pVisibility     the visibility object
-     * @param pVisibilityPart the string containing the information.
-     */
-    protected void parseMinimalVisibility(final Visibility pVisibility, final String pVisibilityPart) {
-        String[] matches = Regex.pregMatch(MinimalVisibilityCommand.MIN_VISIBILITY_REGEX, pVisibilityPart);
-        pVisibility.setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
-        pVisibility.setMinDirection(matches[1].substring(4));
     }
 
     /**
