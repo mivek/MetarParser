@@ -17,9 +17,5 @@ public class MessagesTest {
         Messages.getInstance().setLocale(Locale.ENGLISH);
         // THEN The locale is changed and so is the message.
         assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
-        // When Changing the locale to german.
-        Messages.getInstance().setLocale(Locale.GERMAN);
-        // Then the message is in german.
-        assertEquals("gering", Messages.getInstance().getString("CloudQuantity.FEW"));
     }
 }
