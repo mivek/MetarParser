@@ -69,13 +69,6 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWithoutAirport() throws ParseException {
-        String message = "LLLL 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
-        thrown.expect(ParseException.class);
-        getSut().parse(message);
-    }
-
-    @Test
     public void testTokenize() {
         // GIVEN a string with 1 1/2SM
         String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";

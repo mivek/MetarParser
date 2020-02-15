@@ -19,6 +19,8 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     private Airport airport;
     /** Original message of the metar. */
     private String message;
+    /** The identifier of the station. */
+    private String station;
 
 
     /**
@@ -75,6 +77,20 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
      */
     public void setMessage(final String pMessage) {
         message = pMessage;
+    }
+
+    /**
+     * @return The station. the icao.
+     */
+    public String getStation() {
+        return station;
+    }
+
+    /**
+     * @param station The identifier of the station.
+     */
+    public void setStation(final String station) {
+        this.station = station;
     }
 
     /**

@@ -20,7 +20,6 @@ Checkstyle configuration that checks the sun coding conventions.
     <module name="MethodName"/>
     <module name="PackageName"/>
     <module name="ParameterName">
-      <property name="format" value="^p[A-Z][a-zA-Z0-9]*$"/>
       <property name="accessModifiers" value="public"/>
     </module>
     <module name="StaticVariableName"/>

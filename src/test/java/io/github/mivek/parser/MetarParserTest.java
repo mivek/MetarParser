@@ -6,7 +6,6 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
-import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Cloud;
@@ -46,14 +45,14 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
      */
 
     @Test
-    public void testParse() throws ParseException {
+    public void testParse() {
         String metarString = "LFPG 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
 
         Metar m = fSut.parse(metarString);
 
         assertNotNull(m);
 
-        assertEquals(fSut.getAirportSupplier().get("LFPG").get(), m.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("LFPG"), m.getAirport());
         assertEquals(Integer.valueOf(17), m.getDay());
         assertEquals(8, m.getTime().getHour());
         assertEquals(30, m.getTime().getMinute());
@@ -73,15 +72,15 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseNullAirport() throws ParseException {
+    public void testParseNullAirport() {
         String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
-        thrown.expect(ParseException.class);
-        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
-        fSut.parse(metarString);
+        Metar m = fSut.parse(metarString);
+        assertEquals("AAAA", m.getStation());
+        assertNull(m.getAirport());
     }
 
     @Test
-    public void testParseWithTempo() throws ParseException {
+    public void testParseWithTempo() {
         String metarString = "LFBG 081130Z AUTO 23012KT 9999 SCT022 BKN072 BKN090 22/16 Q1011 TEMPO 26015G25KT 3000 TSRA SCT025CB BKN050";
 
         Metar m = fSut.parse(metarString);
@@ -114,7 +113,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithTempoAndBecmg() throws ParseException {
+    public void testParseWithTempoAndBecmg() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO SHRA BECMG SKC";
 
         Metar m = fSut.parse(metarString);
@@ -131,7 +130,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithTempoAndAT() throws ParseException {
+    public void testParseWithTempoAndAT() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO AT0800 SHRA ";
 
         Metar m = fSut.parse(metarString);
@@ -151,7 +150,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithTempoAndTL() throws ParseException {
+    public void testParseWithTempoAndTL() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO TL1830 SHRA ";
 
         Metar m = fSut.parse(metarString);
@@ -171,7 +170,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithTempoAndFM() throws ParseException {
+    public void testParseWithTempoAndFM() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO FM1830 SHRA ";
 
         Metar m = fSut.parse(metarString);
@@ -191,7 +190,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithTempoAndFMAndTL() throws ParseException {
+    public void testParseWithTempoAndFMAndTL() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO FM1700 TL1830 SHRA ";
 
         Metar m = fSut.parse(metarString);
@@ -222,7 +221,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithMinVisibility() throws ParseException {
+    public void testParseWithMinVisibility() {
         String code = "LFPG 161430Z 24015G25KT 5000 1100w";
 
         Metar m = fSut.parse(code);
@@ -249,7 +248,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithMaximalWind() throws ParseException {
+    public void testParseWithMaximalWind() {
         // Given a code with wind variation.
         String code = "LFPG 161430Z 24015G25KT 180V300";
         //WHEN parsing the code.
@@ -266,7 +265,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithVerticalVisibility() throws ParseException {
+    public void testParseWithVerticalVisibility() {
         String code = "LFLL 160730Z 28002KT 0350 FG VV002";
 
         Metar m = fSut.parse(code);
@@ -290,7 +289,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseVisibilityWithNDV() throws ParseException {
+    public void testParseVisibilityWithNDV() {
         String code = "LSZL 300320Z AUTO 00000KT 9999NDV BKN060 OVC074 00/M04 Q1001\n" + "RMK=";
         Metar m = fSut.parse(code);
         assertNotNull(m);
@@ -298,7 +297,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithCavok() throws ParseException {
+    public void testParseWithCavok() {
         // GIVEN a metar with token CAVOK
         String code = "LFPG 212030Z 03003KT CAVOK 09/06 Q1031 NOSIG";
         // WHEN parsing the metar.
@@ -314,7 +313,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithAltimeterInMercury() throws ParseException {
+    public void testParseWithAltimeterInMercury() {
         // GIVEN a metar with altimeter in inches of mercury
         String code = "KTTN 051853Z 04011KT 9999 VCTS SN FZFG BKN003 OVC010 M02/M02 A3006";
         // WHEN parsing the metar
@@ -327,7 +326,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWithRMK() throws ParseException {
+    public void testParseWithRMK() {
         //GIVEN a metar with RMK
         String code = "CYWG 172000Z 30015G25KT 1 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 Q1001 RMK SF5NS3 SLP134";
         // WHEN parsing the metar

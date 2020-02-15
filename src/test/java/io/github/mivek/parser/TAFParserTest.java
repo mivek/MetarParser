@@ -10,7 +10,11 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.*;
+import io.github.mivek.model.trend.AbstractTafTrend;
+import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.PROBTafTrend;
+import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
@@ -138,7 +142,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF res = fSut.parse(taf);
 
         assertThat(res, is(not(nullValue())));
-        assertEquals(fSut.getAirportSupplier().get("LFPG").get(), res.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("LFPG"), res.getAirport());
         // Check on time delivery.
         assertEquals(Integer.valueOf(15), res.getDay());
         assertEquals(5, res.getTime().getHour());
@@ -286,7 +290,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF res = fSut.parse(taf);
 
         assertThat(res, is(not(nullValue())));
-        assertEquals(fSut.getAirportSupplier().get("LSZH").get(), res.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("LSZH"), res.getAirport());
         // Check on time delivery.
         assertEquals(29, res.getDay().intValue());
         assertEquals(20, res.getTime().getHour());
@@ -321,7 +325,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getMaxTemperature().getTemperature(), is(20));
         // Check min temperature
         assertThat(res.getMinTemperature().getDay(), is(30));
-        assertThat(res.getMinTemperature().getHour(), is(03));
+        assertThat(res.getMinTemperature().getHour(), is(3));
         assertThat(res.getMinTemperature().getTemperature(), is(6));
 
         // Checks on tempos.
@@ -424,7 +428,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF res = fSut.parse(taf);
 
         assertThat(res, is(not(nullValue())));
-        assertEquals(fSut.getAirportSupplier().get("KLSV").get(), res.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("KLSV"), res.getAirport());
         // Check on time delivery.
         assertEquals(12, res.getDay().intValue());
         assertEquals(7, res.getTime().getHour());
@@ -506,7 +510,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(res);
 
         assertThat(res, is(not(nullValue())));
-        assertThat(res.getAirport(), is(fSut.getAirportSupplier().get("KLWT").get()));
+        assertThat(res.getAirport(), is(fSut.getAirportSupplier().get("KLWT")));
         assertThat(res.getDay(), is(21));
         assertThat(res.getTime().getHour(), is(11));
         assertThat(res.getTime().getMinute(), is(20));
@@ -613,9 +617,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Test
     public void testParseInvalidAirport() throws ParseException {
         String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
-        thrown.expect(ParseException.class);
-        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND)));
-        fSut.parse(message);
+        TAF res = fSut.parse(message);
+        assertNull(res.getAirport());
+        assertEquals("AAAA", res.getStation());
     }
 
     @Test

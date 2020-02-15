@@ -12,12 +12,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * @author mivek
  */
-public final class AirportSupplier implements Supplier<Optional<Airport>> {
+public final class AirportSupplier implements Supplier<Airport> {
     /** Path of airport file. */
     private final InputStream fAirportsFile = AbstractParser.class.getClassLoader().getResourceAsStream("data/airports.dat");
     /** Path of countries file. */
@@ -78,11 +77,8 @@ public final class AirportSupplier implements Supplier<Optional<Airport>> {
         }
     }
 
-    @Override public Optional<Airport> get(final String pIcao) {
-        if (fAirports.containsKey(pIcao)) {
-            return Optional.of(fAirports.get(pIcao));
-        }
-        return Optional.empty();
+    @Override public Airport get(final String pIcao) {
+        return fAirports.get(pIcao);
     }
 }
 
