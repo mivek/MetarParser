@@ -88,7 +88,8 @@ public final class TAFParser extends AbstractParser<TAF> {
             i++;
         }
         // Airport
-        Airport airport = getAirportSupplier().get(line1parts[i]).orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND));
+        Airport airport = getAirportSupplier().get(line1parts[i]);
+        taf.setStation(line1parts[i]);
         i++;
         taf.setAirport(airport);
         taf.setMessage(pTAFCode);

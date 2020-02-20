@@ -4,8 +4,6 @@ import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarParserCommandSupplier;
-import io.github.mivek.exception.ErrorCodes;
-import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.trend.AbstractMetarTrend;
@@ -68,12 +66,12 @@ public final class MetarParser extends AbstractParser<Metar> {
      *
      * @param pMetarCode String representing the metar.
      * @return a decoded metar object.
-     * @throws ParseException when an error occurs.
      */
-    @Override public Metar parse(final String pMetarCode) throws ParseException {
+    @Override public Metar parse(final String pMetarCode) {
         Metar m = new Metar();
         String[] metarTab = tokenize(pMetarCode);
-        Airport airport = getAirportSupplier().get(metarTab[0]).orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_AIRPORT_NOT_FOUND));
+        Airport airport = getAirportSupplier().get(metarTab[0]);
+        m.setStation(metarTab[0]);
         m.setAirport(airport);
         m.setMessage(pMetarCode);
         parseDeliveryTime(m, metarTab[1]);
