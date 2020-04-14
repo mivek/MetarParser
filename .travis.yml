@@ -30,8 +30,7 @@ before_deploy:
 deploy:
   provider: releases
   file: target/metarParser-${VERSION}.jar
-  api_key:
-    secure: ${GITHUB_OATH}
+  api_key: $GITHUB_OATH
   skip_cleanup: true
   draft: true
   name: ${VERSION}
