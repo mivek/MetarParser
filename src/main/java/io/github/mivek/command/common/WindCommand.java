@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class WindCommand implements BaseWindCommand {
     /** Pattern regex for wind. */
-    private static final Pattern WIND_REGEX = Pattern.compile("(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
+    private static final Pattern WIND_REGEX = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)?");
     /**
      * This method parses the wind part of the metar code. It parses the generic
      * part.

@@ -28,6 +28,10 @@ public interface BaseWindCommand extends Command {
         if (pGust != null) {
             pWind.setGust(Integer.parseInt(pGust));
         }
-        pWind.setUnit(pUnit);
+        if (pUnit == null) {
+            pWind.setUnit("KT");
+        } else {
+            pWind.setUnit(pUnit);
+        }
     }
 }

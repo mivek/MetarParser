@@ -22,8 +22,8 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for {@link MetarParser}
- * @author mivek
  *
+ * @author mivek
  */
 public class MetarParserTest extends AbstractParserTest<Metar> {
 
@@ -338,12 +338,28 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 
-    @Test public void testParseRMK() {
+    @Test
+    public void testParseRMK() {
         Metar m = new Metar();
-        String[] array = { "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
+        String[] array = {"RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017="};
         getSut().parseRMK(m, array, 0);
         String rmk = m.getRemark();
         assertNotNull(rmk);
         assertThat(rmk, not(containsString("RMK")));
     }
+
+    @Test
+    public void alternativeWindForm() {
+        String code = "ENLK 081350Z 26026G40 240V300 9999 VCSH FEW025 BKN030 02/M01 Q0996";
+        Metar m = fSut.parse(code);
+        assertNotNull(m);
+        assertNotNull(m.getWind());
+        assertEquals(Integer.valueOf(260), m.getWind().getDirectionDegrees());
+        assertEquals(26, m.getWind().getSpeed());
+        assertEquals(40, m.getWind().getGust());
+        assertEquals("KT", m.getWind().getUnit());
+        assertEquals(240, m.getWind().getExtreme1());
+        assertEquals(300, m.getWind().getExtreme2());
+    }
+
 }
