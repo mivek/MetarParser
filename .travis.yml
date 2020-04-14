@@ -9,8 +9,7 @@ cache:
 addons:
   sonarcloud:
     organization: "mivek-github"
-    token:
-      secure: $SONARCLOUD_TOKEN
+    token: ${SONARCLOUD_TOKEN}
 
 jdk: oraclejdk8
 
@@ -32,7 +31,7 @@ deploy:
   provider: releases
   file: target/metarParser-${VERSION}.jar
   api_key:
-    secure: $GITHUB_OATH
+    secure: ${GITHUB_OATH}
   skip_cleanup: true
   draft: true
   name: ${VERSION}
