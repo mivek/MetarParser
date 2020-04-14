@@ -9,8 +9,7 @@ cache:
 addons:
   sonarcloud:
     organization: "mivek-github"
-    token:
-      secure: ${SONARCLOUD_TOKEN}
+    token: ${SONARCLOUD_TOKEN}
 
 jdk: oraclejdk8
 
