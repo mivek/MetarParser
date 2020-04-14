@@ -39,7 +39,7 @@
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13</junit.version>
-        <pitest-maven.version>1.4.11</pitest-maven.version>
+        <pitest-maven.version>1.5.1</pitest-maven.version>
     </properties>
 
     <developers>
