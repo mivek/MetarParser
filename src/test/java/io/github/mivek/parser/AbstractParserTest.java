@@ -17,12 +17,14 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for {@link AbstractParser}
+ *
  * @author mivek
  */
 @Ignore
 public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
     /*
      * =================== WEATHER CONDITION ===================
      */
@@ -51,7 +53,8 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         assertThat(wc.getPhenomenons(), hasItems(Phenomenon.RAIN, Phenomenon.HAIL));
     }
 
-    @Test public void testParseWCNotNull() {
+    @Test
+    public void testParseWCNotNull() {
         String wcPart = "-SH";
 
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
@@ -60,19 +63,22 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWCNull() {
+    public void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
         String wcPart = "SH";
 
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
-        assertNull(wc);
+        assertNotNull(wc);
+        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertNull(wc.getIntensity());
+        assertEquals(0, wc.getPhenomenons().size());
     }
 
     @Test
     public void testTokenize() {
         // GIVEN a string with 1 1/2SM
         String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
-        String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017" };
+        String[] tokens = {"METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017"};
         // WHEN tokenizing the string
         String[] result = getSut().tokenize(code);
         // THEN the visibility part is 1 1/2SM

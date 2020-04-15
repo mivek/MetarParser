@@ -35,7 +35,7 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
             { "SCT026CB", true }, // Cloud
             { "ZZZ026CB", false }, // Cloud null
             { "+SHGSRA", true }, // Weather condition
-            { "+ZERT", false } // Weather null
+            { "+ZERT", true } // Weather null
         });
     }
 
@@ -46,6 +46,7 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
     @Test
     public void testGeneralParse() {
+        System.out.println(fPartToParse);
         assertEquals(fExpected, getSut().generalParse(getWeatherCode(), fPartToParse));
     }
 
