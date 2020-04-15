@@ -26,8 +26,8 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for {@link TAFParser}
- * @author mivek
  *
+ * @author mivek
  */
 public class TAFParserTest extends AbstractParserTest<TAF> {
 
@@ -186,7 +186,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(0).getVisibility().getMainVisibility(), is("3000m"));
         assertThat(res.getTempos().get(0).getWeatherConditions(), hasSize(1));
         assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getDescriptive(), is(nullValue()));
+        assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getDescriptives(), is(empty()));
         assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.MIST));
         assertThat(res.getTempos().get(0).getClouds(), hasSize(1));
@@ -203,7 +203,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(1).getVisibility().getMainVisibility(), is("400m"));
         assertThat(res.getTempos().get(1).getWeatherConditions(), hasSize(1));
         assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getDescriptive(), is(Descriptive.PATCHES));
+        assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getDescriptives(), contains(Descriptive.PATCHES));
         assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
         assertThat(res.getTempos().get(1).getClouds(), hasSize(1));
@@ -220,7 +220,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(2).getWeatherConditions(), not(empty()));
         assertThat(res.getTempos().get(2).getWeatherConditions(), hasSize(1));
         assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getIntensity(), is(Intensity.LIGHT));
-        assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHOWERS));
+        assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getDescriptives(), contains(Descriptive.SHOWERS));
         assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
         assertThat(res.getTempos().get(2).getClouds(), hasSize(2));
@@ -249,7 +249,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals("3000m", tempo4.getVisibility().getMainVisibility());
         assertThat(tempo4.getWeatherConditions(), hasSize(1));
         assertNull(tempo4.getWeatherConditions().get(0).getIntensity());
-        assertNull(tempo4.getWeatherConditions().get(0).getDescriptive());
+        assertTrue(tempo4.getWeatherConditions().get(0).getDescriptives().isEmpty());
         assertThat(tempo4.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertEquals(Phenomenon.MIST, tempo4.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertThat(tempo4.getClouds(), hasSize(1));
@@ -267,7 +267,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals("400m", tempo5.getVisibility().getMainVisibility());
         assertThat(tempo5.getWeatherConditions(), hasSize(1));
         assertNull(tempo5.getWeatherConditions().get(0).getIntensity());
-        assertEquals(Descriptive.PATCHES, tempo5.getWeatherConditions().get(0).getDescriptive());
+        assertTrue(tempo5.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.PATCHES));
         assertThat(tempo5.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertEquals(Phenomenon.FOG, tempo5.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertThat(tempo5.getClouds(), hasSize(1));
@@ -343,7 +343,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(tempo0.getValidity().getEndHour(), is(23));
         assertThat(tempo0.getWeatherConditions(), hasSize(1));
         assertThat(tempo0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(tempo0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHOWERS));
+        assertTrue(tempo0.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(tempo0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(tempo0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
         assertThat(tempo0.getProbability(), is(30));
@@ -356,7 +356,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg0.getValidity().getEndHour(), is(4));
         assertThat(becmg0.getVisibility().getMainVisibility(), is("4000m"));
         assertThat(becmg0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(becmg0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHALLOW));
+        assertTrue(becmg0.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.SHALLOW));
         assertThat(becmg0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(becmg0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
         assertThat(becmg0.getClouds().get(0).getQuantity(), is(CloudQuantity.NSC));
@@ -369,7 +369,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(prob0.getValidity().getEndHour(), is(7));
         assertThat(prob0.getVisibility().getMainVisibility(), is("1500m"));
         assertThat(prob0.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(prob0.getWeatherConditions().get(0).getDescriptive(), is(Descriptive.PATCHES));
+        assertThat(prob0.getWeatherConditions().get(0).getDescriptives(), contains(Descriptive.PATCHES));
         assertThat(prob0.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(prob0.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
         assertThat(prob0.getClouds(), hasSize(1));
@@ -386,7 +386,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(prob1.getValidity().getEndHour(), is(7));
         assertThat(prob1.getVisibility().getMainVisibility(), is("800m"));
         assertThat(prob1.getWeatherConditions().get(0).getIntensity(), is(nullValue()));
-        assertThat(prob1.getWeatherConditions().get(0).getDescriptive(), is(nullValue()));
+        assertThat(prob1.getWeatherConditions().get(0).getDescriptives(), is(empty()));
         assertThat(prob1.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertThat(prob1.getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
         assertThat(prob1.getVerticalVisibility(), is(300));

@@ -76,8 +76,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         }
         for (Descriptive des : Descriptive.values()) {
             if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
-                wc.setDescriptive(des);
-                break;
+                wc.addDescriptive(des);
             }
         }
         for (Phenomenon phe : Phenomenon.values()) {

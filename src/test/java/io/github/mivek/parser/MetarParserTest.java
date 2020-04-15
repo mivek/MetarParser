@@ -6,7 +6,6 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
-import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Cloud;
 import io.github.mivek.model.Metar;
@@ -99,7 +98,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("3000m", trend.getVisibility().getMainVisibility());
         assertThat(trend.getWeatherConditions(), hasSize(1));
         WeatherCondition wc = trend.getWeatherConditions().get(0);
-        assertEquals(Descriptive.THUNDERSTORM, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.THUNDERSTORM));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertEquals(Phenomenon.RAIN, wc.getPhenomenons().get(0));
         assertThat(trend.getClouds(), hasSize(2));
@@ -123,7 +122,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends().get(0).getType(), is(WeatherChangeType.TEMPO));
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
         WeatherCondition wc = m.getTrends().get(0).getWeatherConditions().get(0);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(m.getTrends().get(1).getType(), is(WeatherChangeType.BECMG));
         assertThat(m.getTrends().get(1).getClouds(), hasSize(1));
@@ -141,7 +140,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
         AbstractMetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(trend.getTimes(), hasSize(1));
         assertEquals(TimeIndicator.AT, trend.getTimes().get(0).getType());
@@ -161,7 +160,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
         AbstractMetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(trend.getTimes(), hasSize(1));
         assertEquals(TimeIndicator.TL, trend.getTimes().get(0).getType());
@@ -181,7 +180,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
         AbstractMetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(trend.getTimes(), hasSize(1));
         assertEquals(TimeIndicator.FM, trend.getTimes().get(0).getType());
@@ -201,7 +200,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
         AbstractMetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertEquals(Phenomenon.RAIN, wc.getPhenomenons().get(0));
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(trend.getTimes(), hasSize(2));
@@ -363,13 +362,25 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void desriptiveFieldIsPreservedAlsoWithoutWeatherConditions() {
+    public void descriptiveFieldIsPreservedAlsoWithoutWeatherConditions() {
         //example form field
         String code = "AGGH 140340Z 05010KT 9999 TS FEW020 SCT021CB BKN300 32/26 Q1010";
         Metar m = fSut.parse(code);
         assertNotNull(m);
         assertEquals(1, m.getWeatherConditions().size());
-        assertEquals(Descriptive.THUNDERSTORM, m.getWeatherConditions().get(0).getDescriptive());
+        assertTrue(m.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.THUNDERSTORM));
+    }
+
+    @Test
+    public void supportMultipleDescriptiveFields() {
+        //example form field
+        String code = "AGGH 150350Z 800M TSSH SCT018 FEW018CB BKN100 30/26 Q1009";
+        Metar m = fSut.parse(code);
+        assertNotNull(m);
+        assertEquals(1, m.getWeatherConditions().size());
+        assertTrue(m.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.THUNDERSTORM));
+        assertTrue(m.getWeatherConditions().get(0).getDescriptives().contains(Descriptive.SHOWERS));
+        assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
     }
 
 }

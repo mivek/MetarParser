@@ -15,11 +15,17 @@ import java.util.List;
  * @author mivek
  */
 public class WeatherCondition {
-    /** Intensity of the condition (optional). */
+    /**
+     * Intensity of the condition (optional).
+     */
     private Intensity intensity;
-    /** Descriptive of the condition (optional). */
-    private Descriptive descriptive;
-    /** List of phenomenons of the condition. */
+    /**
+     * Descriptive of the condition (optional).
+     */
+    private List<Descriptive> descriptives;
+    /**
+     * List of phenomenons of the condition.
+     */
     private List<Phenomenon> phenomenons;
 
     /**
@@ -27,6 +33,7 @@ public class WeatherCondition {
      */
     public WeatherCondition() {
         phenomenons = new ArrayList<>();
+        descriptives = new ArrayList<>();
     }
 
     /**
@@ -47,13 +54,24 @@ public class WeatherCondition {
         intensity = pIntensity;
     }
 
+
     /**
      * Getter of the descriptive.
-     *
+     * @deprecated replaced by {@link #getDescriptives()}
      * @return the descriptive.
      */
+    @Deprecated
     public Descriptive getDescriptive() {
-        return descriptive;
+        return descriptives.stream().findFirst().orElse(null);
+    }
+
+    /**
+     * Getter of the descriptives.
+     *
+     * @return the descriptives.
+     */
+    public List<Descriptive> getDescriptives() {
+        return descriptives;
     }
 
     /**
@@ -61,8 +79,8 @@ public class WeatherCondition {
      *
      * @param pDescriptive the descriptive to set.
      */
-    public void setDescriptive(final Descriptive pDescriptive) {
-        descriptive = pDescriptive;
+    public void addDescriptive(final Descriptive pDescriptive) {
+        descriptives.add(pDescriptive);
     }
 
     /**
@@ -89,13 +107,14 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !phenomenons.isEmpty() || intensity != null || descriptive != null;
+        return !phenomenons.isEmpty() || intensity != null || !descriptives.isEmpty();
     }
 
-    @Override public final String toString() {
+    @Override
+    public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.intensity"), intensity).
-                append(Messages.getInstance().getString("ToString.descriptive"), descriptive).
+                append(Messages.getInstance().getString("ToString.descriptive"), descriptives.toString()).
                 append(Messages.getInstance().getString("ToString.phenomenons"), phenomenons.toString()).
                 toString();
     }

@@ -3,9 +3,7 @@ package io.github.mivek.parser;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
-import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
-import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCondition;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -35,7 +33,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
         assertEquals(Intensity.LIGHT, wc.getIntensity());
-        assertNull(wc.getDescriptive());
+        assertTrue(wc.getDescriptives().isEmpty());
         assertThat(wc.getPhenomenons(), hasSize(1));
         assertThat(wc.getPhenomenons(), hasItem(Phenomenon.DRIZZLE));
     }
@@ -47,8 +45,8 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
         assertNull(wc.getIntensity());
-        assertNotNull(wc.getDescriptive());
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertThat(wc.getDescriptives(), hasSize(1));
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertThat(wc.getPhenomenons(), hasSize(2));
         assertThat(wc.getPhenomenons(), hasItems(Phenomenon.RAIN, Phenomenon.HAIL));
     }
@@ -69,7 +67,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
         assertNotNull(wc);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+        assertTrue(wc.getDescriptives().contains(Descriptive.SHOWERS));
         assertNull(wc.getIntensity());
         assertEquals(0, wc.getPhenomenons().size());
     }
