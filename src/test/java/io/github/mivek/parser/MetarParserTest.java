@@ -8,12 +8,9 @@ import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.Cloud;
-import io.github.mivek.model.Metar;
-import io.github.mivek.model.Visibility;
-import io.github.mivek.model.WeatherCondition;
-import io.github.mivek.model.Wind;
+import io.github.mivek.model.*;
 import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivek.utils.Converter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -360,6 +357,17 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("KT", m.getWind().getUnit());
         assertEquals(240, m.getWind().getExtreme1());
         assertEquals(300, m.getWind().getExtreme2());
+    }
+
+    @Test
+    public void testParseValidAirport() throws ParseException {
+        String message = "EPDA 171000Z 36009KT 310V030";
+        Metar m = fSut.parse(message);
+        assertNotNull(m.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("EPDA"), m.getAirport());
+        assertThat(m.getDay(), is(17));
+        assertThat(m.getWind().getDirection(), is(Converter.degreesToDirection("360")));
+        assertThat(m.getWind().getSpeed(), is(9));
     }
 
 }
