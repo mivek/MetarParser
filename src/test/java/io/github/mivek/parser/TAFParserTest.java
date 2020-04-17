@@ -623,6 +623,17 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
+    public void testParseValidAirport() throws ParseException {
+        String message = "TAF EPDA 170800Z 1709/1718 35010KT";
+        TAF res = fSut.parse(message);
+        assertNotNull(res.getAirport());
+        assertEquals(fSut.getAirportSupplier().get("EPDA"), res.getAirport());
+        assertThat(res.getDay(), is(17));
+        assertThat(res.getWind().getDirection(), is(Converter.degreesToDirection("350")));
+        assertThat(res.getWind().getSpeed(), is(10));
+    }
+
+    @Test
     public void testParseWithNauticalMilesVisibility() throws ParseException {
         //GIVEN a TAF message with nautical miles visibility;
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
