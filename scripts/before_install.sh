@@ -6,11 +6,14 @@ if  [[ "$TRAVIS_SECURE_ENV_VARS" = "true" ]] && [[ "$TRAVIS_PULL_REQUEST" = "fal
     echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
 fi
 
-if [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*bugfix) ]] || [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*clean) ]]; then
+if [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*fix) ]] || [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*clean) ]]; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit
     isPRMerged=true
 elif [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*feature) ]] ; then
     mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 versions:commit
+    isPRMerged=true
+elif [[ "$TRAVIS_COMMIT_MESSAGE" =~ (Merge pull request.*major) ]] ; then
+    mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.nextMajorVersion}.0.0 versions:commit
     isPRMerged=true
 fi
 

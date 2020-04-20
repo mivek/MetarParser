@@ -19,9 +19,7 @@ If you want to add a new feature, open an issue describing the feature you want 
 *   Create a branch from master. Prefix the branch name with the type of branch you want to create. Eg: "feature/", "bugfix/", "clean/".
 The keywords feature, bugfix and clean are mandatory for branch name.
 
-*   Update the pom
-    *   For a feature bump the minor version of the pom. Eg: 1.6.0 -> 1.7.0
-    *   For a bug or a clean bump the patch version of the pom. Eg: 1.6.0 -> 1.6.1
+*   Do bot update the pom.xml, it will be updated accordingly to the branch name
 
 *   Add new code and the tests
 
