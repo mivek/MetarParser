@@ -35,7 +35,7 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
             { "SCT026CB", true }, // Cloud
             { "ZZZ026CB", false }, // Cloud null
             { "+SHGSRA", true }, // Weather condition
-            { "+ZERT", true } // Weather null
+            { "+ZERT", false } // Weather null
         });
     }
 

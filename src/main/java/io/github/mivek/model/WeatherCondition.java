@@ -89,7 +89,7 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !phenomenons.isEmpty() || intensity != null || descriptive != null;
+        return !phenomenons.isEmpty() || descriptive != null;
     }
 
     @Override public final String toString() {
