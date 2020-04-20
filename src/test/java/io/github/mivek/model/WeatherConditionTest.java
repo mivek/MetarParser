@@ -9,32 +9,29 @@ import org.junit.Test;
 import pl.pojo.tester.api.FieldPredicate;
 import pl.pojo.tester.api.assertion.Method;
 
-import java.util.Arrays;
-
 import static org.junit.Assert.assertThat;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class WeatherConditionTest {
 
     @Test
-    public void testToString() {
+    public void testToString(){
         WeatherCondition sut = new WeatherCondition();
         sut.setIntensity(Intensity.LIGHT);
-        sut.addDescriptive(Descriptive.SHOWERS);
+        sut.setDescriptive(Descriptive.SHOWERS);
         sut.addPhenomenon(Phenomenon.RAIN);
 
         String desc = sut.toString();
 
         assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.intensity") + "=" + Intensity.LIGHT.toString()));
-        assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.descriptive") + "=" + Arrays.asList(Descriptive.SHOWERS.toString()).toString()));
+        assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.descriptive") + "=" + Descriptive.SHOWERS.toString()));
         assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString()));
     }
 
-    @Test
-    public void testPojo() {
+    @Test public void testPojo() {
         // given
         final Class<?> classUnderTest = WeatherCondition.class;
         // then
-        assertPojoMethodsFor(classUnderTest, FieldPredicate.exclude("phenomenons", "descriptives")).testing(Method.GETTER, Method.SETTER).areWellImplemented();
+        assertPojoMethodsFor(classUnderTest, FieldPredicate.exclude("phenomenons")).testing(Method.GETTER, Method.SETTER).areWellImplemented();
     }
 }
