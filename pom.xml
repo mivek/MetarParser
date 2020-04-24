@@ -3,7 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mivek</groupId>
     <artifactId>metarParser</artifactId>
+    <packaging>pom</packaging>
     <version>1.10.4</version>
+    <modules>
+        <module>metarParser-common</module>
+    </modules>
     <name>metarParser</name>
     <description>This project is a metar parser.
         Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
@@ -57,31 +61,33 @@
         </repository>
     </repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>pl.pojo</groupId>
-            <artifactId>pojo-tester</artifactId>
-            <version>0.7.6</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.opencsv</groupId>
+                <artifactId>opencsv</artifactId>
+                <version>5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>pl.pojo</groupId>
+                <artifactId>pojo-tester</artifactId>
+                <version>0.7.6</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
