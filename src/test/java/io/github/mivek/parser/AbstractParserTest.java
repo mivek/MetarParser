@@ -54,12 +54,12 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWCNotNull() {
+    public void testParseWCNull() {
         String wcPart = "-SH";
 
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
-        assertNotNull(wc);
+        assertNull(wc);
     }
 
     @Test
@@ -68,10 +68,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
 
         WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
 
-        assertNotNull(wc);
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
-        assertNull(wc.getIntensity());
-        assertEquals(0, wc.getPhenomenons().size());
+        assertNull(wc);
     }
 
     @Test
