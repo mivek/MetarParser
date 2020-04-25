@@ -17,11 +17,11 @@ public enum TimeIndicator {
     /**
      * Shortcut of the time indicator.
      */
-    private String shortCut;
+    private final String shortCut;
     /**
      * Name of the time indicator.
      */
-    private String name;
+    private final String name;
 
     /**
      * Constructor.

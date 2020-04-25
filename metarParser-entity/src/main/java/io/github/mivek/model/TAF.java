@@ -23,13 +23,13 @@ public class TAF extends AbstractWeatherCode {
     /** The minimum temperature. */
     private TemperatureDated minTemperature;
     /** List of BECMG changes. */
-    private List<BECMGTafTrend> bECMGs;
+    private final List<BECMGTafTrend> bECMGs;
     /** List of From changes. */
-    private List<FMTafTrend> fMs;
+    private final List<FMTafTrend> fMs;
     /** List of Tempos changes. */
-    private List<TEMPOTafTrend> tempos;
+    private final List<TEMPOTafTrend> tempos;
     /** List of probability changes. */
-    private List<PROBTafTrend> probs;
+    private final List<PROBTafTrend> probs;
     /**Indicate if the taf event is ameded.*/
     private boolean amendment;
 

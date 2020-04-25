@@ -32,9 +32,9 @@ public enum CloudType {
     SC("SC", Messages.getInstance().getString("CloudType.SC"));
 
     /** The shortcut of the cloud type. */
-    private String shortcut; //$NON-NLS-1$
+    private final String shortcut; //$NON-NLS-1$
     /** The name of the cloud type. */
-    private String name; //$NON-NLS-1$
+    private final String name; //$NON-NLS-1$
 
     /**
      * Constructor.

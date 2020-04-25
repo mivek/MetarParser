@@ -20,7 +20,7 @@ public class WeatherCondition {
     /** Descriptive of the condition (optional). */
     private Descriptive descriptive;
     /** List of phenomenons of the condition. */
-    private List<Phenomenon> phenomenons;
+    private final List<Phenomenon> phenomenons;
 
     /**
      * Constructor.

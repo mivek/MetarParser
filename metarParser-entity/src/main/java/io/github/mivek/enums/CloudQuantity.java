@@ -23,9 +23,9 @@ public enum CloudQuantity {
     NSC("NSC", Messages.getInstance().getString("CloudQuantity.NSC")); //$NON-NLS-1$
 
     /** Shortcut of the cloud quanity. */
-    private String shortcut; //$NON-NLS-1$
+    private final String shortcut; //$NON-NLS-1$
     /** The name of the quantity. */
-    private String name; //$NON-NLS-1$
+    private final String name; //$NON-NLS-1$
 
     /**
      * Constructor.

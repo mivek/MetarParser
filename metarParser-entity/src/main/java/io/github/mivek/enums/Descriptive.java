@@ -26,9 +26,9 @@ public enum Descriptive {
     FREEZING("FZ", Messages.getInstance().getString("Descriptive.FZ")); //$NON-NLS-1$
 
     /** Shortcut of the descriptive. */
-    private String shortcut; //$NON-NLS-1$
+    private final String shortcut; //$NON-NLS-1$
     /** Meaning of the descriptive. */
-    private String name; //$NON-NLS-1$
+    private final String name; //$NON-NLS-1$
 
     /**
      * Connstructor.

@@ -14,8 +14,8 @@ import io.github.mivek.internationalization.Messages;
 
 @RunWith(Parameterized.class)
 public class DegreesToDirectionTest {
-    private String direction;
-    private String degrees;
+    private final String direction;
+    private final String degrees;
 
     public DegreesToDirectionTest(final String pDirection, final String pDegrees) {
         direction = pDirection;

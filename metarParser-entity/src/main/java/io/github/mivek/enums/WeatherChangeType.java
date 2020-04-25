@@ -15,9 +15,9 @@ public enum WeatherChangeType {
     /** Probability change. */
     PROB("PROB", Messages.getInstance().getString("WeatherChangeType.PROB"));
     /** Shortcut attribute. */
-    private String shortcut;
+    private final String shortcut;
     /** Name of the enumeration. */
-    private String name;
+    private final String name;
 
     /**
      * Constructor.

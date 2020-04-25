@@ -19,26 +19,6 @@ public class Cloud {
     private CloudType type;
 
     /**
-     * Getter of the altitude (unit: meters, approximation).
-     * @return int of altitude.
-     * @deprecated Use {@link #getHeight()}
-     */
-    @Deprecated
-    public int getAltitude() {
-        return height * 30 / 100;
-    }
-
-    /**
-     * Setter of the altitude (unit: meters).
-     *
-     * @param pAltitude The altitude to set.
-     * @deprecated Use {@link #setHeight(int)}
-     */
-    @Deprecated public void setAltitude(final int pAltitude) {
-        height = pAltitude * 100 / 30;
-    }
-
-    /**
      * Getter of the height (unit: feet).
      * @return int of height.
      */
@@ -92,7 +72,6 @@ public class Cloud {
                 append(Messages.getInstance().getString("ToString.quantity"), quantity).
                 append(Messages.getInstance().getString("ToString.type"), type).
                 append(Messages.getInstance().getString("ToString.height.feet"), height).
-                append(Messages.getInstance().getString("ToString.height.meter"), getAltitude()).
                 toString();
     }
 }

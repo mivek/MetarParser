@@ -13,7 +13,7 @@ public abstract class AbstractMetarTrendTime {
     /**
      * Type of trend AT, FM or TL.
      */
-    private TimeIndicator type;
+    private final TimeIndicator type;
     /**
      * Time of the change.
      */

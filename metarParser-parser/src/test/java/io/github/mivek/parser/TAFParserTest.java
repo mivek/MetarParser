@@ -73,7 +73,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
         assertThat(change.getClouds(), hasSize(1));
         assertThat(change.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
-        assertThat(change.getClouds().get(0).getAltitude(), is(12 * 30));
         assertThat(change.getClouds().get(0).getHeight(), is(1200));
         assertThat(change.getClouds().get(0).getType(), is(CloudType.TCU));
     }
@@ -163,7 +162,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         //Check on clouds.
         assertThat(res.getClouds(), hasSize(1));
         assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
-        assertThat(res.getClouds().get(0).getAltitude(), is(30 * 12));
         assertThat(res.getClouds().get(0).getType(), nullValue());
 
         assertThat(res.getMaxTemperature(), notNullValue());
@@ -192,7 +190,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.MIST));
         assertThat(res.getTempos().get(0).getClouds(), hasSize(1));
         assertThat(res.getTempos().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
-        assertThat(res.getTempos().get(0).getClouds().get(0).getAltitude(), is(6 * 30));
         assertThat(res.getTempos().get(0).getClouds().get(0).getType(), nullValue());
         assertThat(res.getTempos().get(0).getProbability(), nullValue());
         // Second tempo
@@ -209,7 +206,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(1).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.FOG));
         assertThat(res.getTempos().get(1).getClouds(), hasSize(1));
         assertThat(res.getTempos().get(1).getClouds().get(0).getQuantity(), is(CloudQuantity.BKN));
-        assertThat(res.getTempos().get(1).getClouds().get(0).getAltitude(), is(30 * 2));
         assertThat(res.getTempos().get(1).getClouds().get(0).getHeight(), is(200));
         assertThat(res.getTempos().get(1).getProbability(), is(40));
         // Third tempo
@@ -226,10 +222,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTempos().get(2).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
         assertThat(res.getTempos().get(2).getClouds(), hasSize(2));
         assertThat(res.getTempos().get(2).getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
-        assertThat(res.getTempos().get(2).getClouds().get(0).getAltitude(), is(30 * 30));
         assertThat(res.getTempos().get(2).getClouds().get(0).getType(), is(CloudType.TCU));
         assertThat(res.getTempos().get(2).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
-        assertThat(res.getTempos().get(2).getClouds().get(1).getAltitude(), is(30 * 40));
         assertThat(res.getTempos().get(2).getClouds().get(1).getType(), nullValue());
         assertThat(res.getTempos().get(2).getProbability(), is(40));
 
@@ -256,7 +250,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(tempo4.getClouds(), hasSize(1));
         assertEquals(CloudQuantity.BKN, tempo4.getClouds().get(0).getQuantity());
         assertNull(tempo4.getClouds().get(0).getType());
-        assertEquals(6 * 30, tempo4.getClouds().get(0).getAltitude());
         assertNull(tempo4.getProbability());
 
         // Fifth Tempo
@@ -273,7 +266,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(Phenomenon.FOG, tempo5.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertThat(tempo5.getClouds(), hasSize(1));
         assertEquals(CloudQuantity.BKN, tempo5.getClouds().get(0).getQuantity());
-        assertEquals(2 * 30, tempo5.getClouds().get(0).getAltitude());
         assertNull(tempo5.getClouds().get(0).getType());
         assertThat(tempo5.getProbability(), is(40));
     }
@@ -545,10 +537,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertEquals(22, fm1.getWind().getGust());
         assertThat(fm1.getClouds(), hasSize(2));
         assertEquals(CloudQuantity.FEW, fm1.getClouds().get(0).getQuantity());
-        assertEquals(50 * 30, fm1.getClouds().get(0).getAltitude());
         assertNull(fm1.getClouds().get(0).getType());
         assertEquals(CloudQuantity.SCT, fm1.getClouds().get(1).getQuantity());
-        assertEquals(250 * 30, fm1.getClouds().get(1).getAltitude());
         assertNull(fm1.getClouds().get(1).getType());
         // Tempos
         assertThat(res.getTempos(), hasSize(1));
@@ -624,7 +614,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     public void testParseWithNauticalMilesVisibility() throws ParseException {
-        //GIVEN a TAF message with nautical miles visibility;
+        // GIVEN a TAF message with nautical miles visibility;
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
                 "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n" +
                 "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";

@@ -15,7 +15,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
     /**
      * List containing the times properties of the trend.
      */
-    private List<AbstractMetarTrendTime> times;
+    private final List<AbstractMetarTrendTime> times;
 
     /**
      * Constructor.

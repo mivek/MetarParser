@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public abstract class AbstractTrend extends AbstractWeatherContainer {
     /** Type of trend. */
-    private WeatherChangeType type;
+    private final WeatherChangeType type;
 
     /**
      * Constructor.

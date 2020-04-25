@@ -55,9 +55,9 @@ public enum Phenomenon {
     FUNNEL_CLOUD("FC", Messages.getInstance().getString("Phenomenon.FC")); //$NON-NLS-1$
 
     /** Shortcut of the phenomenon. */
-    private String shortcut;
+    private final String shortcut;
     /** Name of the phenomenon. */
-    private String name;
+    private final String name;
 
     /**
      * Constructor.

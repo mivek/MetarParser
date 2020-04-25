@@ -17,9 +17,9 @@ public enum Intensity {
     IN_VICINITY("VC", Messages.getInstance().getString("Intensity.VC")); //$NON-NLS-1$
 
     /** The shortcut of the intensity. */
-    private String shortcut; //$NON-NLS-1$
+    private final String shortcut; //$NON-NLS-1$
     /** The meaning of the intensity. */
-    private String name; //$NON-NLS-1$
+    private final String name; //$NON-NLS-1$
 
     /**
      * Constructor.

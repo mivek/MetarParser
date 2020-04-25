@@ -24,9 +24,9 @@ public class Metar extends AbstractWeatherCode {
     /** Auto Value. */
     private boolean auto;
     /** List of runways information. */
-    private List<RunwayInfo> runways;
+    private final List<RunwayInfo> runways;
     /** List of trends. */
-    private List<AbstractMetarTrend> trends;
+    private final List<AbstractMetarTrend> trends;
 
     /**
      * Constructor.

@@ -15,9 +15,9 @@ public abstract class AbstractWeatherContainer {
     /** The visibility. */
     private Visibility visibility;
     /** The list of clouds. */
-    private List<Cloud> clouds;
+    private final List<Cloud> clouds;
     /** The list of weatherConditions. */
-    private List<WeatherCondition> weatherConditions;
+    private final List<WeatherCondition> weatherConditions;
     /** the vertical Visibility in feet. */
     private Integer verticalVisibility;
     /** The wind shear. */
