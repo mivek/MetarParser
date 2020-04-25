@@ -21,9 +21,9 @@ import io.github.mivek.utils.Converter;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Test class for {@link TAFParser}
@@ -581,9 +581,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Test
     public void testParseInvalidMessage() throws ParseException {
         String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
-        thrown.expect(ParseException.class);
-        thrown.expect(hasProperty("errorCode", is(ErrorCodes.ERROR_CODE_INVALID_MESSAGE)));
-        fSut.parse(message);
+        ParseException e = assertThrows(ParseException.class, () -> fSut.parse(message));
+        assertEquals(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, e.getErrorCode());
     }
 
     @Test
