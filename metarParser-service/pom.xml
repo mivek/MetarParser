@@ -11,5 +11,27 @@
 
     <artifactId>metarParser-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.mivek</groupId>
+            <artifactId>metarParser-parser</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.mivek</groupId>
+            <artifactId>metarParser-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
