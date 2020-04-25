@@ -7,6 +7,7 @@
     <version>1.10.4</version>
     <modules>
         <module>metarParser-common</module>
+        <module>metarParser-entity</module>
     </modules>
     <name>metarParser</name>
     <description>This project is a metar parser.
@@ -44,6 +45,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13</junit.version>
         <pitest-maven.version>1.5.1</pitest-maven.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <pojo-tester.version>0.7.6</pojo-tester.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
     </properties>
 
     <developers>
@@ -71,7 +76,7 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
-                <version>1.3</version>
+                <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -83,7 +88,7 @@
             <dependency>
                 <groupId>pl.pojo</groupId>
                 <artifactId>pojo-tester</artifactId>
-                <version>0.7.6</version>
+                <version>${pojo-tester.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -98,12 +103,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>${spotbugs-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
