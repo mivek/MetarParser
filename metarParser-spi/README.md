@@ -21,7 +21,7 @@ In this file write the fully qualified name of the implementation you want to us
 Example
 
 ```
-io.github.mivek.provider.airport.implOurAirportsAirportProvider
+io.github.mivek.provider.airport.impl.OurAirportsAirportProvider
 ```
 
 ### Add your own implementation
