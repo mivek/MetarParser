@@ -8,6 +8,7 @@
     <modules>
         <module>metarParser-common</module>
         <module>metarParser-entity</module>
+        <module>metarParser-spi</module>
     </modules>
     <name>metarParser</name>
     <description>This project is a metar parser.
