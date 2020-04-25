@@ -9,6 +9,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class RemarkParserTest {
+    public static final String CLOUD_QUANTITY_BKN = "CloudQuantity.BKN";
+    public static final String REMARK_PRECIPITATION_BEG_END = "Remark.Precipitation.Beg.End";
+    public static final String CONVERTER_NE = "Converter.NE";
+    public static final String REMARK_SEA_LEVEL_PRESSURE = "Remark.Sea.Level.Pressure";
     private RemarkParser sut;
 
     @Before public void setUp() {
@@ -137,7 +141,7 @@ public class RemarkParserTest {
         // WHEN parsing the remark
         String remark = sut.parse(code);
         // THEN the sector visibility is decoded
-        String expectedRmk = Messages.getInstance().getString("Remark.Sector.Visibility", Messages.getInstance().getString("Converter.NE"), "2 1/2");
+        String expectedRmk = Messages.getInstance().getString("Remark.Sector.Visibility", Messages.getInstance().getString(CONVERTER_NE), "2 1/2");
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -155,7 +159,7 @@ public class RemarkParserTest {
         String code = "AO1 TORNADO B13 6 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.Beginning", Messages.getInstance().getString("Remark.TORNADO"), "", "13", "6", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.Beginning", Messages.getInstance().getString("Remark.TORNADO"), "", "13", "6", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -163,7 +167,7 @@ public class RemarkParserTest {
         String code = "AO1 TORNADO B1513 6 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.Beginning", Messages.getInstance().getString("Remark.TORNADO"), "15", "13", "6", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.Beginning", Messages.getInstance().getString("Remark.TORNADO"), "15", "13", "6", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -171,7 +175,7 @@ public class RemarkParserTest {
         String code = "AO1 FUNNEL CLOUD B1513E1630 6 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.BegEnd", Messages.getInstance().getString("Remark.FUNNELCLOUD"), "15", "13", "16", "30", "6", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.BegEnd", Messages.getInstance().getString("Remark.FUNNELCLOUD"), "15", "13", "16", "30", "6", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -179,7 +183,7 @@ public class RemarkParserTest {
         String code = "AO1 FUNNEL CLOUD B13E1630 6 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.BegEnd", Messages.getInstance().getString("Remark.FUNNELCLOUD"), "", "13", "16", "30", "6", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.BegEnd", Messages.getInstance().getString("Remark.FUNNELCLOUD"), "", "13", "16", "30", "6", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -187,7 +191,7 @@ public class RemarkParserTest {
         String code = "AO1 WATERSPOUT E16 12 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.Ending", Messages.getInstance().getString("Remark.WATERSPOUT"), "", "16", "12", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.Ending", Messages.getInstance().getString("Remark.WATERSPOUT"), "", "16", "12", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
@@ -195,15 +199,15 @@ public class RemarkParserTest {
         String code = "AO1 WATERSPOUT E1516 12 NE";
         String remark = sut.parse(code);
         String expectedRmk = Messages.getInstance()
-                .getString("Remark.Tornadic.Activity.Ending", Messages.getInstance().getString("Remark.WATERSPOUT"), "15", "16", "12", Messages.getInstance().getString("Converter.NE"));
+                .getString("Remark.Tornadic.Activity.Ending", Messages.getInstance().getString("Remark.WATERSPOUT"), "15", "16", "12", Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expectedRmk));
     }
 
     @Test public void testParseBeginningEndPrecipitation() {
         String code = "AO1 RAB05E30SNB1520E1655";
         String remark = sut.parse(code);
-        String expectedRmk1 = Messages.getInstance().getString("Remark.Precipitation.Beg.End", "", Messages.getInstance().getString("Phenomenon.RA"), "", "05", "", "30");
-        String expectedRmk2 = Messages.getInstance().getString("Remark.Precipitation.Beg.End", "", Messages.getInstance().getString("Phenomenon.SN"), "15", "20", "16", "55");
+        String expectedRmk1 = Messages.getInstance().getString(REMARK_PRECIPITATION_BEG_END, "", Messages.getInstance().getString("Phenomenon.RA"), "", "05", "", "30");
+        String expectedRmk2 = Messages.getInstance().getString(REMARK_PRECIPITATION_BEG_END, "", Messages.getInstance().getString("Phenomenon.SN"), "15", "20", "16", "55");
         assertThat(remark, containsString(expectedRmk1));
         assertThat(remark, containsString(expectedRmk2));
     }
@@ -212,9 +216,9 @@ public class RemarkParserTest {
         String code = "AO1 SHRAB05E30SHSNB20E55";
         String remark = sut.parse(code);
         String expectedRmk1 = Messages.getInstance()
-                .getString("Remark.Precipitation.Beg.End", Messages.getInstance().getString("Descriptive.SH"), Messages.getInstance().getString("Phenomenon.RA"), "", "05", "", "30");
+                .getString(REMARK_PRECIPITATION_BEG_END, Messages.getInstance().getString("Descriptive.SH"), Messages.getInstance().getString("Phenomenon.RA"), "", "05", "", "30");
         String expectedRmk2 = Messages.getInstance()
-                .getString("Remark.Precipitation.Beg.End", Messages.getInstance().getString("Descriptive.SH"), Messages.getInstance().getString("Phenomenon.SN"), "", "20", "", "55");
+                .getString(REMARK_PRECIPITATION_BEG_END, Messages.getInstance().getString("Descriptive.SH"), Messages.getInstance().getString("Phenomenon.SN"), "", "20", "", "55");
         assertThat(remark, containsString(expectedRmk1));
         assertThat(remark, containsString(expectedRmk2));
     }
@@ -222,7 +226,7 @@ public class RemarkParserTest {
     @Test public void testParseBeginningThunderstorm() {
         String code = "AO1 TSB0159E30";
         String remark = sut.parse(code);
-        String expectedRmk1 = Messages.getInstance().getString("Remark.Precipitation.Beg.End", "", Messages.getInstance().getString("Phenomenon.TS"), "01", "59", "", "30");
+        String expectedRmk1 = Messages.getInstance().getString(REMARK_PRECIPITATION_BEG_END, "", Messages.getInstance().getString("Phenomenon.TS"), "01", "59", "", "30");
         assertThat(remark, containsString(expectedRmk1));
     }
 
@@ -236,7 +240,7 @@ public class RemarkParserTest {
     @Test public void testParseThunderStormLocationWithMoving() {
         String code = "AO1 TS SE MOV NE";
         String remark = sut.parse(code);
-        String expected = Messages.getInstance().getString("Remark.Thunderstorm.Location.Moving", Messages.getInstance().getString("Converter.SE"), Messages.getInstance().getString("Converter.NE"));
+        String expected = Messages.getInstance().getString("Remark.Thunderstorm.Location.Moving", Messages.getInstance().getString("Converter.SE"), Messages.getInstance().getString(CONVERTER_NE));
         assertThat(remark, containsString(expected));
     }
 
@@ -284,7 +288,7 @@ public class RemarkParserTest {
     @Test public void testParseObscurations() {
         String code = "AO1 FU BKN020";
         String remark = sut.parse(code);
-        String expected = Messages.getInstance().getString("Remark.Obscuration", Messages.getInstance().getString("CloudQuantity.BKN"), 2000, Messages.getInstance().getString("Phenomenon.FU"));
+        String expected = Messages.getInstance().getString("Remark.Obscuration", Messages.getInstance().getString(CLOUD_QUANTITY_BKN), 2000, Messages.getInstance().getString("Phenomenon.FU"));
         assertThat(remark, containsString(expected));
     }
 
@@ -292,7 +296,7 @@ public class RemarkParserTest {
         String code = "BKN V OVC";
         String remark = sut.parse(code);
         String expected = Messages.getInstance()
-                .getString("Remark.Variable.Sky.Condition", Messages.getInstance().getString("CloudQuantity.BKN"), Messages.getInstance().getString("CloudQuantity.OVC"));
+                .getString("Remark.Variable.Sky.Condition", Messages.getInstance().getString(CLOUD_QUANTITY_BKN), Messages.getInstance().getString("CloudQuantity.OVC"));
         assertThat(remark, containsString(expected));
     }
 
@@ -300,7 +304,7 @@ public class RemarkParserTest {
         String code = "BKN014 V OVC";
         String remark = sut.parse(code);
         String expected = Messages.getInstance()
-                .getString("Remark.Variable.Sky.Condition.Height", 1400, Messages.getInstance().getString("CloudQuantity.BKN"), Messages.getInstance().getString("CloudQuantity.OVC"));
+                .getString("Remark.Variable.Sky.Condition.Height", 1400, Messages.getInstance().getString(CLOUD_QUANTITY_BKN), Messages.getInstance().getString("CloudQuantity.OVC"));
         assertThat(remark, containsString(expected));
     }
 
@@ -314,14 +318,14 @@ public class RemarkParserTest {
     @Test public void testParseSealLevelPressure() {
         String code = "AO1 SLP134";
         String remark = sut.parse(code);
-        String expected = Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4");
+        String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "1013.4");
         assertThat(remark, containsString(expected));
     }
 
     @Test public void testParseSealLevelPressure2() {
         String code = "AO1 SLP982";
         String remark = sut.parse(code);
-        String expected = Messages.getInstance().getString("Remark.Sea.Level.Pressure", "998.2");
+        String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "998.2");
         assertThat(remark, containsString(expected));
     }
 
@@ -337,6 +341,6 @@ public class RemarkParserTest {
 
         String remark = sut.parse(code);
         assertThat(remark, containsString("CF1AC8 CF TR"));
-        assertThat(remark, containsString(Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1009.1")));
+        assertThat(remark, containsString(Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "1009.1")));
     }
 }

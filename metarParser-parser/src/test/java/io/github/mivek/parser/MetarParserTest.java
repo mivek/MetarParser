@@ -27,6 +27,7 @@ import static org.junit.Assert.*;
  */
 public class MetarParserTest extends AbstractParserTest<Metar> {
 
+    public static final String TEN_KM = ">10km";
     private MetarParser fSut;
 
     @Override
@@ -217,7 +218,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(toString, containsString(Descriptive.SHOWERS.toString()));
         assertThat(toString, containsString(Phenomenon.RAIN.toString()));
         assertNotNull(m.getVisibility());
-        assertEquals(">10km", m.getVisibility().getMainVisibility());
+        assertEquals(TEN_KM, m.getVisibility().getMainVisibility());
     }
 
     @Test
@@ -293,7 +294,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         String code = "LSZL 300320Z AUTO 00000KT 9999NDV BKN060 OVC074 00/M04 Q1001\n" + "RMK=";
         Metar m = fSut.parse(code);
         assertNotNull(m);
-        assertEquals(">10km", m.getVisibility().getMainVisibility());
+        assertEquals(TEN_KM, m.getVisibility().getMainVisibility());
     }
 
     @Test
@@ -305,7 +306,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // THEN the attribute cavok is true and the main visibility is > 10km.
         assertNotNull(m);
         assertTrue(m.isCavok());
-        assertEquals(">10km", m.getVisibility().getMainVisibility());
+        assertEquals(TEN_KM, m.getVisibility().getMainVisibility());
         assertEquals(Integer.valueOf(9), m.getTemperature());
         assertEquals(Integer.valueOf(6), m.getDewPoint());
         assertEquals(Integer.valueOf(1031), m.getAltimeter());

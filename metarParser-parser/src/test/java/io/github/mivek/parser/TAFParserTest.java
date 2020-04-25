@@ -32,6 +32,9 @@ import static org.junit.Assert.*;
  */
 public class TAFParserTest extends AbstractParserTest<TAF> {
 
+    public static final String TEN_KM = ">10km";
+    public static final String REMARK_FCST = "Remark.FCST";
+    public static final String REMARK_NXT = "Remark.NXT";
     private TAFParser fSut;
 
     @Override
@@ -300,7 +303,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getWind().getGust(), is(0));
         assertThat(res.getWind().getUnit(), is("KT"));
         // Checks on visibility.
-        assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(res.getVisibility().getMainVisibility(), is(TEN_KM));
         //Check on clouds.
         assertThat(res.getClouds(), hasSize(2));
         assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
@@ -392,7 +395,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg1.getValidity().getStartHour(), is(6));
         assertThat(becmg1.getValidity().getEndDay(), is(30));
         assertThat(becmg1.getValidity().getEndHour(), is(9));
-        assertThat(becmg1.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg1.getVisibility().getMainVisibility(), is(TEN_KM));
         assertThat(becmg1.getWeatherConditions(), hasSize(0));
         assertThat(becmg1.getClouds(), hasSize(1));
         assertThat(becmg1.getClouds().get(0).getQuantity(), is(CloudQuantity.FEW));
@@ -438,7 +441,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getWind().getGust(), is(0));
         assertThat(res.getWind().getUnit(), is("KT"));
         // Checks on visibility.
-        assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(res.getVisibility().getMainVisibility(), is(TEN_KM));
         //Check on clouds.
         assertThat(res.getClouds(), hasSize(1));
         assertThat(res.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
@@ -465,7 +468,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg0.getValidity().getStartHour(), is(17));
         assertThat(becmg0.getValidity().getEndDay(), is(12));
         assertThat(becmg0.getValidity().getEndHour(), is(18));
-        assertThat(becmg0.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg0.getVisibility().getMainVisibility(), is(TEN_KM));
         assertThat(becmg0.getWeatherConditions(), hasSize(0));
         assertThat(becmg0.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
         assertThat(becmg0.getClouds().get(0).getHeight(), is(25000));
@@ -481,7 +484,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg1.getValidity().getStartHour(), is(3));
         assertThat(becmg1.getValidity().getEndDay(), is(13));
         assertThat(becmg1.getValidity().getEndHour(), is(4));
-        assertThat(becmg1.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(becmg1.getVisibility().getMainVisibility(), is(TEN_KM));
         assertThat(becmg1.getWind().getDirectionDegrees(), nullValue());
         assertThat(becmg1.getWind().getDirection(), is(Converter.degreesToDirection("VRB")));
         assertThat(becmg1.getWind().getSpeed(), is(6));
@@ -521,7 +524,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
         // Visibility
         assertThat(res.getVisibility(), is(not(nullValue())));
-        assertThat(res.getVisibility().getMainVisibility(), is(">10km"));
+        assertThat(res.getVisibility().getMainVisibility(), is(TEN_KM));
         assertThat(res.getVisibility().getMinDirection(), is(nullValue()));
         //Clouds
         assertThat(res.getClouds(), hasSize(1));
@@ -569,7 +572,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseInvalidMessage() throws ParseException {
+    public void testParseInvalidMessage() {
         String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
         ParseException e = assertThrows(ParseException.class, () -> fSut.parse(message));
         assertEquals(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, e.getErrorCode());
@@ -614,7 +617,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     public void testParseWithNauticalMilesVisibility() throws ParseException {
-        // GIVEN a TAF message with nautical miles visibility;
+        // GIVEN a TAF message with nautical miles visibility
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
                 "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n" +
                 "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
@@ -667,9 +670,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         // THEN the result is CAVOK and the second BECMG is also cavok.
         assertNotNull(result);
         assertTrue(result.isCavok());
-        assertEquals(">10km", result.getVisibility().getMainVisibility());
+        assertEquals(TEN_KM, result.getVisibility().getMainVisibility());
         assertTrue(result.getBECMGs().get(1).isCavok());
-        assertEquals(">10km", result.getBECMGs().get(1).getVisibility().getMainVisibility());
+        assertEquals(TEN_KM, result.getBECMGs().get(1).getVisibility().getMainVisibility());
     }
 
     @Test
@@ -683,8 +686,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(result);
         assertNotNull(result.getTempos().get(1));
         assertNotNull(result.getTempos().get(1).getRemark());
-        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
-                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        String rmk = Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
         assertThat(result.getTempos().get(1).getRemark(), containsString(rmk));
     }
 
@@ -697,8 +700,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
         // THEN the second tempo contains the remark.
         assertNotNull(result);
-        String rmk = Messages.getInstance().getString("Remark.FCST") + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
-                + Messages.getInstance().getString("Remark.NXT") + " " + Messages.getInstance().getString("Remark.FCST") + " BY 301400Z";
+        String rmk = Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
+                + Messages.getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
         assertThat(result.getRemark(), containsString(rmk));
         String description = result.toString();
         assertThat(description, containsString(Messages.getInstance().getString("ToString.start.day.month") + "=30"));
