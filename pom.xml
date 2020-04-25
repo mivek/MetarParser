@@ -10,6 +10,7 @@
         <module>metarParser-entity</module>
         <module>metarParser-spi</module>
         <module>metarParser-parser</module>
+        <module>metarParser-service</module>
     </modules>
     <name>metarParser</name>
     <description>This project is a metar parser.
