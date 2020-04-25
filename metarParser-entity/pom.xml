@@ -15,7 +15,23 @@
         <dependency>
             <groupId>io.github.mivek</groupId>
             <artifactId>metarParser-common</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>pl.pojo</groupId>
+            <artifactId>pojo-tester</artifactId>
         </dependency>
     </dependencies>
 

@@ -49,6 +49,8 @@
         <pojo-tester.version>0.7.6</pojo-tester.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <opencsv.version>5.1</opencsv.version>
     </properties>
 
     <developers>
@@ -71,7 +73,12 @@
             <dependency>
                 <groupId>com.opencsv</groupId>
                 <artifactId>opencsv</artifactId>
-                <version>5.1</version>
+                <version>${opencsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
@@ -94,6 +101,12 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>install</defaultGoal>
