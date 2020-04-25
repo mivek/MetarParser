@@ -6,8 +6,7 @@ import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.emptyArray;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.regex.Pattern;
 
@@ -45,5 +44,20 @@ public class RegexTest {
 
         assertTrue(Regex.find(regex, input1));
         assertFalse(Regex.find(regex, input2));
+    }
+
+    @Test
+    public void testMatch() {
+        Pattern regex = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)?");
+
+        assertTrue(Regex.match(regex,"12012MPS"));
+    }
+
+    @Test
+    public void testFindString() {
+        Pattern regex = Pattern.compile("(TS)");
+
+        assertEquals("TS", Regex.findString(regex, "TSRA"));
+        assertNull(Regex.findString(regex, "SHRA"));
     }
 }

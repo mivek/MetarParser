@@ -17,5 +17,6 @@ public class MessagesTest {
         Messages.getInstance().setLocale(Locale.ENGLISH);
         // THEN The locale is changed and so is the message.
         assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
+        assertEquals("ceiling varying between 5 and 15 feet", Messages.getInstance().getString("Remark.Ceiling.Height", 5, 15));
     }
 }
