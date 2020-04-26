@@ -11,6 +11,11 @@
 
     <artifactId>metarParser-service</artifactId>
 
+    <properties>
+        <jacoco.coverage.instruction.minimum>0.95</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.complexity.minimum>0.90</jacoco.coverage.complexity.minimum>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.github.mivek</groupId>

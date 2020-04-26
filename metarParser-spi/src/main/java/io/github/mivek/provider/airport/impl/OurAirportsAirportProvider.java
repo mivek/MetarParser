@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         countries = new HashMap<>();
         URI countriesUri = new URI(COUNTRIES_URI);
         try (InputStream countriesStream = countriesUri.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesStream)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
+                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesStream, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
             String[] line;
             while ((line = reader.readNext()) != null) {
                 Country c = new Country();
@@ -75,7 +76,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         URI airportsURI = new URI(AIRPORT_URI);
         airports = new HashMap<>();
         try (InputStream airportStream = airportsURI.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportStream)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
+                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportStream, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
             String[] line;
 
             while ((line = reader.readNext()) != null) {

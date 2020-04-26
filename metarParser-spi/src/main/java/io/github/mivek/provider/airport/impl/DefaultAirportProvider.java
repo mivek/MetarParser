@@ -11,6 +11,7 @@ import io.github.mivek.provider.airport.AirportProvider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public final class DefaultAirportProvider implements AirportProvider {
         Objects.requireNonNull(countriesFile);
         countries = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesFile)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
+        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesFile, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
             while ((line = reader.readNext()) != null) {
                 Country country = new Country();
                 country.setName(line[0]);
@@ -62,7 +63,7 @@ public final class DefaultAirportProvider implements AirportProvider {
         Objects.requireNonNull(airportsFile);
         airports = new HashMap<>();
         String[] line;
-        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportsFile)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
+        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportsFile, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
             while ((line = reader.readNext()) != null) {
                 Airport airport = new Airport();
                 airport.setName(line[1]);

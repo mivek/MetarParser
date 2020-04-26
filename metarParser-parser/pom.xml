@@ -12,6 +12,10 @@
     <artifactId>metarParser-parser</artifactId>
     <description>Module containing the parsers.</description>
 
+    <properties>
+        <jacoco.coverage.branch.minimum>0.95</jacoco.coverage.branch.minimum>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.github.mivek</groupId>

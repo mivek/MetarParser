@@ -11,6 +11,10 @@
 
     <artifactId>metarParser-spi</artifactId>
 
+    <properties>
+        <jacoco.coverage.instruction.minimum>0.96</jacoco.coverage.instruction.minimum>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
