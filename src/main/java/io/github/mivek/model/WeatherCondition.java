@@ -95,10 +95,7 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        if (Descriptive.SHOWERS == descriptive) {
-            return !phenomenons.isEmpty();
-        }
-        return !phenomenons.isEmpty() || descriptive != null;
+        return !phenomenons.isEmpty() || Descriptive.THUNDERSTORM == descriptive;
     }
 
     @Override
