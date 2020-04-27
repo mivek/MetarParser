@@ -57,11 +57,12 @@ public class AirportTest {
         assertEquals(iata, sut.getIata());
         assertEquals(name, sut.getName());
         assertEquals(latitude, sut.getLatitude(), 0);
-        assertEquals(longitude, sut.getLongitude(),0);
+        assertEquals(longitude, sut.getLongitude(), 0);
         assertEquals(altitude, sut.getAltitude());
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = Airport.class;
         // then

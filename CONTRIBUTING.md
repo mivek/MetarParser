@@ -3,7 +3,7 @@
 
 **Have you found a bug**
 
-Open an issue describing the bug and the steps to reproduce it.
+Open an issue describing the bug, and the steps to reproduce it.
 If you are willing to fix the bug:
 
 *  Open a Github Pull request 
@@ -21,7 +21,7 @@ The keywords feature, bugfix and clean are mandatory for branch name.
 
 *   Do bot update the pom.xml, it will be updated accordingly to the branch name
 
-*   Add new code and the tests
+*   Add new code and tests
 
 *   Push code and create the pull request towards the master branch
 
@@ -29,6 +29,6 @@ The keywords feature, bugfix and clean are mandatory for branch name.
 
 This project currently supports English and French languages. 
 If you are willing to add a new language, please use  https://poeditor.com/join/project/kWbkKRuHlr to register and contribute. 
-Once a language is completed at 100%, the file will be added to the project.
+Once a language is complete at 100%, the file will be added to the project.
 
 Thank you

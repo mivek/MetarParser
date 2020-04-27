@@ -5,6 +5,11 @@
     <artifactId>metarParser</artifactId>
     <packaging>pom</packaging>
     <version>1.10.4</version>
+    <name>metarParser</name>
+    <description>This project is a metar parser.
+        Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
+    </description>
+
     <modules>
         <module>metarParser-common</module>
         <module>metarParser-entity</module>
@@ -12,10 +17,8 @@
         <module>metarParser-parser</module>
         <module>metarParser-service</module>
     </modules>
-    <name>metarParser</name>
-    <description>This project is a metar parser.
-        Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
-    </description>
+
+
     <url>https://github.com/mivek/MetarParser</url>
     <scm>
         <url>https://github.com/mivek/MetarParser/tree/master</url>
