@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

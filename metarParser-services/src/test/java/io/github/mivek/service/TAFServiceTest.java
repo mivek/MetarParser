@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -8,12 +8,12 @@ import org.junit.Test;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.TAF;
 
-public class TAFFacadeTest extends AbstractWeatherCodeFacadeTest<TAF> {
+public class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
 
-    private final TAFFacade sut = TAFFacade.getInstance();
+    private final TAFService sut = TAFService.getInstance();
 
     @Override
-    protected AbstractWeatherCodeFacade<TAF> getSut() {
+    protected AbstractWeatherCodeService<TAF> getSut() {
         return sut;
     }
 

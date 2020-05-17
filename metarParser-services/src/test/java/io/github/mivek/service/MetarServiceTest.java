@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -9,12 +9,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
-public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
+public class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
     @Test
     public void testDecodeValidMetar() throws ParseException {
         String code = "LFPG 251830Z 17013KT 9999 OVC006 04/03 Q1012 NOSIG";
 
-        Metar res = MetarFacade.getInstance().decode(code);
+        Metar res = MetarService.getInstance().decode(code);
 
         assertNotNull(res);
         assertEquals("LFPG", res.getAirport().getIcao());
@@ -42,7 +42,7 @@ public class MetarFacadeTest extends AbstractWeatherCodeFacadeTest<Metar> {
     }
 
     @Override
-    protected AbstractWeatherCodeFacade<Metar> getSut() {
-        return MetarFacade.getInstance();
+    protected AbstractWeatherCodeService<Metar> getSut() {
+        return MetarService.getInstance();
     }
 }

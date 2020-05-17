@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,18 +16,18 @@ import io.github.mivek.parser.MetarParser;
  * Class representing the facade for metars.
  * @author mivek
  */
-public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
+public final class MetarService extends AbstractWeatherCodeService<Metar> {
     /** URL to retrieve the metar from. */
     private static final String NOAA_METAR_URL = "https://tgftp.nws.noaa.gov/data/observations/metar/stations/";
     /**
      * Instance.
      */
-    private static final MetarFacade INSTANCE = new MetarFacade();
+    private static final MetarService INSTANCE = new MetarService();
 
     /**
      * Private constructor.
      */
-    private MetarFacade() {
+    private MetarService() {
         super(MetarParser.getInstance());
     }
 
@@ -38,7 +38,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
 
     @Override
     public Metar retrieveFromAirport(final String pIcao) throws ParseException, IOException {
-        if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
+        if (pIcao.length() != AbstractWeatherCodeService.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
         }
         String website = NOAA_METAR_URL + pIcao.toUpperCase() // $NON-NLS-1$
@@ -55,7 +55,7 @@ public final class MetarFacade extends AbstractWeatherCodeFacade<Metar> {
      * Returns a instance of the class.
      * @return the instance of the class.
      */
-    public static MetarFacade getInstance() {
+    public static MetarService getInstance() {
         return INSTANCE;
     }
 }

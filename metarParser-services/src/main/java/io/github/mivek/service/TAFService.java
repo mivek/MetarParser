@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,18 +19,18 @@ import io.github.mivek.parser.TAFParser;
  * Facade for TAF.
  * @author mivek
  */
-public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
+public final class TAFService extends AbstractWeatherCodeService<TAF> {
     /** URL to retrieve the TAF from. */
     private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
     /**
      * The instance of the facade.
      */
-    private static final TAFFacade INSTANCE = new TAFFacade();
+    private static final TAFService INSTANCE = new TAFService();
 
     /**
      * Constructor.
      */
-    private TAFFacade() {
+    private TAFService() {
         super(TAFParser.getInstance());
     }
 
@@ -41,7 +41,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
 
     @Override
     public TAF retrieveFromAirport(final String pIcao) throws IOException, URISyntaxException, ParseException {
-        if (pIcao.length() != AbstractWeatherCodeFacade.ICAO) {
+        if (pIcao.length() != AbstractWeatherCodeService.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
         String website = NOAA_TAF_URL + pIcao.toUpperCase() // $NON-NLS-1$
@@ -79,7 +79,7 @@ public final class TAFFacade extends AbstractWeatherCodeFacade<TAF> {
     /**
      * @return the instance of the facade.
      */
-    public static TAFFacade getInstance() {
+    public static TAFService getInstance() {
         return INSTANCE;
     }
 }

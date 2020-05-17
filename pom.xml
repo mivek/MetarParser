@@ -15,7 +15,7 @@
         <module>metarParser-entities</module>
         <module>metarParser-spi</module>
         <module>metarParser-parsers</module>
-        <module>metarParser-service</module>
+        <module>metarParser-services</module>
     </modules>
 
 

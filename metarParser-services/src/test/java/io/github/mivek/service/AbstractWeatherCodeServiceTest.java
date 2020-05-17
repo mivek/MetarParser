@@ -1,4 +1,4 @@
-package io.github.mivek.facade;
+package io.github.mivek.service;
 
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
@@ -16,8 +16,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 @Ignore
-public abstract class AbstractWeatherCodeFacadeTest<T extends AbstractWeatherCode> {
-    protected abstract AbstractWeatherCodeFacade<T> getSut();
+public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
+    protected abstract AbstractWeatherCodeService<T> getSut();
 
 
     @Test
