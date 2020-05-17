@@ -12,7 +12,7 @@
 
     <modules>
         <module>metarParser-commons</module>
-        <module>metarParser-entity</module>
+        <module>metarParser-entities</module>
         <module>metarParser-spi</module>
         <module>metarParser-parser</module>
         <module>metarParser-service</module>

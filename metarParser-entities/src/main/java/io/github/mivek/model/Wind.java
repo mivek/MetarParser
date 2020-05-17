@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Wind class.
- * TODO Change unit to enumeration class.
  * @author mivek
  */
 public class Wind {
