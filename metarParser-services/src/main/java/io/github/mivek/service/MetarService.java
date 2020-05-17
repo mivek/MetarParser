@@ -13,7 +13,7 @@ import io.github.mivek.model.Metar;
 import io.github.mivek.parser.MetarParser;
 
 /**
- * Class representing the facade for metars.
+ * Class representing the service for metar.
  * @author mivek
  */
 public final class MetarService extends AbstractWeatherCodeService<Metar> {

@@ -4,9 +4,9 @@ import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.parser.AbstractParser;
 
 /**
- * Abstract facade.
+ * Abstract service.
  * @author mivek
- * Abstract class for facade.
+ * Abstract class for the service.
  * @param <T> a concrete sub-class of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> implements IWeatherCodeFacade<T> {

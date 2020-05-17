@@ -23,7 +23,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
     /** URL to retrieve the TAF from. */
     private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
     /**
-     * The instance of the facade.
+     * The instance of the service.
      */
     private static final TAFService INSTANCE = new TAFService();
 
@@ -77,7 +77,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
     }
 
     /**
-     * @return the instance of the facade.
+     * @return the instance of the service.
      */
     public static TAFService getInstance() {
         return INSTANCE;

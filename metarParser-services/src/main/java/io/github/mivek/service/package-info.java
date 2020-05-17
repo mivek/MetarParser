@@ -1,5 +1,5 @@
 /**
- * Contains the facades of the application.
+ * Contains the services of the application.
  *
  * @author mivek
  */

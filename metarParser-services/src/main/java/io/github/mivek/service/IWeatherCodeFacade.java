@@ -7,7 +7,7 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 
 /**
- * Interface for facade.
+ * Interface for service.
  * @author mivek
  * @param <T> a concrete sub-class of {@link AbstractWeatherCode}
  */

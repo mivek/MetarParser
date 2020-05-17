@@ -135,8 +135,8 @@ Instantiate the metarFacade and use its method parse.
 
 ```java
 String code = "LFPG 131830Z 19005KT 170V250 9999 -SHRA FEW040TCU SCT086 16/08 Q1011";
-MetarFacade facade = MetarFacade.getInstance();
-Metar metar = facade.decode(code);
+MetarService service = MetarService.getInstance();
+Metar metar = service.decode(code);
 ```
 
 ### Retrieve the metar of an airport
@@ -145,8 +145,8 @@ Use the its method retrieveFromAirport with the ICAO code of the airport.
 
 ```java
 String icao = "LFPG";
-MetarFacade facade = MetarFacade.getInstance();
-Metar metar = facade.retrieveFromAirport(icao);
+MetarService service = MetarService.getInstance();
+Metar metar = service.retrieveFromAirport(icao);
 ```
 ### Parse a taf
 Use the TAFFacade to decode the taf.
@@ -159,8 +159,8 @@ String message = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n"
                   +"BECMG 1520/1522 CAVOK \n"
                   +"TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
                   +"TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
-TAFFacade facade = TAFFacade.getInstance();
-TAF taf = facade.decode(message);
+TAFService service = TAFService.getInstance();
+TAF taf = service.decode(message);
 ```
 Lines of the message have to be separated by a "\n" character.
 
@@ -169,8 +169,8 @@ Use the TAFFacade and the method retrieveFromAirport with the ICAO code of the a
 
 ```java
 String icao = "LFPG";
-TAFFacade facade = TAFFacade.getInstance();
-TAF taf = facade.retrieveFromAirport(icao);
+TAFService service = TAFService.getInstance();
+TAF taf = service.retrieveFromAirport(icao);
 ```
 
 ### Internationalization
