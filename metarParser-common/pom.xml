@@ -12,17 +12,4 @@
     <artifactId>metarParser-common</artifactId>
     <description>Module containing utility classes</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
 </project>
