@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.mivek</groupId>
-            <artifactId>metarParser-common</artifactId>
+            <artifactId>metarParser-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
