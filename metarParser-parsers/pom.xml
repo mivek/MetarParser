@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>metarParser-parser</artifactId>
+    <artifactId>metarParser-parsers</artifactId>
     <description>Module containing the parsers.</description>
 
     <properties>

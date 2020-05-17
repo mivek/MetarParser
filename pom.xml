@@ -14,7 +14,7 @@
         <module>metarParser-commons</module>
         <module>metarParser-entities</module>
         <module>metarParser-spi</module>
-        <module>metarParser-parser</module>
+        <module>metarParser-parsers</module>
         <module>metarParser-service</module>
     </modules>
 
@@ -152,7 +152,7 @@
                         <configuration>
                             <threads>3</threads>
                             <targetModules>
-                                <param>metarParser-parser</param>
+                                <param>metarParser-parsers</param>
                             </targetModules>
                             <mutationThreshold>98</mutationThreshold>
                             <coverageThreshold>99</coverageThreshold>

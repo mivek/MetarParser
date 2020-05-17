@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.mivek</groupId>
-            <artifactId>metarParser-parser</artifactId>
+            <artifactId>metarParser-parsers</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
