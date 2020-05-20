@@ -29,7 +29,8 @@ before_deploy:
 
 deploy:
   provider: releases
-  file: target/metarParser-${VERSION}.jar
+  file_glob: true
+  file: /**/target/*.jar
   api_key: $GITHUB_OATH
   skip_cleanup: true
   draft: true

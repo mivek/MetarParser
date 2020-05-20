@@ -26,11 +26,24 @@ The trends of the metar are not parsed.
     4. [Retrieve a taf](#retrieve-a-taf)
 4. [Internationalization](#internationalization)
 
+## Architecture of the project
+
+This project is divided into multiple maven module
+
+- metarParser-entities: Contains the model and the enumerations
+- metarParser-parsers: Contains the parsers and the commands
+- metarParser-services: Contains a service allowing you to parse or retrieve METAR and TAF
+- metarParser-spi: Contains the SPI 
+- metarParser-commons: Contains utility and internationalization classes
+
+
 ## Adding the dependency
+To add the service module :
+
 ```xml
 <dependency>
   <groupId>io.github.mivek</groupId>
-  <artifactId>metarParser</artifactId>
+  <artifactId>metarParser-services</artifactId>
   <version>latest</version>
 </dependency>
 ```
@@ -185,13 +198,3 @@ Messages.getInstance().setLocale(Locale.FRENCH); // Changes the locale to french
 If you are willing to add a new locale or contribute to the project please see [Contributing.md file](CONTRIBUTING.md).
 
 [Jetbrains](https://www.jetbrains.com/?from=metarParser) open source project.
-
-## Architecture of the project
-
-This project is divided into multiple maven module
-
-- metarParser-entity: Contains the model and the enumerations
-- metarParser-core: Contains the parsers and the commands
-- metarParser-services: Contains a service allowing you to parse or retrieve METAR and TAF
-- metarParser-spi: Contains the SPI 
-- metarParser-commons: Contains utility and internationalization classes
