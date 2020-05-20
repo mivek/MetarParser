@@ -50,8 +50,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
             // Throw the first line since it is not part of the TAF event.
-            br.readLine();
-            br.lines().forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
+            br.lines().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
             return getParser().parse(format(sb.toString()));
         }
     }

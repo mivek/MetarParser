@@ -76,7 +76,8 @@ public final class MetarParser extends AbstractParser<Metar> {
         m.setMessage(pMetarCode);
         parseDeliveryTime(m, metarTab[1]);
         int metarTabLength = metarTab.length;
-        for (int i = 2; i < metarTabLength; i++) {
+        int i = 2;
+        while (i < metarTabLength) {
             if (!generalParse(m, metarTab[i])) {
                 if ("NOSIG".equals(metarTab[i])) {
                     m.setNosig(true);
@@ -94,6 +95,7 @@ public final class MetarParser extends AbstractParser<Metar> {
                     executeCommand(m, metarTab[i]);
                 }
             }
+            i++;
         }
         return m;
     }

@@ -54,7 +54,7 @@ public enum Intensity {
      * @throws IllegalArgumentException
      * error if not found.
      */
-    public static Intensity getEnum(final String pValue) throws IllegalArgumentException {
+    public static Intensity getEnum(final String pValue) {
         for (Intensity v : values()) {
             if (v.getShortcut().equalsIgnoreCase(pValue)) {
                 return v;
