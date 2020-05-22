@@ -1,7 +1,6 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.command.remark.RemarkCommandSupplier;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.MissingResourceException;
 
@@ -29,7 +28,7 @@ public final class RemarkParser {
     public String parse(final String pRemark) {
         String rmk = pRemark;
         StringBuilder sb = new StringBuilder();
-        while (StringUtils.isNotEmpty(rmk)) {
+        while (!"".equals(rmk)) {
             try {
                 rmk = supplier.get(rmk).execute(rmk, sb);
             } catch (MissingResourceException e) {
