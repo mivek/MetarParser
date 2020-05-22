@@ -89,10 +89,11 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !phenomenons.isEmpty() || (intensity != null && descriptive != null);
+        return !phenomenons.isEmpty() || Descriptive.THUNDERSTORM == descriptive;
     }
 
-    @Override public final String toString() {
+    @Override
+    public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.intensity"), intensity).
                 append(Messages.getInstance().getString("ToString.descriptive"), descriptive).

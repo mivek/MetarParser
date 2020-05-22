@@ -363,4 +363,14 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(300, m.getWind().getExtreme2());
     }
 
+    @Test
+    public void desriptiveFieldIsPreservedAlsoWithoutWeatherConditions() {
+        //example form field
+        String code = "AGGH 140340Z 05010KT 9999 TS FEW020 SCT021CB BKN300 32/26 Q1010";
+        Metar m = fSut.parse(code);
+        assertNotNull(m);
+        assertEquals(1, m.getWeatherConditions().size());
+        assertEquals(Descriptive.THUNDERSTORM, m.getWeatherConditions().get(0).getDescriptive());
+    }
+
 }
