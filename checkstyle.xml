@@ -81,6 +81,7 @@ Checkstyle configuration that checks the sun coding conventions.
     <module name="OneStatementPerLine"/>
     <module name="StringLiteralEquality"/>
     <module name="AvoidStarImport">
+      <property name="excludes" value="org.hamcrest, org.junit"/>
       <property name="allowStaticMemberImports" value="true"/>
     </module>
   </module>
