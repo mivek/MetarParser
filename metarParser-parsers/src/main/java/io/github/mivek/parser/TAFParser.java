@@ -64,10 +64,6 @@ public final class TAFParser extends AbstractParser<TAF> {
         return INSTANCE;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see io.github.mivek.parser.AbstractParser#parse(java.lang.String)
-     */
     @Override
     public TAF parse(final String pTAFCode) throws ParseException {
         String[][] lines = extractLineTokens(pTAFCode);
