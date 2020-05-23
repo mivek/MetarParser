@@ -3,14 +3,16 @@
 This module contains interfaces and implementations for the SPI pattern.
 
 ## Airport source
+
 The interface `AirportProvider` defines the contract needed for the implementation. 
 Implementations should return a map of airport. The key should be the ICAO of the station and the value the `Airport` object.
 
 ### Default implementations
+
 The project provides 2 default implementations:
 
-  - `DefaultAirportProvider` : The implementation uses a file contained in the project `airport.dat` for [openflights](https://openflights.org/).
-  - `OurAirportsAirportProvider`: This implementation is based on [ourairports](https://ourairports.com) onlines csv of countries and airport. To use this implementation make sure you have internet access.
+-   `DefaultAirportProvider` : The implementation uses a file contained in the project `airport.dat` for [openflights](https://openflights.org/).
+-   `OurAirportsAirportProvider`: This implementation is based on [ourairports](https://ourairports.com) onlines csv of countries and airport. To use this implementation make sure you have internet access.
 
 ### Specify the implementation
 
