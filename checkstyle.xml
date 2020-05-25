@@ -11,7 +11,7 @@ Checkstyle configuration that checks the sun coding conventions.
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
-  <property name="fileExtensions" value="java, properties, xml"/>
+  <property name="fileExtensions" value="java"/>
   <module name="TreeWalker">
     <module name="JavadocMethod"/>
     <module name="JavadocType"/>
