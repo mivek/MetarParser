@@ -22,7 +22,6 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     /** The identifier of the station. */
     private String station;
 
-
     /**
      * @return the day
      */

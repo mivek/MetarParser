@@ -23,7 +23,8 @@ public class TemperatureDatedTest {
         assertThat(des, containsString(Messages.getInstance().getString("ToString.temperature") + "=20"));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = TemperatureDated.class;
         // then

@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Abstract class for the validity of a TAF.
+ *
  * @author mivek
  */
 public abstract class AbstractValidity implements IValidity {
@@ -16,7 +17,6 @@ public abstract class AbstractValidity implements IValidity {
      * Beginning hour of the taf's validity.
      */
     private Integer startHour;
-
 
     @Override
     public final Integer getStartDay() {
@@ -41,7 +41,8 @@ public abstract class AbstractValidity implements IValidity {
     /**
      * @return a string describing the object.
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.start.day.month"), startDay).
                 append(Messages.getInstance().getString("ToString.start.hour.day"), startHour).

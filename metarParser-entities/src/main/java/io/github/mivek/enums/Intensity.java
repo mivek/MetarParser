@@ -6,6 +6,7 @@ import io.github.mivek.internationalization.Messages;
  * Enumeration for indicator.
  * The first attribute is the code used in the metar.
  * The second attribute is the meaning of the code.
+ *
  * @author mivek
  */
 public enum Intensity {
@@ -23,10 +24,9 @@ public enum Intensity {
 
     /**
      * Constructor.
-     * @param pShortcut
-     * A String for the shortcut.
-     * @param pName
-     * A string for the meaning.
+     *
+     * @param pShortcut A String for the shortcut.
+     * @param pName     A string for the meaning.
      */
     Intensity(final String pShortcut, final String pName) {
         shortcut = pShortcut;
@@ -40,6 +40,7 @@ public enum Intensity {
 
     /**
      * Returns shortcut.
+     *
      * @return string.
      */
     public String getShortcut() {
@@ -48,11 +49,10 @@ public enum Intensity {
 
     /**
      * Returns the enum with the same shortcut than the value.
-     * @param pValue
-     * String of the intensity searched.
+     *
+     * @param pValue String of the intensity searched.
      * @return a intensity with the same shortcut.
-     * @throws IllegalArgumentException
-     * error if not found.
+     * @throws IllegalArgumentException error if not found.
      */
     public static Intensity getEnum(final String pValue) {
         for (Intensity v : values()) {

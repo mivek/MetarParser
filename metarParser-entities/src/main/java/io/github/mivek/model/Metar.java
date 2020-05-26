@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Metar class.
+ *
  * @author mivek
  */
 public class Metar extends AbstractWeatherCode {
@@ -88,6 +89,7 @@ public class Metar extends AbstractWeatherCode {
 
     /**
      * Adds a runway to the list.
+     *
      * @param pRunwayInformation the runway to add.
      */
     public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
@@ -124,6 +126,7 @@ public class Metar extends AbstractWeatherCode {
 
     /**
      * Adds a trend to the list.
+     *
      * @param pTrend the trend to add.
      */
     public void addTrend(final AbstractMetarTrend pTrend) {
@@ -137,7 +140,8 @@ public class Metar extends AbstractWeatherCode {
         return trends;
     }
 
-    @Override public final String toString() {
+    @Override
+    public final String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
                 append(Messages.getInstance().getString("ToString.temperature"), temperature).

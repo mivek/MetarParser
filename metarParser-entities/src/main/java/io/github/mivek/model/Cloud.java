@@ -8,6 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 /**
  * Class representing a cloud element. Clouds are composed of : a quantity a
  * type (optional) an height (optional)
+ *
  * @author mivek
  */
 public class Cloud {
@@ -20,6 +21,7 @@ public class Cloud {
 
     /**
      * Getter of the height (unit: feet).
+     *
      * @return int of height.
      */
     public int getHeight() {
@@ -28,6 +30,7 @@ public class Cloud {
 
     /**
      * Setter of the height (unit: feet).
+     *
      * @param pHeight The height to set.
      */
     public void setHeight(final int pHeight) {
@@ -36,6 +39,7 @@ public class Cloud {
 
     /**
      * Getter of the quantity.
+     *
      * @return a CloudQuantity.
      */
     public CloudQuantity getQuantity() {
@@ -44,6 +48,7 @@ public class Cloud {
 
     /**
      * Setter of CloudQuantity.
+     *
      * @param pQuantity The CloudQuantity to set.
      */
     public void setQuantity(final CloudQuantity pQuantity) {
@@ -52,6 +57,7 @@ public class Cloud {
 
     /**
      * Getter of type.
+     *
      * @return a CloudType.
      */
     public CloudType getType() {
@@ -60,6 +66,7 @@ public class Cloud {
 
     /**
      * Setter of cloud type.
+     *
      * @param pType The CloudType to set.
      */
     public void setType(final CloudType pType) {

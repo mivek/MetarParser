@@ -25,7 +25,6 @@ public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends A
         super(pType);
     }
 
-
     /**
      * @return the probability
      */

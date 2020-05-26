@@ -11,7 +11,7 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 public class VisibilityTest {
 
     @Test
-    public void testToString(){
+    public void testToString() {
         Visibility sut = new Visibility();
         sut.setMainVisibility(">10km");
         sut.setMinDirection("SE");
@@ -24,7 +24,8 @@ public class VisibilityTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.min") + "=200"));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = Visibility.class;
         // then

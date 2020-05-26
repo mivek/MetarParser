@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing a weather change.
+ *
  * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author mivek
  */
@@ -15,6 +16,7 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
 
     /**
      * Constructor with parameter.
+     *
      * @param pType the type to set.
      */
     protected AbstractTafTrend(final WeatherChangeType pType) {
@@ -35,11 +37,11 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
         validity = pValidity;
     }
 
-
     /**
      * @return A description of the object.
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this).
                 appendSuper(super.toString()).
                 appendToString(validity.toString()).

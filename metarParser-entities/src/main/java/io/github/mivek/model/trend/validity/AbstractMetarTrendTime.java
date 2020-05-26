@@ -7,6 +7,7 @@ import java.time.LocalTime;
 
 /**
  * Abstract class for the time trend in a metar.
+ *
  * @author mivek
  */
 public abstract class AbstractMetarTrendTime {
@@ -21,6 +22,7 @@ public abstract class AbstractMetarTrendTime {
 
     /**
      * Constructor.
+     *
      * @param pType the type of trend.
      */
     protected AbstractMetarTrendTime(final TimeIndicator pType) {

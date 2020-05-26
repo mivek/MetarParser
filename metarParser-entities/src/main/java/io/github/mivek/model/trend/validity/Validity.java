@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing the validity of a TAF message.
+ *
  * @author mivek
  */
 public final class Validity extends AbstractValidity {

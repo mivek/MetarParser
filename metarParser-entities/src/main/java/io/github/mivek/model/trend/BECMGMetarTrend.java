@@ -4,6 +4,7 @@ import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * BECMG class for metar.
+ *
  * @author mivek
  */
 public final class BECMGMetarTrend extends AbstractMetarTrend {

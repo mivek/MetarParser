@@ -11,14 +11,13 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 public class WindTest {
 
     @Test
-    public void testToString(){
+    public void testToString() {
         Wind sut = new Wind();
 
         sut.setDirection(Messages.getInstance().getString("Converter.NE"));
         sut.setDirectionDegrees(45);
         sut.setSpeed(25);
         sut.setUnit("KM/H");
-
 
         String desc = sut.toString();
 
@@ -31,7 +30,8 @@ public class WindTest {
         assertThat(desc, containsString(Messages.getInstance().getString("ToString.wind.unit") + "=KM/H"));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = Wind.class;
         // then

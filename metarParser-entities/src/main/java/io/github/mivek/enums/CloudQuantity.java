@@ -6,6 +6,7 @@ import io.github.mivek.internationalization.Messages;
  * Enumeration for cloud quantity.
  * The first attribute is the code used in the metar.
  * The second attribute is the meaning of the code.
+ *
  * @author mivek
  */
 public enum CloudQuantity {
@@ -29,8 +30,9 @@ public enum CloudQuantity {
 
     /**
      * Constructor.
+     *
      * @param pShortcut a string representing the shortcut.
-     * @param pName The meaning of the shortcut.
+     * @param pName     The meaning of the shortcut.
      */
     CloudQuantity(final String pShortcut, final String pName) {
         shortcut = pShortcut;
@@ -44,6 +46,7 @@ public enum CloudQuantity {
 
     /**
      * Returns the shortcut.
+     *
      * @return a string.
      */
     public String getShortcut() {

@@ -10,7 +10,8 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class RunwayInfoTest {
 
-    @Test public void testToString() {
+    @Test
+    public void testToString() {
         RunwayInfo ri = new RunwayInfo();
         ri.setMinRange(300);
         ri.setName("14R");
@@ -25,7 +26,8 @@ public class RunwayInfoTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=rising"));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = RunwayInfo.class;
         // then

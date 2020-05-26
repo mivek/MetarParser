@@ -8,7 +8,8 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class MetarTest {
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = Metar.class;
         // then

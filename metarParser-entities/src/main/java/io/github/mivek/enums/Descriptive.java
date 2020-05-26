@@ -5,6 +5,7 @@ import io.github.mivek.internationalization.Messages;
 /**
  * Enumeration for descriptive. The first attribute is the code used in the
  * metar. The second attribute is the meaning of the code.
+ *
  * @author mivek
  */
 public enum Descriptive {
@@ -32,10 +33,9 @@ public enum Descriptive {
 
     /**
      * Connstructor.
-     * @param pShortcut
-     * A string for the shorcut.
-     * @param pName
-     * a string for the meaning.
+     *
+     * @param pShortcut A string for the shorcut.
+     * @param pName     a string for the meaning.
      */
     Descriptive(final String pShortcut, final String pName) {
         shortcut = pShortcut;
@@ -49,6 +49,7 @@ public enum Descriptive {
 
     /**
      * return shortcut.
+     *
      * @return string.
      */
     public String getShortcut() {

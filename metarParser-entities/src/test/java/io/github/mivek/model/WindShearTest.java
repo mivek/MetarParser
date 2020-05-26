@@ -10,14 +10,16 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class WindShearTest {
 
-    @Test public void testToString() {
+    @Test
+    public void testToString() {
         WindShear sut = new WindShear();
         sut.setHeight(500);
 
         assertThat(sut.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=500"));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = WindShear.class;
         // then

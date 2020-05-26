@@ -15,7 +15,7 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 public class WeatherConditionTest {
 
     @Test
-    public void testToString(){
+    public void testToString() {
         WeatherCondition sut = new WeatherCondition();
         sut.setIntensity(Intensity.LIGHT);
         sut.setDescriptive(Descriptive.SHOWERS);
@@ -28,7 +28,8 @@ public class WeatherConditionTest {
         assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString()));
     }
 
-    @Test public void testPojo() {
+    @Test
+    public void testPojo() {
         // given
         final Class<?> classUnderTest = WeatherCondition.class;
         // then

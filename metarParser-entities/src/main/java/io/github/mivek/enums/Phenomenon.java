@@ -6,6 +6,7 @@ import io.github.mivek.internationalization.Messages;
  * Enumeration for phenomenon.
  * The first attribute is the code used in the metar.
  * The second attribute is the meaning of the code.
+ *
  * @author mivek
  */
 public enum Phenomenon {
@@ -61,10 +62,9 @@ public enum Phenomenon {
 
     /**
      * Constructor.
-     * @param pShortcut
-     * string for the shortcut.
-     * @param pName
-     * string for the name.
+     *
+     * @param pShortcut string for the shortcut.
+     * @param pName     string for the name.
      */
     Phenomenon(final String pShortcut, final String pName) {
         shortcut = pShortcut;
@@ -78,6 +78,7 @@ public enum Phenomenon {
 
     /**
      * Returns the shortcut.
+     *
      * @return string.
      */
     public String getShortcut() {

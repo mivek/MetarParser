@@ -4,6 +4,7 @@ import io.github.mivek.internationalization.Messages;
 
 /**
  * Enumeration for time indicator in metar trends.
+ *
  * @author mivek
  */
 public enum TimeIndicator {
@@ -25,8 +26,9 @@ public enum TimeIndicator {
 
     /**
      * Constructor.
+     *
      * @param pShortCut the shortcut of the indicator.
-     * @param pName the name of the indicator.
+     * @param pName     the name of the indicator.
      */
     TimeIndicator(final String pShortCut, final String pName) {
         shortCut = pShortCut;

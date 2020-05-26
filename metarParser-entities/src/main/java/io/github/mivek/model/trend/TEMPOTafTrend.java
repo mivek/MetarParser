@@ -5,6 +5,7 @@ import io.github.mivek.model.trend.validity.Validity;
 
 /**
  * Class representing a Tempo change in a taf message.
+ *
  * @author mivek
  */
 public final class TEMPOTafTrend extends AbstractTafProbTrend<Validity> {

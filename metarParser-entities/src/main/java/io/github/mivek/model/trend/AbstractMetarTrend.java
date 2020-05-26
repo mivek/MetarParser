@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Abstract class for metar's trend.
+ *
  * @author mivek
  */
 public abstract class AbstractMetarTrend extends AbstractTrend {
@@ -19,6 +20,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
 
     /**
      * Constructor.
+     *
      * @param pType the WeatherChangeType to set.
      */
     protected AbstractMetarTrend(final WeatherChangeType pType) {
@@ -35,6 +37,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
 
     /**
      * Adds a AbstractMetarTrendTime to the list.
+     *
      * @param pTime the element to add.
      */
     public void addTime(final AbstractMetarTrendTime pTime) {
@@ -44,7 +47,8 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
     /**
      * @return a description of the object.
      */
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).append(times.toString()).toString();
     }
 

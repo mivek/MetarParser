@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Visisbility class.
+ *
  * @author mivek
  */
 public class Visibility {
@@ -17,6 +18,7 @@ public class Visibility {
 
     /**
      * Getter of the mainVisibility.
+     *
      * @return the mainvisibility.
      */
     public String getMainVisibility() {
@@ -25,6 +27,7 @@ public class Visibility {
 
     /**
      * Setter of the main visibility.
+     *
      * @param pMainVisibility the main visibility to set.
      */
     public void setMainVisibility(final String pMainVisibility) {
@@ -33,6 +36,7 @@ public class Visibility {
 
     /**
      * Getter of the minimal visibility.
+     *
      * @return the minimal visibility.
      */
     public int getMinVisibility() {
@@ -41,6 +45,7 @@ public class Visibility {
 
     /**
      * Setter of the minimal visibility.
+     *
      * @param pMinVisibility the minimal visibility to set.
      */
     public void setMinVisibility(final int pMinVisibility) {
@@ -49,6 +54,7 @@ public class Visibility {
 
     /**
      * Getter of direction.
+     *
      * @return the direction.
      */
     public String getMinDirection() {
@@ -57,6 +63,7 @@ public class Visibility {
 
     /**
      * Setter of the minimal direction.
+     *
      * @param pMinDirection the minimal direction to set.
      */
     public void setMinDirection(final String pMinDirection) {

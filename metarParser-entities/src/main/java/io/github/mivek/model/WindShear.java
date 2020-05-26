@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing the wind shear.
+ *
  * @author mivek
  */
 public class WindShear extends Wind {

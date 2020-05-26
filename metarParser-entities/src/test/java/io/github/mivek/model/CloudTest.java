@@ -13,28 +13,29 @@ import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class CloudTest {
 
-	@Test
-	public void testSetHeightGetHeight() {
-		Cloud c = new Cloud();
-		c.setHeight(300);
-		assertEquals(300, c.getHeight());
-	}
+    @Test
+    public void testSetHeightGetHeight() {
+        Cloud c = new Cloud();
+        c.setHeight(300);
+        assertEquals(300, c.getHeight());
+    }
 
-	@Test
-	public void testToString() {
-		Cloud c = new Cloud();
-		c.setQuantity(CloudQuantity.BKN);
-		c.setHeight(300);
-		c.setType(CloudType.CB);
-		assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.type") + "=" + CloudType.CB.toString()));
-		assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.quantity") + "=" + CloudQuantity.BKN.toString()));
-		assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=300"));
-	}
+    @Test
+    public void testToString() {
+        Cloud c = new Cloud();
+        c.setQuantity(CloudQuantity.BKN);
+        c.setHeight(300);
+        c.setType(CloudType.CB);
+        assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.type") + "=" + CloudType.CB.toString()));
+        assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.quantity") + "=" + CloudQuantity.BKN.toString()));
+        assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=300"));
+    }
 
-	@Test public void testPojo() {
-		// given
-		final Class<?> classUnderTest = Cloud.class;
-		// then
-		assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
-	}
+    @Test
+    public void testPojo() {
+        // given
+        final Class<?> classUnderTest = Cloud.class;
+        // then
+        assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
+    }
 }

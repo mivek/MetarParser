@@ -21,10 +21,9 @@ public enum WeatherChangeType {
 
     /**
      * Constructor.
-     * @param pShortcut
-     * the shortcut of the enumeration
-     * @param pName
-     * the name of the enumeration
+     *
+     * @param pShortcut the shortcut of the enumeration
+     * @param pName     the name of the enumeration
      */
     WeatherChangeType(final String pShortcut, final String pName) {
         shortcut = pShortcut;

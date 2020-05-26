@@ -4,6 +4,7 @@ import io.github.mivek.enums.WeatherChangeType;
 
 /**
  * TEMPO class for metar trend.
+ *
  * @author mivek
  */
 public final class TEMPOMetarTrend extends AbstractMetarTrend {

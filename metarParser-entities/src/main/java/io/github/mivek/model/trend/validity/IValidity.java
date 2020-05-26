@@ -2,6 +2,7 @@ package io.github.mivek.model.trend.validity;
 
 /**
  * Interface for validity objects.
+ *
  * @author mivek
  */
 public interface IValidity {

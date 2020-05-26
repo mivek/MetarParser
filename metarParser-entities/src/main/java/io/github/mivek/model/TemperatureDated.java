@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing a temperature with its date.
+ *
  * @author mivek
  */
 public class TemperatureDated {

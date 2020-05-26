@@ -24,7 +24,7 @@ public abstract class AbstractWeatherContainer {
     private WindShear windShear;
     /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
     private boolean cavok;
-    /**Contains the remarks.*/
+    /** Contains the remarks. */
     private String remark;
 
     /**
@@ -79,6 +79,7 @@ public abstract class AbstractWeatherContainer {
 
     /**
      * Adds a cloud to the list.
+     *
      * @param pCloud the cloud to add.
      * @return true if the cloud has been added in the list, false otherwise.
      */
@@ -92,6 +93,7 @@ public abstract class AbstractWeatherContainer {
 
     /**
      * Adds a weather condition to the list.
+     *
      * @param pWeatherCondition the weather condition to add.
      * @return true if the weather condition has been added to the list, false
      * otherwise.

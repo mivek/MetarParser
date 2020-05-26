@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Class representing a TAF.
+ *
  * @author mivek
  */
 public class TAF extends AbstractWeatherCode {
@@ -30,7 +31,7 @@ public class TAF extends AbstractWeatherCode {
     private final List<TEMPOTafTrend> tempos;
     /** List of probability changes. */
     private final List<PROBTafTrend> probs;
-    /**Indicate if the taf event is ameded.*/
+    /** Indicate if the taf event is ameded. */
     private boolean amendment;
 
     /**
@@ -109,6 +110,7 @@ public class TAF extends AbstractWeatherCode {
 
     /**
      * Adds a tempo change to the list.
+     *
      * @param pChange the change to add.
      */
     public void addTempo(final TEMPOTafTrend pChange) {
@@ -117,6 +119,7 @@ public class TAF extends AbstractWeatherCode {
 
     /**
      * Adds a PROB Change to the list.
+     *
      * @param pChange the change to add.
      */
     public void addProb(final PROBTafTrend pChange) {
@@ -125,6 +128,7 @@ public class TAF extends AbstractWeatherCode {
 
     /**
      * Adds a BECMG to the list.
+     *
      * @param pChange the change to add.
      */
     public void addBECMG(final BECMGTafTrend pChange) {
@@ -133,6 +137,7 @@ public class TAF extends AbstractWeatherCode {
 
     /**
      * Adds a FM change to the list.
+     *
      * @param pChange the change to add.
      */
     public void addFM(final FMTafTrend pChange) {
@@ -160,12 +165,10 @@ public class TAF extends AbstractWeatherCode {
         amendment = pAmendment;
     }
 
-    @Override public final String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString())
-                .append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
-                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature)
-                .append(Messages.getInstance().getString("ToString.amendment"), amendment)
-                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString())
-                .appendToString(probs.toString()).toString();
+    @Override
+    public final String toString() {
+        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
+                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), amendment)
+                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(probs.toString()).toString();
     }
 }
