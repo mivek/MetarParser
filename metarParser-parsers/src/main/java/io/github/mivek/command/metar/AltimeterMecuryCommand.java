@@ -21,14 +21,14 @@ public final class AltimeterMecuryCommand implements Command {
     }
 
     @Override
-    public void execute(final Metar pMetar, final String pPart) {
-        String[] matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, pPart);
+    public void execute(final Metar metar, final String part) {
+        String[] matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, part);
         double mercury = Double.parseDouble(matches[1]) / 100;
-        pMetar.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
+        metar.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(ALTIMETER_MERCURY_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(ALTIMETER_MERCURY_REGEX, input);
     }
 }

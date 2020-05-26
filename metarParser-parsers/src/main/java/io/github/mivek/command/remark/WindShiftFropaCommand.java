@@ -23,15 +23,15 @@ public final class WindShiftFropaCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] windShiftParts = Regex.pregMatch(WIND_SHIFT_FROPA, pRemark);
-        pStringBuilder.append(messages.getString("Remark.WindShift.FROPA", verifyString(windShiftParts[1]), windShiftParts[2]));
-        pStringBuilder.append(" ");
-        return pRemark.replaceFirst(WIND_SHIFT_FROPA.pattern(), "");
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] windShiftParts = Regex.pregMatch(WIND_SHIFT_FROPA, remark);
+        stringBuilder.append(messages.getString("Remark.WindShift.FROPA", verifyString(windShiftParts[1]), windShiftParts[2]));
+        stringBuilder.append(" ");
+        return remark.replaceFirst(WIND_SHIFT_FROPA.pattern(), "");
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_SHIFT_FROPA, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_SHIFT_FROPA, input);
     }
 }

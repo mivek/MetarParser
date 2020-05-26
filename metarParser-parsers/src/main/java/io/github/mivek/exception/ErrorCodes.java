@@ -4,7 +4,6 @@ import io.github.mivek.internationalization.Messages;
 
 /**
  * @author mivek
- *
  */
 public enum ErrorCodes {
     /** Error for an invalid ICAO. */
@@ -14,32 +13,33 @@ public enum ErrorCodes {
     /** Error code for when the airport is not found. */
     ERROR_CODE_AIRPORT_NOT_FOUND(3, Messages.getInstance().getString("ErrorCode.AirportNotFound"));
     /** The code of the error. */
-    private final int fCode;
+    private final int code;
     /** The message of the error. */
-    private final String fMessage;
+    private final String message;
 
     /**
      * constructor.
-     * @param pCode the code of the error.
-     * @param pMessage the message to set.
+     *
+     * @param code    the code of the error.
+     * @param message the message to set.
      */
-    ErrorCodes(final int pCode, final String pMessage) {
-        fCode = pCode;
-        fMessage = pMessage;
+    ErrorCodes(final int code, final String message) {
+        this.code = code;
+        this.message = message;
     }
 
     /**
      * @return the code
      */
     public int getCode() {
-        return fCode;
+        return code;
     }
 
     /**
      * @return the message
      */
     public String getMessage() {
-        return fMessage;
+        return message;
     }
 
     @Override

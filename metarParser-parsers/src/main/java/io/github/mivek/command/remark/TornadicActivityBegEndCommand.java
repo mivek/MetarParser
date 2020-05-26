@@ -23,15 +23,15 @@ public final class TornadicActivityBegEndCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Tornadic.Activity.BegEnd", messages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4],
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEG_END, remark);
+        stringBuilder.append(messages.getString("Remark.Tornadic.Activity.BegEnd", messages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4],
                 verifyString(tornadicParts[6]), tornadicParts[7], tornadicParts[9], messages.getString("Converter." + tornadicParts[10]))).append(" ");
-        return pRemark.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
+        return remark.replaceFirst(TORNADIC_ACTIVITY_BEG_END.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(TORNADIC_ACTIVITY_BEG_END, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(TORNADIC_ACTIVITY_BEG_END, input);
     }
 }

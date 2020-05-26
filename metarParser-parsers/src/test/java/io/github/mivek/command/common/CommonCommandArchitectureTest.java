@@ -15,7 +15,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
  * @author mivek
  */
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = {"io.github.mivek.command.common"}, importOptions = { ImportOption.DoNotIncludeTests.class })
+@AnalyzeClasses(packages = { "io.github.mivek.command.common" }, importOptions = { ImportOption.DoNotIncludeTests.class })
 public class CommonCommandArchitectureTest {
 
     @ArchTest

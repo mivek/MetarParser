@@ -23,14 +23,14 @@ public final class SnowPelletsCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] intensityParts = Regex.pregMatch(SNOW_PELLETS_INTENSITY, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Snow.Pellets", messages.getString("Remark." + intensityParts[1]))).append(" ");
-        return pRemark.replaceFirst(SNOW_PELLETS_INTENSITY.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] intensityParts = Regex.pregMatch(SNOW_PELLETS_INTENSITY, remark);
+        stringBuilder.append(messages.getString("Remark.Snow.Pellets", messages.getString("Remark." + intensityParts[1]))).append(" ");
+        return remark.replaceFirst(SNOW_PELLETS_INTENSITY.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(SNOW_PELLETS_INTENSITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(SNOW_PELLETS_INTENSITY, input);
     }
 }

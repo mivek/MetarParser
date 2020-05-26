@@ -23,17 +23,17 @@ public final class VariableSkyHeightCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, pRemark);
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, remark);
         String layer1 = messages.getString("CloudQuantity." + variableSky[1]);
         int height = Integer.parseInt(variableSky[2]) * 100;
         String layer2 = messages.getString("CloudQuantity." + variableSky[3]);
-        pStringBuilder.append(messages.getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
-        return pRemark.replaceFirst(VARIABLE_SKY_HEIGHT.pattern(), "").trim();
+        stringBuilder.append(messages.getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
+        return remark.replaceFirst(VARIABLE_SKY_HEIGHT.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(VARIABLE_SKY_HEIGHT, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(VARIABLE_SKY_HEIGHT, input);
     }
 }

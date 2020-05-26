@@ -23,16 +23,16 @@ public final class CeilingSecondLocationCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] ceilingParts = Regex.pregMatch(CEILING_SECOND_LOCATION, pRemark);
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] ceilingParts = Regex.pregMatch(CEILING_SECOND_LOCATION, remark);
         int height = 100 * Integer.parseInt(ceilingParts[1]);
         String location = ceilingParts[2];
-        pStringBuilder.append(messages.getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
-        return pRemark.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
+        stringBuilder.append(messages.getString("Remark.Ceiling.Second.Location", height, location)).append(" ");
+        return remark.replaceFirst(CEILING_SECOND_LOCATION.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(CEILING_SECOND_LOCATION, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(CEILING_SECOND_LOCATION, input);
     }
 }

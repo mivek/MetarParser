@@ -23,20 +23,20 @@ public final class DefaultCommand implements Command {
     }
 
     @Override
-    public boolean canParse(final String pInput) {
+    public boolean canParse(final String input) {
         return true;
     }
 
     /**
      * Handle the default behavior when a remark token is not recognized by regex.
      *
-     * @param pRemark        the remark string
-     * @param pStringBuilder The string builder containing the parsed message of the remark
+     * @param remark        the remark string
+     * @param stringBuilder The string builder containing the parsed message of the remark
      * @return the remark string.
      */
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String rmk = pRemark;
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String rmk = remark;
         String[] strSlit = rmk.split(" ", 2);
         String token = strSlit[0];
         try {
@@ -44,7 +44,7 @@ public final class DefaultCommand implements Command {
         } catch (MissingResourceException e) {
             LOGGER.info("Remark token \"" + token + "\" is unknown.");
         }
-        pStringBuilder.append(token).append(" ");
+        stringBuilder.append(token).append(" ");
         rmk = strSlit.length == 1 ? "" : strSlit[1];
         return rmk;
     }

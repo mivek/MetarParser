@@ -22,16 +22,16 @@ public final class TornadicActivityBegCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, pRemark);
-        pStringBuilder.append(messages
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_BEGINNING, remark);
+        stringBuilder.append(messages
                 .getString("Remark.Tornadic.Activity.Beginning", messages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6],
                         messages.getString("Converter." + tornadicParts[7]))).append(" ");
-        return pRemark.replaceFirst(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
+        return remark.replaceFirst(TORNADIC_ACTIVITY_BEGINNING.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(TORNADIC_ACTIVITY_BEGINNING, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(TORNADIC_ACTIVITY_BEGINNING, input);
     }
 }

@@ -16,11 +16,13 @@ public class WindCommandTest {
 
     private WindCommand sut;
 
-    @Before public void setUp() {
+    @Before
+    public void setUp() {
         sut = new WindCommand();
     }
 
-    @Test public void testParseWindSimple() {
+    @Test
+    public void testParseWindSimple() {
         String windPart = "34008KT";
 
         Wind res = sut.parseWind(windPart);
@@ -34,7 +36,8 @@ public class WindCommandTest {
 
     }
 
-    @Test public void testParseWindWithGusts() {
+    @Test
+    public void testParseWindWithGusts() {
         String windPart = "12017G20KT";
 
         Wind res = sut.parseWind(windPart);
@@ -47,7 +50,8 @@ public class WindCommandTest {
         assertEquals("KT", res.getUnit());
     }
 
-    @Test public void testParseWindVariable() {
+    @Test
+    public void testParseWindVariable() {
         String windPart = "VRB08KT";
 
         Wind res = sut.parseWind(windPart);

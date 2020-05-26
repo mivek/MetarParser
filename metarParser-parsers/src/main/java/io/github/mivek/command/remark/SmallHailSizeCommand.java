@@ -23,14 +23,14 @@ public final class SmallHailSizeCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] hailParts = Regex.pregMatch(HAIL_SIZE_LESS_THAN, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
-        return pRemark.replaceFirst(HAIL_SIZE_LESS_THAN.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] hailParts = Regex.pregMatch(HAIL_SIZE_LESS_THAN, remark);
+        stringBuilder.append(messages.getString("Remark.Hail.LesserThan", hailParts[1])).append(" ");
+        return remark.replaceFirst(HAIL_SIZE_LESS_THAN.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(HAIL_SIZE_LESS_THAN, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(HAIL_SIZE_LESS_THAN, input);
     }
 }

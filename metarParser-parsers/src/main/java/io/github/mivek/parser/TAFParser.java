@@ -50,13 +50,14 @@ public final class TAFParser extends AbstractParser<TAF> {
     /**
      * Dependency injection constructor.
      *
-     * @param pCommonCommandSupplier the common command supplier
-     * @param pRemarkParser          the remark parser.
-     * @param pAirportSupplier       the airport supplier.
+     * @param commonCommandSupplier the common command supplier
+     * @param remarkParser          the remark parser.
+     * @param airportSupplier       the airport supplier.
      */
-    protected TAFParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
-        super(pCommonCommandSupplier, pRemarkParser, pAirportSupplier);
+    protected TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
+        super(commonCommandSupplier, remarkParser, airportSupplier);
     }
+
     /**
      * @return the instance.
      */
@@ -65,8 +66,8 @@ public final class TAFParser extends AbstractParser<TAF> {
     }
 
     @Override
-    public TAF parse(final String pTAFCode) throws ParseException {
-        String[][] lines = extractLineTokens(pTAFCode);
+    public TAF parse(final String code) throws ParseException {
+        String[][] lines = extractLineTokens(code);
         if (!TAF.equals(lines[0][0])) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE);
         }
@@ -88,7 +89,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         taf.setStation(line1parts[i]);
         i++;
         taf.setAirport(airport);
-        taf.setMessage(pTAFCode);
+        taf.setMessage(code);
         // Day and time
         parseDeliveryTime(taf, line1parts[i]);
         // Validity Time
@@ -119,17 +120,15 @@ public final class TAFParser extends AbstractParser<TAF> {
 
     /**
      * Extracts all lines and tokenize them.
-     * @param pTAFCode raw TAF which may already contains some linebreaks
+     *
+     * @param tafCode raw TAF which may already contains some linebreaks
      * @return 2d jagged array containing lines and their tokens
      */
-    private String[][] extractLineTokens(final String pTAFCode) {
-        String cleanedInput = pTAFCode
-                .replace("\n", " ")   // remove all linebreaks
+    private String[][] extractLineTokens(final String tafCode) {
+        String cleanedInput = tafCode.replace("\n", " ")   // remove all linebreaks
                 .replaceAll("\\s{2,}", " ");  // remove unnecessary whitespaces
 
-        String[] lines = cleanedInput
-                .replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|BECMG|FM|PROB)", "\n$1")
-                .split("\n");
+        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|BECMG|FM|PROB)", "\n$1").split("\n");
         String[][] lineTokens = Arrays.stream(lines).map(this::tokenize).toArray(String[][]::new);
         if (lineTokens.length > 1) {
             // often temperatures are set in the end of the TAF report
@@ -146,37 +145,37 @@ public final class TAFParser extends AbstractParser<TAF> {
     /**
      * Handles the parsing of a line.
      *
-     * @param pTaf   the TAF object to build
-     * @param pParts the token of the line
+     * @param taf   the TAF object to build
+     * @param parts the token of the line
      */
-    private void processLines(final TAF pTaf, final String[] pParts) {
-        if (pParts[0].equals(BECMG)) {
+    private void processLines(final TAF taf, final String[] parts) {
+        if (parts[0].equals(BECMG)) {
             BECMGTafTrend change = new BECMGTafTrend();
-            iterChanges(1, pParts, change);
-            pTaf.addBECMG(change);
-        } else if (pParts[0].equals(TEMPO)) {
+            iterChanges(1, parts, change);
+            taf.addBECMG(change);
+        } else if (parts[0].equals(TEMPO)) {
             TEMPOTafTrend change = new TEMPOTafTrend();
-            iterChanges(1, pParts, change);
-            pTaf.addTempo(change);
-        } else if (pParts[0].startsWith(FM)) {
+            iterChanges(1, parts, change);
+            taf.addTempo(change);
+        } else if (parts[0].startsWith(FM)) {
             FMTafTrend change = new FMTafTrend();
-            change.setValidity(parseBasicValidity(pParts[0]));
-            for (int k = 1; k < pParts.length; k++) {
-                processGeneralChanges(change, pParts[k]);
+            change.setValidity(parseBasicValidity(parts[0]));
+            for (int k = 1; k < parts.length; k++) {
+                processGeneralChanges(change, parts[k]);
             }
-            pTaf.addFM(change);
-        } else if (pParts[0].startsWith(PROB)) {
-            int probability = parseProbability(pParts[0]);
-            if (pParts.length > 1 && pParts[1].equals(TEMPO)) {
+            taf.addFM(change);
+        } else if (parts[0].startsWith(PROB)) {
+            int probability = parseProbability(parts[0]);
+            if (parts.length > 1 && parts[1].equals(TEMPO)) {
                 TEMPOTafTrend change = new TEMPOTafTrend();
-                iterChanges(2, pParts, change);
+                iterChanges(2, parts, change);
                 change.setProbability(probability);
-                pTaf.addTempo(change);
+                taf.addTempo(change);
             } else {
                 PROBTafTrend change = new PROBTafTrend();
                 change.setProbability(probability);
-                iterChanges(1, pParts, change);
-                pTaf.addProb(change);
+                iterChanges(1, parts, change);
+                taf.addProb(change);
             }
         }
     }
@@ -185,45 +184,46 @@ public final class TAFParser extends AbstractParser<TAF> {
      * Updates the change object according to the string.
      *
      * @param change the change object to update.
-     * @param pPart the string to parse.
+     * @param part   the string to parse.
      */
-    private void processChanges(final AbstractTafTrend<Validity> change, final String pPart) {
-        if (Regex.match(REGEX_VALIDITY, pPart)) {
-            change.setValidity(parseValidity(pPart));
+    private void processChanges(final AbstractTafTrend<Validity> change, final String part) {
+        if (Regex.match(REGEX_VALIDITY, part)) {
+            change.setValidity(parseValidity(part));
         } else {
-            processGeneralChanges(change, pPart);
+            processGeneralChanges(change, part);
         }
     }
 
     /**
      * Updates the change object according to the string.
      *
-     * @param pChange the change object to update.
-     * @param pPart String containing the information.
+     * @param change the change object to update.
+     * @param part   String containing the information.
      */
-    protected void processGeneralChanges(final AbstractTafTrend<?> pChange, final String pPart) {
-        generalParse(pChange, pPart);
+    protected void processGeneralChanges(final AbstractTafTrend<?> change, final String part) {
+        generalParse(change, part);
     }
 
     /**
      * parses the probability out of PROB??
      *
-     * @param pPart the string to parse.
+     * @param part the string to parse.
      * @return probability of the trend.
      */
-    protected int parseProbability(final String pPart) {
-        return Integer.parseInt(pPart.substring(4));
+    protected int parseProbability(final String part) {
+        return Integer.parseInt(part.substring(4));
     }
 
     /**
      * Parse the validity part of a {@link TAFParser} or an
      * {@link AbstractTafTrend}.
-     * @param pValidity the string representing the validity.
+     *
+     * @param validityString the string representing the validity.
      * @return a {@link Validity} object.
      */
-    protected Validity parseValidity(final String pValidity) {
+    protected Validity parseValidity(final String validityString) {
         Validity validity = new Validity();
-        String[] validityPart = pValidity.split("/");
+        String[] validityPart = validityString.split("/");
         validity.setStartDay(Integer.parseInt(validityPart[0].substring(0, 2)));
         validity.setStartHour(Integer.parseInt(validityPart[0].substring(2)));
         validity.setEndDay(Integer.parseInt(validityPart[1].substring(0, 2)));
@@ -233,41 +233,44 @@ public final class TAFParser extends AbstractParser<TAF> {
 
     /**
      * Parses the validity of a {@link FMTafTrend} object.
-     * @param pValidity the string to parse
+     *
+     * @param validityString the string to parse
      * @return a {@link BeginningValidity} object.
      */
-    protected BeginningValidity parseBasicValidity(final String pValidity) {
+    protected BeginningValidity parseBasicValidity(final String validityString) {
         BeginningValidity validity = new BeginningValidity();
-        validity.setStartDay(Integer.parseInt(pValidity.substring(2, 4)));
-        validity.setStartHour(Integer.parseInt(pValidity.substring(4, 6)));
-        validity.setStartMinutes(Integer.parseInt(pValidity.substring(6, 8)));
+        validity.setStartDay(Integer.parseInt(validityString.substring(2, 4)));
+        validity.setStartHour(Integer.parseInt(validityString.substring(4, 6)));
+        validity.setStartMinutes(Integer.parseInt(validityString.substring(6, 8)));
         return validity;
     }
 
     /**
      * Iterates over the string array and build the abstractWeather change.
-     * @param pIndex the starting index of the array.
-     * @param pParts the array of string.
-     * @param pChange the abstractWeatherChange to update.
+     *
+     * @param index  the starting index of the array.
+     * @param parts  the array of string.
+     * @param change the abstractWeatherChange to update.
      */
-    private void iterChanges(final int pIndex, final String[] pParts, final AbstractTafTrend<Validity> pChange) {
-        for (int i = pIndex; i < pParts.length; i++) {
-            if (RMK.equals(pParts[i])) {
-                parseRMK(pChange, pParts, i);
+    private void iterChanges(final int index, final String[] parts, final AbstractTafTrend<Validity> change) {
+        for (int i = index; i < parts.length; i++) {
+            if (RMK.equals(parts[i])) {
+                parseRMK(change, parts, i);
             } else {
-                processChanges(pChange, pParts[i]);
+                processChanges(change, parts[i]);
             }
         }
     }
 
     /**
      * Parse the temperature.
-     * @param pTempPart the string to parse.
+     *
+     * @param tempPart the string to parse.
      * @return a temperature with its date.
      */
-    protected TemperatureDated parseTemperature(final String pTempPart) {
+    protected TemperatureDated parseTemperature(final String tempPart) {
         TemperatureDated temperature = new TemperatureDated();
-        String[] parts = pTempPart.split("/");
+        String[] parts = tempPart.split("/");
         temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));
         temperature.setDay(Integer.parseInt(parts[1].substring(0, 2)));
         temperature.setHour(Integer.parseInt(parts[1].substring(2, 4)));

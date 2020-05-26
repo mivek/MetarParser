@@ -24,14 +24,14 @@ public final class ThunderStormLocationCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Thunderstorm.Location", messages.getString("Converter." + thunderStormParts[1]))).append(" ");
-        return pRemark.replaceFirst(THUNDERSTORM_LOCATION.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION, remark);
+        stringBuilder.append(messages.getString("Remark.Thunderstorm.Location", messages.getString("Converter." + thunderStormParts[1]))).append(" ");
+        return remark.replaceFirst(THUNDERSTORM_LOCATION.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(THUNDERSTORM_LOCATION, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(THUNDERSTORM_LOCATION, input);
     }
 }

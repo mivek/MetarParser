@@ -23,16 +23,16 @@ public final class CeilingHeightCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, pRemark);
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, remark);
         int min = Integer.parseInt(ceilingParts[1]) * 100;
         int max = Integer.parseInt(ceilingParts[2]) * 100;
-        pStringBuilder.append(messages.getString("Remark.Ceiling.Height", min, max)).append(" ");
-        return pRemark.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
+        stringBuilder.append(messages.getString("Remark.Ceiling.Height", min, max)).append(" ");
+        return remark.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(CEILING_HEIGHT, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(CEILING_HEIGHT, input);
     }
 }

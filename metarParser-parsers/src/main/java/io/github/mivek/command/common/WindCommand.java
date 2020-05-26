@@ -23,25 +23,25 @@ public final class WindCommand implements BaseWindCommand {
      * This method parses the wind part of the metar code. It parses the generic
      * part.
      *
-     * @param pStringWind a string with wind elements.
+     * @param stringWind a string with wind elements.
      * @return a Wind element with the informations.
      */
-    protected Wind parseWind(final String pStringWind) {
+    protected Wind parseWind(final String stringWind) {
         Wind wind = new Wind();
-        String[] windPart = Regex.pregMatch(WIND_REGEX, pStringWind);
+        String[] windPart = Regex.pregMatch(WIND_REGEX, stringWind);
         setWindElements(wind, windPart[1], windPart[2], windPart[3], windPart[4]);
         return wind;
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        Wind wind = parseWind(pPart);
-        pContainer.setWind(wind);
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        Wind wind = parseWind(part);
+        container.setWind(wind);
         return getReturnValue();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_REGEX, input);
     }
 }

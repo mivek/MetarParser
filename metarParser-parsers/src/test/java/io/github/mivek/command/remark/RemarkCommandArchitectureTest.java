@@ -14,7 +14,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
  * @author mivek
  */
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = {"io.github.mivek.command.remark"}, importOptions = { ImportOption.DoNotIncludeTests.class })
+@AnalyzeClasses(packages = { "io.github.mivek.command.remark" }, importOptions = { ImportOption.DoNotIncludeTests.class })
 public class RemarkCommandArchitectureTest {
     @ArchTest
     public static final ArchRule dependancyRule = noClasses().should().

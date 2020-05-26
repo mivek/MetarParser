@@ -8,13 +8,13 @@ import io.github.mivek.model.AbstractWeatherContainer;
 public interface Command {
 
     /**
-     * Handles the pPart and updates the pContainer.
+     * Handles the pqrt and updates the container.
      *
-     * @param pContainer the container to update.
-     * @param pPart      the string to parse.
+     * @param container the container to update.
+     * @param part      the string to parse.
      * @return true if the part has been properly handled false otherwise
      */
-    boolean execute(AbstractWeatherContainer pContainer, String pPart);
+    boolean execute(AbstractWeatherContainer container, String part);
 
     /**
      * @return the default return value of a command.
@@ -24,8 +24,8 @@ public interface Command {
     }
 
     /**
-     * @param pInput the input string to test.
+     * @param input the input string to test.
      * @return true if the input can be handled by the command.
      */
-    boolean canParse(String pInput);
+    boolean canParse(String input);
 }

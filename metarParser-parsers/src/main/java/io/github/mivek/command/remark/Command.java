@@ -6,28 +6,28 @@ package io.github.mivek.command.remark;
 public interface Command {
 
     /**
-     * @param pRemark        the remark to parse.
-     * @param pStringBuilder the string builder containing the decoded remark
+     * @param remark        the remark to parse.
+     * @param stringBuilder the string builder containing the decoded remark
      * @return the remark without the parsed part
      */
-    String execute(String pRemark, StringBuilder pStringBuilder);
+    String execute(String remark, StringBuilder stringBuilder);
 
     /**
      * Checks if the string is null.
      *
-     * @param pString the string to test
-     * @return empty string if null pString otherwise.
+     * @param string the string to test
+     * @return empty string if null string otherwise.
      */
-    default String verifyString(final String pString) {
-        if (pString == null) {
+    default String verifyString(final String string) {
+        if (string == null) {
             return "";
         }
-        return pString;
+        return string;
     }
 
     /**
-     * @param pInput the input string to test.
+     * @param input the input string to test.
      * @return true if the input can be handled by the command.
      */
-    boolean canParse(String pInput);
+    boolean canParse(String input);
 }

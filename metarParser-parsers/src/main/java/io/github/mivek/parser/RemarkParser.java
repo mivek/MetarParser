@@ -14,6 +14,7 @@ public final class RemarkParser {
 
     /** The command supplier. */
     private final RemarkCommandSupplier supplier;
+
     /***
      * Private constructor.
      */
@@ -22,11 +23,11 @@ public final class RemarkParser {
     }
 
     /**
-     * @param pRemark the remark to parse.
+     * @param remark the remark to parse.
      * @return the remark string
      */
-    public String parse(final String pRemark) {
-        String rmk = pRemark;
+    public String parse(final String remark) {
+        String rmk = remark;
         StringBuilder sb = new StringBuilder();
         while (!"".equals(rmk)) {
             try {

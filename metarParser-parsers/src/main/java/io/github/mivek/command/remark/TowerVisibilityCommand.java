@@ -23,14 +23,14 @@ public final class TowerVisibilityCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
-        return pRemark.replaceFirst(TOWER_VISIBILITY.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, remark);
+        stringBuilder.append(messages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
+        return remark.replaceFirst(TOWER_VISIBILITY.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(TOWER_VISIBILITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(TOWER_VISIBILITY, input);
     }
 }

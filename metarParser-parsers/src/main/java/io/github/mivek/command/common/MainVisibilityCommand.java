@@ -21,17 +21,17 @@ public final class MainVisibilityCommand implements Command {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, pPart);
-        if (pContainer.getVisibility() == null) {
-            pContainer.setVisibility(new Visibility());
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, part);
+        if (container.getVisibility() == null) {
+            container.setVisibility(new Visibility());
         }
-        pContainer.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        container.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
         return getReturnValue();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(MAIN_VISIBILITY_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(MAIN_VISIBILITY_REGEX, input);
     }
 }

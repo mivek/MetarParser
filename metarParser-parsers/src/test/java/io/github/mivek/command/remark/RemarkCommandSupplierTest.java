@@ -13,7 +13,8 @@ import static org.junit.Assert.assertNotNull;
  */
 public class RemarkCommandSupplierTest {
 
-    @Test public void testBuildCommandList() {
+    @Test
+    public void testBuildCommandList() {
         List<Command> commands = new RemarkCommandSupplier().buildCommandList();
 
         assertNotNull(commands);

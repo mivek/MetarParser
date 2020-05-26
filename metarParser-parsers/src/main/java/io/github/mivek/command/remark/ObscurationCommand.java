@@ -23,17 +23,17 @@ public final class ObscurationCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] obscuration = Regex.pregMatch(OBSCURATION, pRemark);
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] obscuration = Regex.pregMatch(OBSCURATION, remark);
         String layer = messages.getString("CloudQuantity." + obscuration[2]);
         int height = Integer.parseInt(obscuration[3]) * 100;
         String obscDetail = messages.getString("Phenomenon." + obscuration[1]);
-        pStringBuilder.append(messages.getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
-        return pRemark.replaceFirst(OBSCURATION.pattern(), "").trim();
+        stringBuilder.append(messages.getString("Remark.Obscuration", layer, height, obscDetail)).append(" ");
+        return remark.replaceFirst(OBSCURATION.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(OBSCURATION, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(OBSCURATION, input);
     }
 }

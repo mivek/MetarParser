@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * @author mivek
- *
  */
 @RunWith(Parameterized.class)
 public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
@@ -23,19 +22,18 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
     @Parameters
     public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-            { "WS020/24045KT", true }, // Wind shear
-            { "05009KT", true }, // Wind
-            { "030V113", true }, // Wind variable
-            { "9999", true }, // Main visibility
-            { "6 1/2SM", true}, //Main visibility SM
-            { "1100w", true }, // Min visibility
-            { "VV002", true }, // Vertical visibility
-            { "CAVOK", true }, // CAVOK
-            { "SCT026CB", true }, // Cloud
-            { "ZZZ026CB", false }, // Cloud null
-            { "+SHGSRA", true }, // Weather condition
-            { "+ZERT", false } // Weather null
+        return Arrays.asList(new Object[][] { { "WS020/24045KT", true }, // Wind shear
+                { "05009KT", true }, // Wind
+                { "030V113", true }, // Wind variable
+                { "9999", true }, // Main visibility
+                { "6 1/2SM", true }, //Main visibility SM
+                { "1100w", true }, // Min visibility
+                { "VV002", true }, // Vertical visibility
+                { "CAVOK", true }, // CAVOK
+                { "SCT026CB", true }, // Cloud
+                { "ZZZ026CB", false }, // Cloud null
+                { "+SHGSRA", true }, // Weather condition
+                { "+ZERT", false } // Weather null
         });
     }
 

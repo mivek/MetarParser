@@ -12,26 +12,26 @@ public interface BaseWindCommand extends Command {
     /**
      * Sets the elements of the wind.
      *
-     * @param pWind      the wind element.
-     * @param pDirection the direction of the wind in degrees.
-     * @param pSpeed     the speed of the wind
-     * @param pGust      the speed of the gust if any
-     * @param pUnit      the unit.
+     * @param wind         the wind element.
+     * @param directionStr the direction of the wind in degrees.
+     * @param speed        the speed of the wind
+     * @param gust         the speed of the gust if any
+     * @param unit         the unit.
      */
-    default void setWindElements(final Wind pWind, final String pDirection, final String pSpeed, final String pGust, final String pUnit) {
-        String direction = Converter.degreesToDirection(pDirection);
-        pWind.setDirection(direction);
+    default void setWindElements(final Wind wind, final String directionStr, final String speed, final String gust, final String unit) {
+        String direction = Converter.degreesToDirection(directionStr);
+        wind.setDirection(direction);
         if (!direction.equals(Messages.getInstance().getString("Converter.VRB"))) {
-            pWind.setDirectionDegrees(Integer.parseInt(pDirection));
+            wind.setDirectionDegrees(Integer.parseInt(directionStr));
         }
-        pWind.setSpeed(Integer.parseInt(pSpeed));
-        if (pGust != null) {
-            pWind.setGust(Integer.parseInt(pGust));
+        wind.setSpeed(Integer.parseInt(speed));
+        if (gust != null) {
+            wind.setGust(Integer.parseInt(gust));
         }
-        if (pUnit == null) {
-            pWind.setUnit("KT");
+        if (unit == null) {
+            wind.setUnit("KT");
         } else {
-            pWind.setUnit(pUnit);
+            wind.setUnit(unit);
         }
     }
 }

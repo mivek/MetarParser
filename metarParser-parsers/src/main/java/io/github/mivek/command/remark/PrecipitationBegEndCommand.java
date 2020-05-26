@@ -23,16 +23,16 @@ public final class PrecipitationBegEndCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : messages.getString("Descriptive." + precipitationBegEnd[2]),
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, remark);
+        stringBuilder.append(messages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : messages.getString("Descriptive." + precipitationBegEnd[2]),
                 messages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5], verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
                 .append(" ");
-        return pRemark.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
+        return remark.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(PRECIPITATION_BEG_END, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(PRECIPITATION_BEG_END, input);
     }
 }

@@ -24,15 +24,15 @@ public final class WindShiftCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] windShiftParts = Regex.pregMatch(WIND_SHIFT, pRemark);
-        pStringBuilder.append(messages.getString("Remark.WindShift", verifyString(windShiftParts[1]), windShiftParts[2]));
-        pStringBuilder.append(" ");
-        return pRemark.replaceFirst(WIND_SHIFT.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] windShiftParts = Regex.pregMatch(WIND_SHIFT, remark);
+        stringBuilder.append(messages.getString("Remark.WindShift", verifyString(windShiftParts[1]), windShiftParts[2]));
+        stringBuilder.append(" ");
+        return remark.replaceFirst(WIND_SHIFT.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_SHIFT, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_SHIFT, input);
     }
 }

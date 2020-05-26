@@ -22,14 +22,14 @@ public final class PrevailingVisibilityCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] visibilityParts = Regex.pregMatch(VARIABLE_PREVAILING_VISIBILITY, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Variable.Prevailing.Visibility", visibilityParts[1], visibilityParts[5])).append(" ");
-        return pRemark.replaceFirst(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] visibilityParts = Regex.pregMatch(VARIABLE_PREVAILING_VISIBILITY, remark);
+        stringBuilder.append(messages.getString("Remark.Variable.Prevailing.Visibility", visibilityParts[1], visibilityParts[5])).append(" ");
+        return remark.replaceFirst(VARIABLE_PREVAILING_VISIBILITY.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(VARIABLE_PREVAILING_VISIBILITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(VARIABLE_PREVAILING_VISIBILITY, input);
     }
 }

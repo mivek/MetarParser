@@ -40,7 +40,6 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         fSut = MetarParser.getInstance();
     }
 
-
     /**
      * =========================== Test ParseMetarAction ===========================
      */
@@ -260,8 +259,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(15, m.getWind().getSpeed());
         assertEquals(25, m.getWind().getGust());
         assertEquals("KT", m.getWind().getUnit());
-        assertEquals(180, m.getWind().getExtreme1());
-        assertEquals(300, m.getWind().getExtreme2());
+        assertEquals(180, m.getWind().getMinVariation());
+        assertEquals(300, m.getWind().getMaxVariation());
 
     }
 
@@ -342,7 +341,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     @Test
     public void testParseRMK() {
         Metar m = new Metar();
-        String[] array = {"RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017="};
+        String[] array = { "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
         getSut().parseRMK(m, array, 0);
         String rmk = m.getRemark();
         assertNotNull(rmk);
@@ -359,8 +358,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals(26, m.getWind().getSpeed());
         assertEquals(40, m.getWind().getGust());
         assertEquals("KT", m.getWind().getUnit());
-        assertEquals(240, m.getWind().getExtreme1());
-        assertEquals(300, m.getWind().getExtreme2());
+        assertEquals(240, m.getWind().getMinVariation());
+        assertEquals(300, m.getWind().getMaxVariation());
     }
 
     @Test

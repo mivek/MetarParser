@@ -24,9 +24,9 @@ public final class RemarkCommandSupplier implements Supplier<Command> {
     }
 
     @Override
-    public Command get(final String pString) {
+    public Command get(final String string) {
         for (Command command : commands) {
-            if (command.canParse(pString)) {
+            if (command.canParse(string)) {
                 return command;
             }
         }

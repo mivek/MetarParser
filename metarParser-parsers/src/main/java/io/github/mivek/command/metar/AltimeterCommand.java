@@ -20,13 +20,13 @@ public final class AltimeterCommand implements Command {
     }
 
     @Override
-    public void execute(final Metar pMetar, final String pPart) {
-        String[] matches = Regex.pregMatch(ALTIMETER_REGEX, pPart);
-        pMetar.setAltimeter(Integer.parseInt(matches[1]));
+    public void execute(final Metar metar, final String part) {
+        String[] matches = Regex.pregMatch(ALTIMETER_REGEX, part);
+        metar.setAltimeter(Integer.parseInt(matches[1]));
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(ALTIMETER_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(ALTIMETER_REGEX, input);
     }
 }

@@ -20,28 +20,28 @@ public final class WindShearCommand implements BaseWindCommand {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        WindShear windShear = parseWindShear(pPart);
-        pContainer.setWindShear(windShear);
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        WindShear windShear = parseWindShear(part);
+        container.setWindShear(windShear);
         return getReturnValue();
     }
 
     /**
      * Parses the wind shear part.
      *
-     * @param pStringWindShear the string to parse
+     * @param stringWindShear the string to parse
      * @return a wind shear object.
      */
-    protected WindShear parseWindShear(final String pStringWindShear) {
+    protected WindShear parseWindShear(final String stringWindShear) {
         WindShear wind = new WindShear();
-        String[] windPart = Regex.pregMatch(WIND_SHEAR_REGEX, pStringWindShear);
+        String[] windPart = Regex.pregMatch(WIND_SHEAR_REGEX, stringWindShear);
         wind.setHeight(100 * Integer.parseInt(windPart[1]));
         setWindElements(wind, windPart[2], windPart[3], windPart[4], windPart[5]);
         return wind;
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_SHEAR_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_SHEAR_REGEX, input);
     }
 }

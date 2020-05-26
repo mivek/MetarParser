@@ -21,14 +21,14 @@ public final class AirportSupplier implements Supplier<Airport> {
     }
 
     @Override
-    public Airport get(final String pIcao) {
+    public Airport get(final String string) {
         AirportProvider provider;
         if (airportLoader.iterator().hasNext()) {
             provider = airportLoader.iterator().next();
         } else {
             provider = new DefaultAirportProvider();
         }
-        return provider.getAirports().get(pIcao);
+        return provider.getAirports().get(string);
     }
 }
 

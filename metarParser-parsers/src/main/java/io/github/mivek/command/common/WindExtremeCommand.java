@@ -20,25 +20,25 @@ public final class WindExtremeCommand implements Command {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        parseExtremeWind(pContainer.getWind(), pPart);
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        parseWindVariation(container.getWind(), part);
         return getReturnValue();
     }
 
     /**
      * Parses the wind.
      *
-     * @param pWind        the wind to update
-     * @param pExtremeWind String with extreme wind information
+     * @param wind          the wind to update
+     * @param windVariation String with wind variation information
      */
-    protected void parseExtremeWind(final Wind pWind, final String pExtremeWind) {
-        String[] matches = Regex.pregMatch(WIND_EXTREME_REGEX, pExtremeWind);
-        pWind.setExtreme1(Integer.parseInt(matches[1]));
-        pWind.setExtreme2(Integer.parseInt(matches[2]));
+    protected void parseWindVariation(final Wind wind, final String windVariation) {
+        String[] matches = Regex.pregMatch(WIND_EXTREME_REGEX, windVariation);
+        wind.setMinVariation(Integer.parseInt(matches[1]));
+        wind.setMaxVariation(Integer.parseInt(matches[2]));
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_EXTREME_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_EXTREME_REGEX, input);
     }
 }

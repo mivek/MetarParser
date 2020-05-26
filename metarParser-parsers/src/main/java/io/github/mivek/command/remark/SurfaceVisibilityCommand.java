@@ -23,14 +23,14 @@ public final class SurfaceVisibilityCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] surfaceVisivilityParts = Regex.pregMatch(SURFACE_VISIBILITY, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Surface.Visibility", surfaceVisivilityParts[1])).append(" ");
-        return pRemark.replaceFirst(SURFACE_VISIBILITY.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] surfaceVisivilityParts = Regex.pregMatch(SURFACE_VISIBILITY, remark);
+        stringBuilder.append(messages.getString("Remark.Surface.Visibility", surfaceVisivilityParts[1])).append(" ");
+        return remark.replaceFirst(SURFACE_VISIBILITY.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(SURFACE_VISIBILITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(SURFACE_VISIBILITY, input);
     }
 }

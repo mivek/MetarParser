@@ -40,15 +40,15 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Dependency injection constructor.
      *
-     * @param pCommonCommandSupplier      the command command supplier
-     * @param pRemarkParser               the remark parser
-     * @param pMetarParserCommandSupplier the metar command supplier.
-     * @param pAirportSupplier            the airport supplier
+     * @param commonCommandSupplier      the command command supplier
+     * @param remarkParser               the remark parser
+     * @param metarParserCommandSupplier the metar command supplier.
+     * @param airportSupplier            the airport supplier
      */
-    protected MetarParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier,
-            final MetarParserCommandSupplier pMetarParserCommandSupplier) {
-        super(pCommonCommandSupplier, pRemarkParser, pAirportSupplier);
-        supplier = pMetarParserCommandSupplier;
+    protected MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
+            final MetarParserCommandSupplier metarParserCommandSupplier) {
+        super(commonCommandSupplier, remarkParser, airportSupplier);
+        supplier = metarParserCommandSupplier;
     }
 
     /**
@@ -64,16 +64,17 @@ public final class MetarParser extends AbstractParser<Metar> {
      * This is the main method of the parser. This method checks if the airport
      * exists. If it does then the metar code is decoded.
      *
-     * @param pMetarCode String representing the metar.
+     * @param code String representing the metar.
      * @return a decoded metar object.
      */
-    @Override public Metar parse(final String pMetarCode) {
+    @Override
+    public Metar parse(final String code) {
         Metar m = new Metar();
-        String[] metarTab = tokenize(pMetarCode);
+        String[] metarTab = tokenize(code);
         Airport airport = getAirportSupplier().get(metarTab[0]);
         m.setStation(metarTab[0]);
         m.setAirport(airport);
-        m.setMessage(pMetarCode);
+        m.setMessage(code);
         parseDeliveryTime(m, metarTab[1]);
         int metarTabLength = metarTab.length;
         int i = 2;
@@ -103,12 +104,12 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Initiate the trend according to string.
      *
-     * @param pS the string to parse.
+     * @param trendpart the string to parse.
      * @return a concrete Trends object.
      */
-    private AbstractMetarTrend initTrend(final String pS) {
+    private AbstractMetarTrend initTrend(final String trendpart) {
         AbstractMetarTrend trend;
-        if (pS.equals(TEMPO)) {
+        if (trendpart.equals(TEMPO)) {
             trend = new TEMPOMetarTrend();
         } else {
             trend = new BECMGMetarTrend();
@@ -119,28 +120,28 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Execute the command given by the supplier.
      *
-     * @param pM     the metar
-     * @param pInput the string to parse.
+     * @param metar the metar
+     * @param input the string to parse.
      */
-    private void executeCommand(final Metar pM, final String pInput) {
-        Command command = supplier.get(pInput);
+    private void executeCommand(final Metar metar, final String input) {
+        Command command = supplier.get(input);
         if (command != null) {
-            command.execute(pM, pInput);
+            command.execute(metar, input);
         }
     }
 
     /**
      * Iterates over an array and parses the trends.
      *
-     * @param pIndex the starting index.
-     * @param pTrend the trend to update
-     * @param pParts an array of strings
+     * @param index the starting index.
+     * @param trend the trend to update
+     * @param parts an array of strings
      * @return the next index to parse.
      */
-    private int iterTrend(final int pIndex, final AbstractMetarTrend pTrend, final String[] pParts) {
-        int i = pIndex + 1;
-        while (i < pParts.length && !pParts[i].equals(TEMPO) && !pParts[i].equals(BECMG)) {
-            processChange(pTrend, pParts[i]);
+    private int iterTrend(final int index, final AbstractMetarTrend trend, final String[] parts) {
+        int i = index + 1;
+        while (i < parts.length && !parts[i].equals(TEMPO) && !parts[i].equals(BECMG)) {
+            processChange(trend, parts[i]);
             i++;
         }
         return i - 1;
@@ -149,24 +150,24 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Parses a string and updates the trend.
      *
-     * @param pTrend the abstractMetarTrend object to update.
-     * @param pPart  The token to parse.
+     * @param trend the abstractMetarTrend object to update.
+     * @param part  The token to parse.
      */
-    private void processChange(final AbstractMetarTrend pTrend, final String pPart) {
-        if (pPart.startsWith(AT)) {
+    private void processChange(final AbstractMetarTrend trend, final String part) {
+        if (part.startsWith(AT)) {
             ATTime at = new ATTime();
-            at.setTime(Converter.stringToTime(pPart.substring(2)));
-            pTrend.addTime(at);
-        } else if (pPart.startsWith(FM)) {
+            at.setTime(Converter.stringToTime(part.substring(2)));
+            trend.addTime(at);
+        } else if (part.startsWith(FM)) {
             FMTime fm = new FMTime();
-            fm.setTime(Converter.stringToTime(pPart.substring(2)));
-            pTrend.addTime(fm);
-        } else if (pPart.startsWith(TILL)) {
+            fm.setTime(Converter.stringToTime(part.substring(2)));
+            trend.addTime(fm);
+        } else if (part.startsWith(TILL)) {
             TLTime tl = new TLTime();
-            tl.setTime(Converter.stringToTime(pPart.substring(2)));
-            pTrend.addTime(tl);
+            tl.setTime(Converter.stringToTime(part.substring(2)));
+            trend.addTime(tl);
         } else {
-            generalParse(pTrend, pPart);
+            generalParse(trend, part);
         }
     }
 

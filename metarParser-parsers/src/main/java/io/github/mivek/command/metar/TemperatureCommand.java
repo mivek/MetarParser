@@ -20,14 +20,14 @@ public final class TemperatureCommand implements Command {
     }
 
     @Override
-    public void execute(final Metar pMetar, final String pPart) {
-        String[] matches = Regex.pregMatch(TEMPERATURE_REGEX, pPart);
-        pMetar.setTemperature(Converter.convertTemperature(matches[1]));
-        pMetar.setDewPoint(Converter.convertTemperature(matches[2]));
+    public void execute(final Metar metar, final String part) {
+        String[] matches = Regex.pregMatch(TEMPERATURE_REGEX, part);
+        metar.setTemperature(Converter.convertTemperature(matches[1]));
+        metar.setDewPoint(Converter.convertTemperature(matches[2]));
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(TEMPERATURE_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(TEMPERATURE_REGEX, input);
     }
 }

@@ -27,8 +27,8 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for {@link TAFParser}
- * @author mivek
  *
+ * @author mivek
  */
 public class TAFParserTest extends AbstractParserTest<TAF> {
 
@@ -46,7 +46,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     public void setUp() {
         fSut = TAFParser.getInstance();
     }
-
 
     @Test
     public void testProcessGeneralChangesWithTX() {
@@ -88,7 +87,6 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
         assertThat(change.getClouds(), is(empty()));
     }
-
 
     @Test
     public void testParseValidity() {
@@ -134,13 +132,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     public void testParseValidWithInvalidLineBreaks() throws ParseException {
-        String taf = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n"
-                + "TEMPO 1506/1509 3000 BR BKN006 PROB40 \n"
-                + "TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
-                + "TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n"
-                + "BECMG 1520/1522 CAVOK \n"
-                + "TEMPO 1603/1608 3000 BR BKN006 PROB40 \n"
-                + "TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
+        String taf = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n" + "TEMPO 1506/1509 3000 BR BKN006 PROB40 \n" + "TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
+                + "TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n" + "BECMG 1520/1522 CAVOK \n" + "TEMPO 1603/1608 3000 BR BKN006 PROB40 \n" + "TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
 
         TAF res = fSut.parse(taf);
 
@@ -275,13 +268,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     public void testParseValidWithoutLineBreaks() throws ParseException {
-        String taf = "TAF LSZH 292025Z 2921/3103 VRB03KT 9999 FEW020 BKN080 TX20/3014Z TN06/3003Z " +
-                "PROB30 TEMPO 2921/2923 SHRA " +
-                "BECMG 3001/3004 4000 MIFG NSC " +
-                "PROB40 3003/3007 1500 BCFG SCT004 " +
-                "PROB30 3004/3007 0800 FG VV003 " +
-                "BECMG 3006/3009 9999 FEW030 " +
-                "PROB40 TEMPO 3012/3017 30008KT";
+        String taf = "TAF LSZH 292025Z 2921/3103 VRB03KT 9999 FEW020 BKN080 TX20/3014Z TN06/3003Z " + "PROB30 TEMPO 2921/2923 SHRA " + "BECMG 3001/3004 4000 MIFG NSC "
+                + "PROB40 3003/3007 1500 BCFG SCT004 " + "PROB30 3004/3007 0800 FG VV003 " + "BECMG 3006/3009 9999 FEW030 " + "PROB40 TEMPO 3012/3017 30008KT";
 
         TAF res = fSut.parse(taf);
 
@@ -499,8 +487,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     public void testParseWithFM() throws ParseException {
-        String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n"
-                + "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
+        String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n" + "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
 
         TAF res = fSut.parse(message);
         assertNotNull(res);
@@ -618,9 +605,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Test
     public void testParseWithNauticalMilesVisibility() throws ParseException {
         // GIVEN a TAF message with nautical miles visibility
-        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" +
-                "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n" +
-                "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
+        String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n"
+                + "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
 
         //WHEN parsing the message.
         TAF result = fSut.parse(message);
@@ -643,13 +629,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Test
     public void testParseWithAMDTAF() throws ParseException {
         //GIVEN an amended TAF
-        String message = "TAF AMD LFPO 100742Z 1007/1112 21018G35KT 9999 BKN025 \r\n" +
-                "      TEMPO 1007/1009 4000 RA BKN014 SCT020CB PROB40 \r\n" +
-                "      TEMPO 1007/1009 22020G45KT \r\n" +
-                "      TEMPO 1010/1017 24022G45KT SHRA SCT030CB PROB30 \r\n" +
-                "      TEMPO 1012/1016 -TSRA \r\n" +
-                "      BECMG 1020/1023 24013KT SCT023 \r\n" +
-                "      TEMPO 1104/1112 4000 -SHRA BKN012 BKN020TCU";
+        String message = "TAF AMD LFPO 100742Z 1007/1112 21018G35KT 9999 BKN025 \r\n" + "      TEMPO 1007/1009 4000 RA BKN014 SCT020CB PROB40 \r\n" + "      TEMPO 1007/1009 22020G45KT \r\n"
+                + "      TEMPO 1010/1017 24022G45KT SHRA SCT030CB PROB30 \r\n" + "      TEMPO 1012/1016 -TSRA \r\n" + "      BECMG 1020/1023 24013KT SCT023 \r\n"
+                + "      TEMPO 1104/1112 4000 -SHRA BKN012 BKN020TCU";
         //WHEN parsing the message
         TAF result = fSut.parse(message);
         //Then the taf is correctly parsed and the amendment attribute is true.
@@ -659,11 +641,8 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     @Test
     public void testParseWithCavok() throws ParseException {
         // GIVEN a TAF with CAVOK in the main part and in a BECMG part.
-        String message = "TAF LFPG 211700Z 2118/2224 VRB03KT CAVOK TX15/2215Z TN02/2205Z \n" +
-                "BECMG 2122/2124 3000 BR \n" +
-                "TEMPO 2202/2209 0800 BCFG PROB30 \n" +
-                "TEMPO 2203/2209 0500 FG  \n" +
-                "BECMG 2211/2213 09006KT CAVOK";
+        String message = "TAF LFPG 211700Z 2118/2224 VRB03KT CAVOK TX15/2215Z TN02/2205Z \n" + "BECMG 2122/2124 3000 BR \n" + "TEMPO 2202/2209 0800 BCFG PROB30 \n" + "TEMPO 2203/2209 0500 FG  \n"
+                + "BECMG 2211/2213 09006KT CAVOK";
 
         // WHEN parsing the event.
         TAF result = fSut.parse(message);
@@ -686,8 +665,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertNotNull(result);
         assertNotNull(result.getTempos().get(1));
         assertNotNull(result.getTempos().get(1).getRemark());
-        String rmk = Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
-                + Messages.getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
+        String rmk =
+                Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. " + Messages
+                        .getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
         assertThat(result.getTempos().get(1).getRemark(), containsString(rmk));
     }
 
@@ -700,8 +680,9 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         TAF result = fSut.parse(message);
         // THEN the second tempo contains the remark.
         assertNotNull(result);
-        String rmk = Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. "
-                + Messages.getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
+        String rmk =
+                Messages.getInstance().getString(REMARK_FCST) + " " + Messages.getInstance().getString("Remark.BASED") + " " + Messages.getInstance().getString("Remark.ON") + " AUTO OBS. " + Messages
+                        .getInstance().getString(REMARK_NXT) + " " + Messages.getInstance().getString(REMARK_FCST) + " BY 301400Z";
         assertThat(result.getRemark(), containsString(rmk));
         String description = result.toString();
         assertThat(description, containsString(Messages.getInstance().getString("ToString.start.day.month") + "=30"));

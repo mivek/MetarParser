@@ -22,20 +22,20 @@ public final class CloudCommand implements Command {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        Cloud c = parseCloud(pPart);
-        return pContainer.addCloud(c);
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        Cloud c = parseCloud(part);
+        return container.addCloud(c);
     }
 
     /**
      * This method parses the cloud part of the metar.
      *
-     * @param pCloudString string with cloud elements.
+     * @param cloudString string with cloud elements.
      * @return a decoded cloud with its quantity, its altitude and its type.
      */
-    protected Cloud parseCloud(final String pCloudString) {
+    protected Cloud parseCloud(final String cloudString) {
         Cloud cloud = new Cloud();
-        String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, pCloudString);
+        String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, cloudString);
         try {
             CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
             cloud.setQuantity(cq);
@@ -53,8 +53,8 @@ public final class CloudCommand implements Command {
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(CLOUD_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(CLOUD_REGEX, input);
     }
 }
 

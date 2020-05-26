@@ -17,11 +17,13 @@ public class RunwayCommandTest {
 
     private RunwayCommand command;
 
-    @Before public void setUp() {
+    @Before
+    public void setUp() {
         command = new RunwayCommand();
     }
 
-    @Test public void testExecuteSimple() {
+    @Test
+    public void testExecuteSimple() {
         String riString = "R26/0600U";
         Metar m = new Metar();
         command.execute(m, riString);
@@ -34,7 +36,8 @@ public class RunwayCommandTest {
         assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
     }
 
-    @Test public void testParseRunWaysComplex() {
+    @Test
+    public void testParseRunWaysComplex() {
         String riString = "R26L/0550V700U";
         Metar m = new Metar();
 
@@ -48,7 +51,8 @@ public class RunwayCommandTest {
         assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
     }
 
-    @Test public void testParseRunWayNull() {
+    @Test
+    public void testParseRunWayNull() {
         String riString = "R26R/AZEZFDFS";
 
         Metar m = new Metar();

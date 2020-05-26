@@ -13,7 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class MetarParserCommandSupplierTest {
 
-    @Test public void testBuildCommandList() {
+    @Test
+    public void testBuildCommandList() {
         List<Command> commands = new MetarParserCommandSupplier().buildCommandList();
 
         assertNotNull(commands);

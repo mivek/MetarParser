@@ -23,16 +23,16 @@ public final class TornadicActivityEndCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, pRemark);
-        pStringBuilder.append(messages
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, remark);
+        stringBuilder.append(messages
                 .getString("Remark.Tornadic.Activity.Ending", messages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6],
                         messages.getString("Converter." + tornadicParts[7]))).append(" ");
-        return pRemark.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
+        return remark.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(TORNADIC_ACTIVITY_ENDING, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(TORNADIC_ACTIVITY_ENDING, input);
     }
 }

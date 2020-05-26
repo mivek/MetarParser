@@ -23,14 +23,14 @@ public final class VirgaDirectionCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Virga.Direction", messages.getString("Converter." + virgaDirection[1]))).append(" ");
-        return pRemark.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, remark);
+        stringBuilder.append(messages.getString("Remark.Virga.Direction", messages.getString("Converter." + virgaDirection[1]))).append(" ");
+        return remark.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(VIRGA_DIRECTION, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(VIRGA_DIRECTION, input);
     }
 }

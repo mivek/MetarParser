@@ -19,14 +19,14 @@ public final class VerticalVisibilityCommand implements Command {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, pPart);
-        pContainer.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, part);
+        container.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
         return getReturnValue();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(VERTICAL_VISIBILITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(VERTICAL_VISIBILITY, input);
     }
 }

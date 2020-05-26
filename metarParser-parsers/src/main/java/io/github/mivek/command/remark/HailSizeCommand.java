@@ -23,14 +23,14 @@ public final class HailSizeCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] hailParts = Regex.pregMatch(HAIL_SIZE, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Hail", hailParts[1])).append(" ");
-        return pRemark.replaceFirst(HAIL_SIZE.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] hailParts = Regex.pregMatch(HAIL_SIZE, remark);
+        stringBuilder.append(messages.getString("Remark.Hail", hailParts[1])).append(" ");
+        return remark.replaceFirst(HAIL_SIZE.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(HAIL_SIZE, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(HAIL_SIZE, input);
     }
 }

@@ -49,14 +49,15 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
 
     /**
      * Dependency injection constructor.
-     * @param pCommonCommandSupplier the common command supplier
-     * @param pRemarkParser the remark parser.
-     * @param pAirportSupplier the airport supplier.
+     *
+     * @param commonCommandSupplier the common command supplier
+     * @param remarkParser          the remark parser.
+     * @param airportSupplier       the airport supplier.
      */
-    AbstractParser(final CommonCommandSupplier pCommonCommandSupplier, final RemarkParser pRemarkParser, final AirportSupplier pAirportSupplier) {
-        commonSupplier = pCommonCommandSupplier;
-        remarkParser = pRemarkParser;
-        airportSupplier = pAirportSupplier;
+    AbstractParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
+        commonSupplier = commonCommandSupplier;
+        this.remarkParser = remarkParser;
+        this.airportSupplier = airportSupplier;
     }
 
     /**
@@ -94,72 +95,72 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
     /**
      * Parses the string containing the delivery time.
      *
-     * @param pWeatherCode The weather code.
-     * @param pTime        the string to parse.
+     * @param weatherCode The weather code.
+     * @param time        the string to parse.
      */
-    void parseDeliveryTime(final AbstractWeatherCode pWeatherCode, final String pTime) {
-        pWeatherCode.setDay(Integer.parseInt(pTime.substring(0, 2)));
-        int hours = Integer.parseInt(pTime.substring(2, 4));
-        int minutes = Integer.parseInt(pTime.substring(4, 6));
+    void parseDeliveryTime(final AbstractWeatherCode weatherCode, final String time) {
+        weatherCode.setDay(Integer.parseInt(time.substring(0, 2)));
+        int hours = Integer.parseInt(time.substring(2, 4));
+        int minutes = Integer.parseInt(time.substring(4, 6));
         LocalTime t = LocalTime.of(hours, minutes);
-        pWeatherCode.setTime(t);
+        weatherCode.setTime(t);
     }
 
     /**
      * Abstract method parse.
      *
-     * @param pCode the message to parse.
+     * @param code the message to parse.
      * @return The decoded object.
      * @throws ParseException when an error occurs during parsing.
      */
-    public abstract T parse(String pCode) throws ParseException;
+    public abstract T parse(String code) throws ParseException;
 
     /**
      * Method that parses common elements of a abstract weather container.
      *
-     * @param pContainer The object to update
-     * @param pPart      the token to parse.
-     * @return boolean if the token pPart as been parsed.
+     * @param container The object to update
+     * @param part      the token to parse.
+     * @return boolean if the token part as been parsed.
      */
-    boolean generalParse(final AbstractWeatherContainer pContainer, final String pPart) {
-        if (CAVOK.equals(pPart)) {
-            pContainer.setCavok(true);
-            if (pContainer.getVisibility() == null) {
-                pContainer.setVisibility(new Visibility());
+    boolean generalParse(final AbstractWeatherContainer container, final String part) {
+        if (CAVOK.equals(part)) {
+            container.setCavok(true);
+            if (container.getVisibility() == null) {
+                container.setVisibility(new Visibility());
             }
-            pContainer.getVisibility().setMainVisibility(">10km");
+            container.getVisibility().setMainVisibility(">10km");
             return true;
         }
 
-        Command command = commonSupplier.get(pPart);
-        if (command != null && command.canParse(pPart)) {
-            return command.execute(pContainer, pPart);
+        Command command = commonSupplier.get(part);
+        if (command != null && command.canParse(part)) {
+            return command.execute(container, part);
         }
 
-        WeatherCondition wc = parseWeatherCondition(pPart);
-        return pContainer.addWeatherCondition(wc);
+        WeatherCondition wc = parseWeatherCondition(part);
+        return container.addWeatherCondition(wc);
     }
 
     /***
      * Adds the remark part to the event.
-     * @param pContainer the event to update
-     * @param pParts the tokens of the event
+     * @param container the event to update
+     * @param parts the tokens of the event
      * @param index the RMK index in the event.
      */
-    void parseRMK(final AbstractWeatherContainer pContainer, final String[] pParts, final int index) {
-        String[] subArray = Arrays.copyOfRange(pParts, index + 1, pParts.length);
-        pContainer.setRemark(remarkParser.parse(String.join(" ", subArray)));
+    void parseRMK(final AbstractWeatherContainer container, final String[] parts, final int index) {
+        String[] subArray = Arrays.copyOfRange(parts, index + 1, parts.length);
+        container.setRemark(remarkParser.parse(String.join(" ", subArray)));
     }
 
     /**
      * Splits a string between spaces except if the space is between two digits with
      * SM.
      *
-     * @param pCode the string to parse
+     * @param code the string to parse
      * @return a array of tokens
      */
-    String[] tokenize(final String pCode) {
-        return TOKENIZE_REGEX.split(pCode);
+    String[] tokenize(final String code) {
+        return TOKENIZE_REGEX.split(code);
     }
 
     /**

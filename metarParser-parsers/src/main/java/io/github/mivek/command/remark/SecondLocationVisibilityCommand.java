@@ -24,14 +24,14 @@ public final class SecondLocationVisibilityCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, pRemark);
-        pStringBuilder.append(messages.getString("Remark.Second.Location.Visibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
-        return pRemark.replaceFirst(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] secondLocationVisibilityParts = Regex.pregMatch(SECOND_LOCATION_VISIBILITY, remark);
+        stringBuilder.append(messages.getString("Remark.Second.Location.Visibility", secondLocationVisibilityParts[1], secondLocationVisibilityParts[5])).append(" ");
+        return remark.replaceFirst(SECOND_LOCATION_VISIBILITY.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(SECOND_LOCATION_VISIBILITY, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(SECOND_LOCATION_VISIBILITY, input);
     }
 }

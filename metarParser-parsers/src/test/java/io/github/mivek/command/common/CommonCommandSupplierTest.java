@@ -13,7 +13,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class CommonCommandSupplierTest {
 
-    @Test public void testBuildCommands() {
+    @Test
+    public void testBuildCommands() {
         List<Command> commands = new CommonCommandSupplier().buildCommands();
 
         assertNotNull(commands);

@@ -9,7 +9,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class DefaultCommandTest {
 
-    @Test public void canParse() {
+    @Test
+    public void canParse() {
         assertTrue(new DefaultCommand().canParse(""));
     }
 }

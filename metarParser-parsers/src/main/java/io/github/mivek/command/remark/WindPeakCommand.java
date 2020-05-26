@@ -24,15 +24,15 @@ public final class WindPeakCommand implements Command {
     }
 
     @Override
-    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
-        String[] windPeakParts = Regex.pregMatch(WIND_PEAK, pRemark);
-        pStringBuilder.append(messages.getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
-        pStringBuilder.append(" ");
-        return pRemark.replaceFirst(WIND_PEAK.pattern(), "").trim();
+    public String execute(final String remark, final StringBuilder stringBuilder) {
+        String[] windPeakParts = Regex.pregMatch(WIND_PEAK, remark);
+        stringBuilder.append(messages.getString("Remark.PeakWind", windPeakParts[1], windPeakParts[2], verifyString(windPeakParts[3]), windPeakParts[4]));
+        stringBuilder.append(" ");
+        return remark.replaceFirst(WIND_PEAK.pattern(), "").trim();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(WIND_PEAK, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(WIND_PEAK, input);
     }
 }

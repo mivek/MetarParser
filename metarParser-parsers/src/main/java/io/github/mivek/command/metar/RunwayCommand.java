@@ -26,28 +26,28 @@ public final class RunwayCommand implements Command {
     }
 
     @Override
-    public void execute(final Metar pMetar, final String pPart) {
+    public void execute(final Metar metar, final String part) {
         RunwayInfo ri = new RunwayInfo();
-        String[] matches = Regex.pregMatch(RUNWAY_REGEX, pPart);
+        String[] matches = Regex.pregMatch(RUNWAY_REGEX, part);
         if (ArrayUtils.isNotEmpty(matches)) {
             ri.setName(matches[1]);
             ri.setMinRange(Integer.parseInt(matches[3]));
             ri.setTrend(Converter.convertTrend(matches[4]));
-            pMetar.addRunwayInfo(ri);
+            metar.addRunwayInfo(ri);
         }
-        matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, pPart);
+        matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, part);
         if (ArrayUtils.isNotEmpty(matches)) {
             ri.setName(matches[1]);
             ri.setMinRange(Integer.parseInt(matches[2]));
             ri.setMaxRange(Integer.parseInt(matches[3]));
             ri.setTrend(Converter.convertTrend(matches[4]));
-            pMetar.addRunwayInfo(ri);
+            metar.addRunwayInfo(ri);
         }
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(GENERIC_RUNWAY_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(GENERIC_RUNWAY_REGEX, input);
     }
 }
 

@@ -19,15 +19,15 @@ public final class MinimalVisibilityCommand implements Command {
     }
 
     @Override
-    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
-        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pPart);
-        pContainer.getVisibility().setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
-        pContainer.getVisibility().setMinDirection(matches[1].substring(4));
+    public boolean execute(final AbstractWeatherContainer container, final String part) {
+        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, part);
+        container.getVisibility().setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
+        container.getVisibility().setMinDirection(matches[1].substring(4));
         return getReturnValue();
     }
 
     @Override
-    public boolean canParse(final String pInput) {
-        return Regex.find(MIN_VISIBILITY_REGEX, pInput);
+    public boolean canParse(final String input) {
+        return Regex.find(MIN_VISIBILITY_REGEX, input);
     }
 }
