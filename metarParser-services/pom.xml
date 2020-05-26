@@ -23,11 +23,6 @@
             <artifactId>metarParser-parsers</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.mivek</groupId>
-            <artifactId>metarParser-entities</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
 </project>
