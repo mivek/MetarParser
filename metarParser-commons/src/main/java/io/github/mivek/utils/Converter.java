@@ -37,14 +37,14 @@ public final class Converter {
     /**
      * This method converter degrees to direction.
      *
-     * @param pDegreesStr a string representing the degrees.
+     * @param degreesStr a string representing the degrees.
      * @return A string for the direction.
      */
-    public static String degreesToDirection(final String pDegreesStr) {
+    public static String degreesToDirection(final String degreesStr) {
         double degrees;
         String res;
         try {
-            degrees = Double.parseDouble(pDegreesStr);
+            degrees = Double.parseDouble(degreesStr);
         } catch (NumberFormatException e) {
             return Messages.getInstance().getString("Converter.VRB");
         }
@@ -76,55 +76,55 @@ public final class Converter {
     /**
      * Checks if num is between lower and max.
      *
-     * @param pNum   double to test
-     * @param pLower the minimum value, included.
-     * @param pMax   The maximum value, exluded.
+     * @param num   double to test
+     * @param lower the minimum value, included.
+     * @param max   The maximum value, exluded.
      * @return true if num is between lower and max, false otherwise.
      */
-    static boolean isBetween(final double pNum, final double pLower, final double pMax) {
-        return pLower <= pNum && pMax > pNum;
+    static boolean isBetween(final double num, final double lower, final double max) {
+        return lower <= num && max > num;
     }
 
     /**
      * Converts a string representing the visibility into a real visibility.
      *
-     * @param pInput A string.
+     * @param input A string.
      * @return a string correctly formatted.
      */
-    public static String convertVisibility(final String pInput) {
-        if ("9999".equals(pInput)) { //$NON-NLS-1$
+    public static String convertVisibility(final String input) {
+        if ("9999".equals(input)) { //$NON-NLS-1$
             return ">10km"; //$NON-NLS-1$
         } else {
-            return Integer.parseInt(pInput) + "m"; //$NON-NLS-1$
+            return Integer.parseInt(input) + "m"; //$NON-NLS-1$
         }
     }
 
     /**
      * Converts the metar part of temperature into integer.
      *
-     * @param pInput The metar part of the temperature.
+     * @param input The metar part of the temperature.
      * @return an integer of the temperature.
      */
-    public static int convertTemperature(final String pInput) {
-        if (pInput.startsWith("M")) { //$NON-NLS-1$
-            return -(Integer.parseInt(pInput.substring(1, 3)));
+    public static int convertTemperature(final String input) {
+        if (input.startsWith("M")) { //$NON-NLS-1$
+            return -(Integer.parseInt(input.substring(1, 3)));
         } else {
-            return Integer.parseInt(pInput);
+            return Integer.parseInt(input);
         }
     }
 
     /**
      * Converts the trend of clouds.
      *
-     * @param pInput Single character string representing the trend.
+     * @param input Single character string representing the trend.
      * @return The signification of the single caracter.
      */
-    public static String convertTrend(final String pInput) {
-        if ("U".equals(pInput)) { //$NON-NLS-1$
+    public static String convertTrend(final String input) {
+        if ("U".equals(input)) { //$NON-NLS-1$
             return Messages.getInstance().getString("Converter.U");
-        } else if ("D".equals(pInput)) { //$NON-NLS-1$
+        } else if ("D".equals(input)) { //$NON-NLS-1$
             return Messages.getInstance().getString("Converter.D");
-        } else if ("N".equals(pInput)) { //$NON-NLS-1$
+        } else if ("N".equals(input)) { //$NON-NLS-1$
             return Messages.getInstance().getString("Converter.NSC");
         }
         return ""; //$NON-NLS-1$
@@ -133,23 +133,23 @@ public final class Converter {
     /**
      * Converts inches of mercury pressure into hecto pascals.
      *
-     * @param pInchesMercury string of mercury.
+     * @param inchesMercury string of mercury.
      * @return double of the pressure in Pascals.
      */
-    public static double inchesMercuryToHPascal(final double pInchesMercury) {
-        return 33.8639 * pInchesMercury;
+    public static double inchesMercuryToHPascal(final double inchesMercury) {
+        return 33.8639 * inchesMercury;
     }
 
     /**
      * Converts a string representing a time to a LocalTime.
      * Eg: "0830" returns a LocalTime of 08:30.
      *
-     * @param pInput the string to convert.
+     * @param input the string to convert.
      * @return the corresponding time.
      */
-    public static LocalTime stringToTime(final String pInput) {
-        int hours = Integer.parseInt(pInput.substring(0, 2));
-        int minutes = Integer.parseInt(pInput.substring(2));
+    public static LocalTime stringToTime(final String input) {
+        int hours = Integer.parseInt(input.substring(0, 2));
+        int minutes = Integer.parseInt(input.substring(2));
         return LocalTime.of(hours, minutes);
     }
 }

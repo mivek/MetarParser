@@ -20,12 +20,12 @@ public final class Regex {
      * Similar to PHP function preg_match. Search a match between the pattern
      * (regex) and the subject (input) and returns an array of string results.
      *
-     * @param pPattern The pattern
-     * @param pInput   The subject.
+     * @param pattern The pattern
+     * @param input   The subject.
      * @return Array of matches.
      */
-    public static String[] pregMatch(final Pattern pPattern, final String pInput) {
-        Matcher m = init(pPattern, pInput);
+    public static String[] pregMatch(final Pattern pattern, final String input) {
+        Matcher m = init(pattern, input);
 
         if (m.find()) {
             int length = m.groupCount() + 1;
@@ -41,24 +41,24 @@ public final class Regex {
     /**
      * Tries to match the regex and the input.
      *
-     * @param pPattern The compiled pattern
-     * @param pInput   the input to test.
+     * @param pattern The compiled pattern
+     * @param input   the input to test.
      * @return true if the input matches the regex.
      */
-    public static boolean find(final Pattern pPattern, final String pInput) {
-        Matcher m = init(pPattern, pInput);
+    public static boolean find(final Pattern pattern, final String input) {
+        Matcher m = init(pattern, input);
         return m.find();
     }
 
     /**
      * Returns the subsequence captured if the regex and the input matches.
      *
-     * @param pPattern The compiled pattern.
-     * @param pInput   The input string
+     * @param pattern The compiled pattern.
+     * @param input   The input string
      * @return the finding string.
      */
-    public static String findString(final Pattern pPattern, final String pInput) {
-        Matcher m = init(pPattern, pInput);
+    public static String findString(final Pattern pattern, final String input) {
+        Matcher m = init(pattern, input);
         if (m.find()) {
             return m.group(1);
         }
@@ -68,23 +68,23 @@ public final class Regex {
     /**
      * Initiates and returns a matcher of the compiled pattern.
      *
-     * @param pPattern the compiled pattern regex.
-     * @param pInput   the input to test.
+     * @param pattern the compiled pattern regex.
+     * @param input   the input to test.
      * @return the initiated matcher.
      */
-    private static Matcher init(final Pattern pPattern, final String pInput) {
-        return pPattern.matcher(pInput);
+    private static Matcher init(final Pattern pattern, final String input) {
+        return pattern.matcher(input);
     }
 
     /**
      * Checks if the input matches the regex.
      *
-     * @param pPattern the compiled pattern regex.
-     * @param pInput   the input to test
+     * @param pattern the compiled pattern regex.
+     * @param input   the input to test
      * @return true if the input matches the regex.
      */
-    public static boolean match(final Pattern pPattern, final String pInput) {
-        Matcher m = init(pPattern, pInput);
+    public static boolean match(final Pattern pattern, final String input) {
+        Matcher m = init(pattern, input);
         return m.matches();
     }
 }

@@ -34,28 +34,28 @@ public final class Messages {
     /**
      * Sets the locale of the bundle.
      *
-     * @param pLocale the locale to set.
+     * @param locale the locale to set.
      */
-    public void setLocale(final Locale pLocale) {
-        Locale.setDefault(pLocale);
+    public void setLocale(final Locale locale) {
+        Locale.setDefault(locale);
         ResourceBundle.clearCache();
-        fResourceBundle = ResourceBundle.getBundle(BUNDLE_NAME, pLocale);
+        fResourceBundle = ResourceBundle.getBundle(BUNDLE_NAME, locale);
     }
 
     /**
-     * @param pString the string to get
-     * @return the translation of pString
+     * @param message the string to get
+     * @return the translation of message
      */
-    public String getString(final String pString) {
-        return fResourceBundle.getString(pString);
+    public String getString(final String message) {
+        return fResourceBundle.getString(message);
     }
 
     /**
-     * @param pString    the translation to get
-     * @param pArguments the arguments to fill
-     * @return the translation of pString with the arguments.
+     * @param message   the translation to get
+     * @param arguments the arguments to fill
+     * @return the translation of ;essqge with the arguments.
      */
-    public String getString(final String pString, final Object... pArguments) {
-        return MessageFormat.format(getString(pString), pArguments);
+    public String getString(final String message, final Object... arguments) {
+        return MessageFormat.format(getString(message), arguments);
     }
 }
