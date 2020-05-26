@@ -37,6 +37,7 @@ public class DegreesToDirectionTest {
             {"Converter.VRB","anyString"}
         });
     }
+
     @Test
     public void testDegreesToDirection() {
         assertEquals(Messages.getInstance().getString(direction), Converter.degreesToDirection(degrees));

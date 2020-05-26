@@ -17,7 +17,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 public class ArchitectureTest {
 
     @ArchTest
-    public static final ArchRule dependencyRule =  classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("java.util..", "java.text..");
+    public static final ArchRule dependencyRule = classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("java.util..", "java.text..");
 
 }
 

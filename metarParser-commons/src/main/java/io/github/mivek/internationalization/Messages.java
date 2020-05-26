@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 /**
  * Messages class for internationalization.
+ *
  * @author mivek
  */
 public final class Messages {
@@ -15,6 +16,7 @@ public final class Messages {
     private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
     /** Bundle variable. */
     private ResourceBundle fResourceBundle;
+
     /**
      * Private constructor.
      */
@@ -28,8 +30,10 @@ public final class Messages {
     public static Messages getInstance() {
         return INSTANCE;
     }
+
     /**
      * Sets the locale of the bundle.
+     *
      * @param pLocale the locale to set.
      */
     public void setLocale(final Locale pLocale) {
@@ -37,7 +41,6 @@ public final class Messages {
         ResourceBundle.clearCache();
         fResourceBundle = ResourceBundle.getBundle(BUNDLE_NAME, pLocale);
     }
-
 
     /**
      * @param pString the string to get
@@ -48,7 +51,7 @@ public final class Messages {
     }
 
     /**
-     * @param pString the translation to get
+     * @param pString    the translation to get
      * @param pArguments the arguments to fill
      * @return the translation of pString with the arguments.
      */

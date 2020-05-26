@@ -46,7 +46,7 @@ public class RegexTest {
     public void testMatch() {
         Pattern regex = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)?");
 
-        assertTrue(Regex.match(regex,"12012MPS"));
+        assertTrue(Regex.match(regex, "12012MPS"));
     }
 
     @Test

@@ -6,6 +6,7 @@ import java.time.LocalTime;
 
 /**
  * This class is used to convert data.
+ *
  * @author mivek
  */
 public final class Converter {
@@ -35,6 +36,7 @@ public final class Converter {
 
     /**
      * This method converter degrees to direction.
+     *
      * @param pDegreesStr a string representing the degrees.
      * @return A string for the direction.
      */
@@ -73,12 +75,10 @@ public final class Converter {
 
     /**
      * Checks if num is between lower and max.
-     * @param pNum
-     * double to test
-     * @param pLower
-     * the minimum value, included.
-     * @param pMax
-     * The maximum value, exluded.
+     *
+     * @param pNum   double to test
+     * @param pLower the minimum value, included.
+     * @param pMax   The maximum value, exluded.
      * @return true if num is between lower and max, false otherwise.
      */
     static boolean isBetween(final double pNum, final double pLower, final double pMax) {
@@ -87,8 +87,8 @@ public final class Converter {
 
     /**
      * Converts a string representing the visibility into a real visibility.
-     * @param pInput
-     * A string.
+     *
+     * @param pInput A string.
      * @return a string correctly formatted.
      */
     public static String convertVisibility(final String pInput) {
@@ -101,6 +101,7 @@ public final class Converter {
 
     /**
      * Converts the metar part of temperature into integer.
+     *
      * @param pInput The metar part of the temperature.
      * @return an integer of the temperature.
      */
@@ -114,6 +115,7 @@ public final class Converter {
 
     /**
      * Converts the trend of clouds.
+     *
      * @param pInput Single character string representing the trend.
      * @return The signification of the single caracter.
      */
@@ -130,6 +132,7 @@ public final class Converter {
 
     /**
      * Converts inches of mercury pressure into hecto pascals.
+     *
      * @param pInchesMercury string of mercury.
      * @return double of the pressure in Pascals.
      */
@@ -140,6 +143,7 @@ public final class Converter {
     /**
      * Converts a string representing a time to a LocalTime.
      * Eg: "0830" returns a LocalTime of 08:30.
+     *
      * @param pInput the string to convert.
      * @return the corresponding time.
      */
