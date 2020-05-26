@@ -14,7 +14,14 @@ public final class MainVisibilityCommand implements Command {
     /** Pattern for the main visibility. */
     private static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$");
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    /**
+     * constructor.
+     */
+    MainVisibilityCommand() {
+    }
+
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         String[] matches = Regex.pregMatch(MAIN_VISIBILITY_REGEX, pPart);
         if (pContainer.getVisibility() == null) {
             pContainer.setVisibility(new Visibility());
@@ -23,7 +30,8 @@ public final class MainVisibilityCommand implements Command {
         return getReturnValue();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(MAIN_VISIBILITY_REGEX, pInput);
     }
 }

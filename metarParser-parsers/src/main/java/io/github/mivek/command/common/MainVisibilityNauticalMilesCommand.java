@@ -13,8 +13,14 @@ public final class MainVisibilityNauticalMilesCommand implements Command {
     /** Pattern for the main visibility in SM. */
     private static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^(\\d)*(\\s)?((\\d\\/\\d)?SM)$");
 
+    /**
+     * constructor.
+     */
+    MainVisibilityNauticalMilesCommand() {
+    }
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         String[] matches = Regex.pregMatch(MAIN_VISIBILITY_SM_REGEX, pPart);
         if (pContainer.getVisibility() == null) {
             pContainer.setVisibility(new Visibility());
@@ -23,7 +29,8 @@ public final class MainVisibilityNauticalMilesCommand implements Command {
         return getReturnValue();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(MAIN_VISIBILITY_SM_REGEX, pInput);
     }
 }

@@ -12,14 +12,22 @@ public final class MinimalVisibilityCommand implements Command {
     /** Pattern for the minimum visibility. */
     public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[a-z])$");
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    /**
+     * Protected constructor.
+     */
+    MinimalVisibilityCommand() {
+    }
+
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, pPart);
         pContainer.getVisibility().setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
         pContainer.getVisibility().setMinDirection(matches[1].substring(4));
         return getReturnValue();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(MIN_VISIBILITY_REGEX, pInput);
     }
 }

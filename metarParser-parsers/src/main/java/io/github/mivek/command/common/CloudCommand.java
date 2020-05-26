@@ -15,7 +15,14 @@ public final class CloudCommand implements Command {
     /** Pattern to recognize clouds. */
     private static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    /**
+     * constructor.
+     */
+    CloudCommand() {
+    }
+
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         Cloud c = parseCloud(pPart);
         return pContainer.addCloud(c);
     }
@@ -45,7 +52,8 @@ public final class CloudCommand implements Command {
         }
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(CLOUD_REGEX, pInput);
     }
 }

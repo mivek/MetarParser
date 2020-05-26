@@ -13,7 +13,14 @@ public final class WindShearCommand implements BaseWindCommand {
     /** Pattern regex for windshear. */
     private static final Pattern WIND_SHEAR_REGEX = Pattern.compile("WS(\\d{3})\\/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)");
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    /**
+     * Package private constructor.
+     */
+    WindShearCommand() {
+    }
+
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         WindShear windShear = parseWindShear(pPart);
         pContainer.setWindShear(windShear);
         return getReturnValue();
@@ -33,7 +40,8 @@ public final class WindShearCommand implements BaseWindCommand {
         return wind;
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(WIND_SHEAR_REGEX, pInput);
     }
 }

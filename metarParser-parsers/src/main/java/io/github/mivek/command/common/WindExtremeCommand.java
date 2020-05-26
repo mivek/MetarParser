@@ -13,7 +13,14 @@ public final class WindExtremeCommand implements Command {
     /** Pattern regex for extreme winds. */
     private static final Pattern WIND_EXTREME_REGEX = Pattern.compile("^(\\d{3})V(\\d{3})");
 
-    @Override public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
+    /**
+     * Protected constructor.
+     */
+    WindExtremeCommand() {
+    }
+
+    @Override
+    public boolean execute(final AbstractWeatherContainer pContainer, final String pPart) {
         parseExtremeWind(pContainer.getWind(), pPart);
         return getReturnValue();
     }
@@ -30,7 +37,8 @@ public final class WindExtremeCommand implements Command {
         pWind.setExtreme2(Integer.parseInt(matches[2]));
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(WIND_EXTREME_REGEX, pInput);
     }
 }
