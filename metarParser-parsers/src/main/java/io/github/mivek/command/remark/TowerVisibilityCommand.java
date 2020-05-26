@@ -13,22 +13,24 @@ public final class TowerVisibilityCommand implements Command {
     private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?/?\\d))");
 
     /** The messages instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     TowerVisibilityCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] towerVisibilityParts = Regex.pregMatch(TOWER_VISIBILITY, pRemark);
-        pStringBuilder.append(fMessages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Tower.Visibility", towerVisibilityParts[1])).append(" ");
         return pRemark.replaceFirst(TOWER_VISIBILITY.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(TOWER_VISIBILITY, pInput);
     }
 }

@@ -13,22 +13,24 @@ public final class SnowIncreaseCommand implements Command {
     private static final Pattern SNOW_INCR_RAPIDLY = Pattern.compile("^SNINCR (\\d+)/(\\d+)");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     SnowIncreaseCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] snowParts = Regex.pregMatch(SNOW_INCR_RAPIDLY, pRemark);
-        pStringBuilder.append(fMessages.getString("Remark.Snow.Increasing.Rapidly", snowParts[1], snowParts[2])).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Snow.Increasing.Rapidly", snowParts[1], snowParts[2])).append(" ");
         return pRemark.replaceFirst(SNOW_INCR_RAPIDLY.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(SNOW_INCR_RAPIDLY, pInput);
     }
 }

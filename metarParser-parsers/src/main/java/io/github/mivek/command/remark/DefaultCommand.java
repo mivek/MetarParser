@@ -13,16 +13,17 @@ public final class DefaultCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(DefaultCommand.class.getName());
 
     /** Message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Constructor.
      */
     DefaultCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return true;
     }
 
@@ -33,12 +34,13 @@ public final class DefaultCommand implements Command {
      * @param pStringBuilder The string builder containing the parsed message of the remark
      * @return the remark string.
      */
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String rmk = pRemark;
         String[] strSlit = rmk.split(" ", 2);
         String token = strSlit[0];
         try {
-            token = fMessages.getString("Remark." + token);
+            token = messages.getString("Remark." + token);
         } catch (MissingResourceException e) {
             LOGGER.info("Remark token \"" + token + "\" is unknown.");
         }

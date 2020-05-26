@@ -13,24 +13,26 @@ public final class TornadicActivityEndCommand implements Command {
     private static final Pattern TORNADIC_ACTIVITY_ENDING = Pattern.compile("^(TORNADO|FUNNEL CLOUD|WATERSPOUT) (E(\\d{2})?(\\d{2}))( (\\d+)? ([A-Z]{1,2})?)?");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     TornadicActivityEndCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] tornadicParts = Regex.pregMatch(TORNADIC_ACTIVITY_ENDING, pRemark);
-        pStringBuilder.append(fMessages
-                .getString("Remark.Tornadic.Activity.Ending", fMessages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6],
-                        fMessages.getString("Converter." + tornadicParts[7]))).append(" ");
+        pStringBuilder.append(messages
+                .getString("Remark.Tornadic.Activity.Ending", messages.getString("Remark." + tornadicParts[1].replace(" ", "")), verifyString(tornadicParts[3]), tornadicParts[4], tornadicParts[6],
+                        messages.getString("Converter." + tornadicParts[7]))).append(" ");
         return pRemark.replaceFirst(TORNADIC_ACTIVITY_ENDING.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(TORNADIC_ACTIVITY_ENDING, pInput);
     }
 }

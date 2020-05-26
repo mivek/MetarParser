@@ -13,22 +13,24 @@ public final class VirgaDirectionCommand implements Command {
     private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     VirgaDirectionCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] virgaDirection = Regex.pregMatch(VIRGA_DIRECTION, pRemark);
-        pStringBuilder.append(fMessages.getString("Remark.Virga.Direction", fMessages.getString("Converter." + virgaDirection[1]))).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Virga.Direction", messages.getString("Converter." + virgaDirection[1]))).append(" ");
         return pRemark.replaceFirst(VIRGA_DIRECTION.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(VIRGA_DIRECTION, pInput);
     }
 }

@@ -13,24 +13,26 @@ public final class CeilingHeightCommand implements Command {
     private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     CeilingHeightCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] ceilingParts = Regex.pregMatch(CEILING_HEIGHT, pRemark);
         int min = Integer.parseInt(ceilingParts[1]) * 100;
         int max = Integer.parseInt(ceilingParts[2]) * 100;
-        pStringBuilder.append(fMessages.getString("Remark.Ceiling.Height", min, max)).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Ceiling.Height", min, max)).append(" ");
         return pRemark.replaceFirst(CEILING_HEIGHT.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(CEILING_HEIGHT, pInput);
     }
 }

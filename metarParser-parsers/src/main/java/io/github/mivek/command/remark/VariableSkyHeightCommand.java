@@ -13,25 +13,27 @@ public final class VariableSkyHeightCommand implements Command {
     private static final Pattern VARIABLE_SKY_HEIGHT = Pattern.compile("^([A-Z]{3})(\\d{3}) V ([A-Z]{3})");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     VariableSkyHeightCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] variableSky = Regex.pregMatch(VARIABLE_SKY_HEIGHT, pRemark);
-        String layer1 = fMessages.getString("CloudQuantity." + variableSky[1]);
+        String layer1 = messages.getString("CloudQuantity." + variableSky[1]);
         int height = Integer.parseInt(variableSky[2]) * 100;
-        String layer2 = fMessages.getString("CloudQuantity." + variableSky[3]);
-        pStringBuilder.append(fMessages.getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
+        String layer2 = messages.getString("CloudQuantity." + variableSky[3]);
+        pStringBuilder.append(messages.getString("Remark.Variable.Sky.Condition.Height", height, layer1, layer2)).append(" ");
         return pRemark.replaceFirst(VARIABLE_SKY_HEIGHT.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(VARIABLE_SKY_HEIGHT, pInput);
     }
 }

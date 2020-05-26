@@ -13,24 +13,26 @@ public final class ThunderStormLocationMovingCommand implements Command {
     private static final Pattern THUNDERSTORM_LOCATION_MOVING = Pattern.compile("^TS ([A-Z]{2}) MOV ([A-Z]{2})");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     ThunderStormLocationMovingCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] thunderStormParts = Regex.pregMatch(THUNDERSTORM_LOCATION_MOVING, pRemark);
         pStringBuilder
-                .append(fMessages.getString("Remark.Thunderstorm.Location.Moving", fMessages.getString("Converter." + thunderStormParts[1]), fMessages.getString("Converter." + thunderStormParts[2])))
+                .append(messages.getString("Remark.Thunderstorm.Location.Moving", messages.getString("Converter." + thunderStormParts[1]), messages.getString("Converter." + thunderStormParts[2])))
                 .append(" ");
         return pRemark.replaceFirst(THUNDERSTORM_LOCATION_MOVING.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(THUNDERSTORM_LOCATION_MOVING, pInput);
     }
 }

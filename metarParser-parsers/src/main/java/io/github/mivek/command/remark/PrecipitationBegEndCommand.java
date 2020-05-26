@@ -13,24 +13,26 @@ public final class PrecipitationBegEndCommand implements Command {
     private static final Pattern PRECIPITATION_BEG_END = Pattern.compile("^(([A-Z]{2})?([A-Z]{2})B(\\d{2})?(\\d{2})E(\\d{2})?(\\d{2}))");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     PrecipitationBegEndCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] precipitationBegEnd = Regex.pregMatch(PRECIPITATION_BEG_END, pRemark);
-        pStringBuilder.append(fMessages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : fMessages.getString("Descriptive." + precipitationBegEnd[2]),
-                fMessages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5], verifyString(precipitationBegEnd[6]),
-                precipitationBegEnd[7])).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Precipitation.Beg.End", precipitationBegEnd[2] == null ? "" : messages.getString("Descriptive." + precipitationBegEnd[2]),
+                messages.getString("Phenomenon." + precipitationBegEnd[3]), verifyString(precipitationBegEnd[4]), precipitationBegEnd[5], verifyString(precipitationBegEnd[6]), precipitationBegEnd[7]))
+                .append(" ");
         return pRemark.replaceFirst(PRECIPITATION_BEG_END.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(PRECIPITATION_BEG_END, pInput);
     }
 }

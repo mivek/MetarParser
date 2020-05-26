@@ -13,16 +13,17 @@ public final class SeaLevelPressureCommand implements Command {
     private static final Pattern SEAL_LEVEL_PRESSURE = Pattern.compile("^SLP(\\d{2})(\\d)");
 
     /** The message instance. */
-    private final Messages fMessages;
+    private final Messages messages;
 
     /**
      * Default constructor.
      */
     SeaLevelPressureCommand() {
-        fMessages = Messages.getInstance();
+        messages = Messages.getInstance();
     }
 
-    @Override public String execute(final String pRemark, final StringBuilder pStringBuilder) {
+    @Override
+    public String execute(final String pRemark, final StringBuilder pStringBuilder) {
         String[] sealevelParts = Regex.pregMatch(SEAL_LEVEL_PRESSURE, pRemark);
         StringBuilder pressure = new StringBuilder();
         if (sealevelParts[1].startsWith("9")) {
@@ -31,11 +32,12 @@ public final class SeaLevelPressureCommand implements Command {
             pressure.append("10");
         }
         pressure.append(sealevelParts[1]).append(".").append(sealevelParts[2]);
-        pStringBuilder.append(fMessages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
+        pStringBuilder.append(messages.getString("Remark.Sea.Level.Pressure", pressure)).append(" ");
         return pRemark.replaceFirst(SEAL_LEVEL_PRESSURE.pattern(), "").trim();
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(SEAL_LEVEL_PRESSURE, pInput);
     }
 }
