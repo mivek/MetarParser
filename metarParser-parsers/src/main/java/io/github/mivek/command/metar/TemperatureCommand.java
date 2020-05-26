@@ -13,13 +13,21 @@ public final class TemperatureCommand implements Command {
     /** Pattern of the temperature block. */
     private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(M?\\d{2})/(M?\\d{2})$");
 
-    @Override public void execute(final Metar pMetar, final String pPart) {
+    /**
+     * Package private constructor.
+     */
+    TemperatureCommand() {
+    }
+
+    @Override
+    public void execute(final Metar pMetar, final String pPart) {
         String[] matches = Regex.pregMatch(TEMPERATURE_REGEX, pPart);
         pMetar.setTemperature(Converter.convertTemperature(matches[1]));
         pMetar.setDewPoint(Converter.convertTemperature(matches[2]));
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(TEMPERATURE_REGEX, pInput);
     }
 }

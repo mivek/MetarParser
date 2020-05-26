@@ -19,7 +19,8 @@ public final class MetarParserCommandSupplier implements Supplier<Command> {
         commands = buildCommandList();
     }
 
-    @Override public Command get(final String pString) {
+    @Override
+    public Command get(final String pString) {
         for (Command command : commands) {
             if (command.canParse(pString)) {
                 return command;

@@ -14,13 +14,21 @@ public final class AltimeterMecuryCommand implements Command {
     /** Pattern for the altimeter in inches of mercury. */
     private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
 
-    @Override public void execute(final Metar pMetar, final String pPart) {
+    /**
+     * Package private constructor.
+     */
+    AltimeterMecuryCommand() {
+    }
+
+    @Override
+    public void execute(final Metar pMetar, final String pPart) {
         String[] matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, pPart);
         double mercury = Double.parseDouble(matches[1]) / 100;
         pMetar.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(ALTIMETER_MERCURY_REGEX, pInput);
     }
 }

@@ -19,7 +19,14 @@ public final class RunwayCommand implements Command {
     /** Pattern regex for runway visibility. */
     private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\w)?(\\d{4})(\\w{0,2})$");
 
-    @Override public void execute(final Metar pMetar, final String pPart) {
+    /**
+     * Package private constructor.
+     */
+    RunwayCommand() {
+    }
+
+    @Override
+    public void execute(final Metar pMetar, final String pPart) {
         RunwayInfo ri = new RunwayInfo();
         String[] matches = Regex.pregMatch(RUNWAY_REGEX, pPart);
         if (ArrayUtils.isNotEmpty(matches)) {
@@ -38,7 +45,8 @@ public final class RunwayCommand implements Command {
         }
     }
 
-    @Override public boolean canParse(final String pInput) {
+    @Override
+    public boolean canParse(final String pInput) {
         return Regex.find(GENERIC_RUNWAY_REGEX, pInput);
     }
 }
