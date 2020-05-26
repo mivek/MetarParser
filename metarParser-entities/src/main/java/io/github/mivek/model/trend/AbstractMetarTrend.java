@@ -21,10 +21,10 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
     /**
      * Constructor.
      *
-     * @param pType the WeatherChangeType to set.
+     * @param type the WeatherChangeType to set.
      */
-    protected AbstractMetarTrend(final WeatherChangeType pType) {
-        super(pType);
+    protected AbstractMetarTrend(final WeatherChangeType type) {
+        super(type);
         times = new ArrayList<>();
     }
 
@@ -38,10 +38,10 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
     /**
      * Adds a AbstractMetarTrendTime to the list.
      *
-     * @param pTime the element to add.
+     * @param time the element to add.
      */
-    public void addTime(final AbstractMetarTrendTime pTime) {
-        times.add(pTime);
+    public void addTime(final AbstractMetarTrendTime time) {
+        times.add(time);
     }
 
     /**

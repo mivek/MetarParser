@@ -31,10 +31,10 @@ public class Cloud {
     /**
      * Setter of the height (unit: feet).
      *
-     * @param pHeight The height to set.
+     * @param height The height to set.
      */
-    public void setHeight(final int pHeight) {
-        height = pHeight;
+    public void setHeight(final int height) {
+        this.height = height;
     }
 
     /**
@@ -49,10 +49,10 @@ public class Cloud {
     /**
      * Setter of CloudQuantity.
      *
-     * @param pQuantity The CloudQuantity to set.
+     * @param quantity The CloudQuantity to set.
      */
-    public void setQuantity(final CloudQuantity pQuantity) {
-        quantity = pQuantity;
+    public void setQuantity(final CloudQuantity quantity) {
+        this.quantity = quantity;
     }
 
     /**
@@ -67,10 +67,10 @@ public class Cloud {
     /**
      * Setter of cloud type.
      *
-     * @param pType The CloudType to set.
+     * @param type The CloudType to set.
      */
-    public void setType(final CloudType pType) {
-        type = pType;
+    public void setType(final CloudType type) {
+        this.type = type;
     }
 
     @Override

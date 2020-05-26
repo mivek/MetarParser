@@ -24,10 +24,10 @@ public class TemperatureDated {
     }
 
     /**
-     * @param pTemperature the temperature to set
+     * @param temperature the temperature to set
      */
-    public void setTemperature(final Integer pTemperature) {
-        temperature = pTemperature;
+    public void setTemperature(final Integer temperature) {
+        this.temperature = temperature;
     }
 
     /**
@@ -38,10 +38,10 @@ public class TemperatureDated {
     }
 
     /**
-     * @param pDay the day to set
+     * @param day the day to set
      */
-    public void setDay(final Integer pDay) {
-        day = pDay;
+    public void setDay(final Integer day) {
+        this.day = day;
     }
 
     /**
@@ -52,10 +52,10 @@ public class TemperatureDated {
     }
 
     /**
-     * @param pHour the hour to set
+     * @param hour the hour to set
      */
-    public void setHour(final Integer pHour) {
-        hour = pHour;
+    public void setHour(final Integer hour) {
+        this.hour = hour;
     }
 
     @Override

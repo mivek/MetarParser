@@ -16,10 +16,10 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
     /**
      * Constructor.
      *
-     * @param pType the type of the trend.
+     * @param type the type of the trend.
      */
-    protected AbstractTrend(final WeatherChangeType pType) {
-        type = pType;
+    protected AbstractTrend(final WeatherChangeType type) {
+        this.type = type;
     }
 
     /**

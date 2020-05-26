@@ -46,10 +46,10 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @param pTemperature the temperature to set
+     * @param temperature the temperature to set
      */
-    public void setTemperature(final Integer pTemperature) {
-        temperature = pTemperature;
+    public void setTemperature(final Integer temperature) {
+        this.temperature = temperature;
     }
 
     /**
@@ -60,10 +60,10 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @param pDewPoint the dewPoint to set
+     * @param dewPoint the dewPoint to set
      */
-    public void setDewPoint(final Integer pDewPoint) {
-        dewPoint = pDewPoint;
+    public void setDewPoint(final Integer dewPoint) {
+        this.dewPoint = dewPoint;
     }
 
     /**
@@ -74,10 +74,10 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @param pAltimeter the altimeter to set
+     * @param altimeter the altimeter to set
      */
-    public void setAltimeter(final Integer pAltimeter) {
-        altimeter = pAltimeter;
+    public void setAltimeter(final Integer altimeter) {
+        this.altimeter = altimeter;
     }
 
     /**
@@ -90,10 +90,10 @@ public class Metar extends AbstractWeatherCode {
     /**
      * Adds a runway to the list.
      *
-     * @param pRunwayInformation the runway to add.
+     * @param runwayInformation the runway to add.
      */
-    public void addRunwayInfo(final RunwayInfo pRunwayInformation) {
-        runways.add(pRunwayInformation);
+    public void addRunwayInfo(final RunwayInfo runwayInformation) {
+        runways.add(runwayInformation);
     }
 
     /**
@@ -104,10 +104,10 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @param pNosig the nosig to set
+     * @param nosig the nosig to set
      */
-    public void setNosig(final boolean pNosig) {
-        nosig = pNosig;
+    public void setNosig(final boolean nosig) {
+        this.nosig = nosig;
     }
 
     /**
@@ -118,19 +118,19 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @param pAuto the auto to set
+     * @param auto the auto to set
      */
-    public void setAuto(final boolean pAuto) {
-        auto = pAuto;
+    public void setAuto(final boolean auto) {
+        this.auto = auto;
     }
 
     /**
      * Adds a trend to the list.
      *
-     * @param pTrend the trend to add.
+     * @param trend the trend to add.
      */
-    public void addTrend(final AbstractMetarTrend pTrend) {
-        trends.add(Validate.notNull(pTrend));
+    public void addTrend(final AbstractMetarTrend trend) {
+        trends.add(Validate.notNull(trend));
     }
 
     /**

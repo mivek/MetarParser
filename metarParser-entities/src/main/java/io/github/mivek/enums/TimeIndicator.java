@@ -27,12 +27,12 @@ public enum TimeIndicator {
     /**
      * Constructor.
      *
-     * @param pShortCut the shortcut of the indicator.
-     * @param pName     the name of the indicator.
+     * @param shortCut the shortcut of the indicator.
+     * @param name     the name of the indicator.
      */
-    TimeIndicator(final String pShortCut, final String pName) {
-        shortCut = pShortCut;
-        name = pName;
+    TimeIndicator(final String shortCut, final String name) {
+        this.shortCut = shortCut;
+        this.name = name;
     }
 
     /**

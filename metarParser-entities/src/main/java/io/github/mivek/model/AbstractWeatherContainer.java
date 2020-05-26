@@ -43,10 +43,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pWind the wind element to set.
+     * @param wind the wind element to set.
      */
-    public final void setWind(final Wind pWind) {
-        wind = pWind;
+    public final void setWind(final Wind wind) {
+        this.wind = wind;
     }
 
     /**
@@ -57,10 +57,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pVisibility the visibility to set
+     * @param visibility the visibility to set
      */
-    public final void setVisibility(final Visibility pVisibility) {
-        visibility = pVisibility;
+    public final void setVisibility(final Visibility visibility) {
+        this.visibility = visibility;
     }
 
     /**
@@ -80,29 +80,29 @@ public abstract class AbstractWeatherContainer {
     /**
      * Adds a cloud to the list.
      *
-     * @param pCloud the cloud to add.
+     * @param cloud the cloud to add.
      * @return true if the cloud has been added in the list, false otherwise.
      */
-    public boolean addCloud(final Cloud pCloud) {
-        if (pCloud == null) {
+    public boolean addCloud(final Cloud cloud) {
+        if (cloud == null) {
             return false;
         }
-        clouds.add(pCloud);
+        clouds.add(cloud);
         return true;
     }
 
     /**
      * Adds a weather condition to the list.
      *
-     * @param pWeatherCondition the weather condition to add.
+     * @param weatherCondition the weather condition to add.
      * @return true if the weather condition has been added to the list, false
      * otherwise.
      */
-    public boolean addWeatherCondition(final WeatherCondition pWeatherCondition) {
-        if (pWeatherCondition == null) {
+    public boolean addWeatherCondition(final WeatherCondition weatherCondition) {
+        if (weatherCondition == null) {
             return false;
         }
-        weatherConditions.add(pWeatherCondition);
+        weatherConditions.add(weatherCondition);
         return true;
     }
 
@@ -114,10 +114,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pVerticalVisibility the verticalVisibility to set
+     * @param verticalVisibility the verticalVisibility to set
      */
-    public void setVerticalVisibility(final Integer pVerticalVisibility) {
-        verticalVisibility = pVerticalVisibility;
+    public void setVerticalVisibility(final Integer verticalVisibility) {
+        this.verticalVisibility = verticalVisibility;
     }
 
     /**
@@ -128,10 +128,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pWindShear the windShear to set
+     * @param windShear the windShear to set
      */
-    public void setWindShear(final WindShear pWindShear) {
-        windShear = pWindShear;
+    public void setWindShear(final WindShear windShear) {
+        this.windShear = windShear;
     }
 
     /**
@@ -142,10 +142,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pCavok the cavok to set
+     * @param cavok the cavok to set
      */
-    public void setCavok(final boolean pCavok) {
-        cavok = pCavok;
+    public void setCavok(final boolean cavok) {
+        this.cavok = cavok;
     }
 
     /**
@@ -156,10 +156,10 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @param pRemark the remark to set
+     * @param remark the remark to set
      */
-    public void setRemark(final String pRemark) {
-        remark = pRemark;
+    public void setRemark(final String remark) {
+        this.remark = remark;
     }
 
     /**

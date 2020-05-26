@@ -28,10 +28,10 @@ public class Visibility {
     /**
      * Setter of the main visibility.
      *
-     * @param pMainVisibility the main visibility to set.
+     * @param mainVisibility the main visibility to set.
      */
-    public void setMainVisibility(final String pMainVisibility) {
-        mainVisibility = pMainVisibility;
+    public void setMainVisibility(final String mainVisibility) {
+        this.mainVisibility = mainVisibility;
     }
 
     /**
@@ -46,10 +46,10 @@ public class Visibility {
     /**
      * Setter of the minimal visibility.
      *
-     * @param pMinVisibility the minimal visibility to set.
+     * @param minVisibility the minimal visibility to set.
      */
-    public void setMinVisibility(final int pMinVisibility) {
-        minVisibility = pMinVisibility;
+    public void setMinVisibility(final int minVisibility) {
+        this.minVisibility = minVisibility;
     }
 
     /**
@@ -64,10 +64,10 @@ public class Visibility {
     /**
      * Setter of the minimal direction.
      *
-     * @param pMinDirection the minimal direction to set.
+     * @param minDirection the minimal direction to set.
      */
-    public void setMinDirection(final String pMinDirection) {
-        minDirection = pMinDirection;
+    public void setMinDirection(final String minDirection) {
+        this.minDirection = minDirection;
     }
 
     @Override

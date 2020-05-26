@@ -25,12 +25,12 @@ public enum Intensity {
     /**
      * Constructor.
      *
-     * @param pShortcut A String for the shortcut.
-     * @param pName     A string for the meaning.
+     * @param shortcut A String for the shortcut.
+     * @param name     A string for the meaning.
      */
-    Intensity(final String pShortcut, final String pName) {
-        shortcut = pShortcut;
-        name = pName;
+    Intensity(final String shortcut, final String name) {
+        this.shortcut = shortcut;
+        this.name = name;
     }
 
     @Override
@@ -50,13 +50,13 @@ public enum Intensity {
     /**
      * Returns the enum with the same shortcut than the value.
      *
-     * @param pValue String of the intensity searched.
+     * @param value String of the intensity searched.
      * @return a intensity with the same shortcut.
      * @throws IllegalArgumentException error if not found.
      */
-    public static Intensity getEnum(final String pValue) {
+    public static Intensity getEnum(final String value) {
         for (Intensity v : values()) {
-            if (v.getShortcut().equalsIgnoreCase(pValue)) {
+            if (v.getShortcut().equalsIgnoreCase(value)) {
                 return v;
             }
         }

@@ -24,8 +24,8 @@ public abstract class AbstractValidity implements IValidity {
     }
 
     @Override
-    public final void setStartDay(final Integer pStartDay) {
-        startDay = pStartDay;
+    public final void setStartDay(final Integer startDay) {
+        this.startDay = startDay;
     }
 
     @Override
@@ -34,8 +34,8 @@ public abstract class AbstractValidity implements IValidity {
     }
 
     @Override
-    public final void setStartHour(final Integer pStartHour) {
-        startHour = pStartHour;
+    public final void setStartHour(final Integer startHour) {
+        this.startHour = startHour;
     }
 
     /**

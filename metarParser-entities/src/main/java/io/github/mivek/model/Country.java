@@ -23,10 +23,10 @@ public class Country {
     /**
      * Setter of name.
      *
-     * @param pName the name to set.
+     * @param name the name to set.
      */
-    public void setName(final String pName) {
-        name = pName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     @Override

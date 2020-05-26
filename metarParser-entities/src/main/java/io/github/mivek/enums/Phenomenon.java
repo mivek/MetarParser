@@ -63,12 +63,12 @@ public enum Phenomenon {
     /**
      * Constructor.
      *
-     * @param pShortcut string for the shortcut.
-     * @param pName     string for the name.
+     * @param shortcut string for the shortcut.
+     * @param name     string for the name.
      */
-    Phenomenon(final String pShortcut, final String pName) {
-        shortcut = pShortcut;
-        name = pName;
+    Phenomenon(final String shortcut, final String name) {
+        this.shortcut = shortcut;
+        this.name = name;
     }
 
     @Override

@@ -40,12 +40,12 @@ public enum CloudType {
     /**
      * Constructor.
      *
-     * @param pShortcut string for shortcut.
-     * @param pName     string for name.
+     * @param shortcut string for shortcut.
+     * @param name     string for name.
      */
-    CloudType(final String pShortcut, final String pName) {
-        shortcut = pShortcut;
-        name = pName;
+    CloudType(final String shortcut, final String name) {
+        this.shortcut = shortcut;
+        this.name = name;
     }
 
     @Override

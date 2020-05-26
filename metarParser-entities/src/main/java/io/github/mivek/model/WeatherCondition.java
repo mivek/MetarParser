@@ -41,10 +41,10 @@ public class WeatherCondition {
     /**
      * Setter of intensity.
      *
-     * @param pIntensity The intensity to set.
+     * @param intensity The intensity to set.
      */
-    public void setIntensity(final Intensity pIntensity) {
-        intensity = pIntensity;
+    public void setIntensity(final Intensity intensity) {
+        this.intensity = intensity;
     }
 
     /**
@@ -59,10 +59,10 @@ public class WeatherCondition {
     /**
      * Setter of the descriptive.
      *
-     * @param pDescriptive the descriptive to set.
+     * @param descriptive the descriptive to set.
      */
-    public void setDescriptive(final Descriptive pDescriptive) {
-        descriptive = pDescriptive;
+    public void setDescriptive(final Descriptive descriptive) {
+        this.descriptive = descriptive;
     }
 
     /**
@@ -77,10 +77,10 @@ public class WeatherCondition {
     /**
      * Adds a phenomenon to the list.
      *
-     * @param pPhenomenon The Phenomenon to add.
+     * @param phenomenon The Phenomenon to add.
      */
-    public void addPhenomenon(final Phenomenon pPhenomenon) {
-        phenomenons.add(pPhenomenon);
+    public void addPhenomenon(final Phenomenon phenomenon) {
+        phenomenons.add(phenomenon);
     }
 
     /**

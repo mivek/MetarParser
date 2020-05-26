@@ -23,10 +23,10 @@ public abstract class AbstractMetarTrendTime {
     /**
      * Constructor.
      *
-     * @param pType the type of trend.
+     * @param type the type of trend.
      */
-    protected AbstractMetarTrendTime(final TimeIndicator pType) {
-        this.type = pType;
+    protected AbstractMetarTrendTime(final TimeIndicator type) {
+        this.type = type;
     }
 
     /**
@@ -37,10 +37,10 @@ public abstract class AbstractMetarTrendTime {
     }
 
     /**
-     * @param pTime the time to set
+     * @param time the time to set
      */
-    public void setTime(final LocalTime pTime) {
-        time = Validate.notNull(pTime);
+    public void setTime(final LocalTime time) {
+        this.time = Validate.notNull(time);
     }
 
     /**

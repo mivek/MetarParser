@@ -18,9 +18,9 @@ public class Wind {
     /** The speed of the gust. */
     private int gust;
     /** The minimal variation of the wind. */
-    private int extreme1;
+    private int minVariation;
     /** The maximum variation of the wind. */
-    private int extreme2;
+    private int maxVariation;
     /** The unit of the speed. */
     private String unit;
 
@@ -36,10 +36,10 @@ public class Wind {
     /**
      * Setter of the speed.
      *
-     * @param pSpeed the speed to set.
+     * @param speed the speed to set.
      */
-    public void setSpeed(final int pSpeed) {
-        speed = pSpeed;
+    public void setSpeed(final int speed) {
+        this.speed = speed;
     }
 
     /**
@@ -54,10 +54,10 @@ public class Wind {
     /**
      * Setter of the direction of the wind.
      *
-     * @param pDirection the direction to set.
+     * @param direction the direction to set.
      */
-    public void setDirection(final String pDirection) {
-        direction = pDirection;
+    public void setDirection(final String direction) {
+        this.direction = direction;
     }
 
     /**
@@ -72,10 +72,10 @@ public class Wind {
     /**
      * Setter of the gust.
      *
-     * @param pGust the gust to set.
+     * @param gust the gust to set.
      */
-    public void setGust(final int pGust) {
-        gust = pGust;
+    public void setGust(final int gust) {
+        this.gust = gust;
     }
 
     /**
@@ -83,35 +83,29 @@ public class Wind {
      *
      * @return the minimal variation of the wind.
      */
-    public int getExtreme1() {
-        return extreme1;
+    public int getMinVariation() {
+        return minVariation;
     }
 
     /**
-     * Setter of extreme1.
-     *
-     * @param pExtreme1 the minimal wind variation to set.
+     * @param minVariation the minimal wind variation to set.
      */
-    public void setExtreme1(final int pExtreme1) {
-        extreme1 = pExtreme1;
+    public void setMinVariation(final int minVariation) {
+        this.minVariation = minVariation;
     }
 
     /**
-     * Getter of the maximal wind variation.
-     *
-     * @return the wind variation.
+     * @return the wind max variation.
      */
-    public int getExtreme2() {
-        return extreme2;
+    public int getMaxVariation() {
+        return maxVariation;
     }
 
     /**
-     * Setter.
-     *
-     * @param pExtreme2 the wind variation to set.
+     * @param maxVariation the wind max variation to set.
      */
-    public void setExtreme2(final int pExtreme2) {
-        extreme2 = pExtreme2;
+    public void setMaxVariation(final int maxVariation) {
+        this.maxVariation = maxVariation;
     }
 
     /**
@@ -126,10 +120,10 @@ public class Wind {
     /**
      * Setter.
      *
-     * @param pUnit The unit to set.
+     * @param unit The unit to set.
      */
-    public void setUnit(final String pUnit) {
-        unit = pUnit;
+    public void setUnit(final String unit) {
+        this.unit = unit;
     }
 
     /**
@@ -140,10 +134,10 @@ public class Wind {
     }
 
     /**
-     * @param pDirectionDegrees the directionDegrees to set.
+     * @param directionDegrees the directionDegrees to set.
      */
-    public void setDirectionDegrees(final Integer pDirectionDegrees) {
-        directionDegrees = pDirectionDegrees;
+    public void setDirectionDegrees(final Integer directionDegrees) {
+        this.directionDegrees = directionDegrees;
     }
 
     /**
@@ -157,8 +151,8 @@ public class Wind {
                 append(Messages.getInstance().getString("ToString.wind.direction"), direction).
                 append(Messages.getInstance().getString("ToString.wind.direction.degrees"), directionDegrees).
                 append(Messages.getInstance().getString("ToString.wind.gusts"), gust).
-                append(Messages.getInstance().getString("ToString.wind.min.variation"), extreme1).
-                append(Messages.getInstance().getString("ToString.wind.max.variation"), extreme2).
+                append(Messages.getInstance().getString("ToString.wind.min.variation"), minVariation).
+                append(Messages.getInstance().getString("ToString.wind.max.variation"), maxVariation).
                 toString();
     }
 }

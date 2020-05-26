@@ -27,10 +27,10 @@ public final class Validity extends AbstractValidity {
     }
 
     /**
-     * @param pEndDay the endDay to set
+     * @param endDay the endDay to set
      */
-    public void setEndDay(final Integer pEndDay) {
-        endDay = pEndDay;
+    public void setEndDay(final Integer endDay) {
+        this.endDay = endDay;
     }
 
     /**
@@ -41,10 +41,10 @@ public final class Validity extends AbstractValidity {
     }
 
     /**
-     * @param pEndHour the endHour to set
+     * @param endHour the endHour to set
      */
-    public void setEndHour(final Integer pEndHour) {
-        endHour = pEndHour;
+    public void setEndHour(final Integer endHour) {
+        this.endHour = endHour;
     }
 
     @Override

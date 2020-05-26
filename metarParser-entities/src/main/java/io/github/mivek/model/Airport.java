@@ -41,10 +41,10 @@ public class Airport {
     /**
      * Setter of name.
      *
-     * @param pName name of the airport.
+     * @param name name of the airport.
      */
-    public void setName(final String pName) {
-        name = pName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     /**
@@ -59,10 +59,10 @@ public class Airport {
     /**
      * Setter of the city.
      *
-     * @param pCity string of the name of the city.
+     * @param city string of the name of the city.
      */
-    public void setCity(final String pCity) {
-        city = pCity;
+    public void setCity(final String city) {
+        this.city = city;
     }
 
     /**
@@ -77,10 +77,10 @@ public class Airport {
     /**
      * Setter of country.
      *
-     * @param pCountry The country to set.
+     * @param country The country to set.
      */
-    public void setCountry(final Country pCountry) {
-        country = pCountry;
+    public void setCountry(final Country country) {
+        this.country = country;
     }
 
     /**
@@ -95,10 +95,10 @@ public class Airport {
     /**
      * Setter of iata code.
      *
-     * @param pIata string of iata.
+     * @param iata string of iata.
      */
-    public void setIata(final String pIata) {
-        iata = pIata;
+    public void setIata(final String iata) {
+        this.iata = iata;
     }
 
     /**
@@ -113,10 +113,10 @@ public class Airport {
     /**
      * Setter of icao.
      *
-     * @param pIcao string of icao.
+     * @param icao string of icao.
      */
-    public void setIcao(final String pIcao) {
-        icao = pIcao;
+    public void setIcao(final String icao) {
+        this.icao = icao;
     }
 
     /**
@@ -131,10 +131,10 @@ public class Airport {
     /**
      * Setter of latitude.
      *
-     * @param pLatitude Latitude to set.
+     * @param latitude Latitude to set.
      */
-    public void setLatitude(final double pLatitude) {
-        latitude = pLatitude;
+    public void setLatitude(final double latitude) {
+        this.latitude = latitude;
     }
 
     /**
@@ -149,10 +149,10 @@ public class Airport {
     /**
      * Setter of longitude.
      *
-     * @param pLongitude to set.
+     * @param longitude to set.
      */
-    public void setLongitude(final double pLongitude) {
-        longitude = pLongitude;
+    public void setLongitude(final double longitude) {
+        this.longitude = longitude;
     }
 
     /**
@@ -167,10 +167,10 @@ public class Airport {
     /**
      * Setter of altitude.
      *
-     * @param pAltitude the altitude to set.
+     * @param altitude the altitude to set.
      */
-    public void setAltitude(final int pAltitude) {
-        altitude = pAltitude;
+    public void setAltitude(final int altitude) {
+        this.altitude = altitude;
     }
 
     /**
@@ -185,10 +185,10 @@ public class Airport {
     /**
      * Setter of timezone.
      *
-     * @param pTimezone timezone string to set.
+     * @param timezone timezone string to set.
      */
-    public void setTimezone(final String pTimezone) {
-        timezone = pTimezone;
+    public void setTimezone(final String timezone) {
+        this.timezone = timezone;
     }
 
     /**
@@ -203,10 +203,10 @@ public class Airport {
     /**
      * Setter of DST.
      *
-     * @param pDst the dst to set.
+     * @param dst the dst to set.
      */
-    public void setDst(final String pDst) {
-        dst = pDst;
+    public void setDst(final String dst) {
+        this.dst = dst;
     }
 
     /**
@@ -221,16 +221,16 @@ public class Airport {
     /**
      * Setter of tzDatabase.
      *
-     * @param pTzDatabase The tzDatabase to set.
+     * @param tzDatabase The tzDatabase to set.
      */
-    public void setTzDatabase(final String pTzDatabase) {
-        tzDatabase = pTzDatabase;
+    public void setTzDatabase(final String tzDatabase) {
+        this.tzDatabase = tzDatabase;
     }
 
     @Override
-    public final boolean equals(final Object pObj) {
-        if (pObj instanceof Airport) {
-            return icao.equals(((Airport) pObj).getIcao());
+    public final boolean equals(final Object obj) {
+        if (obj instanceof Airport) {
+            return icao.equals(((Airport) obj).getIcao());
         }
         return false;
     }

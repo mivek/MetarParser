@@ -20,10 +20,10 @@ public class BeginningValidity extends AbstractValidity {
     }
 
     /**
-     * @param pStartMinutes the startMinutes to set
+     * @param startMinutes the startMinutes to set
      */
-    public void setStartMinutes(final Integer pStartMinutes) {
-        startMinutes = pStartMinutes;
+    public void setStartMinutes(final Integer startMinutes) {
+        this.startMinutes = startMinutes;
     }
 
     @Override

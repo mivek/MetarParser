@@ -19,10 +19,10 @@ public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends A
     /**
      * Constructor with parameter.
      *
-     * @param pType the type to set.
+     * @param type the type to set.
      */
-    protected AbstractTafProbTrend(final WeatherChangeType pType) {
-        super(pType);
+    protected AbstractTafProbTrend(final WeatherChangeType type) {
+        super(type);
     }
 
     /**
@@ -33,10 +33,10 @@ public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends A
     }
 
     /**
-     * @param pProbability the probability to set
+     * @param probability the probability to set
      */
-    public void setProbability(final Integer pProbability) {
-        probability = pProbability;
+    public void setProbability(final Integer probability) {
+        this.probability = probability;
     }
 
     /**

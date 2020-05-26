@@ -34,12 +34,12 @@ public enum Descriptive {
     /**
      * Connstructor.
      *
-     * @param pShortcut A string for the shorcut.
-     * @param pName     a string for the meaning.
+     * @param shortcut A string for the shorcut.
+     * @param name     a string for the meaning.
      */
-    Descriptive(final String pShortcut, final String pName) {
-        shortcut = pShortcut;
-        name = pName;
+    Descriptive(final String shortcut, final String name) {
+        this.shortcut = shortcut;
+        this.name = name;
     }
 
     @Override

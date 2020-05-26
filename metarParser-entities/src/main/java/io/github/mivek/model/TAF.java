@@ -53,10 +53,10 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @param pValidity the validity to set
+     * @param validity the validity to set
      */
-    public void setValidity(final Validity pValidity) {
-        validity = pValidity;
+    public void setValidity(final Validity validity) {
+        this.validity = validity;
     }
 
     /**
@@ -67,10 +67,10 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @param pMaxTemperature the maxTemperature to set
+     * @param maxTemperature the maxTemperature to set
      */
-    public void setMaxTemperature(final TemperatureDated pMaxTemperature) {
-        maxTemperature = pMaxTemperature;
+    public void setMaxTemperature(final TemperatureDated maxTemperature) {
+        this.maxTemperature = maxTemperature;
     }
 
     /**
@@ -81,10 +81,10 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @param pMinTemperature the minTemperature to set
+     * @param minTemperature the minTemperature to set
      */
-    public void setMinTemperature(final TemperatureDated pMinTemperature) {
-        minTemperature = pMinTemperature;
+    public void setMinTemperature(final TemperatureDated minTemperature) {
+        this.minTemperature = minTemperature;
     }
 
     /**
@@ -111,37 +111,37 @@ public class TAF extends AbstractWeatherCode {
     /**
      * Adds a tempo change to the list.
      *
-     * @param pChange the change to add.
+     * @param change the change to add.
      */
-    public void addTempo(final TEMPOTafTrend pChange) {
-        tempos.add(pChange);
+    public void addTempo(final TEMPOTafTrend change) {
+        tempos.add(change);
     }
 
     /**
      * Adds a PROB Change to the list.
      *
-     * @param pChange the change to add.
+     * @param change the change to add.
      */
-    public void addProb(final PROBTafTrend pChange) {
-        probs.add(pChange);
+    public void addProb(final PROBTafTrend change) {
+        probs.add(change);
     }
 
     /**
      * Adds a BECMG to the list.
      *
-     * @param pChange the change to add.
+     * @param change the change to add.
      */
-    public void addBECMG(final BECMGTafTrend pChange) {
-        bECMGs.add(pChange);
+    public void addBECMG(final BECMGTafTrend change) {
+        bECMGs.add(change);
     }
 
     /**
      * Adds a FM change to the list.
      *
-     * @param pChange the change to add.
+     * @param change the change to add.
      */
-    public void addFM(final FMTafTrend pChange) {
-        fMs.add(pChange);
+    public void addFM(final FMTafTrend change) {
+        fMs.add(change);
     }
 
     /**
@@ -159,10 +159,10 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @param pAmendment the amendment to set
+     * @param amendment the amendment to set
      */
-    public void setAmendment(final boolean pAmendment) {
-        amendment = pAmendment;
+    public void setAmendment(final boolean amendment) {
+        this.amendment = amendment;
     }
 
     @Override

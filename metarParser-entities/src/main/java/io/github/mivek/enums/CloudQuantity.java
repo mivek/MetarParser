@@ -31,12 +31,12 @@ public enum CloudQuantity {
     /**
      * Constructor.
      *
-     * @param pShortcut a string representing the shortcut.
-     * @param pName     The meaning of the shortcut.
+     * @param shortcut a string representing the shortcut.
+     * @param name     The meaning of the shortcut.
      */
-    CloudQuantity(final String pShortcut, final String pName) {
-        shortcut = pShortcut;
-        name = pName;
+    CloudQuantity(final String shortcut, final String name) {
+        this.shortcut = shortcut;
+        this.name = name;
     }
 
     @Override

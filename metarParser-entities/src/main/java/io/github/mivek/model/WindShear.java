@@ -20,10 +20,10 @@ public class WindShear extends Wind {
     }
 
     /**
-     * @param pHeight the height to set
+     * @param height the height to set
      */
-    public void setHeight(final int pHeight) {
-        height = pHeight;
+    public void setHeight(final int height) {
+        this.height = height;
     }
 
     @Override

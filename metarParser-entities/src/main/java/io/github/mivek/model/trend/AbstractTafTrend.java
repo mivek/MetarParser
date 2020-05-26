@@ -17,10 +17,10 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
     /**
      * Constructor with parameter.
      *
-     * @param pType the type to set.
+     * @param type the type to set.
      */
-    protected AbstractTafTrend(final WeatherChangeType pType) {
-        super(pType);
+    protected AbstractTafTrend(final WeatherChangeType type) {
+        super(type);
     }
 
     /**
@@ -31,10 +31,10 @@ public abstract class AbstractTafTrend<T extends AbstractValidity> extends Abstr
     }
 
     /**
-     * @param pValidity the validity to set
+     * @param validity the validity to set
      */
-    public void setValidity(final T pValidity) {
-        validity = pValidity;
+    public void setValidity(final T validity) {
+        this.validity = validity;
     }
 
     /**

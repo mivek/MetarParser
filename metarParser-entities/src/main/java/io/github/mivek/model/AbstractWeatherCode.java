@@ -30,10 +30,10 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
-     * @param pDay the day to set
+     * @param day the day to set
      */
-    public void setDay(final Integer pDay) {
-        day = pDay;
+    public void setDay(final Integer day) {
+        this.day = day;
     }
 
     /**
@@ -44,10 +44,10 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
-     * @param pTime the time to set
+     * @param time the time to set
      */
-    public void setTime(final LocalTime pTime) {
-        time = pTime;
+    public void setTime(final LocalTime time) {
+        this.time = time;
     }
 
     /**
@@ -58,10 +58,10 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
-     * @param pAirport the airport to set
+     * @param airport the airport to set
      */
-    public void setAirport(final Airport pAirport) {
-        airport = pAirport;
+    public void setAirport(final Airport airport) {
+        this.airport = airport;
     }
 
     /**
@@ -72,10 +72,10 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
-     * @param pMessage the message to set
+     * @param message the message to set
      */
-    public void setMessage(final String pMessage) {
-        message = pMessage;
+    public void setMessage(final String message) {
+        this.message = message;
     }
 
     /**

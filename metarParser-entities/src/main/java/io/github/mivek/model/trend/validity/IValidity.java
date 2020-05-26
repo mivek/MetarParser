@@ -14,9 +14,9 @@ public interface IValidity {
     Integer getStartDay();
 
     /**
-     * @param pStartDay the startDay to set
+     * @param startDay the startDay to set
      */
-    void setStartDay(Integer pStartDay);
+    void setStartDay(Integer startDay);
 
     /**
      * @return the startHour
@@ -24,7 +24,7 @@ public interface IValidity {
     Integer getStartHour();
 
     /**
-     * @param pStartHour the startHour to set
+     * @param startHour the startHour to set
      */
-    void setStartHour(Integer pStartHour);
+    void setStartHour(Integer startHour);
 }

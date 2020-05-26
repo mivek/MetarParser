@@ -30,10 +30,10 @@ public class RunwayInfo {
     /**
      * Setter of name.
      *
-     * @param pName the name to set.
+     * @param name the name to set.
      */
-    public void setName(final String pName) {
-        name = pName;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     /**
@@ -48,10 +48,10 @@ public class RunwayInfo {
     /**
      * The setter of minRange.
      *
-     * @param pMinRange the minRange to set.
+     * @param minRange the minRange to set.
      */
-    public void setMinRange(final int pMinRange) {
-        minRange = pMinRange;
+    public void setMinRange(final int minRange) {
+        this.minRange = minRange;
     }
 
     /**
@@ -66,10 +66,10 @@ public class RunwayInfo {
     /**
      * Setter of maxRange.
      *
-     * @param pMaxRange the maxrange to set.
+     * @param maxRange the maxrange to set.
      */
-    public void setMaxRange(final int pMaxRange) {
-        maxRange = pMaxRange;
+    public void setMaxRange(final int maxRange) {
+        this.maxRange = maxRange;
     }
 
     /**
@@ -84,10 +84,10 @@ public class RunwayInfo {
     /**
      * Setter of the trend.
      *
-     * @param pTrend Trend to set.
+     * @param trend Trend to set.
      */
-    public void setTrend(final String pTrend) {
-        trend = pTrend;
+    public void setTrend(final String trend) {
+        this.trend = trend;
     }
 
     @Override
