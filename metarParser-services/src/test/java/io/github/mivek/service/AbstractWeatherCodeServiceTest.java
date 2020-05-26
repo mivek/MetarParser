@@ -19,7 +19,6 @@ import static org.junit.Assert.assertThrows;
 public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
     protected abstract AbstractWeatherCodeService<T> getSut();
 
-
     @Test
     public void testRetrieveFromAirportInvalid() {
         ParseException e = assertThrows(ParseException.class, () -> getSut().retrieveFromAirport("RandomIcao"));

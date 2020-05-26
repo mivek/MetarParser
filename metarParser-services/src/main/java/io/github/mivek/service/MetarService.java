@@ -14,6 +14,7 @@ import io.github.mivek.parser.MetarParser;
 
 /**
  * Class representing the service for metar.
+ *
  * @author mivek
  */
 public final class MetarService extends AbstractWeatherCodeService<Metar> {
@@ -32,17 +33,17 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
     }
 
     @Override
-    public Metar decode(final String pCode) throws ParseException {
-        return getParser().parse(pCode);
+    public Metar decode(final String code) throws ParseException {
+        return getParser().parse(code);
     }
 
     @Override
-    public Metar retrieveFromAirport(final String pIcao) throws ParseException, IOException {
-        if (pIcao.length() != AbstractWeatherCodeService.ICAO) {
+    public Metar retrieveFromAirport(final String icao) throws ParseException, IOException {
+        if (icao.length() != AbstractWeatherCodeService.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
         }
-        String website = NOAA_METAR_URL + pIcao.toUpperCase() // $NON-NLS-1$
-        + ".TXT"; //$NON-NLS-1$
+        String website = NOAA_METAR_URL + icao.toUpperCase() // $NON-NLS-1$
+                + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         URLConnection urlCo = url.openConnection();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream(), StandardCharsets.UTF_8))) {
@@ -53,6 +54,7 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
 
     /**
      * Returns a instance of the class.
+     *
      * @return the instance of the class.
      */
     public static MetarService getInstance() {

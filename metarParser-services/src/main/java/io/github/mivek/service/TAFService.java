@@ -17,6 +17,7 @@ import io.github.mivek.parser.TAFParser;
 
 /**
  * Facade for TAF.
+ *
  * @author mivek
  */
 public final class TAFService extends AbstractWeatherCodeService<TAF> {
@@ -35,17 +36,17 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
     }
 
     @Override
-    public TAF decode(final String pCode) throws ParseException {
-        return getParser().parse(pCode);
+    public TAF decode(final String code) throws ParseException {
+        return getParser().parse(code);
     }
 
     @Override
-    public TAF retrieveFromAirport(final String pIcao) throws IOException, URISyntaxException, ParseException {
-        if (pIcao.length() != AbstractWeatherCodeService.ICAO) {
+    public TAF retrieveFromAirport(final String icao) throws IOException, URISyntaxException, ParseException {
+        if (icao.length() != AbstractWeatherCodeService.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }
-        String website = NOAA_TAF_URL + pIcao.toUpperCase() // $NON-NLS-1$
-        + ".TXT"; //$NON-NLS-1$
+        String website = NOAA_TAF_URL + icao.toUpperCase() // $NON-NLS-1$
+                + ".TXT"; //$NON-NLS-1$
         URL url = new URL(website);
         try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
             StringBuilder sb = new StringBuilder();
@@ -57,14 +58,15 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
 
     /**
      * Reformat the first line of the code.
-     * @param pCode the first line of the TAF event.
+     *
+     * @param code the first line of the TAF event.
      * @return the formated taf code.
      * @throws ParseException when an error occurs.
      */
-    protected String format(final String pCode) throws ParseException {
-        String[] lines = pCode.split("\n");
+    protected String format(final String code) throws ParseException {
+        String[] lines = code.split("\n");
         if (!TAFParser.TAF.equals(lines[0].trim())) {
-            return pCode;
+            return code;
         }
         if ("AMD TAF".equals(lines[1].trim())) {
             List<String> list = new ArrayList<>(Arrays.asList(lines));

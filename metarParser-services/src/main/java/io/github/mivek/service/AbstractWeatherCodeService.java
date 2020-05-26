@@ -5,9 +5,10 @@ import io.github.mivek.parser.AbstractParser;
 
 /**
  * Abstract service.
+ *
+ * @param <T> a concrete sub-class of {@link AbstractWeatherCode}.
  * @author mivek
  * Abstract class for the service.
- * @param <T> a concrete sub-class of {@link AbstractWeatherCode}.
  */
 public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> implements IWeatherCodeFacade<T> {
     /**
@@ -22,10 +23,11 @@ public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> 
 
     /**
      * Protected constructor to be used by sub-classes.
-     * @param pParser the parser to set.
+     *
+     * @param parser the parser to set.
      */
-    protected AbstractWeatherCodeService(final AbstractParser<T> pParser) {
-        fParser = pParser;
+    protected AbstractWeatherCodeService(final AbstractParser<T> parser) {
+        fParser = parser;
     }
 
     /**
