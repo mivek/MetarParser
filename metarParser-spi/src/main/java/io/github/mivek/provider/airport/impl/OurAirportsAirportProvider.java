@@ -21,6 +21,7 @@ import java.util.Map;
 /**
  * Implementation of the AirportProvider based on ourAirports.
  * To use this provider make sure you are connected to internet.
+ *
  * @author mivek
  */
 public final class OurAirportsAirportProvider implements AirportProvider {
@@ -30,14 +31,15 @@ public final class OurAirportsAirportProvider implements AirportProvider {
     private static final String AIRPORT_URI = "https://ourairports.com/data/airports.csv";
     /** Map of countries. */
     private Map<String, Country> countries;
-    /**Map of airports. */
+    /** Map of airports. */
     private Map<String, Airport> airports;
 
     /**
      * Default constructor.
+     *
      * @throws CsvValidationException when the parsing of the file fails
-     * @throws IOException when network error
-     * @throws URISyntaxException when the URI is invalid
+     * @throws IOException            when network error
+     * @throws URISyntaxException     when the URI is invalid
      */
     public OurAirportsAirportProvider() throws CsvValidationException, IOException, URISyntaxException {
         countries = new HashMap<>();
@@ -48,9 +50,10 @@ public final class OurAirportsAirportProvider implements AirportProvider {
 
     /**
      * Connects to the countries list and build a map of {@link Country} with the name as key.
+     *
      * @throws CsvValidationException when the parsing of the file fails
-     * @throws IOException when network error
-     * @throws URISyntaxException when the URI is invalid
+     * @throws IOException            when network error
+     * @throws URISyntaxException     when the URI is invalid
      */
     public void buildCountries() throws URISyntaxException, IOException, CsvValidationException {
         countries = new HashMap<>();
@@ -68,9 +71,10 @@ public final class OurAirportsAirportProvider implements AirportProvider {
 
     /**
      * Connects to the airports list and build a map of {@link Airport} with the name as key.
+     *
      * @throws CsvValidationException when the parsing of the file fails
-     * @throws IOException when network error
-     * @throws URISyntaxException when the URI is invalid
+     * @throws IOException            when network error
+     * @throws URISyntaxException     when the URI is invalid
      */
     public void buildAirport() throws URISyntaxException, IOException, CsvValidationException {
         URI airportsURI = new URI(AIRPORT_URI);
@@ -94,7 +98,8 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         }
     }
 
-    @Override public Map<String, Airport> getAirports() {
+    @Override
+    public Map<String, Airport> getAirports() {
         return airports;
     }
 }

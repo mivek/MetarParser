@@ -18,6 +18,7 @@ import java.util.Objects;
 
 /**
  * Default implementation of the AiportProvider using local files to build the airport map.
+ *
  * @author mivek
  */
 public final class DefaultAirportProvider implements AirportProvider {

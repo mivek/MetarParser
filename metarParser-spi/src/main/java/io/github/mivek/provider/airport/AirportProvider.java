@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * Service providing {@link Airport}.
+ *
  * @author mivek
  */
 public interface AirportProvider {
