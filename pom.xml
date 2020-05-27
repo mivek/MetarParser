@@ -4,10 +4,21 @@
     <groupId>io.github.mivek</groupId>
     <artifactId>metarParser</artifactId>
     <version>1.10.5</version>
+    <packaging>pom</packaging>
     <name>metarParser</name>
     <description>This project is a metar parser.
         Use the MetarFacade and its method "parse()" to parse a metar string and retrieve a Metar Object.
     </description>
+
+    <modules>
+        <module>metarParser-commons</module>
+        <module>metarParser-entities</module>
+        <module>metarParser-spi</module>
+        <module>metarParser-parsers</module>
+        <module>metarParser-services</module>
+    </modules>
+
+
     <url>https://github.com/mivek/MetarParser</url>
     <scm>
         <url>https://github.com/mivek/MetarParser/tree/master</url>
@@ -39,7 +50,17 @@
         <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.13</junit.version>
-        <pitest-maven.version>1.5.1</pitest-maven.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <pojo-tester.version>0.7.6</pojo-tester.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <spotbugs-maven-plugin.version>4.0.0</spotbugs-maven-plugin.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <opencsv.version>5.1</opencsv.version>
+        <pitmp-maven-plugin.version>1.3.7</pitmp-maven-plugin.version>
+        <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
+        <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
+        <archunit-junit4.version>0.13.1</archunit-junit4.version>
     </properties>
 
     <developers>
@@ -50,23 +71,33 @@
         </developer>
     </developers>
 
-    <repositories>
-        <repository>
-            <id>jcenter</id>
-            <url>http://jcenter.bintray.com/</url>
-        </repository>
-    </repositories>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.opencsv</groupId>
+                <artifactId>opencsv</artifactId>
+                <version>${opencsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>pl.pojo</groupId>
+                <artifactId>pojo-tester</artifactId>
+                <version>${pojo-tester.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>5.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
-            <version>1.3</version>
+            <artifactId>hamcrest</artifactId>
+            <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -76,13 +107,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>pl.pojo</groupId>
-            <artifactId>pojo-tester</artifactId>
-            <version>0.7.6</version>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit4</artifactId>
+            <version>${archunit-junit4.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <defaultGoal>install</defaultGoal>
@@ -92,12 +122,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>${spotbugs-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -113,19 +143,30 @@
                 <version>3.0.0-M4</version>
             </plugin>
             <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <version>${pitest-maven.version}</version>
+                <groupId>eu.stamp-project</groupId>
+                <artifactId>pitmp-maven-plugin</artifactId>
+                <version>${pitmp-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>mutationCoverage</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
+                            <threads>3</threads>
+                            <targetModules>
+                                <param>metarParser-parsers</param>
+                            </targetModules>
                             <mutationThreshold>98</mutationThreshold>
                             <coverageThreshold>99</coverageThreshold>
+                            <excludedClasses>
+                                <param>io.github.mivek.model.*</param>
+                                <param>io.github.mivek.provider.*</param>
+                                <param>io.github.mivek.enums.*</param>
+                                <param>io.github.mivek.internationalization.*</param>
+                            </excludedClasses>
                             <targetClasses>
                                 <param>io.github.mivek.parser.*</param>
+                                <param>io.github.mivek.command.*</param>
                             </targetClasses>
                         </configuration>
                     </execution>
@@ -161,17 +202,17 @@
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.98</minimum>
+                                            <minimum>${jacoco.coverage.instruction.minimum}</minimum>
                                         </limit>
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.96</minimum>
+                                            <minimum>${jacoco.coverage.branch.minimum}</minimum>
                                         </limit>
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.97</minimum>
+                                            <minimum>${jacoco.coverage.complexity.minimum}</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -180,8 +221,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <excludes>*Test.java</excludes>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
 
     <profiles>
         <profile>

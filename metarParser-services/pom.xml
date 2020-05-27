@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>metarParser</artifactId>
+        <groupId>io.github.mivek</groupId>
+        <version>1.10.5</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>metarParser-services</artifactId>
+
+    <properties>
+        <jacoco.coverage.instruction.minimum>0.95</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.complexity.minimum>0.90</jacoco.coverage.complexity.minimum>
+        <jacoco.coverage.branch.minimum>0.99</jacoco.coverage.branch.minimum>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.mivek</groupId>
+            <artifactId>metarParser-parsers</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
