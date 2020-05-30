@@ -7,39 +7,18 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum WeatherChangeType {
     /** From enumeration. */
-    FM("FM", Messages.getInstance().getString("WeatherChangeType.FM")),
+    FM,
     /** Becoming enumeration. */
-    BECMG("BECMG", Messages.getInstance().getString("WeatherChangeType.BECMG")),
+    BECMG,
     /** Tempo enumeration. */
-    TEMPO("TEMPO", Messages.getInstance().getString("WeatherChangeType.TEMPO")),
+    TEMPO,
     /** Probability change. */
-    PROB("PROB", Messages.getInstance().getString("WeatherChangeType.PROB"));
-    /** Shortcut attribute. */
-    private final String shortcut;
-    /** Name of the enumeration. */
-    private final String name;
+    PROB;
 
-    /**
-     * Constructor.
-     *
-     * @param shortcut the shortcut of the enumeration
-     * @param name     the name of the enumeration
-     */
-    WeatherChangeType(final String shortcut, final String name) {
-        this.shortcut = shortcut;
-        this.name = name;
-    }
-
-    /**
-     * @return the shortcut.
-     */
-    public String getShortcut() {
-        return shortcut;
-    }
 
     @Override
     public String toString() {
-        return name;
+        return Messages.getInstance().getString("WeatherChangeType." + name());
     }
 
 }

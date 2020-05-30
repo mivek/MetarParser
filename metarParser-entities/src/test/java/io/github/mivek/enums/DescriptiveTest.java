@@ -7,19 +7,17 @@ import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 
-public class IntensityTest {
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetEnum() {
-        Intensity.getEnum("QWERTY");
-    }
+/**
+ * @author mivek
+ */
+public class DescriptiveTest {
 
     @Test
     public void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
-        assertEquals("Faible", Intensity.LIGHT.toString());
+        assertEquals("averses de", Descriptive.SHOWERS.toString());
 
         Messages.getInstance().setLocale(Locale.ENGLISH);
-        assertEquals("Light", Intensity.LIGHT.toString());
+        assertEquals("showers of", Descriptive.SHOWERS.toString());
     }
 }

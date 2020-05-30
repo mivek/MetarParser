@@ -10,55 +10,32 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum CloudType {
     /** cumulonimbus. */
-    CB("CB", Messages.getInstance().getString("CloudType.CB")), //$NON-NLS-1$
+    CB, //$NON-NLS-1$
     /** towering cumulus, cumulus congestus. */
-    TCU("TCU", Messages.getInstance().getString("CloudType.TCU")), //$NON-NLS-1$
+    TCU, //$NON-NLS-1$
     /** Cirrus. */
-    CI("CI", Messages.getInstance().getString("CloudType.CI")),
+    CI,
     /** Cirrocumulus. */
-    CC("CC", Messages.getInstance().getString("CloudType.CC")),
+    CC,
     /** Cirrostratus. */
-    CS("CS", Messages.getInstance().getString("CloudType.CS")),
+    CS,
     /** Altocumulus. */
-    AC("AC", Messages.getInstance().getString("CloudType.AC")),
+    AC,
     /** Stratus. */
-    ST("ST", Messages.getInstance().getString("CloudType.ST")),
+    ST,
     /** Cumulus. */
-    CU("CU", Messages.getInstance().getString("CloudType.CU")),
+    CU,
     /** Astrostratus. */
-    AS("AS", Messages.getInstance().getString("CloudType.AS")),
+    AS,
     /** Nimbostratus. */
-    NS("NS", Messages.getInstance().getString("CloudType.NS")),
+    NS,
     /** Stratocumulus. */
-    SC("SC", Messages.getInstance().getString("CloudType.SC"));
-
-    /** The shortcut of the cloud type. */
-    private final String shortcut; //$NON-NLS-1$
-    /** The name of the cloud type. */
-    private final String name; //$NON-NLS-1$
-
-    /**
-     * Constructor.
-     *
-     * @param shortcut string for shortcut.
-     * @param name     string for name.
-     */
-    CloudType(final String shortcut, final String name) {
-        this.shortcut = shortcut;
-        this.name = name;
-    }
+    SC;
 
     @Override
     public String toString() {
-        return name;
+        return Messages.getInstance().getString("CloudType." + name());
     }
 
-    /**
-     * returns the shortcut of the type.
-     *
-     * @return string shortcut.
-     */
-    public String getShortcut() {
-        return shortcut;
-    }
+
 }

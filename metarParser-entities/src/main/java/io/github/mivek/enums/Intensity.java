@@ -11,31 +11,27 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Intensity {
     /** Light intensity. */
-    LIGHT("-", Messages.getInstance().getString("Intensity.-")), //$NON-NLS-1$
+    LIGHT("-"), //$NON-NLS-1$
     /** Heavy intensity. */
-    HEAVY("+", Messages.getInstance().getString("Intensity.+")), //$NON-NLS-1$
+    HEAVY("+"), //$NON-NLS-1$
     /** In vicinity. */
-    IN_VICINITY("VC", Messages.getInstance().getString("Intensity.VC")); //$NON-NLS-1$
+    IN_VICINITY("VC"); //$NON-NLS-1$
 
     /** The shortcut of the intensity. */
     private final String shortcut; //$NON-NLS-1$
-    /** The meaning of the intensity. */
-    private final String name; //$NON-NLS-1$
 
     /**
      * Constructor.
      *
      * @param shortcut A String for the shortcut.
-     * @param name     A string for the meaning.
      */
-    Intensity(final String shortcut, final String name) {
+    Intensity(final String shortcut) {
         this.shortcut = shortcut;
-        this.name = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return Messages.getInstance().getString("Intensity." + getShortcut());
     }
 
     /**

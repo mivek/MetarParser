@@ -11,69 +11,65 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Phenomenon {
     /** Rain. */
-    RAIN("RA", Messages.getInstance().getString("Phenomenon.RA")), //$NON-NLS-1$
+    RAIN("RA"), //$NON-NLS-1$
     /** Drizzle. */
-    DRIZZLE("DZ", Messages.getInstance().getString("Phenomenon.DZ")), //$NON-NLS-1$
+    DRIZZLE("DZ"), //$NON-NLS-1$
     /** Snow. */
-    SNOW("SN", Messages.getInstance().getString("Phenomenon.SN")), //$NON-NLS-1$
+    SNOW("SN"), //$NON-NLS-1$
     /** Snow grains. */
-    SNOW_GRAINS("SG", Messages.getInstance().getString("Phenomenon.SG")), //$NON-NLS-1$
+    SNOW_GRAINS("SG"), //$NON-NLS-1$
     /** Ice pellets. */
-    ICE_PELLETS("PL", Messages.getInstance().getString("Phenomenon.PL")), //$NON-NLS-1$
+    ICE_PELLETS("PL"), //$NON-NLS-1$
     /** Ice crystals. */
-    ICE_CRYSTALS("IC", Messages.getInstance().getString("Phenomenon.IC")), //$NON-NLS-1$
+    ICE_CRYSTALS("IC"), //$NON-NLS-1$
     /** Hail. */
-    HAIL("GR", Messages.getInstance().getString("Phenomenon.GR")), //$NON-NLS-1$
+    HAIL("GR"), //$NON-NLS-1$
     /** Small hail. */
-    SMALL_HAIL("GS", Messages.getInstance().getString("Phenomenon.GS")), //$NON-NLS-1$
+    SMALL_HAIL("GS"), //$NON-NLS-1$
     /** Unknow precipitation. */
-    UNKNOW_PRECIPITATION("UP", Messages.getInstance().getString("Phenomenon.UP")), //$NON-NLS-1$
+    UNKNOW_PRECIPITATION("UP"), //$NON-NLS-1$
     /** Fog. */
-    FOG("FG", Messages.getInstance().getString("Phenomenon.FG")), //$NON-NLS-1$
+    FOG("FG"), //$NON-NLS-1$
     /** Volcanic ashes. */
-    VOLCANIC_ASH("VA", Messages.getInstance().getString("Phenomenon.VA")), //$NON-NLS-1$
+    VOLCANIC_ASH("VA"), //$NON-NLS-1$
     /** Mist. */
-    MIST("BR", Messages.getInstance().getString("Phenomenon.BR")), //$NON-NLS-1$
+    MIST("BR"), //$NON-NLS-1$
     /** Haze. */
-    HAZE("HZ", Messages.getInstance().getString("Phenomenon.HZ")), //$NON-NLS-1$
+    HAZE("HZ"), //$NON-NLS-1$
     /** Widespread dust. */
-    WIDESPREAD_DUST("DU", Messages.getInstance().getString("Phenomenon.DU")), //$NON-NLS-1$
+    WIDESPREAD_DUST("DU"), //$NON-NLS-1$
     /** Smoke. */
-    SMOKE("FU", Messages.getInstance().getString("Phenomenon.FU")), //$NON-NLS-1$
+    SMOKE("FU"), //$NON-NLS-1$
     /** Sand. */
-    SAND("SA", Messages.getInstance().getString("Phenomenon.SA")), //$NON-NLS-1$
+    SAND("SA"), //$NON-NLS-1$
     /** Spray. */
-    SPRAY("PY", Messages.getInstance().getString("Phenomenon.PY")), //$NON-NLS-1$
+    SPRAY("PY"), //$NON-NLS-1$
     /** Squall. */
-    SQUALL("SQ", Messages.getInstance().getString("Phenomenon.SQ")), //$NON-NLS-1$
+    SQUALL("SQ"), //$NON-NLS-1$
     /** Sand whirl. */
-    SAND_WHIRLS("PO", Messages.getInstance().getString("Phenomenon.PO")), //$NON-NLS-1$
+    SAND_WHIRLS("PO"), //$NON-NLS-1$
     /** Duststorm. */
-    DUSTSTORM("DS", Messages.getInstance().getString("Phenomenon.DS")), //$NON-NLS-1$
+    DUSTSTORM("DS"), //$NON-NLS-1$
     /** Sandstorm. */
-    SANDSTORM("SS", Messages.getInstance().getString("Phenomenon.SS")), //$NON-NLS-1$
+    SANDSTORM("SS"), //$NON-NLS-1$
     /** Funnel cloud. */
-    FUNNEL_CLOUD("FC", Messages.getInstance().getString("Phenomenon.FC")); //$NON-NLS-1$
+    FUNNEL_CLOUD("FC"); //$NON-NLS-1$
 
     /** Shortcut of the phenomenon. */
     private final String shortcut;
-    /** Name of the phenomenon. */
-    private final String name;
 
     /**
      * Constructor.
      *
      * @param shortcut string for the shortcut.
-     * @param name     string for the name.
      */
-    Phenomenon(final String shortcut, final String name) {
+    Phenomenon(final String shortcut) {
         this.shortcut = shortcut;
-        this.name = name;
     }
 
     @Override
     public String toString() {
-        return name;
+        return Messages.getInstance().getString("Phenomenon." + getShortcut());
     }
 
     /**
