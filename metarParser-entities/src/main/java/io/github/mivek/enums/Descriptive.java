@@ -10,49 +10,42 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Descriptive {
     /** Showers. */
-    SHOWERS("SH", Messages.getInstance().getString("Descriptive.SH")), //$NON-NLS-1$
+    SHOWERS("SH"), //$NON-NLS-1$
     /** Shallow. */
-    SHALLOW("MI", Messages.getInstance().getString("Descriptive.MI")), //$NON-NLS-1$
+    SHALLOW("MI"), //$NON-NLS-1$
     /** Patches. */
-    PATCHES("BC", Messages.getInstance().getString("Descriptive.BC")), //$NON-NLS-1$
+    PATCHES("BC"), //$NON-NLS-1$
     /** Partial. */
-    PARTIAL("PR", Messages.getInstance().getString("Descriptive.PR")), //$NON-NLS-1$
+    PARTIAL("PR"), //$NON-NLS-1$
     /** Low drifting. */
-    DRIFTING("DR", Messages.getInstance().getString("Descriptive.DR")), //$NON-NLS-1$
+    DRIFTING("DR"), //$NON-NLS-1$
     /** Thunderstorm. */
-    THUNDERSTORM("TS", Messages.getInstance().getString("Descriptive.TS")), //$NON-NLS-1$
+    THUNDERSTORM("TS"), //$NON-NLS-1$
     /** blowing. */
-    BLOWING("BL", Messages.getInstance().getString("Descriptive.BC")), //$NON-NLS-1$
+    BLOWING("BL"), //$NON-NLS-1$
     /** Freezing. */
-    FREEZING("FZ", Messages.getInstance().getString("Descriptive.FZ")); //$NON-NLS-1$
+    FREEZING("FZ"); //$NON-NLS-1$
 
-    /** Shortcut of the descriptive. */
-    private final String shortcut; //$NON-NLS-1$
-    /** Meaning of the descriptive. */
-    private final String name; //$NON-NLS-1$
+    /** The descriptive's shortcut. */
+    private final String shortcut;
 
     /**
-     * Connstructor.
-     *
-     * @param shortcut A string for the shorcut.
-     * @param name     a string for the meaning.
+     * Constructor.
+     * @param shortcut the shortcut of the descriptive.
      */
-    Descriptive(final String shortcut, final String name) {
+    Descriptive(final String shortcut) {
         this.shortcut = shortcut;
-        this.name = name;
+    }
+
+    /**
+     * @return The shortcut.
+     */
+    public String getShortcut() {
+        return this.shortcut;
     }
 
     @Override
     public String toString() {
-        return name;
-    }
-
-    /**
-     * return shortcut.
-     *
-     * @return string.
-     */
-    public String getShortcut() {
-        return shortcut;
+        return Messages.getInstance().getString("Descriptive." + shortcut);
     }
 }

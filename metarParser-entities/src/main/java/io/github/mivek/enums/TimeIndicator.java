@@ -9,41 +9,35 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum TimeIndicator {
     /** The AT value of the metar trend. */
-    AT("AT", Messages.getInstance().getString("TimeIndicator.AT")),
+    AT("AT"),
     /** The FM value of the metar trend. */
-    FM("FM", Messages.getInstance().getString("WeatherChangeType.FM")),
+    FM("FM"),
     /** The TL value of the metar trend. */
-    TL("TL", Messages.getInstance().getString("TimeIndicator.TL"));
+    TL("TL");
 
     /**
      * Shortcut of the time indicator.
      */
-    private final String shortCut;
-    /**
-     * Name of the time indicator.
-     */
-    private final String name;
+    private final String shortcut;
 
     /**
      * Constructor.
      *
-     * @param shortCut the shortcut of the indicator.
-     * @param name     the name of the indicator.
+     * @param shortcut the shortcut of the indicator.
      */
-    TimeIndicator(final String shortCut, final String name) {
-        this.shortCut = shortCut;
-        this.name = name;
+    TimeIndicator(final String shortcut) {
+        this.shortcut = shortcut;
     }
 
     /**
      * @return the shortcut.
      */
     public String getShortcut() {
-        return shortCut;
+        return shortcut;
     }
 
     @Override
     public String toString() {
-        return name;
+        return Messages.getInstance().getString("TimeIndicator." + getShortcut());
     }
 }

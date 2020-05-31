@@ -5,21 +5,19 @@ import org.junit.Test;
 
 import java.util.Locale;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-public class IntensityTest {
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetEnum() {
-        Intensity.getEnum("QWERTY");
-    }
+/**
+ * @author mivek
+ */
+public class PhenomenonTest {
 
     @Test
     public void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
-        assertEquals("Faible", Intensity.LIGHT.toString());
+        assertEquals("pluie", Phenomenon.RAIN.toString());
 
         Messages.getInstance().setLocale(Locale.ENGLISH);
-        assertEquals("Light", Intensity.LIGHT.toString());
+        assertEquals("rain", Phenomenon.RAIN.toString());
     }
 }
