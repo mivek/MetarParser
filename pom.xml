@@ -150,6 +150,9 @@
                         <phase>verify</phase>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludeFilterFile>spotbugs.xml</excludeFilterFile>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
