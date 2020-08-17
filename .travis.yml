@@ -30,7 +30,6 @@ script:
   - mvn clean verify
   # Test against oracle jdk 11
   - export JAVA_HOME=$HOME/oraclejdk11
-  - $TRAVIS_BUILD_DIR/install-jdk.sh --install oraclejdk11 --target $JAVA_HOME
   - bash scripts/script.sh
 
 before_deploy:
