@@ -1,5 +1,6 @@
 dist: trusty
 language: java
+jdk: oraclejdk11
 
 cache:
   directories:
@@ -11,7 +12,6 @@ addons:
     organization: "mivek-github"
     token: ${SONARCLOUD_TOKEN}
 
-jdk: oraclejdk8
 
 before_install:
   # Retrieve keys only if build is not on a pull request
@@ -22,6 +22,15 @@ install:
 
 script:
   # If the branch is master then the deploy goal is used otherwise the maven install is used
+  # Test against oracledk 8
+  - jdk_switcher use oraclejdk8
+  - mvn clean verify
+  # Test against openjdk 8
+  - jdk_switcher use openjdk8
+  - mvn clean verify
+  # Test against oracle jdk 11
+  - export JAVA_HOME=$HOME/oraclejdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh --install oraclejdk11 --target $JAVA_HOME
   - bash scripts/script.sh
 
 before_deploy:
