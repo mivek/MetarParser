@@ -55,7 +55,7 @@
         <pojo-tester.version>0.7.6</pojo-tester.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <spotbugs-maven-plugin.version>4.0.4</spotbugs-maven-plugin.version>
-        <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-lang3.version>3.11</commons-lang3.version>
         <opencsv.version>5.2</opencsv.version>
         <pitmp-maven-plugin.version>1.3.7</pitmp-maven-plugin.version>
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
@@ -150,6 +150,9 @@
                         <phase>verify</phase>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludeFilterFile>spotbugs.xml</excludeFilterFile>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
