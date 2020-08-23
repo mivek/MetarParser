@@ -29,7 +29,7 @@
     </scm>
     <ciManagement>
         <system>travis-ci</system>
-        <url>https://travis-ci.org/mivek/MetarParser</url>
+        <url>https://travis-ci.com/github/mivek/MetarParser</url>
     </ciManagement>
     <issueManagement>
         <system>github</system>
