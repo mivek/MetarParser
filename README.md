@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/mivek/MetarParser.svg?branch=master)](https://travis-ci.org/mivek/MetarParser)
+[![Build Status](https://travis-ci.com/mivek/MetarParser.svg?branch=master)](https://travis-ci.com/github/mivek/MetarParser)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 [![GitHub license](https://img.shields.io/github/license/mivek/MetarParser.svg)](https://github.com/mivek/MetarParser/blob/master/LICENSE)
