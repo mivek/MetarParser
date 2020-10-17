@@ -2,11 +2,9 @@ package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
 import org.junit.Test;
-import pl.pojo.tester.api.assertion.Method;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class WindTest {
 
@@ -28,13 +26,5 @@ public class WindTest {
         assertThat(desc, containsString(Messages.getInstance().getString("ToString.wind.min.variation") + "=0"));
         assertThat(desc, containsString(Messages.getInstance().getString("ToString.wind.max.variation") + "=0"));
         assertThat(desc, containsString(Messages.getInstance().getString("ToString.wind.unit") + "=KM/H"));
-    }
-
-    @Test
-    public void testPojo() {
-        // given
-        final Class<?> classUnderTest = Wind.class;
-        // then
-        assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
     }
 }

@@ -13,9 +13,9 @@
     <description>Module containing utility classes</description>
 
     <properties>
-        <jacoco.coverage.instruction.minimum>0.99</jacoco.coverage.instruction.minimum>
-        <jacoco.coverage.branch.minimum>0.99</jacoco.coverage.branch.minimum>
-        <jacoco.coverage.complexity.minimum>0.99</jacoco.coverage.complexity.minimum>
+        <jacoco.coverage.instruction.minimum>1</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.branch.minimum>1</jacoco.coverage.branch.minimum>
+        <jacoco.coverage.complexity.minimum>1</jacoco.coverage.complexity.minimum>
     </properties>
 
 </project>

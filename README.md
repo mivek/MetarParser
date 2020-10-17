@@ -10,10 +10,6 @@
 
 This java lib provides a Metar and TAF decoder.
 
-Use the MetarFacade class and its method decode to decode a metar.
-Use the MetarFacade class and its method retrieveFromAirport to get the metar of an airport. This method take the icao code as parameter.
-The trends of the metar are not parsed.
-
 ## Table of content
 
 1.  [Adding dependency](#adding-the-dependency)
