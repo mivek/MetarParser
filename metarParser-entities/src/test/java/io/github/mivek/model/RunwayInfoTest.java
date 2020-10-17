@@ -3,10 +3,8 @@ package io.github.mivek.model;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import pl.pojo.tester.api.assertion.Method;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class RunwayInfoTest {
 
@@ -26,11 +24,4 @@ public class RunwayInfoTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=rising"));
     }
 
-    @Test
-    public void testPojo() {
-        // given
-        final Class<?> classUnderTest = RunwayInfo.class;
-        // then
-        assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
-    }
 }

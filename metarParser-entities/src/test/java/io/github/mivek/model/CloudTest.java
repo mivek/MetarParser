@@ -5,11 +5,9 @@ import io.github.mivek.enums.CloudType;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import pl.pojo.tester.api.assertion.Method;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
-import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
 
 public class CloudTest {
 
@@ -31,11 +29,4 @@ public class CloudTest {
         assertThat(c.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=300"));
     }
 
-    @Test
-    public void testPojo() {
-        // given
-        final Class<?> classUnderTest = Cloud.class;
-        // then
-        assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
-    }
 }

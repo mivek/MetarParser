@@ -2,10 +2,9 @@ package io.github.mivek.model;
 
 import org.junit.Before;
 import org.junit.Test;
-import pl.pojo.tester.api.assertion.Method;
 
-import static org.junit.Assert.*;
-import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class AirportTest {
     private Airport sut;
@@ -59,13 +58,5 @@ public class AirportTest {
         assertEquals(latitude, sut.getLatitude(), 0);
         assertEquals(longitude, sut.getLongitude(), 0);
         assertEquals(altitude, sut.getAltitude());
-    }
-
-    @Test
-    public void testPojo() {
-        // given
-        final Class<?> classUnderTest = Airport.class;
-        // then
-        assertPojoMethodsFor(classUnderTest).testing(Method.GETTER, Method.SETTER).areWellImplemented();
     }
 }
