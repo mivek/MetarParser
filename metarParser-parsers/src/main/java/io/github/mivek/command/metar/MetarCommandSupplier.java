@@ -8,14 +8,14 @@ import java.util.List;
 /**
  * @author mivek
  */
-public final class MetarParserCommandSupplier implements Supplier<Command> {
+public final class MetarCommandSupplier implements Supplier<Command> {
     /** List of command for the metarParser. */
     private final List<Command> commands;
 
     /**
      * Constructor.
      */
-    public MetarParserCommandSupplier() {
+    public MetarCommandSupplier() {
         commands = buildCommandList();
     }
 

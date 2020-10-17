@@ -3,7 +3,7 @@ package io.github.mivek.parser;
 import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
-import io.github.mivek.command.metar.MetarParserCommandSupplier;
+import io.github.mivek.command.metar.MetarCommandSupplier;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.trend.AbstractMetarTrend;
@@ -28,13 +28,13 @@ public final class MetarParser extends AbstractParser<Metar> {
     /** Instance of the class. */
     private static final MetarParser INSTANCE = new MetarParser();
     /** The command supplier. */
-    private final MetarParserCommandSupplier supplier;
+    private final MetarCommandSupplier supplier;
 
     /**
      * Private constructor.
      */
     private MetarParser() {
-        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new MetarParserCommandSupplier());
+        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new MetarCommandSupplier());
     }
 
     /**
@@ -42,13 +42,13 @@ public final class MetarParser extends AbstractParser<Metar> {
      *
      * @param commonCommandSupplier      the command command supplier
      * @param remarkParser               the remark parser
-     * @param metarParserCommandSupplier the metar command supplier.
+     * @param metarCommandSupplier the metar command supplier.
      * @param airportSupplier            the airport supplier
      */
     protected MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
-            final MetarParserCommandSupplier metarParserCommandSupplier) {
+            final MetarCommandSupplier metarCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
-        supplier = metarParserCommandSupplier;
+        supplier = metarCommandSupplier;
     }
 
     /**

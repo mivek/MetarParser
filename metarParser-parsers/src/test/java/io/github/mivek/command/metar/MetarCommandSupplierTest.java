@@ -11,11 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * @author mivek
  */
-public class MetarParserCommandSupplierTest {
+public class MetarCommandSupplierTest {
 
     @Test
     public void testBuildCommandList() {
-        List<Command> commands = new MetarParserCommandSupplier().buildCommandList();
+        List<Command> commands = new MetarCommandSupplier().buildCommandList();
 
         assertNotNull(commands);
         assertThat(commands, Matchers.hasSize(4));

@@ -133,7 +133,7 @@ public abstract class AbstractParser<T extends AbstractWeatherCode> {
         }
 
         Command command = commonSupplier.get(part);
-        if (command != null && command.canParse(part)) {
+        if (command != null) {
             return command.execute(container, part);
         }
 
