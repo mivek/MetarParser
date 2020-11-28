@@ -28,7 +28,7 @@ public class WindCommandTest {
         Wind res = sut.parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.N")));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.NNW")));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
         assertEquals(0, res.getGust());
@@ -43,7 +43,7 @@ public class WindCommandTest {
         Wind res = sut.parseWind(windPart);
 
         assertNotNull(res);
-        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.SE")));
+        assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.ESE")));
         assertEquals(Integer.valueOf(120), res.getDirectionDegrees());
         assertEquals(17, res.getSpeed());
         assertEquals(20, res.getGust());
