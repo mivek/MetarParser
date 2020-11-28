@@ -30,7 +30,7 @@ checks:
   identical-code:
     config:
       threshold: # language-specific defaults. an override will affect all languag
-      
+
 plugins:
   checkstyle:
     enabled: false
