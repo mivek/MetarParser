@@ -1,25 +1,13 @@
 package io.github.mivek.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import io.github.mivek.internationalization.Messages;
+import org.junit.Test;
 
 import java.time.LocalTime;
 
-import org.junit.Test;
-
-import io.github.mivek.internationalization.Messages;
+import static org.junit.Assert.assertEquals;
 
 public class ConverterTest {
-    @Test
-    public void testBetween() {
-
-        assertTrue(Converter.isBetween(5, 2, 8));
-        assertTrue(Converter.isBetween(5, 5, 8));
-        assertFalse(Converter.isBetween(5, 6, 10));
-        assertFalse(Converter.isBetween(5, 0, 2));
-    }
-
     @Test
     public void testConvertVisibility() {
         assertEquals(">10km", Converter.convertVisibility("9999"));

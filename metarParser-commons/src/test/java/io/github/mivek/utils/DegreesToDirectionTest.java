@@ -26,14 +26,14 @@ public class DegreesToDirectionTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
             { "Converter.E", "80" },
-            { "Converter.NE", "30" },
-            { "Converter.S", "200" },
+            { "Converter.NNE", "30" },
+            { "Converter.SSW", "200" },
             { "Converter.W", "280" },
-            { "Converter.NW", "300"},
+            { "Converter.WNW", "300"},
             { "Converter.SE", "130" },
             { "Converter.SW", "230" },
             { "Converter.N", "2" },
-            { "Converter.N", "345" },
+            { "Converter.NNW", "345" },
             {"Converter.VRB","anyString"}
         });
     }

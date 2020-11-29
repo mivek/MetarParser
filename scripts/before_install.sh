@@ -21,7 +21,7 @@ if [[ "$isPRMerged" = true ]] ; then
     git config --global user.email "travis@travis-ci.com"
     git config --global user.name "Travis CI"
     git add pom.xml
-    git add **/pom.xml
+    git add ./**/pom.xml
     git commit -m "Bump pom"
     git push https://${TRAVIS_GIT_USER}@github.com/mivek/metarParser.git HEAD:master
 fi

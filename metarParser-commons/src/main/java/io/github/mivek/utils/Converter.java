@@ -10,23 +10,11 @@ import java.time.LocalTime;
  * @author mivek
  */
 public final class Converter {
-
-    /** North East minimal degrees. */
-    private static final double NORTH_EAST_MIN = 22.5;
-    /** North east maximal degrees. */
-    private static final double NORTH_EAST_MAX = 67.5;
-    /** East degrees. */
-    private static final double EAST = 112.5;
-    /** South East degrees. */
-    private static final double SOUTH_EAST = 157.5;
-    /** South degrees. */
-    private static final double SOUTH = 202.5;
-    /** North West degrees. */
-    private static final double NORTH_WEST = 337.5;
-    /** West degrees. */
-    private static final double WEST = 292.5;
-    /** South west degrees. */
-    private static final double SOUTH_WEST = 247.5;
+    /**
+     * Arrays of cardinal directions.
+     */
+    private static final String[] DIRECTIONS = {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
+            "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"};
 
     /**
      * Private constructor.
@@ -42,47 +30,13 @@ public final class Converter {
      */
     public static String degreesToDirection(final String degreesStr) {
         double degrees;
-        String res;
         try {
             degrees = Double.parseDouble(degreesStr);
         } catch (NumberFormatException e) {
             return Messages.getInstance().getString("Converter.VRB");
         }
 
-        if (isBetween(degrees, NORTH_EAST_MIN, SOUTH)) {
-            if (isBetween(degrees, NORTH_EAST_MIN, NORTH_EAST_MAX)) {
-                res = Messages.getInstance().getString("Converter.NE");
-            } else if (isBetween(degrees, NORTH_EAST_MAX, EAST)) {
-                res = Messages.getInstance().getString("Converter.E");
-            } else if (isBetween(degrees, EAST, SOUTH_EAST)) {
-                res = Messages.getInstance().getString("Converter.SE");
-            } else {
-                res = Messages.getInstance().getString("Converter.S");
-            }
-        } else {
-            if (isBetween(degrees, SOUTH, SOUTH_WEST)) {
-                res = Messages.getInstance().getString("Converter.SW");
-            } else if (isBetween(degrees, SOUTH_WEST, WEST)) {
-                res = Messages.getInstance().getString("Converter.W");
-            } else if (isBetween(degrees, WEST, NORTH_WEST)) {
-                res = Messages.getInstance().getString("Converter.NW");
-            } else {
-                res = Messages.getInstance().getString("Converter.N");
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Checks if num is between lower and max.
-     *
-     * @param num   double to test
-     * @param lower the minimum value, included.
-     * @param max   The maximum value, exluded.
-     * @return true if num is between lower and max, false otherwise.
-     */
-    static boolean isBetween(final double num, final double lower, final double max) {
-        return lower <= num && max > num;
+        return Messages.getInstance().getString("Converter." + DIRECTIONS[(int) ((degrees + 11.5) / 22.5)]);
     }
 
     /**
