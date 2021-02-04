@@ -1,6 +1,7 @@
 package io.github.mivek.provider.airport.impl;
 
 import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -33,6 +34,8 @@ public final class OurAirportsAirportProvider implements AirportProvider {
     private Map<String, Country> countries;
     /** Map of airports. */
     private Map<String, Airport> airports;
+    /** Common CSV Parser. */
+    private final CSVParser parser;
 
     /**
      * Default constructor.
@@ -44,6 +47,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
     public OurAirportsAirportProvider() throws CsvValidationException, IOException, URISyntaxException {
         countries = new HashMap<>();
         airports = new HashMap<>();
+        parser = new CSVParserBuilder().withIgnoreQuotations(true).build();
         buildCountries();
         buildAirport();
     }
@@ -59,7 +63,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         countries = new HashMap<>();
         URI countriesUri = new URI(COUNTRIES_URI);
         try (InputStream countriesStream = countriesUri.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesStream, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
+                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesStream, StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
             String[] line;
             while ((line = reader.readNext()) != null) {
                 Country c = new Country();
@@ -80,7 +84,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         URI airportsURI = new URI(AIRPORT_URI);
         airports = new HashMap<>();
         try (InputStream airportStream = airportsURI.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportStream, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(1).build()) {
+                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportStream, StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
             String[] line;
 
             while ((line = reader.readNext()) != null) {
