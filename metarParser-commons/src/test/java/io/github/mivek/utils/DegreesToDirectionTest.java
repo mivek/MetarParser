@@ -34,6 +34,7 @@ public class DegreesToDirectionTest {
             { "Converter.SW", "230" },
             { "Converter.N", "2" },
             { "Converter.NNW", "345" },
+            { "Converter.N", "350" },
             {"Converter.VRB","anyString"}
         });
     }
