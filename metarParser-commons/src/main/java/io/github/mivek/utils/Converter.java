@@ -36,7 +36,7 @@ public final class Converter {
             return Messages.getInstance().getString("Converter.VRB");
         }
 
-        return Messages.getInstance().getString("Converter." + DIRECTIONS[(int) ((degrees + 11.5) / 22.5)]);
+        return Messages.getInstance().getString("Converter." + DIRECTIONS[(int) ((degrees + 11.5) / 22.5) % DIRECTIONS.length]);
     }
 
     /**
