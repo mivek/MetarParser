@@ -60,7 +60,11 @@ The application contains numerous enumerations to represent data.
 -   CloudType: to represent the type of cloud.
 -   CloudQuantity: to represent the amount of clouds.
 -   Intensity: to represent the intensity of a meteorological phenomenon.
--   Descriptive: to represent the descriptive of a meteorological phenomenon.
+-   Descriptive: to represent the description of a meteorological phenomenon.
+-   DepositType: to represent the type of deposit on a runway.
+-   DepositCoverage: to represent the percentage of the runway covered by the deposit.
+-   DepositThickness: to represent the thickness of the deposit.
+-   DepositBrakingCapacity: to represent the braking capacity on the runway.    
 -   Phenomenon: to represent a phenomenon.
 -   WeatherChangeTime: to represent a trend.
 -   TimeIndicator: to represent the time of the trend.
@@ -96,12 +100,18 @@ A country is represented by its name.
 
 #### Runway information
 
+The runway information can represent either an information regarding the visibility on the runway or a deposit.
+
 The runway information is composed of 
 
 -   The name of the runway
--   The minimal visibility on the runway
+-   The minimal visibility on the runway (optional)
 -   The maximal visibility on the runway (optional)
 -   The trend of the visibility (optional)
+-   The type of deposit (optional)
+-   The percentage of coverage on the runway
+-   The thickness of the deposit.
+-   The braking capacity on the runway.
 
 #### Visibility
 

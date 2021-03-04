@@ -1,5 +1,9 @@
 package io.github.mivek.command.metar;
 
+import io.github.mivek.enums.DepositBrakingCapacity;
+import io.github.mivek.enums.DepositCoverage;
+import io.github.mivek.enums.DepositThickness;
+import io.github.mivek.enums.DepositType;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
@@ -58,6 +62,44 @@ public class RunwayCommandTest {
         Metar m = new Metar();
 
         command.execute(m, riString);
+        assertThat(m.getRunways(), hasSize(0));
+    }
+
+    @Test
+    public void testParseRunwayDeposit() {
+        Metar m = new Metar();
+
+        command.execute(m, "R05/629294");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+
+        assertEquals("05", ri.getName());
+        assertEquals(DepositType.SLUSH, ri.getDepositType());
+        assertEquals(DepositCoverage.FROM_11_TO_25, ri.getCoverage());
+        assertEquals(DepositThickness.THICKNESS_10, ri.getThickness());
+        assertEquals(DepositBrakingCapacity.MEDIUM_GOOD, ri.getBrakingCapacity());
+    }
+
+    @Test
+    public void testParseRunwayDepositWithNotReportedType() {
+        Metar m = new Metar();
+
+        command.execute(m, "R05//29294");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+
+        assertEquals("05", ri.getName());
+        assertEquals(DepositType.NOT_REPORTED, ri.getDepositType());
+        assertEquals(DepositCoverage.FROM_11_TO_25, ri.getCoverage());
+        assertEquals(DepositThickness.THICKNESS_10, ri.getThickness());
+        assertEquals(DepositBrakingCapacity.MEDIUM_GOOD, ri.getBrakingCapacity());
+    }
+
+    @Test
+    public void testParseRunwayDepositWithInvalidDeposit() {
+        Metar m = new Metar();
+
+        command.execute(m, "R05/6292/4");
         assertThat(m.getRunways(), hasSize(0));
     }
 }

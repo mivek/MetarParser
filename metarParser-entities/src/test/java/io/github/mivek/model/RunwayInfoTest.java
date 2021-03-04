@@ -1,5 +1,9 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.DepositBrakingCapacity;
+import io.github.mivek.enums.DepositCoverage;
+import io.github.mivek.enums.DepositThickness;
+import io.github.mivek.enums.DepositType;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -15,6 +19,10 @@ public class RunwayInfoTest {
         ri.setName("14R");
         ri.setTrend("rising");
         ri.setMaxRange(500);
+        ri.setDepositType(DepositType.COMPACTED_SNOW);
+        ri.setCoverage(DepositCoverage.FROM_11_TO_25);
+        ri.setThickness(DepositThickness.THICKNESS_15);
+        ri.setBrakingCapacity(DepositBrakingCapacity.POOR);
 
         String des = ri.toString();
 
@@ -22,6 +30,10 @@ public class RunwayInfoTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.min") + "=300"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.max") + "=500"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=rising"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.type") + "=compacted or rolled snow"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.coverage") + "=from 11% to 25%"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.thickness") + "=15 cm"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.braking") + "=poor"));
     }
 
 }
