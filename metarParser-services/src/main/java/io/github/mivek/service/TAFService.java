@@ -1,19 +1,18 @@
 package io.github.mivek.service;
 
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseException;
+import io.github.mivek.model.TAF;
+import io.github.mivek.parser.TAFParser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import io.github.mivek.exception.ErrorCodes;
-import io.github.mivek.exception.ParseException;
-import io.github.mivek.model.TAF;
-import io.github.mivek.parser.TAFParser;
 
 /**
  * Facade for TAF.
@@ -41,7 +40,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
     }
 
     @Override
-    public TAF retrieveFromAirport(final String icao) throws IOException, URISyntaxException, ParseException {
+    public TAF retrieveFromAirport(final String icao) throws IOException, ParseException {
         if (icao.length() != AbstractWeatherCodeService.ICAO) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }

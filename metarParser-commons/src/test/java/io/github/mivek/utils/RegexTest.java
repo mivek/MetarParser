@@ -34,7 +34,7 @@ public class RegexTest {
 
     @Test
     public void testFind() {
-        Pattern regex = Pattern.compile("^(R\\d{2}\\w?\\/)");
+        Pattern regex = Pattern.compile("^(R\\d{2}\\w?/)");
         String input1 = "R26/0550V700U";
         String input2 = "Random string";
 
@@ -44,7 +44,7 @@ public class RegexTest {
 
     @Test
     public void testMatch() {
-        Pattern regex = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM\\/H)?");
+        Pattern regex = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM/H)?");
 
         assertTrue(Regex.match(regex, "12012MPS"));
     }

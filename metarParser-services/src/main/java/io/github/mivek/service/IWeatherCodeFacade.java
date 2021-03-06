@@ -1,10 +1,9 @@
 package io.github.mivek.service;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
+
+import java.io.IOException;
 
 /**
  * Interface for service.
@@ -28,8 +27,7 @@ public interface IWeatherCodeFacade<T extends AbstractWeatherCode> {
      * @param icao the icao of the airport
      * @return the decoded object
      * @throws IOException        When an error occurs
-     * @throws URISyntaxException When an error occurs.
      * @throws ParseException     when an error occurs during the parsing.
      */
-    T retrieveFromAirport(String icao) throws ParseException, IOException, URISyntaxException;
+    T retrieveFromAirport(String icao) throws ParseException, IOException;
 }

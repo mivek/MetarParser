@@ -102,7 +102,7 @@ A country is represented by its name.
 
 The runway information can represent either a visual range or a deposit.
 
-If the object represents a visual range the field `minRange` is non null.
+If the object represents a visual range the field `minRange` is non-null.
 
 The runway information is composed of 
 
@@ -185,7 +185,7 @@ Metar metar = service.decode(code);
 ### Retrieve the metar of an airport
 
 Instantiate the metarFacade.
-Use the its method retrieveFromAirport with the ICAO code of the airport.
+Use the MetarService and its method retrieveFromAirport with the ICAO code of the airport.
 
 ```java
 String icao = "LFPG";
@@ -223,7 +223,7 @@ TAF taf = service.retrieveFromAirport(icao);
 
 ### Internationalization
 
-English and french locales are supported by the library. The library uses the user's locale.
+English and French locales are supported by the library. The library uses the user's locale.
 The default locale is english.
 
 #### Change the locale and contributing
