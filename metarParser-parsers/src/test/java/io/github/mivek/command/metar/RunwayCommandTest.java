@@ -10,6 +10,7 @@ import io.github.mivek.model.RunwayInfo;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -53,6 +54,31 @@ public class RunwayCommandTest {
         assertEquals(550, ri.getMinRange());
         assertEquals(700, ri.getMaxRange());
         assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
+    }
+
+    @Test
+    public void testParseRunwayVisualRangeFeetVariable() {
+        Metar m = new Metar();
+
+        command.execute(m, "R01L/0600V1000FT");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo r = m.getRunways().get(0);
+        assertEquals("01L", r.getName());
+        assertEquals(600, r.getMinRange());
+        assertEquals(1000, r.getMaxRange());
+        assertThat(r.getTrend(), emptyString());
+    }
+
+    @Test
+    public void testParseRunwayVisualRangeFeetSimple() {
+        Metar m = new Metar();
+
+        command.execute(m, "R01L/0800FT");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo r = m.getRunways().get(0);
+        assertEquals("01L", r.getName());
+        assertEquals(800, r.getMinRange());
+        assertThat(r.getTrend(), emptyString());
     }
 
     @Test
@@ -101,5 +127,29 @@ public class RunwayCommandTest {
 
         command.execute(m, "R05/6292/4");
         assertThat(m.getRunways(), hasSize(0));
+    }
+
+    @Test
+    public void testParseRunwayWithLessThanIndicatorAndUnit() {
+        Metar m = new Metar();
+
+        command.execute(m, "R01L/M0600FT");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+        assertEquals("01L", ri.getName());
+        assertEquals(Messages.getInstance().getString("Indicator.M"), ri.getIndicator());
+        assertEquals(600, ri.getMinRange());
+    }
+
+    @Test
+    public void testParseRunwayWithGreaterThanIndicator() {
+        Metar m = new Metar();
+
+        command.execute(m, "R01L/P0600FT");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+        assertEquals("01L", ri.getName());
+        assertEquals(Messages.getInstance().getString("Indicator.P"), ri.getIndicator());
+        assertEquals(600, ri.getMinRange());
     }
 }

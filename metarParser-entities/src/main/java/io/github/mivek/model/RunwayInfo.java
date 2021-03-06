@@ -19,6 +19,8 @@ public class RunwayInfo {
     private int minRange;
     /** The maximal visibility on the runway. */
     private int maxRange;
+    /** Indicator on the visual range: either less than or greater than. */
+    private String indicator;
     /** The tread. */
     private String trend;
     /** The type of deposit. */
@@ -46,6 +48,20 @@ public class RunwayInfo {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the visual range indicator
+     */
+    public String getIndicator() {
+        return indicator;
+    }
+
+    /**
+     * @param indicator to set. Either "greater than" or "less than"
+     */
+    public void setIndicator(final String indicator) {
+        this.indicator = indicator;
     }
 
     /**
@@ -162,6 +178,7 @@ public class RunwayInfo {
     public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.name"), name).
+                append(Messages.getInstance().getString("ToString.indicator"), indicator).
                 append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
                 append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
                 append(Messages.getInstance().getString("ToString.trend"), trend).

@@ -22,9 +22,9 @@ public final class RunwayCommand implements Command {
     /** Pattern to recognize a runway. */
     private static final Pattern GENERIC_RUNWAY_REGEX = Pattern.compile("^(R\\d{2}\\w?/)");
     /** Pattern regex for runway with min and max range visibility. */
-    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\d{4})V(\\d{3})(\\w{0,2})");
+    private static final Pattern RUNWAY_MAX_RANGE_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\d{4})V(\\d{3,4})([UDN])?(FT)?");
     /** Pattern regex for runway visibility. */
-    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)/(\\w)?(\\d{4})(\\w{0,2})$");
+    private static final Pattern RUNWAY_REGEX = Pattern.compile("^R(\\d{2}\\w?)/([MP])?(\\d{4})([UDN])?(FT)?$");
     /** Pattern regex for runway deposit. */
     private static final Pattern RUNWAY_DEPOSIT_REGEX = Pattern.compile("^R(\\d{2}\\w?)/([/\\d])([/\\d])(//|\\d{2})(//|\\d{2})$");
     /** Immutable map of type of deposit. */
@@ -97,6 +97,7 @@ public final class RunwayCommand implements Command {
         } else if (Regex.find(RUNWAY_REGEX, part)) {
             matches = Regex.pregMatch(RUNWAY_REGEX, part);
             ri.setName(matches[1]);
+            ri.setIndicator(Converter.convertIndicator(matches[2]));
             ri.setMinRange(Integer.parseInt(matches[3]));
             ri.setTrend(Converter.convertTrend(matches[4]));
             metar.addRunwayInfo(ri);

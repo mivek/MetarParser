@@ -23,6 +23,7 @@ public class RunwayInfoTest {
         ri.setCoverage(DepositCoverage.FROM_11_TO_25);
         ri.setThickness(DepositThickness.THICKNESS_15);
         ri.setBrakingCapacity(DepositBrakingCapacity.POOR);
+        ri.setIndicator("less than");
 
         String des = ri.toString();
 
@@ -30,10 +31,11 @@ public class RunwayInfoTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.min") + "=300"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.max") + "=500"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=rising"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.type") + "=compacted or rolled snow"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.coverage") + "=from 11% to 25%"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.thickness") + "=15 cm"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.braking") + "=poor"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.type") + "=" + Messages.getInstance().getString("DepositType.COMPACTED_SNOW")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.coverage") + "=" + Messages.getInstance().getString("DepositCoverage.FROM_11_TO_25")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.thickness") + "=" + Messages.getInstance().getString("DepositThickness.THICKNESS_15")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.braking") + "=" + Messages.getInstance().getString("DepositBrakingCapacity.POOR")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.indicator") + "=less than"));
     }
 
 }

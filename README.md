@@ -100,12 +100,15 @@ A country is represented by its name.
 
 #### Runway information
 
-The runway information can represent either an information regarding the visibility on the runway or a deposit.
+The runway information can represent either a visual range or a deposit.
+
+If the object represents a visual range the field `minRange` is non null.
 
 The runway information is composed of 
 
 -   The name of the runway
 -   The minimal visibility on the runway (optional)
+-   The indicator of the visual range. Either "greater than", "less than" or empty. (optional)    
 -   The maximal visibility on the runway (optional)
 -   The trend of the visibility (optional)
 -   The type of deposit (optional)
