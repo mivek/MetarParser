@@ -7,7 +7,7 @@ import io.github.mivek.internationalization.Messages;
  * @author mivek
  */
 public enum DepositBrakingCapacity {
-    /** Not reported: // */
+    /** Not reported: '//'. */
     NOT_REPORTED,
     /** 91. */
     POOR,

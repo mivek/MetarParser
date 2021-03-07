@@ -3,7 +3,7 @@ package io.github.mivek.enums;
 import io.github.mivek.internationalization.Messages;
 
 /**
- * Represent the thickness of the deposit on the runway
+ * Represent the thickness of the deposit on the runway.
  * @author mivek
  */
 public enum DepositThickness {
