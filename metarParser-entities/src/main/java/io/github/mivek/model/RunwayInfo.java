@@ -1,5 +1,9 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.DepositBrakingCapacity;
+import io.github.mivek.enums.DepositCoverage;
+import io.github.mivek.enums.DepositThickness;
+import io.github.mivek.enums.DepositType;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -15,8 +19,18 @@ public class RunwayInfo {
     private int minRange;
     /** The maximal visibility on the runway. */
     private int maxRange;
+    /** Indicator on the visual range: either less than or greater than. */
+    private String indicator;
     /** The tread. */
     private String trend;
+    /** The type of deposit. */
+    private DepositType depositType;
+    /** The percentage of coverage. */
+    private DepositCoverage coverage;
+    /** The thickness of the deposit. */
+    private DepositThickness thickness;
+    /** The breaking capacity on the runway. */
+    private DepositBrakingCapacity brakingCapacity;
 
     /**
      * Getter of name.
@@ -34,6 +48,20 @@ public class RunwayInfo {
      */
     public void setName(final String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the visual range indicator
+     */
+    public String getIndicator() {
+        return indicator;
+    }
+
+    /**
+     * @param indicator to set. Either "greater than" or "less than"
+     */
+    public void setIndicator(final String indicator) {
+        this.indicator = indicator;
     }
 
     /**
@@ -90,14 +118,74 @@ public class RunwayInfo {
         this.trend = trend;
     }
 
+    /**
+     * @return The type of deposit on the runway.
+     */
+    public DepositType getDepositType() {
+        return depositType;
+    }
+
+    /**
+     * @param depositType The type of deposit to set.
+     */
+    public void setDepositType(final DepositType depositType) {
+        this.depositType = depositType;
+    }
+
+    /**
+     * @return The coverage percentage
+     */
+    public DepositCoverage getCoverage() {
+        return coverage;
+    }
+
+    /**
+     * @param coverage The percentage of coverage to set.
+     */
+    public void setCoverage(final DepositCoverage coverage) {
+        this.coverage = coverage;
+    }
+
+    /**
+     * @return The thickness of the deposit.
+     */
+    public DepositThickness getThickness() {
+        return thickness;
+    }
+
+    /**
+     * @param thickness The thickness to set.
+     */
+    public void setThickness(final DepositThickness thickness) {
+        this.thickness = thickness;
+    }
+
+    /**
+     * @return The braking capacity on the runway.
+     */
+    public DepositBrakingCapacity getBrakingCapacity() {
+        return brakingCapacity;
+    }
+
+    /**
+     * @param brakingCapacity the braking capacity to set.
+     */
+    public void setBrakingCapacity(final DepositBrakingCapacity brakingCapacity) {
+        this.brakingCapacity = brakingCapacity;
+    }
+
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.name"), name).
+                append(Messages.getInstance().getString("ToString.indicator"), indicator).
                 append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
                 append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
                 append(Messages.getInstance().getString("ToString.trend"), trend).
+                append(Messages.getInstance().getString("ToString.deposit.type"), depositType).
+                append(Messages.getInstance().getString("ToString.deposit.coverage"), coverage).
+                append(Messages.getInstance().getString("ToString.deposit.thickness"), thickness).
+                append(Messages.getInstance().getString("ToString.deposit.braking"), brakingCapacity).
                 toString();
-
     }
 }

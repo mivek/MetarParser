@@ -26,7 +26,7 @@ public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCo
     }
 
     @Test
-    public void testRetrieveFromAirport() throws IOException, ParseException, URISyntaxException {
+    public void testRetrieveFromAirport() throws IOException, ParseException {
         T res = getSut().retrieveFromAirport("LFPG");
         assertThat(res, notNullValue());
         assertThat(res.getAirport().getIcao(), is("LFPG"));

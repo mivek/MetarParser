@@ -41,4 +41,19 @@ public class ConverterTest {
         assertEquals(8, time.getHour());
         assertEquals(30, time.getMinute());
     }
+
+    @Test
+    public void testConvertIndicatorMinus() {
+        assertEquals("less than", Converter.convertIndicator("M"));
+    }
+
+    @Test
+    public void testConvertIndicatorPlus() {
+        assertEquals("greater than", Converter.convertIndicator("P"));
+    }
+
+    @Test
+    public void testConvertIndicatorNull() {
+        assertEquals("", Converter.convertIndicator(null));
+    }
 }
