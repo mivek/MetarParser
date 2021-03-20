@@ -8,8 +8,18 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class WeatherConditionTest {
+
+    @Test
+    public void testIsValid_VCSH() {
+        WeatherCondition wc = new WeatherCondition();
+        wc.setIntensity(Intensity.IN_VICINITY);
+        wc.setDescriptive(Descriptive.SHOWERS);
+
+        assertTrue(wc.isValid());
+    }
 
     @Test
     public void testToString() {
