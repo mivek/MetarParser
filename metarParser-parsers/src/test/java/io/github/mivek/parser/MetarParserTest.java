@@ -3,6 +3,7 @@ package io.github.mivek.parser;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.enums.TimeIndicator;
 import io.github.mivek.enums.WeatherChangeType;
@@ -28,16 +29,16 @@ import static org.junit.Assert.*;
 public class MetarParserTest extends AbstractParserTest<Metar> {
 
     public static final String TEN_KM = ">10km";
-    private MetarParser fSut;
+    private MetarParser parser;
 
     @Override
-    protected MetarParser getSut() {
-        return fSut;
+    protected MetarParser getParser() {
+        return parser;
     }
 
     @Before
     public void setUp() {
-        fSut = MetarParser.getInstance();
+        parser = MetarParser.getInstance();
     }
 
     /**
@@ -48,11 +49,11 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParse() {
         String metarString = "LFPG 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
 
-        assertEquals(fSut.getAirportSupplier().get("LFPG"), m.getAirport());
+        assertEquals(parser.getAirportSupplier().get("LFPG"), m.getAirport());
         assertEquals(Integer.valueOf(17), m.getDay());
         assertEquals(8, m.getTime().getHour());
         assertEquals(30, m.getTime().getMinute());
@@ -74,7 +75,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     @Test
     public void testParseNullAirport() {
         String metarString = "AAAA 170830Z 00000KT 0350 R27L/0375N R09R/0175N R26R/0500D R08L/0400N R26L/0275D R08R/0250N R27R/0300N R09L/0200N FG SCT000 M01/M01 Q1026 NOSIG";
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
         assertEquals("AAAA", m.getStation());
         assertNull(m.getAirport());
     }
@@ -83,7 +84,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempo() {
         String metarString = "LFBG 081130Z AUTO 23012KT 9999 SCT022 BKN072 BKN090 22/16 Q1011 TEMPO 26015G25KT 3000 TSRA SCT025CB BKN050";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
         assertNotNull(m);
         assertTrue(m.isAuto());
         assertThat(m.getClouds(), hasSize(3));
@@ -116,7 +117,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempoAndBecmg() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO SHRA BECMG SKC";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
         assertThat(m.getTrends(), hasSize(2));
@@ -133,7 +134,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempoAndAT() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO AT0800 SHRA ";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
         assertThat(m.getTrends(), hasSize(1));
@@ -153,7 +154,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempoAndTL() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO TL1830 SHRA ";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
         assertThat(m.getTrends(), hasSize(1));
@@ -173,7 +174,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempoAndFM() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO FM1830 SHRA ";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
         assertThat(m.getTrends(), hasSize(1));
@@ -193,7 +194,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithTempoAndFMAndTL() {
         String metarString = "LFRM 081630Z AUTO 30007KT 260V360 9999 24/15 Q1008 TEMPO FM1700 TL1830 SHRA ";
 
-        Metar m = fSut.parse(metarString);
+        Metar m = parser.parse(metarString);
 
         assertNotNull(m);
         assertThat(m.getTrends(), hasSize(1));
@@ -224,7 +225,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithMinVisibility() {
         String code = "LFPG 161430Z 24015G25KT 5000 1100w";
 
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
 
         assertNotNull(m);
         assertEquals(16, m.getDay().intValue());
@@ -252,7 +253,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // Given a code with wind variation.
         String code = "LFPG 161430Z 24015G25KT 180V300";
         //WHEN parsing the code.
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         // THEN the wind contains information on variation
         assertNotNull(m);
         assertEquals(240, m.getWind().getDirectionDegrees().intValue());
@@ -268,7 +269,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseWithVerticalVisibility() {
         String code = "LFLL 160730Z 28002KT 0350 FG VV002";
 
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
 
         assertNotNull(m);
         assertEquals(16, m.getDay().intValue());
@@ -291,7 +292,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     @Test
     public void testParseVisibilityWithNDV() {
         String code = "LSZL 300320Z AUTO 00000KT 9999NDV BKN060 OVC074 00/M04 Q1001\n" + "RMK=";
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         assertNotNull(m);
         assertEquals(TEN_KM, m.getVisibility().getMainVisibility());
     }
@@ -301,7 +302,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // GIVEN a metar with token CAVOK
         String code = "LFPG 212030Z 03003KT CAVOK 09/06 Q1031 NOSIG";
         // WHEN parsing the metar.
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         // THEN the attribute cavok is true and the main visibility is > 10km.
         assertNotNull(m);
         assertTrue(m.isCavok());
@@ -317,7 +318,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         // GIVEN a metar with altimeter in inches of mercury
         String code = "KTTN 051853Z 04011KT 9999 VCTS SN FZFG BKN003 OVC010 M02/M02 A3006";
         // WHEN parsing the metar
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         // THEN the altimeter is converted in HPa
         assertNotNull(m);
         assertEquals(Integer.valueOf(1017), m.getAltimeter());
@@ -330,7 +331,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         //GIVEN a metar with RMK
         String code = "CYWG 172000Z 30015G25KT 1 3/4SM R36/4000FT/D -SN BLSN BKN008 OVC040 M05/M08 Q1001 RMK SF5NS3 SLP134";
         // WHEN parsing the metar
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         // THEN the remark is not null
         assertNotNull(m);
         assertNotNull(m.getVisibility());
@@ -342,7 +343,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void testParseRMK() {
         Metar m = new Metar();
         String[] array = { "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017=" };
-        getSut().parseRMK(m, array, 0);
+        getParser().parseRMK(m, array, 0);
         String rmk = m.getRemark();
         assertNotNull(rmk);
         assertThat(rmk, not(containsString("RMK")));
@@ -351,7 +352,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     @Test
     public void alternativeWindForm() {
         String code = "ENLK 081350Z 26026G40 240V300 9999 VCSH FEW025 BKN030 02/M01 Q0996";
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         assertNotNull(m);
         assertNotNull(m.getWind());
         assertEquals(Integer.valueOf(260), m.getWind().getDirectionDegrees());
@@ -366,10 +367,17 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     public void desriptiveFieldIsPreservedAlsoWithoutWeatherConditions() {
         //example form field
         String code = "AGGH 140340Z 05010KT 9999 TS FEW020 SCT021CB BKN300 32/26 Q1010";
-        Metar m = fSut.parse(code);
+        Metar m = parser.parse(code);
         assertNotNull(m);
         assertEquals(1, m.getWeatherConditions().size());
         assertEquals(Descriptive.THUNDERSTORM, m.getWeatherConditions().get(0).getDescriptive());
     }
 
+    @Test
+    public void testParseWitVCSH() {
+        Metar m = parser.parse("ENLK 081350Z 26026G40 240V300 9999 VCSH FEW025 BKN030 02/M01 Q0996");
+        assertThat(m.getWeatherConditions(), hasSize(1));
+        assertEquals(Intensity.IN_VICINITY, m.getWeatherConditions().get(0).getIntensity());
+        assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
+    }
 }

@@ -26,7 +26,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     public void testParseWCSimple() {
         String wcPart = "-DZ";
 
-        WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
+        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
         assertEquals(Intensity.LIGHT, wc.getIntensity());
         assertNull(wc.getDescriptive());
@@ -39,7 +39,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     public void testParseWCMultiplePHE() {
         String wcPart = "SHRAGR";
 
-        WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
+        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
         assertNull(wc.getIntensity());
         assertNotNull(wc.getDescriptive());
@@ -52,7 +52,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     public void testParseWCNull() {
         String wcPart = "-SH";
 
-        WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
+        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
         assertNull(wc);
     }
@@ -61,7 +61,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     public void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
         String wcPart = "SH";
 
-        WeatherCondition wc = getSut().parseWeatherCondition(wcPart);
+        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
         assertNull(wc);
     }
@@ -72,12 +72,12 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
         String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
         String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017" };
         // WHEN tokenizing the string
-        String[] result = getSut().tokenize(code);
+        String[] result = getParser().tokenize(code);
         // THEN the visibility part is 1 1/2SM
         assertNotNull(result);
         assertArrayEquals(tokens, result);
 
     }
 
-    protected abstract AbstractParser<T> getSut();
+    protected abstract AbstractParser<T> getParser();
 }
