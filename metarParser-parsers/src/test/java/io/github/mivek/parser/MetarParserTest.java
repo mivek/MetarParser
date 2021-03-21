@@ -361,6 +361,8 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertEquals("KT", m.getWind().getUnit());
         assertEquals(240, m.getWind().getMinVariation());
         assertEquals(300, m.getWind().getMaxVariation());
+        assertEquals(Intensity.IN_VICINITY, m.getWeatherConditions().get(0).getIntensity());
+        assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
     }
 
     @Test
@@ -374,10 +376,9 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
     }
 
     @Test
-    public void testParseWitVCSH() {
-        Metar m = parser.parse("ENLK 081350Z 26026G40 240V300 9999 VCSH FEW025 BKN030 02/M01 Q0996");
-        assertThat(m.getWeatherConditions(), hasSize(1));
-        assertEquals(Intensity.IN_VICINITY, m.getWeatherConditions().get(0).getIntensity());
-        assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
+    public void testParseWithInvalidWeatherCondition() {
+        Metar m = parser.parse("ENLK 081350Z 26026G40 240V300 9999 VCMI");
+
+        assertThat(m.getWeatherConditions(), hasSize(0));
     }
 }

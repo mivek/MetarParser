@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class WeatherConditionTest {
 
     @Test
-    public void testIsValid_VCSH() {
+    public void testIsValidWithVCSH() {
         WeatherCondition wc = new WeatherCondition();
         wc.setIntensity(Intensity.IN_VICINITY);
         wc.setDescriptive(Descriptive.SHOWERS);
