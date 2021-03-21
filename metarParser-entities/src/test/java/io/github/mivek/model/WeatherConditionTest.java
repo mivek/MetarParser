@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class WeatherConditionTest {
@@ -18,6 +19,30 @@ public class WeatherConditionTest {
         wc.setIntensity(Intensity.IN_VICINITY);
         wc.setDescriptive(Descriptive.SHOWERS);
 
+        assertTrue(wc.isValid());
+    }
+
+    @Test
+    public void testIsValidWithoutPhenomenons() {
+        WeatherCondition wc = new WeatherCondition();
+        wc.setIntensity(Intensity.LIGHT);
+        wc.setDescriptive(Descriptive.BLOWING);
+
+        assertFalse(wc.isValid());
+    }
+
+    @Test
+    public void testIsValid() {
+        WeatherCondition wc = new WeatherCondition();
+        wc.addPhenomenon(Phenomenon.HAIL);
+
+        assertTrue(wc.isValid());
+    }
+
+    @Test
+    public void testIsValidTS() {
+        WeatherCondition wc = new WeatherCondition();
+        wc.setDescriptive(Descriptive.THUNDERSTORM);
         assertTrue(wc.isValid());
     }
 
