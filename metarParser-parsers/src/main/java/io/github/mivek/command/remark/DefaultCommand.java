@@ -42,7 +42,7 @@ public final class DefaultCommand implements Command {
         try {
             token = messages.getString("Remark." + token);
         } catch (MissingResourceException e) {
-            LOGGER.info("Remark token \"" + token + "\" is unknown.");
+            // Ignore missing token
         }
         stringBuilder.append(token).append(" ");
         rmk = strSlit.length == 1 ? "" : strSlit[1];
