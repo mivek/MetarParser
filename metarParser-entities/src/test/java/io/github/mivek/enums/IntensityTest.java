@@ -15,6 +15,11 @@ public class IntensityTest {
     }
 
     @Test
+    public void testGetEnumValid() {
+        assertEquals(Intensity.LIGHT, Intensity.getEnum("-"));
+    }
+
+    @Test
     public void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("Faible", Intensity.LIGHT.toString());

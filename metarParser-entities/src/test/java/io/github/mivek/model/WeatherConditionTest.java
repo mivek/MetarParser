@@ -23,6 +23,14 @@ public class WeatherConditionTest {
     }
 
     @Test
+    public void testIdValidWithVCBL() {
+        WeatherCondition wc = new WeatherCondition();
+        wc.setIntensity(Intensity.IN_VICINITY);
+        wc.setDescriptive(Descriptive.BLOWING);
+
+        assertFalse(wc.isValid());
+    }
+    @Test
     public void testIsValidWithoutPhenomenons() {
         WeatherCondition wc = new WeatherCondition();
         wc.setIntensity(Intensity.LIGHT);
