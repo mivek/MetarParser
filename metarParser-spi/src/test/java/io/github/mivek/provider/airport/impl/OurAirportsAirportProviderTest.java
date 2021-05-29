@@ -17,7 +17,6 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author mivek
  */
-@Ignore
 public class OurAirportsAirportProviderTest {
 
     @Test
