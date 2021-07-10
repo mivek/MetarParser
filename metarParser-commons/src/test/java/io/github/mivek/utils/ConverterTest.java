@@ -56,4 +56,9 @@ public class ConverterTest {
     public void testConvertIndicatorNull() {
         assertEquals("", Converter.convertIndicator(null));
     }
+
+    @Test
+    public void testConvertPrecipitationAmount() {
+        assertEquals(2.17, Converter.convertPrecipitationAmount("0217"), 1e-7);
+    }
 }

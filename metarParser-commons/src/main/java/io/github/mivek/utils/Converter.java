@@ -115,4 +115,13 @@ public final class Converter {
         int minutes = Integer.parseInt(input.substring(2));
         return LocalTime.of(hours, minutes);
     }
+
+    /**
+     * Converts a string representing a precipitation amount in inches.
+     * @param input The string to convert
+     * @return The actual amount.
+     */
+    public static float convertPrecipitationAmount(final String input) {
+        return Float.parseFloat(input) / 100;
+    }
 }
