@@ -15,6 +15,6 @@ public class ATTimeTest {
         sut.setTime(LocalTime.of(12, 15));
         String des = sut.toString();
 
-        assertEquals(TimeIndicator.AT.toString() + " 12:15", des);
+        assertEquals(TimeIndicator.AT + " 12:15", des);
     }
 }

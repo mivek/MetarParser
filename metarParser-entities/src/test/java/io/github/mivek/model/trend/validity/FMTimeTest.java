@@ -14,6 +14,6 @@ public class FMTimeTest {
         FMTime sut = new FMTime();
         sut.setTime(LocalTime.of(12, 15));
         String des = sut.toString();
-        assertEquals(TimeIndicator.FM.toString() + " 12:15", des);
+        assertEquals(TimeIndicator.FM + " 12:15", des);
     }
 }

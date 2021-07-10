@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class VirgaDirectionCommand implements Command {
     /** Virga with direction. */
-    private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})");
+    private static final Pattern VIRGA_DIRECTION = Pattern.compile("^VIRGA ([A-Z]{2})\\b");
 
     /** The message instance. */
     private final Messages messages;

@@ -91,7 +91,7 @@ public class WeatherCondition {
     public boolean isValid() {
         return !phenomenons.isEmpty()
                 || Descriptive.THUNDERSTORM == descriptive
-                || (Intensity.IN_VICINITY.equals(intensity) && Descriptive.SHOWERS.equals(descriptive));
+                || Intensity.IN_VICINITY.equals(intensity) && Descriptive.SHOWERS.equals(descriptive);
     }
 
     @Override

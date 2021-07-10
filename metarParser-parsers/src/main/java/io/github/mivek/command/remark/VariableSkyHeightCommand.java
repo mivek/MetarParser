@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class VariableSkyHeightCommand implements Command {
     /** Variable sky condition with height. */
-    private static final Pattern VARIABLE_SKY_HEIGHT = Pattern.compile("^([A-Z]{3})(\\d{3}) V ([A-Z]{3})");
+    private static final Pattern VARIABLE_SKY_HEIGHT = Pattern.compile("^([A-Z]{3})(\\d{3}) V ([A-Z]{3})\\b");
 
     /** The message instance. */
     private final Messages messages;
