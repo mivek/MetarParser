@@ -14,14 +14,8 @@ public final class HourlyPressureCommand implements Command {
     /** Pattern for the hourly pressure. */
     private static final Pattern PRESSURE_PATTERN = Pattern.compile("^5(\\d)(\\d{3})\\b");
     /** Map for the barometer tendency. */
-    private final Map<Integer, String> BAROMETER_TENDENCY;
-    /** The message instance. */
-    private final Messages messages;
-
-
-    HourlyPressureCommand() {
-        this.messages = Messages.getInstance();
-        BAROMETER_TENDENCY = new HashMap<>();
+    private static final Map<Integer, String> BAROMETER_TENDENCY = new HashMap<>();
+    static {
         BAROMETER_TENDENCY.put(0, "Remark.Barometer.0");
         BAROMETER_TENDENCY.put(1, "Remark.Barometer.1");
         BAROMETER_TENDENCY.put(2, "Remark.Barometer.2");
@@ -31,6 +25,12 @@ public final class HourlyPressureCommand implements Command {
         BAROMETER_TENDENCY.put(6, "Remark.Barometer.6");
         BAROMETER_TENDENCY.put(7, "Remark.Barometer.7");
         BAROMETER_TENDENCY.put(8, "Remark.Barometer.8");
+    }
+    /** The message instance. */
+    private final Messages messages;
+
+    HourlyPressureCommand() {
+        this.messages = Messages.getInstance();
     }
 
     @Override
