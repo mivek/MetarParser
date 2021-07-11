@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class HourlyMinimumTemperatureCommandTest {
     public void testExecuteWithNegativeTemperature() {
         Command command = new HourlyMinimumTemperatureCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("21001", sb);
+        MatcherAssert.assertThat(command.execute("21001", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("6-hourly minimum temperature of -0.1°C"));
     }
 
@@ -27,7 +28,7 @@ public class HourlyMinimumTemperatureCommandTest {
     public void testExecuteWithPositiveTemperature() {
         Command command = new HourlyMinimumTemperatureCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("20012", sb);
+        MatcherAssert.assertThat(command.execute("20012", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("6-hourly minimum temperature of 1.2°C"));
     }
 }

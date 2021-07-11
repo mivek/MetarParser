@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class PrecipitationEndCommandTest {
     public void testExecute() {
         Command command = new PrecipitationEndCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("RAE45", sb);
+        MatcherAssert.assertThat(command.execute("RAE45", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("rain ending at :45"));
     }
 
@@ -27,7 +28,7 @@ public class PrecipitationEndCommandTest {
     public void testExecuteWithDescriptive() {
         Command command = new PrecipitationEndCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("SHRAE45", sb);
+        MatcherAssert.assertThat(command.execute("SHRAE45", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("showers of rain ending at :45"));
     }
 }

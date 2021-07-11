@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class PrecipitationAmount36HourCommandTest {
         Command command = new PrecipitationAmount36HourCommand();
         StringBuilder sb = new StringBuilder();
 
-        command.execute("30217", sb);
+        MatcherAssert.assertThat(command.execute("30217", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("2.17 inches of precipitation fell in the last 3 hours"));
     }
 
@@ -29,7 +30,7 @@ public class PrecipitationAmount36HourCommandTest {
         Command command = new PrecipitationAmount36HourCommand();
         StringBuilder sb = new StringBuilder();
 
-        command.execute("60217", sb);
+        MatcherAssert.assertThat(command.execute("60217", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("2.17 inches of precipitation fell in the last 6 hours"));
     }
 

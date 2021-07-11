@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class HourlyPrecipitationAmountCommandTest {
     public void testExecute() {
         Command command = new HourlyPrecipitationAmountCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("P0009", sb);
+        MatcherAssert.assertThat(command.execute("P0009", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("9/100 of an inch of precipitation fell in the last hour"));
     }
 }

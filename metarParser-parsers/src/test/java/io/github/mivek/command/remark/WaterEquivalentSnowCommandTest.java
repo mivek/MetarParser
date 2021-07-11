@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class WaterEquivalentSnowCommandTest {
     public void testExecute() {
         Command command = new WaterEquivalentSnowCommand();
         StringBuilder sb = new StringBuilder();
-        command.execute("933036",sb);
+        MatcherAssert.assertThat(command.execute("933036",sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("water equivalent of 3.6 inches of snow"));
     }
 }

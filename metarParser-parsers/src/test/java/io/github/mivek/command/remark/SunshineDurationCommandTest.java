@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ public class SunshineDurationCommandTest {
         Command command = new SunshineDurationCommand();
         StringBuilder sb = new StringBuilder();
 
-        command.execute("98096", sb);
+        MatcherAssert.assertThat(command.execute("98096", sb), Matchers.emptyString());
 
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("96 minutes of sunshine"));
     }

@@ -6,7 +6,6 @@ import io.github.mivek.utils.Regex;
 
 import java.util.regex.Pattern;
 
-import static io.github.mivek.utils.Converter.convertTemperature;
 
 /**
  * @author Jean-Kevin KPADEY
@@ -24,7 +23,7 @@ public final class HourlyMaximumMinimumTemperatureCommand implements Command {
     @Override
     public String execute(final String remark, final StringBuilder stringBuilder) {
         String[] matches = Regex.pregMatch(TEMPERATURE_PATTERN, remark);
-        stringBuilder.append(messages.getString("Remark.Hourly.Maximum.Minimum.Temperature", Converter.convertTemperature(matches[1], matches[2]), convertTemperature(matches[3], matches[4]))).append(" ");
+        stringBuilder.append(messages.getString("Remark.Hourly.Maximum.Minimum.Temperature", Converter.convertTemperature(matches[1], matches[2]), Converter.convertTemperature(matches[3], matches[4]))).append(" ");
         return remark.replaceFirst(TEMPERATURE_PATTERN.pattern(), "").trim();
     }
 
