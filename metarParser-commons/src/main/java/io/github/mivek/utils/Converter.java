@@ -115,4 +115,24 @@ public final class Converter {
         int minutes = Integer.parseInt(input.substring(2));
         return LocalTime.of(hours, minutes);
     }
+
+    /**
+     * Converts a string representing a precipitation amount in inches.
+     * @param input The string to convert
+     * @return The actual amount.
+     */
+    public static float convertPrecipitationAmount(final String input) {
+        return Float.parseFloat(input) / 100;
+    }
+
+    /**
+     * Converts the temperature for the remark.
+     * @param sign The sign of the temperature: 1 means below 0, 0 means positive
+     * @param temperature The string representing the temperature
+     * @return The temperature as a float
+     */
+    public static float convertTemperature(final String sign, final String temperature) {
+        float temp = Float.parseFloat(temperature) / 10;
+        return "0".equals(sign) ? temp : -1 * temp;
+    }
 }

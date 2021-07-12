@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class WindShiftCommand implements Command {
 
     /** Wind shift pattern. */
-    private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})");
+    private static final Pattern WIND_SHIFT = Pattern.compile("^WSHFT (\\d{2})?(\\d{2})\\b");
 
     /** The messages instance. */
     private final Messages messages;

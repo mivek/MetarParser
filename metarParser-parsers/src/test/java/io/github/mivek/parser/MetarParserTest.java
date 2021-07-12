@@ -17,6 +17,8 @@ import io.github.mivek.model.trend.AbstractMetarTrend;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
@@ -380,5 +382,23 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         Metar m = parser.parse("ENLK 081350Z 26026G40 240V300 9999 VCMI");
 
         assertThat(m.getWeatherConditions(), hasSize(0));
+    }
+
+    @Test
+    public void testParseWithRemarks() {
+        String code = "KCOS 261454Z 34012G18KT 10SM BKN060 BKN100 15/10 A3020 RMK AO2 RAE45 SLP171 P0000 60002 T01500100 51009 $";
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        Metar m = parser.parse(code);
+
+        assertEquals("KCOS", m.getStation());
+        assertThat(m.getWeatherConditions(), empty());
+        assertThat(m.getRemark(), containsString("automated station with a precipitation discriminator"));
+        assertThat(m.getRemark(), containsString("rain ending at :45"));
+        assertThat(m.getRemark(), containsString("sea level pressure of 1017.1 HPa"));
+        assertThat(m.getRemark(), containsString("0/100 of an inch of precipitation fell in the last hour"));
+        assertThat(m.getRemark(), containsString("0/100 of an inch of precipitation fell in the last hour"));
+        assertThat(m.getRemark(), containsString("0.02 inches of precipitation fell in the last 6 hours"));
+        assertThat(m.getRemark(), containsString("hourly temperature of 15°C and dew point of 10°C"));
+        assertThat(m.getRemark(), containsString("Increase, then steady, or increase then Increase more slowly of 0.9 hectopascals in the past 3 hours"));
     }
 }

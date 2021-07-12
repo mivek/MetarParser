@@ -28,7 +28,7 @@ The keywords feature, bugfix and clean are mandatory for branch name.
 **Internationalization**
 
 This project currently supports English and French languages. 
-If you are willing to add a new language, please use  https://poeditor.com/join/project/kWbkKRuHlr to register and contribute. 
-Once a language is complete at 100%, the file will be added to the project.
+If you are willing to add a new language, please use https://crwd.in/metarParser to register and contribute. 
+Once a language is complete at 100%, the translation file will be added to the project.
 
 Thank you

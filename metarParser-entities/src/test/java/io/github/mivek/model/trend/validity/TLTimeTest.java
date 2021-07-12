@@ -15,6 +15,6 @@ public class TLTimeTest {
 
         String desc = sut.toString();
 
-        assertEquals(TimeIndicator.TL.toString() + " 12:15", desc);
+        assertEquals(TimeIndicator.TL + " 12:15", desc);
     }
 }

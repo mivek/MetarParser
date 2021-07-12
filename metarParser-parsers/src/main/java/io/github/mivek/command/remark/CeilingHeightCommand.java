@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class CeilingHeightCommand implements Command {
     /** Ceiling height. */
-    private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})");
+    private static final Pattern CEILING_HEIGHT = Pattern.compile("^CIG (\\d{3})V(\\d{3})\\b");
 
     /** The message instance. */
     private final Messages messages;

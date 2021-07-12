@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class TowerVisibilityCommand implements Command {
     /** Tower visibility. */
-    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?/?\\d))");
+    private static final Pattern TOWER_VISIBILITY = Pattern.compile("^TWR VIS ((\\d)*( )?(\\d?/?\\d))\\b");
 
     /** The messages instance. */
     private final Messages messages;

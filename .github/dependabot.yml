@@ -8,9 +8,9 @@ updates:
   ignore:
   - dependency-name: com.tngtech.archunit:archunit-junit4
     versions:
-      - 0.15.0
-      - 0.16.0
-      - 0.17.0
+    - 0.15.0
+    - 0.16.0
+    - 0.17.0
   - dependency-name: com.puppycrawl.tools:checkstyle
     versions:
       - "8.41"
@@ -19,4 +19,4 @@ updates:
       - 4.2.0
   - dependency-name: org.apache.maven.plugins:maven-checkstyle-plugin
     versions:
-      - 3.1.2
+    - 3.1.2

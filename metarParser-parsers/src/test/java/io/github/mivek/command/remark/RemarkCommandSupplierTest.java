@@ -18,7 +18,7 @@ public class RemarkCommandSupplierTest {
         List<Command> commands = new RemarkCommandSupplier().buildCommandList();
 
         assertNotNull(commands);
-        assertThat(commands, hasSize(25));
+        assertThat(commands, hasSize(39));
     }
 
 }

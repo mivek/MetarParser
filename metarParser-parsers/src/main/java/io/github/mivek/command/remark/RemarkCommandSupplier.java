@@ -52,6 +52,8 @@ public final class RemarkCommandSupplier implements Supplier<Command> {
         commandList.add(new TornadicActivityBegCommand());
         commandList.add(new TornadicActivityEndCommand());
         commandList.add(new PrecipitationBegEndCommand());
+        commandList.add(new PrecipitationBegCommand());
+        commandList.add(new PrecipitationEndCommand());
         commandList.add(new ThunderStormLocationMovingCommand());
         commandList.add(new ThunderStormLocationCommand());
         commandList.add(new SmallHailSizeCommand());
@@ -65,6 +67,18 @@ public final class RemarkCommandSupplier implements Supplier<Command> {
         commandList.add(new CeilingSecondLocationCommand());
         commandList.add(new SeaLevelPressureCommand());
         commandList.add(new SnowIncreaseCommand());
+        commandList.add(new HourlyMaximumMinimumTemperatureCommand());
+        commandList.add(new HourlyMaximumTemperatureCommand());
+        commandList.add(new HourlyMinimumTemperatureCommand());
+        commandList.add(new HourlyPrecipitationAmountCommand());
+        commandList.add(new HourlyPressureCommand());
+        commandList.add(new HourlyTemperatureDewPointCommand());
+        commandList.add(new IceAccretionCommand());
+        commandList.add(new PrecipitationAmount36HourCommand());
+        commandList.add(new PrecipitationAmount24HourCommand());
+        commandList.add(new SnowDepthCommand());
+        commandList.add(new SunshineDurationCommand());
+        commandList.add(new WaterEquivalentSnowCommand());
         return commandList;
     }
 
