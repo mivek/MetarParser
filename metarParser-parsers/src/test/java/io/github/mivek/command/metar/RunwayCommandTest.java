@@ -7,13 +7,14 @@ import io.github.mivek.enums.DepositType;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author mivek
@@ -22,7 +23,7 @@ public class RunwayCommandTest {
 
     private RunwayCommand command;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         command = new RunwayCommand();
     }

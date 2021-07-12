@@ -1,11 +1,11 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author mivek

@@ -1,46 +1,36 @@
 package io.github.mivek.utils;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
-import java.util.Collection;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 import io.github.mivek.internationalization.Messages;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-@RunWith(Parameterized.class)
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
 public class DegreesToDirectionTest {
-    private final String direction;
-    private final String degrees;
 
-    public DegreesToDirectionTest(final String pDirection, final String pDegrees) {
-        direction = pDirection;
-        degrees = pDegrees;
+    static Stream<Arguments> data() {
+        return Stream.of(
+                arguments("Converter.E", "80"),
+                arguments("Converter.NNE", "30"),
+                arguments("Converter.SSW", "200"),
+                arguments("Converter.W", "280"),
+                arguments("Converter.WNW", "300"),
+                arguments("Converter.SE", "130"),
+                arguments("Converter.SW", "230"),
+                arguments("Converter.N", "2"),
+                arguments("Converter.NNW", "345"),
+                arguments("Converter.N", "350"),
+                arguments("Converter.VRB","anyString")
+        );
     }
 
-    @Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
-            { "Converter.E", "80" },
-            { "Converter.NNE", "30" },
-            { "Converter.SSW", "200" },
-            { "Converter.W", "280" },
-            { "Converter.WNW", "300"},
-            { "Converter.SE", "130" },
-            { "Converter.SW", "230" },
-            { "Converter.N", "2" },
-            { "Converter.NNW", "345" },
-            { "Converter.N", "350" },
-            {"Converter.VRB","anyString"}
-        });
-    }
-
-    @Test
-    public void testDegreesToDirection() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testDegreesToDirection(String direction, String degrees) {
         assertEquals(Messages.getInstance().getString(direction), Converter.degreesToDirection(degrees));
     }
 }

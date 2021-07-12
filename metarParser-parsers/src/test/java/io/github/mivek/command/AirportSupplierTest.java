@@ -1,11 +1,11 @@
 package io.github.mivek.command;
 
 import io.github.mivek.model.Airport;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author mivek
@@ -14,7 +14,7 @@ public class AirportSupplierTest {
 
     private AirportSupplier sut;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         sut = new AirportSupplier();
     }

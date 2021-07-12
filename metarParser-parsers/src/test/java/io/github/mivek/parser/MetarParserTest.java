@@ -1,27 +1,17 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.Intensity;
-import io.github.mivek.enums.Phenomenon;
-import io.github.mivek.enums.TimeIndicator;
-import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.enums.*;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.Cloud;
-import io.github.mivek.model.Metar;
-import io.github.mivek.model.Visibility;
-import io.github.mivek.model.WeatherCondition;
-import io.github.mivek.model.Wind;
+import io.github.mivek.model.*;
 import io.github.mivek.model.trend.AbstractMetarTrend;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link MetarParser}
@@ -38,7 +28,7 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         return parser;
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parser = MetarParser.getInstance();
     }

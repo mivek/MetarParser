@@ -3,10 +3,10 @@ package io.github.mivek.command.common;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.model.Cloud;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author mivek
@@ -15,7 +15,7 @@ public class CloudCommandTest {
 
     private CloudCommand sut;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         sut = new CloudCommand();
     }

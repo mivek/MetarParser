@@ -3,20 +3,20 @@ package io.github.mivek.model;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link AbstractWeatherContainer}.
  *
  * @author mivek
  */
-@Ignore
+@Disabled
 public abstract class AbstractWeatherContainerTest<T extends AbstractWeatherContainer> {
 
     abstract T getEntity();

@@ -6,10 +6,6 @@ import io.github.mivek.model.Wind;
 
 public class GeneralParseTAFTest extends GeneralParseTest<TAF> {
 
-    public GeneralParseTAFTest(String pPartToParse, boolean pExpected) {
-        super(pPartToParse, pExpected);
-    }
-
     @Override
     protected TAF getWeatherCode() {
         TAF taf = new TAF();

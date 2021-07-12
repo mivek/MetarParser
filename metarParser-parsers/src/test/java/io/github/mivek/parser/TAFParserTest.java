@@ -1,29 +1,21 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.Intensity;
-import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.AbstractTafTrend;
-import io.github.mivek.model.trend.BECMGTafTrend;
-import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.PROBTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link TAFParser}
@@ -42,7 +34,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         return parser;
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parser = TAFParser.getInstance();
     }

@@ -7,10 +7,6 @@ import io.github.mivek.model.WindShear;
 
 public class GeneralParseMetarTest extends GeneralParseTest<Metar> {
 
-    public GeneralParseMetarTest(String pPartToParse, boolean pExpected) {
-        super(pPartToParse, pExpected);
-    }
-
     @Override
     protected Metar getWeatherCode() {
         Metar m = new Metar();

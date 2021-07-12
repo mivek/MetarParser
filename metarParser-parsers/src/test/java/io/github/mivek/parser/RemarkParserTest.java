@@ -1,12 +1,12 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.internationalization.Messages;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class RemarkParserTest {
     public static final String CLOUD_QUANTITY_BKN = "CloudQuantity.BKN";
@@ -15,7 +15,7 @@ public class RemarkParserTest {
     public static final String REMARK_SEA_LEVEL_PRESSURE = "Remark.Sea.Level.Pressure";
     private RemarkParser parser;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parser = RemarkParser.getInstance();
     }
