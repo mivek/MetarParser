@@ -1,0 +1,28 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    concurrency: ci-${{ github.ref }}
+    strategy:
+      matrix:
+        java: ['8', '11', '13', '15']
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'adopt'
+      - name: Cache maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Run the maven verify
+        run: mvn --batch-mode --update-snapshots clean verify
