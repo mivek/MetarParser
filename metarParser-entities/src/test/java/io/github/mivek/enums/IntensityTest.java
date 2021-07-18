@@ -1,17 +1,18 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IntensityTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetEnum() {
-        Intensity.getEnum("QWERTY");
+        assertThrows(IllegalArgumentException.class, () -> Intensity.getEnum("QWERTY"));
     }
 
     @Test

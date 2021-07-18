@@ -1,11 +1,11 @@
 package io.github.mivek.model.trend.validity;
 
 import io.github.mivek.enums.TimeIndicator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ATTimeTest {
 

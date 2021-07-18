@@ -5,19 +5,19 @@ import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.model.WeatherCondition;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link AbstractParser}
  *
  * @author mivek
  */
-@Ignore
+@Disabled
 public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     /*
      * =================== WEATHER CONDITION ===================

@@ -6,7 +6,7 @@ import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 

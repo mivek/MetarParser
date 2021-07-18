@@ -1,50 +1,41 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.model.AbstractWeatherCode;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author mivek
  */
-@RunWith(Parameterized.class)
 public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
-    private final String fPartToParse;
-    private final boolean fExpected;
 
-    @Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] { { "WS020/24045KT", true }, // Wind shear
-                { "05009KT", true }, // Wind
-                { "030V113", true }, // Wind variable
-                { "9999", true }, // Main visibility
-                { "6 1/2SM", true }, //Main visibility SM
-                { "1100w", true }, // Min visibility
-                { "VV002", true }, // Vertical visibility
-                { "CAVOK", true }, // CAVOK
-                { "SCT026CB", true }, // Cloud
-                { "ZZZ026CB", false }, // Cloud null
-                { "+SHGSRA", true }, // Weather condition
-                { "+ZERT", false } // Weather null
-        });
+    public static Stream<Arguments> data() {
+        return Stream.of(
+                Arguments.arguments("WS020/24045KT", true),
+                Arguments.arguments("05009KT", true),
+                Arguments.arguments("030V113", true),
+                Arguments.arguments("9999", true),
+                Arguments.arguments("6 1/2SM", true),
+                Arguments.arguments("1100w", true),
+                Arguments.arguments("VV002", true),
+                Arguments.arguments("CAVOK", true),
+                Arguments.arguments("SCT026CB", true),
+                Arguments.arguments("ZZZ026CB", false),
+                Arguments.arguments("+SHGSRA", true),
+                Arguments.arguments("+ZERT", false)
+        );
     }
 
-    public GeneralParseTest(final String pPartToParse, final boolean pExpected) {
-        fPartToParse = pPartToParse;
-        fExpected = pExpected;
-    }
-
-    @Test
-    public void testGeneralParse() {
-        assertEquals(fExpected, getSut().generalParse(getWeatherCode(), fPartToParse));
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testGeneralParse(final String partToParse, final boolean expected) {
+        assertEquals(expected, getSut().generalParse(getWeatherCode(), partToParse));
     }
 
     protected abstract T getWeatherCode();

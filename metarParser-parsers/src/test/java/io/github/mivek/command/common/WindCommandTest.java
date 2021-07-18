@@ -2,12 +2,12 @@ package io.github.mivek.command.common;
 
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Wind;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author mivek
@@ -16,7 +16,7 @@ public class WindCommandTest {
 
     private WindCommand sut;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         sut = new WindCommand();
     }

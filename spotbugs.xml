@@ -6,6 +6,14 @@
 
     <Match>
         <Bug code="RCN"/>
-        <Package name="io.github.mivek.provider.airport.impl"/>
+    </Match>
+    <Match>
+        <Bug code="MS"/>
+    </Match>
+    <Match>
+        <Bug code="EI"/>
+    </Match>
+    <Match>
+        <Bug code="EI2"/>
     </Match>
 </FindBugsFilter>

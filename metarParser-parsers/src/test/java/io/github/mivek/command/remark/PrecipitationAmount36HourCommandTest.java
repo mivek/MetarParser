@@ -4,14 +4,17 @@ import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PrecipitationAmount36HourCommandTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
@@ -21,7 +24,7 @@ public class PrecipitationAmount36HourCommandTest {
         Command command = new PrecipitationAmount36HourCommand();
         StringBuilder sb = new StringBuilder();
 
-        MatcherAssert.assertThat(command.execute("30217", sb), Matchers.emptyString());
+        assertEquals("AO1", command.execute("30217 AO1", sb));
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("2.17 inches of precipitation fell in the last 3 hours"));
     }
 
@@ -32,6 +35,12 @@ public class PrecipitationAmount36HourCommandTest {
 
         MatcherAssert.assertThat(command.execute("60217", sb), Matchers.emptyString());
         MatcherAssert.assertThat(sb.toString(), CoreMatchers.containsString("2.17 inches of precipitation fell in the last 6 hours"));
+    }
+
+    @Test
+    public void testCanParse() {
+        Command command = new PrecipitationAmount36HourCommand();
+        assertTrue(command.canParse("60217"));
     }
 
 }
