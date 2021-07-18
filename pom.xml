@@ -88,12 +88,6 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-nop</artifactId>
-                <version>1.7.31</version>
-                <scope>test</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -114,6 +108,12 @@
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5</artifactId>
             <version>${archunit-junit5.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.31</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
