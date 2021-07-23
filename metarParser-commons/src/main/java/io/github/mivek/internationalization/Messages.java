@@ -13,7 +13,7 @@ public final class Messages {
     /** The singleton instance. */
     private static final Messages INSTANCE = new Messages();
     /** Name of the bundle. */
-    private static final String BUNDLE_NAME = "internationalization.messages"; //$NON-NLS-1$
+    private static final String BUNDLE_NAME = "internationalization.messages";
     /** Bundle variable. */
     private ResourceBundle fResourceBundle;
 

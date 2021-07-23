@@ -11,14 +11,14 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Intensity {
     /** Light intensity. */
-    LIGHT("-"), //$NON-NLS-1$
+    LIGHT("-"),
     /** Heavy intensity. */
-    HEAVY("+"), //$NON-NLS-1$
+    HEAVY("+"),
     /** In vicinity. */
-    IN_VICINITY("VC"); //$NON-NLS-1$
+    IN_VICINITY("VC");
 
     /** The shortcut of the intensity. */
-    private final String shortcut; //$NON-NLS-1$
+    private final String shortcut;
 
     /**
      * Constructor.

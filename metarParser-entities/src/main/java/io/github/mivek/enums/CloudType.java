@@ -10,9 +10,9 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum CloudType {
     /** cumulonimbus. */
-    CB, //$NON-NLS-1$
+    CB,
     /** towering cumulus, cumulus congestus. */
-    TCU, //$NON-NLS-1$
+    TCU,
     /** Cirrus. */
     CI,
     /** Cirrocumulus. */
