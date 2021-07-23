@@ -19,7 +19,7 @@ public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> 
     /**
      * The parser.
      */
-    private final AbstractParser<T> fParser;
+    private final AbstractParser<T> parser;
 
     /**
      * Protected constructor to be used by sub-classes.
@@ -27,14 +27,14 @@ public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> 
      * @param parser the parser to set.
      */
     protected AbstractWeatherCodeService(final AbstractParser<T> parser) {
-        fParser = parser;
+        this.parser = parser;
     }
 
     /**
      * @return the parser.
      */
     protected AbstractParser<T> getParser() {
-        return fParser;
+        return parser;
     }
 
 }

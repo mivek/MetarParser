@@ -2,11 +2,11 @@ package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.AbstractMetarTrend;
-import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Metar class.
@@ -130,7 +130,7 @@ public class Metar extends AbstractWeatherCode {
      * @param trend the trend to add.
      */
     public void addTrend(final AbstractMetarTrend trend) {
-        trends.add(Validate.notNull(trend));
+        trends.add(Objects.requireNonNull(trend));
     }
 
     /**

@@ -4,6 +4,8 @@ import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Wind;
 import io.github.mivek.utils.Converter;
 
+import java.util.Objects;
+
 /**
  * @author mivek
  */
@@ -28,10 +30,6 @@ public interface BaseWindCommand extends Command {
         if (gust != null) {
             wind.setGust(Integer.parseInt(gust));
         }
-        if (unit == null) {
-            wind.setUnit("KT");
-        } else {
-            wind.setUnit(unit);
-        }
+        wind.setUnit(Objects.requireNonNullElse(unit, "KT"));
     }
 }
