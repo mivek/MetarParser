@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -25,7 +26,7 @@ public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCo
     }
 
     @Test
-    public void testRetrieveFromAirport() throws IOException, ParseException {
+    public void testRetrieveFromAirport() throws IOException, ParseException, URISyntaxException, InterruptedException {
         T res = getSut().retrieveFromAirport("LFPG");
         assertThat(res, notNullValue());
         assertThat(res.getAirport().getIcao(), is("LFPG"));

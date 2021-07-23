@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class OurAirportsAirportProviderTest {
 
     @Test
-    public void testGetAirport() throws CsvValidationException, IOException, URISyntaxException {
+    public void testGetAirport() throws CsvValidationException, IOException, URISyntaxException, InterruptedException {
         AirportProvider provider = new OurAirportsAirportProvider();
 
         Map<String, Airport> airports = provider.getAirports();

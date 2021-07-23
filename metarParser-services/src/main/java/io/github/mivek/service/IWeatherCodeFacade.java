@@ -4,6 +4,7 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * Interface for service.
@@ -29,5 +30,5 @@ public interface IWeatherCodeFacade<T extends AbstractWeatherCode> {
      * @throws IOException        When an error occurs
      * @throws ParseException     when an error occurs during the parsing.
      */
-    T retrieveFromAirport(String icao) throws ParseException, IOException;
+    T retrieveFromAirport(String icao) throws ParseException, IOException, URISyntaxException, InterruptedException;
 }
