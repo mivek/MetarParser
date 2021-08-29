@@ -391,4 +391,15 @@ public class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getRemark(), containsString("hourly temperature of 15°C and dew point of 10°C"));
         assertThat(m.getRemark(), containsString("Increase, then steady, or increase then Increase more slowly of 0.9 hectopascals in the past 3 hours"));
     }
+
+    @Test
+    public void testParseWithMinimalVisibility() {
+        String code = "SUMU 070520Z 34025KT 8000 2000SW VCSH SCT013CB BKN026 00/M05 Q1012 TEMPO 2000 SHSN=";
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        Metar m = parser.parse(code);
+        assertEquals("SUMU", m.getStation());
+        assertNotNull(m.getVisibility());
+        assertEquals(2000, m.getVisibility().getMinVisibility());
+        assertEquals("SW", m.getVisibility().getMinDirection());
+    }
 }
