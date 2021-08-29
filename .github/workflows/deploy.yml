@@ -25,11 +25,29 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-      - name: Upload the Jars
+      - name: Create jar folder and copy all jars inside
+        run: |
+          mkdir jars
+          cp /**/target/*.jar jars/
+
         uses: actions/upload-artifact@v2
         with:
-          path: /**/target/*.jar
+          name: jars
+          path: jars/
 
-    # Remains upload jar artifacts
-    # Create the release https://github.com/marketplace/actions/gh-release?version=v0.1.5
   release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions.checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: jars/
+
+      - name: Create the release
+        uses: softprops/actions-gh-release@v1
+        with:
+          draft: true
+          files: /etc/usr/artifacts/**/*.jar

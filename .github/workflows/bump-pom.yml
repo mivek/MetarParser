@@ -13,25 +13,14 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+
       - name: Expose git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
 
-      - name: Bump pom patch version for fixes and clean
+      - name: Bump pom according to commit message name
         run: |
-          mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} -DprocessAllModules versions:commit
-        if: "contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'Merge pull request') &&
-          (contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'fix') || contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'clean'))"
+          bash .github/workflows/scripts/bump-pom.sh
 
-      - name: Bump pom minor version for feature
-        run: |
-          mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 -DprocessAllModules versions:commit
-        if: "contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'Merge pull request') && contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'feature')"
-
-      - name: Bump pom major version for major feature
-        run: |
-          mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 -DprocessAllModules versions:commit
-        if: "contains(env.commit_message, 'Merge pull request') &&
-          (contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'clean') || contains(env.GIT_COMMIT_MESSAGE_SUBJECT , 'major'))"
       - name: Retrieve the version
         run: |
           echo "version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
@@ -43,4 +32,4 @@ jobs:
           default_author: github_actions
           message: Bump pom
           tag: ${{ env.version }}
-      if: "contains(env.commit_message, 'Merge pull request')"
+        if: "contains(env.commit_message, 'Merge pull request')"
