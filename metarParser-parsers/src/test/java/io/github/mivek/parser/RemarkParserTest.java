@@ -382,4 +382,14 @@ public class RemarkParserTest {
         assertThat(remark, containsString("CF1AC8 CF TR"));
         assertThat(remark, containsString(Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "1009.1")));
     }
+
+    @Test
+    public void testParseWithDistantLightning() {
+        String code = "AO2 PK WND 13029/2000 LTG DSNT ALQDS P0020";
+        String remark = parser.parse(code);
+
+        assertThat(remark, containsString(Messages.getInstance().getString("Remark.LTG")));
+        assertThat(remark, containsString(Messages.getInstance().getString("Remark.DSNT")));
+        assertThat(remark, containsString(Messages.getInstance().getString("Remark.ALQDS")));
+    }
 }

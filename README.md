@@ -223,8 +223,13 @@ TAF taf = service.retrieveFromAirport(icao);
 
 ### Internationalization
 
-English and French locales are supported by the library. The library uses the user's locale.
 The default locale is english.
+The following locales are also available in the project but may not be fully translated:
+- French
+- German
+- Polish
+- Italian
+- simplified chinese
 
 #### Change the locale and contributing
 
