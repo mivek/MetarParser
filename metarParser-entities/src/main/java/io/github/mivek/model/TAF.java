@@ -1,10 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.BECMGTafTrend;
-import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.PROBTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.Validity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -31,6 +28,8 @@ public class TAF extends AbstractWeatherCode {
     private final List<TEMPOTafTrend> tempos;
     /** List of probability changes. */
     private final List<PROBTafTrend> probs;
+    /** List of intermittent changes. */
+    private final List<INTERTafTrend> inters;
     /** Indicate if the taf event is ameded. */
     private boolean amendment;
 
@@ -43,6 +42,7 @@ public class TAF extends AbstractWeatherCode {
         fMs = new ArrayList<>();
         tempos = new ArrayList<>();
         probs = new ArrayList<>();
+        inters = new ArrayList<>();
     }
 
     /**
@@ -145,10 +145,25 @@ public class TAF extends AbstractWeatherCode {
     }
 
     /**
+     * Adds a INTER to the list of INTER changes.
+     * @param change The trend to add.
+     */
+    public void addInter(final INTERTafTrend change) {
+        inters.add(change);
+    }
+
+    /**
      * @return the tempos
      */
     public List<TEMPOTafTrend> getTempos() {
         return tempos;
+    }
+
+    /**
+     * @return The inter changes.
+     */
+    public List<INTERTafTrend> getInters() {
+        return inters;
     }
 
     /**
@@ -169,6 +184,6 @@ public class TAF extends AbstractWeatherCode {
     public final String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
                 .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), amendment)
-                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(probs.toString()).toString();
+                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(inters.toString()).appendToString(probs.toString()).toString();
     }
 }

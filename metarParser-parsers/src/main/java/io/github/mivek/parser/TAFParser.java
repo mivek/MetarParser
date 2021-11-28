@@ -7,11 +7,7 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.AbstractTafTrend;
-import io.github.mivek.model.trend.BECMGTafTrend;
-import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.PROBTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.*;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
@@ -128,7 +124,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         String cleanedInput = tafCode.replace("\n", " ")   // remove all linebreaks
                 .replaceAll("\\s{2,}", " ");  // remove unnecessary whitespaces
 
-        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|BECMG|FM|PROB)", "\n$1").split("\n");
+        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|INTER|BECMG|FM|PROB)", "\n$1").split("\n");
         String[][] lineTokens = Arrays.stream(lines).map(this::tokenize).toArray(String[][]::new);
         if (lineTokens.length > 1) {
             // often temperatures are set in the end of the TAF report
@@ -149,14 +145,18 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param parts the token of the line
      */
     private void processLines(final TAF taf, final String[] parts) {
-        if (parts[0].equals(BECMG)) {
+        if (BECMG.equals(parts[0])) {
             BECMGTafTrend change = new BECMGTafTrend();
             iterChanges(1, parts, change);
             taf.addBECMG(change);
-        } else if (parts[0].equals(TEMPO)) {
+        } else if (TEMPO.equals(parts[0])) {
             TEMPOTafTrend change = new TEMPOTafTrend();
             iterChanges(1, parts, change);
             taf.addTempo(change);
+        } else if ("INTER".equals(parts[0])) {
+            INTERTafTrend change = new INTERTafTrend();
+            iterChanges(1, parts, change);
+            taf.addInter(change);
         } else if (parts[0].startsWith(FM)) {
             FMTafTrend change = new FMTafTrend();
             change.setValidity(parseBasicValidity(parts[0]));

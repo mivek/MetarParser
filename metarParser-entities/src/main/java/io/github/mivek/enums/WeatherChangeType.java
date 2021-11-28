@@ -12,6 +12,8 @@ public enum WeatherChangeType {
     BECMG,
     /** Tempo enumeration. */
     TEMPO,
+    /** INTER enumeration. */
+    INTER,
     /** Probability change. */
     PROB;
 

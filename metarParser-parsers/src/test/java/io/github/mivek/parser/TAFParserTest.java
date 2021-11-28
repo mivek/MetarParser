@@ -683,4 +683,33 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(description, containsString(Messages.getInstance().getString("ToString.end.hour.day") + "=12"));
     }
 
+    @Test
+    public void testParseWithInter() throws ParseException {
+        String message = "TAF TAF \n" +
+                "AMD YWLM 270723Z 2707/2806 19020G30KT 9999 -SHRA SCT015 BKN020 \n" +
+                "BECMG 2708/2710 19014KT 9999 -SHRA SCT010 BKN015 \n" +
+                "BECMG 2800/2802 18015G25KT 9999 -SHRA SCT015 BKN020 \n" +
+                "TEMPO 2707/2712 3000 SHRA SCT005 BKN010 INTER 2712/2802 4000 SHRA SCT005 BKN010";
+
+        TAF result = parser.parse(message);
+
+        assertNotNull(result);
+
+        assertThat(result.getInters(), hasSize(1));
+        assertThat(result.getInters().get(0).getValidity().getStartDay(), is(27));
+        assertThat(result.getInters().get(0).getValidity().getStartHour(), is(12));
+        assertThat(result.getInters().get(0).getValidity().getEndDay(), is(28));
+        assertThat(result.getInters().get(0).getValidity().getEndHour(), is(2));
+        assertThat(result.getInters().get(0).getVisibility().getMainVisibility(), is("4000m"));
+        assertThat(result.getInters().get(0).getWeatherConditions(), hasSize(1));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHOWERS));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getIntensity(), nullValue());
+        assertThat(result.getInters().get(0).getClouds(), hasSize(2));
+        assertThat(result.getInters().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
+        assertThat(result.getInters().get(0).getClouds().get(0).getHeight(), is(500));
+        assertThat(result.getInters().get(0).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
+        assertThat(result.getInters().get(0).getClouds().get(1).getHeight(), is(1000));
+    }
 }
