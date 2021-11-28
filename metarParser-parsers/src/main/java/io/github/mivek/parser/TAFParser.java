@@ -50,7 +50,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param remarkParser          the remark parser.
      * @param airportSupplier       the airport supplier.
      */
-    protected TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
+    TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
     }
 
@@ -200,7 +200,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param change the change object to update.
      * @param part   String containing the information.
      */
-    protected void processGeneralChanges(final AbstractTafTrend<?> change, final String part) {
+    void processGeneralChanges(final AbstractTafTrend<?> change, final String part) {
         generalParse(change, part);
     }
 
@@ -210,7 +210,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param part the string to parse.
      * @return probability of the trend.
      */
-    protected int parseProbability(final String part) {
+    int parseProbability(final String part) {
         return Integer.parseInt(part.substring(4));
     }
 
@@ -221,7 +221,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param validityString the string representing the validity.
      * @return a {@link Validity} object.
      */
-    protected Validity parseValidity(final String validityString) {
+    Validity parseValidity(final String validityString) {
         Validity validity = new Validity();
         String[] validityPart = validityString.split("/");
         validity.setStartDay(Integer.parseInt(validityPart[0].substring(0, 2)));
@@ -237,7 +237,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param validityString the string to parse
      * @return a {@link BeginningValidity} object.
      */
-    protected BeginningValidity parseBasicValidity(final String validityString) {
+    BeginningValidity parseBasicValidity(final String validityString) {
         BeginningValidity validity = new BeginningValidity();
         validity.setStartDay(Integer.parseInt(validityString.substring(2, 4)));
         validity.setStartHour(Integer.parseInt(validityString.substring(4, 6)));
@@ -268,7 +268,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param tempPart the string to parse.
      * @return a temperature with its date.
      */
-    protected TemperatureDated parseTemperature(final String tempPart) {
+    TemperatureDated parseTemperature(final String tempPart) {
         TemperatureDated temperature = new TemperatureDated();
         String[] parts = tempPart.split("/");
         temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));

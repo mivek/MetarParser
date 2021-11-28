@@ -33,7 +33,7 @@ public final class CloudCommand implements Command {
      * @param cloudString string with cloud elements.
      * @return a decoded cloud with its quantity, its altitude and its type.
      */
-    protected Cloud parseCloud(final String cloudString) {
+    Cloud parseCloud(final String cloudString) {
         Cloud cloud = new Cloud();
         String[] cloudPart = Regex.pregMatch(CLOUD_REGEX, cloudString);
         try {

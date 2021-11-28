@@ -32,7 +32,7 @@ public final class MetarCommandSupplier implements Supplier<Command> {
     /**
      * @return The list of commands used by this parser.
      */
-    protected List<Command> buildCommandList() {
+    List<Command> buildCommandList() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new RunwayCommand());
         commandList.add(new TemperatureCommand());

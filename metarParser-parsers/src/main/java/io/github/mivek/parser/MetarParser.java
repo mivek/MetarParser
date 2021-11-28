@@ -45,7 +45,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param metarCommandSupplier the metar command supplier.
      * @param airportSupplier            the airport supplier
      */
-    protected MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
+    MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
             final MetarCommandSupplier metarCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
         supplier = metarCommandSupplier;

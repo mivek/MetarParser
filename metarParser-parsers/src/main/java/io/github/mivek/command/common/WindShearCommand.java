@@ -32,7 +32,7 @@ public final class WindShearCommand implements BaseWindCommand {
      * @param stringWindShear the string to parse
      * @return a wind shear object.
      */
-    protected WindShear parseWindShear(final String stringWindShear) {
+    WindShear parseWindShear(final String stringWindShear) {
         WindShear wind = new WindShear();
         String[] windPart = Regex.pregMatch(WIND_SHEAR_REGEX, stringWindShear);
         wind.setHeight(100 * Integer.parseInt(windPart[1]));

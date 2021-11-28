@@ -31,7 +31,7 @@ public final class WindExtremeCommand implements Command {
      * @param wind          the wind to update
      * @param windVariation String with wind variation information
      */
-    protected void parseWindVariation(final Wind wind, final String windVariation) {
+    void parseWindVariation(final Wind wind, final String windVariation) {
         String[] matches = Regex.pregMatch(WIND_EXTREME_REGEX, windVariation);
         wind.setMinVariation(Integer.parseInt(matches[1]));
         wind.setMaxVariation(Integer.parseInt(matches[2]));
