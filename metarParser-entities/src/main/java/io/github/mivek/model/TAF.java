@@ -1,7 +1,11 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.*;
+import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.TEMPOTafTrend;
+import io.github.mivek.model.trend.PROBTafTrend;
+import io.github.mivek.model.trend.INTERTafTrend;
 import io.github.mivek.model.trend.validity.Validity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -30,7 +34,7 @@ public class TAF extends AbstractWeatherCode {
     private final List<PROBTafTrend> probs;
     /** List of intermittent changes. */
     private final List<INTERTafTrend> inters;
-    /** Indicate if the taf event is ameded. */
+    /** Indicate if the taf event is amended. */
     private boolean amendment;
 
     /**
