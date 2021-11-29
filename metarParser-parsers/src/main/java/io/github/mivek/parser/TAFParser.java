@@ -10,6 +10,7 @@ import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.trend.AbstractTafTrend;
 import io.github.mivek.model.trend.BECMGTafTrend;
 import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.INTERTafTrend;
 import io.github.mivek.model.trend.PROBTafTrend;
 import io.github.mivek.model.trend.TEMPOTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
@@ -54,7 +55,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param remarkParser          the remark parser.
      * @param airportSupplier       the airport supplier.
      */
-    protected TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
+    TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
     }
 
@@ -128,7 +129,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         String cleanedInput = tafCode.replace("\n", " ")   // remove all linebreaks
                 .replaceAll("\\s{2,}", " ");  // remove unnecessary whitespaces
 
-        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|BECMG|FM|PROB)", "\n$1").split("\n");
+        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|INTER|BECMG|FM|PROB)", "\n$1").split("\n");
         String[][] lineTokens = Arrays.stream(lines).map(this::tokenize).toArray(String[][]::new);
         if (lineTokens.length > 1) {
             // often temperatures are set in the end of the TAF report
@@ -149,14 +150,18 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param parts the token of the line
      */
     private void processLines(final TAF taf, final String[] parts) {
-        if (parts[0].equals(BECMG)) {
+        if (BECMG.equals(parts[0])) {
             BECMGTafTrend change = new BECMGTafTrend();
             iterChanges(1, parts, change);
             taf.addBECMG(change);
-        } else if (parts[0].equals(TEMPO)) {
+        } else if (TEMPO.equals(parts[0])) {
             TEMPOTafTrend change = new TEMPOTafTrend();
             iterChanges(1, parts, change);
             taf.addTempo(change);
+        } else if ("INTER".equals(parts[0])) {
+            INTERTafTrend change = new INTERTafTrend();
+            iterChanges(1, parts, change);
+            taf.addInter(change);
         } else if (parts[0].startsWith(FM)) {
             FMTafTrend change = new FMTafTrend();
             change.setValidity(parseBasicValidity(parts[0]));
@@ -200,7 +205,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param change the change object to update.
      * @param part   String containing the information.
      */
-    protected void processGeneralChanges(final AbstractTafTrend<?> change, final String part) {
+    void processGeneralChanges(final AbstractTafTrend<?> change, final String part) {
         generalParse(change, part);
     }
 
@@ -210,7 +215,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param part the string to parse.
      * @return probability of the trend.
      */
-    protected int parseProbability(final String part) {
+    int parseProbability(final String part) {
         return Integer.parseInt(part.substring(4));
     }
 
@@ -221,7 +226,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param validityString the string representing the validity.
      * @return a {@link Validity} object.
      */
-    protected Validity parseValidity(final String validityString) {
+    Validity parseValidity(final String validityString) {
         Validity validity = new Validity();
         String[] validityPart = validityString.split("/");
         validity.setStartDay(Integer.parseInt(validityPart[0].substring(0, 2)));
@@ -237,7 +242,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param validityString the string to parse
      * @return a {@link BeginningValidity} object.
      */
-    protected BeginningValidity parseBasicValidity(final String validityString) {
+    BeginningValidity parseBasicValidity(final String validityString) {
         BeginningValidity validity = new BeginningValidity();
         validity.setStartDay(Integer.parseInt(validityString.substring(2, 4)));
         validity.setStartHour(Integer.parseInt(validityString.substring(4, 6)));
@@ -268,7 +273,7 @@ public final class TAFParser extends AbstractParser<TAF> {
      * @param tempPart the string to parse.
      * @return a temperature with its date.
      */
-    protected TemperatureDated parseTemperature(final String tempPart) {
+    TemperatureDated parseTemperature(final String tempPart) {
         TemperatureDated temperature = new TemperatureDated();
         String[] parts = tempPart.split("/");
         temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));

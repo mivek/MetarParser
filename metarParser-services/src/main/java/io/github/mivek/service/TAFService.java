@@ -62,7 +62,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
      * @return the formated taf code.
      * @throws ParseException when an error occurs.
      */
-    protected String format(final String code) throws ParseException {
+    String format(final String code) throws ParseException {
         String[] lines = code.split("\n");
         if (!TAFParser.TAF.equals(lines[0].trim())) {
             return code;

@@ -26,7 +26,7 @@ public final class WindCommand implements BaseWindCommand {
      * @param stringWind a string with wind elements.
      * @return a Wind element with the informations.
      */
-    protected Wind parseWind(final String stringWind) {
+    Wind parseWind(final String stringWind) {
         Wind wind = new Wind();
         String[] windPart = Regex.pregMatch(WIND_REGEX, stringWind);
         setWindElements(wind, windPart[1], windPart[2], windPart[3], windPart[4]);

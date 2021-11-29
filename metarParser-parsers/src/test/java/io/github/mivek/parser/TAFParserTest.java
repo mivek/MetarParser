@@ -40,7 +40,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testProcessGeneralChangesWithTX() {
+    void testProcessGeneralChangesWithTX() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "TX15/0612Z";
         parser.processGeneralChanges(change, part);
@@ -50,7 +50,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testProcessGeneralChangesWithTN() {
+    void testProcessGeneralChangesWithTN() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "TN01/0612Z";
         parser.processGeneralChanges(change, part);
@@ -60,7 +60,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testProcessGeneralChangesCloudValid() {
+    void testProcessGeneralChangesCloudValid() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "SCT012TCU";
         parser.processGeneralChanges(change, part);
@@ -72,7 +72,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testProcessGeneralChangesCloudNull() {
+    void testProcessGeneralChangesCloudNull() {
         AbstractTafTrend<?> change = new BECMGTafTrend();
         String part = "NSW";
         parser.processGeneralChanges(change, part);
@@ -81,7 +81,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseValidity() {
+    void testParseValidity() {
         String validityString = "3118/0124";
 
         Validity res = parser.parseValidity(validityString);
@@ -94,7 +94,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseTemperatureMax() {
+    void testParseTemperatureMax() {
         String tempString = "TX15/0612Z";
         TemperatureDated res = parser.parseTemperature(tempString);
 
@@ -104,7 +104,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseTemperatureMinus() {
+    void testParseTemperatureMinus() {
         String tempString = "TNM02/0612Z";
         TemperatureDated res = parser.parseTemperature(tempString);
 
@@ -114,7 +114,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseBeginningValidity() {
+    void testParseBeginningValidity() {
         String validity = "FM061300";
         BeginningValidity res = parser.parseBasicValidity(validity);
         assertThat(res.getStartDay(), is(6));
@@ -123,7 +123,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseValidWithInvalidLineBreaks() throws ParseException {
+    void testParseValidWithInvalidLineBreaks() throws ParseException {
         String taf = "TAF LFPG 150500Z 1506/1612 17005KT 6000 SCT012 \n" + "TEMPO 1506/1509 3000 BR BKN006 PROB40 \n" + "TEMPO 1506/1508 0400 BCFG BKN002 PROB40 \n"
                 + "TEMPO 1512/1516 4000 -SHRA FEW030TCU BKN040 \n" + "BECMG 1520/1522 CAVOK \n" + "TEMPO 1603/1608 3000 BR BKN006 PROB40 \n" + "TEMPO 1604/1607 0400 BCFG BKN002 TX17/1512Z TN07/1605Z";
 
@@ -259,7 +259,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseValidWithoutLineBreaks() throws ParseException {
+    void testParseValidWithoutLineBreaks() throws ParseException {
         String taf = "TAF LSZH 292025Z 2921/3103 VRB03KT 9999 FEW020 BKN080 TX20/3014Z TN06/3003Z " + "PROB30 TEMPO 2921/2923 SHRA " + "BECMG 3001/3004 4000 MIFG NSC "
                 + "PROB40 3003/3007 1500 BCFG SCT004 " + "PROB30 3004/3007 0800 FG VV003 " + "BECMG 3006/3009 9999 FEW030 " + "PROB40 TEMPO 3012/3017 30008KT";
 
@@ -398,7 +398,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseValidWithoutLineBreaksAndEndingTemperature() throws ParseException {
+    void testParseValidWithoutLineBreaksAndEndingTemperature() throws ParseException {
         String taf = "TAF KLSV 120700Z 1207/1313 VRB06KT 9999 SCT250 QNH2992INS BECMG 1217/1218 10010G15KT 9999 SCT250 QNH2980INS BECMG 1303/1304 VRB06KT 9999 FEW250 QNH2979INS TX42/1223Z TN24/1213Z";
 
         TAF res = parser.parse(taf);
@@ -478,7 +478,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithFM() throws ParseException {
+    void testParseWithFM() throws ParseException {
         String message = "TAF KLWT 211120Z 2112/2212 20008KT 9999 SKC \n" + "TEMPO 2112/2116 VRB06KT \n" + "FM212300 30012G22KT 9999 FEW050 SCT250 \n" + "FM220700 27008KT 9999 FEW030 FEW250";
 
         TAF res = parser.parse(message);
@@ -540,7 +540,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWith2Taf() throws ParseException {
+    void testParseWith2Taf() throws ParseException {
         String message = "TAF TAF LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
 
         TAF result = parser.parse(message);
@@ -551,14 +551,14 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseInvalidMessage() {
+    void testParseInvalidMessage() {
         String message = "LFPG 191100Z 1912/2018 02010KT 9999 FEW040 PROB30 ";
         ParseException e = assertThrows(ParseException.class, () -> parser.parse(message));
         assertEquals(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, e.getErrorCode());
     }
 
     @Test
-    public void testParseWithWindShear() throws ParseException {
+    void testParseWithWindShear() throws ParseException {
         // GIVEN a TAF message with windshear in principal part and from part.
         String message = "TAF KMKE 011530 0116/0218 WS020/24045KT\n" + "FM010200 17005KT P6SM SKC WS020/23055KT ";
         // WHEN parsing the message.
@@ -587,7 +587,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseInvalidAirport() throws ParseException {
+    void testParseInvalidAirport() throws ParseException {
         String message = "TAF AAAA 191100Z 1912/2018 02010KT 9999 FEW040 PROB30";
         TAF res = parser.parse(message);
         assertNull(res.getAirport());
@@ -595,7 +595,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithNauticalMilesVisibility() throws ParseException {
+    void testParseWithNauticalMilesVisibility() throws ParseException {
         // GIVEN a TAF message with nautical miles visibility
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 \r\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 \nFM301200 10008KT 2SM -SN OVC010 \r\n"
                 + "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
@@ -619,7 +619,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithAMDTAF() throws ParseException {
+    void testParseWithAMDTAF() throws ParseException {
         //GIVEN an amended TAF
         String message = "TAF AMD LFPO 100742Z 1007/1112 21018G35KT 9999 BKN025 \r\n" + "      TEMPO 1007/1009 4000 RA BKN014 SCT020CB PROB40 \r\n" + "      TEMPO 1007/1009 22020G45KT \r\n"
                 + "      TEMPO 1010/1017 24022G45KT SHRA SCT030CB PROB30 \r\n" + "      TEMPO 1012/1016 -TSRA \r\n" + "      BECMG 1020/1023 24013KT SCT023 \r\n"
@@ -631,7 +631,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithCavok() throws ParseException {
+    void testParseWithCavok() throws ParseException {
         // GIVEN a TAF with CAVOK in the main part and in a BECMG part.
         String message = "TAF LFPG 211700Z 2118/2224 VRB03KT CAVOK TX15/2215Z TN02/2205Z \n" + "BECMG 2122/2124 3000 BR \n" + "TEMPO 2202/2209 0800 BCFG PROB30 \n" + "TEMPO 2203/2209 0500 FG  \n"
                 + "BECMG 2211/2213 09006KT CAVOK";
@@ -647,7 +647,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithRMKInTempo() throws ParseException {
+    void testParseWithRMKInTempo() throws ParseException {
         // GIVEN a TAF with remark in second tempo.
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 FM301200 10008KT 2SM -SN OVC010 \n"
                 + "TEMPO 3012/3022 3/4SM -SN VV007 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z";
@@ -664,7 +664,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @Test
-    public void testParseWithRMK() throws ParseException {
+    void testParseWithRMK() throws ParseException {
         // GIVEN a TAF with remark.
         String message = "TAF CZBF 300939Z 3010/3022 VRB03KT 6SM -SN OVC015 RMK FCST BASED ON AUTO OBS. NXT FCST BY 301400Z\n" + "TEMPO 3010/3012 11/2SM -SN OVC009 FM301200 10008KT 2SM -SN OVC010 \n"
                 + "TEMPO 3012/3022 3/4SM -SN VV007";
@@ -683,4 +683,33 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(description, containsString(Messages.getInstance().getString("ToString.end.hour.day") + "=12"));
     }
 
+    @Test
+    void testParseWithInter() throws ParseException {
+        String message = "TAF TAF \n" +
+                "AMD YWLM 270723Z 2707/2806 19020G30KT 9999 -SHRA SCT015 BKN020 \n" +
+                "BECMG 2708/2710 19014KT 9999 -SHRA SCT010 BKN015 \n" +
+                "BECMG 2800/2802 18015G25KT 9999 -SHRA SCT015 BKN020 \n" +
+                "TEMPO 2707/2712 3000 SHRA SCT005 BKN010 INTER 2712/2802 4000 SHRA SCT005 BKN010";
+
+        TAF result = parser.parse(message);
+
+        assertNotNull(result);
+
+        assertThat(result.getInters(), hasSize(1));
+        assertThat(result.getInters().get(0).getValidity().getStartDay(), is(27));
+        assertThat(result.getInters().get(0).getValidity().getStartHour(), is(12));
+        assertThat(result.getInters().get(0).getValidity().getEndDay(), is(28));
+        assertThat(result.getInters().get(0).getValidity().getEndHour(), is(2));
+        assertThat(result.getInters().get(0).getVisibility().getMainVisibility(), is("4000m"));
+        assertThat(result.getInters().get(0).getWeatherConditions(), hasSize(1));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getPhenomenons().get(0), is(Phenomenon.RAIN));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getDescriptive(), is(Descriptive.SHOWERS));
+        assertThat(result.getInters().get(0).getWeatherConditions().get(0).getIntensity(), nullValue());
+        assertThat(result.getInters().get(0).getClouds(), hasSize(2));
+        assertThat(result.getInters().get(0).getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
+        assertThat(result.getInters().get(0).getClouds().get(0).getHeight(), is(500));
+        assertThat(result.getInters().get(0).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
+        assertThat(result.getInters().get(0).getClouds().get(1).getHeight(), is(1000));
+    }
 }

@@ -34,7 +34,7 @@ public final class CommonCommandSupplier implements Supplier<Command> {
      *
      * @return the list of commands.
      */
-    protected List<Command> buildCommands() {
+    List<Command> buildCommands() {
         List<Command> commandList = new ArrayList<>();
         commandList.add(new WindShearCommand());
         commandList.add(new WindCommand());
