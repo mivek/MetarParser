@@ -4,7 +4,7 @@ import io.github.mivek.model.TAF;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.model.Wind;
 
-public class GeneralParseTAFTest extends GeneralParseTest<TAF> {
+class GeneralParseTAFTest extends GeneralParseTest<TAF> {
 
     @Override
     protected TAF getWeatherCode() {

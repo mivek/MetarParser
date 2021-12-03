@@ -21,7 +21,7 @@ public class CloudCommandTest {
     }
 
     @Test
-    public void testParseCloudNullCloudQuantity() {
+    void testParseCloudNullCloudQuantity() {
         String cloud = "AZE015";
 
         Cloud res = sut.parseCloud(cloud);
@@ -30,7 +30,7 @@ public class CloudCommandTest {
     }
 
     @Test
-    public void testParseCloudSkyClear() {
+    void testParseCloudSkyClear() {
         String cloud = "SKC";
 
         Cloud res = sut.parseCloud(cloud);
@@ -42,7 +42,7 @@ public class CloudCommandTest {
     }
 
     @Test
-    public void testParseCloudWithAltitude() {
+    void testParseCloudWithAltitude() {
         String cloud = "SCT016";
         Cloud res = sut.parseCloud(cloud);
 
@@ -53,7 +53,7 @@ public class CloudCommandTest {
     }
 
     @Test
-    public void testParseCloudWithType() {
+    void testParseCloudWithType() {
         String cloud = "SCT026CB";
 
         Cloud res = sut.parseCloud(cloud);
@@ -66,7 +66,7 @@ public class CloudCommandTest {
     }
 
     @Test
-    public void testParseCloudWithNSC() {
+    void testParseCloudWithNSC() {
         String cloud = "NSC";
         Cloud res = sut.parseCloud(cloud);
         assertNotNull(res);

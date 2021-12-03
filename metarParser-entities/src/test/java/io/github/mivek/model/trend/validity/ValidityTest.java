@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
-public class ValidityTest {
+class ValidityTest {
     @Test
-    public void testToString() {
+    void testToString() {
         Validity sut = new Validity();
         sut.setStartDay(10);
         sut.setStartHour(15);

@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class AirportTest {
+class AirportTest {
     private Airport sut;
 
     @BeforeEach
-    public void init() {
+    void init() {
         sut = new Airport();
     }
 
     @Test
-    public void testEqual() {
+    void testEqual() {
         sut.setIcao("111");
 
         Airport other1 = new Airport();
@@ -32,7 +32,7 @@ public class AirportTest {
     }
 
     @Test
-    public void test() {
+    void test() {
         String city = "London";
         String timezone = "Europe/London";
         String icao = "EGLL";

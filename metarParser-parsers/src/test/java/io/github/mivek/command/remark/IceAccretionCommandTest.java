@@ -11,15 +11,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class IceAccretionCommandTest {
+class IceAccretionCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Command command = new IceAccretionCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("l1004 AO1", sb));
@@ -27,7 +27,7 @@ public class IceAccretionCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new IceAccretionCommand();
         assertTrue(command.canParse("l1004"));
     }

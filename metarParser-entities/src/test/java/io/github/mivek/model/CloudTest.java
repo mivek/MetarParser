@@ -9,17 +9,17 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CloudTest {
+class CloudTest {
 
     @Test
-    public void testSetHeightGetHeight() {
+    void testSetHeightGetHeight() {
         Cloud c = new Cloud();
         c.setHeight(300);
         assertEquals(300, c.getHeight());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         Cloud c = new Cloud();
         c.setQuantity(CloudQuantity.BKN);
         c.setHeight(300);

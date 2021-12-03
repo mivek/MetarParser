@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
-public class TemperatureDatedTest {
+class TemperatureDatedTest {
     @Test
-    public void testToString() {
+    void testToString() {
         TemperatureDated temp = new TemperatureDated();
         temp.setDay(10);
         temp.setHour(15);

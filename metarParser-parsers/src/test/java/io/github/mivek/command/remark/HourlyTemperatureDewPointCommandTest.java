@@ -12,15 +12,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class HourlyTemperatureDewPointCommandTest {
+class HourlyTemperatureDewPointCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Command command = new HourlyTemperatureDewPointCommand();
         StringBuilder sb = new StringBuilder();
         assertThat(command.execute("T00261015", sb), Matchers.emptyString());
@@ -28,7 +28,7 @@ public class HourlyTemperatureDewPointCommandTest {
     }
 
     @Test
-    public void testExecuteOnlyTemperature() {
+    void testExecuteOnlyTemperature() {
         Command command = new HourlyTemperatureDewPointCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("T0026 AO1", sb));
@@ -37,7 +37,7 @@ public class HourlyTemperatureDewPointCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new HourlyTemperatureDewPointCommand();
         assertTrue(command.canParse("T0026"));
     }

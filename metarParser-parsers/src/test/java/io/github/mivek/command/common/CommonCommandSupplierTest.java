@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author mivek
  */
-public class CommonCommandSupplierTest {
+class CommonCommandSupplierTest {
 
     @Test
-    public void testBuildCommands() {
+    void testBuildCommands() {
         List<Command> commands = new CommonCommandSupplier().buildCommands();
 
         assertNotNull(commands);

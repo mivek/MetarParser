@@ -12,9 +12,9 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
  * @author mivek
  */
 @AnalyzeClasses(packages = { "io.github.mivek.provider.airport.impl" }, importOptions = { ImportOption.DoNotIncludeTests.class })
-public class AirportProviderArchitectureTest {
+class AirportProviderArchitectureTest {
 
     @ArchTest
-    public static final ArchRule implRule = classes().should().implement(AirportProvider.class);
+    static final ArchRule implRule = classes().should().implement(AirportProvider.class);
 }
 

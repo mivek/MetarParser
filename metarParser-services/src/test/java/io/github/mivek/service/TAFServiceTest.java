@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
+class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
 
     private final TAFService sut = TAFService.getInstance();
 
@@ -17,7 +17,7 @@ public class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
     }
 
     @Test
-    public void testFormatWithAMD() throws ParseException {
+    void testFormatWithAMD() throws ParseException {
         // Given a taf message with AMD on second line.
         String message =
                 """
@@ -47,7 +47,7 @@ public class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
     }
 
     @Test
-    public void testFormatWithoutReformat() throws ParseException {
+    void testFormatWithoutReformat() throws ParseException {
         // GIVEN a taf with a full first line ie the first line is not only work "TAF"
         String message = "TAF LFPG 121700Z 1218/1324 13003KT CAVOK TX09/1315Z TN00/1306Z \n" + "TEMPO 1303/1308 4000 BR";
         // WHEN formating the message
@@ -57,7 +57,7 @@ public class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
     }
 
     @Test
-    public void testFormat() throws ParseException {
+    void testFormat() throws ParseException {
         String tafMessage = """
                 TAF\s
                 AMD TAF\s

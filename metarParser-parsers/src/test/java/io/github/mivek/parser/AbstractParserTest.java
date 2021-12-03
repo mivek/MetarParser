@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author mivek
  */
 @Disabled
-public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
+abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     /*
      * =================== WEATHER CONDITION ===================
      */
     @Test
-    public void testParseWCSimple() {
+    void testParseWCSimple() {
         String wcPart = "-DZ";
 
         WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
@@ -36,7 +36,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWCMultiplePHE() {
+    void testParseWCMultiplePHE() {
         String wcPart = "SHRAGR";
 
         WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
@@ -49,7 +49,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWCNull() {
+    void testParseWCNull() {
         String wcPart = "-SH";
 
         WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
@@ -58,7 +58,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
+    void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
         String wcPart = "SH";
 
         WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
@@ -67,7 +67,7 @@ public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
     }
 
     @Test
-    public void testTokenize() {
+    void testTokenize() {
         // GIVEN a string with 1 1/2SM
         String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
         String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017" };

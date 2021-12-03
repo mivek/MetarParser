@@ -16,17 +16,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Disabled
-public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
+abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
     protected abstract AbstractWeatherCodeService<T> getSut();
 
     @Test
-    public void testRetrieveFromAirportInvalid() {
+    void testRetrieveFromAirportInvalid() {
         ParseException e = assertThrows(ParseException.class, () -> getSut().retrieveFromAirport("RandomIcao"));
         assertEquals(ErrorCodes.ERROR_CODE_INVALID_ICAO, e.getErrorCode());
     }
 
     @Test
-    public void testRetrieveFromAirport() throws IOException, ParseException, URISyntaxException, InterruptedException {
+    void testRetrieveFromAirport() throws IOException, ParseException, URISyntaxException, InterruptedException {
         T res = getSut().retrieveFromAirport("LFPG");
         assertThat(res, notNullValue());
         assertThat(res.getAirport().getIcao(), is("LFPG"));

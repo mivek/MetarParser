@@ -11,15 +11,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SunshineDurationCommandTest {
+class SunshineDurationCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Command command = new SunshineDurationCommand();
         StringBuilder sb = new StringBuilder();
 
@@ -28,7 +28,7 @@ public class SunshineDurationCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new SunshineDurationCommand();
         assertTrue(command.canParse("98096"));
     }

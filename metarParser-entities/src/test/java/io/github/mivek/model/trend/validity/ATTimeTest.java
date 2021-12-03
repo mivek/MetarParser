@@ -7,10 +7,10 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ATTimeTest {
+class ATTimeTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         ATTime sut = new ATTime();
         sut.setTime(LocalTime.of(12, 15));
         String des = sut.toString();

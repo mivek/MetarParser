@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class RunwayInfoTest {
+class RunwayInfoTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         RunwayInfo ri = new RunwayInfo();
         ri.setMinRange(300);
         ri.setName("14R");

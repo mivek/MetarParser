@@ -12,15 +12,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HourlyMaximumTemperatureCommandTest {
+class HourlyMaximumTemperatureCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecuteBelowZero() {
+    void testExecuteBelowZero() {
         Command command = new HourlyMaximumTemperatureCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("11021 AO1", sb));
@@ -28,7 +28,7 @@ public class HourlyMaximumTemperatureCommandTest {
     }
 
     @Test
-    public void testExecuteAboveZero() {
+    void testExecuteAboveZero() {
         Command command = new HourlyMaximumTemperatureCommand();
         StringBuilder sb = new StringBuilder();
         MatcherAssert.assertThat(command.execute("10142", sb), Matchers.emptyString());
@@ -36,7 +36,7 @@ public class HourlyMaximumTemperatureCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new HourlyMaximumTemperatureCommand();
         assertTrue(command.canParse("10142"));
     }

@@ -11,9 +11,9 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
  * @author mivek
  */
 @AnalyzeClasses(packages = "io.github.mivek.utils", importOptions = { ImportOption.DoNotIncludeTests.class })
-public class ArchitectureTest {
+class ArchitectureTest {
 
     @ArchTest
-    public static final ArchRule dependencyRule = classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("io.github.mivek.internationalization", "java.time", "java.util..");
+    static final ArchRule dependencyRule = classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("io.github.mivek.internationalization", "java.time", "java.util..");
 }
 

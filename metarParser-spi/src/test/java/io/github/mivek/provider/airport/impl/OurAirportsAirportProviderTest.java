@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author mivek
  */
 @Disabled
-public class OurAirportsAirportProviderTest {
+class OurAirportsAirportProviderTest {
 
     @Test
-    public void testGetAirport() throws CsvValidationException, IOException, URISyntaxException, InterruptedException {
+    void testGetAirport() throws CsvValidationException, IOException, URISyntaxException, InterruptedException {
         AirportProvider provider = new OurAirportsAirportProvider();
 
         Map<String, Airport> airports = provider.getAirports();

@@ -7,9 +7,9 @@ import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TLTimeTest {
+class TLTimeTest {
     @Test
-    public void testToString() {
+    void testToString() {
         TLTime sut = new TLTime();
         sut.setTime(LocalTime.of(12, 15));
 

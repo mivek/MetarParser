@@ -9,9 +9,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
+class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
     @Test
-    public void testDecodeValidMetar() throws ParseException {
+    void testDecodeValidMetar() throws ParseException {
         String code = "LFPG 251830Z 17013KT 9999 OVC006 04/03 Q1012 NOSIG";
 
         Metar res = MetarService.getInstance().decode(code);

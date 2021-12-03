@@ -12,17 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author mivek
  */
-public class WindCommandTest {
+class WindCommandTest {
 
     private WindCommand sut;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         sut = new WindCommand();
     }
 
     @Test
-    public void testParseWindSimple() {
+    void testParseWindSimple() {
         String windPart = "34008KT";
 
         Wind res = sut.parseWind(windPart);
@@ -37,7 +37,7 @@ public class WindCommandTest {
     }
 
     @Test
-    public void testParseWindWithGusts() {
+    void testParseWindWithGusts() {
         String windPart = "12017G20KT";
 
         Wind res = sut.parseWind(windPart);
@@ -51,7 +51,7 @@ public class WindCommandTest {
     }
 
     @Test
-    public void testParseWindVariable() {
+    void testParseWindVariable() {
         String windPart = "VRB08KT";
 
         Wind res = sut.parseWind(windPart);

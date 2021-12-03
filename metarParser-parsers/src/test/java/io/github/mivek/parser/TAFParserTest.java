@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author mivek
  */
-public class TAFParserTest extends AbstractParserTest<TAF> {
+class TAFParserTest extends AbstractParserTest<TAF> {
 
     public static final String TEN_KM = ">10km";
     public static final String REMARK_FCST = "Remark.FCST";
@@ -35,7 +35,7 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
     }
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         parser = TAFParser.getInstance();
     }
 
@@ -711,11 +711,12 @@ public class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     void testParseWithInter() throws ParseException {
-        String message = "TAF TAF \n" +
-                "AMD YWLM 270723Z 2707/2806 19020G30KT 9999 -SHRA SCT015 BKN020 \n" +
-                "BECMG 2708/2710 19014KT 9999 -SHRA SCT010 BKN015 \n" +
-                "BECMG 2800/2802 18015G25KT 9999 -SHRA SCT015 BKN020 \n" +
-                "TEMPO 2707/2712 3000 SHRA SCT005 BKN010 INTER 2712/2802 4000 SHRA SCT005 BKN010";
+        String message = """
+                TAF TAF\s
+                AMD YWLM 270723Z 2707/2806 19020G30KT 9999 -SHRA SCT015 BKN020\s
+                BECMG 2708/2710 19014KT 9999 -SHRA SCT010 BKN015\s
+                BECMG 2800/2802 18015G25KT 9999 -SHRA SCT015 BKN020\s
+                TEMPO 2707/2712 3000 SHRA SCT005 BKN010 INTER 2712/2802 4000 SHRA SCT005 BKN010""";
 
         TAF result = parser.parse(message);
 

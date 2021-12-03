@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public class CloudQuantityTest {
+class CloudQuantityTest {
 
     @Test
-    public void testToStringMultipleLocale() {
+    void testToStringMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("peu", CloudQuantity.FEW.toString());
 

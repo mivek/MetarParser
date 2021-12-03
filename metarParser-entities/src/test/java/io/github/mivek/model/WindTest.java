@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 
-public class WindTest {
+class WindTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         Wind sut = new Wind();
 
         sut.setDirection(Messages.getInstance().getString("Converter.NE"));

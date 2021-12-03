@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author mivek
  */
-public class MetarCommandSupplierTest {
+class MetarCommandSupplierTest {
 
     @Test
-    public void testBuildCommandList() {
+    void testBuildCommandList() {
         List<Command> commands = new MetarCommandSupplier().buildCommandList();
 
         assertNotNull(commands);

@@ -5,7 +5,7 @@ import io.github.mivek.model.Visibility;
 import io.github.mivek.model.Wind;
 import io.github.mivek.model.WindShear;
 
-public class GeneralParseMetarTest extends GeneralParseTest<Metar> {
+class GeneralParseMetarTest extends GeneralParseTest<Metar> {
 
     @Override
     protected Metar getWeatherCode() {

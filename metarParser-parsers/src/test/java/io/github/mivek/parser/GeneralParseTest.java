@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
+abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
 
-    public static Stream<Arguments> data() {
+    static Stream<Arguments> data() {
         return Stream.of(
                 Arguments.arguments("WS020/24045KT", true),
                 Arguments.arguments("05009KT", true),
@@ -34,7 +34,7 @@ public abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
     @ParameterizedTest
     @MethodSource("data")
-    public void testGeneralParse(final String partToParse, final boolean expected) {
+    void testGeneralParse(final String partToParse, final boolean expected) {
         assertEquals(expected, getSut().generalParse(getWeatherCode(), partToParse));
     }
 

@@ -3,6 +3,7 @@ package io.github.mivek.command.remark;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -10,14 +11,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HourlyPressureCommandTest {
+class HourlyPressureCommandTest {
 
-    public void setup() {
+    @BeforeEach
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute(){
+    void testExecute(){
         Command command = new HourlyPressureCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("52032 AO1", sb));
@@ -26,7 +28,7 @@ public class HourlyPressureCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new HourlyPressureCommand();
         assertTrue(command.canParse("52032"));
     }

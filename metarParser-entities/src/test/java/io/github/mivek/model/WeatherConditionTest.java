@@ -11,10 +11,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class WeatherConditionTest {
+class WeatherConditionTest {
 
     @Test
-    public void testIsValidWithVCSH() {
+    void testIsValidWithVCSH() {
         WeatherCondition wc = new WeatherCondition();
         wc.setIntensity(Intensity.IN_VICINITY);
         wc.setDescriptive(Descriptive.SHOWERS);
@@ -23,7 +23,7 @@ public class WeatherConditionTest {
     }
 
     @Test
-    public void testIdValidWithVCBL() {
+    void testIdValidWithVCBL() {
         WeatherCondition wc = new WeatherCondition();
         wc.setIntensity(Intensity.IN_VICINITY);
         wc.setDescriptive(Descriptive.BLOWING);
@@ -31,7 +31,7 @@ public class WeatherConditionTest {
         assertFalse(wc.isValid());
     }
     @Test
-    public void testIsValidWithoutPhenomenons() {
+    void testIsValidWithoutPhenomenons() {
         WeatherCondition wc = new WeatherCondition();
         wc.setIntensity(Intensity.LIGHT);
         wc.setDescriptive(Descriptive.BLOWING);
@@ -40,7 +40,7 @@ public class WeatherConditionTest {
     }
 
     @Test
-    public void testIsValid() {
+    void testIsValid() {
         WeatherCondition wc = new WeatherCondition();
         wc.addPhenomenon(Phenomenon.HAIL);
 
@@ -48,14 +48,14 @@ public class WeatherConditionTest {
     }
 
     @Test
-    public void testIsValidTS() {
+    void testIsValidTS() {
         WeatherCondition wc = new WeatherCondition();
         wc.setDescriptive(Descriptive.THUNDERSTORM);
         assertTrue(wc.isValid());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         WeatherCondition sut = new WeatherCondition();
         sut.setIntensity(Intensity.LIGHT);
         sut.setDescriptive(Descriptive.SHOWERS);

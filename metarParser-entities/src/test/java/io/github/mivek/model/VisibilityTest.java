@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class VisibilityTest {
+class VisibilityTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         Visibility sut = new Visibility();
         sut.setMainVisibility(">10km");
         sut.setMinDirection("SE");
