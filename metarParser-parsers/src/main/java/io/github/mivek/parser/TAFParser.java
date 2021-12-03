@@ -134,7 +134,7 @@ public final class TAFParser extends AbstractParser<TAF> {
         if (lineTokens.length > 1) {
             // often temperatures are set in the end of the TAF report
             String[] last = lineTokens[lines.length - 1];
-            List<String> temperatures = Arrays.stream(last).filter(code -> code.startsWith(TX) || code.startsWith(TN)).collect(Collectors.toList());
+            List<String> temperatures = Arrays.stream(last).filter(code -> code.startsWith(TX) || code.startsWith(TN)).toList();
             if (!temperatures.isEmpty()) {
                 lineTokens[0] = Stream.concat(Arrays.stream(lineTokens[0]), temperatures.stream()).toArray(String[]::new);
                 lineTokens[lines.length - 1] = Arrays.stream(last).filter(code -> !code.startsWith(TX) && !code.startsWith(TN)).toArray(String[]::new);

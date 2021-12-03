@@ -6,12 +6,10 @@ import io.github.mivek.model.TAF;
 import io.github.mivek.parser.TAFParser;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,9 +23,7 @@ import java.util.stream.Stream;
 public final class TAFService extends AbstractWeatherCodeService<TAF> {
     /** URL to retrieve the TAF from. */
     private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
-    /**
-     * The instance of the service.
-     */
+    /** The instance of the service. */
     private static final TAFService INSTANCE = new TAFService();
 
     /**
@@ -44,17 +40,10 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
 
     @Override
     public TAF retrieveFromAirport(final String icao) throws IOException, ParseException, URISyntaxException, InterruptedException {
-        if (icao.length() != AbstractWeatherCodeService.ICAO) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
-        }
+        checkIcao(icao);
         String website = NOAA_TAF_URL + icao.toUpperCase()
                 + ".TXT";
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI(website))
-                .GET()
-                .version(HttpClient.Version.HTTP_2)
-                .timeout(Duration.ofSeconds(5))
-                .build();
+        HttpRequest request = buildRequest(website);
 
         HttpResponse<Stream<String>> response = HttpClient.newBuilder()
                 .build()
