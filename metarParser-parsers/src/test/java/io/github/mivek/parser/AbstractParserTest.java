@@ -1,5 +1,9 @@
 package io.github.mivek.parser;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
@@ -8,10 +12,6 @@ import io.github.mivek.model.WeatherCondition;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Test class for {@link AbstractParser}
  *
@@ -19,65 +19,85 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @Disabled
 public abstract class AbstractParserTest<T extends AbstractWeatherCode> {
-    /*
-     * =================== WEATHER CONDITION ===================
-     */
-    @Test
-    public void testParseWCSimple() {
-        String wcPart = "-DZ";
+  /*
+   * =================== WEATHER CONDITION ===================
+   */
+  @Test
+  public void testParseWCSimple() {
+    String wcPart = "-DZ";
 
-        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
+    WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
-        assertEquals(Intensity.LIGHT, wc.getIntensity());
-        assertNull(wc.getDescriptive());
+    assertEquals(Intensity.LIGHT, wc.getIntensity());
+    assertNull(wc.getDescriptive());
 
-        assertThat(wc.getPhenomenons(), hasSize(1));
-        assertThat(wc.getPhenomenons(), hasItem(Phenomenon.DRIZZLE));
-    }
+    assertThat(wc.getPhenomenons(), hasSize(1));
+    assertThat(wc.getPhenomenons(), hasItem(Phenomenon.DRIZZLE));
+  }
 
-    @Test
-    public void testParseWCMultiplePHE() {
-        String wcPart = "SHRAGR";
+  @Test
+  public void testParseWCMultiplePHE() {
+    String wcPart = "SHRAGR";
 
-        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
+    WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
-        assertNull(wc.getIntensity());
-        assertNotNull(wc.getDescriptive());
-        assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
-        assertThat(wc.getPhenomenons(), hasSize(2));
-        assertThat(wc.getPhenomenons(), hasItems(Phenomenon.RAIN, Phenomenon.HAIL));
-    }
+    assertNull(wc.getIntensity());
+    assertNotNull(wc.getDescriptive());
+    assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
+    assertThat(wc.getPhenomenons(), hasSize(2));
+    assertThat(wc.getPhenomenons(), hasItems(Phenomenon.RAIN, Phenomenon.HAIL));
+  }
 
-    @Test
-    public void testParseWCNull() {
-        String wcPart = "-SH";
+  @Test
+  public void testParseWCNull() {
+    String wcPart = "-SH";
 
-        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
+    WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
-        assertNull(wc);
-    }
+    assertNull(wc);
+  }
 
-    @Test
-    public void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
-        String wcPart = "SH";
+  @Test
+  public void testParseWCDescriptiveIsNotNullButPhenomenonCanBeEmptyAndIntensityCanBeNull() {
+    String wcPart = "SH";
 
-        WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
+    WeatherCondition wc = getParser().parseWeatherCondition(wcPart);
 
-        assertNull(wc);
-    }
+    assertNull(wc);
+  }
 
-    @Test
-    public void testTokenize() {
-        // GIVEN a string with 1 1/2SM
-        String code = "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40 SLP176 P0002 T10171017=";
-        String[] tokens = { "METAR", "KTTN", "051853Z", "04011KT", "1 1/2SM", "VCTS", "SN", "FZFG", "BKN003", "OVC010", "M02/M02", "A3006", "RMK", "AO2", "TSB40", "SLP176", "P0002", "T10171017" };
-        // WHEN tokenizing the string
-        String[] result = getParser().tokenize(code);
-        // THEN the visibility part is 1 1/2SM
-        assertNotNull(result);
-        assertArrayEquals(tokens, result);
+  @Test
+  public void testTokenize() {
+    // GIVEN a string with 1 1/2SM
+    String code =
+        "METAR KTTN 051853Z 04011KT 1 1/2SM VCTS SN FZFG BKN003 OVC010 M02/M02 A3006 RMK AO2 TSB40"
+            + " SLP176 P0002 T10171017=";
+    String[] tokens = {
+      "METAR",
+      "KTTN",
+      "051853Z",
+      "04011KT",
+      "1 1/2SM",
+      "VCTS",
+      "SN",
+      "FZFG",
+      "BKN003",
+      "OVC010",
+      "M02/M02",
+      "A3006",
+      "RMK",
+      "AO2",
+      "TSB40",
+      "SLP176",
+      "P0002",
+      "T10171017"
+    };
+    // WHEN tokenizing the string
+    String[] result = getParser().tokenize(code);
+    // THEN the visibility part is 1 1/2SM
+    assertNotNull(result);
+    assertArrayEquals(tokens, result);
+  }
 
-    }
-
-    protected abstract AbstractParser<T> getParser();
+  protected abstract AbstractParser<T> getParser();
 }

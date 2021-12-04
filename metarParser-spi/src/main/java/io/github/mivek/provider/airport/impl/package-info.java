@@ -1,5 +1,6 @@
 /**
- * Package containing implementation of the {@link io.github.mivek.provider.airport.AirportProvider}.
+ * Package containing implementation of the {@link
+ * io.github.mivek.provider.airport.AirportProvider}.
  *
  * @author mivek
  */

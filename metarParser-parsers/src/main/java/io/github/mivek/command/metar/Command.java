@@ -9,17 +9,17 @@ import io.github.mivek.model.Metar;
  */
 public interface Command {
 
-    /**
-     * Method handling the part to parse.
-     *
-     * @param metar the metar object to handle.
-     * @param part  the string to parse.
-     */
-    void execute(Metar metar, String part);
+  /**
+   * Method handling the part to parse.
+   *
+   * @param metar the metar object to handle.
+   * @param part the string to parse.
+   */
+  void execute(Metar metar, String part);
 
-    /**
-     * @param input the input string to test.
-     * @return true if the input can be handled by the command.
-     */
-    boolean canParse(String input);
+  /**
+   * @param input the input string to test.
+   * @return true if the input can be handled by the command.
+   */
+  boolean canParse(String input);
 }

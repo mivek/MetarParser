@@ -2,25 +2,21 @@ package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
 
-/**
- * @author mivek
- */
+/** @author mivek */
 public enum WeatherChangeType {
-    /** From enumeration. */
-    FM,
-    /** Becoming enumeration. */
-    BECMG,
-    /** Tempo enumeration. */
-    TEMPO,
-    /** INTER enumeration. */
-    INTER,
-    /** Probability change. */
-    PROB;
+  /** From enumeration. */
+  FM,
+  /** Becoming enumeration. */
+  BECMG,
+  /** Tempo enumeration. */
+  TEMPO,
+  /** INTER enumeration. */
+  INTER,
+  /** Probability change. */
+  PROB;
 
-
-    @Override
-    public String toString() {
-        return Messages.getInstance().getString("WeatherChangeType." + name());
-    }
-
+  @Override
+  public String toString() {
+    return Messages.getInstance().getString("WeatherChangeType." + name());
+  }
 }

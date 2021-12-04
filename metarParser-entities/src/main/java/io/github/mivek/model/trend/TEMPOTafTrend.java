@@ -9,11 +9,8 @@ import io.github.mivek.model.trend.validity.Validity;
  * @author mivek
  */
 public final class TEMPOTafTrend extends AbstractTafProbTrend<Validity> {
-    /**
-     * Default constructor.
-     */
-    public TEMPOTafTrend() {
-        super(WeatherChangeType.TEMPO);
-    }
-
+  /** Default constructor. */
+  public TEMPOTafTrend() {
+    super(WeatherChangeType.TEMPO);
+  }
 }

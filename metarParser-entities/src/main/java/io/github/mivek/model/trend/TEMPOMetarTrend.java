@@ -9,11 +9,8 @@ import io.github.mivek.enums.WeatherChangeType;
  */
 public final class TEMPOMetarTrend extends AbstractMetarTrend {
 
-    /**
-     * Constructor.
-     */
-    public TEMPOMetarTrend() {
-        super(WeatherChangeType.TEMPO);
-    }
-
+  /** Constructor. */
+  public TEMPOMetarTrend() {
+    super(WeatherChangeType.TEMPO);
+  }
 }

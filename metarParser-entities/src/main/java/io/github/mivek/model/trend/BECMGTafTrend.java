@@ -10,11 +10,8 @@ import io.github.mivek.model.trend.validity.Validity;
  */
 public class BECMGTafTrend extends AbstractTafTrend<Validity> {
 
-    /**
-     * Constructor.
-     */
-    public BECMGTafTrend() {
-        super(WeatherChangeType.BECMG);
-    }
-
+  /** Constructor. */
+  public BECMGTafTrend() {
+    super(WeatherChangeType.BECMG);
+  }
 }
