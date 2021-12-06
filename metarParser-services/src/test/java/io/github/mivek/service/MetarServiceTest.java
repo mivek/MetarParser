@@ -42,7 +42,7 @@ class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
     }
 
     @Override
-    protected AbstractWeatherCodeService<Metar> getSut() {
+    protected AbstractWeatherCodeService<Metar> getService() {
         return MetarService.getInstance();
     }
 }

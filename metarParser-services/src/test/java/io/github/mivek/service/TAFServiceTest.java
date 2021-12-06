@@ -12,7 +12,7 @@ class TAFServiceTest extends AbstractWeatherCodeServiceTest<TAF> {
     private final TAFService sut = TAFService.getInstance();
 
     @Override
-    protected AbstractWeatherCodeService<TAF> getSut() {
+    protected AbstractWeatherCodeService<TAF> getService() {
         return sut;
     }
 
