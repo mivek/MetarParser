@@ -1,7 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivek.model.trend.MetarTrend;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class Metar extends AbstractWeatherCode {
     /** List of runways information. */
     private final List<RunwayInfo> runways;
     /** List of trends. */
-    private final List<AbstractMetarTrend> trends;
+    private final List<MetarTrend> trends;
 
     /**
      * Constructor.
@@ -129,14 +129,14 @@ public class Metar extends AbstractWeatherCode {
      *
      * @param trend the trend to add.
      */
-    public void addTrend(final AbstractMetarTrend trend) {
+    public void addTrend(final MetarTrend trend) {
         trends.add(Objects.requireNonNull(trend));
     }
 
     /**
      * @return the list of trends.
      */
-    public List<AbstractMetarTrend> getTrends() {
+    public List<MetarTrend> getTrends() {
         return trends;
     }
 

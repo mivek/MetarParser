@@ -3,7 +3,7 @@ package io.github.mivek.parser;
 import io.github.mivek.enums.*;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.*;
-import io.github.mivek.model.trend.AbstractMetarTrend;
+import io.github.mivek.model.trend.MetarTrend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +81,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         assertTrue(m.isAuto());
         assertThat(m.getClouds(), hasSize(3));
         assertThat(m.getTrends(), hasSize(1));
-        AbstractMetarTrend trend = m.getTrends().get(0);
+        MetarTrend trend = m.getTrends().get(0);
         assertThat(trend.getType(), is(WeatherChangeType.TEMPO));
         assertNotNull(trend.getWind());
         assertEquals(Integer.valueOf(260), trend.getWind().getDirectionDegrees());
@@ -132,7 +132,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends(), hasSize(1));
         assertThat(m.getTrends().get(0).getType(), is(WeatherChangeType.TEMPO));
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
-        AbstractMetarTrend trend = m.getTrends().get(0);
+        MetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
         assertThat(wc.getPhenomenons(), hasSize(1));
@@ -152,7 +152,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends(), hasSize(1));
         assertThat(m.getTrends().get(0).getType(), is(WeatherChangeType.TEMPO));
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
-        AbstractMetarTrend trend = m.getTrends().get(0);
+        MetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
         assertThat(wc.getPhenomenons(), hasSize(1));
@@ -172,7 +172,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends(), hasSize(1));
         assertThat(m.getTrends().get(0).getType(), is(WeatherChangeType.TEMPO));
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
-        AbstractMetarTrend trend = m.getTrends().get(0);
+        MetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
         assertThat(wc.getPhenomenons(), hasSize(1));
@@ -192,7 +192,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         assertThat(m.getTrends(), hasSize(1));
         assertThat(m.getTrends().get(0).getType(), is(WeatherChangeType.TEMPO));
         assertThat(m.getTrends().get(0).getWeatherConditions(), hasSize(1));
-        AbstractMetarTrend trend = m.getTrends().get(0);
+        MetarTrend trend = m.getTrends().get(0);
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.SHOWERS, wc.getDescriptive());
         assertEquals(Phenomenon.RAIN, wc.getPhenomenons().get(0));
@@ -295,7 +295,7 @@ class MetarParserTest extends AbstractParserTest<Metar> {
         String code = "LFPG 212030Z 03003KT CAVOK 09/06 Q1031 NOSIG";
         // WHEN parsing the metar.
         Metar m = parser.parse(code);
-        // THEN the attribute cavok is true and the main visibility is > 10km.
+        // THEN the attribute cavok is true and the main visibility is > 10 km.
         assertNotNull(m);
         assertTrue(m.isCavok());
         assertEquals(TEN_KM, m.getVisibility().getMainVisibility());

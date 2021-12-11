@@ -2,17 +2,16 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
- * Abstract class for metar's trend.
+ * class for metar's trend.
  *
  * @author mivek
  */
-public abstract class AbstractMetarTrend extends AbstractTrend {
+public class MetarTrend extends AbstractTrend {
     /**
      * List containing the times properties of the trend.
      */
@@ -23,7 +22,7 @@ public abstract class AbstractMetarTrend extends AbstractTrend {
      *
      * @param type the WeatherChangeType to set.
      */
-    protected AbstractMetarTrend(final WeatherChangeType type) {
+    public MetarTrend(final WeatherChangeType type) {
         super(type);
         times = new ArrayList<>();
     }

@@ -4,14 +4,12 @@ import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarCommandSupplier;
+import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.factory.FactoryProvider;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
-import io.github.mivek.model.trend.AbstractMetarTrend;
-import io.github.mivek.model.trend.BECMGMetarTrend;
-import io.github.mivek.model.trend.TEMPOMetarTrend;
-import io.github.mivek.model.trend.validity.ATTime;
-import io.github.mivek.model.trend.validity.FMTime;
-import io.github.mivek.model.trend.validity.TLTime;
+import io.github.mivek.model.trend.MetarTrend;
+import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
 import io.github.mivek.utils.Converter;
 
 /**
@@ -21,10 +19,6 @@ import io.github.mivek.utils.Converter;
  * @author mivek
  */
 public final class MetarParser extends AbstractParser<Metar> {
-    /** Constant string for TL. */
-    private static final String TILL = "TL";
-    /** Constant string for AT. */
-    private static final String AT = "AT";
     /** Instance of the class. */
     private static final MetarParser INSTANCE = new MetarParser();
     /** The command supplier. */
@@ -40,7 +34,7 @@ public final class MetarParser extends AbstractParser<Metar> {
     /**
      * Dependency injection constructor.
      *
-     * @param commonCommandSupplier      the command command supplier
+     * @param commonCommandSupplier      the common command supplier
      * @param remarkParser               the remark parser
      * @param metarCommandSupplier the metar command supplier.
      * @param airportSupplier            the airport supplier
@@ -88,8 +82,7 @@ public final class MetarParser extends AbstractParser<Metar> {
                     parseRMK(m, metarTab, i);
                     break;
                 } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
-                    AbstractMetarTrend trend;
-                    trend = initTrend(metarTab[i]);
+                    MetarTrend trend = new MetarTrend(WeatherChangeType.valueOf(metarTab[i]));
                     i = iterTrend(i, trend, metarTab);
                     m.addTrend(trend);
                 } else {
@@ -99,22 +92,6 @@ public final class MetarParser extends AbstractParser<Metar> {
             i++;
         }
         return m;
-    }
-
-    /**
-     * Initiate the trend according to string.
-     *
-     * @param trendpart the string to parse.
-     * @return a concrete Trends object.
-     */
-    private AbstractMetarTrend initTrend(final String trendpart) {
-        AbstractMetarTrend trend;
-        if (trendpart.equals(TEMPO)) {
-            trend = new TEMPOMetarTrend();
-        } else {
-            trend = new BECMGMetarTrend();
-        }
-        return trend;
     }
 
     /**
@@ -138,7 +115,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param parts an array of strings
      * @return the next index to parse.
      */
-    private int iterTrend(final int index, final AbstractMetarTrend trend, final String[] parts) {
+    private int iterTrend(final int index, final MetarTrend trend, final String[] parts) {
         int i = index + 1;
         while (i < parts.length && !parts[i].equals(TEMPO) && !parts[i].equals(BECMG)) {
             processChange(trend, parts[i]);
@@ -153,19 +130,11 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param trend the abstractMetarTrend object to update.
      * @param part  The token to parse.
      */
-    private void processChange(final AbstractMetarTrend trend, final String part) {
-        if (part.startsWith(AT)) {
-            ATTime at = new ATTime();
-            at.setTime(Converter.stringToTime(part.substring(2)));
-            trend.addTime(at);
-        } else if (part.startsWith(FM)) {
-            FMTime fm = new FMTime();
-            fm.setTime(Converter.stringToTime(part.substring(2)));
-            trend.addTime(fm);
-        } else if (part.startsWith(TILL)) {
-            TLTime tl = new TLTime();
-            tl.setTime(Converter.stringToTime(part.substring(2)));
-            trend.addTime(tl);
+    private void processChange(final MetarTrend trend, final String part) {
+        AbstractMetarTrendTime time = FactoryProvider.getMetarTrendTimeFactory().create(part.substring(0, 2));
+        if (time != null) {
+            time.setTime(Converter.stringToTime(part.substring(2)));
+            trend.addTime(time);
         } else {
             generalParse(trend, part);
         }
