@@ -7,10 +7,9 @@ package io.github.mivek.command;
 @FunctionalInterface
 public interface Supplier<T> {
 
-    /**
-     * @param string the string to parse.
-     * @return the command able to parse the string.
-     */
-    T get(String string);
+  /**
+   * @param string the string to parse.
+   * @return the command able to parse the string.
+   */
+  T get(String string);
 }
-

@@ -9,11 +9,8 @@ import io.github.mivek.enums.WeatherChangeType;
  */
 public final class BECMGMetarTrend extends AbstractMetarTrend {
 
-    /**
-     * Constructor.
-     */
-    public BECMGMetarTrend() {
-        super(WeatherChangeType.BECMG);
-    }
-
+  /** Constructor. */
+  public BECMGMetarTrend() {
+    super(WeatherChangeType.BECMG);
+  }
 }

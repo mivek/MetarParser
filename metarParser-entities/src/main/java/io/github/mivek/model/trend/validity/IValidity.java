@@ -7,24 +7,15 @@ package io.github.mivek.model.trend.validity;
  */
 public interface IValidity {
 
-    /**
-     * @return the startDay
-     */
+  /** @return the startDay */
+  Integer getStartDay();
 
-    Integer getStartDay();
+  /** @param startDay the startDay to set */
+  void setStartDay(Integer startDay);
 
-    /**
-     * @param startDay the startDay to set
-     */
-    void setStartDay(Integer startDay);
+  /** @return the startHour */
+  Integer getStartHour();
 
-    /**
-     * @return the startHour
-     */
-    Integer getStartHour();
-
-    /**
-     * @param startHour the startHour to set
-     */
-    void setStartHour(Integer startHour);
+  /** @param startHour the startHour to set */
+  void setStartHour(Integer startHour);
 }

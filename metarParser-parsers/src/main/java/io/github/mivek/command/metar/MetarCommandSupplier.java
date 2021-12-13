@@ -1,45 +1,37 @@
 package io.github.mivek.command.metar;
 
 import io.github.mivek.command.Supplier;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author mivek
- */
+/** @author mivek */
 public final class MetarCommandSupplier implements Supplier<Command> {
-    /** List of command for the metarParser. */
-    private final List<Command> commands;
+  /** List of command for the metarParser. */
+  private final List<Command> commands;
 
-    /**
-     * Constructor.
-     */
-    public MetarCommandSupplier() {
-        commands = buildCommandList();
+  /** Constructor. */
+  public MetarCommandSupplier() {
+    commands = buildCommandList();
+  }
+
+  @Override
+  public Command get(final String string) {
+    for (Command command : commands) {
+      if (command.canParse(string)) {
+        return command;
+      }
     }
+    return null;
+  }
 
-    @Override
-    public Command get(final String string) {
-        for (Command command : commands) {
-            if (command.canParse(string)) {
-                return command;
-            }
-        }
-        return null;
-    }
+  /** @return The list of commands used by this parser. */
+  List<Command> buildCommandList() {
+    List<Command> commandList = new ArrayList<>();
+    commandList.add(new RunwayCommand());
+    commandList.add(new TemperatureCommand());
+    commandList.add(new AltimeterCommand());
+    commandList.add(new AltimeterMecuryCommand());
 
-    /**
-     * @return The list of commands used by this parser.
-     */
-    List<Command> buildCommandList() {
-        List<Command> commandList = new ArrayList<>();
-        commandList.add(new RunwayCommand());
-        commandList.add(new TemperatureCommand());
-        commandList.add(new AltimeterCommand());
-        commandList.add(new AltimeterMecuryCommand());
-
-        return commandList;
-    }
+    return commandList;
+  }
 }
-

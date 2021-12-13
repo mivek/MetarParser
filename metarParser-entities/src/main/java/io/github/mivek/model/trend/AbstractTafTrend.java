@@ -11,40 +11,34 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  * @author mivek
  */
 public abstract class AbstractTafTrend<T extends AbstractValidity> extends AbstractTrend {
-    /** The validity of the change. */
-    private T validity;
+  /** The validity of the change. */
+  private T validity;
 
-    /**
-     * Constructor with parameter.
-     *
-     * @param type the type to set.
-     */
-    protected AbstractTafTrend(final WeatherChangeType type) {
-        super(type);
-    }
+  /**
+   * Constructor with parameter.
+   *
+   * @param type the type to set.
+   */
+  protected AbstractTafTrend(final WeatherChangeType type) {
+    super(type);
+  }
 
-    /**
-     * @return the validity
-     */
-    public T getValidity() {
-        return validity;
-    }
+  /** @return the validity */
+  public T getValidity() {
+    return validity;
+  }
 
-    /**
-     * @param validity the validity to set
-     */
-    public void setValidity(final T validity) {
-        this.validity = validity;
-    }
+  /** @param validity the validity to set */
+  public void setValidity(final T validity) {
+    this.validity = validity;
+  }
 
-    /**
-     * @return A description of the object.
-     */
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).
-                appendSuper(super.toString()).
-                appendToString(validity.toString()).
-                toString();
-    }
+  /** @return A description of the object. */
+  @Override
+  public String toString() {
+    return new ToStringBuilder(this)
+        .appendSuper(super.toString())
+        .appendToString(validity.toString())
+        .toString();
+  }
 }

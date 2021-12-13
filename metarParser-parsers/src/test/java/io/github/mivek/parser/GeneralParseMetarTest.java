@@ -7,18 +7,17 @@ import io.github.mivek.model.WindShear;
 
 public class GeneralParseMetarTest extends GeneralParseTest<Metar> {
 
-    @Override
-    protected Metar getWeatherCode() {
-        Metar m = new Metar();
-        m.setWind(new Wind());
-        m.setVisibility(new Visibility());
-        m.setWindShear(new WindShear());
-        return m;
-    }
+  @Override
+  protected Metar getWeatherCode() {
+    Metar m = new Metar();
+    m.setWind(new Wind());
+    m.setVisibility(new Visibility());
+    m.setWindShear(new WindShear());
+    return m;
+  }
 
-    @Override
-    protected MetarParser getSut() {
-        return MetarParser.getInstance();
-    }
-
+  @Override
+  protected MetarParser getSut() {
+    return MetarParser.getInstance();
+  }
 }
