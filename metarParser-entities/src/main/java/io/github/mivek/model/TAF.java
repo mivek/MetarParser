@@ -10,7 +10,6 @@ import io.github.mivek.model.trend.validity.AbstractValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -84,40 +83,35 @@ public final class TAF extends AbstractWeatherCode {
      * @return the bECMGs
      */
     public List<TafTrend> getBECMGs() {
-        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.BECMG)).map(TafTrend.class::cast).collect(
-            Collectors.toList());
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.BECMG)).map(TafTrend.class::cast).toList();
     }
 
     /**
      * @return the fMs
      */
     public List<FMTafTrend> getFMs() {
-        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.FM)).map(FMTafTrend.class::cast).collect(
-            Collectors.toList());
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.FM)).map(FMTafTrend.class::cast).toList();
     }
 
     /**
      * @return the probs
      */
     public List<TafProbTrend> getProbs() {
-        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.PROB)).map(TafProbTrend.class::cast).collect(
-            Collectors.toList());
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.PROB)).map(TafProbTrend.class::cast).toList();
     }
 
     /**
      * @return the tempos
      */
     public List<TafProbTrend> getTempos() {
-        return trends.stream().filter(a -> a.getType().equals(WeatherChangeType.TEMPO)).map(TafProbTrend.class::cast).collect(
-            Collectors.toList());
+        return trends.stream().filter(a -> a.getType().equals(WeatherChangeType.TEMPO)).map(TafProbTrend.class::cast).toList();
     }
 
     /**
      * @return inter changes.
      */
     public List<TafTrend> getInters() {
-        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.INTER)).map(TafTrend.class::cast).collect(
-            Collectors.toList());
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.INTER)).map(TafTrend.class::cast).toList();
     }
 
     /**
