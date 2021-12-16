@@ -318,7 +318,6 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertThat(res.getMinTemperature().getHour(), is(3));
         assertThat(res.getMinTemperature().getTemperature(), is(6));
 
-        assertThat(res.getTrends(), hasSize(6));
         // Checks on tempos.
         assertThat(res.getTempos(), hasSize(2));
         // Checks on BECOMGs.

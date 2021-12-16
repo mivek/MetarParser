@@ -2,8 +2,6 @@ package io.github.mivek.factory;
 
 import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
-import io.github.mivek.model.trend.validity.AbstractValidity;
-import io.github.mivek.parser.AbstractTAFTrendParser;
 import java.util.Optional;
 
 /**
@@ -28,7 +26,7 @@ public final class FactoryProvider {
     return new TAFTrendFactory();
   }
 
-  public static AbstractFactory<AbstractTAFTrendParser<? extends AbstractValidity>> getTrendParser() {
+  public static TafTrendParserFactory getTrendParser() {
     return new TafTrendParserFactory();
   }
 }

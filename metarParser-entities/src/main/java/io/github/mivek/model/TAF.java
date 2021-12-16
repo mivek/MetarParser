@@ -136,12 +136,6 @@ public final class TAF extends AbstractWeatherCode {
         this.trends.add(trend);
     }
 
-    /**
-     * @return The list of all trends.
-     */
-    public List<AbstractTafTrend<? extends AbstractValidity>> getTrends() {
-        return this.trends;
-    }
     @Override
     public String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
