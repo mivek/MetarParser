@@ -22,7 +22,7 @@ public abstract class AbstractWeatherCodeParser<T extends AbstractWeatherCode> e
     /** Pattern for RMK. */
     protected static final String RMK = "RMK";
     /** Pattern regex to tokenize the code. */
-    private static final Pattern TOKENIZE_REGEX = Pattern.compile("\\s((?=\\d/\\dSM)(?<!\\s\\d\\s)|(?!\\d/\\dSM))|=\\z");
+    private static final Pattern TOKENIZE_REGEX = Pattern.compile("\\s((?=\\d/\\dSM)(?<!\\s\\d\\s)|(?!\\d/\\dSM))|(=\\z)");
     /** The airport supplier. */
     private final AirportSupplier airportSupplier;
 

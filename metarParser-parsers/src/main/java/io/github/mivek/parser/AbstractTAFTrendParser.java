@@ -14,7 +14,12 @@ import io.github.mivek.utils.Regex;
  */
 public abstract class AbstractTAFTrendParser<T extends AbstractValidity> extends AbstractWeatherContainerParser<AbstractTafTrend<T>, String[]> {
 
-  public AbstractTAFTrendParser(
+  /**
+   * DI constructor.
+   * @param commonCommandSupplier The common command supplier
+   * @param remarkParser The remark parser instance.
+   */
+  AbstractTAFTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser) {
     super(commonCommandSupplier, remarkParser);

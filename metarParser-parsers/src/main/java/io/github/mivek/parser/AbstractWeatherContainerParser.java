@@ -33,7 +33,12 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
   /** The common command commonSupplier. */
   private final CommonCommandSupplier commonSupplier;
 
-  public AbstractWeatherContainerParser(
+  /**
+   * DI constructor.
+   * @param commonCommandSupplier The common command supplier
+   * @param remarkParser The remark Parser instance.
+   */
+  AbstractWeatherContainerParser(
       final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser) {
     this.commonSupplier = commonCommandSupplier;
     this.remarkParser = remarkParser;
