@@ -50,7 +50,7 @@
         <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.8.1</junit.version>
+        <junit.version>5.8.2</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <spotbugs-maven-plugin.version>4.5.0.0</spotbugs-maven-plugin.version>
@@ -67,7 +67,7 @@
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <pitest-maven.version>1.7.3</pitest-maven.version>
-        <checkstyle.version>9.1</checkstyle.version>
+        <checkstyle.version>9.2</checkstyle.version>
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
     </properties>
 
