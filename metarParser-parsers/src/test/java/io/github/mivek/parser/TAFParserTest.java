@@ -1,28 +1,45 @@
 package io.github.mivek.parser;
 
-import io.github.mivek.enums.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
 import io.github.mivek.model.TemperatureDated;
-import io.github.mivek.model.trend.*;
-import io.github.mivek.model.trend.validity.BeginningValidity;
+import io.github.mivek.model.trend.FMTafTrend;
+import io.github.mivek.model.trend.TafProbTrend;
+import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link TAFParser}
  *
  * @author mivek
  */
-class TAFParserTest extends AbstractParserTest<TAF> {
+class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
 
     public static final String TEN_KM = ">10km";
     public static final String REMARK_FCST = "Remark.FCST";
@@ -41,9 +58,9 @@ class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     void testProcessGeneralChangesWithTX() {
-        AbstractTafTrend<?> change = new BECMGTafTrend();
+        TafTrend change = new TafTrend(WeatherChangeType.TEMPO);
         String part = "TX15/0612Z";
-        parser.processGeneralChanges(change, part);
+        parser.generalParse(change, part);
 
         assertThat(change.getClouds(), is(empty()));
         assertThat(change.getWeatherConditions(), is(empty()));
@@ -51,9 +68,9 @@ class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     void testProcessGeneralChangesWithTN() {
-        AbstractTafTrend<?> change = new BECMGTafTrend();
+        TafTrend change = new TafTrend(WeatherChangeType.PROB);
         String part = "TN01/0612Z";
-        parser.processGeneralChanges(change, part);
+        parser.generalParse(change, part);
 
         assertThat(change.getClouds(), is(empty()));
         assertThat(change.getWeatherConditions(), is(empty()));
@@ -61,9 +78,9 @@ class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     void testProcessGeneralChangesCloudValid() {
-        AbstractTafTrend<?> change = new BECMGTafTrend();
+        TafTrend change = new TafTrend(WeatherChangeType.INTER);
         String part = "SCT012TCU";
-        parser.processGeneralChanges(change, part);
+        parser.generalParse(change, part);
 
         assertThat(change.getClouds(), hasSize(1));
         assertThat(change.getClouds().get(0).getQuantity(), is(CloudQuantity.SCT));
@@ -73,9 +90,9 @@ class TAFParserTest extends AbstractParserTest<TAF> {
 
     @Test
     void testProcessGeneralChangesCloudNull() {
-        AbstractTafTrend<?> change = new BECMGTafTrend();
+        TafTrend change = new TafTrend(WeatherChangeType.PROB);
         String part = "NSW";
-        parser.processGeneralChanges(change, part);
+        parser.generalParse(change, part);
 
         assertThat(change.getClouds(), is(empty()));
     }
@@ -111,15 +128,6 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getTemperature(), is(-2));
         assertThat(res.getDay(), is(6));
         assertThat(res.getHour(), is(12));
-    }
-
-    @Test
-    void testParseBeginningValidity() {
-        String validity = "FM061300";
-        BeginningValidity res = parser.parseBasicValidity(validity);
-        assertThat(res.getStartDay(), is(6));
-        assertThat(res.getStartHour(), is(13));
-        assertThat(res.getStartMinutes(), is(0));
     }
 
     @Test
@@ -223,14 +231,14 @@ class TAFParserTest extends AbstractParserTest<TAF> {
 
         // First BECMG
         assertThat(res.getBECMGs(), hasSize(1));
-        BECMGTafTrend becmg = res.getBECMGs().get(0);
+        TafTrend becmg = res.getBECMGs().get(0);
         assertEquals(15, becmg.getValidity().getStartDay().intValue());
         assertEquals(20, becmg.getValidity().getStartHour().intValue());
         assertEquals(15, becmg.getValidity().getEndDay().intValue());
         assertEquals(22, becmg.getValidity().getEndHour().intValue());
 
         // Fourth Tempo
-        TEMPOTafTrend tempo4 = res.getTempos().get(3);
+        TafProbTrend tempo4 = res.getTempos().get(3);
         assertEquals(16, tempo4.getValidity().getStartDay().intValue());
         assertEquals(3, tempo4.getValidity().getStartHour().intValue());
         assertEquals(16, tempo4.getValidity().getEndDay().intValue());
@@ -247,7 +255,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertNull(tempo4.getProbability());
 
         // Fifth Tempo
-        TEMPOTafTrend tempo5 = res.getTempos().get(4);
+        TafProbTrend tempo5 = res.getTempos().get(4);
         assertEquals(16, tempo5.getValidity().getStartDay().intValue());
         assertEquals(4, tempo5.getValidity().getStartHour().intValue());
         assertEquals(16, tempo5.getValidity().getEndDay().intValue());
@@ -310,6 +318,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getMinTemperature().getHour(), is(3));
         assertThat(res.getMinTemperature().getTemperature(), is(6));
 
+        assertThat(res.getTrends(), hasSize(6));
         // Checks on tempos.
         assertThat(res.getTempos(), hasSize(2));
         // Checks on BECOMGs.
@@ -318,7 +327,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getProbs(), hasSize(2));
 
         // First TEMPO
-        TEMPOTafTrend tempo0 = res.getTempos().get(0);
+        TafProbTrend tempo0 = res.getTempos().get(0);
         assertThat(tempo0.getValidity().getStartDay(), is(29));
         assertThat(tempo0.getValidity().getStartHour(), is(21));
         assertThat(tempo0.getValidity().getEndDay(), is(29));
@@ -331,7 +340,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(tempo0.getProbability(), is(30));
 
         // First BECOMG
-        BECMGTafTrend becmg0 = res.getBECMGs().get(0);
+        TafTrend becmg0 = res.getBECMGs().get(0);
         assertThat(becmg0.getValidity().getStartDay(), is(30));
         assertThat(becmg0.getValidity().getStartHour(), is(1));
         assertThat(becmg0.getValidity().getEndDay(), is(30));
@@ -344,7 +353,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg0.getClouds().get(0).getQuantity(), is(CloudQuantity.NSC));
 
         // First PROB
-        PROBTafTrend prob0 = res.getProbs().get(0);
+        TafProbTrend prob0 = res.getProbs().get(0);
         assertThat(prob0.getValidity().getStartDay(), is(30));
         assertThat(prob0.getValidity().getStartHour(), is(3));
         assertThat(prob0.getValidity().getEndDay(), is(30));
@@ -361,7 +370,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(prob0.getProbability(), is(40));
 
         // Second PROB
-        PROBTafTrend prob1 = res.getProbs().get(1);
+        TafProbTrend prob1 = res.getProbs().get(1);
         assertThat(prob1.getValidity().getStartDay(), is(30));
         assertThat(prob1.getValidity().getStartHour(), is(4));
         assertThat(prob1.getValidity().getEndDay(), is(30));
@@ -376,7 +385,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(prob1.getProbability(), is(30));
 
         // Second BECOMG
-        BECMGTafTrend becmg1 = res.getBECMGs().get(1);
+        TafTrend becmg1 = res.getBECMGs().get(1);
         assertThat(becmg1.getValidity().getStartDay(), is(30));
         assertThat(becmg1.getValidity().getStartHour(), is(6));
         assertThat(becmg1.getValidity().getEndDay(), is(30));
@@ -389,7 +398,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg1.getClouds().get(0).getType(), nullValue());
 
         // Second TEMPO
-        TEMPOTafTrend tempo1 = res.getTempos().get(1);
+        TafProbTrend tempo1 = res.getTempos().get(1);
         assertThat(tempo1.getValidity().getStartDay(), is(30));
         assertThat(tempo1.getValidity().getStartHour(), is(12));
         assertThat(tempo1.getValidity().getEndDay(), is(30));
@@ -449,7 +458,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(res.getBECMGs(), hasSize(2));
 
         // First BECOMG
-        BECMGTafTrend becmg0 = res.getBECMGs().get(0);
+        TafTrend becmg0 = res.getBECMGs().get(0);
         assertThat(becmg0.getValidity().getStartDay(), is(12));
         assertThat(becmg0.getValidity().getStartHour(), is(17));
         assertThat(becmg0.getValidity().getEndDay(), is(12));
@@ -465,7 +474,7 @@ class TAFParserTest extends AbstractParserTest<TAF> {
         assertThat(becmg0.getWind().getUnit(), is("KT"));
 
         // Second BECOMG
-        BECMGTafTrend becmg1 = res.getBECMGs().get(1);
+        TafTrend becmg1 = res.getBECMGs().get(1);
         assertThat(becmg1.getValidity().getStartDay(), is(13));
         assertThat(becmg1.getValidity().getStartHour(), is(3));
         assertThat(becmg1.getValidity().getEndDay(), is(13));

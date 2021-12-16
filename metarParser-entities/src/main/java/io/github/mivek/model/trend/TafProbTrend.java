@@ -2,16 +2,14 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.validity.AbstractValidity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing a weather change with a given probability.
  *
- * @param <T> a concrete subclass of {@link AbstractValidity}
  * @author f.loris
  */
-public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends AbstractTafTrend<T> {
+public class TafProbTrend extends TafTrend {
 
     /** Probability of the trend. */
     private Integer probability;
@@ -21,7 +19,7 @@ public abstract class AbstractTafProbTrend<T extends AbstractValidity> extends A
      *
      * @param type the type to set.
      */
-    protected AbstractTafProbTrend(final WeatherChangeType type) {
+    public TafProbTrend(final WeatherChangeType type) {
         super(type);
     }
 

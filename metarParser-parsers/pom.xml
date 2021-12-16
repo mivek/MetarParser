@@ -15,7 +15,7 @@
     <properties>
         <jacoco.coverage.instruction.minimum>0.99</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.97</jacoco.coverage.branch.minimum>
-        <jacoco.coverage.complexity.minimum>0.98</jacoco.coverage.complexity.minimum>
+        <jacoco.coverage.complexity.minimum>0.99</jacoco.coverage.complexity.minimum>
     </properties>
 
     <dependencies>

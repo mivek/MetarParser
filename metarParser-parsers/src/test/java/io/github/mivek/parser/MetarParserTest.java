@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author mivek
  */
-class MetarParserTest extends AbstractParserTest<Metar> {
+class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
 
     static final String TEN_KM = ">10km";
     private MetarParser parser;

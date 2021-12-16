@@ -18,7 +18,7 @@ import io.github.mivek.utils.Converter;
  *
  * @author mivek
  */
-public final class MetarParser extends AbstractParser<Metar> {
+public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     /** Instance of the class. */
     private static final MetarParser INSTANCE = new MetarParser();
     /** The command supplier. */
@@ -83,7 +83,7 @@ public final class MetarParser extends AbstractParser<Metar> {
                     break;
                 } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
                     MetarTrend trend = new MetarTrend(WeatherChangeType.valueOf(metarTab[i]));
-                    i = iterTrend(i, trend, metarTab);
+                    i = parseTrend(i, trend, metarTab);
                     m.addTrend(trend);
                 } else {
                     executeCommand(m, metarTab[i]);
@@ -115,10 +115,10 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param parts an array of strings
      * @return the next index to parse.
      */
-    private int iterTrend(final int index, final MetarTrend trend, final String[] parts) {
+    private int parseTrend(final int index, final MetarTrend trend, final String[] parts) {
         int i = index + 1;
         while (i < parts.length && !parts[i].equals(TEMPO) && !parts[i].equals(BECMG)) {
-            processChange(trend, parts[i]);
+            updateTrend(trend, parts[i]);
             i++;
         }
         return i - 1;
@@ -130,7 +130,7 @@ public final class MetarParser extends AbstractParser<Metar> {
      * @param trend the abstractMetarTrend object to update.
      * @param part  The token to parse.
      */
-    private void processChange(final MetarTrend trend, final String part) {
+    private void updateTrend(final MetarTrend trend, final String part) {
         AbstractMetarTrendTime time = FactoryProvider.getMetarTrendTimeFactory().create(part.substring(0, 2));
         if (time != null) {
             time.setTime(Converter.stringToTime(part.substring(2)));

@@ -15,16 +15,17 @@ public final class MetarTrendTimeFactory implements AbstractFactory<AbstractMeta
   /**
    * Map matching the discriminator to a AbstractMetarTrendTime.
    */
-  private static final Map<String, AbstractMetarTrendTime> TREND_TIME_MAP = new HashMap<>();
+  private final Map<String, AbstractMetarTrendTime> trendTimeMap;
 
-  static {
-    TREND_TIME_MAP.put("AT", new ATTime());
-    TREND_TIME_MAP.put("FM", new FMTime());
-    TREND_TIME_MAP.put("TL", new TLTime());
+
+  MetarTrendTimeFactory() {
+    trendTimeMap = new HashMap<>();
+    trendTimeMap.put("AT", new ATTime());
+    trendTimeMap.put("FM", new FMTime());
+    trendTimeMap.put("TL", new TLTime());
   }
-
   @Override
   public AbstractMetarTrendTime create(final String discriminant) {
-    return TREND_TIME_MAP.get(discriminant);
+    return trendTimeMap.get(discriminant);
   }
 }

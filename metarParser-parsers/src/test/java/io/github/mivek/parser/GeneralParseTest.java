@@ -40,5 +40,5 @@ abstract class GeneralParseTest<T extends AbstractWeatherCode> {
 
     protected abstract T getWeatherCode();
 
-    protected abstract AbstractParser<T> getSut();
+    protected abstract AbstractWeatherCodeParser<T> getSut();
 }
