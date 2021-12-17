@@ -25,7 +25,7 @@ public final class TAF extends AbstractWeatherCode {
     /** The minimum temperature. */
     private TemperatureDated minTemperature;
     /** List of From changes. */
-    private final  List<AbstractTafTrend<? extends AbstractValidity>> trends;
+    private final List<AbstractTafTrend<? extends AbstractValidity>> trends;
     /** Indicate if the taf event is amended. */
     private boolean amendment;
 
