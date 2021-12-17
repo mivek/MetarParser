@@ -1,6 +1,6 @@
 dist: trusty
 language: java
-jdk: oraclejdk16
+jdk: oraclejdk17
 
 cache:
   directories:
