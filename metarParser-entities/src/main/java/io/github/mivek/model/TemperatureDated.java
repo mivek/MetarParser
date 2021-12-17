@@ -10,51 +10,51 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class TemperatureDated {
     /** The temperature. */
-    private Integer temperature;
+    private int temperature;
     /** The day. */
-    private Integer day;
+    private int day;
     /** The hour. */
-    private Integer hour;
+    private int hour;
 
     /**
      * @return the temperature
      */
-    public Integer getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
     /**
      * @param temperature the temperature to set
      */
-    public void setTemperature(final Integer temperature) {
+    public void setTemperature(final int temperature) {
         this.temperature = temperature;
     }
 
     /**
      * @return the day
      */
-    public Integer getDay() {
+    public int getDay() {
         return day;
     }
 
     /**
      * @param day the day to set
      */
-    public void setDay(final Integer day) {
+    public void setDay(final int day) {
         this.day = day;
     }
 
     /**
      * @return the hour
      */
-    public Integer getHour() {
+    public int getHour() {
         return hour;
     }
 
     /**
      * @param hour the hour to set
      */
-    public void setHour(final Integer hour) {
+    public void setHour(final int hour) {
         this.hour = hour;
     }
 

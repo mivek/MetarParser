@@ -11,20 +11,20 @@ public interface IValidity {
      * @return the startDay
      */
 
-    Integer getStartDay();
+    int getStartDay();
 
     /**
      * @param startDay the startDay to set
      */
-    void setStartDay(Integer startDay);
+    void setStartDay(int startDay);
 
     /**
      * @return the startHour
      */
-    Integer getStartHour();
+    int getStartHour();
 
     /**
      * @param startHour the startHour to set
      */
-    void setStartHour(Integer startHour);
+    void setStartHour(int startHour);
 }

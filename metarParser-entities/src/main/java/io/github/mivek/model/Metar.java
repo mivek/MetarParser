@@ -15,11 +15,11 @@ import java.util.Objects;
  */
 public class Metar extends AbstractWeatherCode {
     /** Temperature. */
-    private Integer temperature;
+    private int temperature;
     /** Dew point. */
-    private Integer dewPoint;
+    private int dewPoint;
     /** Altimeter in HPa. */
-    private Integer altimeter;
+    private int altimeter;
     /** Nosig value. */
     private boolean nosig;
     /** Auto Value. */
@@ -41,42 +41,42 @@ public class Metar extends AbstractWeatherCode {
     /**
      * @return the temperature
      */
-    public Integer getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
     /**
      * @param temperature the temperature to set
      */
-    public void setTemperature(final Integer temperature) {
+    public void setTemperature(final int temperature) {
         this.temperature = temperature;
     }
 
     /**
      * @return the dewPoint
      */
-    public Integer getDewPoint() {
+    public int getDewPoint() {
         return dewPoint;
     }
 
     /**
      * @param dewPoint the dewPoint to set
      */
-    public void setDewPoint(final Integer dewPoint) {
+    public void setDewPoint(final int dewPoint) {
         this.dewPoint = dewPoint;
     }
 
     /**
      * @return the altimeter in HPa.
      */
-    public Integer getAltimeter() {
+    public int getAltimeter() {
         return altimeter;
     }
 
     /**
      * @param altimeter the altimeter to set
      */
-    public void setAltimeter(final Integer altimeter) {
+    public void setAltimeter(final int altimeter) {
         this.altimeter = altimeter;
     }
 

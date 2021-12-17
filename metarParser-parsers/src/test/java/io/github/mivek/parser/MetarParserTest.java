@@ -220,12 +220,12 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         Metar m = parser.parse(code);
 
         assertNotNull(m);
-        assertEquals(16, m.getDay().intValue());
+        assertEquals(16, m.getDay());
         assertEquals(14, m.getTime().getHour());
         assertEquals(30, m.getTime().getMinute());
         assertNotNull(m.getWind());
         Wind w = m.getWind();
-        assertEquals(240, w.getDirectionDegrees().intValue());
+        assertEquals(240, w.getDirectionDegrees());
         assertEquals(15, w.getSpeed());
         assertEquals(25, w.getGust());
         assertNotNull(m.getVisibility());
@@ -264,7 +264,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         Metar m = parser.parse(code);
 
         assertNotNull(m);
-        assertEquals(16, m.getDay().intValue());
+        assertEquals(16, m.getDay());
         assertEquals(7, m.getTime().getHour());
         assertEquals(30, m.getTime().getMinute());
         assertNotNull(m.getWind());

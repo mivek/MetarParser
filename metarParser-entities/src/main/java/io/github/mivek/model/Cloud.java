@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class Cloud {
     /** The height of the cloud (unit: feet). */
-    private int height;
+    private Integer height;
     /** The quantity of the cloud. */
     private CloudQuantity quantity;
     /** The type of the cloud. */
@@ -24,7 +24,7 @@ public class Cloud {
      *
      * @return int of height.
      */
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
@@ -33,7 +33,7 @@ public class Cloud {
      *
      * @param height The height to set.
      */
-    public void setHeight(final int height) {
+    public void setHeight(final Integer height) {
         this.height = height;
     }
 

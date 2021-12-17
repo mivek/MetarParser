@@ -31,7 +31,7 @@ class WindCommandTest {
         assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.NNW")));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
-        assertEquals(0, res.getGust());
+        assertNull(res.getGust());
         assertEquals("KT", res.getUnit());
 
     }

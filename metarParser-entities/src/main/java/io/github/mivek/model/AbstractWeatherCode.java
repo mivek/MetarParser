@@ -11,8 +11,8 @@ import java.time.LocalTime;
  */
 public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
 
-    /** Integer for the day of the metar. */
-    private Integer day;
+    /** Day of the METAR or TAF. */
+    private int day;
     /** Time of the metar. */
     private LocalTime time;
     /** Airport of the metar. */
@@ -25,14 +25,14 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     /**
      * @return the day
      */
-    public Integer getDay() {
+    public int getDay() {
         return day;
     }
 
     /**
      * @param day the day to set
      */
-    public void setDay(final Integer day) {
+    public void setDay(final int day) {
         this.day = day;
     }
 

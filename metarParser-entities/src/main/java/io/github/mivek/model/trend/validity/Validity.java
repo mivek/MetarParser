@@ -13,37 +13,37 @@ public final class Validity extends AbstractValidity {
     /**
      * Ending day of the taf's validity.
      */
-    private Integer endDay;
+    private int endDay;
     /**
      * Ending hour of the taf's validity.
      */
-    private Integer endHour;
+    private int endHour;
 
     /**
      * @return the endDay
      */
-    public Integer getEndDay() {
+    public int getEndDay() {
         return endDay;
     }
 
     /**
      * @param endDay the endDay to set
      */
-    public void setEndDay(final Integer endDay) {
+    public void setEndDay(final int endDay) {
         this.endDay = endDay;
     }
 
     /**
      * @return the endHour
      */
-    public Integer getEndHour() {
+    public int getEndHour() {
         return endHour;
     }
 
     /**
      * @param endHour the endHour to set
      */
-    public void setEndHour(final Integer endHour) {
+    public void setEndHour(final int endHour) {
         this.endHour = endHour;
     }
 

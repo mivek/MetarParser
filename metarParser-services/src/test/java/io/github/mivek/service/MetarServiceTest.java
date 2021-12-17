@@ -18,7 +18,7 @@ class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
 
         assertNotNull(res);
         assertEquals("LFPG", res.getAirport().getIcao());
-        assertEquals(25, res.getDay().intValue());
+        assertEquals(25, res.getDay());
         // Time
         assertNotNull(res.getTime());
         assertEquals(18, res.getTime().getHour());
@@ -31,10 +31,10 @@ class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
         // Visibility
         assertEquals(">10km", res.getVisibility().getMainVisibility());
         // Temperatures
-        assertEquals(4, res.getTemperature().intValue());
-        assertEquals(3, res.getDewPoint().intValue());
+        assertEquals(4, res.getTemperature());
+        assertEquals(3, res.getDewPoint());
         // Altimeter
-        assertEquals(1012, res.getAltimeter().intValue());
+        assertEquals(1012, res.getAltimeter());
         assertTrue(res.isNosig());
         // Clouds.
         assertThat(res.getClouds(), is(not(empty())));

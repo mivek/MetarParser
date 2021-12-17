@@ -33,7 +33,7 @@ public class TafProbTrend extends TafTrend {
     /**
      * @param probability the probability to set
      */
-    public void setProbability(final Integer probability) {
+    public void setProbability(final int probability) {
         this.probability = probability;
     }
 

@@ -37,7 +37,7 @@ public class CloudCommandTest {
 
         assertNotNull(res);
         assertEquals(CloudQuantity.SKC, res.getQuantity());
-        assertEquals(0, res.getHeight());
+        assertNull(res.getHeight());
         assertNull(res.getType());
     }
 
