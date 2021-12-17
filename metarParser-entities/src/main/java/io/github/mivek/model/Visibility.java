@@ -48,7 +48,7 @@ public class Visibility {
      *
      * @param minVisibility the minimal visibility to set.
      */
-    public void setMinVisibility(final Integer minVisibility) {
+    public void setMinVisibility(final int minVisibility) {
         this.minVisibility = minVisibility;
     }
 

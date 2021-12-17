@@ -33,7 +33,7 @@ public class Cloud {
      *
      * @param height The height to set.
      */
-    public void setHeight(final Integer height) {
+    public void setHeight(final int height) {
         this.height = height;
     }
 
