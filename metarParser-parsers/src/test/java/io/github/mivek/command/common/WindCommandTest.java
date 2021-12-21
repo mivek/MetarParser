@@ -1,6 +1,7 @@
 package io.github.mivek.command.common;
 
 import io.github.mivek.internationalization.Messages;
+import io.github.mivek.model.Metar;
 import io.github.mivek.model.Wind;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,18 +15,18 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class WindCommandTest {
 
-    private WindCommand sut;
+    private WindCommand command;
 
     @BeforeEach
     void setUp() {
-        sut = new WindCommand();
+        command = new WindCommand();
     }
 
     @Test
     void testParseWindSimple() {
         String windPart = "34008KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.NNW")));
@@ -40,7 +41,7 @@ class WindCommandTest {
     void testParseWindWithGusts() {
         String windPart = "12017G20KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.ESE")));
@@ -54,11 +55,19 @@ class WindCommandTest {
     void testParseWindVariable() {
         String windPart = "VRB08KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
+    }
+
+    @Test
+    void testExecute() {
+        String windPart = "VRB08KT";
+        Metar m = new Metar();
+
+        assertTrue(command.execute(m, windPart));
     }
 }
