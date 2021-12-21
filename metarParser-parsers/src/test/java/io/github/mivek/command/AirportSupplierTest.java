@@ -10,24 +10,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * @author mivek
  */
-public class AirportSupplierTest {
+class AirportSupplierTest {
 
-    private AirportSupplier sut;
+    private AirportSupplier supplier;
 
     @BeforeEach
     void setUp() {
-        sut = new AirportSupplier();
+        supplier = new AirportSupplier();
     }
 
     @Test
     void testGetWithExistingIcao() {
-        Airport res = sut.get("LFPG");
+        Airport res = supplier.get("LFPG");
         assertNotNull(res);
     }
 
     @Test
     void testWithNonExistingIcao() {
-        Airport res = sut.get("AA");
+        Airport res = supplier.get("AA");
         assertNull(res);
     }
 }

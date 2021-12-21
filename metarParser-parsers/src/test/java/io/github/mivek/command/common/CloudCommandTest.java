@@ -11,20 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author mivek
  */
-public class CloudCommandTest {
+class CloudCommandTest {
 
-    private CloudCommand sut;
+    private CloudCommand command;
 
     @BeforeEach
-    public void setUp() {
-        sut = new CloudCommand();
+    void setUp() {
+        command = new CloudCommand();
     }
 
     @Test
     void testParseCloudNullCloudQuantity() {
         String cloud = "AZE015";
 
-        Cloud res = sut.parseCloud(cloud);
+        Cloud res = command.parseCloud(cloud);
 
         assertNull(res);
     }
@@ -33,7 +33,7 @@ public class CloudCommandTest {
     void testParseCloudSkyClear() {
         String cloud = "SKC";
 
-        Cloud res = sut.parseCloud(cloud);
+        Cloud res = command.parseCloud(cloud);
 
         assertNotNull(res);
         assertEquals(CloudQuantity.SKC, res.getQuantity());
@@ -44,7 +44,7 @@ public class CloudCommandTest {
     @Test
     void testParseCloudWithAltitude() {
         String cloud = "SCT016";
-        Cloud res = sut.parseCloud(cloud);
+        Cloud res = command.parseCloud(cloud);
 
         assertNotNull(res);
         assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -56,7 +56,7 @@ public class CloudCommandTest {
     void testParseCloudWithType() {
         String cloud = "SCT026CB";
 
-        Cloud res = sut.parseCloud(cloud);
+        Cloud res = command.parseCloud(cloud);
 
         assertNotNull(res);
         assertEquals(CloudQuantity.SCT, res.getQuantity());
@@ -68,7 +68,7 @@ public class CloudCommandTest {
     @Test
     void testParseCloudWithNSC() {
         String cloud = "NSC";
-        Cloud res = sut.parseCloud(cloud);
+        Cloud res = command.parseCloud(cloud);
         assertNotNull(res);
         assertEquals(CloudQuantity.NSC, res.getQuantity());
     }

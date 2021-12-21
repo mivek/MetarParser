@@ -20,6 +20,7 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
      * @param type the type of the trend.
      */
     protected AbstractTrend(final WeatherChangeType type) {
+        super();
         this.type = Objects.requireNonNull(type);
     }
 
