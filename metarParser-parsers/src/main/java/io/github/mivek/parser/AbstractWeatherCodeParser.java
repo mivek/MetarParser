@@ -4,6 +4,7 @@ import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.model.AbstractWeatherCode;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -35,7 +36,7 @@ public abstract class AbstractWeatherCodeParser<T extends AbstractWeatherCode> e
      */
     AbstractWeatherCodeParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
         super(commonCommandSupplier, remarkParser);
-        this.airportSupplier = airportSupplier;
+        this.airportSupplier = Objects.requireNonNull(airportSupplier);
     }
 
     /**

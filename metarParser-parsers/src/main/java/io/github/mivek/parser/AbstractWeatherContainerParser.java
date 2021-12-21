@@ -13,6 +13,7 @@ import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Regex;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -40,8 +41,8 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
    */
   AbstractWeatherContainerParser(
       final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser) {
-    this.commonSupplier = commonCommandSupplier;
-    this.remarkParser = remarkParser;
+    this.commonSupplier = Objects.requireNonNull(commonCommandSupplier);
+    this.remarkParser = Objects.requireNonNull(remarkParser);
   }
 
   /**

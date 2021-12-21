@@ -11,6 +11,7 @@ import io.github.mivek.model.Metar;
 import io.github.mivek.model.trend.MetarTrend;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
 import io.github.mivek.utils.Converter;
+import java.util.Objects;
 
 /**
  * This controller contains methods that parse the metar code. This class is a
@@ -42,7 +43,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
             final MetarCommandSupplier metarCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
-        supplier = metarCommandSupplier;
+        supplier = Objects.requireNonNull(metarCommandSupplier);
     }
 
     /**
