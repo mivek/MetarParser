@@ -10,7 +10,7 @@ import io.github.mivek.utils.Regex;
 
 /**
  * @author Jean-Kevin KPADEY
- * @param <T>
+ * @param <T> a concrete subclass of {@link AbstractValidity}
  */
 public abstract class AbstractTAFTrendParser<T extends AbstractValidity> extends AbstractWeatherContainerParser<AbstractTafTrend<T>, String[]> {
 

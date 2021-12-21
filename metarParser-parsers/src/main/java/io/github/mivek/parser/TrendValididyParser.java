@@ -6,6 +6,7 @@ import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.Validity;
 
 /**
+ * Parser for {@link TafTrend}.
  * @author Jean-Kevin KPADEY
  */
 public final class TrendValididyParser extends AbstractTAFTrendParser<Validity> {

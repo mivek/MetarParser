@@ -17,13 +17,16 @@ public final class MetarTrendTimeFactory implements AbstractFactory<AbstractMeta
    */
   private final Map<String, AbstractMetarTrendTime> trendTimeMap;
 
-
+  /**
+   * Constructor.
+   */
   MetarTrendTimeFactory() {
     trendTimeMap = new HashMap<>();
     trendTimeMap.put("AT", new ATTime());
     trendTimeMap.put("FM", new FMTime());
     trendTimeMap.put("TL", new TLTime());
   }
+
   @Override
   public AbstractMetarTrendTime create(final String discriminant) {
     return trendTimeMap.get(discriminant);

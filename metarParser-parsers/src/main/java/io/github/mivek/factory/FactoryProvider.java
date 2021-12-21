@@ -22,10 +22,16 @@ public final class FactoryProvider {
     return new MetarTrendTimeFactory();
   }
 
+  /**
+   * @return a new instance of {@link TAFTrendFactory}
+   */
   public static AbstractFactory<Optional<TafTrend>> getTAFTrendFactory() {
     return new TAFTrendFactory();
   }
 
+  /**
+   * @return a new instance of {@link TafTrendParserFactory}
+   */
   public static TafTrendParserFactory getTrendParser() {
     return new TafTrendParserFactory();
   }

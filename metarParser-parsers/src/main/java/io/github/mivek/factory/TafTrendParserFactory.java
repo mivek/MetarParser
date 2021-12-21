@@ -13,9 +13,7 @@ import java.util.Map;
  */
 public final class TafTrendParserFactory implements AbstractFactory<AbstractTAFTrendParser<? extends AbstractValidity>> {
 
-  /**
-   * Map returning the corresponding trend parser depending on the trend.
-   */
+  /** Map returning the corresponding trend parser depending on the trend. */
   private final Map<String, AbstractTAFTrendParser<? extends AbstractValidity>> trendParserMap;
 
   /**

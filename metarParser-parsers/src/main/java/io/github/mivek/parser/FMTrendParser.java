@@ -6,6 +6,7 @@ import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 
 /**
+ * Trend parser for {@link FMTafTrend}.
  * @author Jean-Kevin KPADEY
  */
 public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidity> {

@@ -7,12 +7,16 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
+ * Factory returning a new {@link TafTrend}.
  * @author Jean-Kevin KPADEY
  */
 public class TAFTrendFactory implements AbstractFactory<Optional<TafTrend>> {
   /** Map between String and the corresponding TAFTrend. */
   private final Map<String, TafTrend> trendMap;
 
+  /**
+   * Constructor.
+   */
   TAFTrendFactory() {
     trendMap = new HashMap<>();
     trendMap.put("BECMG", new TafTrend(WeatherChangeType.BECMG));
