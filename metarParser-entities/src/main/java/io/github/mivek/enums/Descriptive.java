@@ -10,21 +10,21 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Descriptive {
     /** Showers. */
-    SHOWERS("SH"), //$NON-NLS-1$
+    SHOWERS("SH"),
     /** Shallow. */
-    SHALLOW("MI"), //$NON-NLS-1$
+    SHALLOW("MI"),
     /** Patches. */
-    PATCHES("BC"), //$NON-NLS-1$
+    PATCHES("BC"),
     /** Partial. */
-    PARTIAL("PR"), //$NON-NLS-1$
+    PARTIAL("PR"),
     /** Low drifting. */
-    DRIFTING("DR"), //$NON-NLS-1$
+    DRIFTING("DR"),
     /** Thunderstorm. */
-    THUNDERSTORM("TS"), //$NON-NLS-1$
+    THUNDERSTORM("TS"),
     /** blowing. */
-    BLOWING("BL"), //$NON-NLS-1$
+    BLOWING("BL"),
     /** Freezing. */
-    FREEZING("FZ"); //$NON-NLS-1$
+    FREEZING("FZ");
 
     /** The descriptive's shortcut. */
     private final String shortcut;

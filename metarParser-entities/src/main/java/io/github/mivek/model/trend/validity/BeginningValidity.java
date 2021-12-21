@@ -10,19 +10,19 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 public class BeginningValidity extends AbstractValidity {
     /** the minutes. */
-    private Integer startMinutes;
+    private int startMinutes;
 
     /**
      * @return the startMinutes
      */
-    public Integer getStartMinutes() {
+    public int getStartMinutes() {
         return startMinutes;
     }
 
     /**
      * @param startMinutes the startMinutes to set
      */
-    public void setStartMinutes(final Integer startMinutes) {
+    public void setStartMinutes(final int startMinutes) {
         this.startMinutes = startMinutes;
     }
 

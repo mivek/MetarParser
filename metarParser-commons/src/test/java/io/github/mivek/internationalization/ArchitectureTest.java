@@ -11,10 +11,10 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
  * @author mivek
  */
 @AnalyzeClasses(packages = "io.github.mivek.internationalization", importOptions = { ImportOption.DoNotIncludeTests.class })
-public class ArchitectureTest {
+class ArchitectureTest {
 
     @ArchTest
-    public static final ArchRule dependencyRule = classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("java.util..", "java.text..");
+    static final ArchRule dependencyRule = classes().should().onlyHaveDependentClassesThat().resideInAnyPackage("java.util..", "java.text..");
 
 }
 

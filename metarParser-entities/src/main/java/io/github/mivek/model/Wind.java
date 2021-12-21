@@ -16,11 +16,11 @@ public class Wind {
     /** Direction of the wind. */
     private Integer directionDegrees;
     /** The speed of the gust. */
-    private int gust;
+    private Integer gust;
     /** The minimal variation of the wind. */
-    private int minVariation;
+    private Integer minVariation;
     /** The maximum variation of the wind. */
-    private int maxVariation;
+    private Integer maxVariation;
     /** The unit of the speed. */
     private String unit;
 
@@ -65,7 +65,7 @@ public class Wind {
      *
      * @return the gust.
      */
-    public int getGust() {
+    public Integer getGust() {
         return gust;
     }
 
@@ -83,7 +83,7 @@ public class Wind {
      *
      * @return the minimal variation of the wind.
      */
-    public int getMinVariation() {
+    public Integer getMinVariation() {
         return minVariation;
     }
 
@@ -97,7 +97,7 @@ public class Wind {
     /**
      * @return the wind max variation.
      */
-    public int getMaxVariation() {
+    public Integer getMaxVariation() {
         return maxVariation;
     }
 
@@ -136,7 +136,7 @@ public class Wind {
     /**
      * @param directionDegrees the directionDegrees to set.
      */
-    public void setDirectionDegrees(final Integer directionDegrees) {
+    public void setDirectionDegrees(final int directionDegrees) {
         this.directionDegrees = directionDegrees;
     }
 

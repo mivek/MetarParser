@@ -46,10 +46,10 @@ public final class Converter {
      * @return a string correctly formatted.
      */
     public static String convertVisibility(final String input) {
-        if ("9999".equals(input)) { //$NON-NLS-1$
-            return ">10km"; //$NON-NLS-1$
+        if ("9999".equals(input)) {
+            return ">10km";
         } else {
-            return Integer.parseInt(input) + "m"; //$NON-NLS-1$
+            return Integer.parseInt(input) + "m";
         }
     }
 
@@ -60,7 +60,7 @@ public final class Converter {
      * @return an integer of the temperature.
      */
     public static int convertTemperature(final String input) {
-        if (input.startsWith("M")) { //$NON-NLS-1$
+        if (input.startsWith("M")) {
             return -(Integer.parseInt(input.substring(1, 3)));
         } else {
             return Integer.parseInt(input);

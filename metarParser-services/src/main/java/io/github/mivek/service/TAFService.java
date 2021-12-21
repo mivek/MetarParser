@@ -5,14 +5,15 @@ import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.TAF;
 import io.github.mivek.parser.TAFParser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Facade for TAF.
@@ -22,9 +23,7 @@ import java.util.List;
 public final class TAFService extends AbstractWeatherCodeService<TAF> {
     /** URL to retrieve the TAF from. */
     private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
-    /**
-     * The instance of the service.
-     */
+    /** The instance of the service. */
     private static final TAFService INSTANCE = new TAFService();
 
     /**
@@ -40,19 +39,19 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
     }
 
     @Override
-    public TAF retrieveFromAirport(final String icao) throws IOException, ParseException {
-        if (icao.length() != AbstractWeatherCodeService.ICAO) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
-        }
-        String website = NOAA_TAF_URL + icao.toUpperCase() // $NON-NLS-1$
-                + ".TXT"; //$NON-NLS-1$
-        URL url = new URL(website);
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8))) {
-            StringBuilder sb = new StringBuilder();
-            // Throw the first line since it is not part of the TAF event.
-            br.lines().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
-            return getParser().parse(format(sb.toString()));
-        }
+    public TAF retrieveFromAirport(final String icao) throws IOException, ParseException, URISyntaxException, InterruptedException {
+        checkIcao(icao);
+        String website = NOAA_TAF_URL + icao.toUpperCase()
+                + ".TXT";
+        HttpRequest request = buildRequest(website);
+
+        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofLines());
+        StringBuilder sb = new StringBuilder();
+        // Throw the first line since it is not part of the TAF event.
+        response.body().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
+        return getParser().parse(format(sb.toString()));
     }
 
     /**

@@ -89,8 +89,8 @@ public class WeatherCondition {
      * @return true if there is at least phenomenon.
      */
     public boolean isValid() {
-        return !phenomenons.isEmpty()
-                || Descriptive.THUNDERSTORM == descriptive
+        return (!phenomenons.isEmpty()
+                || Descriptive.THUNDERSTORM == descriptive)
                 || Intensity.IN_VICINITY.equals(intensity) && Descriptive.SHOWERS.equals(descriptive);
     }
 

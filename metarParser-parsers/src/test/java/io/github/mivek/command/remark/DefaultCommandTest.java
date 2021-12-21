@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * @author mivek
  */
-public class DefaultCommandTest {
+class DefaultCommandTest {
 
     @Test
-    public void canParse() {
+    void canParse() {
         assertTrue(new DefaultCommand().canParse(""));
     }
 }

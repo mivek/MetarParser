@@ -1,12 +1,12 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.AbstractMetarTrend;
-import org.apache.commons.lang3.Validate;
+import io.github.mivek.model.trend.MetarTrend;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Metar class.
@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class Metar extends AbstractWeatherCode {
     /** Temperature. */
-    private Integer temperature;
+    private int temperature;
     /** Dew point. */
-    private Integer dewPoint;
+    private int dewPoint;
     /** Altimeter in HPa. */
-    private Integer altimeter;
+    private int altimeter;
     /** Nosig value. */
     private boolean nosig;
     /** Auto Value. */
@@ -27,7 +27,7 @@ public class Metar extends AbstractWeatherCode {
     /** List of runways information. */
     private final List<RunwayInfo> runways;
     /** List of trends. */
-    private final List<AbstractMetarTrend> trends;
+    private final List<MetarTrend> trends;
 
     /**
      * Constructor.
@@ -41,42 +41,42 @@ public class Metar extends AbstractWeatherCode {
     /**
      * @return the temperature
      */
-    public Integer getTemperature() {
+    public int getTemperature() {
         return temperature;
     }
 
     /**
      * @param temperature the temperature to set
      */
-    public void setTemperature(final Integer temperature) {
+    public void setTemperature(final int temperature) {
         this.temperature = temperature;
     }
 
     /**
      * @return the dewPoint
      */
-    public Integer getDewPoint() {
+    public int getDewPoint() {
         return dewPoint;
     }
 
     /**
      * @param dewPoint the dewPoint to set
      */
-    public void setDewPoint(final Integer dewPoint) {
+    public void setDewPoint(final int dewPoint) {
         this.dewPoint = dewPoint;
     }
 
     /**
      * @return the altimeter in HPa.
      */
-    public Integer getAltimeter() {
+    public int getAltimeter() {
         return altimeter;
     }
 
     /**
      * @param altimeter the altimeter to set
      */
-    public void setAltimeter(final Integer altimeter) {
+    public void setAltimeter(final int altimeter) {
         this.altimeter = altimeter;
     }
 
@@ -129,14 +129,14 @@ public class Metar extends AbstractWeatherCode {
      *
      * @param trend the trend to add.
      */
-    public void addTrend(final AbstractMetarTrend trend) {
-        trends.add(Validate.notNull(trend));
+    public void addTrend(final MetarTrend trend) {
+        trends.add(Objects.requireNonNull(trend));
     }
 
     /**
      * @return the list of trends.
      */
-    public List<AbstractMetarTrend> getTrends() {
+    public List<MetarTrend> getTrends() {
         return trends;
     }
 

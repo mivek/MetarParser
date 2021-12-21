@@ -1,9 +1,9 @@
 package io.github.mivek.model.trend.validity;
 
 import io.github.mivek.enums.TimeIndicator;
-import org.apache.commons.lang3.Validate;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  * Abstract class for the time trend in a metar.
@@ -40,7 +40,7 @@ public abstract class AbstractMetarTrendTime {
      * @param time the time to set
      */
     public void setTime(final LocalTime time) {
-        this.time = Validate.notNull(time);
+        this.time = Objects.requireNonNull(time);
     }
 
     /**

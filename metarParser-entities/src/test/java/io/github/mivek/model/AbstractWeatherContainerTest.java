@@ -17,26 +17,26 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author mivek
  */
 @Disabled
-public abstract class AbstractWeatherContainerTest<T extends AbstractWeatherContainer> {
+abstract class AbstractWeatherContainerTest<T extends AbstractWeatherContainer> {
 
     abstract T getEntity();
 
     @Test
-    public void testAddWeatherConditionWithNull() {
+    void testAddWeatherConditionWithNull() {
         T container = getEntity();
         container.addWeatherCondition(null);
         assertThat(container.getWeatherConditions(), empty());
     }
 
     @Test
-    public void testAddCloudWithNull() {
+    void testAddCloudWithNull() {
         T container = getEntity();
         container.addCloud(null);
         assertThat(container.getClouds(), empty());
     }
 
     @Test
-    public void testAddCloudWithValidCloud() {
+    void testAddCloudWithValidCloud() {
         T container = getEntity();
         Cloud c = new Cloud();
         c.setQuantity(CloudQuantity.BKN);
@@ -49,7 +49,7 @@ public abstract class AbstractWeatherContainerTest<T extends AbstractWeatherCont
     }
 
     @Test
-    public void testGetVerticalVisibility() {
+    void testGetVerticalVisibility() {
         //GIVEN a metar object with a null vertical visibility
         T container = getEntity();
         //WHEN retrieving the vertical visibility
@@ -59,7 +59,7 @@ public abstract class AbstractWeatherContainerTest<T extends AbstractWeatherCont
     }
 
     @Test
-    public void testAddWeatherCondition() {
+    void testAddWeatherCondition() {
         T container = getEntity();
         WeatherCondition wc = new WeatherCondition();
 

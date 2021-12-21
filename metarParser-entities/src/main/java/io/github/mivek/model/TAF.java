@@ -1,39 +1,31 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.internationalization.Messages;
-import io.github.mivek.model.trend.BECMGTafTrend;
+import io.github.mivek.model.trend.AbstractTafTrend;
 import io.github.mivek.model.trend.FMTafTrend;
-import io.github.mivek.model.trend.TEMPOTafTrend;
-import io.github.mivek.model.trend.PROBTafTrend;
-import io.github.mivek.model.trend.INTERTafTrend;
+import io.github.mivek.model.trend.TafProbTrend;
+import io.github.mivek.model.trend.TafTrend;
+import io.github.mivek.model.trend.validity.AbstractValidity;
 import io.github.mivek.model.trend.validity.Validity;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing a TAF.
  *
  * @author mivek
  */
-public class TAF extends AbstractWeatherCode {
+public final class TAF extends AbstractWeatherCode {
     /** The valididty of the TAF. */
     private Validity validity;
     /** The maximum temperature. */
     private TemperatureDated maxTemperature;
     /** The minimum temperature. */
     private TemperatureDated minTemperature;
-    /** List of BECMG changes. */
-    private final List<BECMGTafTrend> bECMGs;
     /** List of From changes. */
-    private final List<FMTafTrend> fMs;
-    /** List of Tempos changes. */
-    private final List<TEMPOTafTrend> tempos;
-    /** List of probability changes. */
-    private final List<PROBTafTrend> probs;
-    /** List of intermittent changes. */
-    private final List<INTERTafTrend> inters;
+    private final List<AbstractTafTrend<? extends AbstractValidity>> trends;
     /** Indicate if the taf event is amended. */
     private boolean amendment;
 
@@ -42,11 +34,7 @@ public class TAF extends AbstractWeatherCode {
      */
     public TAF() {
         super();
-        bECMGs = new ArrayList<>();
-        fMs = new ArrayList<>();
-        tempos = new ArrayList<>();
-        probs = new ArrayList<>();
-        inters = new ArrayList<>();
+        trends = new ArrayList<>();
     }
 
     /**
@@ -94,80 +82,36 @@ public class TAF extends AbstractWeatherCode {
     /**
      * @return the bECMGs
      */
-    public List<BECMGTafTrend> getBECMGs() {
-        return bECMGs;
+    public List<TafTrend> getBECMGs() {
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.BECMG)).map(TafTrend.class::cast).toList();
     }
 
     /**
      * @return the fMs
      */
     public List<FMTafTrend> getFMs() {
-        return fMs;
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.FM)).map(FMTafTrend.class::cast).toList();
     }
 
     /**
      * @return the probs
      */
-    public List<PROBTafTrend> getProbs() {
-        return probs;
-    }
-
-    /**
-     * Adds a tempo change to the list.
-     *
-     * @param change the change to add.
-     */
-    public void addTempo(final TEMPOTafTrend change) {
-        tempos.add(change);
-    }
-
-    /**
-     * Adds a PROB Change to the list.
-     *
-     * @param change the change to add.
-     */
-    public void addProb(final PROBTafTrend change) {
-        probs.add(change);
-    }
-
-    /**
-     * Adds a BECMG to the list.
-     *
-     * @param change the change to add.
-     */
-    public void addBECMG(final BECMGTafTrend change) {
-        bECMGs.add(change);
-    }
-
-    /**
-     * Adds a FM change to the list.
-     *
-     * @param change the change to add.
-     */
-    public void addFM(final FMTafTrend change) {
-        fMs.add(change);
-    }
-
-    /**
-     * Adds a INTER to the list of INTER changes.
-     * @param change The trend to add.
-     */
-    public void addInter(final INTERTafTrend change) {
-        inters.add(change);
+    public List<TafProbTrend> getProbs() {
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.PROB)).map(TafProbTrend.class::cast).toList();
     }
 
     /**
      * @return the tempos
      */
-    public List<TEMPOTafTrend> getTempos() {
-        return tempos;
+    public List<TafProbTrend> getTempos() {
+        return trends.stream().filter(a -> a.getType().equals(WeatherChangeType.TEMPO)).map(TafProbTrend.class::cast).toList();
     }
 
     /**
-     * @return The inter changes.
+     * @return inter changes.
      */
-    public List<INTERTafTrend> getInters() {
-        return inters;
+    public List<TafTrend> getInters() {
+        return trends.stream().filter(trend -> trend.getType().equals(WeatherChangeType.INTER)).map(TafTrend.class::cast).toList();
     }
 
     /**
@@ -184,10 +128,18 @@ public class TAF extends AbstractWeatherCode {
         this.amendment = amendment;
     }
 
+    /**
+     * Adds a trend to the trend list.
+     * @param trend The trend to add.
+     */
+    public void addTrend(final AbstractTafTrend<? extends AbstractValidity> trend) {
+        this.trends.add(trend);
+    }
+
     @Override
-    public final String toString() {
+    public String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
                 .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), amendment)
-                .appendToString(bECMGs.toString()).appendToString(fMs.toString()).appendToString(tempos.toString()).appendToString(inters.toString()).appendToString(probs.toString()).toString();
+                .appendToString(trends.toString()).toString();
     }
 }

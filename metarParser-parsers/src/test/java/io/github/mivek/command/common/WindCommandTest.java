@@ -1,6 +1,7 @@
 package io.github.mivek.command.common;
 
 import io.github.mivek.internationalization.Messages;
+import io.github.mivek.model.Metar;
 import io.github.mivek.model.Wind;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,35 +13,35 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author mivek
  */
-public class WindCommandTest {
+class WindCommandTest {
 
-    private WindCommand sut;
+    private WindCommand command;
 
     @BeforeEach
-    public void setUp() {
-        sut = new WindCommand();
+    void setUp() {
+        command = new WindCommand();
     }
 
     @Test
-    public void testParseWindSimple() {
+    void testParseWindSimple() {
         String windPart = "34008KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.NNW")));
         assertEquals(Integer.valueOf(340), res.getDirectionDegrees());
         assertEquals(8, res.getSpeed());
-        assertEquals(0, res.getGust());
+        assertNull(res.getGust());
         assertEquals("KT", res.getUnit());
 
     }
 
     @Test
-    public void testParseWindWithGusts() {
+    void testParseWindWithGusts() {
         String windPart = "12017G20KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertThat(res.getDirection(), is(Messages.getInstance().getString("Converter.ESE")));
@@ -51,14 +52,22 @@ public class WindCommandTest {
     }
 
     @Test
-    public void testParseWindVariable() {
+    void testParseWindVariable() {
         String windPart = "VRB08KT";
 
-        Wind res = sut.parseWind(windPart);
+        Wind res = command.parseWind(windPart);
 
         assertNotNull(res);
         assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getDirection());
         assertEquals(8, res.getSpeed());
         assertNull(res.getDirectionDegrees());
+    }
+
+    @Test
+    void testExecute() {
+        String windPart = "VRB08KT";
+        Metar m = new Metar();
+
+        assertTrue(command.execute(m, windPart));
     }
 }

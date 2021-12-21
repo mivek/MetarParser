@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public class TimeIndicatorTest {
+class TimeIndicatorTest {
 
     @Test
-    public void testToStringWithMultipleLocale() {
+    void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("De", TimeIndicator.FM.toString());
 

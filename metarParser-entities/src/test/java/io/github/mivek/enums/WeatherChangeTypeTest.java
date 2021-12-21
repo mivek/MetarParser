@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public class WeatherChangeTypeTest {
+class WeatherChangeTypeTest {
 
     @Test
-    public void testToStringWithMultipleLocale() {
+    void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("Devenant", WeatherChangeType.BECMG.toString());
 

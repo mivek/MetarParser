@@ -6,10 +6,10 @@ import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MessagesTest {
+class MessagesTest {
 
     @Test
-    public void testSetLocale() {
+    void testSetLocale() {
         // Given a french locale
         Messages.getInstance().setLocale(Locale.FRENCH);
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));

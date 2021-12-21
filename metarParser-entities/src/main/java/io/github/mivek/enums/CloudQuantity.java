@@ -11,17 +11,17 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum CloudQuantity {
     /** Sky clear. */
-    SKC, //$NON-NLS-1$
+    SKC,
     /** Few clouds. */
-    FEW, //$NON-NLS-1$
+    FEW,
     /** Broken ceiling. */
-    BKN, //$NON-NLS-1$
+    BKN,
     /** Scattered. */
-    SCT, //$NON-NLS-1$
+    SCT,
     /** Overcast. */
-    OVC, //$NON-NLS-1$
+    OVC,
     /** No significant cloud. */
-    NSC; //$NON-NLS-1$
+    NSC;
 
 
     @Override

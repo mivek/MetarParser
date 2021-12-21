@@ -19,17 +19,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author mivek
  */
-public class RunwayCommandTest {
+class RunwayCommandTest {
 
     private RunwayCommand command;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         command = new RunwayCommand();
     }
 
     @Test
-    public void testExecuteSimple() {
+    void testExecuteSimple() {
         String riString = "R26/0600U";
         Metar m = new Metar();
         command.execute(m, riString);
@@ -43,7 +43,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunWaysComplex() {
+    void testParseRunWaysComplex() {
         String riString = "R26L/0550V700U";
         Metar m = new Metar();
 
@@ -58,7 +58,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayVisualRangeFeetVariable() {
+    void testParseRunwayVisualRangeFeetVariable() {
         Metar m = new Metar();
 
         command.execute(m, "R01L/0600V1000FT");
@@ -71,7 +71,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayVisualRangeFeetSimple() {
+    void testParseRunwayVisualRangeFeetSimple() {
         Metar m = new Metar();
 
         command.execute(m, "R01L/0800FT");
@@ -83,7 +83,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunWayNull() {
+    void testParseRunWayNull() {
         String riString = "R26R/AZEZFDFS";
 
         Metar m = new Metar();
@@ -93,7 +93,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayDeposit() {
+    void testParseRunwayDeposit() {
         Metar m = new Metar();
 
         command.execute(m, "R05/629294");
@@ -108,7 +108,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayDepositWithNotReportedType() {
+    void testParseRunwayDepositWithNotReportedType() {
         Metar m = new Metar();
 
         command.execute(m, "R05//29294");
@@ -123,7 +123,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayDepositWithInvalidDeposit() {
+    void testParseRunwayDepositWithInvalidDeposit() {
         Metar m = new Metar();
 
         command.execute(m, "R05/6292/4");
@@ -131,7 +131,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayWithLessThanIndicatorAndUnit() {
+    void testParseRunwayWithLessThanIndicatorAndUnit() {
         Metar m = new Metar();
 
         command.execute(m, "R01L/M0600FT");
@@ -143,7 +143,7 @@ public class RunwayCommandTest {
     }
 
     @Test
-    public void testParseRunwayWithGreaterThanIndicator() {
+    void testParseRunwayWithGreaterThanIndicator() {
         Metar m = new Metar();
 
         command.execute(m, "R01L/P0600FT");

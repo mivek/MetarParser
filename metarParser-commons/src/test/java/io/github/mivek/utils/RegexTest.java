@@ -8,10 +8,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RegexTest {
+class RegexTest {
 
     @Test
-    public void testPregMatchSuccess() {
+    void testPregMatchSuccess() {
         Pattern regex = Pattern.compile("(a((b)(c)))");
         String input = "abc";
 
@@ -23,7 +23,7 @@ public class RegexTest {
     }
 
     @Test
-    public void testPregMatchFail() {
+    void testPregMatchFail() {
         Pattern regex = Pattern.compile("(a((b)(c)))");
         String input = "";
 
@@ -33,7 +33,7 @@ public class RegexTest {
     }
 
     @Test
-    public void testFind() {
+    void testFind() {
         Pattern regex = Pattern.compile("^(R\\d{2}\\w?/)");
         String input1 = "R26/0550V700U";
         String input2 = "Random string";
@@ -43,14 +43,14 @@ public class RegexTest {
     }
 
     @Test
-    public void testMatch() {
+    void testMatch() {
         Pattern regex = Pattern.compile("(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM/H)?");
 
         assertTrue(Regex.match(regex, "12012MPS"));
     }
 
     @Test
-    public void testFindString() {
+    void testFindString() {
         Pattern regex = Pattern.compile("(TS)");
 
         assertEquals("TS", Regex.findString(regex, "TSRA"));

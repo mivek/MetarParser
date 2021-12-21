@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class WindShearTest {
+class WindShearTest {
 
     @Test
-    public void testToString() {
+    void testToString() {
         WindShear sut = new WindShear();
         sut.setHeight(500);
 

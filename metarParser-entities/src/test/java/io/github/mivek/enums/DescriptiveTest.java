@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public class DescriptiveTest {
+class DescriptiveTest {
 
     @Test
-    public void testToStringWithMultipleLocale() {
+    void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("averses de", Descriptive.SHOWERS.toString());
 

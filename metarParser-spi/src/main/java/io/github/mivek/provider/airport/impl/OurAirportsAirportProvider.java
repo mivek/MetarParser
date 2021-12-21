@@ -15,7 +15,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,9 +35,9 @@ public final class OurAirportsAirportProvider implements AirportProvider {
     /** URI to retrieve the list of airports. */
     private static final String AIRPORT_URI = "https://ourairports.com/data/airports.csv";
     /** Map of countries. */
-    private Map<String, Country> countries;
+    private final Map<String, Country> countries;
     /** Map of airports. */
-    private Map<String, Airport> airports;
+    private final Map<String, Airport> airports;
     /** Common CSV Parser. */
     private final CSVParser parser;
 
@@ -44,7 +48,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
      * @throws IOException            when network error
      * @throws URISyntaxException     when the URI is invalid
      */
-    public OurAirportsAirportProvider() throws CsvValidationException, IOException, URISyntaxException {
+    public OurAirportsAirportProvider() throws CsvValidationException, IOException, URISyntaxException, InterruptedException {
         countries = new HashMap<>();
         airports = new HashMap<>();
         parser = new CSVParserBuilder().withIgnoreQuotations(true).build();
@@ -59,11 +63,18 @@ public final class OurAirportsAirportProvider implements AirportProvider {
      * @throws IOException            when network error
      * @throws URISyntaxException     when the URI is invalid
      */
-    public void buildCountries() throws URISyntaxException, IOException, CsvValidationException {
-        countries = new HashMap<>();
-        URI countriesUri = new URI(COUNTRIES_URI);
-        try (InputStream countriesStream = countriesUri.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesStream, StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
+    public void buildCountries() throws URISyntaxException, IOException, CsvValidationException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(COUNTRIES_URI))
+                .GET()
+                .version(HttpClient.Version.HTTP_2)
+                .timeout(Duration.ofSeconds(5))
+                .build();
+
+        HttpResponse<InputStream> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofInputStream());
+        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(response.body(), StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
             String[] line;
             while ((line = reader.readNext()) != null) {
                 Country c = new Country();
@@ -80,11 +91,18 @@ public final class OurAirportsAirportProvider implements AirportProvider {
      * @throws IOException            when network error
      * @throws URISyntaxException     when the URI is invalid
      */
-    public void buildAirport() throws URISyntaxException, IOException, CsvValidationException {
-        URI airportsURI = new URI(AIRPORT_URI);
-        airports = new HashMap<>();
-        try (InputStream airportStream = airportsURI.toURL().openStream();
-                CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportStream, StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
+    public void buildAirport() throws URISyntaxException, IOException, CsvValidationException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(AIRPORT_URI))
+                .GET()
+                .version(HttpClient.Version.HTTP_2)
+                .timeout(Duration.ofSeconds(5))
+                .build();
+
+        HttpResponse<InputStream> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofInputStream());
+        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(response.body(), StandardCharsets.UTF_8)).withCSVParser(parser).withSkipLines(1).build()) {
             String[] line;
 
             while ((line = reader.readNext()) != null) {

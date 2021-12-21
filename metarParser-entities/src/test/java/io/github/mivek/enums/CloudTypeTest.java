@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author mivek
  */
-public class CloudTypeTest {
+class CloudTypeTest {
 
     @Test
-    public void testToStringWithMultipleLocale() {
+    void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("Cirrocumulus", CloudType.CC.toString());
 

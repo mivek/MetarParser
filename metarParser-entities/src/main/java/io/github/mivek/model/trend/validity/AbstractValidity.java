@@ -12,29 +12,29 @@ public abstract class AbstractValidity implements IValidity {
     /**
      * Beginning day of the taf's validity.
      */
-    private Integer startDay;
+    private int startDay;
     /**
      * Beginning hour of the taf's validity.
      */
-    private Integer startHour;
+    private int startHour;
 
     @Override
-    public final Integer getStartDay() {
+    public final int getStartDay() {
         return startDay;
     }
 
     @Override
-    public final void setStartDay(final Integer startDay) {
+    public final void setStartDay(final int startDay) {
         this.startDay = startDay;
     }
 
     @Override
-    public final Integer getStartHour() {
+    public final int getStartHour() {
         return startHour;
     }
 
     @Override
-    public final void setStartHour(final Integer startHour) {
+    public final void setStartHour(final int startHour) {
         this.startHour = startHour;
     }
 

@@ -11,15 +11,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HourlyPrecipitationAmountCommandTest {
+class HourlyPrecipitationAmountCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Command command = new HourlyPrecipitationAmountCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("P0009 AO1", sb));
@@ -27,7 +27,7 @@ public class HourlyPrecipitationAmountCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new HourlyPrecipitationAmountCommand();
         assertTrue(command.canParse("P0009"));
     }

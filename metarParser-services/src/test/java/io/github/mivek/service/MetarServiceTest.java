@@ -9,16 +9,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
+class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
     @Test
-    public void testDecodeValidMetar() throws ParseException {
+    void testDecodeValidMetar() throws ParseException {
         String code = "LFPG 251830Z 17013KT 9999 OVC006 04/03 Q1012 NOSIG";
 
         Metar res = MetarService.getInstance().decode(code);
 
         assertNotNull(res);
         assertEquals("LFPG", res.getAirport().getIcao());
-        assertEquals(25, res.getDay().intValue());
+        assertEquals(25, res.getDay());
         // Time
         assertNotNull(res.getTime());
         assertEquals(18, res.getTime().getHour());
@@ -31,10 +31,10 @@ public class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
         // Visibility
         assertEquals(">10km", res.getVisibility().getMainVisibility());
         // Temperatures
-        assertEquals(4, res.getTemperature().intValue());
-        assertEquals(3, res.getDewPoint().intValue());
+        assertEquals(4, res.getTemperature());
+        assertEquals(3, res.getDewPoint());
         // Altimeter
-        assertEquals(1012, res.getAltimeter().intValue());
+        assertEquals(1012, res.getAltimeter());
         assertTrue(res.isNosig());
         // Clouds.
         assertThat(res.getClouds(), is(not(empty())));
@@ -42,7 +42,7 @@ public class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
     }
 
     @Override
-    protected AbstractWeatherCodeService<Metar> getSut() {
+    protected AbstractWeatherCodeService<Metar> getService() {
         return MetarService.getInstance();
     }
 }

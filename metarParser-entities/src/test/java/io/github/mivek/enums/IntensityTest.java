@@ -8,20 +8,20 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class IntensityTest {
+class IntensityTest {
 
     @Test
-    public void testGetEnum() {
+    void testGetEnum() {
         assertThrows(IllegalArgumentException.class, () -> Intensity.getEnum("QWERTY"));
     }
 
     @Test
-    public void testGetEnumValid() {
+    void testGetEnumValid() {
         assertEquals(Intensity.LIGHT, Intensity.getEnum("-"));
     }
 
     @Test
-    public void testToStringWithMultipleLocale() {
+    void testToStringWithMultipleLocale() {
         Messages.getInstance().setLocale(Locale.FRANCE);
         assertEquals("Faible", Intensity.LIGHT.toString());
 

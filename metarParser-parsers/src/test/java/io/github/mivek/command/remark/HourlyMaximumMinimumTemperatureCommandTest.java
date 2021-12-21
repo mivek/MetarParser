@@ -11,15 +11,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HourlyMaximumMinimumTemperatureCommandTest {
+class HourlyMaximumMinimumTemperatureCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         HourlyMaximumMinimumTemperatureCommand command = new HourlyMaximumMinimumTemperatureCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("401001015 AO1", sb));
@@ -27,7 +27,7 @@ public class HourlyMaximumMinimumTemperatureCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new HourlyMaximumMinimumTemperatureCommand();
         assertTrue(command.canParse("401001015"));
     }

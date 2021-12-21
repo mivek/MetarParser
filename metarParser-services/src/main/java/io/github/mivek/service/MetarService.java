@@ -1,16 +1,16 @@
 package io.github.mivek.service;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
-
-import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Metar;
 import io.github.mivek.parser.MetarParser;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class representing the service for metar.
@@ -20,9 +20,7 @@ import io.github.mivek.parser.MetarParser;
 public final class MetarService extends AbstractWeatherCodeService<Metar> {
     /** URL to retrieve the metar from. */
     private static final String NOAA_METAR_URL = "https://tgftp.nws.noaa.gov/data/observations/metar/stations/";
-    /**
-     * Instance.
-     */
+    /** Instance. */
     private static final MetarService INSTANCE = new MetarService();
 
     /**
@@ -38,18 +36,16 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
     }
 
     @Override
-    public Metar retrieveFromAirport(final String icao) throws ParseException, IOException {
-        if (icao.length() != AbstractWeatherCodeService.ICAO) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO); // $NON-NLS-1$
-        }
-        String website = NOAA_METAR_URL + icao.toUpperCase() // $NON-NLS-1$
-                + ".TXT"; //$NON-NLS-1$
-        URL url = new URL(website);
-        URLConnection urlCo = url.openConnection();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(urlCo.getInputStream(), StandardCharsets.UTF_8))) {
-            String line = br.lines().toArray(String[]::new)[1];
-            return getParser().parse(line);
-        }
+    public Metar retrieveFromAirport(final String icao) throws ParseException, IOException, URISyntaxException, InterruptedException {
+        checkIcao(icao);
+        String website = NOAA_METAR_URL + icao.toUpperCase()
+                + ".TXT";
+        HttpRequest request = buildRequest(website);
+
+        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofLines());
+        return getParser().parse(response.body().skip(1).collect(Collectors.joining()));
     }
 
     /**

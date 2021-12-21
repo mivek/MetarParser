@@ -12,7 +12,7 @@ public class Visibility {
     /** mainVisibility of the metar. */
     private String mainVisibility;
     /** minimal visibility of the metar. */
-    private int minVisibility;
+    private Integer minVisibility;
     /** Direction of the minimal visibility. */
     private String minDirection;
 
@@ -39,7 +39,7 @@ public class Visibility {
      *
      * @return the minimal visibility.
      */
-    public int getMinVisibility() {
+    public Integer getMinVisibility() {
         return minVisibility;
     }
 

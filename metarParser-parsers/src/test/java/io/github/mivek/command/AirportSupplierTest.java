@@ -15,18 +15,18 @@ public class AirportSupplierTest {
     private AirportSupplier sut;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         sut = new AirportSupplier();
     }
 
     @Test
-    public void testGetWithExistingIcao() {
+    void testGetWithExistingIcao() {
         Airport res = sut.get("LFPG");
         assertNotNull(res);
     }
 
     @Test
-    public void testWithNonExistingIcao() {
+    void testWithNonExistingIcao() {
         Airport res = sut.get("AA");
         assertNull(res);
     }

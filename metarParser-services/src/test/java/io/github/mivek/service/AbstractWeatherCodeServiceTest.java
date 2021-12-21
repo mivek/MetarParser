@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -15,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Disabled
-public abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
-    protected abstract AbstractWeatherCodeService<T> getSut();
+abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
+    protected abstract AbstractWeatherCodeService<T> getService();
 
     @Test
-    public void testRetrieveFromAirportInvalid() {
-        ParseException e = assertThrows(ParseException.class, () -> getSut().retrieveFromAirport("RandomIcao"));
+    void testRetrieveFromAirportInvalid() {
+        ParseException e = assertThrows(ParseException.class, () -> getService().retrieveFromAirport("RandomIcao"));
         assertEquals(ErrorCodes.ERROR_CODE_INVALID_ICAO, e.getErrorCode());
     }
 
     @Test
-    public void testRetrieveFromAirport() throws IOException, ParseException {
-        T res = getSut().retrieveFromAirport("LFPG");
+    void testRetrieveFromAirport() throws IOException, ParseException, URISyntaxException, InterruptedException {
+        T res = getService().retrieveFromAirport("LFPG");
         assertThat(res, notNullValue());
         assertThat(res.getAirport().getIcao(), is("LFPG"));
     }

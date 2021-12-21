@@ -12,15 +12,15 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class PrecipitationEndCommandTest {
+class PrecipitationEndCommandTest {
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         Messages.getInstance().setLocale(Locale.ENGLISH);
     }
 
     @Test
-    public void testExecute() {
+    void testExecute() {
         Command command = new PrecipitationEndCommand();
         StringBuilder sb = new StringBuilder();
         assertEquals("AO1", command.execute("RAE45 AO1", sb));
@@ -28,7 +28,7 @@ public class PrecipitationEndCommandTest {
     }
 
     @Test
-    public void testExecuteWithDescriptive() {
+    void testExecuteWithDescriptive() {
         Command command = new PrecipitationEndCommand();
         StringBuilder sb = new StringBuilder();
         MatcherAssert.assertThat(command.execute("SHRAE45", sb), Matchers.emptyString());
@@ -36,7 +36,7 @@ public class PrecipitationEndCommandTest {
     }
 
     @Test
-    public void testCanParse() {
+    void testCanParse() {
         Command command = new PrecipitationEndCommand();
         assertTrue(command.canParse("SHRAE45"));
     }

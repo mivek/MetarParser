@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author mivek
  */
-public class RemarkCommandSupplierTest {
+class RemarkCommandSupplierTest {
 
     @Test
-    public void testBuildCommandList() {
+    void testBuildCommandList() {
         List<Command> commands = new RemarkCommandSupplier().buildCommandList();
 
         assertNotNull(commands);

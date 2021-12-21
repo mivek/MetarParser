@@ -29,7 +29,7 @@ public final class RemarkParser {
     public String parse(final String remark) {
         String rmk = remark;
         StringBuilder sb = new StringBuilder();
-        while (!"".equals(rmk)) {
+        while (!rmk.isBlank()) {
             try {
                 rmk = supplier.get(rmk).execute(rmk, sb);
             } catch (MissingResourceException e) {

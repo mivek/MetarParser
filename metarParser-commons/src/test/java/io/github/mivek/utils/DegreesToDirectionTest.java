@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class DegreesToDirectionTest {
+class DegreesToDirectionTest {
 
     static Stream<Arguments> data() {
         return Stream.of(
@@ -30,7 +30,7 @@ public class DegreesToDirectionTest {
 
     @ParameterizedTest
     @MethodSource("data")
-    public void testDegreesToDirection(String direction, String degrees) {
+    void testDegreesToDirection(String direction, String degrees) {
         assertEquals(Messages.getInstance().getString(direction), Converter.degreesToDirection(degrees));
     }
 }

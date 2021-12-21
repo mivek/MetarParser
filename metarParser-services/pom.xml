@@ -12,7 +12,7 @@
     <artifactId>metarParser-services</artifactId>
 
     <properties>
-        <jacoco.coverage.instruction.minimum>0.95</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.instruction.minimum>0.94</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>1</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.90</jacoco.coverage.complexity.minimum>
     </properties>

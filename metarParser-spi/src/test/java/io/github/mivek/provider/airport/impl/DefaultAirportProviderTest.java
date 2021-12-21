@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author mivek
  */
-public class DefaultAirportProviderTest {
+class DefaultAirportProviderTest {
 
     @Test
-    public void testGetAirport() {
+    void testGetAirport() {
         AirportProvider provider = new DefaultAirportProvider();
 
         Map<String, Airport> airports = provider.getAirports();

@@ -8,20 +8,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class RemarkParserTest {
-    public static final String CLOUD_QUANTITY_BKN = "CloudQuantity.BKN";
-    public static final String REMARK_PRECIPITATION_BEG_END = "Remark.Precipitation.Beg.End";
-    public static final String CONVERTER_NE = "Converter.NE";
-    public static final String REMARK_SEA_LEVEL_PRESSURE = "Remark.Sea.Level.Pressure";
+class RemarkParserTest {
+    static final String CLOUD_QUANTITY_BKN = "CloudQuantity.BKN";
+    static final String REMARK_PRECIPITATION_BEG_END = "Remark.Precipitation.Beg.End";
+    static final String CONVERTER_NE = "Converter.NE";
+    static final String REMARK_SEA_LEVEL_PRESSURE = "Remark.Sea.Level.Pressure";
     private RemarkParser parser;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         parser = RemarkParser.getInstance();
     }
 
     @Test
-    public void testParseWithAO1() {
+    void testParseWithAO1() {
         // GIVEN a RMK with AO1 token.
         String code = "Token AO1 End of remark";
         // WHEN parsing the remark.
@@ -32,7 +32,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWithAO2() {
+    void testParseWithAO2() {
         // GIVEN a RMK with AO2 token
         String code = "Token AO2 End of remark";
         // WHEN parsing the remark.
@@ -43,7 +43,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWithWindPeakAtTheHour() {
+    void testParseWithWindPeakAtTheHour() {
         // GIVEN a RMK with Peak wind at the hour.
         String code = "AO1 PK WND 28045/15";
         // WHEN parsing the remark.
@@ -55,7 +55,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWithWindPeakAtAnotherHour() {
+    void testParseWithWindPeakAtAnotherHour() {
         // GIVEN a RMK with Peak wind at the hour.
         String code = "AO1 PK WND 28045/1515";
         // WHEN parsing the remark.
@@ -67,7 +67,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWindShiftAtTheHour() {
+    void testParseWindShiftAtTheHour() {
         // GIVEN a RMK with Wind shift at the hour
         String code = "AO1 WSHFT 30";
         // WHEN parsing the remark.
@@ -79,7 +79,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWindShift() {
+    void testParseWindShift() {
         // GIVEN a RMK with Wind shift at the hour
         String code = "AO1 WSHFT 1530";
         // WHEN parsing the remark.
@@ -91,7 +91,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWindShiftWithFrontal() {
+    void testParseWindShiftWithFrontal() {
         // GIVEN a RMK with wind shift with frontal passage
         String code = "AO1 WSHFT 1530 FROPA";
         // WHEN parsing the remark
@@ -103,7 +103,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWindShiftWithFrontalAtTheHour() {
+    void testParseWindShiftWithFrontalAtTheHour() {
         // GIVEN a RMK with wind shift with frontal passage
         String code = "AO1 WSHFT 30 FROPA";
         // WHEN parsing the remark
@@ -115,7 +115,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTowerVisibility() {
+    void testParseTowerVisibility() {
         // GIVEN a rmk with tower visibility
         String code = "AO1 TWR VIS 16 1/2";
         // WHEN parsing the remark
@@ -126,7 +126,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSurfaceVisibility() {
+    void testParseSurfaceVisibility() {
         // GIVEN a rmk with surface visibility
         String code = "AO1 SFC VIS 16 1/2";
         // WHEN parsing the remark
@@ -137,7 +137,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParsePrevailingVisibility() {
+    void testParsePrevailingVisibility() {
         // GIVEN a rmk with variable prevailing visibility
         String code = "AO1 VIS 1/2V2";
         // WHEN parsing the remark
@@ -148,7 +148,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSectorVisibility() {
+    void testParseSectorVisibility() {
         // GIVEN a rmk with sector visibility
         String code = "AO1 VIS NE 2 1/2";
         // WHEN parsing the remark
@@ -159,7 +159,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSecondLocationVisibility() {
+    void testParseSecondLocationVisibility() {
         // GIVEN a rmk with visibility at second location
         String code = "AO1 VIS 2 1/2 RWY11";
         // WHEN parsing the remark
@@ -170,7 +170,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithTornado() {
+    void testParseTornadicActivityWithTornado() {
         String code = "AO1 TORNADO B13 6 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -179,7 +179,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithTornadoAndHour() {
+    void testParseTornadicActivityWithTornadoAndHour() {
         String code = "AO1 TORNADO B1513 6 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -188,7 +188,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithFunnelCloud() {
+    void testParseTornadicActivityWithFunnelCloud() {
         String code = "AO1 FUNNEL CLOUD B1513E1630 6 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -197,7 +197,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithFunnelCloudAndHourEnd() {
+    void testParseTornadicActivityWithFunnelCloudAndHourEnd() {
         String code = "AO1 FUNNEL CLOUD B13E1630 6 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -206,7 +206,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithWaterSproutAndEndingTimeOnlyMinutes() {
+    void testParseTornadicActivityWithWaterSproutAndEndingTimeOnlyMinutes() {
         String code = "AO1 WATERSPOUT E16 12 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -215,7 +215,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseTornadicActivityWithWaterSproutAndEndingTime() {
+    void testParseTornadicActivityWithWaterSproutAndEndingTime() {
         String code = "AO1 WATERSPOUT E1516 12 NE";
         String remark = parser.parse(code);
         String expectedRmk = Messages.getInstance()
@@ -224,7 +224,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseBeginningEndPrecipitation() {
+    void testParseBeginningEndPrecipitation() {
         String code = "AO1 RAB05E30SNB1520E1655";
         String remark = parser.parse(code);
         String expectedRmk1 = Messages.getInstance().getString(REMARK_PRECIPITATION_BEG_END, "", Messages.getInstance().getString("Phenomenon.RA"), "", "05", "", "30");
@@ -234,7 +234,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseBeginningEndPrecipitationWithDescriptive() {
+    void testParseBeginningEndPrecipitationWithDescriptive() {
         String code = "AO1 SHRAB05E30SHSNB20E55";
         String remark = parser.parse(code);
         String expectedRmk1 = Messages.getInstance()
@@ -246,7 +246,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseBeginningThunderstorm() {
+    void testParseBeginningThunderstorm() {
         String code = "AO1 TSB0159E30";
         String remark = parser.parse(code);
         String expectedRmk1 = Messages.getInstance().getString(REMARK_PRECIPITATION_BEG_END, "", Messages.getInstance().getString("Phenomenon.TS"), "01", "59", "", "30");
@@ -254,7 +254,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseThunderStormLocation() {
+    void testParseThunderStormLocation() {
         String code = "AO1 TS SE";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Thunderstorm.Location", Messages.getInstance().getString("Converter.SE"));
@@ -262,7 +262,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseThunderStormLocationWithMoving() {
+    void testParseThunderStormLocationWithMoving() {
         String code = "AO1 TS SE MOV NE";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Thunderstorm.Location.Moving", Messages.getInstance().getString("Converter.SE"), Messages.getInstance().getString(CONVERTER_NE));
@@ -270,7 +270,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseHailSize() {
+    void testParseHailSize() {
         String code = "AO1 GR 1 3/4";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Hail", "1 3/4");
@@ -278,7 +278,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseHailSizeWithLesserThan() {
+    void testParseHailSizeWithLesserThan() {
         String code = "AO1 GR LESS THAN 1/4";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Hail.LesserThan", "1/4");
@@ -286,7 +286,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSnowPellets() {
+    void testParseSnowPellets() {
         String code = "AO1 GS MOD";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Snow.Pellets", Messages.getInstance().getString("Remark.MOD"));
@@ -294,7 +294,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseVirgaWithDirection() {
+    void testParseVirgaWithDirection() {
         String code = "AO1 VIRGA SW";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Virga.Direction", Messages.getInstance().getString("Converter.SW"));
@@ -302,14 +302,14 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseVirga() {
+    void testParseVirga() {
         String code = "AO1 VIRGA";
         String remark = parser.parse(code);
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.VIRGA")));
     }
 
     @Test
-    public void testParseCeilingHeight() {
+    void testParseCeilingHeight() {
         String code = "AO1 CIG 005V010";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Ceiling.Height", 500, 1000);
@@ -317,7 +317,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseObscurations() {
+    void testParseObscurations() {
         String code = "AO1 FU BKN020";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Obscuration", Messages.getInstance().getString(CLOUD_QUANTITY_BKN), 2000, Messages.getInstance().getString("Phenomenon.FU"));
@@ -325,7 +325,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseVariableSkyConditionWithoutLayer() {
+    void testParseVariableSkyConditionWithoutLayer() {
         String code = "BKN V OVC";
         String remark = parser.parse(code);
         String expected = Messages.getInstance()
@@ -334,7 +334,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseVariableSkyCondition() {
+    void testParseVariableSkyCondition() {
         String code = "BKN014 V OVC";
         String remark = parser.parse(code);
         String expected = Messages.getInstance()
@@ -343,7 +343,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseCeilingSecondLocation() {
+    void testParseCeilingSecondLocation() {
         String code = "CIG 002 RWY11";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Ceiling.Second.Location", 200, "RWY11");
@@ -351,7 +351,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSealLevelPressure() {
+    void testParseSealLevelPressure() {
         String code = "AO1 SLP134";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "1013.4");
@@ -359,7 +359,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSealLevelPressure2() {
+    void testParseSealLevelPressure2() {
         String code = "AO1 SLP982";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "998.2");
@@ -367,7 +367,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseSnowIncreasingRapidly() {
+    void testParseSnowIncreasingRapidly() {
         String code = "AO1 SNINCR 2/10";
         String remark = parser.parse(code);
         String expected = Messages.getInstance().getString("Remark.Snow.Increasing.Rapidly", 2, 10);
@@ -375,7 +375,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWithRmkSlp() {
+    void testParseWithRmkSlp() {
         String code = "CF1AC8 CF TR SLP091 DENSITY ALT 200FT";
 
         String remark = parser.parse(code);
@@ -384,7 +384,7 @@ public class RemarkParserTest {
     }
 
     @Test
-    public void testParseWithDistantLightning() {
+    void testParseWithDistantLightning() {
         String code = "AO2 PK WND 13029/2000 LTG DSNT ALQDS P0020";
         String remark = parser.parse(code);
 

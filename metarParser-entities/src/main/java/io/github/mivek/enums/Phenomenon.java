@@ -11,49 +11,49 @@ import io.github.mivek.internationalization.Messages;
  */
 public enum Phenomenon {
     /** Rain. */
-    RAIN("RA"), //$NON-NLS-1$
+    RAIN("RA"),
     /** Drizzle. */
-    DRIZZLE("DZ"), //$NON-NLS-1$
+    DRIZZLE("DZ"),
     /** Snow. */
-    SNOW("SN"), //$NON-NLS-1$
+    SNOW("SN"),
     /** Snow grains. */
-    SNOW_GRAINS("SG"), //$NON-NLS-1$
+    SNOW_GRAINS("SG"),
     /** Ice pellets. */
-    ICE_PELLETS("PL"), //$NON-NLS-1$
+    ICE_PELLETS("PL"),
     /** Ice crystals. */
-    ICE_CRYSTALS("IC"), //$NON-NLS-1$
+    ICE_CRYSTALS("IC"),
     /** Hail. */
-    HAIL("GR"), //$NON-NLS-1$
+    HAIL("GR"),
     /** Small hail. */
-    SMALL_HAIL("GS"), //$NON-NLS-1$
+    SMALL_HAIL("GS"),
     /** Unknow precipitation. */
-    UNKNOW_PRECIPITATION("UP"), //$NON-NLS-1$
+    UNKNOW_PRECIPITATION("UP"),
     /** Fog. */
-    FOG("FG"), //$NON-NLS-1$
+    FOG("FG"),
     /** Volcanic ashes. */
-    VOLCANIC_ASH("VA"), //$NON-NLS-1$
+    VOLCANIC_ASH("VA"),
     /** Mist. */
-    MIST("BR"), //$NON-NLS-1$
+    MIST("BR"),
     /** Haze. */
-    HAZE("HZ"), //$NON-NLS-1$
+    HAZE("HZ"),
     /** Widespread dust. */
-    WIDESPREAD_DUST("DU"), //$NON-NLS-1$
+    WIDESPREAD_DUST("DU"),
     /** Smoke. */
-    SMOKE("FU"), //$NON-NLS-1$
+    SMOKE("FU"),
     /** Sand. */
-    SAND("SA"), //$NON-NLS-1$
+    SAND("SA"),
     /** Spray. */
-    SPRAY("PY"), //$NON-NLS-1$
+    SPRAY("PY"),
     /** Squall. */
-    SQUALL("SQ"), //$NON-NLS-1$
+    SQUALL("SQ"),
     /** Sand whirl. */
-    SAND_WHIRLS("PO"), //$NON-NLS-1$
+    SAND_WHIRLS("PO"),
     /** Duststorm. */
-    DUSTSTORM("DS"), //$NON-NLS-1$
+    DUSTSTORM("DS"),
     /** Sandstorm. */
-    SANDSTORM("SS"), //$NON-NLS-1$
+    SANDSTORM("SS"),
     /** Funnel cloud. */
-    FUNNEL_CLOUD("FC"); //$NON-NLS-1$
+    FUNNEL_CLOUD("FC");
 
     /** Shortcut of the phenomenon. */
     private final String shortcut;
