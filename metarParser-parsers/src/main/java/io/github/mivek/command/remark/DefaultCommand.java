@@ -1,17 +1,12 @@
 package io.github.mivek.command.remark;
 
 import io.github.mivek.internationalization.Messages;
-
 import java.util.MissingResourceException;
-import java.util.logging.Logger;
 
 /**
  * @author mivek
  */
 public final class DefaultCommand implements Command {
-    /** The logger instance. */
-    private static final Logger LOGGER = Logger.getLogger(DefaultCommand.class.getName());
-
     /** Message instance. */
     private final Messages messages;
 

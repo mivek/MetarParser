@@ -30,7 +30,7 @@ public abstract class AbstractWeatherContainer {
     /**
      * Constructor to initialize the lists.
      */
-    public AbstractWeatherContainer() {
+    protected AbstractWeatherContainer() {
         clouds = new ArrayList<>();
         weatherConditions = new ArrayList<>();
     }
