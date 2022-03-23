@@ -11,7 +11,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 /**
  * @author mivek
  */
-@AnalyzeClasses(packages = { "io.github.mivek.provider.airport.impl" }, importOptions = { ImportOption.DoNotIncludeTests.class })
+@AnalyzeClasses(packages = { "io.github.mivek.provider.airport.impl" }, importOptions = { ImportOption.DoNotIncludeTests.class, ImportOption.DoNotIncludePackageInfos.class })
 class AirportProviderArchitectureTest {
 
     @ArchTest
