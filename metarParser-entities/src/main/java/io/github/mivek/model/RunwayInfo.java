@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,7 +22,7 @@ public class RunwayInfo {
     /** The maximal visibility on the runway. */
     private int maxRange;
     /** Indicator on the visual range: either less than or greater than. */
-    private String indicator;
+    private RunwayInfoIndicator indicator;
     /** The tread. */
     private RunwayInfoTrend trend;
     /** The type of deposit. */
@@ -54,14 +55,14 @@ public class RunwayInfo {
     /**
      * @return the visual range indicator
      */
-    public String getIndicator() {
+    public RunwayInfoIndicator getIndicator() {
         return indicator;
     }
 
     /**
      * @param indicator to set. Either "greater than" or "less than"
      */
-    public void setIndicator(final String indicator) {
+    public void setIndicator(final RunwayInfoIndicator indicator) {
         this.indicator = indicator;
     }
 

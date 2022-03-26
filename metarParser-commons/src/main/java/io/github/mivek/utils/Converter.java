@@ -67,18 +67,6 @@ public final class Converter {
         }
     }
 
-
-    /**
-     * Converts the indicator for the runway visual range.
-     * @param input Single character representing the indicator
-     * @return Signification of the indicator or empty string.
-     */
-    public static String convertIndicator(final String input) {
-        if ("M".equals(input) || "P".equals(input)) {
-            return  Messages.getInstance().getString("Indicator." + input);
-        }
-        return "";
-    }
     /**
      * Converts inches of mercury pressure into hecto pascals.
      *

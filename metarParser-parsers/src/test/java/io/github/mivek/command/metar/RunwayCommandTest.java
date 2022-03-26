@@ -10,8 +10,8 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
-import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -139,7 +139,7 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
-        assertEquals(Messages.getInstance().getString("Indicator.M"), ri.getIndicator());
+        assertEquals(RunwayInfoIndicator.LESS_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
     }
 
@@ -151,7 +151,7 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
-        assertEquals(Messages.getInstance().getString("Indicator.P"), ri.getIndicator());
+        assertEquals(RunwayInfoIndicator.MORE_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
     }
 }

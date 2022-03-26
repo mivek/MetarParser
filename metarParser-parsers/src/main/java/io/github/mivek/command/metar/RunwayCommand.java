@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
@@ -98,7 +99,7 @@ public final class RunwayCommand implements Command {
         } else if (Regex.find(RUNWAY_REGEX, part)) {
             matches = Regex.pregMatch(RUNWAY_REGEX, part);
             ri.setName(matches[1]);
-            ri.setIndicator(Converter.convertIndicator(matches[2]));
+            ri.setIndicator(RunwayInfoIndicator.get(matches[2]));
             ri.setMinRange(Integer.parseInt(matches[3]));
             ri.setTrend(RunwayInfoTrend.get(matches[4]));
             metar.addRunwayInfo(ri);

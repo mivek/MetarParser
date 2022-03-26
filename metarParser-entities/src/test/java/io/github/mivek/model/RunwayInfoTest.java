@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
@@ -24,7 +25,7 @@ class RunwayInfoTest {
         ri.setCoverage(DepositCoverage.FROM_11_TO_25);
         ri.setThickness(DepositThickness.THICKNESS_15);
         ri.setBrakingCapacity(DepositBrakingCapacity.POOR);
-        ri.setIndicator("less than");
+        ri.setIndicator(RunwayInfoIndicator.LESS_THAN);
 
         String des = ri.toString();
 
