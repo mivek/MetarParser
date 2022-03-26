@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import io.github.mivek.utils.Converter;
@@ -99,14 +100,14 @@ public final class RunwayCommand implements Command {
             ri.setName(matches[1]);
             ri.setIndicator(Converter.convertIndicator(matches[2]));
             ri.setMinRange(Integer.parseInt(matches[3]));
-            ri.setTrend(Converter.convertTrend(matches[4]));
+            ri.setTrend(RunwayInfoTrend.get(matches[4]));
             metar.addRunwayInfo(ri);
         } else if (Regex.find(RUNWAY_MAX_RANGE_REGEX, part)) {
             matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, part);
             ri.setName(matches[1]);
             ri.setMinRange(Integer.parseInt(matches[2]));
             ri.setMaxRange(Integer.parseInt(matches[3]));
-            ri.setTrend(Converter.convertTrend(matches[4]));
+            ri.setTrend(RunwayInfoTrend.get(matches[4]));
             metar.addRunwayInfo(ri);
         }
     }

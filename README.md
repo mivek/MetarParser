@@ -57,17 +57,18 @@ When updating classes, regenerate the diagrams and save the images in the projec
 
 The application contains numerous enumerations to represent data.
 
--   CloudType: to represent the type of cloud.
--   CloudQuantity: to represent the amount of clouds.
--   Intensity: to represent the intensity of a meteorological phenomenon.
--   Descriptive: to represent the description of a meteorological phenomenon.
--   DepositType: to represent the type of deposit on a runway.
--   DepositCoverage: to represent the percentage of the runway covered by the deposit.
--   DepositThickness: to represent the thickness of the deposit.
--   DepositBrakingCapacity: to represent the braking capacity on the runway.    
--   Phenomenon: to represent a phenomenon.
--   WeatherChangeTime: to represent a trend.
--   TimeIndicator: to represent the time of the trend.
+- CloudType: to represent the type of cloud.
+- CloudQuantity: to represent the amount of clouds.
+- Intensity: to represent the intensity of a meteorological phenomenon.
+- Descriptive: to represent the description of a meteorological phenomenon.
+- DepositType: to represent the type of deposit on a runway.
+- DepositCoverage: to represent the percentage of the runway covered by the deposit.
+- DepositThickness: to represent the thickness of the deposit.
+- DepositBrakingCapacity: to represent the braking capacity on the runway.    
+- Phenomenon: to represent a phenomenon.
+- RunwayInfoTrend: to represent the visibility trend on a runway.
+- WeatherChangeTime: to represent a trend.
+- TimeIndicator: to represent the time of the trend.
 
 ### Classes
 

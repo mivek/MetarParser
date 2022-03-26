@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
+import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -22,7 +23,7 @@ public class RunwayInfo {
     /** Indicator on the visual range: either less than or greater than. */
     private String indicator;
     /** The tread. */
-    private String trend;
+    private RunwayInfoTrend trend;
     /** The type of deposit. */
     private DepositType depositType;
     /** The percentage of coverage. */
@@ -105,7 +106,7 @@ public class RunwayInfo {
      *
      * @return the trend.
      */
-    public String getTrend() {
+    public RunwayInfoTrend getTrend() {
         return trend;
     }
 
@@ -114,7 +115,7 @@ public class RunwayInfo {
      *
      * @param trend Trend to set.
      */
-    public void setTrend(final String trend) {
+    public void setTrend(final RunwayInfoTrend trend) {
         this.trend = trend;
     }
 

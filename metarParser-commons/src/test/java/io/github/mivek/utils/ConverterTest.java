@@ -15,14 +15,6 @@ class ConverterTest {
     }
 
     @Test
-    void testConvertTrend() {
-        assertEquals(Messages.getInstance().getString("Converter.U"), Converter.convertTrend("U"));
-        assertEquals(Messages.getInstance().getString("Converter.D"), Converter.convertTrend("D"));
-        assertEquals(Messages.getInstance().getString("Converter.NSC"), Converter.convertTrend("N"));
-        assertEquals("", Converter.convertTrend("Random string"));
-    }
-
-    @Test
     void testInchesMercuryToHPascal() {
         assertEquals(1013.25, Converter.inchesMercuryToHPascal(29.92), 0.1);
     }

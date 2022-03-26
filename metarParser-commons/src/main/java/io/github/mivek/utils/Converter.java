@@ -67,20 +67,6 @@ public final class Converter {
         }
     }
 
-    /**
-     * Converts the trend of clouds.
-     *
-     * @param input Single character string representing the trend.
-     * @return The signification of the single character.
-     */
-    public static String convertTrend(final String input) {
-        if ("U".equals(input) || "D".equals(input)) {
-            return Messages.getInstance().getString("Converter." + input);
-        } else if ("N".equals(input)) {
-            return Messages.getInstance().getString("Converter.NSC");
-        }
-        return "";
-    }
 
     /**
      * Converts the indicator for the runway visual range.
