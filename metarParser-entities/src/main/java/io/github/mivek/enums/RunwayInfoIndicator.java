@@ -8,12 +8,18 @@ import java.util.Arrays;
  * @author Jean-Kevin KPADEY
  */
 public enum RunwayInfoIndicator {
-
+  /** Runway indicator for less than. */
   LESS_THAN("M"),
+  /** Runway indicator for more than. */
   MORE_THAN("P");
 
+  /** Indicator shortcut. */
   private final String shortcut;
 
+  /**
+   * Constructor.
+   * @param shortcut The shortcut indicator.
+   */
   RunwayInfoIndicator(final String shortcut) {
     this.shortcut = shortcut;
   }

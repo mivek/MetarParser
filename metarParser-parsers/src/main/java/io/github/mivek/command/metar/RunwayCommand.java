@@ -8,9 +8,7 @@ import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
-import io.github.mivek.utils.Converter;
 import io.github.mivek.utils.Regex;
-
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.regex.Pattern;
