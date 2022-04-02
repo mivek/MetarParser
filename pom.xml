@@ -51,13 +51,13 @@
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
         <archunit-junit5.version>0.23.1</archunit-junit5.version>
-        <checkstyle.version>10.0</checkstyle.version>
+        <checkstyle.version>10.1</checkstyle.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <junit.version>5.8.2</junit.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
-        <maven-compiler-plugin.version>3.10.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.3.2</maven.javadoc.plugin.version>
         <maven-project-info-reports-plugin.version>3.2.2</maven-project-info-reports-plugin.version>
@@ -67,9 +67,9 @@
         <nexus-staging-maven-plugin.version>1.6.12</nexus-staging-maven-plugin.version>
         <opencsv.version>5.6</opencsv.version>
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.7.4</pitest-maven.version>
+        <pitest-maven.version>1.7.5</pitest-maven.version>
         <slf4j-nop.version>1.7.36</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.5.3.0</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.6.0.0</spotbugs-maven-plugin.version>
     </properties>
 
     <developers>
