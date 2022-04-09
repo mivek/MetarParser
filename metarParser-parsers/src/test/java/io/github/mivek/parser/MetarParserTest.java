@@ -61,7 +61,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         // Check if runways are correctly parsed
         assertEquals("27L", m.getRunways().get(0).getName());
         assertEquals(375, m.getRunways().get(0).getMinRange());
-        assertEquals(Messages.getInstance().getString("Converter.NSC"), m.getRunways().get(0).getTrend());
+        assertEquals(RunwayInfoTrend.NO_SIGNIFICANT_CHANGE, m.getRunways().get(0).getTrend());
     }
 
     @Test

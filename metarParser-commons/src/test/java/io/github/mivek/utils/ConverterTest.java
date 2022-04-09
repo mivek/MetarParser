@@ -1,25 +1,15 @@
 package io.github.mivek.utils;
 
-import io.github.mivek.internationalization.Messages;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalTime;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class ConverterTest {
     @Test
     void testConvertVisibility() {
         assertEquals(">10km", Converter.convertVisibility("9999"));
         assertEquals("5000m", Converter.convertVisibility("5000"));
-    }
-
-    @Test
-    void testConvertTrend() {
-        assertEquals(Messages.getInstance().getString("Converter.U"), Converter.convertTrend("U"));
-        assertEquals(Messages.getInstance().getString("Converter.D"), Converter.convertTrend("D"));
-        assertEquals(Messages.getInstance().getString("Converter.NSC"), Converter.convertTrend("N"));
-        assertEquals("", Converter.convertTrend("Random string"));
     }
 
     @Test
@@ -40,21 +30,6 @@ class ConverterTest {
 
         assertEquals(8, time.getHour());
         assertEquals(30, time.getMinute());
-    }
-
-    @Test
-    void testConvertIndicatorMinus() {
-        assertEquals("less than", Converter.convertIndicator("M"));
-    }
-
-    @Test
-    void testConvertIndicatorPlus() {
-        assertEquals("greater than", Converter.convertIndicator("P"));
-    }
-
-    @Test
-    void testConvertIndicatorNull() {
-        assertEquals("", Converter.convertIndicator(null));
     }
 
     @Test

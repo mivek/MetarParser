@@ -46,29 +46,30 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
-        <maven.javadoc.plugin.version>3.3.1</maven.javadoc.plugin.version>
-        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.8.2</junit.version>
-        <hamcrest.version>2.2</hamcrest.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <spotbugs-maven-plugin.version>4.5.0.0</spotbugs-maven-plugin.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <opencsv.version>5.5.2</opencsv.version>
-        <pitmp-maven-plugin.version>1.3.7</pitmp-maven-plugin.version>
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
-        <archunit-junit5.version>0.22.0</archunit-junit5.version>
-        <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
-        <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
-        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <archunit-junit5.version>0.23.1</archunit-junit5.version>
+        <checkstyle.version>10.1</checkstyle.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
+        <junit.version>5.8.2</junit.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
-        <pitest-maven.version>1.7.3</pitest-maven.version>
-        <checkstyle.version>9.2</checkstyle.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven.javadoc.plugin.version>3.3.2</maven.javadoc.plugin.version>
+        <maven-project-info-reports-plugin.version>3.2.2</maven-project-info-reports-plugin.version>
+        <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
+        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <nexus-staging-maven-plugin.version>1.6.12</nexus-staging-maven-plugin.version>
+        <opencsv.version>5.6</opencsv.version>
         <pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
+        <pitest-maven.version>1.7.5</pitest-maven.version>
+        <slf4j-nop.version>1.7.36</slf4j-nop.version>
+        <spotbugs-maven-plugin.version>4.6.0.0</spotbugs-maven-plugin.version>
     </properties>
 
     <developers>
@@ -116,7 +117,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
-            <version>1.7.32</version>
+            <version>${slf4j-nop.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -163,6 +164,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <createMissingPackageInfoClass>false</createMissingPackageInfoClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -195,36 +199,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
             </plugin>
-            <!--<plugin>
-                <groupId>eu.stamp-project</groupId>
-                <artifactId>pitmp-maven-plugin</artifactId>
-                <version>${pitmp-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <threads>3</threads>
-                            <targetModules>
-                                <param>metarParser-parsers</param>
-                            </targetModules>
-                            <mutationThreshold>98</mutationThreshold>
-                            <coverageThreshold>99</coverageThreshold>
-                            <excludedClasses>
-                                <param>io.github.mivek.model.*</param>
-                                <param>io.github.mivek.provider.*</param>
-                                <param>io.github.mivek.enums.*</param>
-                                <param>io.github.mivek.internationalization.*</param>
-                            </excludedClasses>
-                            <targetClasses>
-                                <param>io.github.mivek.parser.*</param>
-                                <param>io.github.mivek.command.*</param>
-                            </targetClasses>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -365,7 +339,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.8</version>
+                        <version>${nexus-staging-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>

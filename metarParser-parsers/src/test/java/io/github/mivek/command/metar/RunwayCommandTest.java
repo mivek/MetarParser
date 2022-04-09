@@ -1,20 +1,21 @@
 package io.github.mivek.command.metar;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
-import io.github.mivek.internationalization.Messages;
+import io.github.mivek.enums.RunwayInfoIndicator;
+import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author mivek
@@ -39,7 +40,7 @@ class RunwayCommandTest {
         assertNotNull(ri);
         assertEquals("26", ri.getName());
         assertEquals(600, ri.getMinRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
+        assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
     }
 
     @Test
@@ -54,7 +55,7 @@ class RunwayCommandTest {
         assertEquals("26L", ri.getName());
         assertEquals(550, ri.getMinRange());
         assertEquals(700, ri.getMaxRange());
-        assertEquals(Messages.getInstance().getString("Converter.U"), ri.getTrend());
+        assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
     }
 
     @Test
@@ -67,7 +68,7 @@ class RunwayCommandTest {
         assertEquals("01L", r.getName());
         assertEquals(600, r.getMinRange());
         assertEquals(1000, r.getMaxRange());
-        assertThat(r.getTrend(), emptyString());
+        assertNull(r.getTrend());
     }
 
     @Test
@@ -79,7 +80,7 @@ class RunwayCommandTest {
         RunwayInfo r = m.getRunways().get(0);
         assertEquals("01L", r.getName());
         assertEquals(800, r.getMinRange());
-        assertThat(r.getTrend(), emptyString());
+        assertNull(r.getTrend());
     }
 
     @Test
@@ -138,7 +139,7 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
-        assertEquals(Messages.getInstance().getString("Indicator.M"), ri.getIndicator());
+        assertEquals(RunwayInfoIndicator.LESS_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
     }
 
@@ -150,7 +151,7 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
-        assertEquals(Messages.getInstance().getString("Indicator.P"), ri.getIndicator());
+        assertEquals(RunwayInfoIndicator.MORE_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
     }
 }

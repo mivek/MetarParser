@@ -1,6 +1,7 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Arrays;
 
 /**
  * Enumeration for indicator.
@@ -51,11 +52,9 @@ public enum Intensity {
      * @throws IllegalArgumentException error if not found.
      */
     public static Intensity getEnum(final String value) {
-        for (Intensity v : values()) {
-            if (v.getShortcut().equalsIgnoreCase(value)) {
-                return v;
-            }
-        }
-        throw new IllegalArgumentException();
+        return Arrays.stream(Intensity.values())
+            .filter(intensity -> intensity.shortcut.equalsIgnoreCase(value))
+            .findFirst()
+            .orElseThrow(IllegalArgumentException::new);
     }
 }
