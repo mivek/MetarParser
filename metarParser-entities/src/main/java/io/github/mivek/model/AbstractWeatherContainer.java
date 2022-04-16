@@ -116,7 +116,7 @@ public abstract class AbstractWeatherContainer {
     /**
      * @param verticalVisibility the verticalVisibility to set
      */
-    public void setVerticalVisibility(final Integer verticalVisibility) {
+    public void setVerticalVisibility(final int verticalVisibility) {
         this.verticalVisibility = verticalVisibility;
     }
 
@@ -174,8 +174,10 @@ public abstract class AbstractWeatherContainer {
         if (visibility != null) {
             builder.appendToString(visibility.toString());
         }
-        builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility).
-                append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
+        if (verticalVisibility != null) {
+            builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility);
+        }
+        builder.append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
                 append(Messages.getInstance().getString("ToString.weather.conditions"), weatherConditions.toString());
         if (windShear != null) {
             builder.appendToString(windShear.toString());
