@@ -24,7 +24,6 @@ class AirportTest {
         Airport other2 = new Airport();
         other2.setIcao("498");
 
-        assertEquals(sut, sut);
         assertEquals(sut, other1);
         assertNotEquals(sut, other2);
         assertNotEquals(null, sut);
