@@ -36,6 +36,7 @@ public abstract class AbstractTAFTrendParser<T extends AbstractValidity> extends
     for (int i = index; i < parts.length; i++) {
       if (RMK.equals(parts[i])) {
         parseRMK(trend, parts, i);
+        break;
       } else if (Regex.match(VALIDITY_REGEX, parts[i])) {
         trend.setValidity(parseValidity(parts[i]));
       } else {

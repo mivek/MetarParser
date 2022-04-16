@@ -85,7 +85,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
         taf.setValidity(parseValidity(line1parts[i]));
 
         // Handle rest of second line.
-        for (int j = i; j < line1parts.length; j++) {
+        for (int j = i+1; j < line1parts.length; j++) {
             String part = line1parts[j];
             if (RMK.equals(part)) {
                 parseRMK(taf, line1parts, j);
