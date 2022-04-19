@@ -3,10 +3,12 @@ package io.github.mivek.model;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
+import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,5 +69,18 @@ abstract class AbstractWeatherContainerTest<T extends AbstractWeatherContainer> 
 
         assertTrue(container.addWeatherCondition(wc));
         assertThat(container.getWeatherConditions(), hasSize(1));
+    }
+
+    @Test
+    void testToStringWithVerticalVisibility() {
+        T container = getEntity();
+        Wind wind = new Wind();
+        wind.setDirectionDegrees(270);
+        wind.setSpeed(15);
+        container.setWind(wind);
+        container.setVerticalVisibility(2000);
+
+        String description = container.toString();
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.vertical.visibility")));
     }
 }

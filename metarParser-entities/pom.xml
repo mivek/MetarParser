@@ -13,9 +13,9 @@
     <description>Module containing the model of the application.</description>
 
     <properties>
-        <jacoco.coverage.instruction.minimum>0.73</jacoco.coverage.instruction.minimum>
-        <jacoco.coverage.branch.minimum>0.70</jacoco.coverage.branch.minimum>
-        <jacoco.coverage.complexity.minimum>0.56</jacoco.coverage.complexity.minimum>
+        <jacoco.coverage.instruction.minimum>0.80</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.branch.minimum>0.81</jacoco.coverage.branch.minimum>
+        <jacoco.coverage.complexity.minimum>0.60</jacoco.coverage.complexity.minimum>
     </properties>
     <dependencies>
         <dependency>

@@ -747,4 +747,21 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertThat(result.getInters().get(0).getClouds().get(1).getQuantity(), is(CloudQuantity.BKN));
         assertThat(result.getInters().get(0).getClouds().get(1).getHeight(), is(1000));
     }
+
+    @Test
+    void testParseWithRmkFcst() throws ParseException {
+        String message = """
+            TAF CYTL 121940Z 1220/1308
+              TEMPO 1303/1308 2SM -SN RMK FCST BASED ON AUTO OBS. FCST BASED ON OBS BY OTHER SRCS. WIND SENSOR INOP. NXT FCST BY 130200Z
+            """;
+
+        TAF taf = parser.parse(message);
+
+        assertNotNull(taf);
+        assertThat(taf.getTempos(), hasSize(1));
+        assertThat(taf.getTempos().get(0).getWeatherConditions(), hasSize(1));
+        assertEquals(Intensity.LIGHT, taf.getTempos().get(0).getWeatherConditions().get(0).getIntensity());
+        assertThat(taf.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
+        assertEquals(Phenomenon.SNOW, taf.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0));
+    }
 }
