@@ -1,14 +1,12 @@
-name: Java CI
+name: Maven verify
 
-on: [push]
-
+on:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 jobs:
   verify:
     runs-on: ubuntu-latest
-    concurrency: ci-${{ github.ref }}
-    strategy:
-      matrix:
-        java: ['8', '11', '13', '15']
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -16,7 +14,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ matrix.java }}
+          java-version: '17'
           distribution: 'adopt'
       - name: Cache maven packages
         uses: actions/cache@v2
