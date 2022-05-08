@@ -41,7 +41,7 @@ jobs:
           mvn build-helper:parse-version versions:set \
           -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}" \
           -DprocessAllModules versions:commit
-        if: ${{ contains(github.event.head_commit.message, 'fix/') or contains(github.event.head_commit.message, 'clean/') or contains(github.event.head_commit.message, 'dependencies')}}
+        if: ${{ contains(github.event.head_commit.message, 'fix/') || contains(github.event.head_commit.message, 'clean/') || contains(github.event.head_commit.message, 'dependencies')}}
 
       - name: Retrieve the new version
         id: get-version

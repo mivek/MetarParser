@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ startsWith(github.event.head_commit.message, 'Automatic bump after merge') and github.event.head_commit.committer.username == 'github-actions' }}
+    if: ${{ startsWith(github.event.head_commit.message, 'Automatic bump after merge') && github.event.head_commit.committer.username == 'github-actions' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
