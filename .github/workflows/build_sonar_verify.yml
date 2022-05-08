@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   build:
-    if: ${{ github.repository == 'mivek/MetarParser' }} # Sonar build needs secrets in the repository
+    if: ${{ github.repository == 'mivek/MetarParser' && github.actor != 'dependabot[bot]' }} # Sonar build needs secrets in the repository
     name: Build
     runs-on: ubuntu-latest
     steps:
