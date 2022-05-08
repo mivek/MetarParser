@@ -1,0 +1,65 @@
+name: Deploy to maven repository after bump pom
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    if: ${{ startsWith(github.event.head_commit.message, 'Automatic bump after merge') and github.event.head_commit.committer.username == 'github-actions' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          cache: 'maven'
+          server-username: SONATYPE_USERNAME
+          server-password: SONATYPE_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
+
+      - name: Retrieve the new version
+        id: get-version
+        uses: jactions/maven-version@v1
+
+      - name: Publish to Apache Maven Central
+        run: mvn clean -DskipTests deploy --settings .settings.xml -P release,ossrh
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Upload jars file
+        uses: actions/upload-artifact@v3
+        with:
+          name: jars
+          path: ./target/**/*.jar
+          retention-days: 5
+
+  release:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: jars
+
+      - name: Retrieve the version
+        id: get-version
+        uses: jactions/maven-version@v1
+
+      - name: Create the release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            *.jar
