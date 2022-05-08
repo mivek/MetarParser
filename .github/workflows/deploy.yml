@@ -25,7 +25,7 @@ jobs:
 
       - name: Retrieve the new version
         id: get-version
-        uses: jactions/maven-version@v1
+        uses: JActions/maven-version@v1.0.0
 
       - name: Publish to Apache Maven Central
         run: mvn clean -DskipTests deploy --settings .settings.xml -P release,ossrh
@@ -54,7 +54,7 @@ jobs:
 
       - name: Retrieve the version
         id: get-version
-        uses: jactions/maven-version@v1
+        uses: JActions/maven-version@v1.0.0
 
       - name: Create the release
         uses: marvinpinto/action-automatic-releases@latest
