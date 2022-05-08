@@ -24,22 +24,22 @@ jobs:
 
       - name: Update major version when it is a major feature
         run: >
-          mvn build-helper:parse-version versions:set \
-          -DnewVersion="\${parsedVersion.nextMajorVersion}.0.0" \
+          mvn build-helper:parse-version versions:set 
+          -DnewVersion="\${parsedVersion.nextMajorVersion}.0.0"
           -DprocessAllModules versions:commit
         if: ${{ contains(github.event.head_commit.message, 'major/') }}
 
       - name: Update minor version when it is a feature
         run: >
-          mvn build-helper:parse-version versions:set \
-          -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0" \
+          mvn build-helper:parse-version versions:set
+          -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0"
           -DprocessAllModules versions:commit
         if: ${{ contains(github.event.head_commit.message, 'feature/') }}
 
       - name: Update patch version in case of bugfix or dependencies upgrade
         run: >
-          mvn build-helper:parse-version versions:set \
-          -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}" \
+          mvn build-helper:parse-version versions:set
+          -DnewVersion="\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}" 
           -DprocessAllModules versions:commit
         if: ${{ contains(github.event.head_commit.message, 'fix/') || contains(github.event.head_commit.message, 'clean/') || contains(github.event.head_commit.message, 'dependencies')}}
 
