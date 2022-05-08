@@ -51,7 +51,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Automatic bump after merge"
-          file_pattern: pom.xml, **/pom.xml
+          file_pattern: pom.xml **/pom.xml
           commit_author: Github Action <actions@github.com>
           commit_user_name: github-actions
           create_branch: false
