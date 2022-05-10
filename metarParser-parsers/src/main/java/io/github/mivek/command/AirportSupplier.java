@@ -22,7 +22,7 @@ public final class AirportSupplier implements Supplier<Airport> {
 
     @Override
     public Airport get(final String string) {
-        AirportProvider provider = airportLoader.findFirst().orElse(new DefaultAirportProvider());
+        AirportProvider provider = airportLoader.findFirst().orElseGet(DefaultAirportProvider::new);
         return provider.getAirports().get(string);
     }
 }
