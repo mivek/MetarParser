@@ -764,4 +764,25 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertThat(taf.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
         assertEquals(Phenomenon.SNOW, taf.getTempos().get(0).getWeatherConditions().get(0).getPhenomenons().get(0));
     }
+
+    @Test
+    void testParse() throws ParseException {
+        String code = """
+            TAF AMD KEWR 191303Z 1913/2018 09006KT 5SM -RA BR BKN007 OVC025
+            FM191600 17007KT P6SM BKN020
+            FM192100 26008KT P3SM SCT030 SCT050
+            FM200000 29005KT P4SM SCT050
+            FM200600 VRB03KT P9SM SCT050
+            """;
+
+        TAF taf = parser.parse(code);
+
+        assertEquals("5SM", taf.getVisibility().getMainVisibility());
+        assertEquals(4, taf.getFMs().size());
+        assertEquals("P6SM", taf.getFMs().get(0).getVisibility().getMainVisibility());
+        assertEquals("P3SM", taf.getFMs().get(1).getVisibility().getMainVisibility());
+        assertEquals("P4SM", taf.getFMs().get(2).getVisibility().getMainVisibility());
+        assertEquals("P9SM", taf.getFMs().get(3).getVisibility().getMainVisibility());
+    }
+
 }
