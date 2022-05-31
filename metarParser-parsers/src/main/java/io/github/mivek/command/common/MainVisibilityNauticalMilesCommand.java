@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class MainVisibilityNauticalMilesCommand implements Command {
     /** Pattern for the main visibility in SM. */
-    private static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^(\\d)*(\\s)?((\\d/\\d)?SM)$");
+    private static final Pattern MAIN_VISIBILITY_SM_REGEX = Pattern.compile("^([PM])?(\\d)*(\\s)?((\\d/\\d)?SM)$");
 
     /**
      * constructor.
