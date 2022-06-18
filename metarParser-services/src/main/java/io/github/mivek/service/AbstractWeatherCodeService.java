@@ -63,7 +63,6 @@ public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> 
                 .uri(new URI(website))
                 .GET()
                 .version(HttpClient.Version.HTTP_2)
-                .timeout(Duration.ofSeconds(5))
                 .build();
     }
 }

@@ -2,8 +2,8 @@ name: Deploy to maven repository after bump pom
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   deploy:
