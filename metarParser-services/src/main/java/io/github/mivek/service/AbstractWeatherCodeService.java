@@ -4,12 +4,10 @@ import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.parser.AbstractWeatherCodeParser;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.time.Duration;
 
 /**
  * Abstract service.
