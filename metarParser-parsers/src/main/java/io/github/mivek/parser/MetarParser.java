@@ -74,11 +74,9 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
         int metarTabLength = metarTab.length;
         int i = 2;
         while (i < metarTabLength) {
-            if (!generalParse(m, metarTab[i])) {
+            if (!generalParse(m, metarTab[i]) && !parseFlags(m, metarTab[i])) {
                 if ("NOSIG".equals(metarTab[i])) {
                     m.setNosig(true);
-                } else if ("AUTO".equals(metarTab[i])) {
-                    m.setAuto(true);
                 } else if (RMK.equals(metarTab[i])) {
                     parseRMK(m, metarTab, i);
                     break;

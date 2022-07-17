@@ -2,6 +2,7 @@ package io.github.mivek.parser;
 
 import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.enums.Flag;
 import io.github.mivek.model.AbstractWeatherCode;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -51,6 +52,21 @@ public abstract class AbstractWeatherCodeParser<T extends AbstractWeatherCode> e
         int minutes = Integer.parseInt(time.substring(4, 6));
         LocalTime t = LocalTime.of(hours, minutes);
         weatherCode.setTime(t);
+    }
+
+    /**
+     * Adds flags to the WeatherCode.
+     * @param weatherCode The weathercode to update
+     * @param flag The string to test.
+     * @return True if the flag was added.
+     */
+    boolean parseFlags(final AbstractWeatherCode weatherCode, final String flag) {
+        try {
+            weatherCode.getFlags().add(Flag.valueOf(flag));
+            return true;
+        } catch (IllegalArgumentException ignored) {
+            return false;
+        }
     }
 
     /**

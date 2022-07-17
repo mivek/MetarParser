@@ -68,8 +68,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
             i = 2;
         }
         // Handle case the taf event is AMD.
-        if ("AMD".equals(line1parts[i])) {
-            taf.setAmendment(true);
+        if (parseFlags(taf, line1parts[i])) {
             i++;
         }
         // Airport
@@ -95,6 +94,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
             } else if (part.startsWith(TN)) {
                 taf.setMinTemperature(parseTemperature(part));
             } else {
+                parseFlags(taf, part);
                 generalParse(taf, part);
             }
         }

@@ -1,6 +1,9 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.Flag;
 import io.github.mivek.internationalization.Messages;
+import java.util.EnumSet;
+import java.util.Set;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.LocalTime;
@@ -22,6 +25,16 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     /** The identifier of the station. */
     private String station;
 
+    /** Holds the flag of the code. */
+    private final EnumSet<Flag> flags;
+
+    /**
+     * Default constructor.
+     */
+    protected AbstractWeatherCode() {
+        super();
+        flags = EnumSet.noneOf(Flag.class);
+    }
     /**
      * @return the day
      */
@@ -93,6 +106,48 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
+     * @return The flags of the weatherCode.
+     */
+    public Set<Flag> getFlags() {
+        return flags;
+    }
+
+    /**
+     * @return the auto
+     */
+    public boolean isAuto() {
+        return getFlags().contains(Flag.AUTO);
+    }
+
+    /**
+     * @return the amendment
+     */
+    public boolean isAmendment() {
+        return getFlags().contains(Flag.AMD);
+    }
+
+    /**
+     * @return True when the code is canceled.
+     */
+    public boolean isCancelled() {
+        return getFlags().contains(Flag.CNL);
+    }
+
+    /**
+     * @return Return true if the code is nil.
+     */
+    public boolean isNil() {
+        return getFlags().contains(Flag.NIL);
+    }
+
+    /**
+     * @return True if the code is corrected.
+     */
+    public boolean isCorrected() {
+        return getFlags().contains(Flag.COR);
+    }
+
+    /**
      * @return a description of the object.
      */
     @Override
@@ -103,6 +158,7 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
                 append(Messages.getInstance().getString("ToString.airport"), airport).
                 appendSuper(super.toString()).
                 append(Messages.getInstance().getString("ToString.message"), message).
+                append(Messages.getInstance().getString("ToString.flags"), flags).
                 toString();
     }
 }

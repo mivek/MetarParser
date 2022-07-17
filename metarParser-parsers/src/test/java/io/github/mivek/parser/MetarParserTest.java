@@ -402,4 +402,11 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(2000, m.getVisibility().getMinVisibility());
         assertEquals("SW", m.getVisibility().getMinDirection());
     }
+
+    @Test
+    void testParseNil() {
+        String code = "SVMC 211703Z AUTO NIL";
+        Metar m = parser.parse(code);
+        assertTrue(m.isNil());
+    }
 }
