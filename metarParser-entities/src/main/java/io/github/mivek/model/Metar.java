@@ -22,8 +22,6 @@ public class Metar extends AbstractWeatherCode {
     private int altimeter;
     /** Nosig value. */
     private boolean nosig;
-    /** Auto Value. */
-    private boolean auto;
     /** List of runways information. */
     private final List<RunwayInfo> runways;
     /** List of trends. */
@@ -111,20 +109,6 @@ public class Metar extends AbstractWeatherCode {
     }
 
     /**
-     * @return the auto
-     */
-    public boolean isAuto() {
-        return auto;
-    }
-
-    /**
-     * @param auto the auto to set
-     */
-    public void setAuto(final boolean auto) {
-        this.auto = auto;
-    }
-
-    /**
      * Adds a trend to the list.
      *
      * @param trend the trend to add.
@@ -148,7 +132,7 @@ public class Metar extends AbstractWeatherCode {
                 append(Messages.getInstance().getString("ToString.dew.point"), dewPoint).
                 append(Messages.getInstance().getString("ToString.altimeter"), altimeter).
                 append(Messages.getInstance().getString("ToString.nosig"), nosig).
-                append(Messages.getInstance().getString("ToString.auto"), auto).
+                append(Messages.getInstance().getString("ToString.auto"), isAuto()).
                 append(Messages.getInstance().getString("ToString.runway.info"), runways.toString()).
                 append(Messages.getInstance().getString("ToString.trends"), trends.toString()).
                 toString();
