@@ -26,8 +26,6 @@ public final class TAF extends AbstractWeatherCode {
     private TemperatureDated minTemperature;
     /** List of From changes. */
     private final List<AbstractTafTrend<? extends AbstractValidity>> trends;
-    /** Indicate if the taf event is amended. */
-    private boolean amendment;
 
     /**
      * Constructor.
@@ -115,20 +113,6 @@ public final class TAF extends AbstractWeatherCode {
     }
 
     /**
-     * @return the amendment
-     */
-    public boolean isAmendment() {
-        return amendment;
-    }
-
-    /**
-     * @param amendment the amendment to set
-     */
-    public void setAmendment(final boolean amendment) {
-        this.amendment = amendment;
-    }
-
-    /**
      * Adds a trend to the trend list.
      * @param trend The trend to add.
      */
@@ -139,7 +123,7 @@ public final class TAF extends AbstractWeatherCode {
     @Override
     public String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
-                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), amendment)
+                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), isAmendment())
                 .appendToString(trends.toString()).toString();
     }
 }

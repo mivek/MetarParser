@@ -785,4 +785,21 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals("P9SM", taf.getFMs().get(3).getVisibility().getMainVisibility());
     }
 
+    @Test
+    void testParseCanceled() throws ParseException {
+        String code = "TAF VTBD 281000Z 2812/2912 CNL=";
+
+        TAF taf = parser.parse(code);
+
+        assertTrue(taf.isCancelled());
+    }
+
+    @Test
+    void testParseCorrected() throws ParseException {
+        String code = "TAF COR EDDS 201148Z 2012/2112 31010KT CAVOK BECMG 2018/2021 33004KT BECMG 2106/2109 07005KT";
+
+        TAF taf = parser.parse(code);
+
+        assertTrue(taf.isCorrected());
+    }
 }
