@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.mivek</groupId>
     <artifactId>metarParser</artifactId>
-    <version>2.10.1</version>
+    <version>2.10.2</version>
     <packaging>pom</packaging>
     <name>metarParser</name>
     <description>This project is a metar-taf parser.
@@ -51,7 +51,7 @@
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
         <archunit-junit5.version>0.23.1</archunit-junit5.version>
-        <checkstyle.version>10.3.2</checkstyle.version>
+        <checkstyle.version>10.3.3</checkstyle.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
@@ -59,17 +59,17 @@
         <maven-checkstyle-plugin.version>3.2.0</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
-        <maven.javadoc.plugin.version>3.4.0</maven.javadoc.plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.0</maven-project-info-reports-plugin.version>
+        <maven.javadoc.plugin.version>3.4.1</maven.javadoc.plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.1</maven-project-info-reports-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
         <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-        <opencsv.version>5.6</opencsv.version>
+        <opencsv.version>5.7.0</opencsv.version>
         <pitest-junit5-plugin.version>1.0.0</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.9.4</pitest-maven.version>
-        <slf4j-nop.version>1.7.36</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.7.1.1</spotbugs-maven-plugin.version>
+        <pitest-maven.version>1.9.5</pitest-maven.version>
+        <slf4j-nop.version>2.0.1</slf4j-nop.version>
+        <spotbugs-maven-plugin.version>4.7.2.0</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
@@ -264,7 +264,6 @@
                 <configuration>
                     <excludes>*Test.java</excludes>
                     <configLocation>/checkstyle.xml</configLocation>
-                    <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
