@@ -50,7 +50,7 @@ jobs:
 
       - name: Retrieve the version
         id: get-version
-        uses: JActions/maven-version@v1.0.1
+        uses: JActions/maven-version@v1.1.0
 
       - name: Create the release
         uses: marvinpinto/action-automatic-releases@latest

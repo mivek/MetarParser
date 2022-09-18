@@ -45,7 +45,7 @@ jobs:
 
       - name: Retrieve the new version
         id: get-version
-        uses: JActions/maven-version@v1.0.1
+        uses: JActions/maven-version@v1.1.0
 
       - name: Commit and tag the new version
         uses: stefanzweifel/git-auto-commit-action@v4
