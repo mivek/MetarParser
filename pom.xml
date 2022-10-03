@@ -50,7 +50,7 @@
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
-        <archunit-junit5.version>0.23.1</archunit-junit5.version>
+        <archunit-junit5.version>1.0.0</archunit-junit5.version>
         <checkstyle.version>10.3.3</checkstyle.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
