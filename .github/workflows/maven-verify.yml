@@ -24,3 +24,12 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run the maven verify
         run: mvn --batch-mode --update-snapshots clean verify
+
+      - name: Save the PR number in a file
+        run: echo ${{ github.event.number }} > PR_NUMBER.txt
+
+      - name: Upload the PR number as an artifact
+        uses: action/upload-artifact@v3
+        with:
+          name: PR_NUMBER
+          path: PR_NUMBER.txt
