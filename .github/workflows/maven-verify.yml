@@ -29,7 +29,7 @@ jobs:
         run: echo ${{ github.event.number }} > PR_NUMBER.txt
 
       - name: Upload the PR number as an artifact
-        uses: action/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: PR_NUMBER
           path: PR_NUMBER.txt
