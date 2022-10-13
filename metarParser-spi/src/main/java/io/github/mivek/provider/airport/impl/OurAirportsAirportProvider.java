@@ -31,9 +31,9 @@ import java.util.Map;
  */
 public final class OurAirportsAirportProvider implements AirportProvider {
     /** URI to retrieve the list of countries. */
-    private static final String COUNTRIES_URI = "https://ourairports.com/data/countries.csv";
+    private static final String COUNTRIES_URI = "https://davidmegginson.github.io/ourairports-data/countries.csv";
     /** URI to retrieve the list of airports. */
-    private static final String AIRPORT_URI = "https://ourairports.com/data/airports.csv";
+    private static final String AIRPORT_URI = "https://davidmegginson.github.io/ourairports-data/airports.csv";
     /** Map of countries. */
     private final Map<String, Country> countries;
     /** Map of airports. */
