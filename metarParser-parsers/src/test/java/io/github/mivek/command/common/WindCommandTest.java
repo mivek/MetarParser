@@ -70,4 +70,18 @@ class WindCommandTest {
 
         assertTrue(command.execute(m, windPart));
     }
+
+    @Test
+    void testExecuteWithExistingWind() {
+        Wind wind1 = new Wind();
+        wind1.setDirection("N");
+        wind1.setSpeed(5);
+        wind1.setUnit("KT");
+
+        Metar m = new Metar();
+        m.setWind(wind1);
+
+        assertTrue(command.execute(m, "VRB08KT"));
+        assertEquals(wind1, m.getWind());
+    }
 }

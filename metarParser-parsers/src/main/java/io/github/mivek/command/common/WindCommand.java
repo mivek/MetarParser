@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class WindCommand implements BaseWindCommand {
     /** Pattern regex for wind. */
-    private static final Pattern WIND_REGEX = Pattern.compile("^(VRB|\\d{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM/H)?");
+    private static final Pattern WIND_REGEX = Pattern.compile("^(VRB|[0-3]\\d{2})(\\d{2})G?(\\d{2})?(KT|MPS|KM/H)?");
 
     /**
      * Package private constructor.
@@ -24,7 +24,7 @@ public final class WindCommand implements BaseWindCommand {
      * part.
      *
      * @param stringWind a string with wind elements.
-     * @return a Wind element with the informations.
+     * @return a Wind element with the information.
      */
     Wind parseWind(final String stringWind) {
         Wind wind = new Wind();
@@ -36,7 +36,9 @@ public final class WindCommand implements BaseWindCommand {
     @Override
     public boolean execute(final AbstractWeatherContainer container, final String part) {
         Wind wind = parseWind(part);
-        container.setWind(wind);
+        if (container.getWind() == null) {
+            container.setWind(wind);
+        }
         return getReturnValue();
     }
 
