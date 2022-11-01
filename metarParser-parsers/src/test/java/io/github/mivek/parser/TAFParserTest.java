@@ -18,8 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.IcingIntensity;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
@@ -801,5 +803,31 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         TAF taf = parser.parse(code);
 
         assertTrue(taf.isCorrected());
+    }
+
+    @Test
+    void testParseWithTurbulenceAndIcing() throws ParseException {
+        String code = """
+  TAF KLSV 222300Z 2223/2405 21020G35KT 8000 BLDU BKN160 530009 630009 QNH2941INS
+  TEMPO 2223/2302 23035G52KT BKN150 560009
+  BECMG 2305/2306 35015G25KT 9999 VCSH BKN140 520009 QNH2948INS
+  BECMG 2316/2317 34010G18KT 9999 NSW SCT170 QNH2969INS TX28/2323Z TN12/2314Z
+            """;
+
+        TAF taf = parser.parse(code);
+
+        assertNotNull(taf);
+        assertEquals(210, taf.getWind().getDirectionDegrees());
+        assertEquals(20, taf.getWind().getSpeed());
+        assertEquals(35, taf.getWind().getGust());
+        assertEquals("KT", taf.getWind().getUnit());
+        assertNotNull(taf.getTurbulence());
+        assertEquals(TurbulenceIntensity.MODERATE_CLEAR_AIR_FREQUENT, taf.getTurbulence().getIntensity());
+        assertEquals(0, taf.getTurbulence().getBaseHeight());
+        assertEquals(9000, taf.getTurbulence().getDepth());
+        assertNotNull(taf.getIcing());
+        assertEquals(IcingIntensity.LIGHT_CLEAR_ICING_PRECIPITATION, taf.getIcing().getIntensity());
+        assertEquals(0, taf.getIcing().getBaseHeight());
+        assertEquals(9000, taf.getIcing().getDepth());
     }
 }

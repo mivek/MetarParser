@@ -26,6 +26,10 @@ public final class TAF extends AbstractWeatherCode {
     private TemperatureDated minTemperature;
     /** List of From changes. */
     private final List<AbstractTafTrend<? extends AbstractValidity>> trends;
+    /** Taf icing. */
+    private Icing icing;
+    /** Taf turbulence. */
+    private Turbulence turbulence;
 
     /**
      * Constructor.
@@ -120,10 +124,45 @@ public final class TAF extends AbstractWeatherCode {
         this.trends.add(trend);
     }
 
+    /**
+     * @return The icing.
+     */
+    public Icing getIcing() {
+        return icing;
+    }
+
+    /**
+     * @param icing The icing condition to set.
+     */
+    public void setIcing(final Icing icing) {
+        this.icing = icing;
+    }
+
+    /**
+     * @return The turbulence
+     */
+    public Turbulence getTurbulence() {
+        return turbulence;
+    }
+
+    /**
+     * @param turbulence The turbulence to set
+     */
+    public void setTurbulence(final Turbulence turbulence) {
+        this.turbulence = turbulence;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
+        ToStringBuilder builder = new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
                 .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), isAmendment())
-                .appendToString(trends.toString()).toString();
+            .appendToString(trends.toString());
+        if (this.turbulence != null) {
+            builder.append(turbulence.toString());
+        }
+        if (this.icing != null) {
+            builder.append(icing.toString());
+        }
+        return builder.toString();
     }
 }
