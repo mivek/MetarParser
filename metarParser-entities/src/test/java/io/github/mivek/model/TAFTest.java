@@ -431,12 +431,14 @@ class TAFTest extends AbstractWeatherContainerTest<TAF>{
     icing.setIntensity(IcingIntensity.LIGHT_RIME_ICING_CLOUD);
     icing.setBaseHeight(50);
     icing.setDepth(8);
-    taf.setTurbulence(turbulence);
-    taf.setIcing(icing);
+    taf.addTurbulence(turbulence);
+    taf.addIcing(icing);
     Messages.getInstance().setLocale(Locale.ENGLISH);
     String description = taf.toString();
 
 
+    assertThat(taf.getTurbulences(), hasSize(1));
+    assertThat(taf.getIcings(), hasSize(1));
     assertThat(description, containsString("intensity=Extreme turbulence"));
     assertThat(description, containsString("base layer in feet=40"));
     assertThat(description, containsString("layer depth in feet=5"));

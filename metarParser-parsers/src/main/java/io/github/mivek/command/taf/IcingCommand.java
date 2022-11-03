@@ -20,7 +20,7 @@ public final class IcingCommand implements Command {
     icing.setIntensity(IcingIntensity.get(matches[1]));
     icing.setBaseHeight(100 * Integer.parseInt(matches[2]));
     icing.setDepth(1000 * Integer.parseInt(matches[3]));
-    taf.setIcing(icing);
+    taf.addIcing(icing);
   }
 
   @Override

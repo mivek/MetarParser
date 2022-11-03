@@ -821,13 +821,13 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals(20, taf.getWind().getSpeed());
         assertEquals(35, taf.getWind().getGust());
         assertEquals("KT", taf.getWind().getUnit());
-        assertNotNull(taf.getTurbulence());
-        assertEquals(TurbulenceIntensity.MODERATE_CLEAR_AIR_FREQUENT, taf.getTurbulence().getIntensity());
-        assertEquals(0, taf.getTurbulence().getBaseHeight());
-        assertEquals(9000, taf.getTurbulence().getDepth());
-        assertNotNull(taf.getIcing());
-        assertEquals(IcingIntensity.LIGHT_CLEAR_ICING_PRECIPITATION, taf.getIcing().getIntensity());
-        assertEquals(0, taf.getIcing().getBaseHeight());
-        assertEquals(9000, taf.getIcing().getDepth());
+        assertThat(taf.getTurbulences(), not(empty()));
+        assertEquals(TurbulenceIntensity.MODERATE_CLEAR_AIR_FREQUENT, taf.getTurbulences().get(0).getIntensity());
+        assertEquals(0, taf.getTurbulences().get(0).getBaseHeight());
+        assertEquals(9000, taf.getTurbulences().get(0).getDepth());
+        assertThat(taf.getIcings(), not(empty()));
+        assertEquals(IcingIntensity.LIGHT_CLEAR_ICING_PRECIPITATION, taf.getIcings().get(0).getIntensity());
+        assertEquals(0, taf.getIcings().get(0).getBaseHeight());
+        assertEquals(9000, taf.getIcings().get(0).getDepth());
     }
 }

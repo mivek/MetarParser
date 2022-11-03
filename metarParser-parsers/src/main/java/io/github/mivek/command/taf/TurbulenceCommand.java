@@ -22,7 +22,7 @@ public final class TurbulenceCommand implements Command {
     turbulence.setIntensity(TurbulenceIntensity.get(matches[1]));
     turbulence.setBaseHeight(100 * Integer.parseInt(matches[2]));
     turbulence.setDepth(1000 * Integer.parseInt(matches[3]));
-    taf.setTurbulence(turbulence);
+    taf.addTurbulence(turbulence);
   }
 
   @Override
