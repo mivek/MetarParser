@@ -34,6 +34,10 @@ public enum TurbulenceIntensity {
   /** Shortcut of the intensity. */
   private final String shortcut;
 
+  /**
+   * Constructor.
+   * @param shortcut The intensity's shortcut.
+   */
   TurbulenceIntensity(final String shortcut) {
     this.shortcut = shortcut;
   }

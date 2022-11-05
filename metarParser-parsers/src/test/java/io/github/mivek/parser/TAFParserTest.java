@@ -830,4 +830,31 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals(0, taf.getIcings().get(0).getBaseHeight());
         assertEquals(9000, taf.getIcings().get(0).getDepth());
     }
+
+    @Test
+    void testParseWithIcingAndTurbulenceTrends() throws ParseException {
+        String code = """
+            TAF AMD KNID 222300Z 0115/0215 21006KT 9999 SCT250 QNH2981INS
+              BECMG 0116/0118 19014G22KT 9999 FEW120 SCT250 520009 520909 QNH2978INS WND 160V230
+              BECMG 0118/0120 19018G26KT 9000 BLDU FEW003 FEW120 SCT250 530009 530909 QNH2972INS
+              BECMG 0120/0122 19022G35KT 9000 BLDU FEW003 SCT120 BKN250 560009 560906 531509 QNH2967INS
+              TEMPO 0122/0202 19030G40KT 1600 BLDUSA BKN002 SCT120 BKN250
+              BECMG 0202/0204 20018G30KT 9999 NSW SCT120 BKN220 530008 530909 QNH2972INS
+              BECMG 0208/0210 21015G25KT 9999 BKN120 BKN220 611208 530009 540909 QNH2974INS
+              BECMG 0214/0215 22012G25KT 9999 BKN120 BKN220 611208 520009 540909 QNH2980INS""";
+
+        TAF taf = parser.parse(code);
+
+        assertNotNull(taf);
+        assertThat(taf.getBECMGs(), hasSize(6));
+        assertThat(taf.getTempos(), hasSize(1));
+        assertThat(taf.getBECMGs().get(0).getTurbulences(), hasSize(2));
+        assertThat(taf.getBECMGs().get(1).getTurbulences(), hasSize(2));
+        assertThat(taf.getBECMGs().get(2).getTurbulences(), hasSize(3));
+        assertThat(taf.getBECMGs().get(3).getTurbulences(), hasSize(2));
+        assertThat(taf.getBECMGs().get(4).getTurbulences(), hasSize(2));
+        assertThat(taf.getBECMGs().get(4).getIcings(), hasSize(1));
+        assertThat(taf.getBECMGs().get(5).getIcings(), hasSize(1));
+        assertThat(taf.getBECMGs().get(5).getTurbulences(), hasSize(2));
+    }
 }

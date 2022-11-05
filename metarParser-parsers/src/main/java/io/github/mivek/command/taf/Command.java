@@ -1,6 +1,6 @@
 package io.github.mivek.command.taf;
 
-import io.github.mivek.model.TAF;
+import io.github.mivek.model.ITafGroups;
 
 /**
  * Command for the TAFParser.
@@ -13,7 +13,7 @@ public interface Command {
    * @param taf the metar object to handle.
    * @param part  the string to parse.
    */
-  void execute(TAF taf, String part);
+  void execute(ITafGroups taf, String part);
 
   /**
    * @param input the input string to test.

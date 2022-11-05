@@ -17,6 +17,7 @@ public final class Icing {
   private int depth;
 
   /**
+   * Returns the icing intensity.
    * @return the icing intensity.
    */
   public IcingIntensity getIntensity() {
@@ -31,6 +32,7 @@ public final class Icing {
   }
 
   /**
+   * Returns the base of the icing layer in feet.
    * @return the base of the icing layer in feet.
    */
   public int getBaseHeight() {

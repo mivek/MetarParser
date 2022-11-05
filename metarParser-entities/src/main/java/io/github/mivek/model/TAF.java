@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author mivek
  */
-public final class TAF extends AbstractWeatherCode {
+public final class TAF extends AbstractWeatherCode implements ITafGroups {
     /** The valididty of the TAF. */
     private Validity validity;
     /** The maximum temperature. */
@@ -126,32 +126,14 @@ public final class TAF extends AbstractWeatherCode {
         this.trends.add(trend);
     }
 
-    /**
-     * @return The icing.
-     */
+    @Override
     public List<Icing> getIcings() {
         return icings;
     }
 
-    /**
-     * @param icing The icing condition to add to the list.
-     */
-    public void addIcing(final Icing icing) {
-        this.icings.add(icing);
-    }
-
-    /**
-     * @return The turbulence
-     */
+    @Override
     public List<Turbulence> getTurbulences() {
         return turbulences;
-    }
-
-    /**
-     * @param turbulence The turbulence to add
-     */
-    public void addTurbulence(final Turbulence turbulence) {
-        this.turbulences.add(turbulence);
     }
 
     @Override
