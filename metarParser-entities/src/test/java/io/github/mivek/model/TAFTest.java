@@ -1,24 +1,29 @@
 package io.github.mivek.model;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.IcingIntensity;
 import io.github.mivek.enums.Phenomenon;
+import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.TafProbTrend;
 import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import java.util.List;
+import java.util.Locale;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author Jean-Kevin KPADEY
  */
-class TAFTest {
+class TAFTest extends AbstractWeatherContainerTest<TAF>{
 
   @Test
   void testGetTEMPO() {
@@ -88,10 +93,18 @@ class TAFTest {
     tempo3.addCloud(c4);
 
     TAF taf = new TAF();
+
+    Validity validityTaf = new Validity();
+    validityTaf.setStartDay(15);
+    validityTaf.setStartHour(2);
+    validityTaf.setEndDay(16);
+    validityTaf.setEndHour(12);
+
     taf.addTrend(becmg1);
     taf.addTrend(tempo1);
     taf.addTrend(tempo2);
     taf.addTrend(tempo3);
+    taf.setValidity(validityTaf);
 
     List<TafProbTrend> tempos = taf.getTempos();
 
@@ -407,4 +420,41 @@ class TAFTest {
     assertThat(fm, hasSize(3));
   }
 
+  @Test
+  void testToString() {
+    TAF taf = getEntity();
+    Turbulence turbulence = new Turbulence();
+    turbulence.setIntensity(TurbulenceIntensity.EXTREME);
+    turbulence.setBaseHeight(40);
+    turbulence.setDepth(5);
+    Icing icing = new Icing();
+    icing.setIntensity(IcingIntensity.LIGHT_RIME_ICING_CLOUD);
+    icing.setBaseHeight(50);
+    icing.setDepth(8);
+    taf.addTurbulence(turbulence);
+    taf.addIcing(icing);
+    Messages.getInstance().setLocale(Locale.ENGLISH);
+    String description = taf.toString();
+
+
+    assertThat(taf.getTurbulences(), hasSize(1));
+    assertThat(taf.getIcings(), hasSize(1));
+    assertThat(description, containsString("intensity=Extreme turbulence"));
+    assertThat(description, containsString("base layer in feet=40"));
+    assertThat(description, containsString("layer depth in feet=5"));
+    assertThat(description, containsString("intensity=Light Rime Icing In Cloud"));
+    assertThat(description, containsString("base layer in feet=50"));
+    assertThat(description, containsString("layer depth in feet=8"));
+  }
+  @Override
+  TAF getEntity() {
+    TAF taf = new TAF();
+    Validity validity = new Validity();
+    validity.setStartDay(15);
+    validity.setStartHour(21);
+    validity.setEndDay(15);
+    validity.setEndHour(24);
+    taf.setValidity(validity);
+    return taf;
+  }
 }

@@ -2,6 +2,8 @@ package io.github.mivek.parser;
 
 import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.taf.Command;
+import io.github.mivek.command.taf.TAFCommandSupplier;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.factory.FactoryProvider;
@@ -27,12 +29,14 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
     private static final String TN = "TN";
     /** Instance of the TAFParser. */
     private static final TAFParser INSTANCE = new TAFParser();
+    /** TAF command supplier. */
+    private final TAFCommandSupplier supplier;
 
     /**
      * Default constructor.
      */
     private TAFParser() {
-        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier());
+        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new TAFCommandSupplier());
     }
 
     /**
@@ -41,9 +45,11 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
      * @param commonCommandSupplier the common command supplier
      * @param remarkParser          the remark parser.
      * @param airportSupplier       the airport supplier.
+     * @param tafCommandSupplier    the taf command supplier.
      */
-    TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier) {
+    TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier, final TAFCommandSupplier tafCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
+        supplier = tafCommandSupplier;
     }
 
     /**
@@ -94,8 +100,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
             } else if (part.startsWith(TN)) {
                 taf.setMinTemperature(parseTemperature(part));
             } else {
-                parseFlags(taf, part);
-                generalParse(taf, part);
+                executeCommand(taf, part);
             }
         }
         // Process other lines.
@@ -105,6 +110,21 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
             processLines(taf, parts);
         }
         return taf;
+    }
+
+    /**
+     * Execute the command from the taf spplier or the common supplier.
+     * @param taf The taf to update
+     * @param input The string to test.
+     */
+    void executeCommand(final TAF taf, final String input) {
+        Command command = supplier.get(input);
+        if (command != null) {
+            command.execute(taf, input);
+        } else {
+            parseFlags(taf, input);
+            generalParse(taf, input);
+        }
     }
 
     /**

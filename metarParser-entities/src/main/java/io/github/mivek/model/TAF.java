@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @author mivek
  */
-public final class TAF extends AbstractWeatherCode {
+public final class TAF extends AbstractWeatherCode implements ITafGroups {
     /** The valididty of the TAF. */
     private Validity validity;
     /** The maximum temperature. */
@@ -26,6 +26,10 @@ public final class TAF extends AbstractWeatherCode {
     private TemperatureDated minTemperature;
     /** List of From changes. */
     private final List<AbstractTafTrend<? extends AbstractValidity>> trends;
+    /** Taf icing. */
+    private final List<Icing> icings;
+    /** Taf turbulence. */
+    private final List<Turbulence> turbulences;
 
     /**
      * Constructor.
@@ -33,6 +37,8 @@ public final class TAF extends AbstractWeatherCode {
     public TAF() {
         super();
         trends = new ArrayList<>();
+        icings = new ArrayList<>();
+        turbulences = new ArrayList<>();
     }
 
     /**
@@ -121,9 +127,20 @@ public final class TAF extends AbstractWeatherCode {
     }
 
     @Override
+    public List<Icing> getIcings() {
+        return icings;
+    }
+
+    @Override
+    public List<Turbulence> getTurbulences() {
+        return turbulences;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
                 .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), isAmendment())
-                .appendToString(trends.toString()).toString();
+            .appendToString(trends.toString()).append(turbulences.toString()).append(icings.toString()).toString();
+
     }
 }

@@ -1,6 +1,7 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.taf.TAFCommandSupplier;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.trend.TafProbTrend;
 import io.github.mivek.model.trend.validity.Validity;
@@ -17,18 +18,19 @@ public final class ProbTrendParser extends AbstractTAFTrendParser<Validity> {
    * Package private constructor.
    * @param commonCommandSupplier The commonCommon supplier
    * @param remarkParser The instance of RemarkParser.
+   * @param tafCommandSupplier The taf command supplier.
    */
   ProbTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
-      final RemarkParser remarkParser) {
-    super(commonCommandSupplier, remarkParser);
+      final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
+    super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
    * Private constructor.
    */
   private ProbTrendParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance());
+    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
   }
 
   @Override

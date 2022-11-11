@@ -1,6 +1,7 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.taf.TAFCommandSupplier;
 import io.github.mivek.factory.FactoryProvider;
 import io.github.mivek.model.trend.TafTrend;
 import io.github.mivek.model.trend.validity.Validity;
@@ -17,18 +18,19 @@ public final class TrendValididyParser extends AbstractTAFTrendParser<Validity> 
    * Default constructor.
    * @param commonCommandSupplier The common command supplier.
    * @param remarkParser The remark Parser instance.
+   * @param tafCommandSupplier The taf command supplier.
    */
   TrendValididyParser(
       final CommonCommandSupplier commonCommandSupplier,
-      final RemarkParser remarkParser) {
-    super(commonCommandSupplier, remarkParser);
+      final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
+    super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
    * Private constructor.
    */
   private TrendValididyParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance());
+    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
   }
 
   /**

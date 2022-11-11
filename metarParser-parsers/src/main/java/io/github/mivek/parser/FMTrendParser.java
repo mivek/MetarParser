@@ -1,6 +1,7 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.command.common.CommonCommandSupplier;
+import io.github.mivek.command.taf.TAFCommandSupplier;
 import io.github.mivek.model.trend.AbstractTafTrend;
 import io.github.mivek.model.trend.FMTafTrend;
 import io.github.mivek.model.trend.validity.BeginningValidity;
@@ -17,18 +18,19 @@ public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidit
    * Private package constructor.
    * @param commonCommandSupplier The common command Supplier
    * @param remarkParser The remarkParser
+   * @param tafCommandSupplier The taf command supplier
    */
   FMTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
-      final RemarkParser remarkParser) {
-    super(commonCommandSupplier, remarkParser);
+      final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
+    super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
    * Private constructor.
    */
   private FMTrendParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance());
+    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
   }
 
   @Override
