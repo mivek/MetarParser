@@ -73,4 +73,25 @@ class CloudCommandTest {
         assertEquals(CloudQuantity.NSC, res.getQuantity());
     }
 
+    @Test
+    void testParseUnknownCloudType() {
+        String code = "SCT026///";
+
+        Cloud res = command.parseCloud(code);
+        assertNotNull(res);
+        assertEquals(CloudQuantity.SCT, res.getQuantity());
+        assertEquals(2600, res.getHeight());
+        assertNull(res.getType());
+    }
+    @Test
+    void testParseUnknownHeightAndUnknownCloudType() {
+        String code = "SCT//////";
+
+        Cloud res = command.parseCloud(code);
+        assertNotNull(res);
+        assertEquals(CloudQuantity.SCT, res.getQuantity());
+        assertNull(res.getHeight());
+        assertNull(res.getType());
+    }
+
 }

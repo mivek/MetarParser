@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
  */
 public final class CloudCommand implements Command {
     /** Pattern to recognize clouds. */
-    private static final Pattern CLOUD_REGEX = Pattern.compile("^([A-Z]{3})(\\d{3})?([A-Z]{2,3})?$");
-
+    private static final Pattern CLOUD_REGEX = Pattern.compile("^(\\p{Upper}{3})(\\d{3}|/{3})?(\\p{Upper}{2,3}|/{3})?$");
+    /** String to identify the unknown part in a cloud. */
+    private static final String UNDEFINED = "///";
     /**
      * constructor.
      */
@@ -39,12 +40,12 @@ public final class CloudCommand implements Command {
         try {
             CloudQuantity cq = CloudQuantity.valueOf(cloudPart[1]);
             cloud.setQuantity(cq);
-            if (cloudPart[2] != null) {
+            if (cloudPart[2] != null && !UNDEFINED.equals(cloudPart[2])) {
                 cloud.setHeight(100 * Integer.parseInt(cloudPart[2]));
-                if (cloudPart[3] != null) {
-                    CloudType ct = CloudType.valueOf(cloudPart[3]);
-                    cloud.setType(ct);
-                }
+            }
+            if (cloudPart[3] != null && !UNDEFINED.equals(cloudPart[3])) {
+                CloudType ct = CloudType.valueOf(cloudPart[3]);
+                cloud.setType(ct);
             }
             return cloud;
         } catch (IllegalArgumentException e) {

@@ -57,18 +57,23 @@ When updating classes, regenerate the diagrams and save the images in the projec
 
 The application contains numerous enumerations to represent data.
 
-- CloudType: to represent the type of cloud.
-- CloudQuantity: to represent the amount of clouds.
-- Intensity: to represent the intensity of a meteorological phenomenon.
-- Descriptive: to represent the description of a meteorological phenomenon.
-- DepositType: to represent the type of deposit on a runway.
-- DepositCoverage: to represent the percentage of the runway covered by the deposit.
-- DepositThickness: to represent the thickness of the deposit.
-- DepositBrakingCapacity: to represent the braking capacity on the runway.    
-- Phenomenon: to represent a phenomenon.
-- RunwayInfoTrend: to represent the visibility trend on a runway.
-- WeatherChangeTime: to represent a trend.
-- TimeIndicator: to represent the time of the trend.
+- CloudType: Represents the type of cloud.
+- CloudQuantity: Represents the amount of clouds.
+- DepositBrakingCapacity: Represents the breaking capacity on a runway.
+- DepositCoverage: Represents the percentage of a runway covered by deposit.
+- DepositThickness: Represents the thickness of a deposit on a runway.
+- DepositType: Represents the type of deposit on a runway.
+- DepositType: Represents the type of deposit on a runway.
+- Descriptive: Represents the description of a meteorological phenomenon.
+- Flag: Represents a flag applied to a METAR or TAF: AMD, AUTO, CNL, COR or NIL.
+- IcingIntensity: Represents the intensity of an icing element.
+- Intensity: Represents the intensity of a meteorological phenomenon.
+- Phenomenon: Represents a phenomenon.
+- RunwayInfoIndicator: Represents the indicator on a runway.
+- RunwayInfoTrend: Represents the visibility trend on a runway.
+- TimeIndicator: Represents the time of the trend.
+- TurbulenceIntensity: Represents the intensity of a turbulence
+- WeatherChangeType: Represents a type of trend.
 
 ### Classes
 
@@ -99,6 +104,15 @@ In this application a cloud is composed of
 
 A country is represented by its name.
 
+#### Icing
+
+The icing are only available in TAF and in TAFTrends.
+It is composed of 
+
+- The icing intensity
+- The base height
+- The layer's depth
+
 #### Runway information
 
 The runway information can represent either a visual range or a deposit.
@@ -116,6 +130,15 @@ The runway information is composed of
 -   The percentage of coverage on the runway
 -   The thickness of the deposit.
 -   The braking capacity on the runway.
+
+#### Turbulence
+
+The turbulence are only available in TAF and in TAFTrends.
+It is composed of:
+
+- The turbulence intensity
+- The base height
+- The layer's depth
 
 #### Visibility
 
