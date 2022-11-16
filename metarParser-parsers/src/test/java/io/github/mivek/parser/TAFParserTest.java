@@ -857,4 +857,17 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertThat(taf.getBECMGs().get(5).getIcings(), hasSize(1));
         assertThat(taf.getBECMGs().get(5).getTurbulences(), hasSize(2));
     }
+
+    @Test
+    void testParseWithAMDS() throws ParseException {
+        String code = """
+            TAF AMD KVOK 232200Z 2322/2423 15015G20KT 9999 BKN035 BKN050 510008 QNH2966INS
+            BECMG 2411/2412 17012KT 9000 -SHRA FEW006 BKN014 OVC021 510065 QNH2965INS TX24/2322Z TN16/2413Z LAST NO AMDS AFT 2322 NEXT 2409""";
+
+        TAF taf = parser.parse(code);
+
+        assertNotNull(taf);
+        assertThat(taf.getWeatherConditions(), empty());
+        assertThat(taf.getBECMGs().get(0).getWeatherConditions(), hasSize(1));
+    }
 }
