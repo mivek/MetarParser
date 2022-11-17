@@ -14,6 +14,9 @@ public final class SnowDepthCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     SnowDepthCommand() {
         this.messages = Messages.getInstance();
     }

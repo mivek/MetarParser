@@ -14,6 +14,9 @@ public final class SunshineDurationCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     SunshineDurationCommand() {
         this.messages = Messages.getInstance();
     }

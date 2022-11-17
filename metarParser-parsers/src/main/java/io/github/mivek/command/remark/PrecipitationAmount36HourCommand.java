@@ -15,6 +15,9 @@ public final class PrecipitationAmount36HourCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     PrecipitationAmount36HourCommand() {
         this.messages = Messages.getInstance();
     }

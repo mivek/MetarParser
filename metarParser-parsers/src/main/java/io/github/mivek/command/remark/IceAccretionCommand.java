@@ -14,6 +14,9 @@ public final class IceAccretionCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     IceAccretionCommand() {
         this.messages = Messages.getInstance();
     }

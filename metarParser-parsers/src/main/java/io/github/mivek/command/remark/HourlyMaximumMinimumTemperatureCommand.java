@@ -16,6 +16,9 @@ public final class HourlyMaximumMinimumTemperatureCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     HourlyMaximumMinimumTemperatureCommand() {
         this.messages = Messages.getInstance();
     }
