@@ -15,6 +15,9 @@ public final class HourlyTemperatureDewPointCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     HourlyTemperatureDewPointCommand() {
         this.messages = Messages.getInstance();
     }

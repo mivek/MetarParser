@@ -54,24 +54,34 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
    */
   WeatherCondition parseWeatherCondition(final String weatherPart) {
       WeatherCondition wc = new WeatherCondition();
+      String weatherPartCopy = weatherPart;
       String match;
       if (Regex.find(INTENSITY_REGEX, weatherPart)) {
           match = Regex.findString(INTENSITY_REGEX, weatherPart);
           Intensity i = Intensity.getEnum(match);
           wc.setIntensity(i);
+          weatherPartCopy = weatherPartCopy.substring(i.getShortcut().length());
       }
       for (Descriptive des : Descriptive.values()) {
           if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
               wc.setDescriptive(des);
+              weatherPartCopy = weatherPartCopy.substring(des.getShortcut().length());
               break;
           }
       }
-      for (Phenomenon phe : Phenomenon.values()) {
-          if (Regex.findString(Pattern.compile("(" + phe.getShortcut() + ")"), weatherPart) != null) {
-              wc.addPhenomenon(phe);
+
+      String previousToken = "";
+      while (!weatherPartCopy.isEmpty() && !weatherPartCopy.equals(previousToken)) {
+          previousToken = weatherPartCopy;
+          for (Phenomenon phenom: Phenomenon.values()) {
+            if (Regex.find(Pattern.compile("^" + phenom.getShortcut()), weatherPartCopy)) {
+              wc.addPhenomenon(phenom);
+              weatherPartCopy = weatherPartCopy.substring(phenom.getShortcut().length());
+            }
           }
       }
-      if (wc.isValid()) {
+
+      if (wc.isValid() && weatherPartCopy.isEmpty()) {
           return wc;
       }
       return null;

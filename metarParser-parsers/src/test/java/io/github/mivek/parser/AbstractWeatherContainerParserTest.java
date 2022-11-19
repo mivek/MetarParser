@@ -66,4 +66,16 @@ abstract class AbstractWeatherContainerParserTest<T extends AbstractWeatherConta
 
     assertNull(wc);
   }
+
+  @Test
+  void testParseWeatherConditionOrder() {
+    WeatherCondition wc = getParser().parseWeatherCondition("-SNRA");
+
+    assertNotNull(wc);
+    assertEquals(Intensity.LIGHT, wc.getIntensity());
+    assertNull(wc.getDescriptive());
+    assertThat(wc.getPhenomenons(), hasSize(2));
+    assertEquals(Phenomenon.SNOW, wc.getPhenomenons().get(0));
+    assertEquals(Phenomenon.RAIN, wc.getPhenomenons().get(1));
+  }
 }

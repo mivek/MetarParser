@@ -14,6 +14,9 @@ public final class WaterEquivalentSnowCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     WaterEquivalentSnowCommand() {
         this.messages = Messages.getInstance();
     }

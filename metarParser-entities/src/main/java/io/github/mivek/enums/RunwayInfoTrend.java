@@ -35,6 +35,11 @@ public enum RunwayInfoTrend {
     return Messages.getInstance().getString("Converter." + key);
   }
 
+  /**
+   * Returns a trend given a token.
+   * @param input String representing a trend.
+   * @return The RunwayInfoTrend object.
+   */
   public static RunwayInfoTrend get(final String input) {
     return Arrays.stream(RunwayInfoTrend.values())
         .filter(trend -> trend.shortcut.equals(input))

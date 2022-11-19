@@ -29,6 +29,9 @@ public final class HourlyPressureCommand implements Command {
     /** The message instance. */
     private final Messages messages;
 
+    /**
+     * Constructor.
+     */
     HourlyPressureCommand() {
         this.messages = Messages.getInstance();
     }
