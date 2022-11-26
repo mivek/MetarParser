@@ -420,4 +420,20 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals("EKVG", m.getStation());
         assertThat(m.getClouds(), hasSize(2));
     }
+    @Test
+    void testParseVC() {
+        String code = "CYVM 282100Z 36028G36KT 1SM -SN DRSN VCBLSN OVC008 M03/M04 A2935 RMK SN2ST8 LAST STFFD OBS/NXT 291200UTC SLP940";
+
+        Metar m = parser.parse(code);
+
+        assertNotNull(m);
+        assertThat(m.getWeatherConditions(), hasSize(3));
+        assertEquals(Intensity.LIGHT, m.getWeatherConditions().get(0).getIntensity());
+        assertEquals(Phenomenon.SNOW, m.getWeatherConditions().get(0).getPhenomenons().get(0));
+        assertEquals(Descriptive.DRIFTING, m.getWeatherConditions().get(1).getDescriptive());
+        assertEquals(Phenomenon.SNOW, m.getWeatherConditions().get(1).getPhenomenons().get(0));
+        assertEquals(Intensity.IN_VICINITY, m.getWeatherConditions().get(2).getIntensity());
+        assertEquals(Descriptive.BLOWING, m.getWeatherConditions().get(2).getDescriptive());
+        assertEquals(Phenomenon.SNOW, m.getWeatherConditions().get(2).getPhenomenons().get(0));
+    }
 }
