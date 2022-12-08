@@ -1,6 +1,5 @@
 package io.github.mivek.provider.airport.impl;
 
-import com.opencsv.exceptions.CsvValidationException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.provider.airport.AirportProvider;
 import org.junit.jupiter.api.Disabled;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class OurAirportsAirportProviderTest {
 
     @Test
-    void testGetAirport() throws CsvValidationException, IOException, URISyntaxException, InterruptedException {
+    void testGetAirport() throws IOException, URISyntaxException, InterruptedException {
         AirportProvider provider = new OurAirportsAirportProvider();
 
         Map<String, Airport> airports = provider.getAirports();

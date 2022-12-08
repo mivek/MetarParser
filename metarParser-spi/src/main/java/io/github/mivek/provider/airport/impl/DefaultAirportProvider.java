@@ -1,13 +1,8 @@
 package io.github.mivek.provider.airport.impl;
 
-import com.opencsv.CSVParser;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-import com.opencsv.exceptions.CsvValidationException;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Country;
 import io.github.mivek.provider.airport.AirportProvider;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +10,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 /**
  * Default implementation of the AiportProvider using local files to build the airport map.
@@ -45,14 +43,13 @@ public final class DefaultAirportProvider implements AirportProvider {
     private void initCountries() {
         Objects.requireNonNull(countriesFile);
         countries = new HashMap<>();
-        String[] line;
-        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(countriesFile, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
-            while ((line = reader.readNext()) != null) {
+        try (CSVParser parser = CSVFormat.DEFAULT.parse(new InputStreamReader(countriesFile, StandardCharsets.UTF_8))) {
+            for (CSVRecord line : parser) {
                 Country country = new Country();
-                country.setName(line[0]);
+                country.setName(line.get(0));
                 countries.put(country.getName(), country);
             }
-        } catch (IOException | CsvValidationException exception) {
+        } catch (IOException exception) {
             throw new IllegalStateException(exception.getMessage());
         }
     }
@@ -63,23 +60,22 @@ public final class DefaultAirportProvider implements AirportProvider {
     private void initAirports() {
         Objects.requireNonNull(airportsFile);
         airports = new HashMap<>();
-        String[] line;
-        try (CSVReader reader = new CSVReaderBuilder(new InputStreamReader(airportsFile, StandardCharsets.UTF_8)).withCSVParser(new CSVParser()).withSkipLines(0).build()) {
-            while ((line = reader.readNext()) != null) {
+        try (CSVParser parser = CSVFormat.DEFAULT.parse(new InputStreamReader(airportsFile, StandardCharsets.UTF_8))) {
+            for (CSVRecord line : parser) {
                 Airport airport = new Airport();
-                airport.setName(line[1]);
-                airport.setCity(line[2]);
-                airport.setCountry(countries.get(line[3]));
-                airport.setIata(line[4]);
-                airport.setIcao(line[5]);
-                airport.setLatitude(Double.parseDouble(line[6]));
-                airport.setLongitude(Double.parseDouble(line[7]));
-                airport.setAltitude(Integer.parseInt(line[8]));
-                airport.setTimezone(line[9]);
-                airport.setDst(line[10]);
+                airport.setName(line.get(1));
+                airport.setCity(line.get(2));
+                airport.setCountry(countries.get(line.get(3)));
+                airport.setIata(line.get(4));
+                airport.setIcao(line.get(5));
+                airport.setLatitude(Double.parseDouble(line.get(6)));
+                airport.setLongitude(Double.parseDouble(line.get(7)));
+                airport.setAltitude(Integer.parseInt(line.get(8)));
+                airport.setTimezone(line.get(9));
+                airport.setDst(line.get(10));
                 airports.put(airport.getIcao(), airport);
             }
-        } catch (IOException | CsvValidationException exception) {
+        } catch (IOException exception) {
             throw new IllegalStateException(exception.getMessage());
         }
     }
