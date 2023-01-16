@@ -3,7 +3,6 @@ package io.github.mivek.command;
 import io.github.mivek.model.Airport;
 import io.github.mivek.provider.airport.AirportProvider;
 import io.github.mivek.provider.airport.impl.DefaultAirportProvider;
-
 import java.util.ServiceLoader;
 
 /**
@@ -22,7 +21,7 @@ public final class AirportSupplier implements Supplier<Airport> {
 
     @Override
     public Airport get(final String string) {
-        AirportProvider provider = airportLoader.findFirst().orElseGet(DefaultAirportProvider::new);
+        AirportProvider provider = airportLoader.iterator().hasNext() ? airportLoader.iterator().next() : new DefaultAirportProvider();
         return provider.getAirports().get(string);
     }
 }
