@@ -436,4 +436,19 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(Descriptive.BLOWING, m.getWeatherConditions().get(2).getDescriptive());
         assertEquals(Phenomenon.SNOW, m.getWeatherConditions().get(2).getPhenomenons().get(0));
     }
+
+    @Test
+    void testParseRunwayDeposit() {
+        String code = "UUDD 212100Z 20005MPS 8000 -FZRA SCT005 M01/M02 Q1010 R14R/590335 NOSIG";
+
+        Messages.getInstance().setLocale(Locale.ENGLISH);
+        Metar m = parser.parse(code);
+        assertEquals("UUDD", m.getStation());
+        assertThat(m.getRunways(), hasSize(1));
+        assertEquals("14R", m.getRunways().get(0).getName());
+        assertEquals(DepositType.WET_SNOW, m.getRunways().get(0).getDepositType());
+        assertEquals(DepositCoverage.FROM_51_TO_100, m.getRunways().get(0).getCoverage());
+        assertEquals("03 mm", m.getRunways().get(0).getThickness());
+        assertEquals("friction coefficient of 0.35", m.getRunways().get(0).getBrakingCapacity());
+    }
 }

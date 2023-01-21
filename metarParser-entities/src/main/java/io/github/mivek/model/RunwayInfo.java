@@ -1,8 +1,6 @@
 package io.github.mivek.model;
 
-import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
-import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
@@ -30,9 +28,9 @@ public class RunwayInfo {
     /** The percentage of coverage. */
     private DepositCoverage coverage;
     /** The thickness of the deposit. */
-    private DepositThickness thickness;
+    private String thickness;
     /** The breaking capacity on the runway. */
-    private DepositBrakingCapacity brakingCapacity;
+    private String brakingCapacity;
 
     /**
      * Getter of name.
@@ -151,28 +149,28 @@ public class RunwayInfo {
     /**
      * @return The thickness of the deposit.
      */
-    public DepositThickness getThickness() {
+    public String getThickness() {
         return thickness;
     }
 
     /**
      * @param thickness The thickness to set.
      */
-    public void setThickness(final DepositThickness thickness) {
+    public void setThickness(final String thickness) {
         this.thickness = thickness;
     }
 
     /**
      * @return The braking capacity on the runway.
      */
-    public DepositBrakingCapacity getBrakingCapacity() {
+    public String getBrakingCapacity() {
         return brakingCapacity;
     }
 
     /**
      * @param brakingCapacity the braking capacity to set.
      */
-    public void setBrakingCapacity(final DepositBrakingCapacity brakingCapacity) {
+    public void setBrakingCapacity(final String brakingCapacity) {
         this.brakingCapacity = brakingCapacity;
     }
 

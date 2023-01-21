@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
-import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -104,8 +103,8 @@ class RunwayCommandTest {
         assertEquals("05", ri.getName());
         assertEquals(DepositType.SLUSH, ri.getDepositType());
         assertEquals(DepositCoverage.FROM_11_TO_25, ri.getCoverage());
-        assertEquals(DepositThickness.THICKNESS_10, ri.getThickness());
-        assertEquals(DepositBrakingCapacity.MEDIUM_GOOD, ri.getBrakingCapacity());
+        assertEquals(Messages.getInstance().getString("DepositThickness.92"), ri.getThickness());
+        assertEquals(Messages.getInstance().getString("DepositBrakingCapacity.94"), ri.getBrakingCapacity());
     }
 
     @Test
@@ -119,8 +118,8 @@ class RunwayCommandTest {
         assertEquals("05", ri.getName());
         assertEquals(DepositType.NOT_REPORTED, ri.getDepositType());
         assertEquals(DepositCoverage.FROM_11_TO_25, ri.getCoverage());
-        assertEquals(DepositThickness.THICKNESS_10, ri.getThickness());
-        assertEquals(DepositBrakingCapacity.MEDIUM_GOOD, ri.getBrakingCapacity());
+        assertEquals(Messages.getInstance().getString("DepositThickness.92"), ri.getThickness());
+        assertEquals(Messages.getInstance().getString("DepositBrakingCapacity.94"), ri.getBrakingCapacity());
     }
 
     @Test

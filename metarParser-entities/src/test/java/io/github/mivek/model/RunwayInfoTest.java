@@ -1,16 +1,14 @@
 package io.github.mivek.model;
 
-import io.github.mivek.enums.DepositBrakingCapacity;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import io.github.mivek.enums.DepositCoverage;
-import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 class RunwayInfoTest {
 
@@ -23,8 +21,8 @@ class RunwayInfoTest {
         ri.setMaxRange(500);
         ri.setDepositType(DepositType.COMPACTED_SNOW);
         ri.setCoverage(DepositCoverage.FROM_11_TO_25);
-        ri.setThickness(DepositThickness.THICKNESS_15);
-        ri.setBrakingCapacity(DepositBrakingCapacity.POOR);
+        ri.setThickness(Messages.getInstance().getString("DepositThickness.93"));
+        ri.setBrakingCapacity(Messages.getInstance().getString("DepositBrakingCapacity.91"));
         ri.setIndicator(RunwayInfoIndicator.LESS_THAN);
 
         String des = ri.toString();
@@ -35,8 +33,8 @@ class RunwayInfoTest {
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=up rising"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.type") + "=" + Messages.getInstance().getString("DepositType.COMPACTED_SNOW")));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.coverage") + "=" + Messages.getInstance().getString("DepositCoverage.FROM_11_TO_25")));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.thickness") + "=" + Messages.getInstance().getString("DepositThickness.THICKNESS_15")));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.braking") + "=" + Messages.getInstance().getString("DepositBrakingCapacity.POOR")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.thickness") + "=" + Messages.getInstance().getString("DepositThickness.93")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.braking") + "=" + Messages.getInstance().getString("DepositBrakingCapacity.91")));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.indicator") + "=less than"));
     }
 
