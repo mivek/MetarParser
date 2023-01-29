@@ -1,11 +1,10 @@
 package io.github.mivek.command.metar;
 
-import io.github.mivek.enums.DepositBrakingCapacity;
 import io.github.mivek.enums.DepositCoverage;
-import io.github.mivek.enums.DepositThickness;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import io.github.mivek.utils.Regex;
@@ -50,35 +49,37 @@ public final class RunwayCommand implements Command {
             new AbstractMap.SimpleImmutableEntry<>("9", DepositCoverage.FROM_51_TO_100))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     /** Immutable map deposit thickness. */
-    private static final Map<String, DepositThickness> DEPOSIT_THICKNESS_MAP = Stream.of(
-            new AbstractMap.SimpleImmutableEntry<>("//", DepositThickness.NOT_REPORTED),
-            new AbstractMap.SimpleImmutableEntry<>("00", DepositThickness.LESS_1_MM),
-            new AbstractMap.SimpleImmutableEntry<>("92", DepositThickness.THICKNESS_10),
-            new AbstractMap.SimpleImmutableEntry<>("93", DepositThickness.THICKNESS_15),
-            new AbstractMap.SimpleImmutableEntry<>("94", DepositThickness.THICKNESS_20),
-            new AbstractMap.SimpleImmutableEntry<>("95", DepositThickness.THICKNESS_25),
-            new AbstractMap.SimpleImmutableEntry<>("96", DepositThickness.THICKNESS_30),
-            new AbstractMap.SimpleImmutableEntry<>("97", DepositThickness.THICKNESS_35),
-            new AbstractMap.SimpleImmutableEntry<>("98", DepositThickness.THICKNESS_40),
-            new AbstractMap.SimpleImmutableEntry<>("99", DepositThickness.CLOSED))
+    private static final Map<String, String> DEPOSIT_THICKNESS_MAP = Stream.of(
+            new AbstractMap.SimpleImmutableEntry<>("//", "DepositThickness.//"),
+            new AbstractMap.SimpleImmutableEntry<>("00", "DepositThickness.00"),
+            new AbstractMap.SimpleImmutableEntry<>("92", "DepositThickness.92"),
+            new AbstractMap.SimpleImmutableEntry<>("93", "DepositThickness.93"),
+            new AbstractMap.SimpleImmutableEntry<>("94", "DepositThickness.94"),
+            new AbstractMap.SimpleImmutableEntry<>("95", "DepositThickness.95"),
+            new AbstractMap.SimpleImmutableEntry<>("96", "DepositThickness.96"),
+            new AbstractMap.SimpleImmutableEntry<>("97", "DepositThickness.97"),
+            new AbstractMap.SimpleImmutableEntry<>("98", "DepositThickness.98"),
+            new AbstractMap.SimpleImmutableEntry<>("99", "DepositThickness.99"))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
     /** Immutable map of braking capacity. */
-    private static final Map<String, DepositBrakingCapacity> DEPOSIT_BRAKING_CAPACITY_MAP = Stream.of(
-            new AbstractMap.SimpleImmutableEntry<>("//", DepositBrakingCapacity.NOT_REPORTED),
-            new AbstractMap.SimpleImmutableEntry<>("91", DepositBrakingCapacity.POOR),
-            new AbstractMap.SimpleImmutableEntry<>("92", DepositBrakingCapacity.MEDIUM_POOR),
-            new AbstractMap.SimpleImmutableEntry<>("93", DepositBrakingCapacity.MEDIUM),
-            new AbstractMap.SimpleImmutableEntry<>("94", DepositBrakingCapacity.MEDIUM_GOOD),
-            new AbstractMap.SimpleImmutableEntry<>("95", DepositBrakingCapacity.GOOD),
-            new AbstractMap.SimpleImmutableEntry<>("99", DepositBrakingCapacity.UNRELIABLE))
+    private static final Map<String, String> DEPOSIT_BRAKING_CAPACITY_MAP = Stream.of(
+            new AbstractMap.SimpleImmutableEntry<>("//", "DepositBrakingCapacity.//"),
+            new AbstractMap.SimpleImmutableEntry<>("91", "DepositBrakingCapacity.91"),
+            new AbstractMap.SimpleImmutableEntry<>("92", "DepositBrakingCapacity.92"),
+            new AbstractMap.SimpleImmutableEntry<>("93", "DepositBrakingCapacity.93"),
+            new AbstractMap.SimpleImmutableEntry<>("94", "DepositBrakingCapacity.94"),
+            new AbstractMap.SimpleImmutableEntry<>("95", "DepositBrakingCapacity.95"),
+            new AbstractMap.SimpleImmutableEntry<>("99", "DepositBrakingCapacity.99"))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-
+    /** Message instance. */
+    private final Messages messages;
     /**
      * Package private constructor.
      */
     RunwayCommand() {
+        this.messages = Messages.getInstance();
     }
 
     @Override
@@ -91,8 +92,8 @@ public final class RunwayCommand implements Command {
             ri.setName(matches[1]);
             ri.setDepositType(DEPOSIT_TYPE_MAP.get(matches[2]));
             ri.setCoverage(DEPOSIT_COVERAGE_MAP.get(matches[3]));
-            ri.setThickness(DEPOSIT_THICKNESS_MAP.get(matches[4]));
-            ri.setBrakingCapacity(DEPOSIT_BRAKING_CAPACITY_MAP.get(matches[5]));
+            ri.setThickness(parseDepositThickness(matches[4]));
+            ri.setBrakingCapacity(parseDepositBrakingCapacity(matches[5]));
             metar.addRunwayInfo(ri);
         } else if (Regex.find(RUNWAY_REGEX, part)) {
             matches = Regex.pregMatch(RUNWAY_REGEX, part);
@@ -111,6 +112,24 @@ public final class RunwayCommand implements Command {
         }
     }
 
+    /**
+     * Parses the deposit thickness according to the input.
+     * @param input The deposit thickness to parse.
+     * @return Translated sentence representing the deposit thickness.
+     */
+    private String parseDepositThickness(final String input) {
+        return messages.getString(DEPOSIT_THICKNESS_MAP.getOrDefault(input, "DepositThickness.default"), input);
+    }
+
+    /**
+     * Parses the braking capacity according to the input.
+     * If the input is not in the map then the default translation is used.
+     * @param input The braking capacity.
+     * @return Translated sentence representing the braking capacity.
+     */
+    private String parseDepositBrakingCapacity(final String input) {
+        return messages.getString(DEPOSIT_BRAKING_CAPACITY_MAP.getOrDefault(input, "DepositBrakingCapacity.default"), Double.parseDouble(input) / 100);
+    }
     @Override
     public boolean canParse(final String input) {
         return Regex.find(GENERIC_RUNWAY_REGEX, input);
