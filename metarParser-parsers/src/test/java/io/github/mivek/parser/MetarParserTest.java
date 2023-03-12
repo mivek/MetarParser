@@ -451,4 +451,15 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals("03 mm", m.getRunways().get(0).getThickness());
         assertEquals("friction coefficient of 0.35", m.getRunways().get(0).getBrakingCapacity());
     }
+
+    @Test
+    void testParsWithLowWind() {
+        String code = "KATW 022045Z 0000KT 10SM SCT120 00/M08 A2996";
+
+        Metar m = parser.parse(code);
+        assertEquals("KATW", m.getStation());
+        assertNotNull(m.getWind());
+        assertEquals(0, m.getWind().getSpeed());
+        assertEquals(0, m.getWind().getDirectionDegrees());
+    }
 }
