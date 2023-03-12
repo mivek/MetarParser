@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class MinimalVisibilityCommand implements Command {
     /** Pattern for the minimum visibility. */
-    public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[a-zA-Z]{1,2})$");
+    public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[NnEeSsWw]{1,2})$");
 
     /**
      * Protected constructor.
