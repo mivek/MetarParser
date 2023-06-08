@@ -51,23 +51,23 @@
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
         <archunit-junit5.version>1.0.1</archunit-junit5.version>
-        <checkstyle.version>10.11.0</checkstyle.version>
+        <checkstyle.version>10.12.0</checkstyle.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-        <junit.version>5.9.2</junit.version>
-        <maven-checkstyle-plugin.version>3.2.2</maven-checkstyle-plugin.version>
+        <junit.version>5.9.3</junit.version>
+        <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven.gpg.plugin.version>3.0.1</maven.gpg.plugin.version>
+        <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.3</maven-project-info-reports-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.4</maven-project-info-reports-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-        <maven.source.plugin.version>3.2.1</maven.source.plugin.version>
+        <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
         <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <commons-csv.version>1.10.0</commons-csv.version>
-        <pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.13.1</pitest-maven.version>
+        <pitest-junit5-plugin.version>1.2.0</pitest-junit5-plugin.version>
+        <pitest-maven.version>1.14.1</pitest-maven.version>
         <slf4j-nop.version>2.0.7</slf4j-nop.version>
         <spotbugs-maven-plugin.version>4.7.3.4</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
@@ -155,6 +155,7 @@
                                     <param>io.github.mivek.parser.*</param>
                                     <param>io.github.mivek.command.*</param>
                                 </targetClasses>
+                                <verbose>true</verbose>
                             </configuration>
                         </execution>
                     </executions>

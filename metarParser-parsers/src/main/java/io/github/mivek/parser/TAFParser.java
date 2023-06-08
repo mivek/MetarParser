@@ -137,7 +137,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
         String cleanedInput = tafCode.replace("\n", " ")   // remove all linebreaks
                 .replaceAll("\\s{2,}", " ");  // remove unnecessary whitespaces
 
-        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|INTER|BECMG|FM|PROB)", "\n$1").split("\n");
+        String[] lines = cleanedInput.replaceAll("\\s(PROB\\d{2}\\sTEMPO|TEMPO|INTER|BECMG|FM(?![A-Z]{2}\\s)|PROB)", "\n$1").split("\n");
         String[][] lineTokens = Arrays.stream(lines).map(this::tokenize).toArray(String[][]::new);
         if (lineTokens.length > 1) {
             // often temperatures are set in the end of the TAF report

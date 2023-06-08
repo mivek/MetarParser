@@ -870,4 +870,89 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertThat(taf.getWeatherConditions(), empty());
         assertThat(taf.getBECMGs().get(0).getWeatherConditions(), hasSize(1));
     }
+
+    @Test
+    void testParseWithStationBeginningWithFM() throws ParseException {
+        String code = """
+            TAF FMMI 082300Z 0900/1006 16006KT 9999 FEW017 BKN020 PROB30
+            TEMPO 0908/0916 4500 RADZ
+            BECMG 0909/0911 10010KT
+            BECMG 0918/0920 16006KT
+            """;
+
+        TAF taf = parser.parse(code);
+
+        assertEquals("FMMI", taf.getStation());
+
+        assertEquals(8, taf.getDay());
+        assertEquals(23, taf.getTime().getHour());
+        assertEquals(0, taf.getTime().getMinute());
+
+        assertEquals(9, taf.getValidity().getStartDay());
+        assertEquals(0, taf.getValidity().getStartHour());
+        assertEquals(10, taf.getValidity().getEndDay());
+        assertEquals(6, taf.getValidity().getEndHour());
+
+        assertEquals(160, taf.getWind().getDirectionDegrees());
+        assertEquals(Messages.getInstance().getString("Converter.SSE"), taf.getWind().getDirection());
+        assertEquals(6, taf.getWind().getSpeed());
+        assertEquals("KT", taf.getWind().getUnit());
+
+        assertEquals(">10km", taf.getVisibility().getMainVisibility());
+
+        assertEquals(2, taf.getClouds().size());
+        assertEquals(CloudQuantity.FEW, taf.getClouds().get(0).getQuantity());
+        assertEquals(1700, taf.getClouds().get(0).getHeight());
+        assertNull(taf.getClouds().get(0).getType());
+        assertEquals(CloudQuantity.BKN, taf.getClouds().get(1).getQuantity());
+        assertEquals(2000, taf.getClouds().get(1).getHeight());
+        assertNull(taf.getClouds().get(1).getType());
+
+        assertEquals(0, taf.getWeatherConditions().size());
+
+        assertNull(taf.getMaxTemperature());
+        assertNull(taf.getMinTemperature());
+
+        assertEquals(1, taf.getTempos().size());
+        TafTrend tempo = taf.getTempos().get(0);
+        assertEquals(0, tempo.getClouds().size());
+        assertEquals(WeatherChangeType.TEMPO, tempo.getType());
+        assertEquals(9, tempo.getValidity().getStartDay());
+        assertEquals(8, tempo.getValidity().getStartHour());
+        assertEquals(9, tempo.getValidity().getEndDay());
+        assertEquals(16, tempo.getValidity().getEndHour());
+        assertEquals("4500m", tempo.getVisibility().getMainVisibility());
+        assertEquals(1, tempo.getWeatherConditions().size());
+        assertEquals(Phenomenon.RAIN, tempo.getWeatherConditions().get(0).getPhenomenons().get(0));
+        assertEquals(Phenomenon.DRIZZLE, tempo.getWeatherConditions().get(0).getPhenomenons().get(1));
+        assertNull((tempo.getWind()));
+
+        TafTrend becmg1 = taf.getBECMGs().get(0);
+        assertEquals(0, becmg1.getClouds().size());
+        assertEquals(WeatherChangeType.BECMG, becmg1.getType());
+        assertEquals(9, becmg1.getValidity().getStartDay());
+        assertEquals(9, becmg1.getValidity().getStartHour());
+        assertEquals(9, becmg1.getValidity().getEndDay());
+        assertEquals(11, becmg1.getValidity().getEndHour());
+        assertNull(becmg1.getVisibility());
+        assertEquals(0, becmg1.getWeatherConditions().size());
+        assertEquals(100, becmg1.getWind().getDirectionDegrees());
+        assertEquals(Messages.getInstance().getString("Converter.E"), becmg1.getWind().getDirection());
+        assertEquals(10, becmg1.getWind().getSpeed());
+        assertEquals("KT", becmg1.getWind().getUnit());
+
+        TafTrend becmg2 = taf.getBECMGs().get(1);
+        assertEquals(0, becmg2.getClouds().size());
+        assertEquals(WeatherChangeType.BECMG, becmg2.getType());
+        assertEquals(9, becmg2.getValidity().getStartDay());
+        assertEquals(18, becmg2.getValidity().getStartHour());
+        assertEquals(9, becmg2.getValidity().getEndDay());
+        assertEquals(20, becmg2.getValidity().getEndHour());
+        assertNull(becmg2.getVisibility());
+        assertEquals(0, becmg2.getWeatherConditions().size());
+        assertEquals(160, becmg2.getWind().getDirectionDegrees());
+        assertEquals(Messages.getInstance().getString("Converter.SSE"), becmg2.getWind().getDirection());
+        assertEquals(6, becmg2.getWind().getSpeed());
+        assertEquals("KT", becmg2.getWind().getUnit());
+    }
 }
