@@ -52,7 +52,7 @@
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
         <archunit-junit5.version>1.0.1</archunit-junit5.version>
         <checkstyle.version>10.12.0</checkstyle.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-lang3.version>3.13.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <junit.version>5.9.3</junit.version>
