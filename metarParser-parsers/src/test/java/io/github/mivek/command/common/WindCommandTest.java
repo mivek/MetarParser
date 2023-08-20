@@ -84,4 +84,14 @@ class WindCommandTest {
         assertTrue(command.execute(m, "VRB08KT"));
         assertEquals(wind1, m.getWind());
     }
+
+    @Test
+    void testParseWindThreeDigitGust() {
+        Wind w = command.parseWind("12017G015KT");
+        assertEquals(Messages.getInstance().getString("Converter.ESE"), w.getDirection());
+        assertEquals(120, w.getDirectionDegrees());
+        assertEquals(17, w.getSpeed());
+        assertEquals(15, w.getGust());
+        assertEquals("KT", w.getUnit());
+    }
 }

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class WindShearCommand implements BaseWindCommand {
     /** Pattern regex for windshear. */
-    private static final Pattern WIND_SHEAR_REGEX = Pattern.compile("^WS(\\d{3})/(\\w{3})(\\d{2})G?(\\d{2})?(KT|MPS|KM/H)");
+    private static final Pattern WIND_SHEAR_REGEX = Pattern.compile("^WS(\\d{3})/(\\w{3})(\\d{2})G?(\\d{2,3})?(KT|MPS|KM/H)");
 
     /**
      * Package private constructor.
