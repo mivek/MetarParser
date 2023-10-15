@@ -48,7 +48,7 @@ jobs:
         uses: JActions/maven-version@v1.2.0
 
       - name: Commit and tag the new version
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Automatic bump after merge"
           file_pattern: pom.xml **/pom.xml

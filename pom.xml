@@ -51,7 +51,7 @@
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
         <archunit-junit5.version>1.1.0</archunit-junit5.version>
-        <checkstyle.version>10.12.2</checkstyle.version>
+        <checkstyle.version>10.12.4</checkstyle.version>
         <commons-lang3.version>3.13.0</commons-lang3.version>
         <hamcrest.version>2.2</hamcrest.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
@@ -59,7 +59,7 @@
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven.gpg.plugin.version>3.1.0</maven.gpg.plugin.version>
-        <maven.javadoc.plugin.version>3.5.0</maven.javadoc.plugin.version>
+        <maven.javadoc.plugin.version>3.6.0</maven.javadoc.plugin.version>
         <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
         <maven.source.plugin.version>3.3.0</maven.source.plugin.version>
@@ -67,9 +67,9 @@
         <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
         <commons-csv.version>1.10.0</commons-csv.version>
         <pitest-junit5-plugin.version>1.2.0</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.14.4</pitest-maven.version>
-        <slf4j-nop.version>2.0.7</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.7.3.5</spotbugs-maven-plugin.version>
+        <pitest-maven.version>1.15.1</pitest-maven.version>
+        <slf4j-nop.version>2.0.9</slf4j-nop.version>
+        <spotbugs-maven-plugin.version>4.7.3.6</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
