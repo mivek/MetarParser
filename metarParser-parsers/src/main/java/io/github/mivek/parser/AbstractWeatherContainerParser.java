@@ -28,7 +28,7 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
   /** Regex for the validity. */
   protected static final Pattern VALIDITY_REGEX = Pattern.compile("^\\d{4}/\\d{4}$");
   /** Pattern regex for the intensity of a phenomenon. */
-  private static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC)");
+  private static final Pattern INTENSITY_REGEX = Pattern.compile("^(-|\\+|VC|RE)");
   /** The remark parser. */
   private final RemarkParser remarkParser;
   /** The common command commonSupplier. */
