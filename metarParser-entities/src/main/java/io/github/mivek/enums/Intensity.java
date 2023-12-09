@@ -15,6 +15,8 @@ public enum Intensity {
     LIGHT("-"),
     /** Heavy intensity. */
     HEAVY("+"),
+    /** Recent. */
+    RECENT("RE"),
     /** In vicinity. */
     IN_VICINITY("VC");
 

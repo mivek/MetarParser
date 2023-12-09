@@ -462,4 +462,17 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(0, m.getWind().getSpeed());
         assertEquals(0, m.getWind().getDirectionDegrees());
     }
+
+    @Test
+    void testParseWithRecentRain() {
+        String code = "LTAE 250250Z VRB02KT 9999 BKN030 BKN080 06/05 Q1005 RESHRA NOSIG RMK RWY21 07004KT 040V100";
+
+        Metar m = parser.parse(code);
+        assertEquals("LTAE", m.getStation());
+        assertEquals(1, m.getWeatherConditions().size());
+        assertEquals(Intensity.RECENT, m.getWeatherConditions().get(0).getIntensity());
+        assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
+        assertEquals(1, m.getWeatherConditions().get(0).getPhenomenons().size());
+        assertEquals(Phenomenon.RAIN, m.getWeatherConditions().get(0).getPhenomenons().get(0));
+    }
 }
