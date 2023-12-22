@@ -12,7 +12,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'adopt'
@@ -29,7 +29,7 @@ jobs:
         run: echo ${{ github.event.number }} > PR_NUMBER.txt
 
       - name: Upload the PR number as an artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: PR_NUMBER
           path: PR_NUMBER.txt
