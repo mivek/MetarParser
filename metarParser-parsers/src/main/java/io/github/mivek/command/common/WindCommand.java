@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public final class WindCommand implements BaseWindCommand {
     /** Pattern regex for wind. */
-    private static final Pattern WIND_REGEX = Pattern.compile("^(VRB|00|[0-3]\\d{2})(\\d{2})G?(\\d{2,3})?(KT|MPS|KM/H)?");
+    private static final Pattern WIND_REGEX = Pattern.compile("^(VRB|000|[0-3]\\d{2})(\\d{2})G?(\\d{2,3})?(KT|MPS|KM/H)?");
 
     /**
      * Package private constructor.
