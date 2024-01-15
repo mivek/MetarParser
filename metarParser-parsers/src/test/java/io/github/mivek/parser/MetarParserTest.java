@@ -454,7 +454,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
 
     @Test
     void testParsWithLowWind() {
-        String code = "KATW 022045Z 0000KT 10SM SCT120 00/M08 A2996";
+        String code = "KATW 022045Z 00000KT 10SM SCT120 00/M08 A2996";
 
         Metar m = parser.parse(code);
         assertEquals("KATW", m.getStation());
