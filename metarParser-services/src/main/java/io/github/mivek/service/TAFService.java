@@ -48,6 +48,9 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
         HttpResponse<Stream<String>> response = HttpClient.newBuilder()
                 .build()
                 .send(request, HttpResponse.BodyHandlers.ofLines());
+
+        if (response.statusCode() != 200) return null;
+
         StringBuilder sb = new StringBuilder();
         // Throw the first line since it is not part of the TAF event.
         response.body().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));

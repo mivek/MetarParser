@@ -45,6 +45,9 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
         HttpResponse<Stream<String>> response = HttpClient.newBuilder()
                 .build()
                 .send(request, HttpResponse.BodyHandlers.ofLines());
+
+        if (response.statusCode() != 200) return null;
+
         return getParser().parse(response.body().skip(1).collect(Collectors.joining()));
     }
 
