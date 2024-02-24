@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Disabled
 abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
     protected abstract AbstractWeatherCodeService<T> getService();
 
@@ -32,4 +31,9 @@ abstract class AbstractWeatherCodeServiceTest<T extends AbstractWeatherCode> {
         assertThat(res.getAirport().getIcao(), is("LFPG"));
     }
 
+    @Test
+    void testRetrieveFromAirportNotFound() {
+        ParseException e = assertThrows(ParseException.class, () -> getService().retrieveFromAirport("lftm"));
+        assertEquals(ErrorCodes.ERROR_CODE_INVALID_ICAO, e.getErrorCode());
+    }
 }

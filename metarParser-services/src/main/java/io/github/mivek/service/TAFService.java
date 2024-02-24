@@ -7,8 +7,6 @@ import io.github.mivek.parser.TAFParser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,14 +38,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
 
     @Override
     public TAF retrieveFromAirport(final String icao) throws IOException, ParseException, URISyntaxException, InterruptedException {
-        checkIcao(icao);
-        String website = NOAA_TAF_URL + icao.toUpperCase()
-                + ".TXT";
-        HttpRequest request = buildRequest(website);
-
-        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofLines());
+        HttpResponse<Stream<String>> response = getResponse(icao, NOAA_TAF_URL);
         StringBuilder sb = new StringBuilder();
         // Throw the first line since it is not part of the TAF event.
         response.body().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));

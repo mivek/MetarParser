@@ -4,10 +4,15 @@ import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 import io.github.mivek.parser.AbstractWeatherCodeParser;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.stream.Stream;
 
 /**
  * Abstract service.
@@ -62,5 +67,30 @@ public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> 
                 .GET()
                 .version(HttpClient.Version.HTTP_2)
                 .build();
+    }
+
+    /**
+     * Builds the request and return the HTTP response.
+     * @param icao The ICAO code of the station.
+     * @param noaaUrl The URL of the NOAA
+     * @return the HTTP response
+     * @throws ParseException When the icao is invalid
+     * @throws URISyntaxException When the URI is invalid
+     * @throws IOException When network issue
+     * @throws InterruptedException When network issue
+     */
+    protected HttpResponse<Stream<String>> getResponse(final String icao, final String noaaUrl) throws ParseException, IOException, InterruptedException, URISyntaxException {
+        checkIcao(icao);
+        String website = noaaUrl + icao.toUpperCase()
+                + ".TXT";
+        HttpRequest request = buildRequest(website);
+
+        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
+                .build()
+                .send(request, HttpResponse.BodyHandlers.ofLines());
+        if (response.statusCode() != HttpURLConnection.HTTP_OK) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
+        }
+        return response;
     }
 }

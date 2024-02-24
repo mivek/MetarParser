@@ -6,8 +6,6 @@ import io.github.mivek.parser.MetarParser;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,14 +35,7 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
 
     @Override
     public Metar retrieveFromAirport(final String icao) throws ParseException, IOException, URISyntaxException, InterruptedException {
-        checkIcao(icao);
-        String website = NOAA_METAR_URL + icao.toUpperCase()
-                + ".TXT";
-        HttpRequest request = buildRequest(website);
-
-        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofLines());
+        HttpResponse<Stream<String>> response = getResponse(icao, NOAA_METAR_URL);
         return getParser().parse(response.body().skip(1).collect(Collectors.joining()));
     }
 
