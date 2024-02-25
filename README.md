@@ -260,9 +260,12 @@ The default locale is english.
 The following locales are also available in the project but may not be fully translated:
 - French
 - German
-- Polish
 - Italian
+- Polish
+- Russian
 - simplified chinese
+- Spanish
+- Turkish
 
 #### Change the locale and contributing
 
