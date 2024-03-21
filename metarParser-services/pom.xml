@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>metarParser-services</artifactId>
+    <artifactId>metarParser-services-wisebyte</artifactId>
 
     <properties>
         <jacoco.coverage.instruction.minimum>0.94</jacoco.coverage.instruction.minimum>
