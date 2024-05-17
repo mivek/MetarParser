@@ -20,7 +20,7 @@ public final class TrendValididyParser extends AbstractTAFTrendParser<Validity> 
    * @param remarkParser The remark Parser instance.
    * @param tafCommandSupplier The taf command supplier.
    */
-  TrendValididyParser(
+  private TrendValididyParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);

@@ -41,7 +41,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
      * @param metarCommandSupplier the metar command supplier.
      * @param airportSupplier            the airport supplier
      */
-    MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
+    private MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
             final MetarCommandSupplier metarCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
         supplier = Objects.requireNonNull(metarCommandSupplier);

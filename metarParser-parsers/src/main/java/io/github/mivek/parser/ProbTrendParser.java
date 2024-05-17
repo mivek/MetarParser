@@ -20,7 +20,7 @@ public final class ProbTrendParser extends AbstractTAFTrendParser<Validity> {
    * @param remarkParser The instance of RemarkParser.
    * @param tafCommandSupplier The taf command supplier.
    */
-  ProbTrendParser(
+  private ProbTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);

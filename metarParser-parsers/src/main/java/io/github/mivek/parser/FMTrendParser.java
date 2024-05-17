@@ -20,7 +20,7 @@ public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidit
    * @param remarkParser The remarkParser
    * @param tafCommandSupplier The taf command supplier
    */
-  FMTrendParser(
+  private FMTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);
