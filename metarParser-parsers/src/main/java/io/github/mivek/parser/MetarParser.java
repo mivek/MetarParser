@@ -5,6 +5,7 @@ import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarCommandSupplier;
 import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.exception.ParseException;
 import io.github.mivek.factory.FactoryProvider;
 import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
@@ -63,7 +64,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
      * @return a decoded metar object.
      */
     @Override
-    public Metar parse(final String code) {
+    public Metar parse(final String code) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = tokenize(code);
         Airport airport = getAirportSupplier().get(metarTab[0]);
@@ -99,7 +100,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
      * @param metar the metar
      * @param input the string to parse.
      */
-    private void executeCommand(final Metar metar, final String input) {
+    private void executeCommand(final Metar metar, final String input) throws ParseException {
         Command command = supplier.get(input);
         if (command != null) {
             command.execute(metar, input);

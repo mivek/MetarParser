@@ -1,5 +1,6 @@
 package io.github.mivek.command.metar;
 
+import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Metar;
 
 /**
@@ -14,8 +15,9 @@ public interface Command {
      *
      * @param metar the metar object to handle.
      * @param part  the string to parse.
+     * @throws ParseException when runway information cannot be parsed.
      */
-    void execute(Metar metar, String part);
+    void execute(Metar metar, String part) throws ParseException;
 
     /**
      * @param input the input string to test.

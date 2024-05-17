@@ -4,6 +4,8 @@ import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
@@ -83,33 +85,67 @@ public final class RunwayCommand implements Command {
     }
 
     @Override
-    public void execute(final Metar metar, final String part) {
-        RunwayInfo ri = new RunwayInfo();
-        String[] matches;
-
-        if (Regex.find(RUNWAY_DEPOSIT_REGEX, part)) {
-            matches = Regex.pregMatch(RUNWAY_DEPOSIT_REGEX, part);
-            ri.setName(matches[1]);
-            ri.setDepositType(DEPOSIT_TYPE_MAP.get(matches[2]));
-            ri.setCoverage(DEPOSIT_COVERAGE_MAP.get(matches[3]));
-            ri.setThickness(parseDepositThickness(matches[4]));
-            ri.setBrakingCapacity(parseDepositBrakingCapacity(matches[5]));
-            metar.addRunwayInfo(ri);
-        } else if (Regex.find(RUNWAY_REGEX, part)) {
-            matches = Regex.pregMatch(RUNWAY_REGEX, part);
-            ri.setName(matches[1]);
-            ri.setIndicator(RunwayInfoIndicator.get(matches[2]));
-            ri.setMinRange(Integer.parseInt(matches[3]));
-            ri.setTrend(RunwayInfoTrend.get(matches[4]));
-            metar.addRunwayInfo(ri);
-        } else if (Regex.find(RUNWAY_MAX_RANGE_REGEX, part)) {
-            matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, part);
-            ri.setName(matches[1]);
-            ri.setMinRange(Integer.parseInt(matches[2]));
-            ri.setMaxRange(Integer.parseInt(matches[3]));
-            ri.setTrend(RunwayInfoTrend.get(matches[4]));
-            metar.addRunwayInfo(ri);
+    public void execute(final Metar metar, final String part) throws ParseException {
+        try {
+            if (Regex.find(RUNWAY_DEPOSIT_REGEX, part)) {
+                parseRunwayDeposit(metar, part);
+            } else if (Regex.find(RUNWAY_REGEX, part)) {
+                parseRunway(metar, part);
+            } else if (Regex.find(RUNWAY_MAX_RANGE_REGEX, part)) {
+                parseRunwayMaxRange(metar, part);
+            }
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INCOMPLETE_RUNWAY_INFORMATION);
         }
+    }
+
+    /**
+     * Parses a runway token with its maximum visual range provided.
+     * @param metar The METAR object to update
+     * @param part The part of the message to parse
+     */
+    private void parseRunwayMaxRange(final Metar metar, final String part) {
+        String[] matches;
+        RunwayInfo ri = new RunwayInfo();
+        matches = Regex.pregMatch(RUNWAY_MAX_RANGE_REGEX, part);
+        ri.setName(matches[1]);
+        ri.setMinRange(Integer.parseInt(matches[2]));
+        ri.setMaxRange(Integer.parseInt(matches[3]));
+        ri.setTrend(RunwayInfoTrend.get(matches[4]));
+        metar.addRunwayInfo(ri);
+    }
+
+    /**
+     * Parses a runway token.
+     * @param metar The METAR object to update
+     * @param part The part of the message to parse
+     */
+    private void parseRunway(final Metar metar, final String part) {
+        String[] matches;
+        RunwayInfo ri = new RunwayInfo();
+        matches = Regex.pregMatch(RUNWAY_REGEX, part);
+        ri.setName(matches[1]);
+        ri.setIndicator(RunwayInfoIndicator.get(matches[2]));
+        ri.setMinRange(Integer.parseInt(matches[3]));
+        ri.setTrend(RunwayInfoTrend.get(matches[4]));
+        metar.addRunwayInfo(ri);
+    }
+
+    /**
+     * Parses a runway token with its deposit provided.
+     * @param metar The METAR object to update
+     * @param part The part of the message to parse
+     */
+    private void parseRunwayDeposit(final Metar metar, final String part) {
+        String[] matches;
+        RunwayInfo ri = new RunwayInfo();
+        matches = Regex.pregMatch(RUNWAY_DEPOSIT_REGEX, part);
+        ri.setName(matches[1]);
+        ri.setDepositType(DEPOSIT_TYPE_MAP.get(matches[2]));
+        ri.setCoverage(DEPOSIT_COVERAGE_MAP.get(matches[3]));
+        ri.setThickness(parseDepositThickness(matches[4]));
+        ri.setBrakingCapacity(parseDepositBrakingCapacity(matches[5]));
+        metar.addRunwayInfo(ri);
     }
 
     /**

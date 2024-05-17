@@ -1,20 +1,19 @@
 package io.github.mivek.command.metar;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.RunwayInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author mivek
@@ -29,7 +28,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testExecuteSimple() {
+    void testExecuteSimple() throws ParseException {
         String riString = "R26/0600U";
         Metar m = new Metar();
         command.execute(m, riString);
@@ -43,7 +42,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunWaysComplex() {
+    void testParseRunWaysComplex() throws ParseException {
         String riString = "R26L/0550V700U";
         Metar m = new Metar();
 
@@ -58,7 +57,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayVisualRangeFeetVariable() {
+    void testParseRunwayVisualRangeFeetVariable() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R01L/0600V1000FT");
@@ -71,7 +70,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayVisualRangeFeetSimple() {
+    void testParseRunwayVisualRangeFeetSimple() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R01L/0800FT");
@@ -83,7 +82,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunWayNull() {
+    void testParseRunWayNull() throws ParseException {
         String riString = "R26R/AZEZFDFS";
 
         Metar m = new Metar();
@@ -93,7 +92,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayDeposit() {
+    void testParseRunwayDeposit() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R05/629294");
@@ -108,7 +107,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayDepositWithNotReportedType() {
+    void testParseRunwayDepositWithNotReportedType() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R05//29294");
@@ -123,7 +122,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayDepositWithInvalidDeposit() {
+    void testParseRunwayDepositWithInvalidDeposit() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R05/6292/4");
@@ -131,7 +130,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayWithLessThanIndicatorAndUnit() {
+    void testParseRunwayWithLessThanIndicatorAndUnit() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R01L/M0600FT");
@@ -143,7 +142,7 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayWithGreaterThanIndicator() {
+    void testParseRunwayWithGreaterThanIndicator() throws ParseException {
         Metar m = new Metar();
 
         command.execute(m, "R01L/P0600FT");
@@ -152,5 +151,14 @@ class RunwayCommandTest {
         assertEquals("01L", ri.getName());
         assertEquals(RunwayInfoIndicator.MORE_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
+    }
+
+    @Test
+    void testParseRunwayWithIncompleteInfo() {
+        Metar m = new Metar();
+        ParseException e = assertThrows(ParseException.class, () -> {
+            command.execute(m, "R16///////");
+        });
+        assertEquals(Messages.getInstance().getString("ErrorCode.IncompleteRunwayInformation"), e.getErrorCode().getMessage());
     }
 }
