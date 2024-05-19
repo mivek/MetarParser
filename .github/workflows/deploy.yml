@@ -18,10 +18,10 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
           cache: 'maven'
-          server-username: SONATYPE_USERNAME
-          server-password: SONATYPE_PASSWORD
+          server-username: ${{ secrets.SONATYPE_USERNAME }}
+          server-password: ${{ secrets.SONATYPE_PASSWORD }}
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Publish to Apache Maven Central
         run: mvn clean -DskipTests deploy --settings .settings.xml -P release,ossrh
