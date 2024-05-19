@@ -7,6 +7,10 @@
             <username>${env.SONATYPE_USERNAME}</username>
             <password>${env.SONATYPE_PASSWORD}</password>
         </server>
+        <server>
+            <id>gpg.passphrase</id>
+            <passphrase>${env.MAVEN_GPG_PASSPHRASE}</passphrase>
+        </server>
     </servers>
 
     <profiles>
@@ -15,9 +19,6 @@
         <activation>
           <activeByDefault>false</activeByDefault>
         </activation>
-        <properties>
-          <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
-        </properties>
       </profile>
     </profiles>
 </settings>
