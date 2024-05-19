@@ -11,7 +11,9 @@ public enum ErrorCodes {
     /** Error for an invalid message. */
     ERROR_CODE_INVALID_MESSAGE(2, Messages.getInstance().getString("ErrorCode.InvalidMessage")),
     /** Error code for when the airport is not found. */
-    ERROR_CODE_AIRPORT_NOT_FOUND(3, Messages.getInstance().getString("ErrorCode.AirportNotFound"));
+    ERROR_CODE_AIRPORT_NOT_FOUND(3, Messages.getInstance().getString("ErrorCode.AirportNotFound")),
+    /** Error code when runway information is incomplete. */
+    ERROR_CODE_INCOMPLETE_RUNWAY_INFORMATION(4, Messages.getInstance().getString("ErrorCode.IncompleteRunwayInformation"));
     /** The code of the error. */
     private final int code;
     /** The message of the error. */

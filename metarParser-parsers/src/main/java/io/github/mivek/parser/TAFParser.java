@@ -47,7 +47,7 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
      * @param airportSupplier       the airport supplier.
      * @param tafCommandSupplier    the taf command supplier.
      */
-    TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier, final TAFCommandSupplier tafCommandSupplier) {
+    private TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier, final TAFCommandSupplier tafCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
         supplier = tafCommandSupplier;
     }
