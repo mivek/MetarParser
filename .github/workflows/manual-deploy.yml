@@ -11,7 +11,7 @@ jobs:
   manual_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/@checkout@v4
         with:
           ref: ${{ github.event.inputs.tag }}
 
@@ -38,7 +38,7 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Upload jars file
-        uses: actions/upload-artifact@v4.4.3
+        uses: actions/upload-artifact@v4.5.0
         with:
           name: jars
           path: ./target/**/*.jar
@@ -48,7 +48,7 @@ jobs:
     needs: manual_deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/@checkout@v4
         with:
           ref: ${{ github.event.inputs.tag }}
 
