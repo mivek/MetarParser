@@ -1,12 +1,13 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.MetarTrend;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Metar class.
@@ -14,6 +15,8 @@ import java.util.Objects;
  * @author mivek
  */
 public class Metar extends AbstractWeatherCode {
+
+    public static final Double SM_TO_KM = 1.609344;
     /** Temperature. */
     private int temperature;
     /** Dew point. */
@@ -124,6 +127,13 @@ public class Metar extends AbstractWeatherCode {
         return trends;
     }
 
+    /**
+     * @return the US weather category.
+     */
+    public <T extends WeatherCategory> T getWeatherCategory(Class<T> weatherCategory) {
+        return (T) computeWeatherCategory(weatherCategory.getEnumConstants());
+    }
+
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
@@ -136,5 +146,46 @@ public class Metar extends AbstractWeatherCode {
                 append(Messages.getInstance().getString("ToString.runway.info"), runways.toString()).
                 append(Messages.getInstance().getString("ToString.trends"), trends.toString()).
                 toString();
+    }
+
+    private WeatherCategory computeWeatherCategory(WeatherCategory[] categories) {
+        final Double visibility = parseVisibilityInKM();
+        if (visibility == null) {
+            return null;
+        }
+
+        final int ceiling = computeCeiling();
+
+        return Arrays.stream(categories)
+                .filter(cat -> cat.isCriteriaMet(visibility, ceiling))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Double parseVisibilityInKM() {
+            final Matcher matcher = Pattern.compile("(\\d+)([a-z,A-Z]+)")
+                    .matcher(getVisibility().getMainVisibility().replace(">", ""));
+            if (!matcher.find()) {
+                return null;
+            }
+
+            final int value = Integer.parseInt(matcher.group(1));
+            final String unit = matcher.group(2).toUpperCase();
+
+            switch (unit) {
+                case "SM" -> { return value * SM_TO_KM; }
+                case "KM" -> { return (double) value; }
+                case "M" -> { return value / 1000.0; }
+                default -> { return null; }
+            }
+    }
+
+    private Integer computeCeiling() {
+        return getClouds().stream()
+                .sorted(Comparator.comparing(Cloud::getHeight))
+                .filter(c -> CloudQuantity.BKN.equals(c.getQuantity()) || CloudQuantity.OVC.equals(c.getQuantity()))
+                .findFirst()
+                .map(c -> c.getHeight() - getAirport().getAltitude())
+                .orElse(Integer.MAX_VALUE);
     }
 }
