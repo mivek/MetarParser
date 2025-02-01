@@ -3,7 +3,7 @@ package io.github.mivek.model;
 import java.util.function.BiPredicate;
 
 /**
- * Enum of GAFOR weather categories (see https://www.dwd.de/SharedDocs/broschueren/DE/luftfahrt/gafor.pdf?__blob=publicationFile&v=7).
+ * Enum of GAFOR weather categories (see https://www.dwd.de/SharedDocs/broschueren/DE/luftfahrt/gafor.pdf?__blob=publicationFile&amp;v=7).
  */
 public enum GAFORWeatherCategory implements WeatherCategory {
 
