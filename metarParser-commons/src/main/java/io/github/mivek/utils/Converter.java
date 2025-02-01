@@ -3,6 +3,8 @@ package io.github.mivek.utils;
 import io.github.mivek.internationalization.Messages;
 
 import java.time.LocalTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class is used to convert data.
@@ -10,11 +12,17 @@ import java.time.LocalTime;
  * @author mivek
  */
 public final class Converter {
+
     /**
      * Arrays of cardinal directions.
      */
     private static final String[] DIRECTIONS = {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE",
             "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"};
+
+    /**
+     * Statue miles to kilometers ratio.
+     **/
+    private static final Double SM_TO_KM = 1.609344;
 
     /**
      * Private constructor.
@@ -108,5 +116,40 @@ public final class Converter {
     public static float convertTemperature(final String sign, final String temperature) {
         float temp = Float.parseFloat(temperature) / 10;
         return "0".equals(sign) ? temp : -1 * temp;
+    }
+
+    /**
+     * Converts the visibility to a value in km.
+     *
+     * @param visibility The main visibility of a Visibility object
+     * @return The visibility in km as a double
+     */
+    public static Double convertVisibilityToKM(final String visibility) {
+        final Matcher matcher = Pattern.compile("(\\d+)([a-z,A-Z]+)").matcher(visibility.replace(">", ""));
+        if (!matcher.find()) {
+            return null;
+        }
+
+        final int value = Integer.parseInt(matcher.group(1));
+        final String unit = matcher.group(2).toUpperCase();
+
+        final Double result;
+        switch (unit) {
+            case "SM" ->  result = value * SM_TO_KM;
+            case "KM" -> result = (double) value;
+            case "M" -> result = value / 1000.0;
+            default -> result = null;
+        }
+
+        return result;
+    }
+
+    /**
+     * Converts kilometers to statue miles.
+     * @param km kilometers
+     * @return value in statue miles
+     */
+    public static Double kmToSM(final Double km) {
+        return km / SM_TO_KM;
     }
 }
