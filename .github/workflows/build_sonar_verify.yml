@@ -1,4 +1,4 @@
-# This action launches an analysis on sonarcloud only for PR made from the repository and on master branch.
+
 name: Sonar verify
 on:
   workflow_run:

@@ -1,8 +1,8 @@
-name: SonarCloud
+name: CI - main
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   build:
     name: Build and analyze

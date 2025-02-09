@@ -22,7 +22,7 @@
 
     <url>https://github.com/mivek/MetarParser</url>
     <scm>
-        <url>https://github.com/mivek/MetarParser/tree/master</url>
+        <url>https://github.com/mivek/MetarParser/tree/main</url>
         <connection>scm:git:git@github.com:mivek/MetarParser.git</connection>
         <developerConnection>scm:git:git@github.com:mivek/MetarParser.git</developerConnection>
         <tag>HEAD</tag>
