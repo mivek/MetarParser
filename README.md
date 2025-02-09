@@ -1,7 +1,7 @@
 [![Maven verify](https://github.com/mivek/MetarParser/actions/workflows/maven-verify.yml/badge.svg)](https://github.com/mivek/MetarParser/actions/workflows/maven-verify.yml)
 [![Sonar verify](https://github.com/mivek/MetarParser/actions/workflows/build_sonar_verify.yml/badge.svg)](https://github.com/mivek/MetarParser/actions/workflows/build_sonar_verify.yml)[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.github.mivek%3AmetarParser&metric=coverage)](https://sonarcloud.io/dashboard?id=io.github.mivek%3AmetarParser)
-[![GitHub license](https://img.shields.io/github/license/mivek/MetarParser.svg)](https://github.com/mivek/MetarParser/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mivek/MetarParser.svg)](https://github.com/mivek/MetarParser/blob/main/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mivek/metarParser.svg)](https://search.maven.org/artifact/io.github.mivek/metarParser/)
 
 ![](jetbrains_small.png)

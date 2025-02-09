@@ -2,11 +2,12 @@ name: Maven verify
 
 on:
   pull_request:
-    types: [ opened, synchronize, reopened ]
+
 jobs:
   verify:
     runs-on: ubuntu-latest
-
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,3 +34,21 @@ jobs:
         with:
           name: PR_NUMBER
           path: PR_NUMBER.txt
+      - uses: marocchino/sticky-pull-request-comment@v2.9.1
+        with:
+          message: |
+            Please check on sonarcloud <https://sonarcloud.io/project/pull_requests_list?id=io.github.mivek%3AmetarParser> that the PR does not add any issue.
+  generate-docs:
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Generate the javadoc
+        run: mvn --batch-mode javadoc:javadoc
