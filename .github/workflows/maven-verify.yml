@@ -6,7 +6,8 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-
+    permissions:
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,6 +34,10 @@ jobs:
         with:
           name: PR_NUMBER
           path: PR_NUMBER.txt
+      - uses: marocchino/sticky-pull-request-comment@v2.9.1
+        with:
+          message: |
+            Please check on sonarcloud <https://sonarcloud.io/project/pull_requests_list?id=io.github.mivek%3AmetarParser> that the PR does not add any issue.
   generate-docs:
     runs-on: ubuntu-latest
     needs: verify
