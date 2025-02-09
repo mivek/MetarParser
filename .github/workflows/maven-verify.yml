@@ -2,7 +2,7 @@ name: Maven verify
 
 on:
   pull_request:
-    types: [ opened, synchronize, reopened ]
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -33,3 +33,17 @@ jobs:
         with:
           name: PR_NUMBER
           path: PR_NUMBER.txt
+  generate-docs:
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Generate the javadoc
+        run: mvn --batch-mode javadoc:javadoc
