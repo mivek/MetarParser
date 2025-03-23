@@ -49,7 +49,7 @@ class MetarTest extends AbstractWeatherContainerTest<Metar>{
         metar.addCloud(cloudMid);
         metar.addCloud(cloudHigh);
 
-        FAAWeatherCategory result = metar.getWeatherCategory(WeatherCategory.FAA);
+        FAAWeatherCategory result = metar.getWeatherCategory(FAAWeatherCategory.class);
 
         assertThat(result, is(expected));
     }
@@ -65,7 +65,7 @@ class MetarTest extends AbstractWeatherContainerTest<Metar>{
         metar.setAirport(airport);
         metar.setVisibility(visibility);
 
-        FAAWeatherCategory result = metar.getWeatherCategory(WeatherCategory.FAA);
+        FAAWeatherCategory result = metar.getWeatherCategory(FAAWeatherCategory.class);
 
         assertThat(result, is(expected));
     }
@@ -93,7 +93,7 @@ class MetarTest extends AbstractWeatherContainerTest<Metar>{
         metar.addCloud(cloudMid);
         metar.addCloud(cloudHigh);
 
-        FAAWeatherCategory result = metar.getWeatherCategory(WeatherCategory.FAA);
+        FAAWeatherCategory result = metar.getWeatherCategory(FAAWeatherCategory.class);
 
         assertThat(result, is(expected));
     }
