@@ -148,6 +148,12 @@ public class Metar extends AbstractWeatherCode {
                 toString();
     }
 
+    /**
+     * Computes the weather category using ceiling and visibility.
+     *
+     * @param categories Array of possible weather categories
+     * @return Actual weather category
+     */
     private WeatherCategory computeWeatherCategory(WeatherCategory[] categories) {
         final Double visibility = parseVisibilityInKM();
         if (visibility == null) {
@@ -162,6 +168,11 @@ public class Metar extends AbstractWeatherCode {
                 .orElse(null);
     }
 
+    /**
+     * Parses visibility value to kilometers.
+     *
+     * @return Visibility in kilometers
+     */
     private Double parseVisibilityInKM() {
             final Matcher matcher = Pattern.compile("(\\d+)([a-z,A-Z]+)")
                     .matcher(getVisibility().getMainVisibility().replace(">", ""));
@@ -180,6 +191,11 @@ public class Metar extends AbstractWeatherCode {
             }
     }
 
+    /**
+     * Gets lowest cloud layer that is broken or overcast.
+     *
+     * @return ceiling
+     */
     private Integer computeCeiling() {
         return getClouds().stream()
                 .sorted(Comparator.comparing(Cloud::getHeight))
