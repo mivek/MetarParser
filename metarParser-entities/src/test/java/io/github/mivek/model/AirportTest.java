@@ -3,20 +3,19 @@ package io.github.mivek.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AirportTest {
-    private Airport sut;
+    private Airport airport;
 
     @BeforeEach
     void init() {
-        sut = new Airport();
+        airport = new Airport();
     }
 
     @Test
     void testEqual() {
-        sut.setIcao("111");
+        airport.setIcao("111");
 
         Airport other1 = new Airport();
         other1.setIcao("111");
@@ -24,10 +23,10 @@ class AirportTest {
         Airport other2 = new Airport();
         other2.setIcao("498");
 
-        assertEquals(sut, other1);
-        assertNotEquals(sut, other2);
-        assertNotEquals(null, sut);
-        assertNotEquals(sut, new Object());
+        assertEquals(airport, other1);
+        assertNotEquals(airport, other2);
+        assertNotNull(airport);
+        assertNotEquals(new Object(), airport);
     }
 
     @Test
@@ -40,22 +39,22 @@ class AirportTest {
         int altitude = 51;
         double latitude = 51.4706;
         double longitude = -0.461941;
-        sut = new Airport();
-        sut.setCity(city);
-        sut.setTimezone(timezone);
-        sut.setIcao(icao);
-        sut.setIata(iata);
-        sut.setName(name);
-        sut.setAltitude(altitude);
-        sut.setLatitude(latitude);
-        sut.setLongitude(longitude);
-        assertEquals(city, sut.getCity());
-        assertEquals(timezone, sut.getTimezone());
-        assertEquals(icao, sut.getIcao());
-        assertEquals(iata, sut.getIata());
-        assertEquals(name, sut.getName());
-        assertEquals(latitude, sut.getLatitude(), 0);
-        assertEquals(longitude, sut.getLongitude(), 0);
-        assertEquals(altitude, sut.getAltitude());
+        airport = new Airport();
+        airport.setCity(city);
+        airport.setTimezone(timezone);
+        airport.setIcao(icao);
+        airport.setIata(iata);
+        airport.setName(name);
+        airport.setAltitude(altitude);
+        airport.setLatitude(latitude);
+        airport.setLongitude(longitude);
+        assertEquals(city, airport.getCity());
+        assertEquals(timezone, airport.getTimezone());
+        assertEquals(icao, airport.getIcao());
+        assertEquals(iata, airport.getIata());
+        assertEquals(name, airport.getName());
+        assertEquals(latitude, airport.getLatitude(), 0);
+        assertEquals(longitude, airport.getLongitude(), 0);
+        assertEquals(altitude, airport.getAltitude());
     }
 }
