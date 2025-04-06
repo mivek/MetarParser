@@ -72,6 +72,7 @@ public final class WeatherCategoryService {
      */
     private Integer computeCeiling(final List<Cloud> clouds) {
         return clouds.stream()
+                .filter(c -> c.getHeight() != null)
                 .sorted(Comparator.comparing(Cloud::getHeight))
                 .filter(c -> CloudQuantity.BKN.equals(c.getQuantity()) || CloudQuantity.OVC.equals(c.getQuantity()))
                 .findFirst()
