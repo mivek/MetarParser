@@ -8,7 +8,7 @@
       "@semantic-release/exec",
       {
         "prepareCmd": "mvn versions:set -DnewVersion=${nextRelease.version} -DprocessAllModules=true && mvn versions:commit",
-        "publishCmd": "mvn deploy -DskipTests"
+        "publishCmd": "mvn deploy -DskipTests -Prelease"
       }
     ],
     "@semantic-release/git",
