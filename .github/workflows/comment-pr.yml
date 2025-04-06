@@ -1,0 +1,16 @@
+name: "Comment Pull requests"
+
+permissions:
+  pull-requests: write
+
+on:
+  pull_request_target:
+
+jobs:
+  sonarr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Please check on sonarcloud <https://sonarcloud.io/project/pull_requests_list?id=io.github.mivek%3AmetarParser> that the PR does not add any issue.
