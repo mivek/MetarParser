@@ -67,7 +67,7 @@
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <commons-csv.version>1.14.0</commons-csv.version>
         <pitest-junit5-plugin.version>1.2.2</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.19.0</pitest-maven.version>
+        <pitest-maven.version>1.19.5</pitest-maven.version>
         <slf4j-nop.version>2.0.17</slf4j-nop.version>
         <spotbugs-maven-plugin.version>4.9.3.0</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
