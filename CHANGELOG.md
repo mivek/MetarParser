@@ -1,3 +1,10 @@
+# [2.18.0](https://github.com/mivek/MetarParser/compare/v2.17.2...v2.18.0) (2025-06-12)
+
+
+### Features
+
+* improve performance in AirportSupplier by resolving the provider once in the constructor ([97374b4](https://github.com/mivek/MetarParser/commit/97374b411905efa9f47aac26e17627fc8e79d340))
+
 ## [2.17.2](https://github.com/mivek/MetarParser/compare/v2.17.1...v2.17.2) (2025-04-06)
 
 
