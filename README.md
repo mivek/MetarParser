@@ -4,8 +4,6 @@
 [![GitHub license](https://img.shields.io/github/license/mivek/MetarParser.svg)](https://github.com/mivek/MetarParser/blob/main/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mivek/metarParser.svg)](https://search.maven.org/artifact/io.github.mivek/metarParser/)
 
-![](jetbrains_small.png)
-
 # MetarParser
 
 This java lib provides a Metar and TAF decoder.
@@ -277,4 +275,3 @@ Messages.getInstance().setLocale(Locale.FRENCH); // Changes the locale to french
 
 If you are willing to add a new locale or contribute to the project please see [Contributing.md file](CONTRIBUTING.md).
 
-[Jetbrains](https://www.jetbrains.com/?from=metarParser) open source project.
