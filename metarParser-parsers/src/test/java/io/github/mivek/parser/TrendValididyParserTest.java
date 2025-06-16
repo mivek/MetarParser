@@ -1,13 +1,13 @@
 package io.github.mivek.parser;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
-
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.model.trend.TafTrend;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Jean-Kevin KPADEY
@@ -18,7 +18,7 @@ class TrendValididyParserTest {
   void testInvalidTrend() {
     String[] code  = {"TEMPO", "1420/1423", "4000", "BR", "BKN004", "PROB40"};
 
-    TrendValididyParser parser = TrendValididyParser.getInstance();
+    TrendValididyParser parser = new TrendValididyParser();
 
     assertThrows(IllegalArgumentException.class, () -> parser.parse(code));
   }
@@ -27,7 +27,7 @@ class TrendValididyParserTest {
   void testParseTrend() {
     String[] code  = {"BECMG", "1420/1423", "4000", "BR", "BKN004"};
 
-    TrendValididyParser parser = TrendValididyParser.getInstance();
+    TrendValididyParser parser = new TrendValididyParser();
     TafTrend trend = parser.parse(code);
     assertNotNull(trend);
     assertEquals(14, trend.getValidity().getStartDay());
@@ -42,5 +42,11 @@ class TrendValididyParserTest {
     assertEquals(CloudQuantity.BKN, trend.getClouds().get(0).getQuantity());
     assertEquals(400, trend.getClouds().get(0).getHeight());
   }
+
+  @Test
+    void testGetInstance() {
+        assertNotNull(TrendValididyParser.getInstance());
+        assertInstanceOf(TrendValididyParser.class, TrendValididyParser.getInstance());
+    }
 
 }

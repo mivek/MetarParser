@@ -16,7 +16,7 @@ class ProbTrendParserTest {
   @Test
   void testParseWithTempoWithoutPROB() {
     String[] code = {"TEMPO", "1707/1710", "2000", "BR", "OVC002"};
-    TafProbTrend trend = ProbTrendParser.getInstance().parse(code);
+    TafProbTrend trend = new ProbTrendParser().parse(code);
 
     assertNotNull(trend);
     assertEquals(WeatherChangeType.TEMPO, trend.getType());
@@ -33,7 +33,7 @@ class ProbTrendParserTest {
   @Test
   void testParseWithTempoWithProb() {
     String[] code = {"PROB30", "TEMPO", "1623/1705", "BKN003" };
-    TafProbTrend trend = ProbTrendParser.getInstance().parse(code);
+    TafProbTrend trend = new ProbTrendParser().parse(code);
     assertNotNull(trend);
     assertEquals(WeatherChangeType.TEMPO, trend.getType());
     assertEquals(30, trend.getProbability());
@@ -47,7 +47,7 @@ class ProbTrendParserTest {
   @Test
   void testParseWithProb() {
     String[] code = {"PROB30", "1623/1705", "BKN003" };
-    TafProbTrend trend = ProbTrendParser.getInstance().parse(code);
+    TafProbTrend trend = new ProbTrendParser().parse(code);
     assertNotNull(trend);
     assertEquals(WeatherChangeType.PROB, trend.getType());
     assertEquals(30, trend.getProbability());
@@ -56,5 +56,11 @@ class ProbTrendParserTest {
     assertEquals(17, trend.getValidity().getEndDay());
     assertEquals(5, trend.getValidity().getEndHour());
     MatcherAssert.assertThat(trend.getClouds(), hasSize(1));
+  }
+
+  @Test
+  void testGetInstance() {
+    assertNotNull(ProbTrendParser.getInstance());
+    assertInstanceOf(ProbTrendParser.class, ProbTrendParser.getInstance());
   }
 }

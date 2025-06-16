@@ -11,33 +11,32 @@ import io.github.mivek.model.trend.validity.Validity;
  * @author Jean-Kevin KPADEY
  */
 public final class TrendValididyParser extends AbstractTAFTrendParser<Validity> {
-  /** Instance of the class. */
-  private static final TrendValididyParser INSTANCE = new TrendValididyParser();
-
   /**
-   * Default constructor.
+   * DI constructor.
    * @param commonCommandSupplier The common command supplier.
    * @param remarkParser The remark Parser instance.
    * @param tafCommandSupplier The taf command supplier.
    */
-  private TrendValididyParser(
+  TrendValididyParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
-   * Private constructor.
+   * Default constructor.
    */
-  private TrendValididyParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
+  public TrendValididyParser() {
+    this(new CommonCommandSupplier(), new RemarkParser(), new TAFCommandSupplier());
   }
 
   /**
+   * @deprecated Use constructor instead.
    * @return The TrendValidityParser instance.
    */
+  @Deprecated(forRemoval = true, since = "2.19.0")
   public static TrendValididyParser getInstance() {
-    return INSTANCE;
+    return new TrendValididyParser();
   }
 
   @Override

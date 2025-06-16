@@ -9,17 +9,22 @@ import java.util.MissingResourceException;
  */
 public final class RemarkParser {
 
-    /** The instance of the parser. */
-    private static final RemarkParser INSTANCE = new RemarkParser();
-
     /** The command supplier. */
     private final RemarkCommandSupplier supplier;
 
-    /***
-     * Private constructor.
+    /**
+     * Dependency injection constructor.
+     * @param supplier the command supplier
      */
-    private RemarkParser() {
-        supplier = new RemarkCommandSupplier();
+    public RemarkParser(final RemarkCommandSupplier supplier) {
+        this.supplier = supplier;
+    }
+
+    /**
+     * Default constructor.
+     */
+    public RemarkParser() {
+        this(new RemarkCommandSupplier());
     }
 
     /**
@@ -40,9 +45,11 @@ public final class RemarkParser {
     }
 
     /**
+     * @deprecated Use the default constructor instead.
      * @return the instance of the parser.
      */
+    @Deprecated(forRemoval = true, since = "2.19.0")
     public static RemarkParser getInstance() {
-        return INSTANCE;
+        return new RemarkParser();
     }
 }

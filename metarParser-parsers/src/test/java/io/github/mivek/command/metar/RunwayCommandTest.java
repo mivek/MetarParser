@@ -158,9 +158,7 @@ class RunwayCommandTest {
     @Test
     void testParseRunwayWithIncompleteInfo() {
         Metar m = new Metar();
-        ParseException e = assertThrows(ParseException.class, () -> {
-            command.execute(m, "R16///////");
-        });
+        ParseException e = assertThrows(ParseException.class, () -> command.execute(m, "R16///////"));
         assertEquals(Messages.getInstance().getString("ErrorCode.IncompleteRunwayInformation"), e.getErrorCode().getMessage());
     }
 }
