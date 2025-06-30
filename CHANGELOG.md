@@ -1,3 +1,10 @@
+## [2.18.1](https://github.com/mivek/MetarParser/compare/v2.18.0...v2.18.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* made the runway visibility ranges integer ([49ba715](https://github.com/mivek/MetarParser/commit/49ba71535d6dc5bfad7f7e6818293153a1b5e944))
+
 # [2.18.0](https://github.com/mivek/MetarParser/compare/v2.17.2...v2.18.0) (2025-06-12)
 
 
