@@ -38,6 +38,7 @@ class RunwayCommandTest {
         assertNotNull(ri);
         assertEquals("26", ri.getName());
         assertEquals(600, ri.getMinRange());
+        assertNull(ri.getMaxRange());
         assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
     }
 
@@ -78,6 +79,7 @@ class RunwayCommandTest {
         RunwayInfo r = m.getRunways().get(0);
         assertEquals("01L", r.getName());
         assertEquals(800, r.getMinRange());
+        assertNull(r.getMaxRange());
         assertNull(r.getTrend());
     }
 

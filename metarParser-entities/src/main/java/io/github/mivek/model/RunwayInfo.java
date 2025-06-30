@@ -16,9 +16,9 @@ public class RunwayInfo {
     /** The name of the runway. */
     private String name;
     /** The minimal visibility on the runway. */
-    private int minRange;
+    private Integer minRange;
     /** The maximal visibility on the runway. */
-    private int maxRange;
+    private Integer maxRange;
     /** Indicator on the visual range: either less than or greater than. */
     private RunwayInfoIndicator indicator;
     /** The tread. */
@@ -69,7 +69,7 @@ public class RunwayInfo {
      *
      * @return the minRange.
      */
-    public int getMinRange() {
+    public Integer getMinRange() {
         return minRange;
     }
 
@@ -78,7 +78,7 @@ public class RunwayInfo {
      *
      * @param minRange the minRange to set.
      */
-    public void setMinRange(final int minRange) {
+    public void setMinRange(final Integer minRange) {
         this.minRange = minRange;
     }
 
@@ -87,7 +87,7 @@ public class RunwayInfo {
      *
      * @return maxRange.
      */
-    public int getMaxRange() {
+    public Integer getMaxRange() {
         return maxRange;
     }
 
@@ -96,7 +96,7 @@ public class RunwayInfo {
      *
      * @param maxRange the maxrange to set.
      */
-    public void setMaxRange(final int maxRange) {
+    public void setMaxRange(final Integer maxRange) {
         this.maxRange = maxRange;
     }
 
