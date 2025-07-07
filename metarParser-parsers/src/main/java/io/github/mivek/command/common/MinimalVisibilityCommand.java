@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class MinimalVisibilityCommand implements Command {
     /** Pattern for the minimum visibility. */
-    public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}[NnEeSsWw]{1,2})$");
+    public static final Pattern MIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(N|NE|E|SE|S|SW|W|NW)$");
 
     /**
      * Protected constructor.
@@ -20,14 +20,14 @@ public final class MinimalVisibilityCommand implements Command {
 
     @Override
     public boolean execute(final AbstractWeatherContainer container, final String part) {
-        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, part);
-        container.getVisibility().setMinVisibility(Integer.parseInt(matches[1].substring(0, 4)));
-        container.getVisibility().setMinDirection(matches[1].substring(4));
+        String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, part.toUpperCase());
+        container.getVisibility().setMinVisibility(Integer.parseInt(matches[1]));
+        container.getVisibility().setMinDirection(matches[2]);
         return getReturnValue();
     }
 
     @Override
     public boolean canParse(final String input) {
-        return Regex.find(MIN_VISIBILITY_REGEX, input);
+        return Regex.find(MIN_VISIBILITY_REGEX, input.toUpperCase());
     }
 }

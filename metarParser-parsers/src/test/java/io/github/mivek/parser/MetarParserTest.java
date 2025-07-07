@@ -233,7 +233,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         Visibility v = m.getVisibility();
         assertEquals("5000m", v.getMainVisibility());
         assertEquals(1100, v.getMinVisibility());
-        assertEquals("w", v.getMinDirection());
+        assertEquals("W", v.getMinDirection());
         String des = m.toString();
 
         assertThat(des, containsString(Messages.getInstance().getString("ToString.day.month") + "=16"));
