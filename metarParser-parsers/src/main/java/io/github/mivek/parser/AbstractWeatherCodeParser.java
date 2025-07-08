@@ -42,16 +42,26 @@ public abstract class AbstractWeatherCodeParser<T extends AbstractWeatherCode> e
 
     /**
      * Parses the string containing the delivery time.
+     * If there is no delivery time, it parses the beginning of the validity time as delivery time.
      *
      * @param weatherCode The weather code.
      * @param time        the string to parse.
+     * @return true if the token was a real delivery time, false if it was a validity time.
      */
-    void parseDeliveryTime(final AbstractWeatherCode weatherCode, final String time) {
+    boolean parseDeliveryTime(final AbstractWeatherCode weatherCode, final String time) {
         weatherCode.setDay(Integer.parseInt(time.substring(0, 2)));
         int hours = Integer.parseInt(time.substring(2, 4));
-        int minutes = Integer.parseInt(time.substring(4, 6));
-        LocalTime t = LocalTime.of(hours, minutes);
-        weatherCode.setTime(t);
+        LocalTime t;
+        if (time.length() > 6 && time.contains("/")) {
+            t = LocalTime.of(hours, 0);
+            weatherCode.setTime(t);
+            return false;
+        } else {
+            int minutes = Integer.parseInt(time.substring(4, 6));
+            t = LocalTime.of(hours, minutes);
+            weatherCode.setTime(t);
+            return true;
+        }
     }
 
     /**
