@@ -1,3 +1,10 @@
+# [2.19.0](https://github.com/mivek/MetarParser/compare/v2.18.1...v2.19.0) (2025-07-11)
+
+
+### Features
+
+* parse TAF messages without delivery time ([b5ca5c0](https://github.com/mivek/MetarParser/commit/b5ca5c0cc60ca080576f44dbb9ba96d08869df2c))
+
 ## [2.18.1](https://github.com/mivek/MetarParser/compare/v2.18.0...v2.18.1) (2025-06-30)
 
 
