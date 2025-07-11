@@ -84,9 +84,10 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
         taf.setAirport(airport);
         taf.setMessage(code);
         // Day and time
-        parseDeliveryTime(taf, line1parts[i]);
+        if(parseDeliveryTime(taf, line1parts[i])) {
+            i++;
+        }
         // Validity Time
-        i++;
         taf.setValidity(parseValidity(line1parts[i]));
 
         // Handle rest of second line.

@@ -955,4 +955,26 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals(6, becmg2.getWind().getSpeed());
         assertEquals("KT", becmg2.getWind().getUnit());
     }
+
+    @Test
+    void testParseWithoutDeliveryTime() throws ParseException {
+        String code = """
+            TAF KNYL 2603/2703 20006KT 9999 SKC QNH2974INS
+            FM261000 14004KT 9999 SKC QNH2977INS
+            FM261700 17007KT 9999 SKC QNH2974INS
+            FM262100 19013KT 9999 SKC QNH2967INS AUTOMATED SENSOR METWATCH 2606 TIL 2614 TX42/2623Z TN24/2614Z
+            """;
+
+        TAF taf = parser.parse(code);
+
+        assertEquals("KNYL", taf.getStation());
+        assertEquals(26, taf.getDay());
+        assertEquals(3, taf.getTime().getHour());
+        assertEquals(0, taf.getTime().getMinute());
+
+        assertEquals(26, taf.getValidity().getStartDay());
+        assertEquals(3, taf.getValidity().getStartHour());
+        assertEquals(27, taf.getValidity().getEndDay());
+        assertEquals(3, taf.getValidity().getEndHour());
+    }
 }
