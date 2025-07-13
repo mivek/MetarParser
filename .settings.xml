@@ -3,22 +3,13 @@
     <servers>
         <server>
             <!-- Maven Central Deployment -->
-            <id>ossrh</id>
-            <username>${env.SONATYPE_USERNAME}</username>
-            <password>${env.SONATYPE_PASSWORD}</password>
+            <id>central</id>
+            <username>${env.MAVEN_CENTRAL_USERNAME}</username>
+            <password>${env.MAVEN_CENTRAL_PASSWORD}</password>
         </server>
         <server>
             <id>gpg.passphrase</id>
             <passphrase>${env.MAVEN_GPG_PASSPHRASE}</passphrase>
         </server>
     </servers>
-
-    <profiles>
-      <profile>
-        <id>ossrh</id>
-        <activation>
-          <activeByDefault>false</activeByDefault>
-        </activation>
-      </profile>
-    </profiles>
 </settings>
