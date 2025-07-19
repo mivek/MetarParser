@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RemarkParserTest {
@@ -17,7 +18,7 @@ class RemarkParserTest {
 
     @BeforeEach
     void setUp() {
-        parser = RemarkParser.getInstance();
+        parser = new RemarkParser();
     }
 
     @Test
@@ -391,5 +392,11 @@ class RemarkParserTest {
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.LTG")));
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.DSNT")));
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.ALQDS")));
+    }
+
+    @Test
+    void testGetInstance() {
+        assertNotNull(RemarkParser.getInstance());
+        assertInstanceOf(RemarkParser.class, RemarkParser.getInstance());
     }
 }

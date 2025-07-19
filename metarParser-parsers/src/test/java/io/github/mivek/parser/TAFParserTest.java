@@ -1,28 +1,6 @@
 package io.github.mivek.parser;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import io.github.mivek.enums.CloudQuantity;
-import io.github.mivek.enums.CloudType;
-import io.github.mivek.enums.Descriptive;
-import io.github.mivek.enums.IcingIntensity;
-import io.github.mivek.enums.Intensity;
-import io.github.mivek.enums.Phenomenon;
-import io.github.mivek.enums.TurbulenceIntensity;
-import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -35,6 +13,10 @@ import io.github.mivek.model.trend.validity.Validity;
 import io.github.mivek.utils.Converter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for {@link TAFParser}
@@ -55,7 +37,7 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
 
     @BeforeEach
     void setUp() {
-        parser = TAFParser.getInstance();
+        parser = new TAFParser();
     }
 
     @Test
@@ -811,8 +793,7 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
   TAF KLSV 222300Z 2223/2405 21020G35KT 8000 BLDU BKN160 530009 630009 QNH2941INS
   TEMPO 2223/2302 23035G52KT BKN150 560009
   BECMG 2305/2306 35015G25KT 9999 VCSH BKN140 520009 QNH2948INS
-  BECMG 2316/2317 34010G18KT 9999 NSW SCT170 QNH2969INS TX28/2323Z TN12/2314Z
-            """;
+  BECMG 2316/2317 34010G18KT 9999 NSW SCT170 QNH2969INS TX28/2323Z TN12/2314Z""";
 
         TAF taf = parser.parse(code);
 
@@ -976,5 +957,11 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals(3, taf.getValidity().getStartHour());
         assertEquals(27, taf.getValidity().getEndDay());
         assertEquals(3, taf.getValidity().getEndHour());
+    }
+
+    @Test
+    void testGetInstance() {
+        assertNotNull(TAFParser.getInstance());
+        assertInstanceOf(TAFParser.class, TAFParser.getInstance());
     }
 }

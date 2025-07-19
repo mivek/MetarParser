@@ -31,7 +31,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
 
     @BeforeEach
     void setUp() {
-        parser = MetarParser.getInstance();
+        parser = new MetarParser();
     }
 
     /**
@@ -475,5 +475,11 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
         assertEquals(1, m.getWeatherConditions().get(0).getPhenomenons().size());
         assertEquals(Phenomenon.RAIN, m.getWeatherConditions().get(0).getPhenomenons().get(0));
+    }
+
+    @Test
+    void testGetInstance() {
+        assertNotNull(MetarParser.getInstance());
+        assertInstanceOf(MetarParser.class, MetarParser.getInstance());
     }
 }

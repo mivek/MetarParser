@@ -21,16 +21,14 @@ import java.util.Objects;
  * @author mivek
  */
 public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
-    /** Instance of the class. */
-    private static final MetarParser INSTANCE = new MetarParser();
     /** The command supplier. */
     private final MetarCommandSupplier supplier;
 
     /**
-     * Private constructor.
+     * Public default constructor.
      */
-    private MetarParser() {
-        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new MetarCommandSupplier());
+    public MetarParser() {
+        this(new CommonCommandSupplier(), new RemarkParser(), new AirportSupplier(), new MetarCommandSupplier());
     }
 
     /**
@@ -41,7 +39,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
      * @param metarCommandSupplier the metar command supplier.
      * @param airportSupplier            the airport supplier
      */
-    private MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
+    public MetarParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier,
             final MetarCommandSupplier metarCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
         supplier = Objects.requireNonNull(metarCommandSupplier);
@@ -51,9 +49,11 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
      * Get instance method.
      *
      * @return the instance of MetarParser.
+     * @deprecated Use the constructor instead.
      */
+    @Deprecated(forRemoval = true, since = "2.19.0")
     public static MetarParser getInstance() {
-        return INSTANCE;
+        return new MetarParser();
     }
 
     /**

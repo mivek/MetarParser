@@ -25,7 +25,7 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
      * Private constructor.
      */
     private MetarService() {
-        super(MetarParser.getInstance());
+        super(new MetarParser());
     }
 
     @Override

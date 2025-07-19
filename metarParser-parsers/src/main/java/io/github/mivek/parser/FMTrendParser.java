@@ -11,26 +11,24 @@ import io.github.mivek.model.trend.validity.BeginningValidity;
  * @author Jean-Kevin KPADEY
  */
 public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidity> {
-  /** The parser singleton instance. */
-  private static final FMTrendParser INSTANCE = new FMTrendParser();
 
   /**
-   * Private package constructor.
+   * Public package constructor.
    * @param commonCommandSupplier The common command Supplier
    * @param remarkParser The remarkParser
    * @param tafCommandSupplier The taf command supplier
    */
-  private FMTrendParser(
+  public FMTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
-   * Private constructor.
+   * DI constructor.
    */
-  private FMTrendParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
+  public FMTrendParser() {
+    this(new CommonCommandSupplier(), new RemarkParser(), new TAFCommandSupplier());
   }
 
   @Override
@@ -45,9 +43,11 @@ public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidit
 
   /**
    * @return The singleton instance.
+   * @deprecated Use the constructor instead.
    */
+  @Deprecated(forRemoval = true, since = "2.19.0")
   public static FMTrendParser getInstance() {
-    return INSTANCE;
+    return new FMTrendParser();
   }
 
   /**

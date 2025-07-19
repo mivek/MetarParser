@@ -21,11 +21,11 @@ public final class TafTrendParserFactory implements AbstractFactory<AbstractTAFT
    */
   TafTrendParserFactory() {
     trendParserMap = new HashMap<>();
-    trendParserMap.put("TE", ProbTrendParser.getInstance());
-    trendParserMap.put("BE", TrendValididyParser.getInstance());
-    trendParserMap.put("IN", TrendValididyParser.getInstance());
-    trendParserMap.put("PR", ProbTrendParser.getInstance());
-    trendParserMap.put("FM", FMTrendParser.getInstance());
+    trendParserMap.put("TE", new ProbTrendParser());
+    trendParserMap.put("BE", new TrendValididyParser());
+    trendParserMap.put("IN", new TrendValididyParser());
+    trendParserMap.put("PR", new ProbTrendParser());
+    trendParserMap.put("FM", new FMTrendParser());
   }
 
   @Override

@@ -15,8 +15,8 @@ class GeneralParseTAFTest extends GeneralParseTest<TAF> {
     }
 
     @Override
-    protected AbstractWeatherCodeParser<TAF> getSut() {
-        return TAFParser.getInstance();
+    protected AbstractWeatherCodeParser<TAF> getParser() {
+        return new TAFParser();
     }
 
 }

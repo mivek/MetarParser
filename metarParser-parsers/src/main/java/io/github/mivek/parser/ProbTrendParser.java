@@ -11,26 +11,24 @@ import io.github.mivek.model.trend.validity.Validity;
  * @author Jean-Kevin KPADEY
  */
 public final class ProbTrendParser extends AbstractTAFTrendParser<Validity> {
-  /** The singleton instance. */
-  private static final ProbTrendParser INSTANCE = new ProbTrendParser();
 
   /**
-   * Package private constructor.
+   * Public DI constructor.
    * @param commonCommandSupplier The commonCommon supplier
    * @param remarkParser The instance of RemarkParser.
    * @param tafCommandSupplier The taf command supplier.
    */
-  private ProbTrendParser(
+  public ProbTrendParser(
       final CommonCommandSupplier commonCommandSupplier,
       final RemarkParser remarkParser, final TAFCommandSupplier tafCommandSupplier) {
     super(commonCommandSupplier, remarkParser, tafCommandSupplier);
   }
 
   /**
-   * Private constructor.
+   * Public default constructor.
    */
-  private ProbTrendParser() {
-    this(new CommonCommandSupplier(), RemarkParser.getInstance(), new TAFCommandSupplier());
+  public ProbTrendParser() {
+    this(new CommonCommandSupplier(), new RemarkParser(), new TAFCommandSupplier());
   }
 
   @Override
@@ -52,9 +50,11 @@ public final class ProbTrendParser extends AbstractTAFTrendParser<Validity> {
 
   /**
    * @return The ProbTrendParser instance.
+   * @deprecated Use the constructor instead.
    */
+  @Deprecated(forRemoval = true, since = "2.19.0")
   public static ProbTrendParser getInstance() {
-    return INSTANCE;
+    return new ProbTrendParser();
   }
 
   /**

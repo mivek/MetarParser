@@ -28,7 +28,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
      * Constructor.
      */
     private TAFService() {
-        super(TAFParser.getInstance());
+        super(new TAFParser());
     }
 
     @Override

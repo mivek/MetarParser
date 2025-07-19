@@ -35,10 +35,10 @@ abstract class GeneralParseTest<T extends AbstractWeatherCode> {
     @ParameterizedTest
     @MethodSource("data")
     void testGeneralParse(final String partToParse, final boolean expected) {
-        assertEquals(expected, getSut().generalParse(getWeatherCode(), partToParse));
+        assertEquals(expected, getParser().generalParse(getWeatherCode(), partToParse));
     }
 
     protected abstract T getWeatherCode();
 
-    protected abstract AbstractWeatherCodeParser<T> getSut();
+    protected abstract AbstractWeatherCodeParser<T> getParser();
 }

@@ -27,16 +27,14 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
     private static final String TX = "TX";
     /** Temperature Minimum Constant. */
     private static final String TN = "TN";
-    /** Instance of the TAFParser. */
-    private static final TAFParser INSTANCE = new TAFParser();
     /** TAF command supplier. */
     private final TAFCommandSupplier supplier;
 
     /**
      * Default constructor.
      */
-    private TAFParser() {
-        this(new CommonCommandSupplier(), RemarkParser.getInstance(), new AirportSupplier(), new TAFCommandSupplier());
+    public TAFParser() {
+        this(new CommonCommandSupplier(), new RemarkParser(), new AirportSupplier(), new TAFCommandSupplier());
     }
 
     /**
@@ -47,16 +45,18 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
      * @param airportSupplier       the airport supplier.
      * @param tafCommandSupplier    the taf command supplier.
      */
-    private TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier, final TAFCommandSupplier tafCommandSupplier) {
+    public TAFParser(final CommonCommandSupplier commonCommandSupplier, final RemarkParser remarkParser, final AirportSupplier airportSupplier, final TAFCommandSupplier tafCommandSupplier) {
         super(commonCommandSupplier, remarkParser, airportSupplier);
         supplier = tafCommandSupplier;
     }
 
     /**
+     * @deprecated Use constructor instead.
      * @return the instance.
      */
+    @Deprecated(forRemoval = true, since = "2.19.0")
     public static TAFParser getInstance() {
-        return INSTANCE;
+        return new TAFParser();
     }
 
     @Override

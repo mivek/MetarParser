@@ -17,8 +17,8 @@ class GeneralParseMetarTest extends GeneralParseTest<Metar> {
     }
 
     @Override
-    protected MetarParser getSut() {
-        return MetarParser.getInstance();
+    protected MetarParser getParser() {
+        return new MetarParser();
     }
 
 }
