@@ -1,3 +1,10 @@
+# [2.20.0](https://github.com/mivek/MetarParser/compare/v2.19.0...v2.20.0) (2025-07-19)
+
+
+### Features
+
+* deprecate usage of singleton pattern ([86f8f51](https://github.com/mivek/MetarParser/commit/86f8f513055532ac14b55c901aa62e06ff9441f5))
+
 # [2.19.0](https://github.com/mivek/MetarParser/compare/v2.18.1...v2.19.0) (2025-07-11)
 
 
