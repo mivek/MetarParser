@@ -72,6 +72,46 @@ The application contains numerous enumerations to represent data.
 
 ### Classes
 
+#### Abstract Classes and Interfaces
+
+##### AbstractWeatherContainer
+
+Abstract base class that provides common weather-related fields for both METAR and TAF objects:
+
+-   Wind information
+-   Visibility
+-   List of clouds
+-   List of weather conditions
+-   Vertical visibility (optional)
+-   Wind shear (optional)
+-   CAVOK indicator (ceiling and visibility ok)
+-   Remarks
+
+##### AbstractWeatherCode
+
+Abstract parent class of METAR and TAF that extends AbstractWeatherContainer:
+
+-   Day of the observation
+-   Time of the observation
+-   Airport information
+-   Original message text
+-   Station identifier
+-   Flags (AUTO, AMD, COR, etc.)
+
+##### ITafGroups
+
+Interface defining methods for TAF-specific elements:
+
+-   List of turbulence elements
+-   List of icing elements
+-   Methods to add turbulence and icing
+
+##### WeatherCategory
+
+Interface for different weather categories that defines a contract for checking if weather criteria are met based on visibility and ceiling.
+
+#### Concrete Classes
+
 #### Airport
 
 The airport class is composed of
@@ -179,10 +219,6 @@ It is composed of:
 -   The temperature (integer)
 -   The day (integer)
 -   The hour (integer)
-
-#### WeatherCategory
-
-Interface for different weather categories that defines a contract for checking if weather criteria are met based on visibility and ceiling.
 
 #### FAAWeatherCategory
 
