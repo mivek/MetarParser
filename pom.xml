@@ -66,7 +66,7 @@
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <commons-csv.version>1.14.0</commons-csv.version>
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.20.3</pitest-maven.version>
+        <pitest-maven.version>1.20.5</pitest-maven.version>
         <slf4j-nop.version>2.0.17</slf4j-nop.version>
         <spotbugs-maven-plugin.version>4.9.6.0</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
