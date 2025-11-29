@@ -10,6 +10,8 @@ import io.github.mivek.internationalization.Messages;
  * @author mivek
  */
 public enum CloudQuantity {
+    /** Clear. */
+    CLR,
     /** Sky clear. */
     SKC,
     /** Few clouds. */
