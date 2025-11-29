@@ -1,3 +1,10 @@
+## [2.20.1](https://github.com/mivek/MetarParser/compare/v2.20.0...v2.20.1) (2025-11-29)
+
+
+### Bug Fixes
+
+* handle cloud quantity CLR the same way as SKC ([6f54567](https://github.com/mivek/MetarParser/commit/6f5456724a1def58abd34d699af2cadccab239b3))
+
 # [2.20.0](https://github.com/mivek/MetarParser/compare/v2.19.0...v2.20.0) (2025-07-19)
 
 
