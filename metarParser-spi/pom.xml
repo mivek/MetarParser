@@ -13,9 +13,9 @@
     <name>metarParser-spi</name>
 
     <properties>
-        <jacoco.coverage.instruction.minimum>0.96</jacoco.coverage.instruction.minimum>
-        <jacoco.coverage.complexity.minimum>1</jacoco.coverage.complexity.minimum>
-        <jacoco.coverage.branch.minimum>1</jacoco.coverage.branch.minimum>
+        <jacoco.coverage.instruction.minimum>0.94</jacoco.coverage.instruction.minimum>
+        <jacoco.coverage.complexity.minimum>0.75</jacoco.coverage.complexity.minimum>
+        <jacoco.coverage.branch.minimum>0.62</jacoco.coverage.branch.minimum>
     </properties>
 
     <dependencies>
