@@ -57,23 +57,60 @@ The application contains numerous enumerations to represent data.
 
 - CloudType: Represents the type of cloud.
 - CloudQuantity: Represents the amount of clouds.
-- DepositBrakingCapacity: Represents the breaking capacity on a runway.
 - DepositCoverage: Represents the percentage of a runway covered by deposit.
-- DepositThickness: Represents the thickness of a deposit on a runway.
-- DepositType: Represents the type of deposit on a runway.
-- DepositType: Represents the type of deposit on a runway.
+- DepositType: Represents the type of deposit on a runway (NOT_REPORTED, CLEAR_DRY, DAMP, WET_WATER_PATCHES, RIME_FROST_COVERED, DRY_SNOW, WET_SNOW, SLUSH, ICE, COMPACTED_SNOW, FROZEN_RIDGES).
 - Descriptive: Represents the description of a meteorological phenomenon.
 - Flag: Represents a flag applied to a METAR or TAF: AMD, AUTO, CNL, COR or NIL.
 - IcingIntensity: Represents the intensity of an icing element.
-- Intensity: Represents the intensity of a meteorological phenomenon.
-- Phenomenon: Represents a phenomenon.
+- Intensity: Represents the intensity of a meteorological phenomenon (LIGHT, HEAVY, RECENT, IN_VICINITY).
+- Phenomenon: Represents a meteorological phenomenon (various weather phenomena like HAZE, WIDESPREAD_DUST, SMOKE, SAND, etc.).
 - RunwayInfoIndicator: Represents the indicator on a runway.
 - RunwayInfoTrend: Represents the visibility trend on a runway.
 - TimeIndicator: Represents the time of the trend.
-- TurbulenceIntensity: Represents the intensity of a turbulence
-- WeatherChangeType: Represents a type of trend.
+- TurbulenceIntensity: Represents the intensity of a turbulence.
+- WeatherChangeType: Represents a type of trend (FM, BECMG, TEMPO, INTER, PROB).
 
 ### Classes
+
+#### Abstract Classes and Interfaces
+
+##### AbstractWeatherContainer
+
+Abstract base class that provides common weather-related fields for both METAR and TAF objects:
+
+-   Wind information
+-   Visibility
+-   List of clouds
+-   List of weather conditions
+-   Vertical visibility (optional)
+-   Wind shear (optional)
+-   CAVOK indicator (ceiling and visibility ok)
+-   Remarks
+
+##### AbstractWeatherCode
+
+Abstract parent class of METAR and TAF that extends AbstractWeatherContainer:
+
+-   Day of the observation
+-   Time of the observation
+-   Airport information
+-   Original message text
+-   Station identifier
+-   Flags (AUTO, AMD, COR, etc.)
+
+##### ITafGroups
+
+Interface defining methods for TAF-specific elements:
+
+-   List of turbulence elements
+-   List of icing elements
+-   Methods to add turbulence and icing
+
+##### WeatherCategory
+
+Interface for different weather categories that defines a contract for checking if weather criteria are met based on visibility and ceiling.
+
+#### Concrete Classes
 
 #### Airport
 
@@ -124,10 +161,10 @@ The runway information is composed of
 -   The indicator of the visual range. Either "greater than", "less than" or empty. (optional)    
 -   The maximal visibility on the runway (optional)
 -   The trend of the visibility (optional)
--   The type of deposit (optional)
--   The percentage of coverage on the runway
--   The thickness of the deposit.
--   The braking capacity on the runway.
+-   The type of deposit (optional, DepositType enum)
+-   The percentage of coverage on the runway (optional, DepositCoverage enum)
+-   The thickness of the deposit (optional, String value)
+-   The braking capacity on the runway (optional, String value)
 
 #### Turbulence
 
@@ -160,10 +197,11 @@ A weather condition is composed of
 The wind class is composed of 
 
 -   the speed
--   the direction
--   the speed of the gust
--   the minimal wind variation in degrees
--   the maximal wind variation in degrees
+-   the direction (String)
+-   the direction in degrees (Integer, optional)
+-   the speed of the gust (optional)
+-   the minimal wind variation in degrees (optional)
+-   the maximal wind variation in degrees (optional)
 -   the unit of the wind's speed
 
 #### WindShear
@@ -172,6 +210,50 @@ This class is a subclass of Wind.
 It is composed of
 
 -   the height of the wind shear.
+
+#### TemperatureDated
+
+Class representing a temperature with its date.
+It is composed of:
+
+-   The temperature (integer)
+-   The day (integer)
+-   The hour (integer)
+
+#### FAAWeatherCategory
+
+Enum implementing WeatherCategory for FAA weather categories (see https://www.faasafety.gov/gslac/alc/libview_printerfriendly.aspx?id=9091).
+It includes:
+
+-   LIFR (Low IFR): ceiling < 500 feet or visibility < 1 statute mile
+-   IFR (Instrument Flight Rules): ceiling 500-999 feet or visibility 1-2 statute miles
+-   MVFR (Marginal VFR): ceiling 1000-3000 feet or visibility 3-5 statute miles
+-   VFR (Visual Flight Rules): ceiling > 3000 feet and visibility > 5 statute miles
+
+#### GAFORWeatherCategory
+
+Enum implementing WeatherCategory for GAFOR weather categories (see https://www.dwd.de/SharedDocs/broschueren/DE/luftfahrt/gafor.pdf).
+It includes categories: X, M2, M5, M6, M7, M8, D1, D3, D4, O, C
+
+#### ICAOWeatherCategory
+
+Enum implementing WeatherCategory for ICAO weather categories (see ICAO Annex 2: Rules of the Air, Chapter 4: Visual Flight Rules).
+It includes:
+
+-   IMC (Instrument Meteorological Conditions): ceiling < 1500 feet or visibility < 5 km
+-   VMC (Visual Meteorological Conditions): ceiling >= 1500 feet and visibility >= 5 km
+
+#### MilitaryWeatherCategory
+
+Enum implementing WeatherCategory for military weather categories (see https://semarv.weebly.com/uploads/3/1/8/7/3187688/military_metar_codes_v1.5.pdf).
+It includes:
+
+-   RED: ceiling < 200 feet and visibility < 0.8 km
+-   AMB (Amber): ceiling 200-299 feet and visibility 0.8-1.5 km
+-   YLO (Yellow): ceiling 300-699 feet and visibility 1.6-3.6 km
+-   GRN (Green): ceiling 700-1499 feet and visibility 3.7-4.9 km
+-   WHT (White): ceiling 1500-2499 feet and visibility 5.0-7.9 km
+-   BLU (Blue): ceiling >= 2500 feet and visibility >= 8.0 km
 
 ### Trends
 
