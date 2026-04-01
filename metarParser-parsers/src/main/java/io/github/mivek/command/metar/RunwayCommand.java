@@ -164,6 +164,9 @@ public final class RunwayCommand implements Command {
      * @return Translated sentence representing the braking capacity.
      */
     private String parseDepositBrakingCapacity(final String input) {
+        if ("//".equals(input)) {
+            return messages.getString(DEPOSIT_BRAKING_CAPACITY_MAP.get(input));
+        }
         return messages.getString(DEPOSIT_BRAKING_CAPACITY_MAP.getOrDefault(input, "DepositBrakingCapacity.default"), Double.parseDouble(input) / 100);
     }
     @Override
@@ -171,4 +174,3 @@ public final class RunwayCommand implements Command {
         return Regex.find(GENERIC_RUNWAY_REGEX, input);
     }
 }
-
