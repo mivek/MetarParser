@@ -1,3 +1,5 @@
+## [2.20.11](https://github.com/mivek/MetarParser/compare/v2.20.10...v2.20.11) (2026-04-06)
+
 ## [2.20.10](https://github.com/mivek/MetarParser/compare/v2.20.9...v2.20.10) (2026-03-29)
 
 ## [2.20.9](https://github.com/mivek/MetarParser/compare/v2.20.8...v2.20.9) (2026-03-29)
