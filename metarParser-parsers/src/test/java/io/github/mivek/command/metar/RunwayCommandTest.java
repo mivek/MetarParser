@@ -156,9 +156,26 @@ class RunwayCommandTest {
     }
 
     @Test
-    void testParseRunwayWithIncompleteInfo() {
+    void testParseRunwayWithNoInfo() throws ParseException {
         Metar m = new Metar();
-        ParseException e = assertThrows(ParseException.class, () -> command.execute(m, "R16///////"));
-        assertEquals(Messages.getInstance().getString("ErrorCode.IncompleteRunwayInformation"), e.getErrorCode().getMessage());
+
+        command.execute(m, "R16///////");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+        assertEquals("16", ri.getName());
+        assertEquals(DepositType.NOT_REPORTED, ri.getDepositType());
+        assertEquals(DepositCoverage.NOT_REPORTED, ri.getCoverage());
+    }
+
+    @Test
+    void testParseRunwayWithPartialInfo() throws ParseException {
+        Metar m = new Metar();
+
+        command.execute(m, "R88/29////");
+        assertThat(m.getRunways(), hasSize(1));
+        RunwayInfo ri = m.getRunways().get(0);
+        assertEquals("88", ri.getName());
+        assertEquals(DepositType.WET_WATER_PATCHES, ri.getDepositType());
+        assertEquals(DepositCoverage.FROM_51_TO_100, ri.getCoverage());
     }
 }
