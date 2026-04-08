@@ -1,3 +1,10 @@
+## [2.20.13](https://github.com/mivek/MetarParser/compare/v2.20.12...v2.20.13) (2026-04-08)
+
+
+### Bug Fixes
+
+* **parser:** improve runway parsing to properly handle cases when data is only partially provided ([9856a56](https://github.com/mivek/MetarParser/commit/9856a5607dbda3d877779033a96be3ed8b19f20a))
+
 ## [2.20.12](https://github.com/mivek/MetarParser/compare/v2.20.11...v2.20.12) (2026-04-06)
 
 ## [2.20.11](https://github.com/mivek/MetarParser/compare/v2.20.10...v2.20.11) (2026-04-06)
