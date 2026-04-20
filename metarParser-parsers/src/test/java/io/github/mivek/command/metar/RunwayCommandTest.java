@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
@@ -40,6 +41,7 @@ class RunwayCommandTest {
         assertEquals(600, ri.getMinRange());
         assertNull(ri.getMaxRange());
         assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
+        assertEquals(LengthUnit.METERS, ri.getUnit());
     }
 
     @Test
@@ -55,6 +57,7 @@ class RunwayCommandTest {
         assertEquals(550, ri.getMinRange());
         assertEquals(700, ri.getMaxRange());
         assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
+        assertEquals(LengthUnit.METERS, ri.getUnit());
     }
 
     @Test
@@ -68,6 +71,7 @@ class RunwayCommandTest {
         assertEquals(600, r.getMinRange());
         assertEquals(1000, r.getMaxRange());
         assertNull(r.getTrend());
+        assertEquals(LengthUnit.FEET, r.getUnit());
     }
 
     @Test
@@ -81,6 +85,7 @@ class RunwayCommandTest {
         assertEquals(800, r.getMinRange());
         assertNull(r.getMaxRange());
         assertNull(r.getTrend());
+        assertEquals(LengthUnit.FEET, r.getUnit());
     }
 
     @Test
@@ -141,6 +146,7 @@ class RunwayCommandTest {
         assertEquals("01L", ri.getName());
         assertEquals(RunwayInfoIndicator.LESS_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
+        assertEquals(LengthUnit.FEET, ri.getUnit());
     }
 
     @Test
@@ -153,6 +159,7 @@ class RunwayCommandTest {
         assertEquals("01L", ri.getName());
         assertEquals(RunwayInfoIndicator.MORE_THAN, ri.getIndicator());
         assertEquals(600, ri.getMinRange());
+        assertEquals(LengthUnit.FEET, ri.getUnit());
     }
 
     @Test

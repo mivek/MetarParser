@@ -47,4 +47,4 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Generate the javadoc
-        run: mvn --batch-mode javadoc:javadoc
+        run: mvn --batch-mode install -DskipTests && mvn --batch-mode javadoc:javadoc
