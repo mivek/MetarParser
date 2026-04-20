@@ -63,6 +63,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals("27L", m.getRunways().get(0).getName());
         assertEquals(375, m.getRunways().get(0).getMinRange());
         assertEquals(RunwayInfoTrend.NO_SIGNIFICANT_CHANGE, m.getRunways().get(0).getTrend());
+        assertEquals(LengthUnit.METERS, m.getRunways().get(0).getUnit());
     }
 
     @Test
@@ -330,6 +331,19 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertNotNull(m.getVisibility());
         assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
+    }
+
+    @Test
+    void testParseWithRunwayVisualRangeInFeet() throws ParseException {
+        String code = "KJFK 121651Z 18012KT 9999 R24L/2400FT SCT015 18/12 A2992";
+
+        Metar m = parser.parse(code);
+
+        assertNotNull(m);
+        assertThat(m.getRunways(), hasSize(1));
+        assertEquals("24L", m.getRunways().get(0).getName());
+        assertEquals(2400, m.getRunways().get(0).getMinRange());
+        assertEquals(LengthUnit.FEET, m.getRunways().get(0).getUnit());
     }
 
     @Test

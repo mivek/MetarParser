@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -19,6 +20,8 @@ public class RunwayInfo {
     private Integer minRange;
     /** The maximal visibility on the runway. */
     private Integer maxRange;
+    /** The runway visual range unit. */
+    private LengthUnit unit;
     /** Indicator on the visual range: either less than or greater than. */
     private RunwayInfoIndicator indicator;
     /** The tread. */
@@ -89,6 +92,24 @@ public class RunwayInfo {
      */
     public Integer getMaxRange() {
         return maxRange;
+    }
+
+    /**
+     * Getter of runway visual range unit.
+     *
+     * @return the runway visual range unit.
+     */
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
+    /**
+     * Setter of runway visual range unit.
+     *
+     * @param unit the runway visual range unit to set.
+     */
+    public void setUnit(final LengthUnit unit) {
+        this.unit = unit;
     }
 
     /**
@@ -181,6 +202,7 @@ public class RunwayInfo {
                 append(Messages.getInstance().getString("ToString.indicator"), indicator).
                 append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
                 append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
+                append(Messages.getInstance().getString("ToString.runway.unit"), unit).
                 append(Messages.getInstance().getString("ToString.trend"), trend).
                 append(Messages.getInstance().getString("ToString.deposit.type"), depositType).
                 append(Messages.getInstance().getString("ToString.deposit.coverage"), coverage).

@@ -6,6 +6,7 @@ import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -24,12 +25,14 @@ class RunwayInfoTest {
         ri.setThickness(Messages.getInstance().getString("DepositThickness.93"));
         ri.setBrakingCapacity(Messages.getInstance().getString("DepositBrakingCapacity.91"));
         ri.setIndicator(RunwayInfoIndicator.LESS_THAN);
+        ri.setUnit(LengthUnit.FEET);
 
         String des = ri.toString();
 
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.name") + "=14R"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.min") + "=300"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.visibility.max") + "=500"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.runway.unit") + "=FT"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.trend") + "=up rising"));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.type") + "=" + Messages.getInstance().getString("DepositType.COMPACTED_SNOW")));
         assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.deposit.coverage") + "=" + Messages.getInstance().getString("DepositCoverage.FROM_11_TO_25")));

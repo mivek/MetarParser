@@ -4,6 +4,7 @@ import io.github.mivek.enums.DepositCoverage;
 import io.github.mivek.enums.DepositType;
 import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
@@ -112,6 +113,7 @@ public final class RunwayCommand implements Command {
         ri.setMinRange(Integer.parseInt(matches[2]));
         ri.setMaxRange(Integer.parseInt(matches[3]));
         ri.setTrend(RunwayInfoTrend.get(matches[4]));
+        ri.setUnit(matches[5] == null ? LengthUnit.METERS : LengthUnit.FEET);
         metar.addRunwayInfo(ri);
     }
 
@@ -128,6 +130,7 @@ public final class RunwayCommand implements Command {
         ri.setIndicator(RunwayInfoIndicator.get(matches[2]));
         ri.setMinRange(Integer.parseInt(matches[3]));
         ri.setTrend(RunwayInfoTrend.get(matches[4]));
+        ri.setUnit(matches[5] == null ? LengthUnit.METERS : LengthUnit.FEET);
         metar.addRunwayInfo(ri);
     }
 
