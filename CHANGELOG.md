@@ -1,3 +1,10 @@
+# [2.21.0](https://github.com/mivek/MetarParser/compare/v2.20.13...v2.21.0) (2026-04-20)
+
+
+### Features
+
+* add length unit to RunwayInfo ([45f15fb](https://github.com/mivek/MetarParser/commit/45f15fbe3691dbbfdd1903e57904f5079be779a4))
+
 ## [2.20.13](https://github.com/mivek/MetarParser/compare/v2.20.12...v2.20.13) (2026-04-08)
 
 
