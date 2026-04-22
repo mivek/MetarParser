@@ -31,27 +31,30 @@ jobs:
       - name: Fetch commit metadata and diff
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_HASH: ${{ inputs.commit_hash }}
         run: |
-          gh api "repos/${{ github.repository }}/commits/${{ inputs.commit_hash }}" \
+          gh api "repos/${{ github.repository }}/commits/$COMMIT_HASH" \
             --jq '.commit.message | split("\\n")[0]' > /tmp/commit_title.txt
 
-          gh api "repos/${{ github.repository }}/commits/${{ inputs.commit_hash }}" \
+          gh api "repos/${{ github.repository }}/commits/$COMMIT_HASH" \
             --jq '.commit.message' > /tmp/commit_message.txt
 
-          gh api "repos/${{ github.repository }}/commits/${{ inputs.commit_hash }}" \
+          gh api "repos/${{ github.repository }}/commits/$COMMIT_HASH" \
             -H "Accept: application/vnd.github.diff" \
             > /tmp/commit.diff
 
       - name: Build issue body
+        env:
+          COMMIT_HASH: ${{ inputs.commit_hash }}
         run: |
           SOURCE_LANG="${{ steps.ctx.outputs.source_lang }}"
           TARGET_LANG="${{ steps.ctx.outputs.target_lang }}"
-          COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ inputs.commit_hash }}"
+          COMMIT_URL="https://github.com/${{ github.repository }}/commit/$COMMIT_HASH"
 
           {
             echo "## Port \`${SOURCE_LANG}\` → \`${TARGET_LANG}\`"
             echo ""
-            echo "Port commit [\`${{ inputs.commit_hash }}\`](${COMMIT_URL}) from the ${SOURCE_LANG} sister repository."
+            echo "Port commit [\`$COMMIT_HASH\`](${COMMIT_URL}) from the ${SOURCE_LANG} sister repository."
             echo ""
             echo "### Original commit message"
             echo ""
