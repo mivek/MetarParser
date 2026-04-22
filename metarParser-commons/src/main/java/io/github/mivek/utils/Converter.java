@@ -24,6 +24,9 @@ public final class Converter {
      **/
     private static final Double SM_TO_KM = 1.609344;
 
+    /** Pattern to parse a visibility string composed of a numeric value and a unit. */
+    private static final Pattern VISIBILITY_PATTERN = Pattern.compile("(\\d+)([a-z,A-Z]+)");
+
     /**
      * Private constructor.
      */
@@ -125,7 +128,7 @@ public final class Converter {
      * @return The visibility in km as a double
      */
     public static Double convertVisibilityToKM(final String visibility) {
-        final Matcher matcher = Pattern.compile("(\\d+)([a-z,A-Z]+)").matcher(visibility.replace(">", ""));
+        final Matcher matcher = VISIBILITY_PATTERN.matcher(visibility.replace(">", ""));
         if (!matcher.find()) {
             return null;
         }

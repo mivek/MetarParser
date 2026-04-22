@@ -1,6 +1,7 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.regex.Pattern;
 
 /**
  * Enumeration for phenomenon.
@@ -57,6 +58,8 @@ public enum Phenomenon {
 
     /** Shortcut of the phenomenon. */
     private final String shortcut;
+    /** Pre-compiled pattern used to match this phenomenon at the start of a weather token. */
+    private final Pattern pattern;
 
     /**
      * Constructor.
@@ -65,6 +68,7 @@ public enum Phenomenon {
      */
     Phenomenon(final String shortcut) {
         this.shortcut = shortcut;
+        this.pattern = Pattern.compile("^" + shortcut);
     }
 
     @Override
@@ -79,5 +83,14 @@ public enum Phenomenon {
      */
     public String getShortcut() {
         return shortcut;
+    }
+
+    /**
+     * Returns the pre-compiled pattern used to match this phenomenon at the start of a weather token.
+     *
+     * @return the compiled {@link Pattern}.
+     */
+    public Pattern getPattern() {
+        return pattern;
     }
 }

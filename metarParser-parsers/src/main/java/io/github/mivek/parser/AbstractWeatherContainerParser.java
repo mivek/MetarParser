@@ -63,7 +63,7 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
           weatherPartCopy = weatherPartCopy.substring(i.getShortcut().length());
       }
       for (Descriptive des : Descriptive.values()) {
-          if (Regex.findString(Pattern.compile("(" + des.getShortcut() + ")"), weatherPart) != null) {
+          if (Regex.findString(des.getPattern(), weatherPart) != null) {
               wc.setDescriptive(des);
               weatherPartCopy = weatherPartCopy.substring(des.getShortcut().length());
               break;
@@ -74,7 +74,7 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
       while (!weatherPartCopy.isEmpty() && !weatherPartCopy.equals(previousToken)) {
           previousToken = weatherPartCopy;
           for (Phenomenon phenom: Phenomenon.values()) {
-            if (Regex.find(Pattern.compile("^" + phenom.getShortcut()), weatherPartCopy)) {
+            if (Regex.find(phenom.getPattern(), weatherPartCopy)) {
               wc.addPhenomenon(phenom);
               weatherPartCopy = weatherPartCopy.substring(phenom.getShortcut().length());
             }
