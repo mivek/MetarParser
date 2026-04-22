@@ -1,3 +1,10 @@
+## [2.21.1](https://github.com/mivek/MetarParser/compare/v2.21.0...v2.21.1) (2026-04-22)
+
+
+### Bug Fixes
+
+* french translation ([9520638](https://github.com/mivek/MetarParser/commit/9520638ca444f9b455f4b0b856f10bf095479919))
+
 # [2.21.0](https://github.com/mivek/MetarParser/compare/v2.20.13...v2.21.0) (2026-04-20)
 
 
