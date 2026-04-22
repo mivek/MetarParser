@@ -1,3 +1,10 @@
+## [2.21.2](https://github.com/mivek/MetarParser/compare/v2.21.1...v2.21.2) (2026-04-22)
+
+
+### Bug Fixes
+
+* **security:** prevent script injection by assigning inputs.commit_hash to env var ([e2fe222](https://github.com/mivek/MetarParser/commit/e2fe22228b5dd6f3dd893ae13d5ce9396b00ea71))
+
 ## [2.21.1](https://github.com/mivek/MetarParser/compare/v2.21.0...v2.21.1) (2026-04-22)
 
 
