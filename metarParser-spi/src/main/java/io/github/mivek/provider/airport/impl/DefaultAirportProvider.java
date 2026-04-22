@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -23,28 +24,31 @@ public final class DefaultAirportProvider implements AirportProvider {
     private static final String AIRPORTS_RESOURCE = "data/airports.dat";
     private static final String COUNTRIES_RESOURCE = "data/countries.dat";
 
-    private volatile Map<String, Country> countries;
-    private volatile Map<String, Airport> airports;
+    /** Whether the data has been loaded. Set to true only after airports map is fully populated. */
+    private volatile boolean initialized;
+    /** Map of airports keyed by ICAO code. */
+    private Map<String, Airport> airports;
 
-    /** private lock to avoid exposing the monitor. */
+    /** Private lock to avoid exposing the monitor. */
     private final Object loadLock = new Object();
-
 
     /**
      * Ensure the airport and country data have been loaded.
      *
-     * <p>This method is safe to call from multiple threads. It performs a double-checked
-     * locking pattern using {@code loadLock} to initialize the data only once.
+     * <p>This method is safe to call from multiple threads. It uses a double-checked
+     * locking pattern on a single {@code volatile boolean} flag so that a thread
+     * never observes a partially-initialized state.
      */
     private void ensureLoaded() {
-        if (airports != null && countries != null) {
+        if (initialized) {
             return;
         }
         synchronized (loadLock) {
-            if (airports != null && countries != null) {
+            if (initialized) {
                 return;
             }
             loadResources();
+            initialized = true;
         }
     }
 
@@ -98,22 +102,20 @@ public final class DefaultAirportProvider implements AirportProvider {
             throw new IllegalStateException(e);
         }
 
-        this.countries = localCountries;
         this.airports = localAirports;
     }
 
     /**
-     * Returns the map of loaded airports keyed by ICAO code.
+     * Returns an unmodifiable view of the loaded airports keyed by ICAO code.
      *
      * <p>When this method is called the first time, it triggers loading of the underlying
-     * country and airport resources. Subsequent calls return the cached map. The returned
-     * map is the internal map instance (not a defensive copy).
+     * country and airport resources. Subsequent calls return the cached map.
      *
-     * @return the map of ICAO -> Airport
+     * @return an unmodifiable map of ICAO -> Airport
      */
     @Override
     public Map<String, Airport> getAirports() {
         ensureLoaded();
-        return airports;
+        return Collections.unmodifiableMap(airports);
     }
 }
