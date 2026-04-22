@@ -13,6 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
@@ -113,7 +114,7 @@ public final class OurAirportsAirportProvider implements AirportProvider {
 
     @Override
     public Map<String, Airport> getAirports() {
-        return airports;
+        return Collections.unmodifiableMap(airports);
     }
 }
 

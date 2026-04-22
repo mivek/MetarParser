@@ -1,6 +1,7 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.regex.Pattern;
 
 /**
  * Enumeration for descriptive. The first attribute is the code used in the
@@ -28,6 +29,8 @@ public enum Descriptive {
 
     /** The descriptive's shortcut. */
     private final String shortcut;
+    /** Pre-compiled pattern used to detect this descriptive in a weather token. */
+    private final Pattern pattern;
 
     /**
      * Constructor.
@@ -35,6 +38,7 @@ public enum Descriptive {
      */
     Descriptive(final String shortcut) {
         this.shortcut = shortcut;
+        this.pattern = Pattern.compile("(" + shortcut + ")");
     }
 
     /**
@@ -42,6 +46,15 @@ public enum Descriptive {
      */
     public String getShortcut() {
         return this.shortcut;
+    }
+
+    /**
+     * Returns the pre-compiled pattern used to match this descriptive in a weather token.
+     *
+     * @return the compiled {@link Pattern}.
+     */
+    public Pattern getPattern() {
+        return pattern;
     }
 
     @Override
