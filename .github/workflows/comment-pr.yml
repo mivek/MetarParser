@@ -10,7 +10,7 @@ jobs:
   sonarr:
     runs-on: ubuntu-latest
     steps:
-      - uses: marocchino/sticky-pull-request-comment@v2
+      - uses: marocchino/sticky-pull-request-comment@v3
         with:
           message: |
             Please check on sonarcloud <https://sonarcloud.io/project/pull_requests_list?id=io.github.mivek%3AmetarParser> that the PR does not add any issue.
