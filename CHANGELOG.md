@@ -1,3 +1,10 @@
+# [2.22.0](https://github.com/mivek/MetarParser/compare/v2.21.2...v2.22.0) (2026-04-23)
+
+
+### Features
+
+* add missing implementations to parser ([14189a0](https://github.com/mivek/MetarParser/commit/14189a0ebdd3b9d2b62530369ca00e7635c884e6))
+
 ## [2.21.2](https://github.com/mivek/MetarParser/compare/v2.21.1...v2.21.2) (2026-04-22)
 
 
