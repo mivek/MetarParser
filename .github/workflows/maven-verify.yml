@@ -1,13 +1,15 @@
 name: Maven verify
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   verify:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
       - uses: actions/checkout@v6
         with:
@@ -17,6 +19,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Cache SonarQube packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Cache maven packages
         uses: actions/cache@v5
         with:
@@ -24,16 +32,10 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run the maven verify
-        run: mvn --batch-mode --update-snapshots clean verify
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mivek_MetarParser
 
-      - name: Save the PR number in a file
-        run: echo ${{ github.event.number }} > PR_NUMBER.txt
-
-      - name: Upload the PR number as an artifact
-        uses: actions/upload-artifact@v5.0.0
-        with:
-          name: PR_NUMBER
-          path: PR_NUMBER.txt
   generate-docs:
     runs-on: ubuntu-latest
     needs: verify
