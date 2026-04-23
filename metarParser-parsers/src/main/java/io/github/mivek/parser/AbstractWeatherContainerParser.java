@@ -113,6 +113,12 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
           return true;
       }
 
+      if ("NSW".equals(part)) {
+          container.setNsw(true);
+          container.getWeatherConditions().clear();
+          return true;
+      }
+
       Command command = commonSupplier.get(part);
       if (command != null) {
           return command.execute(container, part);

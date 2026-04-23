@@ -23,7 +23,9 @@ public enum CloudQuantity {
     /** Overcast. */
     OVC,
     /** No significant cloud. */
-    NSC;
+    NSC,
+    /** No cloud detected. */
+    NCD;
 
 
     @Override
