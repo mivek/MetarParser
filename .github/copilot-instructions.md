@@ -97,3 +97,45 @@ Follow Conventional Commits: `<type>(<scope>): <subject>` — e.g., `feat(parser
 
 ### Services Are Singletons; Parsers Are Not
 `MetarService.getInstance()` / `TAFService.getInstance()` return static singletons. `MetarParser` and `TAFParser` use plain constructors (the static `getInstance()` on parsers is `@Deprecated(forRemoval = true)`). Prefer constructor instantiation for parsers.
+
+## Weather Provider Architecture
+
+The **Strategy pattern** is used for weather data retrieval to eliminate the NOAA single point of failure and enable multiple data sources.
+
+### WeatherProvider Interface
+Located in `io.github.mivek.service.provider`, the interface defines:
+- `String retrieveMetar(String icao)` — fetches raw METAR string (without "METAR"/"SPECI" prefix)
+- `String retrieveTaf(String icao)` — fetches raw TAF string ready for parsing
+
+Throws `ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO)` when a station is not found.
+
+### Built-in Providers
+- **NOAAWeatherProvider** (default): Uses `https://tgftp.nws.noaa.gov/data/`. Handles NOAA-specific TAF reformatting (merging lines when first line is only "TAF").
+- **AviationWeatherProvider**: Uses `https://aviationweather.gov/api/data/metar` and `/taf`. Strips "METAR "/"SPECI " prefixes for parser compatibility.
+
+### AbstractWeatherProvider Base Class
+Provides shared HTTP utilities (all `protected final`):
+- `checkIcao(String icao)` — validates 4-character ICAO codes
+- `buildRequest(String url)` — creates HTTP GET request with HTTP/2
+- `getHttpResponse(String url)` — executes request and throws `ParseException` on non-200 status
+
+### Using Custom Providers
+```java
+// Use a specific provider for a single request
+MetarService metarService = MetarService.withProvider(new MyWeatherProvider());
+Metar m = metarService.retrieveFromAirport("LFPG");
+
+TAFService tafService = TAFService.withProvider(new MyWeatherProvider());
+TAF t = tafService.retrieveFromAirport("LFPG");
+
+// Default singletons still use NOAA
+MetarService.getInstance().retrieveFromAirport("LFPG");
+TAFService.getInstance().retrieveFromAirport("LFPG");
+```
+
+### Adding a New Provider
+1. Extend `AbstractWeatherProvider` and implement `retrieveMetar()` and `retrieveTaf()`
+2. Return raw weather strings in parser-compatible format
+3. Create comprehensive tests in `io.github.mivek.service.provider` with 100% branch coverage
+4. Add integration tests to `MetarServiceTest` and `TAFServiceTest` using `withProvider(new YourProvider())`
+5. See CONTRIBUTING.md for detailed step-by-step instructions
