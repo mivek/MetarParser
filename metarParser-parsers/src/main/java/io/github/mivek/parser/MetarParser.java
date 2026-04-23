@@ -67,13 +67,26 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     public Metar parse(final String code) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = tokenize(code);
-        Airport airport = getAirportSupplier().get(metarTab[0]);
-        m.setStation(metarTab[0]);
+        int startIndex = 0;
+
+        // Check for METAR/SPECI prefix
+        if (metarTab.length > 0) {
+            if ("METAR".equals(metarTab[0])) {
+                m.setReportType(io.github.mivek.enums.ReportType.METAR);
+                startIndex = 1;
+            } else if ("SPECI".equals(metarTab[0])) {
+                m.setReportType(io.github.mivek.enums.ReportType.SPECI);
+                startIndex = 1;
+            }
+        }
+
+        Airport airport = getAirportSupplier().get(metarTab[startIndex]);
+        m.setStation(metarTab[startIndex]);
         m.setAirport(airport);
         m.setMessage(code);
-        parseDeliveryTime(m, metarTab[1]);
+        parseDeliveryTime(m, metarTab[startIndex + 1]);
         int metarTabLength = metarTab.length;
-        int i = 2;
+        int i = startIndex + 2;
         while (i < metarTabLength) {
             if (!generalParse(m, metarTab[i]) && !parseFlags(m, metarTab[i])) {
                 if ("NOSIG".equals(metarTab[i])) {

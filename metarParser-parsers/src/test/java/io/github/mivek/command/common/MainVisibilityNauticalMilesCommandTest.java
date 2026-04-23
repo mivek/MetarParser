@@ -27,4 +27,11 @@ class MainVisibilityNauticalMilesCommandTest {
     assertTrue(command.execute(m, "P6SM"));
     assertNotNull(m.getVisibility());
   }
+
+  @Test
+  void testCanParseSolidus() {
+    MainVisibilityNauticalMilesCommand command = new MainVisibilityNauticalMilesCommand();
+    assertFalse(command.canParse("////"));
+    // Solidus visibility is for metric (MainVisibilityCommand), not nautical miles
+  }
 }

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public final class MainVisibilityCommand implements Command {
     /** Pattern for the main visibility. */
-    private static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4})(|NDV)$");
+    private static final Pattern MAIN_VISIBILITY_REGEX = Pattern.compile("^(\\d{4}|////)(|NDV)$");
 
     /**
      * constructor.
@@ -26,7 +26,9 @@ public final class MainVisibilityCommand implements Command {
         if (container.getVisibility() == null) {
             container.setVisibility(new Visibility());
         }
-        container.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        if (!matches[1].equals("////")) {
+            container.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+        }
         return getReturnValue();
     }
 

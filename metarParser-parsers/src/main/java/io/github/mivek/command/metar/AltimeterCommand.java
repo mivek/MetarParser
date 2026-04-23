@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class AltimeterCommand implements Command {
 
     /** Pattern of the altimeter (Pascals). */
-    private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4})$");
+    private static final Pattern ALTIMETER_REGEX = Pattern.compile("^Q(\\d{4}|////)$");
 
     /**
      * Package private constructor.
@@ -22,7 +22,9 @@ public final class AltimeterCommand implements Command {
     @Override
     public void execute(final Metar metar, final String part) {
         String[] matches = Regex.pregMatch(ALTIMETER_REGEX, part);
-        metar.setAltimeter(Integer.parseInt(matches[1]));
+        if (!matches[1].equals("////")) {
+            metar.setAltimeter(Integer.parseInt(matches[1]));
+        }
     }
 
     @Override

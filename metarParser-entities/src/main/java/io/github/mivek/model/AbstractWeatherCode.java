@@ -1,6 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.enums.Flag;
+import io.github.mivek.enums.ReportType;
 import io.github.mivek.internationalization.Messages;
 import java.util.EnumSet;
 import java.util.Set;
@@ -24,6 +25,8 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     private String message;
     /** The identifier of the station. */
     private String station;
+    /** Report type (METAR or SPECI). */
+    private ReportType reportType;
 
     /** Holds the flag of the code. */
     private final EnumSet<Flag> flags;
@@ -103,6 +106,20 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
      */
     public void setStation(final String station) {
         this.station = station;
+    }
+
+    /**
+     * @return the report type (METAR or SPECI).
+     */
+    public ReportType getReportType() {
+        return reportType;
+    }
+
+    /**
+     * @param reportType the report type to set.
+     */
+    public void setReportType(final ReportType reportType) {
+        this.reportType = reportType;
     }
 
     /**

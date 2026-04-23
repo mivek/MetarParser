@@ -94,4 +94,41 @@ class WindCommandTest {
         assertEquals(15, w.getGust());
         assertEquals("KT", w.getUnit());
     }
+
+    @Test
+    void testWindCommandWithP99Speed() {
+        String windPart = "280P99KT";
+        Wind res = command.parseWind(windPart);
+        assertNotNull(res);
+        assertEquals(Integer.valueOf(280), res.getDirectionDegrees());
+        assertEquals(100, res.getSpeed());
+        assertEquals("KT", res.getUnit());
+    }
+
+    @Test
+    void testWindCommandWithP99Gust() {
+        String windPart = "28050GP99KT";
+        Wind res = command.parseWind(windPart);
+        assertNotNull(res);
+        assertEquals(Integer.valueOf(280), res.getDirectionDegrees());
+        assertEquals(50, res.getSpeed());
+        assertEquals(100, res.getGust());
+        assertEquals("KT", res.getUnit());
+    }
+
+    @Test
+    void testWindCommandWithSolidusSpeed() {
+        String code = "000////KT";
+        assertTrue(command.canParse(code), "Should be able to parse solidus wind");
+    }
+
+    @Test
+    void testWindCommandVRBWind() {
+        String windPart = "VRB05KT";
+        Wind res = command.parseWind(windPart);
+        assertNotNull(res);
+        assertEquals(Messages.getInstance().getString("Converter.VRB"), res.getDirection());
+        assertEquals(5, res.getSpeed());
+        assertNull(res.getDirectionDegrees());
+    }
 }

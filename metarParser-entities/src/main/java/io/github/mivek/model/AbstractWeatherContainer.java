@@ -26,6 +26,8 @@ public abstract class AbstractWeatherContainer {
     private boolean cavok;
     /** Contains the remarks. */
     private String remark;
+    /** Indicates whether NSW (No Significant Weather) is present. */
+    private boolean nsw;
 
     /**
      * Constructor to initialize the lists.
@@ -160,6 +162,20 @@ public abstract class AbstractWeatherContainer {
      */
     public void setRemark(final String remark) {
         this.remark = remark;
+    }
+
+    /**
+     * @return the nsw (No Significant Weather)
+     */
+    public boolean isNsw() {
+        return nsw;
+    }
+
+    /**
+     * @param nsw the nsw to set
+     */
+    public void setNsw(final boolean nsw) {
+        this.nsw = nsw;
     }
 
     /**

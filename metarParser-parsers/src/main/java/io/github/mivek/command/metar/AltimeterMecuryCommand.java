@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public final class AltimeterMecuryCommand implements Command {
 
     /** Pattern for the altimeter in inches of mercury. */
-    private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4})$");
+    private static final Pattern ALTIMETER_MERCURY_REGEX = Pattern.compile("^A(\\d{4}|////)$");
 
     /**
      * Package private constructor.
@@ -23,8 +23,10 @@ public final class AltimeterMecuryCommand implements Command {
     @Override
     public void execute(final Metar metar, final String part) {
         String[] matches = Regex.pregMatch(ALTIMETER_MERCURY_REGEX, part);
-        double mercury = Double.parseDouble(matches[1]) / 100;
-        metar.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
+        if (!matches[1].equals("////")) {
+            double mercury = Double.parseDouble(matches[1]) / 100;
+            metar.setAltimeter((int) Converter.inchesMercuryToHPascal(mercury));
+        }
     }
 
     @Override
