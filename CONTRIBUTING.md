@@ -90,3 +90,57 @@ If you are willing to add a new language, please use https://crwd.in/metarParser
 Once a language is complete at 100%, the translation file will be added to the project.
 
 Thank you
+
+## Adding a Weather Provider
+
+Weather providers are responsible for fetching raw METAR and TAF strings from an external source.
+The built-in providers are `NOAAWeatherProvider` (default) and `AviationWeatherProvider`.
+
+### Steps to add a new provider
+
+1. **Implement the `WeatherProvider` interface** in `metarParser-services`:
+
+   ```java
+   package io.github.mivek.service.provider;
+
+   public final class MyWeatherProvider extends AbstractWeatherProvider {
+
+       @Override
+       public String retrieveMetar(final String icao)
+               throws ParseException, IOException, URISyntaxException, InterruptedException {
+           checkIcao(icao);
+           // Fetch from your source and return the raw METAR string (without "METAR" prefix).
+           // Throw ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO) if the station is not found.
+       }
+
+       @Override
+       public String retrieveTaf(final String icao)
+               throws ParseException, IOException, URISyntaxException, InterruptedException {
+           checkIcao(icao);
+           // Fetch from your source and return a TAF string ready for TAFParser.
+           // Throw ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO) if the station is not found.
+       }
+   }
+   ```
+
+   Key points:
+   - Extend `AbstractWeatherProvider` to reuse `checkIcao()`, `buildRequest()`, and `getHttpResponse()`.
+   - Return the raw weather code in the format expected by `MetarParser` / `TAFParser` (no `METAR` or `SPECI` prefix for METARs; follow `NOAAWeatherProvider.format()` as a reference for TAFs).
+   - Throw `new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO)` when the station is not found or the ICAO is invalid.
+
+2. **Write tests** in `metarParser-services`:
+
+   - Add a `MyWeatherProviderTest` class in `src/test/java/io/github/mivek/service/provider/` that covers all branches of your implementation (100% branch coverage is required for this module).
+   - Add integration tests to `MetarServiceTest` and `TAFServiceTest` that use `MetarService.withProvider(new MyWeatherProvider())` and `TAFService.withProvider(new MyWeatherProvider())` to verify that the data returned by your provider can actually be parsed.
+
+3. **Use the provider** via the factory methods:
+
+   ```java
+   MetarService metarService = MetarService.withProvider(new MyWeatherProvider());
+   Metar metar = metarService.retrieveFromAirport("LFPG");
+
+   TAFService tafService = TAFService.withProvider(new MyWeatherProvider());
+   TAF taf = tafService.retrieveFromAirport("LFPG");
+   ```
+
+   The default singleton (`MetarService.getInstance()` / `TAFService.getInstance()`) continues to use the NOAA provider.

@@ -3,12 +3,11 @@ package io.github.mivek.service;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.Metar;
 import io.github.mivek.parser.MetarParser;
+import io.github.mivek.service.provider.NOAAWeatherProvider;
+import io.github.mivek.service.provider.WeatherProvider;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpResponse;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Class representing the service for metar.
@@ -16,16 +15,33 @@ import java.util.stream.Stream;
  * @author mivek
  */
 public final class MetarService extends AbstractWeatherCodeService<Metar> {
-    /** URL to retrieve the metar from. */
-    private static final String NOAA_METAR_URL = "https://tgftp.nws.noaa.gov/data/observations/metar/stations/";
     /** Instance. */
     private static final MetarService INSTANCE = new MetarService();
 
     /**
-     * Private constructor.
+     * Private default constructor. Uses the NOAA provider.
      */
     private MetarService() {
-        super(new MetarParser());
+        this(new NOAAWeatherProvider());
+    }
+
+    /**
+     * Private constructor for a specific provider.
+     *
+     * @param provider the weather provider to use.
+     */
+    private MetarService(final WeatherProvider provider) {
+        super(new MetarParser(), provider);
+    }
+
+    /**
+     * Creates a new {@link MetarService} instance configured with the given provider.
+     *
+     * @param provider the weather provider to use for fetching METAR data.
+     * @return a new {@link MetarService} using the specified provider.
+     */
+    public static MetarService withProvider(final WeatherProvider provider) {
+        return new MetarService(provider);
     }
 
     @Override
@@ -35,8 +51,7 @@ public final class MetarService extends AbstractWeatherCodeService<Metar> {
 
     @Override
     public Metar retrieveFromAirport(final String icao) throws ParseException, IOException, URISyntaxException, InterruptedException {
-        HttpResponse<Stream<String>> response = getResponse(icao, NOAA_METAR_URL);
-        return getParser().parse(response.body().skip(1).collect(Collectors.joining()));
+        return getParser().parse(getProvider().retrieveMetar(icao));
     }
 
     /**
