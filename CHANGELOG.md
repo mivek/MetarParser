@@ -1,3 +1,10 @@
+# [2.24.0](https://github.com/mivek/MetarParser/compare/v2.23.0...v2.24.0) (2026-04-24)
+
+
+### Features
+
+* **entities:** add LengthUnit to entities ([c99d57c](https://github.com/mivek/MetarParser/commit/c99d57c2c915a4deb6409d78cbb4c70439fc2924))
+
 # [2.23.0](https://github.com/mivek/MetarParser/compare/v2.22.0...v2.23.0) (2026-04-24)
 
 
