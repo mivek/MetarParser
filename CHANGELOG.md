@@ -1,3 +1,10 @@
+# [2.23.0](https://github.com/mivek/MetarParser/compare/v2.22.0...v2.23.0) (2026-04-24)
+
+
+### Features
+
+* **services:** add WeatherProvider pattern with NOAA and AviationWeather providers ([dba7656](https://github.com/mivek/MetarParser/commit/dba7656c397ff38aad424f76359d4700f12adfcb))
+
 # [2.22.0](https://github.com/mivek/MetarParser/compare/v2.21.2...v2.22.0) (2026-04-23)
 
 
