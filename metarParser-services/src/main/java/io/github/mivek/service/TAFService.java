@@ -1,17 +1,13 @@
 package io.github.mivek.service;
 
-import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.TAF;
 import io.github.mivek.parser.TAFParser;
+import io.github.mivek.service.provider.NOAAWeatherProvider;
+import io.github.mivek.service.provider.WeatherProvider;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Facade for TAF.
@@ -19,16 +15,33 @@ import java.util.stream.Stream;
  * @author mivek
  */
 public final class TAFService extends AbstractWeatherCodeService<TAF> {
-    /** URL to retrieve the TAF from. */
-    private static final String NOAA_TAF_URL = "https://tgftp.nws.noaa.gov/data/forecasts/taf/stations/";
     /** The instance of the service. */
     private static final TAFService INSTANCE = new TAFService();
 
     /**
-     * Constructor.
+     * Private default constructor. Uses the NOAA provider.
      */
     private TAFService() {
-        super(new TAFParser());
+        this(new NOAAWeatherProvider());
+    }
+
+    /**
+     * Private constructor for a specific provider.
+     *
+     * @param provider the weather provider to use.
+     */
+    private TAFService(final WeatherProvider provider) {
+        super(new TAFParser(), provider);
+    }
+
+    /**
+     * Creates a new {@link TAFService} instance configured with the given provider.
+     *
+     * @param provider the weather provider to use for fetching TAF data.
+     * @return a new {@link TAFService} using the specified provider.
+     */
+    public static TAFService withProvider(final WeatherProvider provider) {
+        return new TAFService(provider);
     }
 
     @Override
@@ -38,32 +51,7 @@ public final class TAFService extends AbstractWeatherCodeService<TAF> {
 
     @Override
     public TAF retrieveFromAirport(final String icao) throws IOException, ParseException, URISyntaxException, InterruptedException {
-        HttpResponse<Stream<String>> response = getResponse(icao, NOAA_TAF_URL);
-        StringBuilder sb = new StringBuilder();
-        // Throw the first line since it is not part of the TAF event.
-        response.body().skip(1).forEach(currentLine -> sb.append(currentLine.replaceAll("\\s{2,}", "")).append("\n"));
-        return getParser().parse(format(sb.toString()));
-    }
-
-    /**
-     * Reformat the first line of the code.
-     *
-     * @param code the first line of the TAF event.
-     * @return the formated taf code.
-     * @throws ParseException when an error occurs.
-     */
-    String format(final String code) throws ParseException {
-        String[] lines = code.split("\n");
-        if (!TAFParser.TAF.equals(lines[0].trim())) {
-            return code;
-        }
-        if ("AMD TAF".equals(lines[1].trim())) {
-            List<String> list = new ArrayList<>(Arrays.asList(lines));
-            list.remove(1);
-            lines = list.toArray(new String[0]);
-        }
-        // Case of TAF AMD, the 2 first lines must be merged.
-        return Arrays.stream(lines).reduce((x, y) -> x + y + "\n").orElseThrow(() -> new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE));
+        return getParser().parse(getProvider().retrieveTaf(icao));
     }
 
     /**
