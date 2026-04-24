@@ -2,7 +2,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mivek_MetarParser&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mivek_MetarParser)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=mivek_MetarParser&metric=coverage)](https://sonarcloud.io/summary/new_code?id=mivek_MetarParser)[![GitHub license](https://img.shields.io/github/license/mivek/MetarParser.svg)](https://github.com/mivek/MetarParser/blob/main/LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.mivek/metarParser.svg)](https://search.maven.org/artifact/io.github.mivek/metarParser/)
-
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B15BGU6)
 # MetarParser
 
 This java lib provides a Metar and TAF decoder.
