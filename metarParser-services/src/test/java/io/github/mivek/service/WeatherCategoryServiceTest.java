@@ -1,6 +1,7 @@
 package io.github.mivek.service;
 
 import io.github.mivek.enums.CloudQuantity;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -230,6 +231,24 @@ class WeatherCategoryServiceTest {
                 Arguments.of("6000m", 2300, MilitaryWeatherCategory.WHT),
                 Arguments.of("10SM", 6000, MilitaryWeatherCategory.BLU));
     }
+    @Test
+    void computeWithUnitSet() {
+        final Visibility visibility = new Visibility();
+        visibility.setMainVisibility("5000");
+        visibility.setUnit(LengthUnit.METERS);
+        final Cloud cloud = new Cloud();
+        cloud.setHeight(2000);
+        cloud.setQuantity(CloudQuantity.BKN);
+
+        final Metar metar = new Metar();
+        metar.setVisibility(visibility);
+        metar.addCloud(cloud);
+
+        final FAAWeatherCategory result = WeatherCategoryService.getInstance().computeWeatherCategory(metar, FAAWeatherCategory.class);
+
+        assertEquals(FAAWeatherCategory.MVFR, result);
+    }
+
     @Test
     void computeWithNullHeight() {
         final Visibility visibility = new Visibility();

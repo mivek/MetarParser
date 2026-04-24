@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -15,6 +16,8 @@ public class Visibility {
     private Integer minVisibility;
     /** Direction of the minimal visibility. */
     private String minDirection;
+    /** The unit of the visibility values. */
+    private LengthUnit unit;
 
     /**
      * Getter of the mainVisibility.
@@ -53,7 +56,7 @@ public class Visibility {
     }
 
     /**
-     * Getter of direction.
+     * Getter of the minimal direction.
      *
      * @return the direction.
      */
@@ -70,11 +73,30 @@ public class Visibility {
         this.minDirection = minDirection;
     }
 
+    /**
+     * Getter of the visibility unit.
+     *
+     * @return the visibility unit.
+     */
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
+    /**
+     * Setter of the visibility unit.
+     *
+     * @param unit the visibility unit to set.
+     */
+    public void setUnit(final LengthUnit unit) {
+        this.unit = unit;
+    }
+
     @Override
     public final String toString() {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString("ToString.visibility.main"), mainVisibility).
                 append(Messages.getInstance().getString("ToString.visibility.min"), minVisibility).
-                append(Messages.getInstance().getString("ToString.visibility.min.direction"), minDirection).toString();
+                append(Messages.getInstance().getString("ToString.visibility.min.direction"), minDirection).
+                append(Messages.getInstance().getString("ToString.visibility.unit"), unit).toString();
     }
 }

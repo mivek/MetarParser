@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
 
-    static final String TEN_KM = ">10km";
+    static final String TEN_KM = ">10000";
     private MetarParser parser;
 
     @Override
@@ -56,8 +56,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals("KT", m.getWind().getUnit());
         assertNotNull(m.getVisibility());
         assertEquals(metarString, m.getMessage());
-        assertEquals("350m", m.getVisibility().getMainVisibility());
-        assertThat(m.getRunways(), is(not(empty())));
+        assertEquals("350", m.getVisibility().getMainVisibility());
         assertThat(m.getRunways(), hasSize(8));
         // Check if runways are correctly parsed
         assertEquals("27L", m.getRunways().get(0).getName());
@@ -91,7 +90,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(25, trend.getWind().getGust());
         assertThat(trend.getTimes(), hasSize(0));
         assertNotNull(trend.getVisibility());
-        assertEquals("3000m", trend.getVisibility().getMainVisibility());
+        assertEquals("3000", trend.getVisibility().getMainVisibility());
         assertThat(trend.getWeatherConditions(), hasSize(1));
         WeatherCondition wc = trend.getWeatherConditions().get(0);
         assertEquals(Descriptive.THUNDERSTORM, wc.getDescriptive());
@@ -232,7 +231,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(25, w.getGust());
         assertNotNull(m.getVisibility());
         Visibility v = m.getVisibility();
-        assertEquals("5000m", v.getMainVisibility());
+        assertEquals("5000", v.getMainVisibility());
         assertEquals(1100, v.getMinVisibility());
         assertEquals("W", v.getMinDirection());
         String des = m.toString();
@@ -275,12 +274,12 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(2, w.getSpeed());
 
         assertNotNull(m.getVisibility());
-        assertEquals("350m", m.getVisibility().getMainVisibility());
+        assertEquals("350", m.getVisibility().getMainVisibility());
         assertThat(m.getWeatherConditions(), hasSize(1));
         assertEquals(Phenomenon.FOG, m.getWeatherConditions().get(0).getPhenomenons().get(0));
         assertNotNull(m.getVerticalVisibility());
         assertEquals(200, m.getVerticalVisibility().intValue());
-        assertThat(m.toString(), containsString(Messages.getInstance().getString("ToString.visibility.main") + "=350m"));
+        assertThat(m.toString(), containsString(Messages.getInstance().getString("ToString.visibility.main") + "=350"));
     }
 
     @Test
@@ -329,7 +328,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         // THEN the remark is not null
         assertNotNull(m);
         assertNotNull(m.getVisibility());
-        assertEquals("1 3/4SM", m.getVisibility().getMainVisibility());
+        assertEquals("1 3/4", m.getVisibility().getMainVisibility());
         assertThat(m.getRemark(), containsString("SF5NS3 " + Messages.getInstance().getString("Remark.Sea.Level.Pressure", "1013.4")));
     }
 

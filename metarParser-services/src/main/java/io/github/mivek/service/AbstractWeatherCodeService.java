@@ -12,8 +12,6 @@ import io.github.mivek.service.provider.WeatherProvider;
  * Abstract class for the service.
  */
 public abstract class AbstractWeatherCodeService<T extends AbstractWeatherCode> implements IWeatherCodeFacade<T> {
-    /** Const for icao length. */
-    public static final int ICAO = 4;
 
     /** The parser. */
     private final AbstractWeatherCodeParser<T> parser;

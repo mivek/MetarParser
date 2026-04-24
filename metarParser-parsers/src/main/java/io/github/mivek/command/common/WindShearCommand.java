@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.WindShear;
 import io.github.mivek.utils.Regex;
@@ -36,6 +37,7 @@ public final class WindShearCommand implements BaseWindCommand {
         WindShear wind = new WindShear();
         String[] windPart = Regex.pregMatch(WIND_SHEAR_REGEX, stringWindShear);
         wind.setHeight(100 * Integer.parseInt(windPart[1]));
+        wind.setHeightUnit(LengthUnit.FEET);
         setWindElements(wind, windPart[2], windPart[3], windPart[4], windPart[5]);
         return wind;
     }

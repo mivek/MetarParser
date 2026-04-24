@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.Visibility;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,5 +20,6 @@ class MinimalVisibilityCommandTest {
         command.execute(metar, input);
         assertEquals(600, metar.getVisibility().getMinVisibility());
         assertEquals(direction, metar.getVisibility().getMinDirection());
+        assertEquals(LengthUnit.METERS, metar.getVisibility().getUnit());
     }
 }

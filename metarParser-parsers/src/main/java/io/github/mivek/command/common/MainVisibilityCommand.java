@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.utils.Converter;
@@ -28,6 +29,7 @@ public final class MainVisibilityCommand implements Command {
         }
         if (!matches[1].equals("////")) {
             container.getVisibility().setMainVisibility(Converter.convertVisibility(matches[1]));
+            container.getVisibility().setUnit(LengthUnit.METERS);
         }
         return getReturnValue();
     }

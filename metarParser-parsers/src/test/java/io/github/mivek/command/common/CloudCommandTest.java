@@ -2,6 +2,7 @@ package io.github.mivek.command.common;
 
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.Cloud;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,7 @@ class CloudCommandTest {
         assertEquals(CloudQuantity.SKC, res.getQuantity());
         assertNull(res.getHeight());
         assertNull(res.getType());
+        assertNull(res.getUnit());
     }
 
     @Test
@@ -50,6 +52,7 @@ class CloudCommandTest {
         assertEquals(CloudQuantity.SCT, res.getQuantity());
         assertEquals(1600, res.getHeight());
         assertNull(res.getType());
+        assertEquals(LengthUnit.FEET, res.getUnit());
     }
 
     @Test
@@ -63,6 +66,7 @@ class CloudCommandTest {
         assertEquals(2600, res.getHeight());
         assertNotNull(res.getType());
         assertEquals(CloudType.CB, res.getType());
+        assertEquals(LengthUnit.FEET, res.getUnit());
     }
 
     @Test
@@ -82,6 +86,7 @@ class CloudCommandTest {
         assertEquals(CloudQuantity.SCT, res.getQuantity());
         assertEquals(2600, res.getHeight());
         assertNull(res.getType());
+        assertEquals(LengthUnit.FEET, res.getUnit());
     }
     @Test
     void testParseUnknownHeightAndUnknownCloudType() {
@@ -92,6 +97,7 @@ class CloudCommandTest {
         assertEquals(CloudQuantity.SCT, res.getQuantity());
         assertNull(res.getHeight());
         assertNull(res.getType());
+        assertNull(res.getUnit());
     }
 
 }

@@ -25,7 +25,7 @@ class ProbTrendParserTest {
     assertEquals(7, trend.getValidity().getStartHour());
     assertEquals(17, trend.getValidity().getEndDay());
     assertEquals(10, trend.getValidity().getEndHour());
-    assertEquals("2000m", trend.getVisibility().getMainVisibility());
+    assertEquals("2000", trend.getVisibility().getMainVisibility());
     MatcherAssert.assertThat(trend.getWeatherConditions(), hasSize(1));
     MatcherAssert.assertThat(trend.getClouds(), hasSize(1));
   }

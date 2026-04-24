@@ -1,6 +1,7 @@
 package io.github.mivek.command.taf;
 
 import io.github.mivek.enums.IcingIntensity;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.ITafGroups;
 import io.github.mivek.model.Icing;
 import io.github.mivek.utils.Regex;
@@ -20,6 +21,7 @@ public final class IcingCommand implements Command {
     icing.setIntensity(IcingIntensity.get(matches[1]));
     icing.setBaseHeight(100 * Integer.parseInt(matches[2]));
     icing.setDepth(1000 * Integer.parseInt(matches[3]));
+    icing.setUnit(LengthUnit.FEET);
     taf.addIcing(icing);
   }
 

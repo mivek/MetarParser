@@ -11,7 +11,9 @@ public enum LengthUnit {
     /** Metric unit used by default in METAR runway visual range. */
     METERS("M"),
     /** Imperial unit occasionally used in US reports. */
-    FEET("FT");
+    FEET("FT"),
+    /** Statute miles unit used in US METAR visibility. */
+    STATUTE_MILES("SM");
 
     /** Shortcut found in METAR token. */
     private final String shortcut;

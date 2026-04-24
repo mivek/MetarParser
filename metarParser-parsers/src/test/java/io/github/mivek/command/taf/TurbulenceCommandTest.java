@@ -2,6 +2,7 @@ package io.github.mivek.command.taf;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.model.TAF;
 import org.hamcrest.MatcherAssert;
@@ -29,6 +30,7 @@ class TurbulenceCommandTest {
     assertEquals(TurbulenceIntensity.MODERATE_CLEAR_AIR_OCCASIONAL, taf.getTurbulences().get(0).getIntensity());
     assertEquals(100, taf.getTurbulences().get(0).getBaseHeight());
     assertEquals(4000, taf.getTurbulences().get(0).getDepth());
+    assertEquals(LengthUnit.FEET, taf.getTurbulences().get(0).getUnit());
   }
   @Test
   void testCanParse() {

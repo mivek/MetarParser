@@ -2,6 +2,7 @@ package io.github.mivek.command.common;
 
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Cloud;
 import io.github.mivek.utils.Regex;
@@ -42,6 +43,7 @@ public final class CloudCommand implements Command {
             cloud.setQuantity(cq);
             if (cloudPart[3] != null && !UNDEFINED.equals(cloudPart[3])) {
                 cloud.setHeight(100 * Integer.parseInt(cloudPart[3]));
+                cloud.setUnit(LengthUnit.FEET);
             }
             if (cloudPart[4] != null && !UNDEFINED.equals(cloudPart[4])) {
                 CloudType ct = CloudType.valueOf(cloudPart[4]);

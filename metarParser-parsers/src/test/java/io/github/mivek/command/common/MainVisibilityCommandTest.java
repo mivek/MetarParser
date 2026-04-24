@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.Metar;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,7 @@ class MainVisibilityCommandTest {
         assertTrue(result);
         assertNotNull(metar.getVisibility());
         assertNotNull(metar.getVisibility().getMainVisibility());
+        assertEquals(LengthUnit.METERS, metar.getVisibility().getUnit());
     }
 
     @Test
@@ -38,5 +40,6 @@ class MainVisibilityCommandTest {
         assertNotNull(metar.getVisibility());
         // When visibility is missing, mainVisibility should not be set
         assertNull(metar.getVisibility().getMainVisibility());
+        assertNull(metar.getVisibility().getUnit());
     }
 }

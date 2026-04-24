@@ -39,7 +39,7 @@ class NSWHandlingTest {
         String code = "METAR KJFK 121151Z 24016G28KT 10SM +TSRA 25/10 Q1012 TEMPO 1015/1020 NSW";
         Metar metar = parser.parse(code);
         assertNotNull(metar, "METAR should parse");
-        assertTrue(metar.getWeatherConditions().size() > 0, "Present weather should be set");
+        assertFalse(metar.getWeatherConditions().isEmpty(), "Present weather should be set");
         if (!metar.getTrends().isEmpty()) {
             assertTrue(metar.getTrends().get(0).isNsw(), "Trend should have NSW");
         }
