@@ -27,6 +27,9 @@ public final class Converter {
     /** Pattern to parse a visibility string composed of a numeric value and a unit. */
     private static final Pattern VISIBILITY_PATTERN = Pattern.compile("(\\d+)([a-z,A-Z]+)");
 
+    /** Pattern to extract a numeric value from a raw visibility string. */
+    private static final Pattern NUMERIC_PATTERN = Pattern.compile("(\\d+)");
+
     /**
      * Private constructor.
      */
@@ -58,9 +61,9 @@ public final class Converter {
      */
     public static String convertVisibility(final String input) {
         if ("9999".equals(input)) {
-            return ">10km";
+            return ">10000";
         } else {
-            return Integer.parseInt(input) + "m";
+            return String.valueOf(Integer.parseInt(input));
         }
     }
 
@@ -145,6 +148,27 @@ public final class Converter {
         }
 
         return result;
+    }
+
+    /**
+     * Converts the visibility to a value in km using the provided unit shortcut.
+     *
+     * @param rawVisibility The raw visibility string (no unit suffix expected)
+     * @param unitShortcut The unit shortcut ("M", "SM", "KM", "FT")
+     * @return The visibility in km as a double
+     */
+    public static Double convertVisibilityToKM(final String rawVisibility, final String unitShortcut) {
+        final Matcher matcher = NUMERIC_PATTERN.matcher(rawVisibility.replace(">", ""));
+        if (!matcher.find()) {
+            return null;
+        }
+        final int value = Integer.parseInt(matcher.group(1));
+        return switch (unitShortcut.toUpperCase()) {
+            case "SM" -> value * SM_TO_KM;
+            case "KM" -> (double) value;
+            case "M" -> value / 1000.0;
+            default -> null;
+        };
     }
 
     /**

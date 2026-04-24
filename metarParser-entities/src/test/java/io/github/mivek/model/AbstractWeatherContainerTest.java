@@ -3,6 +3,7 @@ package io.github.mivek.model;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.Descriptive;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -79,8 +80,16 @@ abstract class AbstractWeatherContainerTest<T extends AbstractWeatherContainer> 
         wind.setSpeed(15);
         container.setWind(wind);
         container.setVerticalVisibility(2000);
+        container.setVerticalVisibilityUnit(LengthUnit.FEET);
 
         String description = container.toString();
         assertThat(description, containsString(Messages.getInstance().getString("ToString.vertical.visibility")));
+        assertThat(description, containsString(Messages.getInstance().getString("ToString.vertical.visibility.unit")));
+    }
+
+    @Test
+    void testGetVerticalVisibilityUnitIsNullByDefault() {
+        T container = getEntity();
+        assertNull(container.getVerticalVisibilityUnit());
     }
 }

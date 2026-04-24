@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.github.mivek.enums.IcingIntensity;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.TAF;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -32,6 +33,7 @@ class IcingCommandTest {
     assertEquals(IcingIntensity.LIGHT_RIME_ICING_CLOUD, taf.getIcings().get(0).getIntensity());
     assertEquals(3000, taf.getIcings().get(0).getBaseHeight());
     assertEquals(4000, taf.getIcings().get(0).getDepth());
+    assertEquals(LengthUnit.FEET, taf.getIcings().get(0).getUnit());
   }
 
   @Test

@@ -33,7 +33,7 @@ class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
         assertEquals(13, res.getWind().getSpeed());
         assertEquals("KT", res.getWind().getUnit());
         // Visibility
-        assertEquals(">10km", res.getVisibility().getMainVisibility());
+        assertEquals(">10000", res.getVisibility().getMainVisibility());
         // Temperatures
         assertEquals(4, res.getTemperature());
         assertEquals(3, res.getDewPoint());

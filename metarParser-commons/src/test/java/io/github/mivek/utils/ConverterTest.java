@@ -9,13 +9,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.time.LocalTime;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ConverterTest {
     @Test
     void testConvertVisibility() {
-        assertEquals(">10km", Converter.convertVisibility("9999"));
-        assertEquals("5000m", Converter.convertVisibility("5000"));
+        assertEquals(">10000", Converter.convertVisibility("9999"));
+        assertEquals("5000", Converter.convertVisibility("5000"));
     }
 
     @Test
@@ -77,5 +77,29 @@ class ConverterTest {
                 Arguments.of("2KM", 2D),
                 Arguments.of("800m", 0.8D),
                 Arguments.of("2NM", null));
+    }
+
+    @DisplayName("should convert raw visibility string and unit shortcut to km")
+    @ParameterizedTest
+    @MethodSource
+    void testConvertVisibilityToKMWithUnit(final String rawVisibility, final String unitShortcut, final Double expected) {
+        final Double result = Converter.convertVisibilityToKM(rawVisibility, unitShortcut);
+
+        if (expected == null) {
+            assertNull(result);
+        } else {
+            assertNotNull(result);
+            assertEquals(expected, result, 1e-6);
+        }
+    }
+
+    static Stream<Arguments> testConvertVisibilityToKMWithUnit() {
+        return Stream.of(
+                Arguments.of("800", "M", 0.8D),
+                Arguments.of(">10000", "M", 10.0D),
+                Arguments.of("P6SM", "SM", 6 * 1.609344),
+                Arguments.of("2", "KM", 2.0D),
+                Arguments.of("notParsable", "M", null),
+                Arguments.of("5000", "FT", null));
     }
 }

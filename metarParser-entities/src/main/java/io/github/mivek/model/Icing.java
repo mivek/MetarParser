@@ -1,6 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.enums.IcingIntensity;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -11,10 +12,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public final class Icing {
   /** The intensity of the icing. */
   private IcingIntensity intensity;
-  /** The base of the icing layer in feet. */
+  /** The base of the icing layer. */
   private int baseHeight;
-  /** The icing layer depth in feet. */
+  /** The icing layer depth. */
   private int depth;
+  /** The unit of the icing heights. */
+  private LengthUnit unit;
 
   /**
    * Returns the icing intensity.
@@ -32,22 +35,22 @@ public final class Icing {
   }
 
   /**
-   * Returns the base of the icing layer in feet.
-   * @return the base of the icing layer in feet.
+   * Returns the base of the icing layer.
+   * @return the base of the icing layer.
    */
   public int getBaseHeight() {
     return baseHeight;
   }
 
   /**
-   * @param baseHeight The base height to set in feet.
+   * @param baseHeight The base height to set.
    */
   public void setBaseHeight(final int baseHeight) {
     this.baseHeight = baseHeight;
   }
 
   /**
-   * @return the icing layer depth in feet.
+   * @return the icing layer depth.
    * Add this to the baseHeight to determine the top limit of the icing conditions.
    */
   public int getDepth() {
@@ -55,10 +58,24 @@ public final class Icing {
   }
 
   /**
-   * @param depth The depth to set in feet.
+   * @param depth The depth to set.
    */
   public void setDepth(final int depth) {
     this.depth = depth;
+  }
+
+  /**
+   * @return the unit of the icing heights.
+   */
+  public LengthUnit getUnit() {
+    return unit;
+  }
+
+  /**
+   * @param unit The unit of the icing heights to set.
+   */
+  public void setUnit(final LengthUnit unit) {
+    this.unit = unit;
   }
 
   @Override
@@ -67,6 +84,7 @@ public final class Icing {
         append(Messages.getInstance().getString("ToString.intensity"), intensity).
         append(Messages.getInstance().getString("ToString.baseHeight"), baseHeight).
         append(Messages.getInstance().getString("ToString.depth"), depth).
+        append(Messages.getInstance().getString("ToString.height.unit"), unit).
         toString();
   }
 }

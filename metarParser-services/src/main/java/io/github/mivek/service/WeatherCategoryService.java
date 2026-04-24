@@ -3,6 +3,7 @@ package io.github.mivek.service;
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Cloud;
+import io.github.mivek.model.Visibility;
 import io.github.mivek.model.WeatherCategory;
 import io.github.mivek.utils.Converter;
 
@@ -52,7 +53,13 @@ public final class WeatherCategoryService {
      * @return Weather category
      */
     private WeatherCategory computeWeatherCategory(final AbstractWeatherContainer weatherContainer, final WeatherCategory[] categories) {
-        final Double visibilityDistance = Converter.convertVisibilityToKM(weatherContainer.getVisibility().getMainVisibility());
+        final Visibility vis = weatherContainer.getVisibility();
+        final Double visibilityDistance;
+        if (vis.getUnit() != null) {
+            visibilityDistance = Converter.convertVisibilityToKM(vis.getMainVisibility(), vis.getUnit().toString());
+        } else {
+            visibilityDistance = Converter.convertVisibilityToKM(vis.getMainVisibility());
+        }
         if (visibilityDistance == null) {
             return null;
         }

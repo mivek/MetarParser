@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.utils.Regex;
 
@@ -23,6 +24,7 @@ public final class MinimalVisibilityCommand implements Command {
         String[] matches = Regex.pregMatch(MIN_VISIBILITY_REGEX, part.toUpperCase());
         container.getVisibility().setMinVisibility(Integer.parseInt(matches[1]));
         container.getVisibility().setMinDirection(matches[2]);
+        container.getVisibility().setUnit(LengthUnit.METERS);
         return getReturnValue();
     }
 

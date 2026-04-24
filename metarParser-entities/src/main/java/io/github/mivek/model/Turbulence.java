@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,10 +12,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public final class Turbulence {
   /** The intensity of the turbulence. */
   private TurbulenceIntensity intensity;
-  /** The base limit of the turbulence layer in feet. */
+  /** The base limit of the turbulence layer. */
   private int baseHeight;
-  /** The turbulence layer depth in feet. */
+  /** The turbulence layer depth. */
   private int depth;
+  /** The unit of the turbulence heights. */
+  private LengthUnit unit;
 
   /**
    * @return the intensity of the turbulence.
@@ -31,21 +34,21 @@ public final class Turbulence {
   }
 
   /**
-   * @return The base height of the turbulence layer in feet.
+   * @return The base height of the turbulence layer.
    */
   public int getBaseHeight() {
     return baseHeight;
   }
 
   /**
-   * @param baseHeight The base height to set in feet.
+   * @param baseHeight The base height to set.
    */
   public void setBaseHeight(final int baseHeight) {
     this.baseHeight = baseHeight;
   }
 
   /**
-   * @return the turbulence layer depth in feet.
+   * @return the turbulence layer depth.
    * Add it to the base height to determine the top limit of the turbulence conditions.
    */
   public int getDepth() {
@@ -53,10 +56,24 @@ public final class Turbulence {
   }
 
   /**
-   * @param depth The turbulence layer depth to set in feet.
+   * @param depth The turbulence layer depth to set.
    */
   public void setDepth(final int depth) {
     this.depth = depth;
+  }
+
+  /**
+   * @return the unit of the turbulence heights.
+   */
+  public LengthUnit getUnit() {
+    return unit;
+  }
+
+  /**
+   * @param unit The unit of the turbulence heights to set.
+   */
+  public void setUnit(final LengthUnit unit) {
+    this.unit = unit;
   }
 
   @Override
@@ -65,6 +82,7 @@ public final class Turbulence {
         append(Messages.getInstance().getString("ToString.intensity"), intensity).
         append(Messages.getInstance().getString("ToString.baseHeight"), baseHeight).
         append(Messages.getInstance().getString("ToString.depth"), depth).
+        append(Messages.getInstance().getString("ToString.height.unit"), unit).
         toString();
   }
 }

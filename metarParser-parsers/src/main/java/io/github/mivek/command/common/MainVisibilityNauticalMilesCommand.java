@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.model.Visibility;
 import io.github.mivek.utils.Regex;
@@ -21,11 +22,11 @@ public final class MainVisibilityNauticalMilesCommand implements Command {
 
     @Override
     public boolean execute(final AbstractWeatherContainer container, final String part) {
-        String[] matches = Regex.pregMatch(MAIN_VISIBILITY_SM_REGEX, part);
         if (container.getVisibility() == null) {
             container.setVisibility(new Visibility());
         }
-        container.getVisibility().setMainVisibility(matches[0]);
+        container.getVisibility().setMainVisibility(part.replaceAll("SM$", "").trim());
+        container.getVisibility().setUnit(LengthUnit.STATUTE_MILES);
         return getReturnValue();
     }
 

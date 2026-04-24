@@ -4,6 +4,7 @@ import io.github.mivek.command.common.Command;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherContainer;
@@ -109,7 +110,8 @@ public abstract class AbstractWeatherContainerParser<T extends AbstractWeatherCo
           if (container.getVisibility() == null) {
               container.setVisibility(new Visibility());
           }
-          container.getVisibility().setMainVisibility(">10km");
+          container.getVisibility().setMainVisibility(">10000");
+          container.getVisibility().setUnit(LengthUnit.METERS);
           return true;
       }
 

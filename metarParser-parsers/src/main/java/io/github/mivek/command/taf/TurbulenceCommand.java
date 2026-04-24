@@ -1,5 +1,6 @@
 package io.github.mivek.command.taf;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.model.ITafGroups;
 import io.github.mivek.model.Turbulence;
@@ -22,6 +23,7 @@ public final class TurbulenceCommand implements Command {
     turbulence.setIntensity(TurbulenceIntensity.get(matches[1]));
     turbulence.setBaseHeight(100 * Integer.parseInt(matches[2]));
     turbulence.setDepth(1000 * Integer.parseInt(matches[3]));
+    turbulence.setUnit(LengthUnit.FEET);
     taf.addTurbulence(turbulence);
   }
 

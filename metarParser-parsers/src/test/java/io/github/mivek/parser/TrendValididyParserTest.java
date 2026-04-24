@@ -34,7 +34,7 @@ class TrendValididyParserTest {
     assertEquals(20, trend.getValidity().getStartHour());
     assertEquals(14, trend.getValidity().getEndDay());
     assertEquals(23, trend.getValidity().getEndHour());
-    assertEquals("4000m", trend.getVisibility().getMainVisibility());
+    assertEquals("4000", trend.getVisibility().getMainVisibility());
     MatcherAssert.assertThat(trend.getWeatherConditions(), hasSize(1));
     MatcherAssert.assertThat(trend.getWeatherConditions().get(0).getPhenomenons(), hasSize(1));
     assertEquals(Phenomenon.MIST, trend.getWeatherConditions().get(0).getPhenomenons().get(0));

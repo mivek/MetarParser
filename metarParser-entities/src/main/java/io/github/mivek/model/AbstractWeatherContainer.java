@@ -1,5 +1,6 @@
 package io.github.mivek.model;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -20,6 +21,8 @@ public abstract class AbstractWeatherContainer {
     private final List<WeatherCondition> weatherConditions;
     /** the vertical Visibility in feet. */
     private Integer verticalVisibility;
+    /** The unit of the vertical visibility. */
+    private LengthUnit verticalVisibilityUnit;
     /** The wind shear. */
     private WindShear windShear;
     /** Indicates whether the event contains CAVOK (ceiling and visibility ok). */
@@ -123,6 +126,20 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
+     * @return the unit of the vertical visibility.
+     */
+    public LengthUnit getVerticalVisibilityUnit() {
+        return verticalVisibilityUnit;
+    }
+
+    /**
+     * @param verticalVisibilityUnit the unit of the vertical visibility to set.
+     */
+    public void setVerticalVisibilityUnit(final LengthUnit verticalVisibilityUnit) {
+        this.verticalVisibilityUnit = verticalVisibilityUnit;
+    }
+
+    /**
      * @return the windShear
      */
     public WindShear getWindShear() {
@@ -192,6 +209,7 @@ public abstract class AbstractWeatherContainer {
         }
         if (verticalVisibility != null) {
             builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility);
+            builder.append(Messages.getInstance().getString("ToString.vertical.visibility.unit"), verticalVisibilityUnit);
         }
         builder.append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
                 append(Messages.getInstance().getString("ToString.weather.conditions"), weatherConditions.toString());

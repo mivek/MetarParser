@@ -1,5 +1,6 @@
 package io.github.mivek.command.common;
 
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.model.AbstractWeatherContainer;
 import io.github.mivek.utils.Regex;
 
@@ -22,6 +23,7 @@ public final class VerticalVisibilityCommand implements Command {
     public boolean execute(final AbstractWeatherContainer container, final String part) {
         String[] matches = Regex.pregMatch(VERTICAL_VISIBILITY, part);
         container.setVerticalVisibility(100 * Integer.parseInt(matches[1]));
+        container.setVerticalVisibilityUnit(LengthUnit.FEET);
         return getReturnValue();
     }
 

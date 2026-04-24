@@ -2,25 +2,28 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
+import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Class representing a cloud element. Clouds are composed of : a quantity a
- * type (optional) an height (optional)
+ * type (optional) n height (optional)
  *
  * @author mivek
  */
 public class Cloud {
-    /** The height of the cloud (unit: feet). */
+    /** The height of the cloud. */
     private Integer height;
+    /** The unit of the cloud height. */
+    private LengthUnit unit;
     /** The quantity of the cloud. */
     private CloudQuantity quantity;
     /** The type of the cloud. */
     private CloudType type;
 
     /**
-     * Getter of the height (unit: feet).
+     * Getter of the height.
      *
      * @return int of height.
      */
@@ -29,12 +32,30 @@ public class Cloud {
     }
 
     /**
-     * Setter of the height (unit: feet).
+     * Setter of the height.
      *
      * @param height The height to set.
      */
     public void setHeight(final int height) {
         this.height = height;
+    }
+
+    /**
+     * Getter of the cloud height unit.
+     *
+     * @return the cloud height unit.
+     */
+    public LengthUnit getUnit() {
+        return unit;
+    }
+
+    /**
+     * Setter of the cloud height unit.
+     *
+     * @param unit the cloud height unit to set.
+     */
+    public void setUnit(final LengthUnit unit) {
+        this.unit = unit;
     }
 
     /**
@@ -79,6 +100,7 @@ public class Cloud {
                 append(Messages.getInstance().getString("ToString.quantity"), quantity).
                 append(Messages.getInstance().getString("ToString.type"), type).
                 append(Messages.getInstance().getString("ToString.height.feet"), height).
+                append(Messages.getInstance().getString("ToString.cloud.unit"), unit).
                 toString();
     }
 }
