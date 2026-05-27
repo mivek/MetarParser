@@ -1,3 +1,10 @@
+# [2.25.0](https://github.com/mivek/MetarParser/compare/v2.24.0...v2.25.0) (2026-05-27)
+
+
+### Features
+
+* add custom user agents when calling external services ([cf0d347](https://github.com/mivek/MetarParser/commit/cf0d34790a67c12308756fa92f6f1dc919c0c698))
+
 # [2.24.0](https://github.com/mivek/MetarParser/compare/v2.23.0...v2.24.0) (2026-04-24)
 
 
