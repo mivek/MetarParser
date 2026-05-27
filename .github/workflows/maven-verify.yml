@@ -32,9 +32,34 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Run the maven verify
+        run: mvn -B -ntp verify
+      - name: Run SonarCloud analysis on main branch
+        if: github.event_name == 'push'
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mivek_MetarParser
+        run: mvn -B -ntp org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mivek_MetarParser
+      - name: Write PR metadata
+        if: github.event_name == 'pull_request'
+        run: |
+          mkdir -p .pr-meta
+          echo "${{ github.event.number }}" > .pr-meta/pr_number
+          echo "${{ github.event.pull_request.head.ref }}" > .pr-meta/head_ref
+          echo "${{ github.event.pull_request.base.ref }}" > .pr-meta/base_ref
+          echo "${{ github.event.pull_request.head.sha }}" > .pr-meta/head_sha
+      - name: Upload build artifacts for Sonar
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sonar-build
+          path: '**/target/'
+          retention-days: 1
+      - name: Upload PR metadata
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-meta
+          path: .pr-meta/
+          retention-days: 1
 
   generate-docs:
     runs-on: ubuntu-latest
@@ -49,4 +74,4 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Generate the javadoc
-        run: mvn --batch-mode install -DskipTests && mvn --batch-mode javadoc:javadoc
+        run: mvn --batch-mode -ntp install -DskipTests && mvn --batch-mode -ntp javadoc:javadoc

@@ -169,3 +169,6 @@ buildNumber.properties
 .mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/maven,eclipse,intellij+all
+model_class_attributes.txt
+plan.md
+references/

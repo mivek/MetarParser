@@ -1,0 +1,70 @@
+name: Sonar PR analysis
+
+on:
+  workflow_run:
+    workflows: ["Maven verify"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Download PR metadata
+        uses: actions/download-artifact@v4
+        with:
+          name: pr-meta
+          path: .pr-meta
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: sonar-build
+          path: .
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Read PR metadata
+        id: pr-meta
+        run: |
+          echo "pr_number=$(cat .pr-meta/pr_number)" >> $GITHUB_OUTPUT
+          echo "head_ref=$(cat .pr-meta/head_ref)" >> $GITHUB_OUTPUT
+          echo "base_ref=$(cat .pr-meta/base_ref)" >> $GITHUB_OUTPUT
+          echo "head_sha=$(cat .pr-meta/head_sha)" >> $GITHUB_OUTPUT
+      - name: Checkout PR head
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ steps.pr-meta.outputs.head_sha }}
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Cache SonarQube packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache maven packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Run Sonar analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: >
+          mvn -B -ntp org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          -Dsonar.projectKey=mivek_MetarParser
+          -Dsonar.pullrequest.key=${{ steps.pr-meta.outputs.pr_number }}
+          -Dsonar.pullrequest.branch=${{ steps.pr-meta.outputs.head_ref }}
+          -Dsonar.pullrequest.base=${{ steps.pr-meta.outputs.base_ref }}
+          -Dsonar.scm.revision=${{ steps.pr-meta.outputs.head_sha }}
