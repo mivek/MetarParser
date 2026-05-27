@@ -35,6 +35,31 @@ public final class NOAAWeatherProvider extends AbstractWeatherProvider {
     /** The AMD TAF token that appears as a second line in amended NOAA TAF responses. */
     private static final String AMD_TAF_TOKEN = "AMD TAF";
 
+    /**
+     * Default constructor. Uses the default User-Agent.
+     */
+    public NOAAWeatherProvider() {
+        super();
+    }
+
+    /**
+     * Constructor with a custom User-Agent string.
+     *
+     * @param userAgent the User-Agent header value to send with every HTTP request.
+     */
+    public NOAAWeatherProvider(final String userAgent) {
+        super(userAgent);
+    }
+
+    /**
+     * Package-private constructor for testing. Accepts an injectable {@link java.net.http.HttpClient}.
+     *
+     * @param httpClient the HTTP client to use for all requests.
+     */
+    NOAAWeatherProvider(final java.net.http.HttpClient httpClient) {
+        super(httpClient);
+    }
+
     @Override
     public String retrieveMetar(final String icao) throws ParseException, IOException, URISyntaxException, InterruptedException {
         checkIcao(icao);

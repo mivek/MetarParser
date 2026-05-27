@@ -23,10 +23,49 @@ public abstract class AbstractWeatherProvider implements WeatherProvider {
     /** The required length of a valid ICAO code. */
     static final int ICAO_LENGTH = 4;
 
+    /** The default User-Agent string sent with every HTTP request. */
+    static final String DEFAULT_USER_AGENT = "MetarParser";
+
+    /** The User-Agent string sent with every HTTP request. */
+    private final String userAgent;
+
+    /** The HTTP client used to execute requests. */
+    private final HttpClient httpClient;
+
     /**
-     * Protected constructor.
+     * Protected constructor. Uses the default User-Agent and a default {@link HttpClient}.
      */
     protected AbstractWeatherProvider() {
+        this(DEFAULT_USER_AGENT, HttpClient.newBuilder().build());
+    }
+
+    /**
+     * Protected constructor with a custom User-Agent string and a default {@link HttpClient}.
+     *
+     * @param userAgent the User-Agent header value to send with every HTTP request.
+     */
+    protected AbstractWeatherProvider(final String userAgent) {
+        this(userAgent, HttpClient.newBuilder().build());
+    }
+
+    /**
+     * Package-private constructor for testing. Accepts an injectable {@link HttpClient}.
+     *
+     * @param httpClient the HTTP client to use for all requests.
+     */
+    AbstractWeatherProvider(final HttpClient httpClient) {
+        this(DEFAULT_USER_AGENT, httpClient);
+    }
+
+    /**
+     * Private canonical constructor used by all other constructors.
+     *
+     * @param userAgent  the User-Agent header value to send with every HTTP request.
+     * @param httpClient the HTTP client to use for all requests.
+     */
+    private AbstractWeatherProvider(final String userAgent, final HttpClient httpClient) {
+        this.userAgent = userAgent;
+        this.httpClient = httpClient;
     }
 
     /**
@@ -42,7 +81,7 @@ public abstract class AbstractWeatherProvider implements WeatherProvider {
     }
 
     /**
-     * Builds an HTTP GET request for the given URL.
+     * Builds an HTTP GET request for the given URL, including the configured {@code User-Agent} header.
      *
      * @param url the URL to request.
      * @return the constructed {@link HttpRequest}.
@@ -53,6 +92,7 @@ public abstract class AbstractWeatherProvider implements WeatherProvider {
                 .uri(new URI(url))
                 .GET()
                 .version(HttpClient.Version.HTTP_2)
+                .header("User-Agent", userAgent)
                 .build();
     }
 
@@ -70,9 +110,7 @@ public abstract class AbstractWeatherProvider implements WeatherProvider {
     protected final HttpResponse<Stream<String>> getHttpResponse(final String url)
             throws IOException, URISyntaxException, InterruptedException, ParseException {
         HttpRequest request = buildRequest(url);
-        HttpResponse<Stream<String>> response = HttpClient.newBuilder()
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofLines());
+        HttpResponse<Stream<String>> response = httpClient.send(request, HttpResponse.BodyHandlers.ofLines());
         if (response.statusCode() != HttpURLConnection.HTTP_OK) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_ICAO);
         }

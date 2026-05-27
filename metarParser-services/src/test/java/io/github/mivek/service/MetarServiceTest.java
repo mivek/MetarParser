@@ -3,11 +3,7 @@ package io.github.mivek.service;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.Metar;
-import io.github.mivek.service.provider.AviationWeatherProvider;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -45,15 +41,8 @@ class MetarServiceTest extends AbstractWeatherCodeServiceTest<Metar> {
 
     }
 
-    @Test
-    void testRetrieveFromAirportWithAviationWeatherProvider() throws ParseException, IOException, URISyntaxException, InterruptedException {
-        Metar result = MetarService.withProvider(new AviationWeatherProvider()).retrieveFromAirport("LFPG");
-        assertNotNull(result);
-        assertEquals("LFPG", result.getAirport().getIcao());
-    }
-
     @Override
-    protected AbstractWeatherCodeService<Metar> getService() {
-        return MetarService.getInstance();
+    protected AbstractWeatherCodeService<Metar> getService(final FakeWeatherProvider provider) {
+        return MetarService.withProvider(provider);
     }
 }

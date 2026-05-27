@@ -35,6 +35,31 @@ public final class AviationWeatherProvider extends AbstractWeatherProvider {
     /** The "SPECI " report-type prefix returned by the API. */
     private static final String SPECI_PREFIX = "SPECI ";
 
+    /**
+     * Default constructor. Uses the default User-Agent.
+     */
+    public AviationWeatherProvider() {
+        super();
+    }
+
+    /**
+     * Constructor with a custom User-Agent string.
+     *
+     * @param userAgent the User-Agent header value to send with every HTTP request.
+     */
+    public AviationWeatherProvider(final String userAgent) {
+        super(userAgent);
+    }
+
+    /**
+     * Package-private constructor for testing. Accepts an injectable {@link java.net.http.HttpClient}.
+     *
+     * @param httpClient the HTTP client to use for all requests.
+     */
+    AviationWeatherProvider(final java.net.http.HttpClient httpClient) {
+        super(httpClient);
+    }
+
     @Override
     public String retrieveMetar(final String icao) throws ParseException, IOException, URISyntaxException, InterruptedException {
         checkIcao(icao);
