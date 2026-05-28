@@ -6,6 +6,8 @@ import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -33,11 +35,11 @@ class TurbulenceTest {
         turbulence.setDepth(4000);
         turbulence.setUnit(LengthUnit.FEET);
 
-        String des = turbulence.toString();
+        String des = turbulence.toString(Locale.ENGLISH);
 
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.intensity")));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.baseHeight") + "=100"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.depth") + "=4000"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.height.unit") + "=FT"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.intensity")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.baseHeight") + "=100"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.depth") + "=4000"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.height.unit") + "=FT"));
     }
 }

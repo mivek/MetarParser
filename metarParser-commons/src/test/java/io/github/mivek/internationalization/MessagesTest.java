@@ -1,6 +1,5 @@
 package io.github.mivek.internationalization;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -10,23 +9,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MessagesTest {
 
     @Test
     void testSetLocale() {
-        // Given a french locale
         Messages.getInstance().setLocale(Locale.FRENCH);
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        // WHEN Changing the locale to english
         Messages.getInstance().setLocale(Locale.ENGLISH);
-        // THEN The locale is changed and so is the message.
         assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
         assertEquals("ceiling varying between 5 and 15 feet", Messages.getInstance().getString("Remark.Ceiling.Height", 5, 15));
     }
@@ -36,14 +34,46 @@ class MessagesTest {
         Messages.getInstance().setLocale(Locale.FRENCH);
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
         Messages.getInstance().clearLocale();
-        // After clearing, the JVM default locale is used; the key must still be resolvable.
         assertDoesNotThrow(() -> Messages.getInstance().getString("CloudQuantity.FEW"));
+    }
+
+    @Test
+    void testGetStringWithLocale() {
+        assertEquals("peu", Messages.getInstance().getString(Locale.FRENCH, "CloudQuantity.FEW"));
+        assertEquals("few", Messages.getInstance().getString(Locale.ENGLISH, "CloudQuantity.FEW"));
+    }
+
+    @Test
+    void testGetStringWithLocaleAndArgs() {
+        assertEquals("variation du plafond entre 5 et 15 pieds",
+            Messages.getInstance().getString(Locale.FRENCH, "Remark.Ceiling.Height", 5, 15));
+        assertEquals("ceiling varying between 5 and 15 feet",
+            Messages.getInstance().getString(Locale.ENGLISH, "Remark.Ceiling.Height", 5, 15));
+    }
+
+    @Test
+    void testMissingKeyReturnsKey() {
+        assertThrows(MissingResourceException.class, () -> Messages.getInstance().getString("NonExistent.Key"));
+        assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key"));
+    }
+
+    @Test
+    void testMissingKeyWithArgsReturnsKey() {
+        assertThrows(MissingResourceException.class, () -> Messages.getInstance().getString("NonExistent.Key", "arg1"));
+        assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key", "arg1"));
+    }
+
+    @Test
+    void testStatelessOverloadsDoNotAffectThreadLocale() {
+        Messages.getInstance().setLocale(Locale.FRENCH);
+        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
+        assertEquals("few", Messages.getInstance().getString(Locale.ENGLISH, "CloudQuantity.FEW"));
+        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"messages_de", "messages_es", "messages_fr", "messages_it",
         "messages_pl_PL", "messages_ru_RU", "messages_tr_TR", "messages_zh_CN"})
-    @Disabled("Requires all locale bundles to be complete and up-to-date with the base bundle")
     void testLocaleContainsAllBaseKeys(final String bundleName) throws IOException {
         Properties base = loadProperties("internationalization/messages.properties");
         Properties locale = loadProperties("internationalization/" + bundleName + ".properties");

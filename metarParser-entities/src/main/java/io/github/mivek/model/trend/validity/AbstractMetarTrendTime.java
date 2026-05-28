@@ -1,8 +1,8 @@
 package io.github.mivek.model.trend.validity;
 
 import io.github.mivek.enums.TimeIndicator;
-
 import java.time.LocalTime;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -52,6 +52,15 @@ public abstract class AbstractMetarTrendTime {
 
     @Override
     public final String toString() {
-        return type + " " + time;
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
+        return type.toString(locale) + " " + time;
     }
 }

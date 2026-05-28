@@ -4,6 +4,7 @@ import io.github.mivek.enums.CloudQuantity;
 import io.github.mivek.enums.CloudType;
 import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -96,11 +97,33 @@ public class Cloud {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.quantity"), quantity).
-                append(Messages.getInstance().getString("ToString.type"), type).
-                append(Messages.getInstance().getString("ToString.height.feet"), height).
-                append(Messages.getInstance().getString("ToString.cloud.unit"), unit).
+                append(Messages.getInstance().getString(locale, "ToString.quantity"), localized(quantity, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.type"), localized(type, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.height.feet"), height).
+                append(Messages.getInstance().getString(locale, "ToString.cloud.unit"), unit).
                 toString();
+    }
+
+    private static String localized(final Object obj, final Locale locale) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof CloudQuantity q) {
+            return q.toString(locale);
+        }
+        if (obj instanceof CloudType t) {
+            return t.toString(locale);
+        }
+        return obj.toString();
     }
 }

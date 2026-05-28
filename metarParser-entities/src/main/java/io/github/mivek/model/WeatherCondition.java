@@ -4,10 +4,11 @@ import io.github.mivek.enums.Descriptive;
 import io.github.mivek.enums.Intensity;
 import io.github.mivek.enums.Phenomenon;
 import io.github.mivek.internationalization.Messages;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Weather condition class.
@@ -96,10 +97,33 @@ public class WeatherCondition {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.intensity"), intensity).
-                append(Messages.getInstance().getString("ToString.descriptive"), descriptive).
-                append(Messages.getInstance().getString("ToString.phenomenons"), phenomenons.toString()).
+                append(Messages.getInstance().getString(locale, "ToString.intensity"), localized(intensity, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.descriptive"), localized(descriptive, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.phenomenons"),
+                    phenomenons.stream().map(p -> p.toString(locale)).collect(Collectors.joining(", "))).
                 toString();
+    }
+
+    private static String localized(final Object obj, final Locale locale) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof Intensity i) {
+            return i.toString(locale);
+        }
+        if (obj instanceof Descriptive d) {
+            return d.toString(locale);
+        }
+        return obj.toString();
     }
 }

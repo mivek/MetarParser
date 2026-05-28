@@ -1,6 +1,7 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 
 /**
  * Represents the type of deposit on a runway.
@@ -30,9 +31,22 @@ public enum DepositType {
     /** Frozen ridges: 9. */
     FROZEN_RIDGES;
 
+    /**
+     * Returns the localized string using the JVM default locale.
+     * @return the translated string.
+     */
     @Override
     public String toString() {
-        return Messages.getInstance().getString("DepositType." + name());
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns the localized string for the given locale.
+     * @param locale the locale to use.
+     * @return the translated string.
+     */
+    public String toString(final Locale locale) {
+        return Messages.getInstance().getString(locale, "DepositType." + name());
     }
 }
 

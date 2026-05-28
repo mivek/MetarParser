@@ -2,6 +2,7 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -38,13 +39,22 @@ public class TafProbTrend extends TafTrend {
     }
 
     /**
-     * @return A description of the object.
+     * @return A description of the object using the JVM default locale.
      */
     @Override
     public String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                appendSuper(super.toString()).
-                append(Messages.getInstance().getString("ToString.probability"), probability).
+                appendSuper(super.toString(locale)).
+                append(Messages.getInstance().getString(locale, "ToString.probability"), probability).
                 toString();
     }
 }

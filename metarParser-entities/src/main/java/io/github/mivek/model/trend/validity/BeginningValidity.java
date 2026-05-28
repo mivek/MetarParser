@@ -1,6 +1,7 @@
 package io.github.mivek.model.trend.validity;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -28,9 +29,18 @@ public class BeginningValidity extends AbstractValidity {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                appendSuper(super.toString()).
-                append(Messages.getInstance().getString("ToString.start.minute"), startMinutes).
+                appendSuper(super.toString(locale)).
+                append(Messages.getInstance().getString(locale, "ToString.start.minute"), startMinutes).
                 toString();
     }
 }

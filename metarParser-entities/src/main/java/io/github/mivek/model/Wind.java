@@ -1,6 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -145,14 +146,23 @@ public class Wind {
      */
     @Override
     public String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.wind.speed"), speed).
-                append(Messages.getInstance().getString("ToString.wind.unit"), unit).
-                append(Messages.getInstance().getString("ToString.wind.direction"), direction).
-                append(Messages.getInstance().getString("ToString.wind.direction.degrees"), directionDegrees).
-                append(Messages.getInstance().getString("ToString.wind.gusts"), gust).
-                append(Messages.getInstance().getString("ToString.wind.min.variation"), minVariation).
-                append(Messages.getInstance().getString("ToString.wind.max.variation"), maxVariation).
+                append(Messages.getInstance().getString(locale, "ToString.wind.speed"), speed).
+                append(Messages.getInstance().getString(locale, "ToString.wind.unit"), unit).
+                append(Messages.getInstance().getString(locale, "ToString.wind.direction"), direction).
+                append(Messages.getInstance().getString(locale, "ToString.wind.direction.degrees"), directionDegrees).
+                append(Messages.getInstance().getString(locale, "ToString.wind.gusts"), gust).
+                append(Messages.getInstance().getString(locale, "ToString.wind.min.variation"), minVariation).
+                append(Messages.getInstance().getString(locale, "ToString.wind.max.variation"), maxVariation).
                 toString();
     }
 }

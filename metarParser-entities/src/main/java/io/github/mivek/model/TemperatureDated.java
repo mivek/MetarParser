@@ -1,6 +1,7 @@
 package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -60,10 +61,19 @@ public class TemperatureDated {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.temperature"), temperature).
-                append(Messages.getInstance().getString("ToString.day.month"), day).
-                append(Messages.getInstance().getString("ToString.day.hour"), hour).
+                append(Messages.getInstance().getString(locale, "ToString.temperature"), temperature).
+                append(Messages.getInstance().getString(locale, "ToString.day.month"), day).
+                append(Messages.getInstance().getString(locale, "ToString.day.hour"), hour).
                 toString();
     }
 }

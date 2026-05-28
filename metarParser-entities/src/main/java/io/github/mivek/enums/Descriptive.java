@@ -1,6 +1,7 @@
 package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -57,8 +58,21 @@ public enum Descriptive {
         return pattern;
     }
 
+    /**
+     * Returns the localized string using the JVM default locale.
+     * @return the translated string.
+     */
     @Override
     public String toString() {
-        return Messages.getInstance().getString("Descriptive." + shortcut);
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns the localized string for the given locale.
+     * @param locale the locale to use.
+     * @return the translated string.
+     */
+    public String toString(final Locale locale) {
+        return Messages.getInstance().getString(locale, "Descriptive." + shortcut);
     }
 }

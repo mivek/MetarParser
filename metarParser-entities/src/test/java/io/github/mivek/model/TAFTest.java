@@ -433,8 +433,7 @@ class TAFTest extends AbstractWeatherContainerTest<TAF>{
     icing.setDepth(8);
     taf.addTurbulence(turbulence);
     taf.addIcing(icing);
-    Messages.getInstance().setLocale(Locale.ENGLISH);
-    String description = taf.toString();
+    String description = taf.toString(Locale.ENGLISH);
 
 
     assertThat(taf.getTurbulences(), hasSize(1));
@@ -446,6 +445,25 @@ class TAFTest extends AbstractWeatherContainerTest<TAF>{
     assertThat(description, containsString("base layer in feet=50"));
     assertThat(description, containsString("layer depth in feet=8"));
   }
+
+  @Test
+  void testToStringWithNullValidityAndTemperatures() {
+    TAF taf = new TAF();
+    TemperatureDated max = new TemperatureDated();
+    max.setTemperature(25);
+    max.setDay(15);
+    max.setHour(12);
+    taf.setMaxTemperature(max);
+    TemperatureDated min = new TemperatureDated();
+    min.setTemperature(12);
+    min.setDay(15);
+    min.setHour(6);
+    taf.setMinTemperature(min);
+    String desc = taf.toString(Locale.ENGLISH);
+    assertThat(desc, containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.temperature.max")));
+    assertThat(desc, containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.temperature.min")));
+  }
+
   @Override
   TAF getEntity() {
     TAF taf = new TAF();

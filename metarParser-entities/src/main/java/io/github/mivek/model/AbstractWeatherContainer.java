@@ -2,10 +2,11 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author mivek
@@ -196,28 +197,39 @@ public abstract class AbstractWeatherContainer {
     }
 
     /**
-     * @return string describing the object.
+     * @return string describing the object using the JVM default locale.
      */
     @Override
     public String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         ToStringBuilder builder = new ToStringBuilder(this);
         if (wind != null) {
-            builder.appendToString(wind.toString());
+            builder.appendToString(wind.toString(locale));
         }
         if (visibility != null) {
-            builder.appendToString(visibility.toString());
+            builder.appendToString(visibility.toString(locale));
         }
         if (verticalVisibility != null) {
-            builder.append(Messages.getInstance().getString("ToString.vertical.visibility"), verticalVisibility);
-            builder.append(Messages.getInstance().getString("ToString.vertical.visibility.unit"), verticalVisibilityUnit);
+            builder.append(Messages.getInstance().getString(locale, "ToString.vertical.visibility"), verticalVisibility);
+            builder.append(Messages.getInstance().getString(locale, "ToString.vertical.visibility.unit"), verticalVisibilityUnit);
         }
-        builder.append(Messages.getInstance().getString("ToString.clouds"), clouds.toString()).
-                append(Messages.getInstance().getString("ToString.weather.conditions"), weatherConditions.toString());
+        builder.append(Messages.getInstance().getString(locale, "ToString.clouds"),
+                clouds.stream().map(c -> c.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+                append(Messages.getInstance().getString(locale, "ToString.weather.conditions"),
+                weatherConditions.stream().map(w -> w.toString(locale)).collect(Collectors.joining(", ", "[", "]")));
         if (windShear != null) {
-            builder.appendToString(windShear.toString());
+            builder.appendToString(windShear.toString(locale));
         }
-        builder.append(Messages.getInstance().getString("ToString.cavok"), cavok).
-                append(Messages.getInstance().getString("ToString.remark"), remark);
+        builder.append(Messages.getInstance().getString(locale, "ToString.cavok"), cavok).
+                append(Messages.getInstance().getString(locale, "ToString.remark"), remark);
         return builder.toString();
     }
 }
