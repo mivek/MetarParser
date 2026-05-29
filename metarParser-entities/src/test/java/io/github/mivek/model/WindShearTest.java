@@ -5,6 +5,8 @@ import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -17,8 +19,8 @@ class WindShearTest {
         sut.setHeight(500);
         sut.setHeightUnit(LengthUnit.FEET);
 
-        assertThat(sut.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.feet") + "=500"));
-        assertThat(sut.toString(), Matchers.containsString(Messages.getInstance().getString("ToString.height.unit") + "=FT"));
+        assertThat(sut.toString(Locale.ENGLISH), Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.height.feet") + "=500"));
+        assertThat(sut.toString(Locale.ENGLISH), Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.height.unit") + "=FT"));
     }
 
     @Test

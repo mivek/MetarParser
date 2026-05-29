@@ -2,6 +2,7 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -45,10 +46,19 @@ public class WindShear extends Wind {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                appendSuper(super.toString()).
-                append(Messages.getInstance().getString("ToString.height.feet"), height).
-                append(Messages.getInstance().getString("ToString.height.unit"), heightUnit).
+                appendSuper(super.toString(locale)).
+                append(Messages.getInstance().getString(locale, "ToString.height.feet"), height).
+                append(Messages.getInstance().getString(locale, "ToString.height.unit"), heightUnit).
                 toString();
     }
 }

@@ -6,6 +6,7 @@ import io.github.mivek.enums.RunwayInfoIndicator;
 import io.github.mivek.enums.RunwayInfoTrend;
 import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -197,17 +198,45 @@ public class RunwayInfo {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.name"), name).
-                append(Messages.getInstance().getString("ToString.indicator"), indicator).
-                append(Messages.getInstance().getString("ToString.visibility.min"), minRange).
-                append(Messages.getInstance().getString("ToString.visibility.max"), maxRange).
-                append(Messages.getInstance().getString("ToString.runway.unit"), unit).
-                append(Messages.getInstance().getString("ToString.trend"), trend).
-                append(Messages.getInstance().getString("ToString.deposit.type"), depositType).
-                append(Messages.getInstance().getString("ToString.deposit.coverage"), coverage).
-                append(Messages.getInstance().getString("ToString.deposit.thickness"), thickness).
-                append(Messages.getInstance().getString("ToString.deposit.braking"), brakingCapacity).
+                append(Messages.getInstance().getString(locale, "ToString.name"), name).
+                append(Messages.getInstance().getString(locale, "ToString.indicator"), localized(indicator, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.visibility.min"), minRange).
+                append(Messages.getInstance().getString(locale, "ToString.visibility.max"), maxRange).
+                append(Messages.getInstance().getString(locale, "ToString.runway.unit"), unit).
+                append(Messages.getInstance().getString(locale, "ToString.trend"), localized(trend, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.deposit.type"), localized(depositType, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.deposit.coverage"), localized(coverage, locale)).
+                append(Messages.getInstance().getString(locale, "ToString.deposit.thickness"), thickness).
+                append(Messages.getInstance().getString(locale, "ToString.deposit.braking"), brakingCapacity).
                 toString();
+    }
+
+    private static String localized(final Object obj, final Locale locale) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof RunwayInfoIndicator i) {
+            return i.toString(locale);
+        }
+        if (obj instanceof RunwayInfoTrend t) {
+            return t.toString(locale);
+        }
+        if (obj instanceof DepositType d) {
+            return d.toString(locale);
+        }
+        if (obj instanceof DepositCoverage c) {
+            return c.toString(locale);
+        }
+        return obj.toString();
     }
 }

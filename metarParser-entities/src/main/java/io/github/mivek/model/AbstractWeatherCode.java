@@ -3,11 +3,12 @@ package io.github.mivek.model;
 import io.github.mivek.enums.Flag;
 import io.github.mivek.enums.ReportType;
 import io.github.mivek.internationalization.Messages;
-import java.util.EnumSet;
-import java.util.Set;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.time.LocalTime;
+import java.util.EnumSet;
+import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author mivek
@@ -165,17 +166,27 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
     }
 
     /**
-     * @return a description of the object.
+     * @return a description of the object using the JVM default locale.
      */
     @Override
     public String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                append(Messages.getInstance().getString("ToString.day.month"), day).
-                append(Messages.getInstance().getString("ToString.report.time"), time).
-                append(Messages.getInstance().getString("ToString.airport"), airport).
-                appendSuper(super.toString()).
-                append(Messages.getInstance().getString("ToString.message"), message).
-                append(Messages.getInstance().getString("ToString.flags"), flags).
+                append(Messages.getInstance().getString(locale, "ToString.day.month"), day).
+                append(Messages.getInstance().getString(locale, "ToString.report.time"), time).
+                append(Messages.getInstance().getString(locale, "ToString.airport"), airport).
+                appendSuper(super.toString(locale)).
+                append(Messages.getInstance().getString(locale, "ToString.message"), message).
+                append(Messages.getInstance().getString(locale, "ToString.flags"),
+                    flags.stream().map(f -> f.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
                 toString();
     }
 }

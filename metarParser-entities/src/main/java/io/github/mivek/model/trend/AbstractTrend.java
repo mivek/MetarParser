@@ -2,6 +2,7 @@ package io.github.mivek.model.trend;
 
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.AbstractWeatherContainer;
+import java.util.Locale;
 import java.util.Objects;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -32,10 +33,19 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
     }
 
     /**
-     * @return a description of the object
+     * @return a description of the object using the JVM default locale.
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).appendToString(type.toString()).appendSuper(super.toString()).toString();
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
+        return new ToStringBuilder(this).appendToString(type.toString(locale)).appendSuper(super.toString(locale)).toString();
     }
 }

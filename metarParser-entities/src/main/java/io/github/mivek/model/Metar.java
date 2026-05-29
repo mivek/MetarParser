@@ -2,11 +2,12 @@ package io.github.mivek.model;
 
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.trend.MetarTrend;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Metar class.
@@ -126,15 +127,26 @@ public class Metar extends AbstractWeatherCode {
 
     @Override
     public final String toString() {
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
         return new ToStringBuilder(this).
-                appendSuper(super.toString()).
-                append(Messages.getInstance().getString("ToString.temperature"), temperature).
-                append(Messages.getInstance().getString("ToString.dew.point"), dewPoint).
-                append(Messages.getInstance().getString("ToString.altimeter"), altimeter).
-                append(Messages.getInstance().getString("ToString.nosig"), nosig).
-                append(Messages.getInstance().getString("ToString.auto"), isAuto()).
-                append(Messages.getInstance().getString("ToString.runway.info"), runways.toString()).
-                append(Messages.getInstance().getString("ToString.trends"), trends.toString()).
+                appendSuper(super.toString(locale)).
+                append(Messages.getInstance().getString(locale, "ToString.temperature"), temperature).
+                append(Messages.getInstance().getString(locale, "ToString.dew.point"), dewPoint).
+                append(Messages.getInstance().getString(locale, "ToString.altimeter"), altimeter).
+                append(Messages.getInstance().getString(locale, "ToString.nosig"), nosig).
+                append(Messages.getInstance().getString(locale, "ToString.auto"), isAuto()).
+                append(Messages.getInstance().getString(locale, "ToString.runway.info"),
+                    runways.stream().map(r -> r.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+                append(Messages.getInstance().getString(locale, "ToString.trends"),
+                    trends.stream().map(t -> t.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
                 toString();
     }
 }

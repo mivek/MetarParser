@@ -10,6 +10,8 @@ import io.github.mivek.model.trend.validity.AbstractValidity;
 import io.github.mivek.model.trend.validity.Validity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -138,9 +140,26 @@ public final class TAF extends AbstractWeatherCode implements ITafGroups {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).appendToString(validity.toString()).append(Messages.getInstance().getString("ToString.temperature.max"), maxTemperature)
-                .append(Messages.getInstance().getString("ToString.temperature.min"), minTemperature).append(Messages.getInstance().getString("ToString.amendment"), isAmendment())
-            .appendToString(trends.toString()).append(turbulences.toString()).append(icings.toString()).toString();
+        return toString(Locale.getDefault());
+    }
 
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for labels and sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
+        return new ToStringBuilder(this).
+            appendSuper(super.toString(locale)).
+            appendToString(validity != null ? validity.toString(locale) : null).
+            append(Messages.getInstance().getString(locale, "ToString.temperature.max"),
+                maxTemperature != null ? maxTemperature.toString(locale) : null).
+            append(Messages.getInstance().getString(locale, "ToString.temperature.min"),
+                minTemperature != null ? minTemperature.toString(locale) : null).
+            append(Messages.getInstance().getString(locale, "ToString.amendment"), isAmendment()).
+            appendToString(trends.stream().map(t -> t.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+            append(turbulences.stream().map(t -> t.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+            append(icings.stream().map(i -> i.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+            toString();
     }
 }

@@ -2,6 +2,7 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.TurbulenceIntensity;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -33,6 +34,12 @@ public final class Turbulence extends AbstractWeatherLayer {
 
   @Override
   protected void appendIntensity(final ToStringBuilder builder) {
-    builder.append(Messages.getInstance().getString("ToString.intensity"), intensity);
+    appendIntensity(builder, Locale.getDefault());
+  }
+
+  @Override
+  protected void appendIntensity(final ToStringBuilder builder, final Locale locale) {
+    builder.append(Messages.getInstance().getString(locale, "ToString.intensity"),
+        intensity != null ? intensity.toString(locale) : null);
   }
 }

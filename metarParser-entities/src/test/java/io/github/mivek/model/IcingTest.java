@@ -6,6 +6,8 @@ import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -33,11 +35,23 @@ class IcingTest {
         icing.setDepth(4000);
         icing.setUnit(LengthUnit.FEET);
 
-        String des = icing.toString();
+        String des = icing.toString(Locale.ENGLISH);
 
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.intensity")));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.baseHeight") + "=3000"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.depth") + "=4000"));
-        assertThat(des, Matchers.containsString(Messages.getInstance().getString("ToString.height.unit") + "=FT"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.intensity")));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.baseHeight") + "=3000"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.depth") + "=4000"));
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.height.unit") + "=FT"));
+    }
+
+    @Test
+    void testToStringWithNullIntensity() {
+        Icing icing = new Icing();
+        icing.setBaseHeight(3000);
+        icing.setDepth(4000);
+        icing.setUnit(LengthUnit.FEET);
+
+        String des = icing.toString(Locale.ENGLISH);
+
+        assertThat(des, Matchers.containsString(Messages.getInstance().getString(Locale.ENGLISH, "ToString.baseHeight") + "=3000"));
     }
 }

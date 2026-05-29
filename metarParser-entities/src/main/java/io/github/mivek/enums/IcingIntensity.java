@@ -2,6 +2,7 @@ package io.github.mivek.enums;
 
 import io.github.mivek.internationalization.Messages;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * Intensity level for the Icing.
@@ -40,9 +41,30 @@ public enum IcingIntensity {
     this.shortcut = shortcut;
   }
 
+  /**
+   * Returns the shortcut of the intensity.
+   * @return the shortcut string.
+   */
+  public String getShortcut() {
+    return shortcut;
+  }
+
+  /**
+   * Returns the localized string using the JVM default locale.
+   * @return the translated string.
+   */
   @Override
   public String toString() {
-    return Messages.getInstance().getString("IcingIntensity." + shortcut);
+    return toString(Locale.getDefault());
+  }
+
+  /**
+   * Returns the localized string for the given locale.
+   * @param locale the locale to use.
+   * @return the translated string.
+   */
+  public String toString(final Locale locale) {
+    return Messages.getInstance().getString(locale, "IcingIntensity." + shortcut);
   }
 
   /**

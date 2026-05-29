@@ -2,6 +2,7 @@ package io.github.mivek.model;
 
 import io.github.mivek.enums.LengthUnit;
 import io.github.mivek.internationalization.Messages;
+import java.util.Locale;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -75,21 +76,41 @@ public abstract class AbstractWeatherLayer {
   }
 
   /**
-   * Appends intensity-specific information to the toString builder.
+   * Appends intensity-specific information to the toString builder using the default locale.
    * Implemented by subclasses to add their intensity field.
    *
    * @param builder the ToStringBuilder to append to.
    */
   protected abstract void appendIntensity(final ToStringBuilder builder);
 
+  /**
+   * Appends intensity-specific information to the toString builder for a given locale.
+   * The default implementation delegates to {@link #appendIntensity(ToStringBuilder)}.
+   *
+   * @param builder the ToStringBuilder to append to.
+   * @param locale the locale to use.
+   */
+  protected void appendIntensity(final ToStringBuilder builder, final Locale locale) {
+    appendIntensity(builder);
+  }
+
   @Override
   public final String toString() {
+    return toString(Locale.getDefault());
+  }
+
+  /**
+   * Returns a locale-aware string representation.
+   * @param locale the locale to use for labels and sub-objects.
+   * @return the string representation.
+   */
+  public String toString(final Locale locale) {
     ToStringBuilder builder = new ToStringBuilder(this);
-    appendIntensity(builder);
+    appendIntensity(builder, locale);
     return builder.
-        append(Messages.getInstance().getString("ToString.baseHeight"), baseHeight).
-        append(Messages.getInstance().getString("ToString.depth"), depth).
-        append(Messages.getInstance().getString("ToString.height.unit"), unit).
+        append(Messages.getInstance().getString(locale, "ToString.baseHeight"), baseHeight).
+        append(Messages.getInstance().getString(locale, "ToString.depth"), depth).
+        append(Messages.getInstance().getString(locale, "ToString.height.unit"), unit).
         toString();
   }
 }

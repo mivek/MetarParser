@@ -7,6 +7,8 @@ import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
+import java.util.Locale;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -66,5 +68,15 @@ class WeatherConditionTest {
         assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.intensity") + "=" + Intensity.LIGHT));
         assertThat(desc, Matchers.containsString(Messages.getInstance().getString("ToString.descriptive") + "=" + Descriptive.SHOWERS));
         assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString()));
+    }
+
+    @Test
+    void testToStringWithNullFields() {
+        WeatherCondition sut = new WeatherCondition();
+        sut.addPhenomenon(Phenomenon.RAIN);
+
+        String desc = sut.toString(Locale.ENGLISH);
+
+        assertThat(desc, Matchers.containsString(Phenomenon.RAIN.toString(Locale.ENGLISH)));
     }
 }

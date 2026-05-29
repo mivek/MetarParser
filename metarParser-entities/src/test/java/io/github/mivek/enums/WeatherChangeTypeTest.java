@@ -1,6 +1,5 @@
 package io.github.mivek.enums;
 
-import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -14,10 +13,7 @@ class WeatherChangeTypeTest {
 
     @Test
     void testToStringWithMultipleLocale() {
-        Messages.getInstance().setLocale(Locale.FRANCE);
-        assertEquals("Devenant", WeatherChangeType.BECMG.toString());
-
-        Messages.getInstance().setLocale(Locale.ENGLISH);
-        assertEquals("Becoming", WeatherChangeType.BECMG.toString());
+        assertEquals("Devenant", WeatherChangeType.BECMG.toString(Locale.FRANCE));
+        assertEquals("Becoming", WeatherChangeType.BECMG.toString(Locale.ENGLISH));
     }
 }

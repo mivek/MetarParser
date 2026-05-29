@@ -1,6 +1,5 @@
 package io.github.mivek.enums;
 
-import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -14,10 +13,7 @@ class CloudQuantityTest {
 
     @Test
     void testToStringMultipleLocale() {
-        Messages.getInstance().setLocale(Locale.FRANCE);
-        assertEquals("peu", CloudQuantity.FEW.toString());
-
-        Messages.getInstance().setLocale(Locale.ENGLISH);
-        assertEquals("few", CloudQuantity.FEW.toString());
+        assertEquals("peu", CloudQuantity.FEW.toString(Locale.FRENCH));
+        assertEquals("few", CloudQuantity.FEW.toString(Locale.ENGLISH));
     }
 }

@@ -4,6 +4,8 @@ import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -44,11 +46,23 @@ public class MetarTrend extends AbstractTrend {
     }
 
     /**
-     * @return a description of the object.
+     * @return a description of the object using the JVM default locale.
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).appendSuper(super.toString()).append(times.toString()).toString();
+        return toString(Locale.getDefault());
+    }
+
+    /**
+     * Returns a locale-aware string representation.
+     * @param locale the locale to use for sub-objects.
+     * @return the string representation.
+     */
+    public String toString(final Locale locale) {
+        return new ToStringBuilder(this).
+            appendSuper(super.toString(locale)).
+            append(times.stream().map(t -> t.toString(locale)).collect(Collectors.joining(", ", "[", "]"))).
+            toString();
     }
 
 }

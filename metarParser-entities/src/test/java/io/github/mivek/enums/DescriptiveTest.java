@@ -1,6 +1,5 @@
 package io.github.mivek.enums;
 
-import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
@@ -14,10 +13,7 @@ class DescriptiveTest {
 
     @Test
     void testToStringWithMultipleLocale() {
-        Messages.getInstance().setLocale(Locale.FRANCE);
-        assertEquals("averses de", Descriptive.SHOWERS.toString());
-
-        Messages.getInstance().setLocale(Locale.ENGLISH);
-        assertEquals("showers of", Descriptive.SHOWERS.toString());
+        assertEquals("averses de", Descriptive.SHOWERS.toString(Locale.FRANCE));
+        assertEquals("showers of", Descriptive.SHOWERS.toString(Locale.ENGLISH));
     }
 }
