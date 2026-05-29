@@ -1,3 +1,10 @@
+# [2.26.0](https://github.com/mivek/MetarParser/compare/v2.25.0...v2.26.0) (2026-05-29)
+
+
+### Features
+
+* **i18n:** add locale-aware toString() and stateless Messages API ([9c43603](https://github.com/mivek/MetarParser/commit/9c43603c3b11926d4e30cc05bc304f893337b22d))
+
 # [2.25.0](https://github.com/mivek/MetarParser/compare/v2.24.0...v2.25.0) (2026-05-27)
 
 
