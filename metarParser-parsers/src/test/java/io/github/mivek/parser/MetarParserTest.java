@@ -491,6 +491,7 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
     }
 
     @Test
+    @SuppressWarnings("java:S5738")
     void testGetInstance() {
         assertNotNull(MetarParser.getInstance());
         assertInstanceOf(MetarParser.class, MetarParser.getInstance());

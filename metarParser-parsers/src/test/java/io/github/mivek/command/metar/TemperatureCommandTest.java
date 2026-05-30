@@ -13,16 +13,16 @@ class TemperatureCommandTest {
     void testParseNormalTemperature() {
         Metar metar = new Metar();
         command.execute(metar, "25/10");
-        assertEquals(25, metar.getTemperature().intValue());
-        assertEquals(10, metar.getDewPoint().intValue());
+        assertEquals(Integer.valueOf(25), metar.getTemperature());
+        assertEquals(Integer.valueOf(10), metar.getDewPoint());
     }
 
     @Test
     void testParseNegativeTemperature() {
         Metar metar = new Metar();
         command.execute(metar, "M05/M10");
-        assertEquals(-5, metar.getTemperature().intValue());
-        assertEquals(-10, metar.getDewPoint().intValue());
+        assertEquals(Integer.valueOf(-5), metar.getTemperature());
+        assertEquals(Integer.valueOf(-10), metar.getDewPoint());
     }
 
     @Test
@@ -30,14 +30,14 @@ class TemperatureCommandTest {
         Metar metar = new Metar();
         command.execute(metar, "////10");
         assertNull(metar.getTemperature());
-        assertEquals(10, metar.getDewPoint().intValue());
+        assertEquals(Integer.valueOf(10), metar.getDewPoint());
     }
 
     @Test
     void testParseMissingDewPoint() {
         Metar metar = new Metar();
         command.execute(metar, "25////");
-        assertEquals(25, metar.getTemperature().intValue());
+        assertEquals(Integer.valueOf(25), metar.getTemperature());
         assertNull(metar.getDewPoint());
     }
 
@@ -71,14 +71,14 @@ class TemperatureCommandTest {
         Metar metar = new Metar();
         command.execute(metar, "////M05");
         assertNull(metar.getTemperature());
-        assertEquals(-5, metar.getDewPoint().intValue());
+        assertEquals(Integer.valueOf(-5), metar.getDewPoint());
     }
 
     @Test
     void testParseNegativeSolidusTemp() {
         Metar metar = new Metar();
         command.execute(metar, "M05////");
-        assertEquals(-5, metar.getTemperature().intValue());
+        assertEquals(Integer.valueOf(-5), metar.getTemperature());
         assertNull(metar.getDewPoint());
     }
 
@@ -86,7 +86,7 @@ class TemperatureCommandTest {
     void testParseZeroTemperature() {
         Metar metar = new Metar();
         command.execute(metar, "00/M05");
-        assertEquals(0, metar.getTemperature().intValue());
-        assertEquals(-5, metar.getDewPoint().intValue());
+        assertEquals(Integer.valueOf(0), metar.getTemperature());
+        assertEquals(Integer.valueOf(-5), metar.getDewPoint());
     }
 }

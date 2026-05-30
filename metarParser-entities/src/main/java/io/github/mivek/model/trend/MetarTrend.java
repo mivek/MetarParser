@@ -58,6 +58,7 @@ public class MetarTrend extends AbstractTrend {
      * @param locale the locale to use for sub-objects.
      * @return the string representation.
      */
+    @Override
     public String toString(final Locale locale) {
         return new ToStringBuilder(this).
             appendSuper(super.toString(locale)).

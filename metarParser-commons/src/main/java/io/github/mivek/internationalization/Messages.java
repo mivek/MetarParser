@@ -53,7 +53,7 @@ public final class Messages {
    * @deprecated Use {@link #getString(Locale, String)} instead.
    * Scheduled for removal in a future major release.
    */
-  @Deprecated
+  @Deprecated(since = "2.17.0", forRemoval = true)
   public void setLocale(final Locale locale) {
     bundleHolder.set(ResourceBundle.getBundle(BUNDLE_NAME, locale));
   }
@@ -67,7 +67,7 @@ public final class Messages {
    * @deprecated Use {@link #getString(Locale, String)} instead.
    * Scheduled for removal in a future major release.
    */
-  @Deprecated
+  @Deprecated(since = "2.17.0", forRemoval = true)
   public void clearLocale() {
     bundleHolder.remove();
   }

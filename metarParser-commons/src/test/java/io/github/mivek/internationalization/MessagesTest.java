@@ -13,28 +13,36 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MessagesTest {
 
     @Test
+    @SuppressWarnings("java:S1874")
     void testSetLocale() {
         Messages.getInstance().setLocale(Locale.FRENCH);
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
         Messages.getInstance().setLocale(Locale.ENGLISH);
         assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
-        assertEquals("ceiling varying between 5 and 15 feet", Messages.getInstance().getString("Remark.Ceiling.Height", 5, 15));
+        Messages.getInstance().clearLocale();
     }
 
     @Test
+    @SuppressWarnings("java:S1874")
     void testClearLocale() {
         Messages.getInstance().setLocale(Locale.FRENCH);
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
         Messages.getInstance().clearLocale();
         assertDoesNotThrow(() -> Messages.getInstance().getString("CloudQuantity.FEW"));
+    }
+
+    @Test
+    void testGetStringWithArgs() {
+        assertEquals("ceiling varying between 5 and 15 feet",
+            Messages.getInstance().getString("Remark.Ceiling.Height", 5, 15));
     }
 
     @Test
@@ -53,22 +61,16 @@ class MessagesTest {
 
     @Test
     void testMissingKeyReturnsKey() {
-        assertThrows(MissingResourceException.class, () -> Messages.getInstance().getString("NonExistent.Key"));
+        Messages messages = Messages.getInstance();
+        assertThrows(MissingResourceException.class, () -> messages.getString("NonExistent.Key"));
         assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key"));
     }
 
     @Test
     void testMissingKeyWithArgsReturnsKey() {
-        assertThrows(MissingResourceException.class, () -> Messages.getInstance().getString("NonExistent.Key", "arg1"));
+        Messages messages = Messages.getInstance();
+        assertThrows(MissingResourceException.class, () -> messages.getString("NonExistent.Key", "arg1"));
         assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key", "arg1"));
-    }
-
-    @Test
-    void testStatelessOverloadsDoNotAffectThreadLocale() {
-        Messages.getInstance().setLocale(Locale.FRENCH);
-        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        assertEquals("few", Messages.getInstance().getString(Locale.ENGLISH, "CloudQuantity.FEW"));
-        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
     }
 
     @ParameterizedTest

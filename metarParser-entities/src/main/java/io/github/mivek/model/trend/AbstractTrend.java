@@ -45,6 +45,7 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
      * @param locale the locale to use for sub-objects.
      * @return the string representation.
      */
+    @Override
     public String toString(final Locale locale) {
         return new ToStringBuilder(this).appendToString(type.toString(locale)).appendSuper(super.toString(locale)).toString();
     }

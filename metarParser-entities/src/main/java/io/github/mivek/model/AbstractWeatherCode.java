@@ -178,6 +178,7 @@ public abstract class AbstractWeatherCode extends AbstractWeatherContainer {
      * @param locale the locale to use for labels and sub-objects.
      * @return the string representation.
      */
+    @Override
     public String toString(final Locale locale) {
         return new ToStringBuilder(this).
                 append(Messages.getInstance().getString(locale, "ToString.day.month"), day).

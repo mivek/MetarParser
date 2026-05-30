@@ -25,7 +25,7 @@ class AltimeterMecuryCommandTest {
         Metar metar = new Metar();
         command.execute(metar, "A3012");
         // A3012 = 30.12 inches of mercury, which converts to approximately 1019 hPa
-        assertEquals(1019, metar.getAltimeter().intValue());
+        assertEquals(Integer.valueOf(1019), metar.getAltimeter());
     }
 
     @Test

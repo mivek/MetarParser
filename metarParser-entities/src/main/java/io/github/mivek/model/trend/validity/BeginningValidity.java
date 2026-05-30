@@ -37,6 +37,7 @@ public class BeginningValidity extends AbstractValidity {
      * @param locale the locale to use for labels.
      * @return the string representation.
      */
+    @Override
     public String toString(final Locale locale) {
         return new ToStringBuilder(this).
                 appendSuper(super.toString(locale)).

@@ -44,6 +44,7 @@ class TrendValididyParserTest {
   }
 
   @Test
+  @SuppressWarnings("java:S5738")
     void testGetInstance() {
         assertNotNull(TrendValididyParser.getInstance());
         assertInstanceOf(TrendValididyParser.class, TrendValididyParser.getInstance());

@@ -960,6 +960,7 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
     }
 
     @Test
+    @SuppressWarnings("java:S5738")
     void testGetInstance() {
         assertNotNull(TAFParser.getInstance());
         assertInstanceOf(TAFParser.class, TAFParser.getInstance());

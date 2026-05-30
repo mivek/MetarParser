@@ -24,6 +24,7 @@ class FMTrendParserTest {
   }
 
   @Test
+  @SuppressWarnings("java:S5738")
     void testGetInstance() {
         assertNotNull(FMTrendParser.getInstance());
         assertInstanceOf(FMTrendParser.class, FMTrendParser.getInstance());

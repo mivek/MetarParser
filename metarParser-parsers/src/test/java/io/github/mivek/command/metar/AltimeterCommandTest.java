@@ -2,6 +2,9 @@ package io.github.mivek.command.metar;
 
 import io.github.mivek.model.Metar;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,22 +12,10 @@ class AltimeterCommandTest {
 
     private final AltimeterCommand command = new AltimeterCommand();
 
-    @Test
-    void testCanParseNormal() {
-        assertTrue(command.canParse("Q1012"));
-        assertTrue(command.canParse("Q0950"));
-    }
-
-    @Test
-    void testCanParseSolidus() {
-        assertTrue(command.canParse("Q////"));
-    }
-
-    @Test
-    void testExecuteNormal() {
-        Metar metar = new Metar();
-        command.execute(metar, "Q1012");
-        assertEquals(1012, metar.getAltimeter().intValue());
+    @ParameterizedTest
+    @ValueSource(strings = {"Q1012", "Q0950", "Q////"})
+    void testCanParse(final String input) {
+        assertTrue(command.canParse(input));
     }
 
     @Test
@@ -34,17 +25,11 @@ class AltimeterCommandTest {
         assertNull(metar.getAltimeter());
     }
 
-    @Test
-    void testParseAltimeterEdgeCases() {
+    @ParameterizedTest
+    @CsvSource({"Q1012, 1012", "Q0500, 500", "Q1050, 1050"})
+    void testExecute(final String input, final int expected) {
         Metar metar = new Metar();
-        command.execute(metar, "Q0500");
-        assertEquals(500, metar.getAltimeter().intValue());
-    }
-
-    @Test
-    void testParseAltimeterMaximum() {
-        Metar metar = new Metar();
-        command.execute(metar, "Q1050");
-        assertEquals(1050, metar.getAltimeter().intValue());
+        command.execute(metar, input);
+        assertEquals(Integer.valueOf(expected), metar.getAltimeter());
     }
 }

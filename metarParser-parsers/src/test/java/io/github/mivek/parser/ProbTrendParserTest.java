@@ -59,6 +59,7 @@ class ProbTrendParserTest {
   }
 
   @Test
+  @SuppressWarnings("java:S5738")
   void testGetInstance() {
     assertNotNull(ProbTrendParser.getInstance());
     assertInstanceOf(ProbTrendParser.class, ProbTrendParser.getInstance());

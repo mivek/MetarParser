@@ -14,14 +14,14 @@ class SolidusHandlingTest {
         String code = "KJFK 121151Z 24016G28KT 10SM ////10 Q1012";
         Metar metar = parser.parse(code);
         assertNull(metar.getTemperature(), "Temperature should be null when missing");
-        assertEquals(10, metar.getDewPoint().intValue(), "Dew point should be parsed");
+        assertEquals(Integer.valueOf(10), metar.getDewPoint(), "Dew point should be parsed");
     }
 
     @Test
     void testParseMetarWithSolidusDewPoint() throws Exception {
         String code = "KJFK 121151Z 24016G28KT 10SM 25//// Q1012";
         Metar metar = parser.parse(code);
-        assertEquals(25, metar.getTemperature().intValue(), "Temperature should be parsed");
+        assertEquals(Integer.valueOf(25), metar.getTemperature(), "Temperature should be parsed");
         assertNull(metar.getDewPoint(), "Dew point should be null when missing");
     }
 
@@ -29,7 +29,7 @@ class SolidusHandlingTest {
     void testParseMetarWithSolidusAltimeter() throws Exception {
         String code = "KJFK 121151Z 24016G28KT 10SM 25/10 Q////";
         Metar metar = parser.parse(code);
-        assertEquals(25, metar.getTemperature().intValue(), "Temperature should be parsed");
+        assertEquals(Integer.valueOf(25), metar.getTemperature(), "Temperature should be parsed");
         assertNull(metar.getAltimeter(), "Altimeter should be null when missing");
     }
 
@@ -76,8 +76,8 @@ class SolidusHandlingTest {
     void testParseMetarWithNegativeTemperature() throws Exception {
         String code = "KJFK 121151Z 24016G28KT 10SM M25/M30 Q1012";
         Metar metar = parser.parse(code);
-        assertEquals(-25, metar.getTemperature().intValue(), "Temperature should be -25");
-        assertEquals(-30, metar.getDewPoint().intValue(), "Dew point should be -30");
+        assertEquals(Integer.valueOf(-25), metar.getTemperature(), "Temperature should be -25");
+        assertEquals(Integer.valueOf(-30), metar.getDewPoint(), "Dew point should be -30");
     }
 
     @Test
@@ -100,16 +100,16 @@ class SolidusHandlingTest {
     void testParseMetarWithMixedNormalAndSolidus() throws Exception {
         String code = "KJFK 121151Z 24016G28KT 10SM 25//// Q1012";
         Metar metar = parser.parse(code);
-        assertEquals(25, metar.getTemperature().intValue(), "Temperature should be 25");
+        assertEquals(Integer.valueOf(25), metar.getTemperature(), "Temperature should be 25");
         assertNull(metar.getDewPoint(), "Dew point should be null");
-        assertEquals(1012, metar.getAltimeter().intValue(), "Altimeter should be 1012");
+        assertEquals(Integer.valueOf(1012), metar.getAltimeter(), "Altimeter should be 1012");
     }
 
     @Test
     void testParseMetarWithNegativeSolidusTemp() throws Exception {
         String code = "KJFK 121151Z 24016G28KT 10SM M05//// Q1012";
         Metar metar = parser.parse(code);
-        assertEquals(-5, metar.getTemperature().intValue(), "Negative temperature should be parsed");
+        assertEquals(Integer.valueOf(-5), metar.getTemperature(), "Negative temperature should be parsed");
         assertNull(metar.getDewPoint(), "Dew point should be null");
     }
 }

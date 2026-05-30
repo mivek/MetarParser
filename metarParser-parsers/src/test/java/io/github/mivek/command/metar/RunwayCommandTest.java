@@ -38,7 +38,7 @@ class RunwayCommandTest {
         RunwayInfo ri = m.getRunways().get(0);
         assertNotNull(ri);
         assertEquals("26", ri.getName());
-        assertEquals(600, ri.getMinRange());
+        assertEquals(Integer.valueOf(600), ri.getMinRange());
         assertNull(ri.getMaxRange());
         assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
         assertEquals(LengthUnit.METERS, ri.getUnit());
@@ -54,8 +54,8 @@ class RunwayCommandTest {
         RunwayInfo ri = m.getRunways().get(0);
         assertNotNull(ri);
         assertEquals("26L", ri.getName());
-        assertEquals(550, ri.getMinRange());
-        assertEquals(700, ri.getMaxRange());
+        assertEquals(Integer.valueOf(550), ri.getMinRange());
+        assertEquals(Integer.valueOf(700), ri.getMaxRange());
         assertEquals(RunwayInfoTrend.UPRISING, ri.getTrend());
         assertEquals(LengthUnit.METERS, ri.getUnit());
     }
@@ -68,8 +68,8 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo r = m.getRunways().get(0);
         assertEquals("01L", r.getName());
-        assertEquals(600, r.getMinRange());
-        assertEquals(1000, r.getMaxRange());
+        assertEquals(Integer.valueOf(600), r.getMinRange());
+        assertEquals(Integer.valueOf(1000), r.getMaxRange());
         assertNull(r.getTrend());
         assertEquals(LengthUnit.FEET, r.getUnit());
     }
@@ -82,7 +82,7 @@ class RunwayCommandTest {
         assertThat(m.getRunways(), hasSize(1));
         RunwayInfo r = m.getRunways().get(0);
         assertEquals("01L", r.getName());
-        assertEquals(800, r.getMinRange());
+        assertEquals(Integer.valueOf(800), r.getMinRange());
         assertNull(r.getMaxRange());
         assertNull(r.getTrend());
         assertEquals(LengthUnit.FEET, r.getUnit());
@@ -145,7 +145,7 @@ class RunwayCommandTest {
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
         assertEquals(RunwayInfoIndicator.LESS_THAN, ri.getIndicator());
-        assertEquals(600, ri.getMinRange());
+        assertEquals(Integer.valueOf(600), ri.getMinRange());
         assertEquals(LengthUnit.FEET, ri.getUnit());
     }
 
@@ -158,7 +158,7 @@ class RunwayCommandTest {
         RunwayInfo ri = m.getRunways().get(0);
         assertEquals("01L", ri.getName());
         assertEquals(RunwayInfoIndicator.MORE_THAN, ri.getIndicator());
-        assertEquals(600, ri.getMinRange());
+        assertEquals(Integer.valueOf(600), ri.getMinRange());
         assertEquals(LengthUnit.FEET, ri.getUnit());
     }
 

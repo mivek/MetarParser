@@ -3,6 +3,8 @@ package io.github.mivek.parser;
 import io.github.mivek.internationalization.Messages;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
@@ -21,26 +23,12 @@ class RemarkParserTest {
         parser = new RemarkParser();
     }
 
-    @Test
-    void testParseWithAO1() {
-        // GIVEN a RMK with AO1 token.
-        String code = "Token AO1 End of remark";
-        // WHEN parsing the remark.
+    @ParameterizedTest
+    @CsvSource({"Token AO1 End of remark, Remark.AO1", "Token AO2 End of remark, Remark.AO2"})
+    void testParseWithAO(final String code, final String key) {
         String remark = parser.parse(code);
-        // THEN the token is parsed and translated
         assertNotNull(remark);
-        assertThat(remark, containsString(Messages.getInstance().getString("Remark.AO1")));
-    }
-
-    @Test
-    void testParseWithAO2() {
-        // GIVEN a RMK with AO2 token
-        String code = "Token AO2 End of remark";
-        // WHEN parsing the remark.
-        String remark = parser.parse(code);
-        // THEN the token is parsed and translated
-        assertNotNull(remark);
-        assertThat(remark, containsString(Messages.getInstance().getString("Remark.AO2")));
+        assertThat(remark, containsString(Messages.getInstance().getString(key)));
     }
 
     @Test
@@ -351,19 +339,11 @@ class RemarkParserTest {
         assertThat(remark, containsString(expected));
     }
 
-    @Test
-    void testParseSealLevelPressure() {
-        String code = "AO1 SLP134";
+    @ParameterizedTest
+    @CsvSource({"AO1 SLP134, 1013.4", "AO1 SLP982, 998.2"})
+    void testParseSealLevelPressure(final String code, final String expectedValue) {
         String remark = parser.parse(code);
-        String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "1013.4");
-        assertThat(remark, containsString(expected));
-    }
-
-    @Test
-    void testParseSealLevelPressure2() {
-        String code = "AO1 SLP982";
-        String remark = parser.parse(code);
-        String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, "998.2");
+        String expected = Messages.getInstance().getString(REMARK_SEA_LEVEL_PRESSURE, expectedValue);
         assertThat(remark, containsString(expected));
     }
 
@@ -395,6 +375,7 @@ class RemarkParserTest {
     }
 
     @Test
+    @SuppressWarnings("java:S5738")
     void testGetInstance() {
         assertNotNull(RemarkParser.getInstance());
         assertInstanceOf(RemarkParser.class, RemarkParser.getInstance());

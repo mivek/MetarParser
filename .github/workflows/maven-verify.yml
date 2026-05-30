@@ -40,12 +40,17 @@ jobs:
         run: mvn -B -ntp org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=mivek_MetarParser
       - name: Write PR metadata
         if: github.event_name == 'pull_request'
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           mkdir -p .pr-meta
-          echo "${{ github.event.number }}" > .pr-meta/pr_number
-          echo "${{ github.event.pull_request.head.ref }}" > .pr-meta/head_ref
-          echo "${{ github.event.pull_request.base.ref }}" > .pr-meta/base_ref
-          echo "${{ github.event.pull_request.head.sha }}" > .pr-meta/head_sha
+          echo "$PR_NUMBER" > .pr-meta/pr_number
+          echo "$HEAD_REF" > .pr-meta/head_ref
+          echo "$BASE_REF" > .pr-meta/base_ref
+          echo "$HEAD_SHA" > .pr-meta/head_sha
       - name: Upload build artifacts for Sonar
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
