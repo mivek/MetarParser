@@ -23,6 +23,10 @@ updates:
       - dependency-name: org.apache.maven.plugins:maven-checkstyle-plugin
         versions:
           - 3.1.2
+    groups:
+      maven-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: github-actions
     directory: ".github/workflows"
     schedule:
@@ -30,3 +34,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: scope
+    groups:
+      github-actions-dependencies:
+        patterns:
+          - "*"
