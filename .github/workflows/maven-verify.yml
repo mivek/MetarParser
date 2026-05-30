@@ -54,7 +54,6 @@ jobs:
           path: |
             **/target/classes/**
             **/target/test-classes/**
-            **/target/jacoco.xml
             **/target/site/jacoco/**
             **/target/surefire-reports/**
           retention-days: 1
@@ -72,6 +71,7 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     needs: verify
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v6
         with:
