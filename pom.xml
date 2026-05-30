@@ -69,7 +69,7 @@
         <pitest-maven.version>1.25.3</pitest-maven.version>
         <mockito.version>5.17.0</mockito.version>
         <slf4j-nop.version>2.0.17</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.9.8.3</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
