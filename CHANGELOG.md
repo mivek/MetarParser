@@ -1,3 +1,11 @@
+## [2.26.1](https://github.com/mivek/MetarParser/compare/v2.26.0...v2.26.1) (2026-05-30)
+
+
+### Bug Fixes
+
+* **ci:** add actions:read permission for cross-workflow artifact download ([8d9c5ec](https://github.com/mivek/MetarParser/commit/8d9c5ec403c99f0092f61408163474860beea8bf))
+* **ci:** restrict generate-docs to push events and remove dead jacoco path ([125262d](https://github.com/mivek/MetarParser/commit/125262dfe48b47295cecb731b6ebed0c187d1e0c))
+
 # [2.26.0](https://github.com/mivek/MetarParser/compare/v2.25.0...v2.26.0) (2026-05-29)
 
 
