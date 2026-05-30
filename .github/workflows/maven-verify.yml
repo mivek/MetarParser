@@ -51,8 +51,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sonar-build
-          path: '**/target/'
+          path: |
+            **/target/classes/**
+            **/target/test-classes/**
+            **/target/jacoco.xml
+            **/target/site/jacoco/**
+            **/target/surefire-reports/**
           retention-days: 1
+          if-no-files-found: error
       - name: Upload PR metadata
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v4
@@ -60,6 +66,8 @@ jobs:
           name: pr-meta
           path: .pr-meta/
           retention-days: 1
+          if-no-files-found: error
+          include-hidden-files: true
 
   generate-docs:
     runs-on: ubuntu-latest
