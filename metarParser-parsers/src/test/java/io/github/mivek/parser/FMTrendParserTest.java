@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author Jean-Kevin KPADEY
@@ -23,10 +21,5 @@ class FMTrendParserTest {
     assertThat(res.getStartMinutes(), is(5));
   }
 
-  @Test
-  @SuppressWarnings("java:S5738")
-    void testGetInstance() {
-        assertNotNull(FMTrendParser.getInstance());
-        assertInstanceOf(FMTrendParser.class, FMTrendParser.getInstance());
-    }
 }
+

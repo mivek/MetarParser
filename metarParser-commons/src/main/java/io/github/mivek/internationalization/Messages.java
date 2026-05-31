@@ -14,10 +14,9 @@ import java.util.ResourceBundle;
  *       {@link #getString(Locale, String, Object...)} require an explicit
  *       {@code Locale} parameter and never touch thread-local state.
  *       These are the preferred path for new code.</li>
- *   <li><b>Stateful (legacy)</b> — {@link #getString(String)} and
+ *   <li><b>Stateful</b> — {@link #getString(String)} and
  *       {@link #getString(String, Object...)} read from a per-thread
- *       {@link ResourceBundle} controlled by {@link #setLocale(Locale)}.
- *       Scheduled for removal in a future major release.</li>
+ *       {@link ResourceBundle} using the JVM default locale.</li>
  * </ul>
  *
  * All lookups degrade gracefully: if a key is missing in the requested bundle
@@ -44,32 +43,6 @@ public final class Messages {
    */
   public static Messages getInstance() {
     return INSTANCE;
-  }
-
-  /**
-   * Sets the locale of the bundle for the current thread.
-   *
-   * @param locale the locale to set.
-   * @deprecated Use {@link #getString(Locale, String)} instead.
-   * Scheduled for removal in a future major release.
-   */
-  @Deprecated(since = "2.17.0", forRemoval = true)
-  public void setLocale(final Locale locale) {
-    bundleHolder.set(ResourceBundle.getBundle(BUNDLE_NAME, locale));
-  }
-
-  /**
-   * Clears the locale for the current thread, resetting it to the JVM default.
-   *
-   * <p>Must be called in thread-pool environments (e.g., servlets, Spring)
-   * after each request to prevent locale leakage between tasks on the same thread.
-   *
-   * @deprecated Use {@link #getString(Locale, String)} instead.
-   * Scheduled for removal in a future major release.
-   */
-  @Deprecated(since = "2.17.0", forRemoval = true)
-  public void clearLocale() {
-    bundleHolder.remove();
   }
 
   /**

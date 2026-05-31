@@ -49,15 +49,6 @@ public final class ProbTrendParser extends AbstractTAFTrendParser<Validity> {
   }
 
   /**
-   * @return The ProbTrendParser instance.
-   * @deprecated Use the constructor instead.
-   */
-  @Deprecated(forRemoval = true, since = "2.19.0")
-  public static ProbTrendParser getInstance() {
-    return new ProbTrendParser();
-  }
-
-  /**
    * parses the probability out of PROB.
    *
    * @param part the string to parse.

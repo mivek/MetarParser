@@ -58,10 +58,5 @@ class ProbTrendParserTest {
     MatcherAssert.assertThat(trend.getClouds(), hasSize(1));
   }
 
-  @Test
-  @SuppressWarnings("java:S5738")
-  void testGetInstance() {
-    assertNotNull(ProbTrendParser.getInstance());
-    assertInstanceOf(ProbTrendParser.class, ProbTrendParser.getInstance());
-  }
 }
+

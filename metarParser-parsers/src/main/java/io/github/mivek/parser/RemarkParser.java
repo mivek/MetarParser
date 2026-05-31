@@ -44,12 +44,4 @@ public final class RemarkParser {
         return sb.toString();
     }
 
-    /**
-     * @deprecated Use the default constructor instead.
-     * @return the instance of the parser.
-     */
-    @Deprecated(forRemoval = true, since = "2.19.0")
-    public static RemarkParser getInstance() {
-        return new RemarkParser();
-    }
 }

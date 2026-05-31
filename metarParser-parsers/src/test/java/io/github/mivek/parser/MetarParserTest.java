@@ -8,8 +8,6 @@ import io.github.mivek.model.trend.MetarTrend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -391,7 +389,6 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
     @Test
     void testParseWithRemarks() throws ParseException {
         String code = "KCOS 261454Z 34012G18KT 10SM BKN060 BKN100 15/10 A3020 RMK AO2 RAE45 SLP171 P0000 60002 T01500100 51009 $";
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         Metar m = parser.parse(code);
 
         assertEquals("KCOS", m.getStation());
@@ -409,7 +406,6 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
     @Test
     void testParseWithMinimalVisibility() throws ParseException {
         String code = "SUMU 070520Z 34025KT 8000 2000SW VCSH SCT013CB BKN026 00/M05 Q1012 TEMPO 2000 SHSN=";
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         Metar m = parser.parse(code);
         assertEquals("SUMU", m.getStation());
         assertNotNull(m.getVisibility());
@@ -455,7 +451,6 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
     void testParseRunwayDeposit() throws ParseException {
         String code = "UUDD 212100Z 20005MPS 8000 -FZRA SCT005 M01/M02 Q1010 R14R/590335 NOSIG";
 
-        Messages.getInstance().setLocale(Locale.ENGLISH);
         Metar m = parser.parse(code);
         assertEquals("UUDD", m.getStation());
         assertThat(m.getRunways(), hasSize(1));
@@ -490,10 +485,4 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(Phenomenon.RAIN, m.getWeatherConditions().get(0).getPhenomenons().get(0));
     }
 
-    @Test
-    @SuppressWarnings("java:S5738")
-    void testGetInstance() {
-        assertNotNull(MetarParser.getInstance());
-        assertInstanceOf(MetarParser.class, MetarParser.getInstance());
-    }
 }

@@ -42,15 +42,6 @@ public final class FMTrendParser extends AbstractTAFTrendParser<BeginningValidit
   }
 
   /**
-   * @return The singleton instance.
-   * @deprecated Use the constructor instead.
-   */
-  @Deprecated(forRemoval = true, since = "2.19.0")
-  public static FMTrendParser getInstance() {
-    return new FMTrendParser();
-  }
-
-  /**
    * Parses the validity of a {@link FMTafTrend} object.
    *
    * @param validityString the string to parse
