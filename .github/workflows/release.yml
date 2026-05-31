@@ -37,7 +37,7 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
       - name: Install semantic-release dependencies
-        run: npm install --ignore-scripts
+        run: npm ci --ignore-scripts
       - name: Run semantic-release
         run: npx semantic-release
         env:

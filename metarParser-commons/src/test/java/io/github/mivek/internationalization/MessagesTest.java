@@ -21,21 +21,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MessagesTest {
 
     @Test
-    @SuppressWarnings("java:S1874")
+    @SuppressWarnings("java:S5738")
     void testSetLocale() {
-        Messages.getInstance().setLocale(Locale.FRENCH);
+        Messages.getInstance().setLocale(Locale.FRENCH); // NOSONAR java:S5738
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().setLocale(Locale.ENGLISH);
+        Messages.getInstance().setLocale(Locale.ENGLISH); // NOSONAR java:S5738
         assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().clearLocale();
+        Messages.getInstance().clearLocale(); // NOSONAR java:S5738
     }
 
     @Test
-    @SuppressWarnings("java:S1874")
+    @SuppressWarnings("java:S5738")
     void testClearLocale() {
-        Messages.getInstance().setLocale(Locale.FRENCH);
+        Messages.getInstance().setLocale(Locale.FRENCH); // NOSONAR java:S5738
         assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().clearLocale();
+        Messages.getInstance().clearLocale(); // NOSONAR java:S5738
         assertDoesNotThrow(() -> Messages.getInstance().getString("CloudQuantity.FEW"));
     }
 
