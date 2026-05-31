@@ -1,3 +1,10 @@
+## [2.26.4](https://github.com/mivek/MetarParser/compare/v2.26.3...v2.26.4) (2026-05-31)
+
+
+### Bug Fixes
+
+* **sonar:** address SonarCloud code quality issues ([6a356a6](https://github.com/mivek/MetarParser/commit/6a356a6528c4bd251bb6a13ec48894e58054bb75))
+
 ## [2.26.3](https://github.com/mivek/MetarParser/compare/v2.26.2...v2.26.3) (2026-05-30)
 
 ## [2.26.2](https://github.com/mivek/MetarParser/compare/v2.26.1...v2.26.2) (2026-05-30)
