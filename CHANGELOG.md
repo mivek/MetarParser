@@ -1,3 +1,10 @@
+## [2.26.5](https://github.com/mivek/MetarParser/compare/v2.26.4...v2.26.5) (2026-05-31)
+
+
+### Bug Fixes
+
+* **sonar:** fix security issues and correct S5738 suppression ([aa81fff](https://github.com/mivek/MetarParser/commit/aa81fffa96d155a9a8c140226d817421c4e5bcbb))
+
 ## [2.26.4](https://github.com/mivek/MetarParser/compare/v2.26.3...v2.26.4) (2026-05-31)
 
 
