@@ -16,8 +16,8 @@ jobs:
 
       - name: Install commitlint
         run: |
-          npm install conventional-changelog-conventionalcommits@7.0.2
-          npm install commitlint@19.7.1
+          npm install --ignore-scripts conventional-changelog-conventionalcommits@7.0.2
+          npm install --ignore-scripts commitlint@19.7.1
 
       - name: Validate PR commits with commitlint
         run: npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
