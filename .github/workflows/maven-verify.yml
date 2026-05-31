@@ -17,7 +17,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'adopt'
       - name: Cache SonarQube packages
         uses: actions/cache@v5
@@ -84,7 +84,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'adopt'
       - name: Generate the javadoc
         run: mvn --batch-mode -ntp install -DskipTests && mvn --batch-mode -ntp javadoc:javadoc
