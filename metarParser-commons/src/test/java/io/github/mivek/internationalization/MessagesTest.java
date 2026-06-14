@@ -53,6 +53,14 @@ class MessagesTest {
         assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key", "arg1"));
     }
 
+    @Test
+    void testCleanup() {
+        Messages messages = Messages.getInstance();
+        String before = messages.getString("CloudQuantity.FEW");
+        Messages.cleanup();
+        assertEquals(before, messages.getString("CloudQuantity.FEW"));
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"messages_de", "messages_es", "messages_fr", "messages_it",
         "messages_pl_PL", "messages_ru_RU", "messages_tr_TR", "messages_zh_CN"})

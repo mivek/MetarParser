@@ -46,6 +46,20 @@ public final class Messages {
   }
 
   /**
+   * Clears the thread-local {@link ResourceBundle} for the current thread.
+   *
+   * <p>Call this when a thread finishes using the stateful API
+   * ({@link #getString(String)} / {@link #getString(String, Object...)}),
+   * especially in thread pools, to prevent {@link ThreadLocal} memory leaks.
+   *
+   * <p>Not needed for the stateless overloads {@link #getString(Locale, String)}
+   * and {@link #getString(Locale, String, Object...)}.
+   */
+  public static void cleanup() {
+    INSTANCE.bundleHolder.remove();
+  }
+
+  /**
    * Returns a localized string for the given key using the thread-local locale.
    *
    * @param message the key to look up.
