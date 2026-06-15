@@ -1,3 +1,29 @@
+# [3.0.0](https://github.com/mivek/MetarParser/compare/v2.26.6...v3.0.0) (2026-06-15)
+
+
+* refactor!: remove deprecated methods ([08e8306](https://github.com/mivek/MetarParser/commit/08e8306391f46aa63e519050ab41082a6a59c3c5))
+
+
+### Bug Fixes
+
+* **commons:** add cleanup method for ThreadLocal to prevent memory leak ([042f0a3](https://github.com/mivek/MetarParser/commit/042f0a3efe3fd495cbf6b219d263bd129cf2d17f))
+
+
+### BREAKING CHANGES
+
+* Removed all deprecated methods:
+- Messages.setLocale(Locale) (since 2.17.0)
+- Messages.clearLocale() (since 2.17.0)
+- MetarParser.getInstance() (since 2.19.0)
+- TAFParser.getInstance() (since 2.19.0)
+- RemarkParser.getInstance() (since 2.19.0)
+- FMTrendParser.getInstance() (since 2.19.0)
+- ProbTrendParser.getInstance() (since 2.19.0)
+- TrendValididyParser.getInstance() (since 2.19.0)
+
+Use the constructor directly for parsers. For locale-aware
+string lookup, use Messages.getString(Locale, String).
+
 ## [2.26.6](https://github.com/mivek/MetarParser/compare/v2.26.5...v2.26.6) (2026-06-01)
 
 ## [2.26.5](https://github.com/mivek/MetarParser/compare/v2.26.4...v2.26.5) (2026-05-31)
