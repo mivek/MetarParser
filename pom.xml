@@ -50,26 +50,26 @@
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
-        <archunit-junit5.version>1.4.1</archunit-junit5.version>
+        <archunit-junit5.version>1.4.2</archunit-junit5.version>
         <checkstyle.version>10.26.1</checkstyle.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
         <junit.version>5.11.4</junit.version>
         <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven.gpg.plugin.version>3.2.8</maven.gpg.plugin.version>
         <maven.javadoc.plugin.version>3.12.0</maven.javadoc.plugin.version>
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
-        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <maven-site-plugin.version>3.22.0</maven-site-plugin.version>
         <maven.source.plugin.version>3.4.0</maven.source.plugin.version>
-        <maven-surefire-plugin.version>3.5.5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
         <commons-csv.version>1.14.1</commons-csv.version>
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.25.3</pitest-maven.version>
-        <mockito.version>5.17.0</mockito.version>
-        <slf4j-nop.version>2.0.17</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.9.8.3</spotbugs-maven-plugin.version>
+        <pitest-maven.version>1.25.4</pitest-maven.version>
+        <mockito.version>5.23.0</mockito.version>
+        <slf4j-nop.version>2.0.18</slf4j-nop.version>
+        <spotbugs-maven-plugin.version>4.10.2.0</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
