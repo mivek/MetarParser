@@ -44,8 +44,8 @@
     </licenses>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>

@@ -50,15 +50,6 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
         supplier = tafCommandSupplier;
     }
 
-    /**
-     * @deprecated Use constructor instead.
-     * @return the instance.
-     */
-    @Deprecated(forRemoval = true, since = "2.19.0")
-    public static TAFParser getInstance() {
-        return new TAFParser();
-    }
-
     @Override
     public TAF parse(final String code) throws ParseException {
         String[][] lines = extractLineTokens(code);

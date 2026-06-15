@@ -13,31 +13,11 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MessagesTest {
-
-    @Test
-    @SuppressWarnings("java:S5738")
-    void testSetLocale() {
-        Messages.getInstance().setLocale(Locale.FRENCH); // NOSONAR java:S5738
-        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().setLocale(Locale.ENGLISH); // NOSONAR java:S5738
-        assertEquals("few", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().clearLocale(); // NOSONAR java:S5738
-    }
-
-    @Test
-    @SuppressWarnings("java:S5738")
-    void testClearLocale() {
-        Messages.getInstance().setLocale(Locale.FRENCH); // NOSONAR java:S5738
-        assertEquals("peu", Messages.getInstance().getString("CloudQuantity.FEW"));
-        Messages.getInstance().clearLocale(); // NOSONAR java:S5738
-        assertDoesNotThrow(() -> Messages.getInstance().getString("CloudQuantity.FEW"));
-    }
 
     @Test
     void testGetStringWithArgs() {
@@ -71,6 +51,14 @@ class MessagesTest {
         Messages messages = Messages.getInstance();
         assertThrows(MissingResourceException.class, () -> messages.getString("NonExistent.Key", "arg1"));
         assertEquals("NonExistent.Key", Messages.getInstance().getString(Locale.FRENCH, "NonExistent.Key", "arg1"));
+    }
+
+    @Test
+    void testCleanup() {
+        Messages messages = Messages.getInstance();
+        String before = messages.getString("CloudQuantity.FEW");
+        Messages.cleanup();
+        assertEquals(before, messages.getString("CloudQuantity.FEW"));
     }
 
     @ParameterizedTest

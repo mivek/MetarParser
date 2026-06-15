@@ -1,11 +1,8 @@
 package io.github.mivek.command.remark;
 
-import io.github.mivek.internationalization.Messages;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,10 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class HourlyTemperatureDewPointCommandTest {
 
-    @BeforeEach
-    void setup() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
-    }
 
     @Test
     void testExecute() {

@@ -46,17 +46,6 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     }
 
     /**
-     * Get instance method.
-     *
-     * @return the instance of MetarParser.
-     * @deprecated Use the constructor instead.
-     */
-    @Deprecated(forRemoval = true, since = "2.19.0")
-    public static MetarParser getInstance() {
-        return new MetarParser();
-    }
-
-    /**
      * This is the main method of the parser. This method checks if the airport
      * exists. If it does then the metar code is decoded.
      *

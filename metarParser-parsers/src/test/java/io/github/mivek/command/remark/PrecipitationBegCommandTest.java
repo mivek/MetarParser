@@ -1,23 +1,16 @@
 package io.github.mivek.command.remark;
 
-import io.github.mivek.internationalization.Messages;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PrecipitationBegCommandTest {
 
-    @BeforeEach
-    void setup() {
-        Messages.getInstance().setLocale(Locale.ENGLISH);
-    }
 
     @Test
     void testExecute() {

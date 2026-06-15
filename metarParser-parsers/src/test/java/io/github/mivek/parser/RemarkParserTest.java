@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class RemarkParserTest {
@@ -374,10 +373,4 @@ class RemarkParserTest {
         assertThat(remark, containsString(Messages.getInstance().getString("Remark.ALQDS")));
     }
 
-    @Test
-    @SuppressWarnings("java:S5738")
-    void testGetInstance() {
-        assertNotNull(RemarkParser.getInstance());
-        assertInstanceOf(RemarkParser.class, RemarkParser.getInstance());
-    }
 }

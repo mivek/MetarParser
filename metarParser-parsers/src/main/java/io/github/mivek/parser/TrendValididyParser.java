@@ -30,15 +30,6 @@ public final class TrendValididyParser extends AbstractTAFTrendParser<Validity> 
     this(new CommonCommandSupplier(), new RemarkParser(), new TAFCommandSupplier());
   }
 
-  /**
-   * @deprecated Use constructor instead.
-   * @return The TrendValidityParser instance.
-   */
-  @Deprecated(forRemoval = true, since = "2.19.0")
-  public static TrendValididyParser getInstance() {
-    return new TrendValididyParser();
-  }
-
   @Override
   public TafTrend parse(final String[] code) {
     TafTrend trend = FactoryProvider.getTAFTrendFactory().create(code[0]).orElseThrow(() -> new IllegalArgumentException(code[0]));
