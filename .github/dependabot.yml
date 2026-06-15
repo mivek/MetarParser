@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: maven
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore"
@@ -24,17 +24,19 @@ updates:
         versions:
           - 3.1.2
     groups:
-      maven-dependencies:
-        patterns:
-          - "*"
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: github-actions
     directory: ".github/workflows"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "chore"
       include: scope
     groups:
-      github-actions-dependencies:
-        patterns:
-          - "*"
+      minor-patch:
+        update-types:
+          - "minor"
+          - "patch"
