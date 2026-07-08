@@ -1,3 +1,10 @@
+## [3.0.3](https://github.com/mivek/MetarParser/compare/v3.0.2...v3.0.3) (2026-07-08)
+
+
+### Bug Fixes
+
+* **entities:** remove Objects.requireNonNull from AbstractTrend constructor ([71fd80e](https://github.com/mivek/MetarParser/commit/71fd80e0bc2fd006a59fdc90f539485b959f9bed))
+
 ## [3.0.2](https://github.com/mivek/MetarParser/compare/v3.0.1...v3.0.2) (2026-07-08)
 
 ## [3.0.1](https://github.com/mivek/MetarParser/compare/v3.0.0...v3.0.1) (2026-07-08)
