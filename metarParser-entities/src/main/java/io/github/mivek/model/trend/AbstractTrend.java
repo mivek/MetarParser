@@ -3,7 +3,6 @@ package io.github.mivek.model.trend;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.model.AbstractWeatherContainer;
 import java.util.Locale;
-import java.util.Objects;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -22,7 +21,7 @@ public abstract class AbstractTrend extends AbstractWeatherContainer {
      */
     protected AbstractTrend(final WeatherChangeType type) {
         super();
-        this.type = Objects.requireNonNull(type);
+        this.type = type;
     }
 
     /**
