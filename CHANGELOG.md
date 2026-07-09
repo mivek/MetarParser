@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/mivek/MetarParser/compare/v3.0.3...v3.0.4) (2026-07-09)
+
+
+### Reverts
+
+* Revert "fix(entities): remove Objects.requireNonNull from AbstractTrend constructor" ([b5a7f2e](https://github.com/mivek/MetarParser/commit/b5a7f2e98283d1677dbe44b91fc75c7f2002f274))
+
 ## [3.0.3](https://github.com/mivek/MetarParser/compare/v3.0.2...v3.0.3) (2026-07-08)
 
 
