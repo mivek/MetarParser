@@ -16,4 +16,16 @@
     <Match>
         <Bug code="EI2"/>
     </Match>
+    <Match>
+        <Class name="io.github.mivek.parser.AbstractWeatherContainerParser"/>
+        <Bug code="CT"/>
+    </Match>
+    <Match>
+        <Class name="io.github.mivek.parser.AbstractWeatherCodeParser"/>
+        <Bug code="CT"/>
+    </Match>
+    <Match>
+        <Class name="io.github.mivek.model.trend.AbstractTrend"/>
+        <Bug code="CT"/>
+    </Match>
 </FindBugsFilter>
