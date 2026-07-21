@@ -5,6 +5,7 @@ import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.taf.Command;
 import io.github.mivek.command.taf.TAFCommandSupplier;
 import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseErrorType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.factory.FactoryProvider;
 import io.github.mivek.model.Airport;
@@ -13,8 +14,10 @@ import io.github.mivek.model.TemperatureDated;
 import io.github.mivek.model.trend.AbstractTafTrend;
 import io.github.mivek.model.trend.validity.AbstractValidity;
 import io.github.mivek.utils.Converter;
+import io.github.mivek.utils.Regex;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 /**
@@ -27,6 +30,8 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
     private static final String TX = "TX";
     /** Temperature Minimum Constant. */
     private static final String TN = "TN";
+    /** Temperature regex pattern. */
+    private static final Pattern TEMPERATURE_REGEX = Pattern.compile("^(TX|TN)M?\\d{2}/\\d{4}Z$");
     /** TAF command supplier. */
     private final TAFCommandSupplier supplier;
 
@@ -75,11 +80,15 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
         taf.setAirport(airport);
         taf.setMessage(code);
         // Day and time
-        if(parseDeliveryTime(taf, line1parts[i])) {
+        if(parseDeliveryTime(taf, line1parts[i], i)) {
             i++;
         }
         // Validity Time
-        taf.setValidity(parseValidity(line1parts[i]));
+        String validityToken = line1parts[i];
+        if (!Regex.match(VALIDITY_REGEX, validityToken)) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.VALIDITY, validityToken, i);
+        }
+        taf.setValidity(parseValidity(validityToken));
 
         // Handle rest of second line.
         for (int j = i + 1; j < line1parts.length; j++) {
@@ -88,9 +97,9 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
                 parseRMK(taf, line1parts, j);
                 break;
             } else if (part.startsWith(TX)) {
-                taf.setMaxTemperature(parseTemperature(part));
+                taf.setMaxTemperature(parseTemperature(part, j));
             } else if (part.startsWith(TN)) {
-                taf.setMinTemperature(parseTemperature(part));
+                taf.setMinTemperature(parseTemperature(part, j));
             } else {
                 executeCommand(taf, part);
             }
@@ -149,8 +158,14 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
      * @param taf   the TAF object to build
      * @param parts the token of the line
      */
-    private void processLines(final TAF taf, final String[] parts) throws ParseException {
+    void processLines(final TAF taf, final String[] parts) throws ParseException {
+        if (parts[0].length() < 2) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.TREND, parts[0], 0);
+        }
         AbstractTAFTrendParser<? extends AbstractValidity> trendParser = FactoryProvider.getTrendParser().create(parts[0].substring(0, 2));
+        if (trendParser == null) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.TREND, parts[0], 0);
+        }
         AbstractTafTrend<? extends AbstractValidity> trend = trendParser.parse(parts);
         taf.addTrend(trend);
     }
@@ -159,15 +174,24 @@ public final class TAFParser extends AbstractWeatherCodeParser<TAF> {
      * Parse the temperature.
      *
      * @param tempPart the string to parse.
+     * @param position the token index.
      * @return a temperature with its date.
+     * @throws ParseException if the temperature token is malformed.
      */
-    TemperatureDated parseTemperature(final String tempPart) {
-        TemperatureDated temperature = new TemperatureDated();
-        String[] parts = tempPart.split("/");
-        temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));
-        temperature.setDay(Integer.parseInt(parts[1].substring(0, 2)));
-        temperature.setHour(Integer.parseInt(parts[1].substring(2, 4)));
-        return temperature;
+    TemperatureDated parseTemperature(final String tempPart, final int position) throws ParseException {
+        if (!Regex.match(TEMPERATURE_REGEX, tempPart)) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.TEMPERATURE, tempPart, position);
+        }
+        try {
+            TemperatureDated temperature = new TemperatureDated();
+            String[] parts = tempPart.split("/");
+            temperature.setTemperature(Converter.convertTemperature(parts[0].substring(2)));
+            temperature.setDay(Integer.parseInt(parts[1].substring(0, 2)));
+            temperature.setHour(Integer.parseInt(parts[1].substring(2, 4)));
+            return temperature;
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.TEMPERATURE, tempPart, position);
+        }
     }
 
 }

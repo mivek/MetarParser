@@ -3,6 +3,9 @@ package io.github.mivek.parser;
 import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.enums.Flag;
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseErrorType;
+import io.github.mivek.exception.ParseException;
 import io.github.mivek.model.AbstractWeatherCode;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -46,21 +49,27 @@ public abstract class AbstractWeatherCodeParser<T extends AbstractWeatherCode> e
      *
      * @param weatherCode The weather code.
      * @param time        the string to parse.
+     * @param position    the token index in the tokenized input.
      * @return true if the token was a real delivery time, false if it was a validity time.
+     * @throws ParseException if the time token is malformed.
      */
-    boolean parseDeliveryTime(final AbstractWeatherCode weatherCode, final String time) {
-        weatherCode.setDay(Integer.parseInt(time.substring(0, 2)));
-        int hours = Integer.parseInt(time.substring(2, 4));
-        LocalTime t;
-        if (time.length() > 6 && time.contains("/")) {
-            t = LocalTime.of(hours, 0);
-            weatherCode.setTime(t);
-            return false;
-        } else {
-            int minutes = Integer.parseInt(time.substring(4, 6));
-            t = LocalTime.of(hours, minutes);
-            weatherCode.setTime(t);
-            return true;
+    boolean parseDeliveryTime(final AbstractWeatherCode weatherCode, final String time, final int position) throws ParseException {
+        try {
+            weatherCode.setDay(Integer.parseInt(time.substring(0, 2)));
+            int hours = Integer.parseInt(time.substring(2, 4));
+            LocalTime t;
+            if (time.length() > 6 && time.contains("/")) {
+                t = LocalTime.of(hours, 0);
+                weatherCode.setTime(t);
+                return false;
+            } else {
+                int minutes = Integer.parseInt(time.substring(4, 6));
+                t = LocalTime.of(hours, minutes);
+                weatherCode.setTime(t);
+                return true;
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.DELIVERY_TIME, time, position);
         }
     }
 

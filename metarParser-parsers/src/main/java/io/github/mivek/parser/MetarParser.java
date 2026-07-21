@@ -5,6 +5,8 @@ import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarCommandSupplier;
 import io.github.mivek.enums.WeatherChangeType;
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseErrorType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.factory.FactoryProvider;
 import io.github.mivek.model.Airport;
@@ -12,7 +14,9 @@ import io.github.mivek.model.Metar;
 import io.github.mivek.model.trend.MetarTrend;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
 import io.github.mivek.utils.Converter;
+import io.github.mivek.utils.Regex;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * This controller contains methods that parse the metar code. This class is a
@@ -21,6 +25,8 @@ import java.util.Objects;
  * @author mivek
  */
 public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
+    /** Station ICAO pattern. */
+    private static final Pattern STATION_PATTERN = Pattern.compile("^[A-Z]{4}$");
     /** The command supplier. */
     private final MetarCommandSupplier supplier;
 
@@ -69,11 +75,21 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
             }
         }
 
-        Airport airport = getAirportSupplier().get(metarTab[startIndex]);
-        m.setStation(metarTab[startIndex]);
+        if (startIndex >= metarTab.length) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.STATION, null, startIndex);
+        }
+        String stationToken = metarTab[startIndex];
+        if (!Regex.match(STATION_PATTERN, stationToken)) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.STATION, stationToken, startIndex);
+        }
+        Airport airport = getAirportSupplier().get(stationToken);
+        m.setStation(stationToken);
         m.setAirport(airport);
         m.setMessage(code);
-        parseDeliveryTime(m, metarTab[startIndex + 1]);
+        if (startIndex + 1 >= metarTab.length) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.DELIVERY_TIME, null, startIndex + 1);
+        }
+        parseDeliveryTime(m, metarTab[startIndex + 1], startIndex + 1);
         int metarTabLength = metarTab.length;
         int i = startIndex + 2;
         while (i < metarTabLength) {
