@@ -1000,7 +1000,7 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
     }
 
     @Test
-    void testParseInvalidTemperatureWithPosition() throws ParseException {
+    void testParseInvalidTemperatureWithPosition() {
         ParseException e = assertThrows(ParseException.class, () -> parser.parseTemperature("TX/34", 7));
         assertEquals(ParseErrorType.TEMPERATURE, e.getType());
         assertEquals("TX/34", e.getOffendingToken());

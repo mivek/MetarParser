@@ -9,7 +9,6 @@ import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseErrorType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.factory.FactoryProvider;
-import io.github.mivek.model.Airport;
 import io.github.mivek.model.Metar;
 import io.github.mivek.model.trend.MetarTrend;
 import io.github.mivek.model.trend.validity.AbstractMetarTrendTime;
@@ -62,9 +61,38 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     public Metar parse(final String code) throws ParseException {
         Metar m = new Metar();
         String[] metarTab = tokenize(code);
-        int startIndex = 0;
+        int index = parseIdentification(m, metarTab, code);
+        while (index < metarTab.length) {
+            if (!generalParse(m, metarTab[index]) && !parseFlags(m, metarTab[index])) {
+                if ("NOSIG".equals(metarTab[index])) {
+                    m.setNosig(true);
+                } else if (RMK.equals(metarTab[index])) {
+                    parseRMK(m, metarTab, index);
+                    break;
+                } else if (metarTab[index].equals(TEMPO) || metarTab[index].equals(BECMG)) {
+                    MetarTrend trend = new MetarTrend(WeatherChangeType.valueOf(metarTab[index]));
+                    index = parseTrend(index, trend, metarTab);
+                    m.addTrend(trend);
+                } else {
+                    executeCommand(m, metarTab[index]);
+                }
+            }
+            index++;
+        }
+        return m;
+    }
 
-        // Check for METAR/SPECI prefix
+    /**
+     * Parses the report-type prefix, station and delivery time.
+     *
+     * @param m        the metar being built.
+     * @param metarTab the tokenized message.
+     * @param code     the raw message.
+     * @return the index of the first body token.
+     * @throws ParseException if the station or delivery time is missing or malformed.
+     */
+    private int parseIdentification(final Metar m, final String[] metarTab, final String code) throws ParseException {
+        int startIndex = 0;
         if (metarTab.length > 0) {
             if ("METAR".equals(metarTab[0])) {
                 m.setReportType(io.github.mivek.enums.ReportType.METAR);
@@ -74,7 +102,6 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
                 startIndex = 1;
             }
         }
-
         if (startIndex >= metarTab.length) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.STATION, null, startIndex);
         }
@@ -82,34 +109,14 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
         if (!Regex.match(STATION_PATTERN, stationToken)) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.STATION, stationToken, startIndex);
         }
-        Airport airport = getAirportSupplier().get(stationToken);
         m.setStation(stationToken);
-        m.setAirport(airport);
+        m.setAirport(getAirportSupplier().get(stationToken));
         m.setMessage(code);
         if (startIndex + 1 >= metarTab.length) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.DELIVERY_TIME, null, startIndex + 1);
         }
         parseDeliveryTime(m, metarTab[startIndex + 1], startIndex + 1);
-        int metarTabLength = metarTab.length;
-        int i = startIndex + 2;
-        while (i < metarTabLength) {
-            if (!generalParse(m, metarTab[i]) && !parseFlags(m, metarTab[i])) {
-                if ("NOSIG".equals(metarTab[i])) {
-                    m.setNosig(true);
-                } else if (RMK.equals(metarTab[i])) {
-                    parseRMK(m, metarTab, i);
-                    break;
-                } else if (metarTab[i].equals(TEMPO) || metarTab[i].equals(BECMG)) {
-                    MetarTrend trend = new MetarTrend(WeatherChangeType.valueOf(metarTab[i]));
-                    i = parseTrend(i, trend, metarTab);
-                    m.addTrend(trend);
-                } else {
-                    executeCommand(m, metarTab[i]);
-                }
-            }
-            i++;
-        }
-        return m;
+        return startIndex + 2;
     }
 
     /**
