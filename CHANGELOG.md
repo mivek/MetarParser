@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/mivek/MetarParser/compare/v3.0.6...v3.1.0) (2026-07-22)
+
+
+### Features
+
+* **parser:** add structured token-level error metadata to ParseException ([bbf974c](https://github.com/mivek/MetarParser/commit/bbf974c648d1b1d9781557789277f6dfabc067e1))
+
 ## [3.0.6](https://github.com/mivek/MetarParser/compare/v3.0.5...v3.0.6) (2026-07-14)
 
 ## [3.0.5](https://github.com/mivek/MetarParser/compare/v3.0.4...v3.0.5) (2026-07-09)
