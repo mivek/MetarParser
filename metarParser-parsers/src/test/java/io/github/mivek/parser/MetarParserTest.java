@@ -1,6 +1,8 @@
 package io.github.mivek.parser;
 
 import io.github.mivek.enums.*;
+import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseErrorType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.*;
@@ -483,6 +485,26 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         assertEquals(Descriptive.SHOWERS, m.getWeatherConditions().get(0).getDescriptive());
         assertEquals(1, m.getWeatherConditions().get(0).getPhenomenons().size());
         assertEquals(Phenomenon.RAIN, m.getWeatherConditions().get(0).getPhenomenons().get(0));
+    }
+
+    @Test
+    void testParseInvalidStation() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("METAR 12 150500Z 17005KT 6000"));
+        assertEquals(ParseErrorType.STATION, e.getType());
+        assertEquals("12", e.getOffendingToken());
+        assertEquals(1, e.getPosition());
+    }
+
+    @Test
+    void testParseEmptyMessageThrowsStationError() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("METAR"));
+        assertEquals(ParseErrorType.STATION, e.getType());
+    }
+
+    @Test
+    void testParseWithoutDeliveryTimeThrowsDeliveryTimeError() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("LFPG"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
     }
 
 }

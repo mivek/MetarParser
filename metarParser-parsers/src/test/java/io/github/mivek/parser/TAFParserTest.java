@@ -2,6 +2,7 @@ package io.github.mivek.parser;
 
 import io.github.mivek.enums.*;
 import io.github.mivek.exception.ErrorCodes;
+import io.github.mivek.exception.ParseErrorType;
 import io.github.mivek.exception.ParseException;
 import io.github.mivek.internationalization.Messages;
 import io.github.mivek.model.TAF;
@@ -95,9 +96,9 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
     }
 
     @Test
-    void testParseTemperatureMax() {
+    void testParseTemperatureMax() throws ParseException {
         String tempString = "TX15/0612Z";
-        TemperatureDated res = parser.parseTemperature(tempString);
+        TemperatureDated res = parser.parseTemperature(tempString, 6);
 
         assertThat(res.getTemperature(), is(15));
         assertThat(res.getDay(), is(6));
@@ -105,9 +106,9 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
     }
 
     @Test
-    void testParseTemperatureMinus() {
+    void testParseTemperatureMinus() throws ParseException {
         String tempString = "TNM02/0612Z";
-        TemperatureDated res = parser.parseTemperature(tempString);
+        TemperatureDated res = parser.parseTemperature(tempString, 7);
 
         assertThat(res.getTemperature(), is(-2));
         assertThat(res.getDay(), is(6));
@@ -957,6 +958,53 @@ class TAFParserTest extends AbstractWeatherCodeParserTest<TAF> {
         assertEquals(3, taf.getValidity().getStartHour());
         assertEquals(27, taf.getValidity().getEndDay());
         assertEquals(3, taf.getValidity().getEndHour());
+    }
+
+    @Test
+    void testParseInvalidTemperature() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("TAF LFPG 150500Z 1506/1612 17005KT 6000 TX/34 2112Z"));
+        assertEquals(ParseErrorType.TEMPERATURE, e.getType());
+        assertEquals("TX/34", e.getOffendingToken());
+    }
+
+    @Test
+    void testParseInvalidValidity() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("TAF LFPG 150500Z 2018l/2020 17005KT 6000"));
+        assertEquals(ParseErrorType.VALIDITY, e.getType());
+        assertEquals("2018l/2020", e.getOffendingToken());
+    }
+
+    @Test
+    void testParseInvalidDeliveryTime() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("TAF LFPG 2007XXZ 1506/1612 17005KT 6000"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+        assertEquals("2007XXZ", e.getOffendingToken());
+    }
+
+    @Test
+    void testProcessLinesWithShortToken() {
+        TAF taf = new TAF();
+        String[] parts = {"X"};
+        ParseException e = assertThrows(ParseException.class, () -> parser.processLines(taf, parts));
+        assertEquals(ParseErrorType.TREND, e.getType());
+        assertEquals("X", e.getOffendingToken());
+    }
+
+    @Test
+    void testProcessLinesWithUnknownTrendPrefix() {
+        TAF taf = new TAF();
+        String[] parts = {"XX", "1506/1508"};
+        ParseException e = assertThrows(ParseException.class, () -> parser.processLines(taf, parts));
+        assertEquals(ParseErrorType.TREND, e.getType());
+        assertEquals("XX", e.getOffendingToken());
+    }
+
+    @Test
+    void testParseInvalidTemperatureWithPosition() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parseTemperature("TX/34", 7));
+        assertEquals(ParseErrorType.TEMPERATURE, e.getType());
+        assertEquals("TX/34", e.getOffendingToken());
+        assertEquals(7, e.getPosition());
     }
 
 }
