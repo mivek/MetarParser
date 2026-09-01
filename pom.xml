@@ -50,7 +50,7 @@
         <jacoco.coverage.instruction.minimum>0.98</jacoco.coverage.instruction.minimum>
         <jacoco.coverage.branch.minimum>0.96</jacoco.coverage.branch.minimum>
         <jacoco.coverage.complexity.minimum>0.97</jacoco.coverage.complexity.minimum>
-        <archunit-junit5.version>1.4.2</archunit-junit5.version>
+        <archunit-junit5.version>1.5.0</archunit-junit5.version>
         <checkstyle.version>10.26.1</checkstyle.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <hamcrest.version>3.0</hamcrest.version>
@@ -66,10 +66,10 @@
         <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
         <commons-csv.version>1.14.1</commons-csv.version>
         <pitest-junit5-plugin.version>1.2.3</pitest-junit5-plugin.version>
-        <pitest-maven.version>1.25.7</pitest-maven.version>
+        <pitest-maven.version>1.30.0</pitest-maven.version>
         <mockito.version>5.23.0</mockito.version>
         <slf4j-nop.version>2.0.18</slf4j-nop.version>
-        <spotbugs-maven-plugin.version>4.10.2.0</spotbugs-maven-plugin.version>
+        <spotbugs-maven-plugin.version>4.10.4.0</spotbugs-maven-plugin.version>
         <sonar.organization>mivek-github</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
