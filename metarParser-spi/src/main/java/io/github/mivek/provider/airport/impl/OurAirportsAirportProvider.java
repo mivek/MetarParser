@@ -36,6 +36,8 @@ public final class OurAirportsAirportProvider implements AirportProvider {
     private final Map<String, Country> countries;
     /** Map of airports. */
     private final Map<String, Airport> airports;
+    /** HTTP client used to retrieve airport data. */
+    private final HttpClient httpClient;
     /** Common CSV format. */
     private final CSVFormat csvFormat;
 
@@ -46,8 +48,25 @@ public final class OurAirportsAirportProvider implements AirportProvider {
      * @throws URISyntaxException     when the URI is invalid
      */
     public OurAirportsAirportProvider() throws IOException, URISyntaxException, InterruptedException {
+        this(HttpClient.newBuilder().build());
+    }
+
+    /**
+     * Creates a provider with the supplied HTTP client.
+     *
+     * <p>This constructor is package-private to support deterministic tests without changing
+     * the public HTTP-based provider API.
+     *
+     * @param client HTTP client used to retrieve OurAirports data
+     * @throws IOException            when network error
+     * @throws URISyntaxException     when a URI is invalid
+     * @throws InterruptedException   when the request is interrupted
+     */
+    OurAirportsAirportProvider(final HttpClient client)
+            throws IOException, URISyntaxException, InterruptedException {
         countries = new HashMap<>();
         airports = new HashMap<>();
+        httpClient = client;
         csvFormat = CSVFormat.RFC4180;
         buildCountries();
         buildAirport();
@@ -67,10 +86,18 @@ public final class OurAirportsAirportProvider implements AirportProvider {
                 .timeout(Duration.ofSeconds(5))
                 .build();
 
-        HttpResponse<InputStream> response = HttpClient.newBuilder()
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofInputStream());
-        try (CSVParser parser = csvFormat.parse(new InputStreamReader(response.body(), StandardCharsets.UTF_8))) {
+        HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        parseCountries(response.body());
+    }
+
+    /**
+     * Parses countries CSV data and adds the records to the country map.
+     *
+     * @param countriesStream stream containing countries.csv data
+     * @throws IOException when the stream cannot be parsed
+     */
+    private void parseCountries(final InputStream countriesStream) throws IOException {
+        try (CSVParser parser = csvFormat.parse(new InputStreamReader(countriesStream, StandardCharsets.UTF_8))) {
             for (CSVRecord line: parser) {
                 Country c = new Country();
                 c.setName(line.get(2));
@@ -93,10 +120,18 @@ public final class OurAirportsAirportProvider implements AirportProvider {
                 .timeout(Duration.ofSeconds(5))
                 .build();
 
-        HttpResponse<InputStream> response = HttpClient.newBuilder()
-                .build()
-                .send(request, HttpResponse.BodyHandlers.ofInputStream());
-        try (CSVParser parser = csvFormat.parse(new InputStreamReader(response.body(), StandardCharsets.UTF_8))) {
+        HttpResponse<InputStream> response = httpClient.send(request, HttpResponse.BodyHandlers.ofInputStream());
+        parseAirports(response.body());
+    }
+
+    /**
+     * Parses airports CSV data and adds the records to the airport map.
+     *
+     * @param airportsStream stream containing airports.csv data
+     * @throws IOException when the stream cannot be parsed
+     */
+    private void parseAirports(final InputStream airportsStream) throws IOException {
+        try (CSVParser parser = csvFormat.parse(new InputStreamReader(airportsStream, StandardCharsets.UTF_8))) {
             for (CSVRecord line : parser) {
                 Airport airport = new Airport();
                 airport.setIcao(line.get(1));
@@ -117,4 +152,3 @@ public final class OurAirportsAirportProvider implements AirportProvider {
         return Collections.unmodifiableMap(airports);
     }
 }
-
