@@ -11,6 +11,7 @@
 
     <artifactId>metarParser-commons</artifactId>
     <name>metarParser-commons</name>
+    <url>https://github.com/mivek/MetarParser/tree/main/metarParser-commons</url>
     <description>Module containing utility classes</description>
 
     <properties>

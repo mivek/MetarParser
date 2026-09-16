@@ -11,6 +11,7 @@
 
     <artifactId>metarParser-spi</artifactId>
     <name>metarParser-spi</name>
+    <url>https://github.com/mivek/MetarParser/tree/main/metarParser-spi</url>
 
     <properties>
         <jacoco.coverage.instruction.minimum>0.94</jacoco.coverage.instruction.minimum>

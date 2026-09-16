@@ -11,6 +11,7 @@
 
     <artifactId>metarParser-entities</artifactId>
     <name>metarParser-entities</name>
+    <url>https://github.com/mivek/MetarParser/tree/main/metarParser-entities</url>
     <description>Module containing the model of the application.</description>
 
     <properties>

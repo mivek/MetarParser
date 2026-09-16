@@ -38,7 +38,7 @@ To add the service module :
 <dependency>
   <groupId>io.github.mivek</groupId>
   <artifactId>metarParser-services</artifactId>
-  <version>latest</version>
+  <version>3.1.1</version>
 </dependency>
 ```
 
@@ -273,4 +273,3 @@ Messages.getInstance().setLocale(Locale.FRENCH); // Changes the locale to french
 ```
 
 If you are willing to add a new locale or contribute to the project please see [Contributing.md file](CONTRIBUTING.md).
-

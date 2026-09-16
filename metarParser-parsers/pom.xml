@@ -11,6 +11,7 @@
 
     <artifactId>metarParser-parsers</artifactId>
     <name>metarParser-parsers</name>
+    <url>https://github.com/mivek/MetarParser/tree/main/metarParser-parsers</url>
 
     <description>Module containing the parsers.</description>
 
