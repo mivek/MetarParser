@@ -32,6 +32,8 @@ This project is divided into multiple maven module
 
 ## Adding the dependency
 
+MetarParser requires Java 17 or later.
+
 To add the service module :
 
 ```xml
