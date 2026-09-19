@@ -30,7 +30,7 @@ manually.
 
 | Concern | Technology |
 |---|---|
-| Language | Java 21 |
+| Language | Java 17 minimum runtime; CI also tests Java 21 and 25 |
 | Build | Apache Maven (multi-module) |
 | Unit tests | JUnit 5 (`junit-jupiter` 5.11.4) |
 | Assertions | Hamcrest 3.0 |

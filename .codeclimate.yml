@@ -41,4 +41,4 @@ plugins:
   sonar-java:
     enabled: true
     config:
-      sonar.java.source: 21
+      sonar.java.source: 17
