@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <name>metarParser-services</name>
     <artifactId>metarParser-services</artifactId>
+    <url>https://github.com/mivek/MetarParser/tree/main/metarParser-services</url>
 
     <properties>
         <jacoco.coverage.instruction.minimum>0.93</jacoco.coverage.instruction.minimum>
