@@ -1,3 +1,10 @@
+## [3.1.2](https://github.com/mivek/MetarParser/compare/v3.1.1...v3.1.2) (2026-09-19)
+
+
+### Bug Fixes
+
+* **build:** restore Java 17 compatibility ([9fc88ec](https://github.com/mivek/MetarParser/commit/9fc88ec1292a95d7e738f32d496218cec0b33940))
+
 ## [3.1.1](https://github.com/mivek/MetarParser/compare/v3.1.0...v3.1.1) (2026-08-21)
 
 # [3.1.0](https://github.com/mivek/MetarParser/compare/v3.0.6...v3.1.0) (2026-07-22)
