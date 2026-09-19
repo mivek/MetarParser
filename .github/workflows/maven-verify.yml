@@ -124,7 +124,7 @@ jobs:
       - name: Install semantic-release dependencies
         run: npm ci --ignore-scripts
       - name: Run semantic-release
-        run: npx semantic-release
+        run: ./node_modules/.bin/semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
