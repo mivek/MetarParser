@@ -9,6 +9,8 @@ import io.github.mivek.model.*;
 import io.github.mivek.model.trend.MetarTrend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -505,6 +507,77 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
     void testParseWithoutDeliveryTimeThrowsDeliveryTimeError() {
         ParseException e = assertThrows(ParseException.class, () -> parser.parse("LFPG"));
         assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+    }
+
+    @Test
+    void testParseWithCorrectionBetweenStationAndDeliveryTime() throws ParseException {
+        Metar m = parser.parse("MRLB COR 071700Z 11013KT 9999 FEW045 34/22 A2983");
+
+        assertTrue(m.isCorrected());
+        assertEquals("MRLB", m.getStation());
+        assertEquals(Integer.valueOf(7), m.getDay());
+        assertEquals(17, m.getTime().getHour());
+        assertEquals(0, m.getTime().getMinute());
+        assertEquals(Integer.valueOf(34), m.getTemperature());
+    }
+
+    @Test
+    void testParseWithCorrectionBetweenReportTypeAndStation() throws ParseException {
+        Metar m = parser.parse("METAR COR LFPG 081130Z 00000KT 0350 FG SCT000 M01/M01 Q1026");
+
+        assertTrue(m.isCorrected());
+        assertEquals(ReportType.METAR, m.getReportType());
+        assertEquals("LFPG", m.getStation());
+        assertEquals(Integer.valueOf(8), m.getDay());
+        assertEquals(11, m.getTime().getHour());
+        assertEquals(30, m.getTime().getMinute());
+    }
+
+    @Test
+    void testParseWithCorrectionAfterDeliveryTime() throws ParseException {
+        Metar m = parser.parse("MRLB 071700Z COR 11013KT 9999 FEW045 34/22 A2983");
+
+        assertTrue(m.isCorrected());
+        assertEquals(Integer.valueOf(7), m.getDay());
+        assertEquals(Integer.valueOf(34), m.getTemperature());
+    }
+
+    @Test
+    void testParseWithoutCorrectionIsNotFlaggedAsCorrected() throws ParseException {
+        Metar m = parser.parse("MRLB 071700Z 11013KT 9999 FEW045 34/22 A2983");
+
+        assertFalse(m.isCorrected());
+        assertEquals(Integer.valueOf(7), m.getDay());
+    }
+
+    @Test
+    void testParseWithModifierButWithoutDeliveryTimeThrowsDeliveryTimeError() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("LFPG COR"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+        assertEquals(2, e.getPosition());
+    }
+
+    @Test
+    void testParseWithModifierButWithoutStationThrowsStationError() {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("METAR COR"));
+        assertEquals(ParseErrorType.STATION, e.getType());
+        assertEquals(2, e.getPosition());
+    }
+
+    @Test
+    void testParseKeepsAutoAsStationWhenItLeadsTheMessage() {
+        // a modifier is only expected after the report type or the station, never in first position
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("AUTO 11013KT 9999"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+        assertEquals("11013KT", e.getOffendingToken());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"AMD", "CNL", "AUTO", "NIL"})
+    void testParseRejectsFlagsOtherThanCorBeforeDeliveryTime(final String flag) {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("MRLB " + flag + " 071700Z 11013KT 9999"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+        assertEquals(flag, e.getOffendingToken());
     }
 
 }
