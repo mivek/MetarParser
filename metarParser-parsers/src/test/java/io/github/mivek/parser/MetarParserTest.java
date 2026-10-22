@@ -9,6 +9,8 @@ import io.github.mivek.model.*;
 import io.github.mivek.model.trend.MetarTrend;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -568,6 +570,14 @@ class MetarParserTest extends AbstractWeatherCodeParserTest<Metar> {
         ParseException e = assertThrows(ParseException.class, () -> parser.parse("AUTO 11013KT 9999"));
         assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
         assertEquals("11013KT", e.getOffendingToken());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"AMD", "CNL", "AUTO", "NIL"})
+    void testParseRejectsFlagsOtherThanCorBeforeDeliveryTime(final String flag) {
+        ParseException e = assertThrows(ParseException.class, () -> parser.parse("MRLB " + flag + " 071700Z 11013KT 9999"));
+        assertEquals(ParseErrorType.DELIVERY_TIME, e.getType());
+        assertEquals(flag, e.getOffendingToken());
     }
 
 }

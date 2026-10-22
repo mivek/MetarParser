@@ -4,6 +4,7 @@ import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarCommandSupplier;
+import io.github.mivek.enums.Flag;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseErrorType;
@@ -124,18 +125,19 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     }
 
     /**
-     * Consumes the report modifiers (COR, AMD, ...) preceding the delivery time. Modifiers placed
+     * Consumes the correction indicator (COR) preceding the delivery time. Other flags and COR placed
      * after the delivery time are consumed by the body of the message instead.
      *
      * @param m        the metar being built.
      * @param metarTab the tokenized message.
      * @param index    the index to start at.
-     * @return the index of the first token that is not a modifier.
+     * @return the index of the first token that is not a correction indicator.
      */
     private int parseLeadingFlags(final Metar m, final String[] metarTab, final int index) {
         int flagIndex = index;
         // index 0 holds the report type or the station, never a modifier
-        while (flagIndex > 0 && flagIndex < metarTab.length && parseFlags(m, metarTab[flagIndex])) {
+        while (flagIndex > 0 && flagIndex < metarTab.length && Flag.COR.name().equals(metarTab[flagIndex])) {
+            parseFlags(m, metarTab[flagIndex]);
             flagIndex++;
         }
         return flagIndex;
