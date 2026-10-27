@@ -4,6 +4,7 @@ import io.github.mivek.command.AirportSupplier;
 import io.github.mivek.command.common.CommonCommandSupplier;
 import io.github.mivek.command.metar.Command;
 import io.github.mivek.command.metar.MetarCommandSupplier;
+import io.github.mivek.enums.Flag;
 import io.github.mivek.enums.WeatherChangeType;
 import io.github.mivek.exception.ErrorCodes;
 import io.github.mivek.exception.ParseErrorType;
@@ -83,7 +84,7 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
     }
 
     /**
-     * Parses the report-type prefix, station and delivery time.
+     * Parses the report-type prefix, the report modifiers, the station and the delivery time.
      *
      * @param m        the metar being built.
      * @param metarTab the tokenized message.
@@ -101,6 +102,8 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
                 m.setReportType(io.github.mivek.enums.ReportType.SPECI);
                 startIndex = 1;
             }
+            // a modifier may follow the report type, as in "METAR COR LFPG 081130Z"
+            startIndex = parseLeadingFlags(m, metarTab, startIndex);
         }
         if (startIndex >= metarTab.length) {
             throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.STATION, null, startIndex);
@@ -112,11 +115,32 @@ public final class MetarParser extends AbstractWeatherCodeParser<Metar> {
         m.setStation(stationToken);
         m.setAirport(getAirportSupplier().get(stationToken));
         m.setMessage(code);
-        if (startIndex + 1 >= metarTab.length) {
-            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.DELIVERY_TIME, null, startIndex + 1);
+        // it may also sit between the station and the delivery time, as in "LFPG COR 081130Z"
+        int timeIndex = parseLeadingFlags(m, metarTab, startIndex + 1);
+        if (timeIndex >= metarTab.length) {
+            throw new ParseException(ErrorCodes.ERROR_CODE_INVALID_MESSAGE, ParseErrorType.DELIVERY_TIME, null, timeIndex);
         }
-        parseDeliveryTime(m, metarTab[startIndex + 1], startIndex + 1);
-        return startIndex + 2;
+        parseDeliveryTime(m, metarTab[timeIndex], timeIndex);
+        return timeIndex + 1;
+    }
+
+    /**
+     * Consumes the correction indicator (COR) preceding the delivery time. Other flags and COR placed
+     * after the delivery time are consumed by the body of the message instead.
+     *
+     * @param m        the metar being built.
+     * @param metarTab the tokenized message.
+     * @param index    the index to start at.
+     * @return the index of the first token that is not a correction indicator.
+     */
+    private int parseLeadingFlags(final Metar m, final String[] metarTab, final int index) {
+        int flagIndex = index;
+        // index 0 holds the report type or the station, never a modifier
+        while (flagIndex > 0 && flagIndex < metarTab.length && Flag.COR.name().equals(metarTab[flagIndex])) {
+            parseFlags(m, metarTab[flagIndex]);
+            flagIndex++;
+        }
+        return flagIndex;
     }
 
     /**
