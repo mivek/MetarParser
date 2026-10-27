@@ -1,3 +1,10 @@
+## [3.1.4](https://github.com/mivek/MetarParser/compare/v3.1.3...v3.1.4) (2026-10-27)
+
+
+### Bug Fixes
+
+* **parser:** accept report modifiers before the delivery time ([#833](https://github.com/mivek/MetarParser/issues/833)) ([c9e0af0](https://github.com/mivek/MetarParser/commit/c9e0af0b59ff9393a13bd8d32113f8dec3a9b291))
+
 ## [3.1.3](https://github.com/mivek/MetarParser/compare/v3.1.2...v3.1.3) (2026-10-22)
 
 ## [3.1.2](https://github.com/mivek/MetarParser/compare/v3.1.1...v3.1.2) (2026-09-19)
